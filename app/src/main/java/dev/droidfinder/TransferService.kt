@@ -1,0 +1,132 @@
+package dev.droidfinder
+
+import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
+import android.content.Context
+import android.content.Intent
+import android.content.pm.ServiceInfo
+import android.os.IBinder
+import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.withTimeout
+
+object TransferRuntime {
+    val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    @Volatile
+    var label: String? = null
+        private set
+
+    @Volatile
+    var progress = TransferProgress()
+        private set
+
+    @Volatile private var control: TransferControl? = null
+    private var lastNotification = 0L
+    private var foregroundReady: CompletableDeferred<Unit>? = null
+
+    suspend fun begin(context: Context, title: String, token: TransferControl) {
+        label = title
+        progress = TransferProgress()
+        control = token
+        val ready = CompletableDeferred<Unit>()
+        foregroundReady = ready
+        context.startForegroundService(Intent(context, TransferService::class.java))
+        // Short operations must not stop the service before Android has promoted it.
+        withTimeout(4_000) { ready.await() }
+    }
+
+    @SuppressLint(
+        "MissingPermission",
+    ) // A foreground-service notification is required even without POST_NOTIFICATIONS.
+    fun report(context: Context, value: TransferProgress) {
+        progress = value
+        val now = android.os.SystemClock.elapsedRealtime()
+        if (label != null && now - lastNotification > 500) {
+            lastNotification = now
+            context
+                .getSystemService(NotificationManager::class.java)
+                .notify(TRANSFER_NOTIFICATION, notification(context))
+        }
+    }
+
+    fun cancel() {
+        control?.cancel()
+    }
+
+    fun finish(context: Context) {
+        label = null
+        control = null
+        foregroundReady = null
+        context.stopService(Intent(context, TransferService::class.java))
+    }
+
+    private const val TRANSFER_NOTIFICATION = 24
+    private const val CHANNEL = "file-transfers"
+
+    fun notification(context: Context): Notification {
+        val manager = context.getSystemService(NotificationManager::class.java)
+        manager.createNotificationChannel(
+            NotificationChannel(CHANNEL, "File transfers", NotificationManager.IMPORTANCE_LOW),
+        )
+        val open =
+            PendingIntent.getActivity(
+                context,
+                0,
+                Intent(context, MainActivity::class.java),
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
+        val cancel =
+            PendingIntent.getService(
+                context,
+                1,
+                Intent(context, TransferService::class.java).setAction("cancel"),
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
+        return NotificationCompat.Builder(context, CHANNEL)
+            .setSmallIcon(R.drawable.ic_launcher)
+            .setContentTitle(label ?: "DroidFinder")
+            .setContentText(
+                "${progress.items} items · ${formatSize(progress.bytes)} · ${progress.current}",
+            )
+            .setContentIntent(open)
+            .setOngoing(true)
+            .setOnlyAlertOnce(true)
+            .setProgress(0, 0, true)
+            .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Cancel", cancel)
+            .build()
+    }
+
+    fun foreground(service: Service) {
+        ServiceCompat.startForeground(
+            service,
+            TRANSFER_NOTIFICATION,
+            notification(service),
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
+        )
+        foregroundReady?.complete(Unit)
+    }
+}
+
+class TransferService : Service() {
+    override fun onBind(intent: Intent?): IBinder? = null
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        TransferRuntime.foreground(this)
+        if (intent?.action == "cancel") TransferRuntime.cancel()
+        if (TransferRuntime.label == null) stopSelf()
+        return START_NOT_STICKY
+    }
+
+    override fun onTimeout(startId: Int, fgsType: Int) {
+        TransferRuntime.cancel()
+        stopSelf()
+    }
+}

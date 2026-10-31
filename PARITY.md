@@ -14,22 +14,26 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 
 ## Improvement loop
 
-- [ ] Safe multi-step Undo/Redo for file operations, with changed-file protection.
-- [ ] Batch rename: replace, add text, numbered format, collision preview.
-- [ ] New Folder with Selection, destination picker, reveal original folder.
-- [ ] Custom tags, multiple tags per item, tag management, persistent metadata.
-- [ ] Grouping by kind/date/tag, icon zoom, resizable columns and preview pane.
-- [ ] Saved Smart Folders with name/kind/date/size/tag/content criteria.
-- [ ] Complete PDF navigation/zoom, oriented images, audio/video Quick Look.
+- [x] Safe multi-step Undo/Redo for file operations, with changed-file protection.
+- [x] Batch rename: replace, add text, numbered format, collision preview.
+- [x] New Folder with Selection, destination picker, reveal original folder.
+- [x] Custom tags, multiple tags per item, tag management, persistent metadata.
+- [x] Grouping by kind/date/tag, icon zoom, resizable columns and preview pane.
+- [x] Saved Smart Folders with name/kind/date/size/tag/content criteria.
+- [x] Complete PDF navigation/zoom, oriented images, audio/video Quick Look.
 - [ ] Mouse context menus in every view, selection ranges, type-to-select.
 - [ ] Native drag-and-drop onto folders, tabs/sidebar, and import/export with Android apps.
-- [ ] Android document-provider locations, persistable grants, read-only capabilities.
-- [ ] Cross-provider/local copy/move, create/rename, provider previews/sharing.
-- [ ] Cancellable transfers with byte/item progress, recovery journal and lifecycle handling.
-- [ ] Favorites/sidebar management, aliases as portable app shortcuts, folder appearance.
-- [ ] Preference controls, folder information, display/extension options, dark theme.
+- [x] Android document-provider locations, persistable grants, read-only capabilities.
+- [x] Cross-provider/local copy/move, create/rename, provider previews/sharing.
+- [x] Cancellable transfers with byte/item progress, recovery journal and lifecycle handling.
+- [x] Favorites/sidebar management, aliases as portable app shortcuts, folder appearance.
+- [x] Preference controls, folder information, display/extension options, dark theme.
 - [ ] Expanded safety and workflow tests, tablet landscape/portrait/small-window checks.
 - [ ] GitHub source, build instructions, installable preview release and final verification.
+
+## Verification still in progress
+
+Native dragging, advanced pointer selection, final UI regression, optimized APK smoke tests and the downloadable GitHub preview are the final gates. Existing device tests run on the isolated `DroidFinder_Tablet_API_36` emulator.
 
 ## Platform equivalents and boundaries
 

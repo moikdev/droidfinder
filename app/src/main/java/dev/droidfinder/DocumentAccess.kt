@@ -1,0 +1,708 @@
+package dev.droidfinder
+
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.provider.DocumentsContract
+import android.provider.DocumentsContract.Document
+import java.io.File
+import java.io.InputStream
+import java.io.OutputStream
+import java.nio.file.Files
+import java.security.MessageDigest
+import java.util.Properties
+import java.util.UUID
+import org.json.JSONArray
+import org.json.JSONObject
+
+data class ConnectedLocation(val uri: String, val grant: String, val name: String)
+
+fun isDocumentPath(path: String) = path.startsWith("content://")
+
+/**
+ * Storage Access Framework gateway. Cloud/network authentication stays in the installed provider.
+ */
+class DocumentAccess(
+    private val context: Context,
+    private val engine: FileEngine = FileEngine(context.filesDir),
+) {
+    private val resolver = context.contentResolver
+    private val prefs = context.getSharedPreferences("locations", 0)
+    private val parentFile = File(context.filesDir, "document-parents.properties")
+    private val parents =
+        Properties().apply { if (parentFile.exists()) parentFile.inputStream().use(::load) }
+    private val titles = mutableMapOf<String, String>()
+    private val notifications = mutableMapOf<String, Uri>()
+
+    fun notificationUri(path: String) = notifications[path] ?: Uri.parse(path)
+
+    var lastCopyMappings: List<Pair<String, String>> = emptyList()
+        private set
+
+    var lastRestoreMappings: List<Pair<String, String>> = emptyList()
+        private set
+
+    var locations: List<ConnectedLocation> = runCatching {
+        val array = JSONArray(prefs.getString("roots", "[]"))
+        (0 until array.length()).map {
+            val item = array.getJSONObject(it)
+            ConnectedLocation(
+                item.getString("uri"),
+                item.getString("grant"),
+                item.getString("name"),
+            )
+        }
+    }
+        .getOrDefault(emptyList())
+        private set
+
+    init {
+        locations.forEach { titles[it.uri] = it.name }
+    }
+
+    fun connect(tree: Uri, persist: Boolean = true): ConnectedLocation {
+        if (persist) {
+            resolver.takePersistableUriPermission(tree, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            runCatching {
+                resolver.takePersistableUriPermission(tree, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            }
+        }
+        val uri =
+            DocumentsContract.buildDocumentUriUsingTree(
+                    tree,
+                    DocumentsContract.getTreeDocumentId(tree),
+                )
+                .toString()
+        val entry = read(uri)
+        require(entry.folder) { "Choose a folder rather than a single file." }
+        val root = ConnectedLocation(uri, tree.toString(), entry.name)
+        locations = locations.filterNot { it.uri == uri } + root
+        saveLocations()
+        return root
+    }
+
+    fun disconnect(uri: String) {
+        val root = locations.firstOrNull { it.uri == uri } ?: return
+        locations = locations.filterNot { it.uri == uri }
+        saveLocations()
+        listOf(Intent.FLAG_GRANT_READ_URI_PERMISSION, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            .forEach { flag ->
+                runCatching {
+                    resolver.releasePersistableUriPermission(Uri.parse(root.grant), flag)
+                }
+            }
+    }
+
+    private fun saveLocations() {
+        prefs
+            .edit()
+            .putString(
+                "roots",
+                JSONArray(
+                        locations.map {
+                            JSONObject()
+                                .put("uri", it.uri)
+                                .put("grant", it.grant)
+                                .put("name", it.name)
+                        },
+                    )
+                    .toString(),
+            )
+            .apply()
+    }
+
+    fun allowed(path: String): Boolean = runCatching {
+        val uri = Uri.parse(path)
+        val tree = DocumentsContract.getTreeDocumentId(uri)
+        locations.any {
+            val grant = Uri.parse(it.grant)
+            grant.authority == uri.authority && DocumentsContract.getTreeDocumentId(grant) == tree
+        }
+    }
+        .getOrDefault(false)
+
+    fun title(path: String) =
+        titles[path] ?: locations.firstOrNull { it.uri == path }?.name ?: "Connected folder"
+
+    fun parent(path: String): String? =
+        if (isDocumentPath(path)) parents.getProperty(path) else File(path).parent
+
+    private fun saveParents() {
+        parentFile.outputStream().use { parents.store(it, "Known document parents") }
+    }
+
+    private val projection =
+        arrayOf(
+            Document.COLUMN_DOCUMENT_ID,
+            Document.COLUMN_DISPLAY_NAME,
+            Document.COLUMN_MIME_TYPE,
+            Document.COLUMN_SIZE,
+            Document.COLUMN_LAST_MODIFIED,
+            Document.COLUMN_FLAGS,
+        )
+
+    fun read(path: String): Entry {
+        if (!isDocumentPath(path)) return Entry(File(path))
+        val uri = Uri.parse(path)
+        return resolver.query(uri, projection, null, null, null)?.use { cursor ->
+            check(cursor.moveToFirst()) { "The document is no longer available." }
+            fromCursor(uri, cursor, parents.getProperty(path))
+        } ?: error("Couldn't read this document provider.")
+    }
+
+    private fun fromCursor(tree: Uri, cursor: android.database.Cursor, parent: String?): Entry {
+        fun string(column: String) = cursor.getString(cursor.getColumnIndexOrThrow(column))
+        fun number(column: String) = cursor.getLong(cursor.getColumnIndexOrThrow(column))
+        val id = string(Document.COLUMN_DOCUMENT_ID)
+        val uri = DocumentsContract.buildDocumentUriUsingTree(tree, id)
+        val name = string(Document.COLUMN_DISPLAY_NAME)
+        val mime = string(Document.COLUMN_MIME_TYPE)
+        val flags = number(Document.COLUMN_FLAGS).toInt()
+        val folder = mime == Document.MIME_TYPE_DIR
+        val file = cacheFile(uri.toString(), name)
+        titles[uri.toString()] = name
+        if (parent != null) parents.setProperty(uri.toString(), parent)
+        return Entry(
+            file,
+            name,
+            folder,
+            number(Document.COLUMN_SIZE),
+            number(Document.COLUMN_LAST_MODIFIED),
+            uri,
+            parent,
+            if (folder) flags and Document.FLAG_DIR_SUPPORTS_CREATE != 0
+            else flags and Document.FLAG_SUPPORTS_WRITE != 0,
+            flags and Document.FLAG_SUPPORTS_RENAME != 0,
+            flags and Document.FLAG_SUPPORTS_DELETE != 0,
+            mime,
+        )
+    }
+
+    fun list(path: String): List<Entry> {
+        if (!isDocumentPath(path))
+            return (File(path).listFiles() ?: error("Couldn't read this folder.")).map(::Entry)
+        val uri = Uri.parse(path)
+        val children =
+            DocumentsContract.buildChildDocumentsUriUsingTree(
+                uri,
+                DocumentsContract.getDocumentId(uri),
+            )
+        val result =
+            resolver.query(children, projection, null, null, null)?.use { cursor ->
+                cursor.notificationUri?.let { notifications[path] = it }
+                buildList<Entry> { while (cursor.moveToNext()) add(fromCursor(uri, cursor, path)) }
+            } ?: error("Couldn't list this folder. The provider may be offline.")
+        saveParents()
+        return result
+    }
+
+    private fun cacheFile(path: String, name: String): File {
+        val key =
+            MessageDigest.getInstance("SHA-256").digest(path.toByteArray()).joinToString("") {
+                "%02x".format(it)
+            }
+        return File(context.cacheDir, "documents/$key/${name.replace('/','_')}")
+    }
+
+    fun materialize(entry: Entry, limit: Long = 128L * 1024 * 1024): File {
+        if (entry.documentUri == null) return entry.file
+        check(!entry.folder)
+        check(entry.size <= limit) {
+            "This file is too large for an in-app preview. Open it with another app."
+        }
+        val file = entry.file
+        if (file.isFile && file.length() == entry.size && file.lastModified() >= entry.modified)
+            return file
+        file.parentFile!!.mkdirs()
+        val staging = File(file.parentFile, "preview.tmp")
+        try {
+            input(entry.path).use { source ->
+                staging.outputStream().use { output ->
+                    val buffer = ByteArray(64 * 1024)
+                    var bytes = 0L
+                    while (true) {
+                        val n = source.read(buffer)
+                        if (n < 0) break
+                        bytes += n
+                        check(bytes <= limit) { "Preview exceeds the 128 MB limit." }
+                        output.write(buffer, 0, n)
+                    }
+                }
+            }
+            Files.move(
+                staging.toPath(),
+                file.toPath(),
+                java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+            )
+        } catch (error: Exception) {
+            staging.delete()
+            throw error
+        }
+        return file
+    }
+
+    fun input(path: String): InputStream =
+        if (isDocumentPath(path))
+            resolver.openInputStream(Uri.parse(path))
+                ?: error("The provider couldn't open this file.")
+        else File(path).inputStream()
+
+    private fun output(path: String): OutputStream =
+        if (isDocumentPath(path))
+            resolver.openOutputStream(Uri.parse(path), "wt")
+                ?: error("The provider couldn't write this file.")
+        else File(path).outputStream()
+
+    fun create(
+        parent: String,
+        name: String,
+        folder: Boolean,
+        mime: String = "application/octet-stream",
+    ): String {
+        validateFilename(name)
+        if (!isDocumentPath(parent)) {
+            return if (folder) engine.createFolder(File(parent), name).absolutePath
+            else
+                File(parent, name)
+                    .also { check(it.createNewFile()) { "${it.name} already exists." } }
+                    .absolutePath
+        }
+        check(read(parent).writable) { "This provider folder is read only." }
+        check(list(parent).none { it.name == name }) { "$name already exists." }
+        val uri =
+            DocumentsContract.createDocument(
+                resolver,
+                Uri.parse(parent),
+                if (folder) Document.MIME_TYPE_DIR else mime,
+                name,
+            ) ?: error("The provider couldn't create $name.")
+        parents.setProperty(uri.toString(), parent)
+        titles[uri.toString()] = name
+        saveParents()
+        return uri.toString()
+    }
+
+    fun rename(path: String, name: String): String {
+        validateFilename(name)
+        if (!isDocumentPath(path)) return engine.rename(File(path), name).absolutePath
+        val before = read(path)
+        if (before.name == name) return path
+        check(before.canRename) { "This provider doesn't allow renaming this item." }
+        val parent = parent(path) ?: error("The parent folder is unavailable.")
+        check(list(parent).none { it.name == name && it.path != path }) { "$name already exists." }
+        val result =
+            DocumentsContract.renameDocument(resolver, Uri.parse(path), name)
+                ?: error("The provider couldn't rename this item.")
+        parents.setProperty(result.toString(), parent)
+        titles[result.toString()] = name
+        saveParents()
+        return result.toString()
+    }
+
+    fun delete(path: String) {
+        if (!isDocumentPath(path)) {
+            check(File(path).deleteRecursively()) {
+                "Couldn't completely remove the original after copying. The destination copy was kept."
+            }
+            return
+        }
+        check(locations.none { it.uri == path }) { "A connected root can't be deleted." }
+        check(read(path).canDelete) { "The provider doesn't permit deleting this item." }
+        check(DocumentsContract.deleteDocument(resolver, Uri.parse(path))) {
+            "Couldn't completely remove the original. The destination copy was kept."
+        }
+    }
+
+    private fun uniqueName(parent: String, name: String): String {
+        val names = list(parent).map { it.name }.toSet()
+        val dot = name.lastIndexOf('.').takeIf { it > 0 } ?: name.length
+        var result = name
+        var number = 2
+        while (result in names) {
+            result = "${name.take(dot)} ${number++}${name.drop(dot)}"
+        }
+        return result
+    }
+
+    private fun checkDestination(source: String, parent: String) {
+        require(source != parent) { "A folder can't be placed inside itself." }
+        var cursor: String? = parent
+        val seen = mutableSetOf<String>()
+        while (cursor != null && seen.add(cursor)) {
+            require(cursor != source) { "A folder can't be placed inside itself." }
+            cursor = this.parent(cursor)
+        }
+        if (isDocumentPath(source) && isDocumentPath(parent)) {
+            val a = Uri.parse(source)
+            val b = Uri.parse(parent)
+            if (a.authority == b.authority)
+                require(
+                    !runCatching { DocumentsContract.isChildDocument(resolver, a, b) }
+                        .getOrDefault(false),
+                ) {
+                    "A folder can't be placed inside itself."
+                }
+        }
+    }
+
+    fun copy(
+        source: String,
+        parent: String,
+        move: Boolean,
+        control: TransferControl = TransferControl(),
+        requestedName: String? = null,
+    ): String {
+        lastCopyMappings = emptyList()
+        if (!isDocumentPath(source) && !isDocumentPath(parent))
+            return if (move && requestedName != null)
+                engine.relocate(File(source), File(parent, requestedName), control).absolutePath
+            else engine.copy(File(source), File(parent), move, control).absolutePath
+        checkDestination(source, parent)
+        val entry = read(source)
+        if (move) {
+            check(entry.canDelete) { "The source is read only. Copy it instead." }
+            require(this.parent(source) != parent || requestedName != null) {
+                "This item is already in that folder."
+            }
+        }
+        val name =
+            requestedName?.also {
+                validateFilename(it)
+                check(list(parent).none { child -> child.name == it }) { "$it already exists." }
+            } ?: uniqueName(parent, entry.name)
+        val staging = create(parent, ".droidfinder-${UUID.randomUUID()}", entry.folder, entry.mime)
+        val mappings = mutableListOf<Pair<String, String>>()
+        fun copyContents(from: Entry, to: String) {
+            control.item(from.name)
+            mappings += from.path to to
+            if (from.documentUri == null)
+                check(!Files.isSymbolicLink(from.file.toPath())) { "Symbolic links aren't copied." }
+            if (from.folder)
+                list(from.path).forEach { child ->
+                    copyContents(child, create(to, child.name, child.folder, child.mime))
+                }
+            else input(from.path).use { input -> output(to).use { control.copy(input, it) } }
+        }
+        val completed =
+            try {
+                copyContents(entry, staging)
+                control.check()
+                rename(staging, name)
+            } catch (error: Exception) {
+                runCatching { delete(staging) }
+                throw error
+            }
+        lastCopyMappings = mappings.map {
+            it.first to remapPath(it.second, listOf(staging to completed))
+        }
+        if (move) delete(source)
+        return completed
+    }
+
+    fun importUri(uri: Uri, parent: String, control: TransferControl): String {
+        val name =
+            resolver
+                .query(
+                    uri,
+                    arrayOf(android.provider.OpenableColumns.DISPLAY_NAME),
+                    null,
+                    null,
+                    null,
+                )
+                ?.use { if (it.moveToFirst()) it.getString(0) else null } ?: "Imported file"
+        validateFilename(name)
+        val desired = uniqueName(parent, name)
+        val staging =
+            create(
+                parent,
+                ".droidfinder-${UUID.randomUUID()}",
+                false,
+                resolver.getType(uri) ?: "application/octet-stream",
+            )
+        try {
+            control.item(name)
+            (resolver.openInputStream(uri) ?: error("Couldn't read $name")).use { input ->
+                output(staging).use { control.copy(input, it) }
+            }
+            control.check()
+            return rename(staging, desired)
+        } catch (error: Exception) {
+            runCatching { delete(staging) }
+            throw error
+        }
+    }
+
+    fun trash(path: String, control: TransferControl = TransferControl()): File {
+        if (!isDocumentPath(path)) return engine.trash(File(path), control)
+        val entry = read(path)
+        check(entry.canDelete) { "This provider item is read only." }
+        val parent = parent(path) ?: error("The original parent is unavailable.")
+        val staging =
+            File(context.filesDir, "provider-staging/${UUID.randomUUID()}").apply { mkdirs() }
+        try {
+            val copy = copy(path, staging.absolutePath, false, control)
+            val trashed = engine.trash(File(copy), control)
+            engine.rememberOriginal(trashed, path, parent)
+            engine.rememberMappings(
+                trashed,
+                lastCopyMappings.map {
+                    it.first to remapPath(it.second, listOf(copy to trashed.absolutePath))
+                },
+            )
+            delete(path)
+            return trashed
+        } finally {
+            staging.deleteRecursively()
+        }
+    }
+
+    fun restore(item: File, control: TransferControl = TransferControl()): String {
+        lastRestoreMappings = emptyList()
+        val original = engine.originalPath(item) ?: error("The original location is unavailable.")
+        if (!isDocumentPath(original)) return engine.restore(item, control).absolutePath
+        val parent =
+            engine.originalParent(item) ?: error("The original provider folder is unavailable.")
+        val originals = engine.originalMappings(item)
+        val result = copy(item.absolutePath, parent, false, control)
+        val newPaths = lastCopyMappings.toMap()
+        lastRestoreMappings =
+            originals
+                .mapNotNull { (source, local) -> newPaths[local]?.let { source to it } }
+                .ifEmpty { listOf(original to result) }
+        engine.deleteForever(item)
+        return result
+    }
+
+    fun digest(path: String): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        fun add(entry: Entry, relative: String) {
+            digest.update(relative.toByteArray())
+            if (entry.folder) {
+                digest.update(0)
+                list(entry.path).sortedBy { it.name }.forEach { add(it, "$relative/${it.name}") }
+            } else
+                input(entry.path).use { source ->
+                    val buffer = ByteArray(64 * 1024)
+                    while (true) {
+                        val count = source.read(buffer)
+                        if (count < 0) break
+                        digest.update(buffer, 0, count)
+                    }
+                }
+        }
+        add(read(path), "")
+        return digest.digest().joinToString("") { "%02x".format(it) }
+    }
+
+    fun createdStep(path: String): FileStep {
+        if (!isDocumentPath(path)) return FileStep.Created(File(path))
+        var current = path
+        val entry = read(path)
+        val parent = parent(path)!!
+        val stamp = digest(path)
+        var stash: File? = null
+        var stashStamp: String? = null
+        return FileStep.Callback(
+            check = { undo ->
+                if (undo)
+                    check(digest(current) == stamp) {
+                        "${entry.name} changed; Undo stopped to protect it."
+                    }
+                else {
+                    check(list(parent).none { it.name == entry.name }) {
+                        "${entry.name} already exists."
+                    }
+                    check(stash?.exists() == true && fingerprint(stash!!) == stashStamp) {
+                        "The recovery copy is unavailable or changed."
+                    }
+                }
+            },
+            perform = { undo ->
+                if (undo) {
+                    stash = trash(current)
+                    stashStamp = fingerprint(stash!!)
+                    emptyList()
+                } else {
+                    val before = current
+                    current = restore(stash!!)
+                    stash = null
+                    lastRestoreMappings.ifEmpty { listOf(before to current) }
+                }
+            },
+        )
+    }
+
+    fun movedStep(before: Entry, after: String): FileStep {
+        if (before.documentUri == null && !isDocumentPath(after))
+            return FileStep.Moved(before.file, File(after))
+        var current = after
+        val beforeParent = before.parentPath ?: error("Source parent unavailable")
+        val afterEntry = read(after)
+        val afterParent = parent(after)!!
+        val stamp = digest(after)
+        return FileStep.Callback(
+            check = { undo ->
+                check(digest(current) == stamp) {
+                    "The item changed; Undo/Redo stopped to protect it."
+                }
+                val parent = if (undo) beforeParent else afterParent
+                val name = if (undo) before.name else afterEntry.name
+                check(list(parent).none { it.name == name }) { "$name already exists." }
+            },
+            perform = { undo ->
+                val from = current
+                current =
+                    copy(
+                        current,
+                        if (undo) beforeParent else afterParent,
+                        true,
+                        requestedName = if (undo) before.name else afterEntry.name,
+                    )
+                lastCopyMappings.ifEmpty { listOf(from to current) }
+            },
+        )
+    }
+
+    fun renamedStep(before: Entry, after: String): FileStep {
+        if (before.documentUri == null) return FileStep.Moved(before.file, File(after))
+        var current = after
+        val afterName = read(after).name
+        val stamp = digest(after)
+        val parent = before.parentPath!!
+        return FileStep.Callback(
+            check = { undo ->
+                check(digest(current) == stamp) { "The item changed after renaming." }
+                val name = if (undo) before.name else afterName
+                check(list(parent).none { it.name == name && it.path != current }) {
+                    "$name already exists."
+                }
+            },
+            perform = { undo ->
+                val from = current
+                current = rename(current, if (undo) before.name else afterName)
+                listOf(from to current)
+            },
+        )
+    }
+
+    fun renameBatch(items: List<Pair<Entry, String>>): List<Pair<String, String>> {
+        if (items.all { it.first.documentUri == null })
+            return engine.renameBatch(items.map { RenameProposal(it.first.file, it.second) }).map {
+                it.first.absolutePath to it.second.absolutePath
+            }
+        val targets = items.map { (entry, name) ->
+            validateFilename(name)
+            (entry.parentPath ?: error("Parent folder unavailable")) to name
+        }
+        require(targets.distinct().size == targets.size) { "Two items would have the same name." }
+        val sources = items.map { it.first.path }.toSet()
+        items.forEach { (entry, name) ->
+            check(entry.canRename) { "${entry.name} can't be renamed by this provider." }
+            check(list(entry.parentPath!!).none { it.name == name && it.path !in sources }) {
+                "$name already exists."
+            }
+        }
+        val positions = items.associate { it.first.path to it.first.path }.toMutableMap()
+        try {
+            items.forEach { (entry, _) ->
+                positions[entry.path] =
+                    rename(entry.path, ".droidfinder-rename-${UUID.randomUUID()}")
+            }
+            items.forEach { (entry, name) ->
+                positions[entry.path] = rename(positions.getValue(entry.path), name)
+            }
+        } catch (error: Exception) {
+            positions.toMap().forEach { (original, current) ->
+                if (current != original)
+                    runCatching {
+                        positions[original] =
+                            rename(current, ".droidfinder-rollback-${UUID.randomUUID()}")
+                    }
+            }
+            val recovery = items.mapNotNull { (entry, _) ->
+                val current = positions.getValue(entry.path)
+                if (current == entry.path) null
+                else
+                    runCatching {
+                        rename(current, entry.name)
+                        null
+                    }
+                        .getOrElse { current }
+            }
+            if (recovery.isNotEmpty())
+                error("Rename stopped. Recovery items were kept: ${recovery.joinToString()}")
+            throw error
+        }
+        return positions.toList()
+    }
+
+    fun renamedBatchStep(before: List<Entry>, pairs: List<Pair<String, String>>): FileStep {
+        if (before.all { it.documentUri == null })
+            return FileStep.Renamed(pairs.map { File(it.first) to File(it.second) })
+        var current = pairs.map { it.second }
+        val original = before.associateBy { it.path }
+        val names = pairs.map { read(it.second).name }
+        val stamps = current.map(::digest)
+        return FileStep.Callback(
+            check = { undo ->
+                current.forEachIndexed { index, path ->
+                    check(digest(path) == stamps[index]) { "An item changed after renaming." }
+                    val entry = read(path)
+                    val name =
+                        if (undo) original.getValue(pairs[index].first).name else names[index]
+                    check(
+                        list(entry.parentPath!!).none { it.name == name && it.path !in current },
+                    ) {
+                        "$name already exists."
+                    }
+                }
+            },
+            perform = { undo ->
+                val result =
+                    renameBatch(
+                        current.mapIndexed { index, path ->
+                            read(path) to
+                                if (undo) original.getValue(pairs[index].first).name
+                                else names[index]
+                        },
+                    )
+                current = result.map { it.second }
+                result
+            },
+        )
+    }
+
+    fun trashedStep(before: Entry, item: File): FileStep {
+        if (before.documentUri == null) return FileStep.Trashed(before.file, item)
+        var stash = item
+        var restored: String? = null
+        var stamp = fingerprint(item)
+        var restoredStamp: String? = null
+        val parent = before.parentPath!!
+        return FileStep.Callback(
+            check = { undo ->
+                if (undo) {
+                    check(fingerprint(stash) == stamp) { "The recovery copy changed." }
+                    check(list(parent).none { it.name == before.name }) {
+                        "${before.name} already exists."
+                    }
+                } else
+                    check(digest(restored!!) == restoredStamp) {
+                        "The restored file changed; Redo stopped to protect it."
+                    }
+            },
+            perform = { undo ->
+                if (undo) {
+                    val old = before.path
+                    restored = restore(stash)
+                    restoredStamp = digest(restored!!)
+                    lastRestoreMappings.ifEmpty { listOf(old to restored!!) }
+                } else {
+                    stash = trash(restored!!)
+                    stamp = fingerprint(stash)
+                    emptyList()
+                }
+            },
+        )
+    }
+}

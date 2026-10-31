@@ -1,0 +1,229 @@
+package dev.droidfinder.testing
+
+import android.database.Cursor
+import android.database.MatrixCursor
+import android.os.CancellationSignal
+import android.os.Handler
+import android.os.ParcelFileDescriptor
+import android.provider.DocumentsContract
+import android.provider.DocumentsContract.Document
+import android.provider.DocumentsContract.Root
+import android.provider.DocumentsProvider
+import android.webkit.MimeTypeMap
+import dev.droidfinder.validateFilename
+import java.io.File
+import java.io.FileNotFoundException
+
+/** Isolated fixture provider: compiled only into the debug/test build, never preview/release. */
+class FixtureDocumentsProvider : DocumentsProvider() {
+    companion object {
+        @Volatile var transferGate: java.util.concurrent.CountDownLatch? = null
+        @Volatile var gateOpened: java.util.concurrent.CountDownLatch? = null
+    }
+
+    private val authority
+        get() = "${context!!.packageName}.fixtures"
+
+    private val root
+        get() = File(context!!.filesDir, "ProviderFixtures").apply { mkdirs() }
+
+    override fun onCreate() = true
+
+    private fun file(id: String): File {
+        val relative = if (id == "root") "" else id.removePrefix("root/")
+        val file = File(root, relative).canonicalFile
+        if (!file.toPath().startsWith(root.canonicalFile.toPath()))
+            throw FileNotFoundException("Outside fixture root")
+        return file
+    }
+
+    private fun id(file: File) =
+        "root" +
+            file.canonicalFile
+                .relativeTo(root.canonicalFile)
+                .path
+                .takeIf { it.isNotEmpty() }
+                ?.let { "/$it" }
+                .orEmpty()
+
+    private fun readOnly(file: File) =
+        file.relativeTo(root).path.split('/').any { it == "readonly" }
+
+    private val columns =
+        arrayOf(
+            Document.COLUMN_DOCUMENT_ID,
+            Document.COLUMN_DISPLAY_NAME,
+            Document.COLUMN_MIME_TYPE,
+            Document.COLUMN_SIZE,
+            Document.COLUMN_LAST_MODIFIED,
+            Document.COLUMN_FLAGS,
+        )
+
+    override fun queryRoots(projection: Array<out String>?): Cursor =
+        MatrixCursor(
+                projection
+                    ?: arrayOf(
+                        Root.COLUMN_ROOT_ID,
+                        Root.COLUMN_DOCUMENT_ID,
+                        Root.COLUMN_TITLE,
+                        Root.COLUMN_FLAGS,
+                        Root.COLUMN_AVAILABLE_BYTES,
+                    ),
+            )
+            .apply {
+                val row = newRow()
+                columnNames.forEach { column ->
+                    row.add(
+                        column,
+                        when (column) {
+                            Root.COLUMN_ROOT_ID -> "fixture"
+                            Root.COLUMN_DOCUMENT_ID -> "root"
+                            Root.COLUMN_TITLE -> "DroidFinder test storage"
+                            Root.COLUMN_FLAGS ->
+                                Root.FLAG_SUPPORTS_CREATE or Root.FLAG_SUPPORTS_IS_CHILD
+                            Root.COLUMN_AVAILABLE_BYTES -> root.usableSpace
+                            else -> null
+                        },
+                    )
+                }
+            }
+
+    private fun row(cursor: MatrixCursor, file: File) {
+        val row = cursor.newRow()
+        cursor.columnNames.forEach { column ->
+            row.add(
+                column,
+                when (column) {
+                    Document.COLUMN_DOCUMENT_ID -> id(file)
+                    Document.COLUMN_DISPLAY_NAME ->
+                        if (file == root) "DroidFinder test storage" else file.name
+                    Document.COLUMN_MIME_TYPE ->
+                        if (file.isDirectory) Document.MIME_TYPE_DIR
+                        else
+                            MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.extension)
+                                ?: "application/octet-stream"
+                    Document.COLUMN_SIZE -> if (file.isDirectory) 0L else file.length()
+                    Document.COLUMN_LAST_MODIFIED -> file.lastModified()
+                    Document.COLUMN_FLAGS ->
+                        if (readOnly(file)) 0
+                        else
+                            Document.FLAG_SUPPORTS_DELETE or
+                                Document.FLAG_SUPPORTS_RENAME or
+                                if (file.isDirectory) Document.FLAG_DIR_SUPPORTS_CREATE
+                                else Document.FLAG_SUPPORTS_WRITE
+                    else -> null
+                },
+            )
+        }
+    }
+
+    override fun queryDocument(documentId: String, projection: Array<out String>?): Cursor =
+        MatrixCursor(projection ?: columns).apply {
+            val file = file(documentId)
+            if (!file.exists()) throw FileNotFoundException(documentId)
+            row(this, file)
+        }
+
+    override fun queryChildDocuments(
+        parentDocumentId: String,
+        projection: Array<out String>?,
+        sortOrder: String?,
+    ): Cursor =
+        MatrixCursor(projection ?: columns).apply {
+            file(parentDocumentId).listFiles()?.sortedBy { it.name }?.forEach { row(this, it) }
+            setNotificationUri(
+                context!!.contentResolver,
+                DocumentsContract.buildChildDocumentsUri(authority, parentDocumentId),
+            )
+        }
+
+    private fun changed(parent: File?) {
+        if (parent != null)
+            context!!
+                .contentResolver
+                .notifyChange(DocumentsContract.buildChildDocumentsUri(authority, id(parent)), null)
+    }
+
+    override fun openDocument(
+        documentId: String,
+        mode: String,
+        signal: CancellationSignal?,
+    ): ParcelFileDescriptor {
+        signal?.throwIfCanceled()
+        val file = file(documentId)
+        if (mode.contains('w') && readOnly(file)) throw FileNotFoundException("Read only fixture")
+        if (file.name in listOf("Slow.bin", "Gate.bin") && mode == "r") {
+            val pipe = ParcelFileDescriptor.createPipe()
+            Thread(
+                    {
+                        runCatching {
+                            if (file.name == "Gate.bin") {
+                                gateOpened?.countDown()
+                                transferGate?.await(15, java.util.concurrent.TimeUnit.SECONDS)
+                            }
+                            ParcelFileDescriptor.AutoCloseOutputStream(pipe[1]).use { output ->
+                                file.inputStream().use { input ->
+                                    val buffer = ByteArray(64 * 1024)
+                                    while (true) {
+                                        val size = input.read(buffer)
+                                        if (size < 0) break
+                                        output.write(buffer, 0, size)
+                                        if (file.name == "Slow.bin") Thread.sleep(50)
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "fixture-slow-stream",
+                )
+                .apply {
+                    isDaemon = true
+                    start()
+                }
+            return pipe[0]
+        }
+        return if (mode.contains('w'))
+            ParcelFileDescriptor.open(
+                file,
+                ParcelFileDescriptor.parseMode(mode),
+                Handler(context!!.mainLooper),
+            ) {
+                changed(file.parentFile)
+            }
+        else ParcelFileDescriptor.open(file, ParcelFileDescriptor.parseMode(mode))
+    }
+
+    override fun createDocument(
+        parentDocumentId: String,
+        mimeType: String,
+        displayName: String,
+    ): String {
+        val parent = file(parentDocumentId)
+        if (readOnly(parent)) throw FileNotFoundException("Read only")
+        val created = File(parent, validateFilename(displayName))
+        if (created.exists()) throw FileNotFoundException("Collision")
+        check(if (mimeType == Document.MIME_TYPE_DIR) created.mkdir() else created.createNewFile())
+        changed(parent)
+        return id(created)
+    }
+
+    override fun renameDocument(documentId: String, displayName: String): String {
+        val before = file(documentId)
+        if (readOnly(before)) throw FileNotFoundException("Read only")
+        val after = File(before.parentFile, validateFilename(displayName))
+        if (after.exists()) throw FileNotFoundException("Collision")
+        check(before.renameTo(after))
+        changed(after.parentFile)
+        return id(after)
+    }
+
+    override fun deleteDocument(documentId: String) {
+        val file = file(documentId)
+        if (file == root || readOnly(file)) throw FileNotFoundException("Read only")
+        check(file.deleteRecursively())
+        changed(file.parentFile)
+    }
+
+    override fun isChildDocument(parentDocumentId: String, documentId: String) =
+        documentId.startsWith("$parentDocumentId/")
+}
