@@ -24,12 +24,16 @@ fun rememberKeyboardListState(
         val saved = remember { model.savedViewport(tabId, viewport) }
         val latestPaths by rememberUpdatedState(paths)
         var ready by remember { mutableStateOf(false) }
+        var restoring by remember { mutableStateOf(false) }
+        val initialInteraction = remember { model.viewportInteraction }
         val initialRequest = remember { model.keyboardScrollRequest }
         fun capture(): ViewportAnchor? {
-            if (!ready || latestPaths.isEmpty()) return null
+            if (!ready || restoring || latestPaths.isEmpty()) return null
             val index = state.firstVisibleItemIndex
             return ViewportAnchor(
-                latestPaths.getOrNull(index),
+                (state.layoutInfo.visibleItemsInfo.firstOrNull { it.index == index }?.key
+                        as? String)
+                    ?.takeUnless { it.startsWith("group:") },
                 index,
                 state.firstVisibleItemScrollOffset,
             )
@@ -38,23 +42,40 @@ fun rememberKeyboardListState(
             capture()?.let { model.recordViewport(tabId, viewport, it) }
         }
         LaunchedEffect(model.loading, paths) {
-            if (!ready && !model.loading) {
+            val anchor = saved?.path?.let(paths::indexOf) ?: -1
+            if (!ready && (saved == null || anchor >= 0 || !model.loading)) {
                 withFrameNanos {}
-                if (paths.isNotEmpty() && saved != null) {
-                    val at =
-                        saved.path?.let(paths::indexOf)?.takeIf { it >= 0 }
-                            ?: saved.index.coerceIn(paths.indices)
-                    state.scrollToItem(at, saved.offset)
+                if (ready) return@LaunchedEffect
+                restoring = true
+                try {
+                    if (paths.isNotEmpty() && saved != null) {
+                        val at =
+                            saved.path?.let(paths::indexOf)?.takeIf { it >= 0 }
+                                ?: saved.index.coerceIn(paths.indices)
+                        state.scrollToItem(at, saved.offset)
+                    }
+                    ready = true
+                } finally {
+                    restoring = false
                 }
-                ready = true
             }
+        }
+        LaunchedEffect(model.viewportInteraction, model.keyboardScrollRequest) {
+            if (
+                model.viewportInteraction != initialInteraction ||
+                    model.keyboardScrollRequest != initialRequest
+            )
+                ready = true
+        }
+        LaunchedEffect(state) {
+            snapshotFlow { state.isScrollInProgress }.collect { if (it && !restoring) ready = true }
         }
         LaunchedEffect(state) {
             snapshotFlow {
                 Triple(state.firstVisibleItemIndex, state.firstVisibleItemScrollOffset, ready)
             }
                 .distinctUntilChanged()
-                .collect { if (!model.loading) record() }
+                .collect { record() }
         }
         DisposableEffect(state) {
             model.registerViewport(tabId, viewport, state, ::capture)
@@ -102,12 +123,16 @@ fun rememberKeyboardGridState(model: FinderModel, paths: List<String?>): LazyGri
         val saved = remember { model.savedViewport(tabId, viewport) }
         val latestPaths by rememberUpdatedState(paths)
         var ready by remember { mutableStateOf(false) }
+        var restoring by remember { mutableStateOf(false) }
+        val initialInteraction = remember { model.viewportInteraction }
         val initialRequest = remember { model.keyboardScrollRequest }
         fun capture(): ViewportAnchor? {
-            if (!ready || latestPaths.isEmpty()) return null
+            if (!ready || restoring || latestPaths.isEmpty()) return null
             val index = state.firstVisibleItemIndex
             return ViewportAnchor(
-                latestPaths.getOrNull(index),
+                (state.layoutInfo.visibleItemsInfo.firstOrNull { it.index == index }?.key
+                        as? String)
+                    ?.takeUnless { it.startsWith("group:") },
                 index,
                 state.firstVisibleItemScrollOffset,
             )
@@ -116,23 +141,40 @@ fun rememberKeyboardGridState(model: FinderModel, paths: List<String?>): LazyGri
             capture()?.let { model.recordViewport(tabId, viewport, it) }
         }
         LaunchedEffect(model.loading, paths) {
-            if (!ready && !model.loading) {
+            val anchor = saved?.path?.let(paths::indexOf) ?: -1
+            if (!ready && (saved == null || anchor >= 0 || !model.loading)) {
                 withFrameNanos {}
-                if (paths.isNotEmpty() && saved != null) {
-                    val at =
-                        saved.path?.let(paths::indexOf)?.takeIf { it >= 0 }
-                            ?: saved.index.coerceIn(paths.indices)
-                    state.scrollToItem(at, saved.offset)
+                if (ready) return@LaunchedEffect
+                restoring = true
+                try {
+                    if (paths.isNotEmpty() && saved != null) {
+                        val at =
+                            saved.path?.let(paths::indexOf)?.takeIf { it >= 0 }
+                                ?: saved.index.coerceIn(paths.indices)
+                        state.scrollToItem(at, saved.offset)
+                    }
+                    ready = true
+                } finally {
+                    restoring = false
                 }
-                ready = true
             }
+        }
+        LaunchedEffect(model.viewportInteraction, model.keyboardScrollRequest) {
+            if (
+                model.viewportInteraction != initialInteraction ||
+                    model.keyboardScrollRequest != initialRequest
+            )
+                ready = true
+        }
+        LaunchedEffect(state) {
+            snapshotFlow { state.isScrollInProgress }.collect { if (it && !restoring) ready = true }
         }
         LaunchedEffect(state) {
             snapshotFlow {
                 Triple(state.firstVisibleItemIndex, state.firstVisibleItemScrollOffset, ready)
             }
                 .distinctUntilChanged()
-                .collect { if (!model.loading) record() }
+                .collect { record() }
         }
         DisposableEffect(state) {
             model.registerViewport(tabId, viewport, state, ::capture)
@@ -182,19 +224,22 @@ fun rememberBrowserHorizontalState(model: FinderModel, view: String): ScrollStat
         val saved = remember { model.savedViewport(tabId, viewport)?.offset ?: 0 }
         var ready by remember { mutableStateOf(false) }
         LaunchedEffect(model.loading) {
-            if (!ready && !model.loading) {
+            if (!ready && (!model.loading || saved == 0)) {
                 withFrameNanos {}
-                state.scrollTo(saved)
-                ready = true
+                if (!ready) {
+                    state.scrollTo(saved)
+                    ready = true
+                }
             }
         }
         fun record() {
             if (ready) model.recordViewport(tabId, viewport, ViewportAnchor(offset = state.value))
         }
         LaunchedEffect(state) {
-            snapshotFlow { state.value to ready }
-                .distinctUntilChanged()
-                .collect { if (!model.loading) record() }
+            snapshotFlow { state.isScrollInProgress }.collect { if (it) ready = true }
+        }
+        LaunchedEffect(state) {
+            snapshotFlow { state.value to ready }.distinctUntilChanged().collect { record() }
         }
         DisposableEffect(state) {
             model.registerViewport(tabId, viewport, state) {

@@ -200,69 +200,98 @@ private fun BoxWithConstraintsScope.PaneFiles(
                     .folderContextMenu(model)
                     .folderDropTarget(model, model.folderPath, spring = false),
             ) {
-                when {
-                    model.listingError != null ->
-                        EmptyState(
-                            Icons.Outlined.FolderOff,
-                            "Folder unavailable",
-                            model.listingError!!,
-                            "Try again",
-                            model::refresh,
-                        )
-                    model.entries.isEmpty() && !model.loading -> {
-                        if (
-                            model.directory == model.workspace &&
-                                !model.effectiveSearchRules.active &&
-                                !model.hasAccess
-                        )
-                            WelcomeState(onGrantAccess, onNew)
-                        else
-                            EmptyState(
-                                if (
-                                    (model.query.isNotEmpty() ||
-                                        model.effectiveSearchRules.active ||
-                                        model.currentSmartFolder != null)
+                Column(Modifier.fillMaxSize()) {
+                    ListingStatus(model)
+                    Box(Modifier.weight(1f).fillMaxWidth()) {
+                        when {
+                            model.listingError != null ->
+                                EmptyState(
+                                    Icons.Outlined.FolderOff,
+                                    "Folder unavailable",
+                                    model.listingError!!,
+                                    "Try again",
+                                    model::refresh,
                                 )
-                                    Icons.Outlined.SearchOff
-                                else if (model.isTrash) Icons.Outlined.DeleteOutline
-                                else Icons.Outlined.FolderOpen,
-                                if (
-                                    (model.query.isNotEmpty() ||
-                                        model.effectiveSearchRules.active ||
-                                        model.currentSmartFolder != null)
+                            model.entries.isEmpty() &&
+                                !model.loading &&
+                                model.listingProgress.incomplete -> {
+                                EmptyState(
+                                    Icons.Outlined.Info,
+                                    when {
+                                        model.listingProgress.stopped -> "Scan stopped"
+                                        model.listingProgress.providerPending ->
+                                            "Waiting for provider"
+                                        model.listingProgress.scanLimit ->
+                                            "No matches in the scanned portion"
+                                        else -> "Results are incomplete"
+                                    },
+                                    "Some items haven't been fully checked. Review result details or try again.",
+                                    "Result details",
+                                    { model.listingDetailsRequested = true },
                                 )
-                                    "No matching files"
-                                else if (model.isTrash) "Trash is empty"
-                                else "This folder is empty",
+                            }
+                            model.entries.isEmpty() && !model.loading -> {
                                 if (
-                                    (model.query.isNotEmpty() ||
-                                        model.effectiveSearchRules.active ||
-                                        model.currentSmartFolder != null)
+                                    model.directory == model.workspace &&
+                                        !model.effectiveSearchRules.active &&
+                                        !model.hasAccess
                                 )
-                                    "Try another name. Search includes subfolders."
-                                else if (model.isTrash) "Items you move to Trash will appear here."
-                                else "Create a folder or paste files to get started.",
-                                if (model.canCreate && model.busy == null && model.query.isEmpty())
-                                    "New folder"
-                                else null,
-                                onNew,
+                                    WelcomeState(onGrantAccess, onNew)
+                                else
+                                    EmptyState(
+                                        if (
+                                            (model.query.isNotEmpty() ||
+                                                model.effectiveSearchRules.active ||
+                                                model.currentSmartFolder != null)
+                                        )
+                                            Icons.Outlined.SearchOff
+                                        else if (model.isTrash) Icons.Outlined.DeleteOutline
+                                        else Icons.Outlined.FolderOpen,
+                                        if (
+                                            (model.query.isNotEmpty() ||
+                                                model.effectiveSearchRules.active ||
+                                                model.currentSmartFolder != null)
+                                        )
+                                            "No matching files"
+                                        else if (model.isTrash) "Trash is empty"
+                                        else "This folder is empty",
+                                        if (
+                                            (model.query.isNotEmpty() ||
+                                                model.effectiveSearchRules.active ||
+                                                model.currentSmartFolder != null)
+                                        )
+                                            "Try another name. Search includes subfolders."
+                                        else if (model.isTrash)
+                                            "Items you move to Trash will appear here."
+                                        else "Create a folder or paste files to get started.",
+                                        if (
+                                            model.canCreate &&
+                                                model.busy == null &&
+                                                model.query.isEmpty()
+                                        )
+                                            "New folder"
+                                        else null,
+                                        onNew,
+                                    )
+                            }
+                            model.mode == ViewMode.ICONS -> IconView(model, open)
+                            model.mode == ViewMode.LIST && model.windowsLayout == 8 ->
+                                ContentListView(model, open)
+                            model.mode == ViewMode.LIST ->
+                                ListView(model, open) { entry ->
+                                    model.requestContext(entry)
+                                }
+                            model.mode == ViewMode.COLUMNS -> ColumnsView(model, open)
+                            model.mode == ViewMode.GALLERY -> GalleryView(model, open)
+                        }
+                        if (model.loading)
+                            LinearProgressIndicator(
+                                Modifier.fillMaxWidth().height(2.dp),
+                                color = Blue,
                             )
                     }
-                    model.mode == ViewMode.ICONS -> IconView(model, open)
-                    model.mode == ViewMode.LIST && model.windowsLayout == 8 ->
-                        ContentListView(model, open)
-                    model.mode == ViewMode.LIST ->
-                        ListView(model, open) { entry ->
-                            model.requestContext(entry)
-                        }
-                    model.mode == ViewMode.COLUMNS -> ColumnsView(model, open)
-                    model.mode == ViewMode.GALLERY -> GalleryView(model, open)
                 }
-                if (model.loading)
-                    LinearProgressIndicator(
-                        Modifier.fillMaxWidth().height(2.dp),
-                        color = Blue,
-                    )
+                ListingDetails(model)
             }
             if (model.previewVisible && model.mode != ViewMode.GALLERY && paneWidth >= 900.dp) {
                 ResizeHandle(

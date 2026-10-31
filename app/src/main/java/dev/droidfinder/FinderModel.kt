@@ -231,6 +231,7 @@ constructor(
         saveTabState()
         closedTabs = (closedTabs + tabs.filterNot { it.pinned }).takeLast(20)
         viewportPositions.clear()
+        listingBudgets.clear()
         tabs = saved.tabs.map { it.copy(id = java.util.UUID.randomUUID().toString()) }
         activeTab = saved.active.coerceIn(tabs.indices)
         mode = saved.mode
@@ -490,6 +491,8 @@ constructor(
 
     fun toggleExpanded(entry: Entry) {
         if (!entry.folder || !canExpandList) return
+        pendingTabRestore = null
+        viewportInteraction++
         if (entry.path in expandedFolders) {
             expandedFolders = expandedFolders - entry.path
             scheduleNavigationSave()
@@ -595,6 +598,7 @@ constructor(
         get() = closedTabs.isNotEmpty()
 
     private val viewportPositions = mutableMapOf<String, Map<ViewportKey, ViewportAnchor>>()
+    private val listingBudgets = mutableMapOf<String, Map<ListingScope, ListingBudget>>()
 
     private data class ViewportReader(val owner: Any, val capture: () -> ViewportAnchor?)
 
@@ -1073,8 +1077,84 @@ constructor(
     var volumes by session.volumes
         private set
 
+    internal var viewportInteraction by mutableIntStateOf(0)
+        private set
+
     private var listingLocation: String? = null
     private var listingJob: Job? = null
+    private var listingControl: ListingControl? = null
+    private var listingGeneration = 0L
+    private var listingIdentity: List<Any?>? = null
+    private var listingBudget = ListingBudget()
+    private var listingBudgetKey: ListingScope? = null
+    internal var listingProgress by mutableStateOf(ListingProgress())
+        private set
+
+    internal var listingDetailsRequested by mutableStateOf(false)
+    internal val canLoadMore
+        get() =
+            (listingProgress.resultLimit && listingBudget.results < 50_000) ||
+                (listingProgress.scanLimit && listingBudget.scanned < 2_000_000)
+
+    internal val listingCountText: String
+        get() =
+            when {
+                loading -> "${entries.size} shown · scanning…"
+                selected.isNotEmpty() -> "${selected.size} of ${entries.size} selected"
+                effectiveSearchRules.active || currentSmartFolder != null ->
+                    "${entries.size} matches"
+                else -> "${entries.size} item${if (entries.size == 1) "" else "s"}"
+            } + if (!loading && listingProgress.incomplete) " · incomplete" else ""
+
+    fun stopLoading() {
+        if (!loading) return
+        viewportInteraction++
+        listingGeneration++
+        listingControl?.cancel()
+        listingJob?.cancel()
+        loading = false
+        listingProgress = listingProgress.copy(stopped = true)
+        truncated = true
+        finishListingSelection()
+        stopListingObservers()
+    }
+
+    fun loadMoreResults() {
+        if (loading || !canLoadMore) return
+        listingBudget = listingBudget.more()
+        val tab = tabs[activeTab]
+        listingBudgetKey?.let { key ->
+            val before = listingBudgets[tab.id] ?: tab.navigation.budgets
+            listingBudgets[tab.id] =
+                (before - key + (key to listingBudget)).entries.toList().takeLast(32).associate {
+                    it.toPair()
+                }
+        }
+        persistTabs()
+        refresh()
+    }
+
+    private fun stopListingObservers() {
+        observer?.stopWatching()
+        observer = null
+        providerObserver?.let {
+            getApplication<Application>().contentResolver.unregisterContentObserver(it)
+        }
+        providerObserver = null
+    }
+
+    private fun finishListingSelection() {
+        val visible = visibleEntries.map { it.path }.toSet()
+        val saved = pendingTabRestore?.takeIf { it.first == tabs[activeTab].id }?.second
+        if (saved != null) {
+            selected = saved.selected.intersect(visible)
+            leadSelection = saved.lead?.takeIf { it in visible }
+            rangeAnchor = saved.anchor?.takeIf { it in visible }
+            multiSelecting = saved.multiple && selected.isNotEmpty()
+            pendingTabRestore = null
+        } else selected = selected.intersect(visible)
+    }
+
     private var observer: FileObserver? = null
     private var providerObserver: android.database.ContentObserver? = null
     val selectedEntries
@@ -1420,6 +1500,7 @@ constructor(
                         navigation =
                             state.copy(
                                 positions = viewportPositions[tab.id] ?: tab.navigation.positions,
+                                budgets = listingBudgets[tab.id] ?: tab.navigation.budgets,
                             ),
                     )
             }
@@ -1451,7 +1532,7 @@ constructor(
             ?.get(key)
 
     internal fun recordViewport(tabId: String, key: ViewportKey, point: ViewportAnchor) {
-        if (tabId != tabs[activeTab].id || key != viewportKey(key.view) || loading) return
+        if (tabId != tabs[activeTab].id || key != viewportKey(key.view)) return
         val tab = (tabs + closedTabs).firstOrNull { it.id == tabId } ?: return
         val before = viewportPositions[tabId] ?: tab.navigation.positions
         if (before[key] == point) return
@@ -1470,11 +1551,13 @@ constructor(
                     navigation =
                         tab.navigation.copy(
                             positions = viewportPositions[tab.id] ?: tab.navigation.positions,
+                            budgets = listingBudgets[tab.id] ?: tab.navigation.budgets,
                         ),
                 )
             tabs = tabs.map(::positions)
             closedTabs = closedTabs.map(::positions)
             viewportPositions.keys.retainAll((tabs + closedTabs).map { it.id }.toSet())
+            listingBudgets.keys.retainAll((tabs + closedTabs).map { it.id }.toSet())
             panePrefs
                 .edit()
                 .putString("tabs", JSONArray(tabs.map(NavigationJson::tab)).toString())
@@ -1590,7 +1673,11 @@ constructor(
                         index = history.lastIndex,
                         search = "",
                         rules = SearchRules(),
-                        navigation = TabNavigation(positions = current.navigation.positions),
+                        navigation =
+                            TabNavigation(
+                                positions = current.navigation.positions,
+                                budgets = current.navigation.budgets,
+                            ),
                     )
             }
         restoreTabState()
@@ -1608,7 +1695,11 @@ constructor(
                         index = tab.index - 1,
                         search = "",
                         rules = SearchRules(),
-                        navigation = TabNavigation(positions = tab.navigation.positions),
+                        navigation =
+                            TabNavigation(
+                                positions = tab.navigation.positions,
+                                budgets = tab.navigation.budgets,
+                            ),
                     )
             }
         restoreTabState()
@@ -1627,7 +1718,11 @@ constructor(
                         index = tab.index + 1,
                         search = "",
                         rules = SearchRules(),
-                        navigation = TabNavigation(positions = tab.navigation.positions),
+                        navigation =
+                            TabNavigation(
+                                positions = tab.navigation.positions,
+                                budgets = tab.navigation.budgets,
+                            ),
                     )
             }
         restoreTabState()
@@ -1816,6 +1911,7 @@ constructor(
     }
 
     fun select(entry: Entry, multiple: Boolean = false, range: Boolean = false) {
+        viewportInteraction++
         pendingTabRestore = null
         scheduleNavigationSave()
         keyboardRangeBase = null
@@ -1875,6 +1971,7 @@ constructor(
     }
 
     fun selectPaths(paths: Set<String>) {
+        viewportInteraction++
         pendingTabRestore = null
         scheduleNavigationSave()
         selected = paths.intersect(visibleEntries.map { it.path }.toSet())
@@ -1883,6 +1980,7 @@ constructor(
     }
 
     fun clearSelection() {
+        viewportInteraction++
         pendingTabRestore = null
         scheduleNavigationSave()
         keyboardRangeBase = null
@@ -2104,6 +2202,9 @@ constructor(
             pane.viewportPositions.replaceAll { _, points ->
                 TabNavigation(positions = points).remap(names).positions
             }
+            pane.listingBudgets.replaceAll { _, budgets ->
+                TabNavigation(budgets = budgets).remap(names).budgets
+            }
             pane.pendingTabRestore =
                 pane.pendingTabRestore?.let { it.first to it.second.remap(names) }
             pane.selected = pane.selected.map(::update).toSet()
@@ -2149,28 +2250,53 @@ constructor(
         else session.panes.forEach { it.refresh() }
     }
 
-    private fun sorted(items: List<Entry>): List<Entry> {
+    private fun entryComparator(
+        order: SortBy = sort,
+        forward: Boolean = ascending,
+        folders: Boolean = foldersFirst,
+    ): Comparator<Entry> {
         var comparator =
-            when (sort) {
+            when (order) {
                 SortBy.NAME -> compareBy<Entry, String>(String.CASE_INSENSITIVE_ORDER) { it.name }
                 SortBy.MODIFIED -> compareBy { it.modified }
                 SortBy.SIZE -> compareBy { it.size }
                 SortBy.KIND -> compareBy { it.kind }
             }.thenBy(String.CASE_INSENSITIVE_ORDER) { it.name }
-        if (!ascending) comparator = comparator.reversed()
-        return items.sortedWith(
-            if (foldersFirst) compareByDescending<Entry> { it.folder }.then(comparator)
-            else comparator,
-        )
+        if (!forward) comparator = comparator.reversed()
+        return if (folders) compareByDescending<Entry> { it.folder }.then(comparator)
+        else comparator
     }
 
+    private fun sorted(items: List<Entry>) = items.sortedWith(entryComparator())
+
     fun refresh(debounce: Boolean = false) {
+        listingControl?.cancel()
         listingJob?.cancel()
+        stopListingObservers()
+        val generation = ++listingGeneration
+        val control = ListingControl().also { listingControl = it }
         val path = location
         val search = query.trim()
         val hidden = showHidden
         val smart = smartFolders.firstOrNull { path == "@smart:${it.id}" }
         val rules = effectiveSearchRules
+        val identity = listOf(path, rules, hidden, smart?.root, tabs[activeTab].id)
+        val budgetKey = ListingScope(path, rules, hidden, smart?.root)
+        listingBudgetKey = budgetKey
+        if (listingIdentity != identity) {
+            listingIdentity = identity
+            val tab = tabs[activeTab]
+            listingBudget =
+                (listingBudgets[tab.id] ?: tab.navigation.budgets)[budgetKey]?.normalized()
+                    ?: ListingBudget()
+            entries = emptyList()
+        }
+        val previousCount = entries.size
+        val order = Triple(sort, ascending, foldersFirst)
+        val comparator = entryComparator()
+        val tagsSnapshot = tagAssignments.toMap()
+        val stylesSnapshot = folderStyles.toMap()
+        val budget = listingBudget
         if (listingLocation != path) {
             entries = emptyList()
             folderInfo = null
@@ -2180,89 +2306,131 @@ constructor(
         loading = true
         listingError = null
         truncated = false
+        listingProgress = ListingProgress()
         listingJob = viewModelScope.launch {
             if (debounce) delay(220)
             val result = runCatching {
                 withContext(Dispatchers.IO) {
-                    var traversalLimited = false
                     val info =
                         if (!path.startsWith("@")) {
                             check(allowedPath(path)) {
                                 "Storage access is needed to open this folder."
                             }
-                            documents.read(path)
+                            documents.read(path, control)
                         } else null
-                    val base: List<Entry> =
+                    val explicit =
+                        when {
+                            path == "@trash" -> engine.trashItems().map { it.path }
+                            path.startsWith("@tag:") ->
+                                tagsSnapshot
+                                    .filterValues { path.removePrefix("@tag:") in it }
+                                    .keys
+                                    .toList()
+                            else -> null
+                        }
+                    val roots =
                         when {
                             smart != null -> {
                                 check(allowedPath(smart.root)) {
                                     "Reconnect the Smart Folder's location."
                                 }
-                                scanPath(smart.root, hidden, 50_000).let { (files, limited) ->
-                                    traversalLimited = limited
-                                    files
+                                listOf(smart.root)
+                            }
+                            path == "@recent" ->
+                                listOf(workspace.path) +
+                                    (if (hasAccess) listOf(deviceRoot.path) else emptyList()) +
+                                    connectedLocations.map { it.uri }
+                            else -> listOf(path)
+                        }
+                    val trashRequest = path == "@trash"
+                    val source =
+                        object : ListingSource {
+                            override suspend fun children(
+                                path: String,
+                                control: ListingControl,
+                                visit: suspend (Entry) -> Boolean,
+                            ): DirectoryReply {
+                                check(allowedPath(path)) {
+                                    "Storage access is needed to read this folder."
+                                }
+                                return documents.visitChildren(path, control, visit)
+                            }
+
+                            override fun read(path: String, control: ListingControl): Entry {
+                                check(
+                                    allowedPath(path) ||
+                                        (trashRequest &&
+                                            File(path)
+                                                .canonicalFile
+                                                .toPath()
+                                                .startsWith(
+                                                    File(
+                                                            getApplication<Application>().filesDir,
+                                                            "Trash",
+                                                        )
+                                                        .canonicalFile
+                                                        .toPath(),
+                                                )),
+                                ) {
+                                    "Storage access is needed to read this item."
+                                }
+                                return documents.read(path, control)
+                            }
+
+                            override fun input(entry: Entry, control: ListingControl) =
+                                documents.input(entry.path, control)
+
+                            override fun searchable(entry: Entry) =
+                                entry.documentUri != null ||
+                                    !java.nio.file.Files.isSymbolicLink(entry.file.toPath())
+
+                            override fun traversable(entry: Entry) =
+                                searchable(entry) &&
+                                    !(entry.parentPath == deviceRoot.path &&
+                                        entry.name == "Android")
+                        }
+                    val request =
+                        ListingRequest(
+                            roots,
+                            smart != null || rules.active || path == "@recent",
+                            hidden,
+                            rules,
+                            tagsSnapshot,
+                            stylesSnapshot,
+                            comparator,
+                            budget,
+                            path == "@recent",
+                            explicit,
+                        )
+                    val batch =
+                        DirectoryLoader(source).load(request, control) { update ->
+                            withContext(Dispatchers.Main.immediate) {
+                                if (generation == listingGeneration) {
+                                    if (order != Triple(sort, ascending, foldersFirst)) {
+                                        refresh()
+                                    } else {
+                                        folderInfo = info
+                                        if (update.entries.size >= previousCount)
+                                            entries = update.entries
+                                        listingProgress = update.progress
+                                    }
                                 }
                             }
-                            path == "@trash" -> engine.trashItems().map(::Entry)
-                            path.startsWith("@tag:") ->
-                                tagAssignments
-                                    .filterValues { path.removePrefix("@tag:") in it }
-                                    .keys
-                                    .filter(::allowedPath)
-                                    .mapNotNull { runCatching { documents.read(it) }.getOrNull() }
-                                    .filter { it.documentUri != null || it.file.exists() }
-                            path == "@recent" -> {
-                                val roots =
-                                    listOf(workspace.absolutePath) +
-                                        (if (hasAccess) listOf(deviceRoot.absolutePath)
-                                        else emptyList()) +
-                                        connectedLocations.map { it.uri }
-                                roots
-                                    .flatMap { root ->
-                                        runCatching {
-                                                scanPath(root, hidden, 50_000).let {
-                                                    (files, limited) ->
-                                                    traversalLimited = traversalLimited || limited
-                                                    files
-                                                }
-                                            }
-                                            .getOrDefault(emptyList())
-                                    }
-                                    .filterNot { it.folder }
-                                    .sortedByDescending { it.modified }
-                                    .take(200)
-                            }
-                            else ->
-                                if (rules.active)
-                                    scanPath(path, hidden, 50_000).let { (files, limited) ->
-                                        traversalLimited = limited
-                                        files
-                                    }
-                                else documents.list(path)
                         }
-                    val filtered =
-                        base
-                            .asSequence()
-                            .filter { hidden || !it.name.startsWith('.') }
-                            .filter { !it.name.startsWith(".droidfinder-") }
-                            .filter {
-                                rules.matches(
-                                    it,
-                                    tagAssignments[it.path].orEmpty(),
-                                    read = { entry -> documents.input(entry.path) },
-                                )
-                            }
-                            .map { it.copy(style = folderStyles[it.path]) }
-                            .take(5001)
-                            .toList()
-                    Triple(filtered.take(5000), filtered.size > 5000 || traversalLimited, info)
+                    batch to info
                 }
             }
             result
-                .onSuccess { (items, limited, info) ->
+                .onSuccess { (batch, info) ->
+                    if (generation != listingGeneration) return@onSuccess
+                    if (order != Triple(sort, ascending, foldersFirst)) {
+                        refresh()
+                        return@onSuccess
+                    }
                     folderInfo = info
-                    entries = sorted(items)
-                    truncated = limited
+                    entries = batch.entries
+                    listingProgress = batch.progress
+                    truncated = batch.progress.incomplete
                     if (expandedFolders.isNotEmpty()) {
                         expandedChildren =
                             withContext(Dispatchers.IO) {
@@ -2282,21 +2450,18 @@ constructor(
                                     }
                             }
                     }
-                    val visible = visibleEntries.map { it.path }.toSet()
-                    val saved = pendingTabRestore?.takeIf { it.first == tabs[activeTab].id }?.second
-                    if (saved != null) {
-                        selected = saved.selected.intersect(visible)
-                        leadSelection = saved.lead?.takeIf { it in visible }
-                        rangeAnchor = saved.anchor?.takeIf { it in visible }
-                        multiSelecting = saved.multiple && selected.isNotEmpty()
-                        pendingTabRestore = null
-                    } else selected = selected.intersect(visible)
+                    if (generation != listingGeneration) return@onSuccess
+                    finishListingSelection()
                 }
                 .onFailure {
                     if (it is kotlinx.coroutines.CancellationException) throw it
-                    entries = emptyList()
-                    listingError = it.message ?: "Couldn't load this folder."
+                    if (generation == listingGeneration) {
+                        entries = emptyList()
+                        listingError = it.message ?: "Couldn't load this folder."
+                        finishListingSelection()
+                    }
                 }
+            if (generation != listingGeneration) return@launch
             loading = false
             observer?.stopWatching()
             providerObserver?.let {
@@ -2311,7 +2476,8 @@ constructor(
                                     android.os.Handler(android.os.Looper.getMainLooper()),
                                 ) {
                                 override fun onChange(selfChange: Boolean) {
-                                    if (busy == null) refresh(debounce = true)
+                                    if (generation == listingGeneration && busy == null)
+                                        refresh(debounce = true)
                                 }
                             }
                             .also {
@@ -2347,7 +2513,8 @@ constructor(
                                         return
                                     viewModelScope.launch {
                                         if (
-                                            directory?.path == folder.path &&
+                                            generation == listingGeneration &&
+                                                directory?.path == folder.path &&
                                                 busy == null &&
                                                 query.isEmpty()
                                         )
@@ -2358,51 +2525,6 @@ constructor(
                             .also { it.startWatching() }
                 }
         }
-    }
-
-    private suspend fun scanPath(
-        root: String,
-        hidden: Boolean,
-        limit: Int,
-    ): Pair<List<Entry>, Boolean> {
-        val found = ArrayList<Entry>()
-        val pending = ArrayDeque<String>()
-        pending.add(root)
-        val visited = mutableSetOf<String>()
-        var partial = false
-        while (pending.isNotEmpty() && found.size < limit) {
-            coroutineContext.ensureActive()
-            val folder = pending.removeFirst()
-            if (!visited.add(folder)) continue
-            val children = runCatching {
-                documents.list(folder)
-            }
-                .getOrElse {
-                    if (folder == root) throw it
-                    partial = true
-                    emptyList()
-                }
-            children.forEach { entry ->
-                val symlink =
-                    entry.documentUri == null &&
-                        java.nio.file.Files.isSymbolicLink(entry.file.toPath())
-                if (
-                    found.size < limit &&
-                        (hidden || !entry.name.startsWith('.')) &&
-                        !entry.name.startsWith(".droidfinder-") &&
-                        !symlink
-                ) {
-                    found.add(entry)
-                    if (
-                        entry.folder &&
-                            !(entry.parentPath == deviceRoot.absolutePath &&
-                                entry.name == "Android")
-                    )
-                        pending.add(entry.path)
-                }
-            }
-        }
-        return found to (found.size >= limit || partial)
     }
 
     private fun syncHistory() {
@@ -3348,6 +3470,8 @@ constructor(
     }
 
     override fun onCleared() {
+        listingControl?.cancel()
+        listingJob?.cancel()
         viewportReaders.clear()
         if (paneId == "primary") windowState.secondaryStore.clear()
         session.panes.remove(this)

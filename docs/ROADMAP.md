@@ -30,11 +30,11 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [x] Touch tab reorder, named workspaces and per-folder view/sort/group/column preferences (0.9.0–0.10.0), including pane defaults, folder profile management and detail-column resizing.
 
 ## 4. Performance and search
-- [ ] Progressive large-folder loading, bounded shared thumbnail caches and deduplicated work; invalidate thumbnails when provider names/types change while document URIs remain stable. Shared bounded caching, request deduplication/cancellation and name/type invalidation are implemented in 0.9.0; progressive loading remains open.
+- [ ] Progressive large-folder loading, bounded shared thumbnail caches and deduplicated work; invalidate thumbnails when provider names/types change while document URIs remain stable. Shared bounded caching, request deduplication/cancellation and name/type invalidation are implemented in 0.9.0; primary folder/search progressive loading, stop/restart, explicit limits and larger per-tab budgets are implemented in 0.12.0. Auxiliary child listings, indexed paging and measured large-catalog performance remain open.
 - [ ] Cancellable verification/preview/search, measured startup/scroll/memory/battery benchmarks.
 - [ ] Optional local index scoped to chosen roots, filename/tag/metadata/document-content search.
 - [ ] Highlighted matches/snippets, scope/exclusions, suggestions/history and Smart Folder editor.
-- [ ] Clear incomplete/offline/inaccessible results and index maintenance controls.
+- [ ] Clear incomplete/offline/inaccessible results and index maintenance controls. Primary scans now expose stopped/capped/provider-pending/read errors and retry details (0.12.0); index maintenance remains open.
 
 ## 5. Peek and archives
 - [ ] PDF text search/selection, thumbnails/bookmarks; richer image metadata and large-image navigation.

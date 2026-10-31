@@ -40,6 +40,10 @@ class DesktopWorkflowTest {
         }
         compose.runOnIdle {
             if (model.dualPane) model.toggleDualPane()
+            model.tabs
+                .filter { it.pinned }
+                .map { it.id }
+                .forEach { id -> model.togglePinTab(model.tabs.indexOfFirst { it.id == id }) }
             model.closeOtherTabs(model.activeTab)
             model.changeMode(ViewMode.LIST)
             model.changeGrouping(GroupBy.NONE)

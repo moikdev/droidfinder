@@ -8,6 +8,26 @@ data class ViewportAnchor(val path: String? = null, val index: Int = 0, val offs
 
 data class ViewportKey(val location: String, val view: String, val search: String = "")
 
+/** The scan budget belongs to a folder/filter scope, independent of its visual layout. */
+data class ListingScope(
+    val location: String,
+    val rules: SearchRules = SearchRules(),
+    val hidden: Boolean = false,
+    val root: String? = null,
+) {
+    fun remap(routes: List<Pair<String, String>>): ListingScope {
+        val tags =
+            routes
+                .filter { it.first.startsWith("@tag:") && it.second.startsWith("@tag:") }
+                .associate { it.first.removePrefix("@tag:") to it.second.removePrefix("@tag:") }
+        return copy(
+            location = remapPath(location, routes),
+            root = root?.let { remapPath(it, routes) },
+            rules = rules.copy(tag = tags[rules.tag] ?: rules.tag),
+        )
+    }
+}
+
 data class TabNavigation(
     val selected: Set<String> = emptySet(),
     val lead: String? = null,
@@ -15,6 +35,7 @@ data class TabNavigation(
     val expanded: Set<String> = emptySet(),
     val multiple: Boolean = false,
     val positions: Map<ViewportKey, ViewportAnchor> = emptyMap(),
+    val budgets: Map<ListingScope, ListingBudget> = emptyMap(),
 ) {
     fun remap(routes: List<Pair<String, String>>): TabNavigation {
         fun path(p: String) = remapPath(p, routes)
@@ -23,6 +44,7 @@ data class TabNavigation(
             lead = lead?.let(::path),
             anchor = anchor?.let(::path),
             expanded = expanded.map(::path).toSet(),
+            budgets = budgets.mapKeys { (key, _) -> key.remap(routes) },
             positions =
                 positions
                     .map { (key, value) ->
@@ -111,6 +133,20 @@ object NavigationJson {
                     .put("expanded", JSONArray(n.expanded))
                     .put("multiple", n.multiple)
                     .put(
+                        "budgets",
+                        JSONArray(
+                            n.budgets.entries.toList().takeLast(32).map { (k, v) ->
+                                JSONObject()
+                                    .put("location", k.location)
+                                    .put("rules", rules(k.rules))
+                                    .put("hidden", k.hidden)
+                                    .put("root", k.root)
+                                    .put("results", v.results)
+                                    .put("scanned", v.scanned)
+                            },
+                        ),
+                    )
+                    .put(
                         "positions",
                         JSONArray(
                             n.positions.map { (k, v) ->
@@ -155,6 +191,24 @@ object NavigationJson {
                                         )
                                 }
                                 .toMap()
+                        val rawBudgets = n?.optJSONArray("budgets")
+                        val budgets =
+                            (0 until minOf(rawBudgets?.length() ?: 0, 32))
+                                .mapNotNull { j ->
+                                    val p = rawBudgets!!.optJSONObject(j) ?: return@mapNotNull null
+                                    ListingScope(
+                                        p.optString("location"),
+                                        rules(p.optJSONObject("rules")),
+                                        p.optBoolean("hidden"),
+                                        p.optString("root").takeIf(String::isNotEmpty),
+                                    ) to
+                                        ListingBudget(
+                                                p.optInt("results", 20_000),
+                                                p.optInt("scanned", 50_000),
+                                            )
+                                            .normalized()
+                                }
+                                .toMap()
                         FinderTab(
                             history,
                             v.optInt("index", history.lastIndex).coerceIn(history.indices),
@@ -169,6 +223,7 @@ object NavigationJson {
                                 strings(n?.optJSONArray("expanded"), 1000).toSet(),
                                 n?.optBoolean("multiple") ?: false,
                                 points,
+                                budgets,
                             ),
                         )
                     }

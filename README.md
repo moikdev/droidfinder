@@ -6,7 +6,9 @@ This is an independent implementation, not Apple source code or a macOS runtime.
 
 ![DroidFinder tablet preview](docs/screenshots/dragging-workspace.png)
 
-Actual Android screenshot with synthetic QA documents. [Drag feedback](docs/screenshots/dragging-cross-pane.png) · [Hover to open](docs/screenshots/dragging-hover.png) · [Opened folder](docs/screenshots/dragging-opened.png) · [Cancel restores](docs/screenshots/dragging-restored.png). [Folder settings](docs/screenshots/folder-views-settings.png) · [Columns](docs/screenshots/folder-views-columns.png) · [Saved folders](docs/screenshots/folder-views-manager.png). [Tab overview](docs/screenshots/navigation-overview.png) · [Saved layouts](docs/screenshots/navigation-workspaces.png). [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+Actual Android screenshot with synthetic QA documents. [Progressive loading](docs/screenshots/loading-progress.png) · [Stopped scan](docs/screenshots/loading-stopped.png) · [Compact result details](docs/screenshots/loading-details.png) · [Large catalog](docs/screenshots/loading-complete.png). [Drag feedback](docs/screenshots/dragging-cross-pane.png) · [Hover to open](docs/screenshots/dragging-hover.png) · [Opened folder](docs/screenshots/dragging-opened.png) · [Cancel restores](docs/screenshots/dragging-restored.png). [Folder settings](docs/screenshots/folder-views-settings.png) · [Columns](docs/screenshots/folder-views-columns.png) · [Saved folders](docs/screenshots/folder-views-manager.png). [Tab overview](docs/screenshots/navigation-overview.png) · [Saved layouts](docs/screenshots/navigation-workspaces.png). [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+
+**0.12.0:** Progressive folder/search results, Stop/Restart, explicit incomplete-result details, higher per-tab scan limits, and streaming text search beyond the former 1 MiB cutoff. [Loading and search](docs/LOADING.md).
 
 **0.11.0:** Compact move/copy/shortcut feedback, spring-loaded folders and tabs, proportional edge scrolling, and precise one-pixel resizing. [Dragging and resizing](docs/DRAGGING.md).
 
@@ -22,7 +24,7 @@ Actual Android screenshot with synthetic QA documents. [Drag feedback](docs/scre
 
 ## Install or build
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.11.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.12.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -45,7 +47,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | Organizing | Create folder/text file, New Folder with Selection, destination picker, rename, batch rename (replace/prefix/suffix/numbered format), duplicate, copy/cut/paste, copy/move to other pane, folder comparison with optional content verification |
 | Undo/Redo | Session history for create/copy/move/rename, batch rename, grouping, Trash/restore, archives, shortcuts, and tag edits; content fingerprints stop Undo from removing later edits |
 | Tags/appearance | Multiple named tags per item, custom tag colors/names, tag editing/deletion/filtering, custom folder color/symbol, persistent favorites, per-folder views and pane defaults |
-| Search | Recursive names, kind/date/size/tag/text-content criteria, saved live Smart Folders, Recents, hidden files, groups by kind/date/tag/size |
+| Search | Progressive cancellable results with explicit limits/errors, streaming UTF-8 content matching, recursive names, kind/date/size/tag/text-content criteria, saved live Smart Folders, Recents, hidden files, groups by kind/date/tag/size |
 | Peek / Quick Look | Images with EXIF orientation, pinch/button zoom, all PDF pages with navigation/zoom, audio controls, video play/pause and seeking, text preview, folder counts/size and Get Info |
 | File integration | Android default apps/Open With, temporary read grants for sharing, full-path copy, inert `.finderlink` shortcuts |
 | Archives/Trash | Named ZIP creation with compression levels, read-only archive browsing, extraction with path checks; recoverable Trash and restore, Undo, explicit confirmation for permanent deletion/emptying |

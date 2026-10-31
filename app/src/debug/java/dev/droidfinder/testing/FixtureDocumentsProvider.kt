@@ -20,6 +20,14 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         @Volatile var transferGate: java.util.concurrent.CountDownLatch? = null
         @Volatile var gateOpened: java.util.concurrent.CountDownLatch? = null
         @Volatile var beforeDelete: ((String) -> Unit)? = null
+        @Volatile var listingDirectory: String? = null
+        @Volatile var listingTitle: String? = null
+        @Volatile var streamCancellation: java.util.concurrent.CountDownLatch? = null
+        @Volatile var listingGate: java.util.concurrent.CountDownLatch? = null
+        @Volatile var listingGateOpened: java.util.concurrent.CountDownLatch? = null
+        @Volatile var listingExtras: android.os.Bundle? = null
+        @Volatile var listingFailure: String? = null
+        val listingClosed = java.util.concurrent.atomic.AtomicInteger(0)
     }
 
     private val authority
@@ -97,7 +105,9 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                 when (column) {
                     Document.COLUMN_DOCUMENT_ID -> id(file)
                     Document.COLUMN_DISPLAY_NAME ->
-                        if (file == root) "DroidFinder test storage" else file.name
+                        if (file.canonicalPath == listingDirectory && listingTitle != null)
+                            listingTitle
+                        else if (file == root) "DroidFinder test storage" else file.name
                     Document.COLUMN_MIME_TYPE ->
                         if (file.isDirectory) Document.MIME_TYPE_DIR
                         else
@@ -131,14 +141,41 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         parentDocumentId: String,
         projection: Array<out String>?,
         sortOrder: String?,
-    ): Cursor =
-        MatrixCursor(projection ?: columns).apply {
-            file(parentDocumentId).listFiles()?.sortedBy { it.name }?.forEach { row(this, it) }
-            setNotificationUri(
-                context!!.contentResolver,
-                DocumentsContract.buildChildDocumentsUri(authority, parentDocumentId),
-            )
-        }
+    ): Cursor {
+        val parent = file(parentDocumentId)
+        if (parent.canonicalPath == listingFailure)
+            throw FileNotFoundException("Fixture location is offline")
+        val controlled = parent.canonicalPath == listingDirectory
+        return object : MatrixCursor(projection ?: columns) {
+                private var waited = false
+
+                override fun onMove(oldPosition: Int, newPosition: Int): Boolean {
+                    if (controlled && newPosition >= 64 && !waited && listingGate != null) {
+                        waited = true
+                        listingGateOpened?.countDown()
+                        listingGate?.await(20, java.util.concurrent.TimeUnit.SECONDS)
+                    }
+                    return true
+                }
+
+                override fun getExtras(): android.os.Bundle =
+                    if (controlled)
+                        listingExtras?.let { android.os.Bundle(it) } ?: android.os.Bundle.EMPTY
+                    else android.os.Bundle.EMPTY
+
+                override fun close() {
+                    super.close()
+                    if (controlled) listingClosed.incrementAndGet()
+                }
+            }
+            .apply {
+                parent.listFiles()?.sortedBy { it.name }?.forEach { row(this, it) }
+                setNotificationUri(
+                    context!!.contentResolver,
+                    DocumentsContract.buildChildDocumentsUri(authority, parentDocumentId),
+                )
+            }
+    }
 
     private fun changed(parent: File?) {
         if (parent != null)
@@ -155,12 +192,18 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         signal?.throwIfCanceled()
         val file = file(documentId)
         if (mode.contains('w') && readOnly(file)) throw FileNotFoundException("Read only fixture")
-        if (file.name in listOf("Slow.bin", "Gate.bin") && mode == "r") {
+        if (file.name in listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt") && mode == "r") {
             val pipe = ParcelFileDescriptor.createPipe()
+            signal?.setOnCancelListener {
+                streamCancellation?.countDown()
+                runCatching { pipe[1].close() }
+                runCatching { pipe[0].close() }
+                if (file.name == "Gate.txt") transferGate?.countDown()
+            }
             Thread(
                     {
                         runCatching {
-                            if (file.name == "Gate.bin") {
+                            if (file.name == "Gate.bin" || file.name == "Gate.txt") {
                                 gateOpened?.countDown()
                                 transferGate?.await(15, java.util.concurrent.TimeUnit.SECONDS)
                             }
@@ -171,7 +214,8 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                                         val size = input.read(buffer)
                                         if (size < 0) break
                                         output.write(buffer, 0, size)
-                                        if (file.name == "Slow.bin") Thread.sleep(50)
+                                        if (file.name == "Slow.bin" || file.name == "Slow.txt")
+                                            Thread.sleep(50)
                                     }
                                 }
                             }

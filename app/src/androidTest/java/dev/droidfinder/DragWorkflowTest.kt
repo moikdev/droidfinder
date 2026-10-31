@@ -196,11 +196,20 @@ class DragWorkflowTest {
         val drag = start()
         val bounds = compose.onNodeWithTag("browser-list").fetchSemanticsNode().boundsInWindow
         drag.move(Offset(bounds.center.x, bounds.bottom - 5f))
-        compose.waitUntil(7000) {
-            compose
-                .onAllNodes(hasText("Item35.txt") and hasAnyAncestor(hasTestTag("file-browser")))
-                .fetchSemanticsNodes()
-                .isNotEmpty()
+        try {
+            compose.waitUntil(7000) {
+                compose
+                    .onAllNodes(
+                        hasText("Item35.txt") and hasAnyAncestor(hasTestTag("file-browser")),
+                    )
+                    .fetchSemanticsNodes()
+                    .isNotEmpty()
+            }
+        } catch (error: Throwable) {
+            throw AssertionError(
+                "List edge at $bounds, location=${model.location}, loading=${model.loading}; ${compose.onRoot().printToString()}",
+                error,
+            )
         }
         drag.move(bounds.center)
         SystemClock.sleep(200)
@@ -312,9 +321,16 @@ class DragWorkflowTest {
         val drag = start()
         val viewport = compose.onNodeWithTag("browser-list").fetchSemanticsNode().boundsInWindow
         drag.move(Offset(viewport.center.x, viewport.bottom - 5f))
-        compose.waitUntil(7000) {
-            file(note.name).isDisplayed() &&
-                file(note.name).fetchSemanticsNode().boundsInWindow.bottom <= viewport.bottom
+        try {
+            compose.waitUntil(7000) {
+                file(note.name).isDisplayed() &&
+                    file(note.name).fetchSemanticsNode().boundsInWindow.bottom <= viewport.bottom
+            }
+        } catch (error: Throwable) {
+            throw AssertionError(
+                "Folder edge at $viewport, location=${model.location}, loading=${model.loading}; ${compose.onRoot().printToString()}",
+                error,
+            )
         }
         // Stop edge motion before resolving the row. Lazy composition also exposes
         // prefetched rows whose center is still outside the viewport.
@@ -433,7 +449,7 @@ class DragWorkflowTest {
         )
     }
 
-    private class NativeDrag(
+    internal class NativeDrag(
         private val origin: Offset,
         private val mouse: Boolean,
         private val copy: Boolean,

@@ -23,6 +23,8 @@ data class SearchRules(
     val content: String = "",
     val nameTerms: List<String> = emptyList(),
 ) {
+    private val contentPattern by lazy { StreamingText(content) }
+
     val active
         get() =
             name.isNotBlank() ||
@@ -39,7 +41,10 @@ data class SearchRules(
         tags: Set<String>,
         now: Long = System.currentTimeMillis(),
         read: ((Entry) -> java.io.InputStream)? = null,
+        check: () -> Unit = {},
+        contentIssue: (String) -> Unit = {},
     ): Boolean {
+        check()
         if (name.isNotBlank() && !entry.name.contains(name, true)) return false
         if (nameTerms.any { !entry.name.contains(it, true) }) return false
         if (kind != "Any" && entry.kind != kind) return false
@@ -49,25 +54,20 @@ data class SearchRules(
         if (maximumBytes > 0 && (entry.folder || entry.size > maximumBytes)) return false
         if (content.isNotBlank()) {
             if (entry.folder || entry.kind != "Text document") return false
-            val bytes =
-                runCatching {
-                    (read?.invoke(entry) ?: entry.file.inputStream()).use { input ->
-                        val buffer = ByteArray(1024 * 1024)
-                        var read = 0
-                        while (read < buffer.size) {
-                            val n = input.read(buffer, read, buffer.size - read)
-                            if (n < 0) break
-                            read += n
+            return try {
+                (read?.invoke(entry) ?: entry.file.inputStream())
+                    .bufferedReader(Charsets.UTF_8)
+                    .use { reader ->
+                        contentPattern.contains(reader, check) {
+                            contentIssue("Binary content in a text file wasn't searched")
                         }
-                        buffer.copyOf(read)
                     }
-                }
-                    .getOrNull() ?: return false
-            if (
-                bytes.any { it == 0.toByte() } ||
-                    !bytes.toString(Charsets.UTF_8).contains(content, true)
-            )
-                return false
+            } catch (error: Exception) {
+                check()
+                if (error is kotlinx.coroutines.CancellationException) throw error
+                contentIssue(error.message ?: "Couldn't search this file's contents")
+                false
+            }
         }
         return true
     }

@@ -31,6 +31,19 @@ class NavigationStateTest {
     }
 
     @Test
+    fun browseLimitsFollowFolderMovesAndAreNormalizedWhenRestored() {
+        val key = ListingScope("/old/Folder", SearchRules(tag = "Red"), root = "/old")
+        val state = TabNavigation(budgets = mapOf(key to ListingBudget(40_000, 100_000)))
+        val moved = state.remap(listOf("/old" to "/new", "@tag:Red" to "@tag:Urgent"))
+        assertEquals(
+            ListingBudget(40_000, 100_000),
+            moved.budgets[ListingScope("/new/Folder", SearchRules(tag = "Urgent"), root = "/new")],
+        )
+        assertEquals(ListingBudget(50_000, 50_000), ListingBudget(Int.MAX_VALUE, -1).normalized())
+        assertEquals(ListingBudget(50_000, 2_000_000), ListingBudget(50_000, 2_000_000).more())
+    }
+
+    @Test
     fun renamedTagsUpdateClosedTabHistoryAndItsSearchRules() {
         val tab =
             FinderTab(

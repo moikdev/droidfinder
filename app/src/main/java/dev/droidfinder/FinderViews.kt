@@ -985,14 +985,7 @@ fun PathBar(model: FinderModel, goTo: () -> Unit) {
             }
         }
         Text(
-            when {
-                model.loading -> "Loading…"
-                model.selected.isNotEmpty() ->
-                    "${model.selected.size} of ${model.entries.size} selected"
-                model.effectiveSearchRules.active || model.currentSmartFolder != null ->
-                    "${model.entries.size} matches"
-                else -> "${model.entries.size} item${if (model.entries.size == 1) "" else "s"}"
-            } + if (model.truncated) " · limited" else "",
+            model.listingCountText,
             color = Muted,
             fontSize = 10.sp,
             modifier = Modifier.padding(horizontal = 12.dp),
@@ -1014,16 +1007,9 @@ fun StatusBar(model: FinderModel) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         val count = model.entries.size
-        val text =
-            when {
-                model.loading -> "Loading…"
-                model.selected.isNotEmpty() -> "${model.selected.size} of $count selected"
-                (model.effectiveSearchRules.active || model.currentSmartFolder != null) ->
-                    "$count matches · includes subfolders"
-                else -> "$count item${if (count == 1) "" else "s"}"
-            }
+        val text = model.listingCountText
         Text(
-            text + if (model.truncated) " · results limited" else "",
+            text,
             fontSize = 9.sp,
             color = Muted,
         )

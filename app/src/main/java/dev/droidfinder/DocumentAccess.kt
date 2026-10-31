@@ -45,6 +45,9 @@ class DocumentAccess(
     private val titles = java.util.concurrent.ConcurrentHashMap<String, String>()
     private val notifications = java.util.concurrent.ConcurrentHashMap<String, Uri>()
 
+    internal fun cachedTitle(path: String) =
+        titles[path] ?: Uri.parse(path).lastPathSegment ?: "Document"
+
     fun notificationUri(path: String) = notifications[path] ?: Uri.parse(path)
 
     var lastCopyMappings: List<Pair<String, String>> = emptyList()
@@ -185,6 +188,78 @@ class DocumentAccess(
             fromCursor(uri, cursor, parents.getProperty(path))
         } ?: error("Couldn't read this document provider.")
     }
+
+    internal fun read(path: String, control: ListingControl): Entry = control.withSignal { signal ->
+        control.check()
+        if (!isDocumentPath(path)) {
+            val file = File(path)
+            check(file.exists()) { "This item is no longer available." }
+            Entry(file)
+        } else {
+            val uri = Uri.parse(path)
+            resolver.query(uri, projection, null, null, null, signal)?.use { cursor ->
+                control.check()
+                check(cursor.moveToFirst()) { "The document is no longer available." }
+                control.check()
+                fromCursor(uri, cursor, parents.getProperty(path))
+            } ?: error("Couldn't read this document provider.")
+        }
+    }
+
+    internal suspend fun visitChildren(
+        path: String,
+        control: ListingControl,
+        visit: suspend (Entry) -> Boolean,
+    ): DirectoryReply {
+        control.check()
+        if (!isDocumentPath(path)) {
+            java.nio.file.Files.newDirectoryStream(File(path).toPath()).use { children ->
+                for (child in children) {
+                    control.check()
+                    if (!visit(Entry(child.toFile()))) break
+                }
+            }
+            return DirectoryReply()
+        }
+        val uri = Uri.parse(path)
+        val children =
+            DocumentsContract.buildChildDocumentsUriUsingTree(
+                uri,
+                DocumentsContract.getDocumentId(uri),
+            )
+        val cursor =
+            control.withSignal { signal ->
+                resolver.query(children, projection, null, null, null, signal)
+            } ?: error("Couldn't list this folder. The provider may be offline.")
+        try {
+            cursor.use {
+                cursor.notificationUri?.let { notifications[path] = it }
+                while (true) {
+                    control.check()
+                    if (!cursor.moveToNext()) break
+                    control.check()
+                    if (!visit(fromCursor(uri, cursor, path))) break
+                }
+                val extras = cursor.extras
+                return DirectoryReply(
+                    extras.getBoolean(DocumentsContract.EXTRA_LOADING, false),
+                    extras.getString(DocumentsContract.EXTRA_ERROR),
+                    extras.getString(DocumentsContract.EXTRA_INFO),
+                )
+            }
+        } finally {
+            saveParents()
+        }
+    }
+
+    internal fun input(path: String, control: ListingControl): InputStream =
+        control.stream { signal ->
+            if (!isDocumentPath(path)) File(path).inputStream()
+            else
+                (resolver.openAssetFileDescriptor(Uri.parse(path), "r", signal)
+                        ?: error("Couldn't open this document"))
+                    .createInputStream()
+        }
 
     private fun fromCursor(tree: Uri, cursor: android.database.Cursor, parent: String?): Entry {
         fun string(column: String) = cursor.getString(cursor.getColumnIndexOrThrow(column))
