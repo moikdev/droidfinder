@@ -1,6 +1,6 @@
 # Tablet preview verification
 
-Latest: **0.5.0-preview — Transfer and conflict foundation**. See [the current workflows and validation](docs/TRANSFER-CENTER.md). [0.4.0 desktop workflows](docs/DESKTOP-WORKFLOWS.md) is preserved. [0.3.0 Refined Finder and Peek](docs/REFINED-FINDER.md) is also preserved. The record below applies to the earlier 0.2.0 preview.
+Latest: **0.6.0-preview — Folder merging and member recovery**. See [the current workflows and validation](docs/FOLDER-MERGE.md). [0.5.0 transfer foundation](docs/TRANSFER-CENTER.md) is preserved. [0.4.0 desktop workflows](docs/DESKTOP-WORKFLOWS.md) is preserved. [0.3.0 Refined Finder and Peek](docs/REFINED-FINDER.md) is also preserved. The record below applies to the earlier 0.2.0 preview.
 
 Version: **0.2.0-preview**. Verified locally on 2026-10-31 using a dedicated Android 16 / API 36 tablet emulator. These checks cover implemented Android workflows; they do not certify identical behavior to every macOS Finder service.
 

@@ -165,4 +165,72 @@ class TransferQueueTest {
             dir.deleteRecursively()
         }
     }
+
+    @Test
+    fun mergeRetriesKeepDestinationParentsAndExcludePublishedSkippedAndAmbiguousUnits() {
+        val members =
+            listOf(
+                MergeMember("/root/done", "/out/root", destination = "/out/root/done"),
+                MergeMember("/root/skipped", "/out/root", skipped = true),
+                MergeMember(
+                    "/root/shared/missing",
+                    "/out/root/shared",
+                    error = "Disconnected",
+                    cleanup = SourceCleanup.KEPT,
+                ),
+                MergeMember("/root/ambiguous", "/out/root"),
+            )
+        val job =
+            TransferJob(
+                paths = listOf("/root", "/other"),
+                destination = "/out",
+                move = true,
+                inFlight = "/root/ambiguous",
+                mergePlans = listOf(MergePlan("/root", "/out/root", "stamp", members)),
+            )
+        assertEquals(
+            listOf(
+                TransferRetryTarget("/other", "/out"),
+                TransferRetryTarget("/root/shared/missing", "/out/root/shared"),
+            ),
+            job.afterRestart().retryTargets,
+        )
+        assertTrue(
+            job.copy(paths = listOf("/other"), mergePlans = emptyList(), inFlight = "/other")
+                .retryTargets
+                .isEmpty(),
+        )
+    }
+
+    @Test
+    fun cancelClosesAGuardedVerificationStreamToUnblockReads() {
+        val control = TransferControl()
+        val entered = CountDownLatch(1)
+        val closed = CountDownLatch(1)
+        val done = CountDownLatch(1)
+        val stream =
+            object : java.io.InputStream() {
+                override fun read(): Int {
+                    entered.countDown()
+                    check(closed.await(3, TimeUnit.SECONDS))
+                    throw java.io.IOException("Closed")
+                }
+
+                override fun close() {
+                    closed.countDown()
+                }
+            }
+        val thread = Thread {
+            try {
+                control.guard(stream) { stream.read() }
+            } catch (_: CancellationException) {
+                done.countDown()
+            }
+        }
+            .apply { start() }
+        assertTrue(entered.await(2, TimeUnit.SECONDS))
+        control.cancel()
+        assertTrue(done.await(2, TimeUnit.SECONDS))
+        thread.join(2000)
+    }
 }

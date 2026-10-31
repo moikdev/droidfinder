@@ -341,7 +341,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     var busy by mutableStateOf<String?>(null)
         private set
 
-    private val transferJournal = TransferJournal(File(app.filesDir, "transfer-jobs.properties"))
+    private val transferJournal: TransferStore = SqliteTransferStore(app)
     private val journalMutex = Mutex()
     var journalError by mutableStateOf<String?>(null)
         private set
@@ -399,10 +399,11 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         job: TransferJob,
         source: Entry,
         existing: Entry,
+        mergeAllowed: Boolean = true,
     ): ConflictDecision {
         val answer = CompletableDeferred<ConflictDecision>()
         conflictAnswer = answer
-        fileConflict = FileConflict(job.id, source, existing)
+        fileConflict = FileConflict(job.id, source, existing, mergeAllowed)
         try {
             return answer.await()
         } finally {
@@ -1993,176 +1994,26 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
             },
         ) {
             val steps = mutableListOf<FileStep>()
-            var policy = job.conflictPolicy
             try {
                 saveTransfers()
-                for (path in job.paths) {
-                    withContext(Dispatchers.IO) { transferControl.check() }
-                    updateTransfer(job.id) {
-                        it.copy(inFlight = path, current = path.substringAfterLast('/'))
-                    }
-                    saveTransfers()
-                    try {
-                        val before =
-                            withContext(Dispatchers.IO) {
-                                documents.validateTransfer(path, job.destination, job.move)
-                                documents.read(path)
-                            }
-                        val existing =
-                            withContext(Dispatchers.IO) {
-                                documents.list(job.destination).firstOrNull {
-                                    it.name == before.name && it.path != path
-                                }
-                            }
-                        var desiredName: String? = null
-                        var replaced: Pair<Entry, File>? = null
-                        if (existing != null) {
-                            val decision =
-                                when (policy) {
-                                    ConflictPolicy.ASK -> askConflict(job, before, existing)
-                                    ConflictPolicy.KEEP_BOTH ->
-                                        ConflictDecision(ConflictAction.KEEP_BOTH)
-                                    ConflictPolicy.SKIP -> ConflictDecision(ConflictAction.SKIP)
-                                    ConflictPolicy.REPLACE ->
-                                        ConflictDecision(ConflictAction.REPLACE)
-                                }
-                            if (decision.applyAll)
-                                policy =
-                                    when (decision.action) {
-                                        ConflictAction.KEEP_BOTH -> ConflictPolicy.KEEP_BOTH
-                                        ConflictAction.SKIP -> ConflictPolicy.SKIP
-                                        ConflictAction.REPLACE -> ConflictPolicy.REPLACE
-                                        else -> policy
-                                    }
-                            when (decision.action) {
-                                ConflictAction.CANCEL -> {
-                                    cancelTransfer()
-                                    withContext(Dispatchers.IO) { transferControl.check() }
-                                }
-                                ConflictAction.SKIP -> {
-                                    updateTransfer(job.id) {
-                                        it.copy(
-                                            results =
-                                                it.results +
-                                                    TransferItemResult(path, skipped = true),
-                                            inFlight = null,
-                                        )
-                                    }
-                                    saveTransfers()
-                                    continue
-                                }
-                                ConflictAction.RENAME ->
-                                    desiredName = validateFilename(decision.name.orEmpty())
-                                ConflictAction.REPLACE -> {
-                                    check(existing.canDelete) {
-                                        "The existing item cannot be replaced."
-                                    }
-                                    val stash =
-                                        withContext(Dispatchers.IO) {
-                                            val latest = documents.read(existing.path)
-                                            check(
-                                                latest.size == existing.size &&
-                                                    latest.modified == existing.modified &&
-                                                    latest.folder == existing.folder,
-                                            ) {
-                                                "The destination changed while choosing. Review it and retry."
-                                            }
-                                            documents.trash(existing.path, transferControl)
-                                        }
-                                    replaced = existing to stash
-                                    relocateMetadata(existing.path, stash.path)
-                                    desiredName = existing.name
-                                }
-                                else -> Unit
-                            }
-                        }
-                        val result =
-                            try {
-                                withContext(Dispatchers.IO) {
-                                    documents.copy(
-                                        path,
-                                        job.destination,
-                                        job.move,
-                                        transferControl,
-                                        desiredName,
-                                    )
-                                }
-                            } catch (error: Exception) {
-                                if (replaced != null && error !is TransferPublicationException) {
-                                    val restored =
-                                        withContext(Dispatchers.IO) {
-                                            documents.restore(replaced.second)
-                                        }
-                                    relocateMetadata(replaced.second.path, restored)
-                                }
-                                throw error
-                            }
-                        updateTransfer(job.id) {
-                            it.copy(
-                                results = it.results + TransferItemResult(path, result),
-                                inFlight = null,
-                            )
-                        }
-                        saveTransfers()
-                        try {
-                            steps +=
-                                withContext(Dispatchers.IO) {
-                                    if (replaced != null)
-                                        replacementStep(
-                                            documents,
-                                            replaced.first,
-                                            replaced.second,
-                                            before,
-                                            result,
-                                            job.move,
-                                        )
-                                    else if (job.move) documents.movedStep(before, result)
-                                    else documents.createdStep(result)
-                                }
-                        } catch (error: Exception) {
-                            updateTransfer(job.id) {
-                                it.copy(
-                                    results =
-                                        it.results.map { r ->
-                                            if (r.source == path)
-                                                r.copy(
-                                                    error =
-                                                        "File transferred; Undo unavailable: ${error.message}",
-                                                )
-                                            else r
-                                        },
-                                )
-                            }
-                        }
-                        val mappings =
-                            documents.lastCopyMappings.ifEmpty { listOf(before.path to result) }
-                        if (job.move) relocateMetadataPaths(mappings)
-                        else copyMetadataPaths(mappings)
-                    } catch (error: Exception) {
-                        withContext(Dispatchers.IO) { transferControl.check() }
-                        if (
-                            transferJobs
-                                .first { it.id == job.id }
-                                .results
-                                .none { it.source == path }
-                        )
-                            updateTransfer(job.id) {
-                                it.copy(
-                                    results =
-                                        it.results +
-                                            TransferItemResult(
-                                                path,
-                                                (error as? TransferPublicationException)
-                                                    ?.destination,
-                                                error.message ?: "Transfer failed",
-                                            ),
-                                    inFlight = null,
-                                )
-                            }
-                        else throw error
-                    }
-                    saveTransfers()
-                }
+                TransferWorker(
+                        job,
+                        documents,
+                        transferControl,
+                        current = { transferJobs.first { it.id == job.id } },
+                        checkpoint = { change ->
+                            updateTransfer(job.id, change)
+                            saveTransfers()
+                        },
+                        ask = { source, existing, mergeAllowed ->
+                            askConflict(job, source, existing, mergeAllowed)
+                        },
+                        metadata = { paths, move ->
+                            if (move) relocateMetadataPaths(paths) else copyMetadataPaths(paths)
+                        },
+                        steps = steps,
+                    )
+                    .run()
             } finally {
                 rememberOperation(if (job.move) "Move" else "Copy", steps)
             }
@@ -2216,13 +2067,16 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     fun retryTransfer(id: String) {
         val job = transferJobs.firstOrNull { it.id == id && it.terminal } ?: return
-        if (job.remaining.isNotEmpty())
-            transferPaths(
-                job.remaining,
-                job.destination,
-                job.move,
-                policy = ConflictPolicy.KEEP_BOTH,
-            )
+        job.retryTargets
+            .groupBy { it.parent }
+            .forEach { (parent, targets) ->
+                transferPaths(
+                    targets.map { it.source },
+                    parent,
+                    job.move,
+                    policy = ConflictPolicy.KEEP_BOTH,
+                )
+            }
     }
 
     fun moveQueuedTransfer(id: String, delta: Int) {

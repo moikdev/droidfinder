@@ -5,12 +5,13 @@ import java.nio.file.Files
 import java.security.MessageDigest
 
 /** Digest paths relative to the item, never following links. Protects Undo from later edits. */
-fun fingerprint(file: File): String {
+fun fingerprint(file: File, control: TransferControl? = null): String {
     check(file.exists() || Files.isSymbolicLink(file.toPath())) {
         "${file.name} is no longer available."
     }
     val digest = MessageDigest.getInstance("SHA-256")
     fun add(item: File, relative: String) {
+        control?.check()
         digest.update(relative.toByteArray())
         if (Files.isSymbolicLink(item.toPath())) {
             digest.update("link:${Files.readSymbolicLink(item.toPath())}".toByteArray())
@@ -22,12 +23,16 @@ fun fingerprint(file: File): String {
         } else {
             digest.update("file:${item.length()}:${item.lastModified()}:".toByteArray())
             item.inputStream().buffered().use { input ->
-                val buffer = ByteArray(64 * 1024)
-                while (true) {
-                    val n = input.read(buffer)
-                    if (n < 0) break
-                    digest.update(buffer, 0, n)
+                fun read() {
+                    val buffer = ByteArray(64 * 1024)
+                    while (true) {
+                        control?.check()
+                        val n = input.read(buffer)
+                        if (n < 0) break
+                        digest.update(buffer, 0, n)
+                    }
                 }
+                if (control != null) control.guard(input, ::read) else read()
             }
         }
     }

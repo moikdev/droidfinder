@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -41,9 +41,17 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Named ZIP archives, compression levels, destination selection, safe read-only archive browsing.
 - [x] Keep browsing, switching tabs, selecting, copying paths/items and previewing during a transfer.
 
+## Transfer and merge pass
+
+- [x] Durable serialized copy/move queue, pause/resume/cancel, per-item results and notification controls.
+- [x] Conflict comparison, rename/skip/keep-both/recoverable replacement and apply to remaining choices.
+- [x] Folder merge plans, nested conflicts, local/provider recovery and complete/partial move Undo/Redo.
+- [x] Transactional SQLite migration/checkpoints, per-member retry destinations and explicit ambiguity review.
+- [x] Cancellation-aware merge verification and source/destination content checks before cleanup.
+
 ## Verification
 
-See [the current verification record](docs/DESKTOP-WORKFLOWS.md) for the 48 JVM tests, 42 Android workflow tests, screenshots, optimized APK checks, and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. This checklist closes the implemented tablet workflow scope; the platform boundaries below remain explicit.
+See [the current verification record](docs/FOLDER-MERGE.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 

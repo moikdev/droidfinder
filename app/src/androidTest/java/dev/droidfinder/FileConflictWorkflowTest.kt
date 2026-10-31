@@ -117,10 +117,7 @@ class FileConflictWorkflowTest {
             assertEquals("existing $it", File(out, it).readText())
         }
         assertEquals(setOf("A.txt", "B.txt", "C.txt", "Renamed.txt"), out.list()!!.toSet())
-        val job =
-            TransferJournal(File(compose.activity.filesDir, "transfer-jobs.properties"))
-                .load()
-                .first { it.id == id }
+        val job = SqliteTransferStore(compose.activity).use { it.load() }.first { it.id == id }
         assertEquals(2, job.results.count { it.skipped })
         assertTrue(job.remaining.isEmpty())
         assertEquals(TransferState.COMPLETED, job.state)
@@ -152,5 +149,62 @@ class FileConflictWorkflowTest {
         assertEquals("keep", File(existing, "Original.txt").readText())
         assertTrue(source.isDirectory)
         assertEquals(TransferState.FAILED, model.transferJobs.last().state)
+    }
+
+    @Test
+    fun mergeDialogAndRetryKeepNestedDestinationsAndCompletedMembers() {
+        val source = File(folder, "Project/Shared").apply { mkdirs() }
+        File(source, "Same.txt").writeText("incoming")
+        File(source, "Good.txt").writeText("good")
+        val target = File(out, "Project/Shared").apply { mkdirs() }
+        File(target, "Same.txt").writeText("original")
+        File(target, "Blocked.txt").writeText("keep")
+        lateinit var id: String
+        compose.runOnIdle {
+            model.clearTransferHistory()
+            model.transferPaths(listOf(source.parentFile!!.path), out.path, false)
+            id = model.transferJobs.last().id
+        }
+        conflict()
+        choose("Merge folders")
+        compose.waitUntil(10_000) { model.fileConflict?.source?.name == "Same.txt" }
+        compose.onNodeWithText("Merge folders").assertDoesNotExist()
+        choose("Rename incoming…")
+        compose.onNode(hasSetTextAction()).performTextReplacement("Blocked.txt")
+        choose("Use new name")
+        loaded()
+        val job = model.transferJobs.first { it.id == id }
+        assertEquals(TransferState.FAILED, job.state)
+        assertEquals(
+            listOf(TransferRetryTarget(File(source, "Same.txt").path, target.path)),
+            job.retryTargets,
+        )
+        assertEquals("original", File(target, "Same.txt").readText())
+        assertEquals("keep", File(target, "Blocked.txt").readText())
+        assertEquals("good", File(target, "Good.txt").readText())
+        compose.onNodeWithContentDescription("Actions").performClick()
+        compose.onNodeWithText("Transfers", useUnmergedTree = true).performClick()
+        compose.onNodeWithText("Show files").performClick()
+        compose.onNodeWithText("Folder merge", substring = true).assertExists()
+        android.os.ParcelFileDescriptor.AutoCloseInputStream(
+                androidx.test.platform.app.InstrumentationRegistry.getInstrumentation()
+                    .uiAutomation
+                    .executeShellCommand("screencap -p /sdcard/droidfinder-folder-merge.png"),
+            )
+            .use { it.readBytes() }
+        compose.onNodeWithContentDescription("Close transfers").performClick()
+        compose.runOnIdle { model.retryTransfer(id) }
+        compose.waitUntil(15_000) {
+            model.transferJobs.last().state == TransferState.COMPLETED && model.busy == null
+        }
+        loaded()
+        assertEquals(TransferState.COMPLETED, model.transferJobs.last().state)
+        assertEquals(
+            setOf("Same.txt", "Same 2.txt", "Good.txt", "Blocked.txt"),
+            target.list()!!.toSet(),
+        )
+        assertEquals("incoming", File(target, "Same 2.txt").readText())
+        assertEquals(setOf("Project"), out.list()!!.toSet())
+        assertEquals(model.transferJobs, SqliteTransferStore(compose.activity).use { it.load() })
     }
 }

@@ -387,6 +387,19 @@ class DocumentAccess(
         }
     }
 
+    fun validateReplacement(source: String, existing: String) {
+        if (!isDocumentPath(source) && !isDocumentPath(existing)) {
+            require(
+                !File(source)
+                    .canonicalFile
+                    .toPath()
+                    .startsWith(File(existing).canonicalFile.toPath()),
+            ) {
+                "A folder containing the source cannot be replaced."
+            }
+        } else checkDestination(existing, source)
+    }
+
     fun validateTransfer(
         source: String,
         parent: String,
@@ -523,7 +536,16 @@ class DocumentAccess(
                     it.first to remapPath(it.second, listOf(copy to trashed.absolutePath))
                 },
             )
-            delete(path)
+            try {
+                control.check()
+                delete(path)
+            } catch (error: Exception) {
+                throw TransferPublicationException(
+                    trashed.path,
+                    "A recovery copy was kept in Trash, but removing the source failed: ${error.message}",
+                    error,
+                )
+            }
             return trashed
         } finally {
             staging.deleteRecursively()
@@ -547,25 +569,60 @@ class DocumentAccess(
         return result
     }
 
-    fun digest(path: String): String {
-        val digest = MessageDigest.getInstance("SHA-256")
-        fun add(entry: Entry, relative: String) {
-            digest.update(relative.toByteArray())
-            if (entry.folder) {
-                digest.update(0)
-                list(entry.path).sortedBy { it.name }.forEach { add(it, "$relative/${it.name}") }
-            } else
-                input(entry.path).use { source ->
+    fun digest(path: String, control: TransferControl? = null): String {
+        fun content(entry: Entry): Pair<ByteArray, Long> {
+            control?.check()
+            require(entry.documentUri != null || !Files.isSymbolicLink(entry.file.toPath())) {
+                "Symbolic links are not verified implicitly."
+            }
+            val hash = MessageDigest.getInstance("SHA-256")
+            var bytes = 0L
+            input(entry.path).use { source ->
+                fun read() {
                     val buffer = ByteArray(64 * 1024)
                     while (true) {
-                        val count = source.read(buffer)
-                        if (count < 0) break
-                        digest.update(buffer, 0, count)
+                        control?.check()
+                        val n = source.read(buffer)
+                        if (n < 0) break
+                        bytes += n
+                        hash.update(buffer, 0, n)
                     }
                 }
+                if (control != null) control.guard(source, ::read) else read()
+            }
+            return hash.digest() to bytes
         }
-        add(read(path), "")
-        return digest.digest().joinToString("") { "%02x".format(it) }
+        val root = read(path)
+        if (!root.folder) return content(root).first.joinToString("") { "%02x".format(it) }
+        val digest = MessageDigest.getInstance("SHA-256")
+        val seen = mutableSetOf<String>()
+        var visited = 0
+        fun add(entry: Entry, relative: String, depth: Int) {
+            control?.check()
+            require(++visited <= 100_000 && depth <= 128) {
+                "This verification exceeds the safe traversal limit."
+            }
+            require(entry.documentUri != null || !Files.isSymbolicLink(entry.file.toPath())) {
+                "Symbolic links are not verified implicitly."
+            }
+            digest.update(if (entry.folder) 0.toByte() else 1.toByte())
+            val name = relative.toByteArray(Charsets.UTF_8)
+            digest.update(java.nio.ByteBuffer.allocate(4).putInt(name.size).array())
+            digest.update(name)
+            if (entry.folder) {
+                require(seen.add(entry.path)) { "A provider folder cycle was found." }
+                list(entry.path)
+                    .sortedBy { it.name }
+                    .forEach { add(it, "$relative/${it.name}", depth + 1) }
+                digest.update(2.toByte())
+            } else {
+                val (hash, bytes) = content(entry)
+                digest.update(java.nio.ByteBuffer.allocate(8).putLong(bytes).array())
+                digest.update(hash)
+            }
+        }
+        add(root, "", 0)
+        return "tree-sha256-v1:" + digest.digest().joinToString("") { "%02x".format(it) }
     }
 
     fun createdStep(path: String): FileStep {

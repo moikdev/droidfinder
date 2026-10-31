@@ -19,6 +19,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
     companion object {
         @Volatile var transferGate: java.util.concurrent.CountDownLatch? = null
         @Volatile var gateOpened: java.util.concurrent.CountDownLatch? = null
+        @Volatile var beforeDelete: ((String) -> Unit)? = null
     }
 
     private val authority
@@ -220,6 +221,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
     override fun deleteDocument(documentId: String) {
         val file = file(documentId)
         if (file == root || readOnly(file)) throw FileNotFoundException("Read only")
+        beforeDelete?.invoke(documentId)
         check(file.deleteRecursively())
         changed(file.parentFile)
     }

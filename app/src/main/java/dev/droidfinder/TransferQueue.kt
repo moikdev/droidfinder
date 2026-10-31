@@ -24,6 +24,8 @@ data class TransferItemResult(
     val skipped: Boolean = false,
 )
 
+data class TransferRetryTarget(val source: String, val parent: String)
+
 data class TransferJob(
     val id: String = UUID.randomUUID().toString(),
     val paths: List<String>,
@@ -39,6 +41,7 @@ data class TransferJob(
     val finished: Long = 0,
     val inFlight: String? = null,
     val conflictPolicy: ConflictPolicy = ConflictPolicy.ASK,
+    val mergePlans: List<MergePlan> = emptyList(),
 ) {
     val title
         get() =
@@ -52,6 +55,25 @@ data class TransferJob(
             results.none { it.source == path && (it.destination != null || it.skipped) }
         }
 
+    /** Published or ambiguous members are review-only, never replayed as whole folder roots. */
+    val retryTargets: List<TransferRetryTarget>
+        get() = buildList {
+            remaining
+                .filter { root -> mergePlans.none { it.source == root } && root != inFlight }
+                .forEach { add(TransferRetryTarget(it, destination)) }
+            mergePlans.forEach { plan ->
+                plan.members
+                    .filter {
+                        it.destination == null &&
+                            !it.skipped &&
+                            it.source != inFlight &&
+                            it.cleanup != SourceCleanup.FAILED &&
+                            it.recovery == null
+                    }
+                    .forEach { add(TransferRetryTarget(it.source, it.parent)) }
+            }
+        }
+
     val terminal
         get() = state !in setOf(TransferState.QUEUED, TransferState.RUNNING, TransferState.PAUSED)
 
@@ -59,12 +81,12 @@ data class TransferJob(
 }
 
 /** Atomic, versioned job journal. Pending work is never automatically replayed after restart. */
-class TransferJournal(private val file: File) {
+class TransferJournal(private val file: File) : TransferStore {
     private val backup = File(file.path + ".bak")
     private var loadedBackup = false
 
     @Synchronized
-    fun load(): List<TransferJob> {
+    override fun load(): List<TransferJob> {
         if (!file.exists() && !backup.exists()) return emptyList()
         return runCatching { read(file) }
             .getOrElse { original ->
@@ -116,7 +138,7 @@ class TransferJournal(private val file: File) {
     }
 
     @Synchronized
-    fun preserveDamaged(): List<File> {
+    override fun preserveDamaged(): List<File> {
         val suffix = ".damaged-${System.currentTimeMillis()}-${UUID.randomUUID()}"
         return listOf(file, backup)
             .filter { it.exists() }
@@ -127,7 +149,10 @@ class TransferJournal(private val file: File) {
     }
 
     @Synchronized
-    fun save(jobs: List<TransferJob>) {
+    override fun save(jobs: List<TransferJob>) {
+        require(jobs.all { it.mergePlans.isEmpty() }) {
+            "Merge plans require the database journal."
+        }
         val p =
             Properties().apply {
                 setProperty("version", "1")

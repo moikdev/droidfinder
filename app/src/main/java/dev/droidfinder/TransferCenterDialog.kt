@@ -139,7 +139,7 @@ fun TransferCenterDialog(
             title = { Text("Retry remaining items?") },
             text = {
                 Text(
-                    "Review the destination first. ${job.remaining.size} items have no recorded destination. After an interruption, an item may already have been published before its result was recorded. Retrying keeps both copies rather than overwriting. A partially removed move source needs manual review.",
+                    "Review the destination first. ${job.retryTargets.size} unfinished items can be retried in their original destination folders. Published, skipped, and ambiguous in-flight items are excluded. Retrying keeps both copies. Review partial moves and Trash before continuing.",
                 )
             },
             confirmButton = {
@@ -165,6 +165,7 @@ private fun TransferJobCard(
     dismiss: () -> Unit,
 ) {
     var expanded by remember(job.id) { mutableStateOf(false) }
+    var visibleMembers by remember(job.id) { mutableIntStateOf(50) }
     val active = job.id == model.activeTransferId
     Surface(
         color = SubtleSurface,
@@ -189,7 +190,8 @@ private fun TransferJobCard(
                     TextButton(onClick = { model.resumeTransfer(job.id) }) { Text("Resume") }
                 if (!job.terminal)
                     TextButton(onClick = { model.cancelQueuedTransfer(job.id) }) { Text("Cancel") }
-                else if (job.remaining.isNotEmpty()) TextButton(onClick = retry) { Text("Retry…") }
+                else if (job.retryTargets.isNotEmpty())
+                    TextButton(onClick = retry) { Text("Retry…") }
             }
             if (active) {
                 LinearProgressIndicator(Modifier.fillMaxWidth().padding(vertical = 10.dp))
@@ -243,7 +245,7 @@ private fun TransferJobCard(
                     )
                 }
             }
-            if (expanded)
+            if (expanded) {
                 job.paths.forEach { source ->
                     val result = job.results.lastOrNull { it.source == source }
                     HorizontalDivider(color = Border)
@@ -265,7 +267,61 @@ private fun TransferJobCard(
                         fontSize = 11.sp,
                         color = Muted,
                     )
+                    job.mergePlans
+                        .firstOrNull { it.source == source }
+                        ?.let { plan ->
+                            Text(
+                                "Folder merge · ${plan.members.size} planned units · ${plan.cleanup.title}",
+                                fontSize = 11.sp,
+                                color = Muted,
+                            )
+                            plan.recovery?.let {
+                                Text(
+                                    "Source recovery: ${model.displayPath(it)}",
+                                    fontSize = 11.sp,
+                                    color = Muted,
+                                )
+                            }
+                            plan.members.take(visibleMembers).forEach { member ->
+                                Text(
+                                    model.displayPath(member.source),
+                                    Modifier.padding(top = 8.dp, start = 12.dp),
+                                    fontSize = 11.sp,
+                                    color = Ink,
+                                )
+                                Text(
+                                    member.error
+                                        ?: if (member.skipped) "Skipped — original kept"
+                                        else
+                                            member.destination?.let {
+                                                "Copied → ${model.displayPath(it)} · ${member.cleanup.title}"
+                                            }
+                                                ?: if (job.inFlight == member.source)
+                                                    "Needs review — may have been published"
+                                                else "Not completed",
+                                    Modifier.padding(start = 12.dp, bottom = 4.dp),
+                                    fontSize = 11.sp,
+                                    color = Muted,
+                                )
+                                member.recovery?.let {
+                                    Text(
+                                        "Recovery: ${model.displayPath(it)}",
+                                        Modifier.padding(start = 12.dp),
+                                        fontSize = 11.sp,
+                                        color = Muted,
+                                    )
+                                }
+                            }
+                            if (plan.members.size > visibleMembers) {
+                                TextButton(onClick = { visibleMembers += 50 }) {
+                                    Text(
+                                        "Show more merge items (${visibleMembers} of ${plan.members.size})",
+                                    )
+                                }
+                            }
+                        }
                 }
+            }
         }
     }
 }

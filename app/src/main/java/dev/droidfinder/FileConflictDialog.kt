@@ -38,6 +38,19 @@ fun FileConflictDialog(model: FinderModel, conflict: FileConflict) {
                     "Choose how to handle this conflict. Replaced originals are kept in DroidFinder Trash.",
                     fontSize = 12.sp,
                 )
+                if (conflict.canMerge) {
+                    TextButton(
+                        onClick = { answer(ConflictAction.MERGE) },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text("Merge folders")
+                    }
+                    Text(
+                        "Combine contents, keep existing folders, and choose how to handle matching files.",
+                        fontSize = 12.sp,
+                        color = Muted,
+                    )
+                }
                 ConflictDetails("Incoming", conflict.source, model::displayPath)
                 ConflictDetails("Existing", conflict.existing, model::displayPath)
                 if (rename)

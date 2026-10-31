@@ -14,8 +14,8 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [ ] Preflight totals/ETA and safe independent concurrent transfers.
 - [x] Explicit interruption review; never silently replay an ambiguous published move/copy (0.5.0).
 - [x] Conflict comparison: keep both, skip, rename and replace with recoverable Undo/Redo (0.5.0).
-- [ ] Folder merge with per-member conflict handling and recovery.
-- [x] Apply choices to remaining conflicts, capability/descendant checks and changed-destination guard (0.5.0).
+- [x] Folder merge with per-member conflict handling, local/provider recovery and nested retry destinations (0.6.0).
+- [x] Apply choices to remaining conflicts, capability/descendant checks and changed-destination guard (0.5.0); ancestor replacement rejection (0.6.0).
 - [ ] Free-space preflight and dedicated Unicode/case-only rename coverage.
 - [x] Optional transfer notifications with pause/resume/cancel (0.5.0).
 - [ ] Appropriate Android background execution per local/network operation.
@@ -53,7 +53,8 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [ ] Reusable operation presets and previewable organization rules.
 
 ## 8. Recovery, privacy and accessibility
-- [ ] Safely reconstructable persistent Undo, operation journal and partial-failure recovery.
+- [x] Transactional transfer database, legacy migration, merge member outcomes and corruption preservation (0.6.0).
+- [ ] Safely reconstructable persistent Undo and expanded partial-failure recovery.
 - [ ] Settings/favorites/tags/workspace backup and restore; per-location preview/index/cache controls.
 - [ ] Optional encrypted vault with explicit recovery, opt-in diagnostics without document disclosure.
 - [ ] Configurable shortcuts, TalkBack, large text, RTL and localization.

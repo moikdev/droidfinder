@@ -117,8 +117,7 @@ class TransferQueueWorkflowTest {
                 TransferState.CANCELLED,
                 model.transferJobs.first { it.id == queued }.state,
             )
-            val saved =
-                TransferJournal(File(compose.activity.filesDir, "transfer-jobs.properties")).load()
+            val saved = SqliteTransferStore(compose.activity).use { it.load() }
             assertEquals(TransferState.COMPLETED, saved.first { it.id == running }.state)
             compose.onNodeWithContentDescription("Close transfers").performClick()
         } finally {
@@ -165,10 +164,7 @@ class TransferQueueWorkflowTest {
             assertEquals("restored", File(out, "Missing.txt").readText())
             assertEquals(
                 TransferState.COMPLETED,
-                TransferJournal(File(compose.activity.filesDir, "transfer-jobs.properties"))
-                    .load()
-                    .last()
-                    .state,
+                SqliteTransferStore(compose.activity).use { it.load() }.last().state,
             )
         } finally {
             compose.runOnIdle { model.navigate(model.workspace.path) }

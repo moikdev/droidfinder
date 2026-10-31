@@ -82,6 +82,19 @@ class TransferControl(private val progress: (TransferProgress) -> Unit = {}) {
         progress(snapshot)
     }
 
+    fun <T> guard(stream: Closeable, work: () -> T): T {
+        activeStreams.add(stream)
+        try {
+            check()
+            return work()
+        } catch (error: Exception) {
+            check()
+            throw error
+        } finally {
+            activeStreams.remove(stream)
+        }
+    }
+
     fun copy(input: InputStream, output: OutputStream) {
         check()
         activeStreams.add(input)

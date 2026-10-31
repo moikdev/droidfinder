@@ -8,15 +8,15 @@ This is an independent implementation, not Apple source code or a macOS runtime.
 
 Actual Android screenshot with synthetic QA documents. [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png). [Portrait](docs/screenshots/desktop-portrait.png) · [Compact window](docs/screenshots/desktop-compact.png) · [Dark appearance](docs/screenshots/desktop-dark.png)
 
-**0.5.0:** Persistent transfer queue, pause/resume, per-file results/retry, conflict choices and recoverable replacement Undo/Redo. [Workflows and verification](docs/TRANSFER-CENTER.md).
+**0.6.0:** Folder merging with per-member conflicts, local/provider move recovery, Undo/Redo, and transactional transfer history. [Workflows and verification](docs/FOLDER-MERGE.md). Earlier: [0.5.0 transfer center](docs/TRANSFER-CENTER.md).
 
 [Transfer center](docs/screenshots/transfer-center.png) · [Conflict choices](docs/screenshots/file-conflict.png)
 
-[Full improvement roadmap](docs/ROADMAP.md) — this is the first increment; the remaining roadmap is still in progress.
+[Full improvement roadmap](docs/ROADMAP.md) — delivery continues in verified increments; unchecked items remain in progress.
 
 ## Install or build
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.5.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.6.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -44,7 +44,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | File integration | Android default apps/Open With, temporary read grants for sharing, full-path copy, inert `.finderlink` shortcuts |
 | Archives/Trash | Named ZIP creation with compression levels, read-only archive browsing, extraction with path checks; recoverable Trash and restore, Undo, explicit confirmation for permanent deletion/emptying |
 | Transfers | Persistent copy/move queue, pause/resume/cancel, notification controls, per-file results/retry, reorder, foreground service, browsing during transfers and explicit interruption review |
-| Conflicts | Compare incoming/existing items; keep both, skip, rename or replace with recoverable Undo/Redo; apply to remaining conflicts |
+| Conflicts | Compare incoming/existing items; keep both, skip, rename or replace with recoverable Undo/Redo; folder merging, nested member retries and apply-to-remaining choices |
 | Persistence | Tabs/current locations, view/sort/group settings, sizes, preview/hidden/extension preferences, theme, favorites, tags, Smart Folders, provider grants, folder appearance, Trash recovery metadata |
 
 Mouse users can drag file icons. On touch, select items and hold the drag grip in the selection bar, then drop onto a folder, breadcrumb, sidebar location, or tab. Hold Ctrl/Alt when starting a drag to copy. Files can also be dragged out to compatible Android apps; content-URI drops from other apps can be imported into writable folders.
@@ -78,7 +78,7 @@ Normal text-field editing shortcuts remain available while editing. Toolbar acti
 - Android all-files access is optional and user-controlled. Other apps' private directories remain protected. [Android storage access](https://developer.android.com/training/data-storage/manage-all-files). Play Store distribution requires the corresponding file-manager permission review.
 - Provider permissions are scoped to folders you authorize and retained through Android's persistable grants. Read-only items remain readable/copyable; writes, moves, rename and deletion follow provider capabilities. Providers may require their own account or network access.
 - **Uninstalling DroidFinder or clearing its data deletes Workspace, Trash, tags, favorites, Smart Folders and folder appearance.** Restore important files to shared/provider storage first. Trash and provider previews consume internal storage, including when the original lived on USB/SD/cloud storage.
-- Transfers can ask about conflicts, keep both, skip or replace with recovery. Folder merge remains in the roadmap. Copies without an explicit replacement and restores choose unused names. Hidden staging items are exposed under their final names only after successful copying. Sources are removed only after destination copies complete. No silent overwrites. Providers must support the create/rename/delete operations needed for staged transfers.
+- Transfers can ask about conflicts, keep both, skip or replace with recovery. Folder merges preserve existing destination folders, verify content before source cleanup, and record recoverable per-member results. Copies without an explicit replacement and restores choose unused names. Hidden staging items are exposed under their final names only after successful copying. Sources are removed only after destination copies complete. No silent overwrites. Providers must support the create/rename/delete operations needed for staged transfers.
 - Undo/Redo is a 50-command session history; it does not survive a process restart. Changed-file checks protect later edits. Permanent deletion is intentionally not undoable and clears history. Batch failures preserve completed work; a mid-operation storage disconnect may require reviewing the affected folders.
 - Transfers use an Android `dataSync` foreground service and an application-owned model, so closing/recreating the activity does not cancel a copy. Android can still force-stop/kill an app or enforce service limits. On the next launch an interruption journal offers a destination review. Completed items are kept; incomplete `.droidfinder-*` staging items may remain after process death. Transfers are not blindly replayed after a crash. [Foreground services](https://developer.android.com/develop/background-work/services/fgs/service-types).
 - Symlinks are not copied/compressed. Trash deletion and folder-size traversal do not follow symlinks. App shortcuts are inspectable data files, not executable links or macOS aliases.
@@ -112,7 +112,8 @@ The script validates preview/release version agreement, verifies the development
 
 - `FileEngine`, `ZipArchive`, `FileHistory`, `BatchRename`, `TransferControl`: safe local operations, session command history, name planning, cancellation/progress.
 - `DocumentAccess`: document-provider capabilities, grants, cross-storage IO, previews and recoverable provider Trash.
-- `FinderModel`, `FinderApplication`, `TransferService`: navigation/state, app lifetime, transfer execution/notification and recovery.
+- `TransferWorker`, `MergePlanner`, `SqliteTransferStore`: serialized jobs, safe folder merging, durable member plans and legacy migration.
+- `FinderModel`, `FinderApplication`, `TransferService`: navigation/state, app lifetime, transfer queue/notification and recovery.
 - `TagStore`, `FolderStyleStore`, `SearchRules`: persistent metadata, shortcuts, Smart Folder criteria and grouping.
 - `FinderApp`, `FinderViews`, `FinderDialogs`, `DesktopMenus`, `DesktopTabs`, `ArchiveDialogs`, `ViewModeSelector`, `TransferStrip`, `FinderDragDrop`, `MarqueeSelection`: tablet UI and pointer/keyboard workflows.
 - `FileVisuals`, `QuickLookMedia`: file graphics, previews, document/image zoom and media controls.

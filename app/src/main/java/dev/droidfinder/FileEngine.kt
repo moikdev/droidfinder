@@ -154,9 +154,11 @@ class FileEngine(private val stateDir: File) {
                     check(!target.exists()) { "$it already exists." }
                 }
             } ?: uniqueFile(parent, source.name)
-        if (move && source.renameTo(target)) {
+        if (move) {
             control.item(source.name)
-            return target
+            control.check()
+            // Publication must not be followed by a cancellation check that hides its result.
+            if (source.renameTo(target)) return target
         }
         // Hide incomplete copies and only expose the result after a successful copy.
         val staging = File(parent, ".droidfinder-${UUID.randomUUID()}")

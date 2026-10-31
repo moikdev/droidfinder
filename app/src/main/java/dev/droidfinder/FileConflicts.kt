@@ -8,6 +8,7 @@ enum class ConflictPolicy(val title: String) {
     KEEP_BOTH("Keep both"),
     SKIP("Skip existing"),
     REPLACE("Replace with recovery"),
+    MERGE("Merge folders; ask for files"),
 }
 
 enum class ConflictAction {
@@ -15,6 +16,7 @@ enum class ConflictAction {
     SKIP,
     RENAME,
     REPLACE,
+    MERGE,
     CANCEL,
 }
 
@@ -24,7 +26,15 @@ data class ConflictDecision(
     val applyAll: Boolean = false,
 )
 
-data class FileConflict(val jobId: String, val source: Entry, val existing: Entry)
+data class FileConflict(
+    val jobId: String,
+    val source: Entry,
+    val existing: Entry,
+    val mergeAllowed: Boolean = true,
+) {
+    val canMerge
+        get() = mergeAllowed && source.folder && existing.folder
+}
 
 /** A dependent swap has one preflight: the new file occupies the old file's original path. */
 fun replacementStep(
