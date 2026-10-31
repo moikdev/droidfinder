@@ -196,7 +196,8 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         val file = file(documentId)
         if (mode.contains('w') && readOnly(file)) throw FileNotFoundException("Read only fixture")
         if (
-            file.name in listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt", "Gate.pdf") &&
+            file.name in
+                listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt", "Gate.pdf", "Gate.jpg") &&
                 mode == "r"
         ) {
             val pipe = ParcelFileDescriptor.createPipe()
@@ -204,12 +205,15 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                 streamCancellation?.countDown()
                 runCatching { pipe[1].close() }
                 runCatching { pipe[0].close() }
-                if (file.name == "Gate.txt" || file.name == "Gate.pdf") transferGate?.countDown()
+                if (file.name in listOf("Gate.txt", "Gate.pdf", "Gate.jpg"))
+                    transferGate?.countDown()
             }
             Thread(
                     {
                         runCatching {
-                            if (file.name in listOf("Gate.bin", "Gate.txt", "Gate.pdf")) {
+                            if (
+                                file.name in listOf("Gate.bin", "Gate.txt", "Gate.pdf", "Gate.jpg")
+                            ) {
                                 gateOpened?.countDown()
                                 transferGate?.await(15, java.util.concurrent.TimeUnit.SECONDS)
                             }

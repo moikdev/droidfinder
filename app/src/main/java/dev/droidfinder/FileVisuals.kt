@@ -272,6 +272,12 @@ private sealed interface Preview {
 
 @Composable
 fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean = false) {
+    if (
+        large && !entry.folder && fileType(entry.extension, entry.mime).group == FileTypeGroup.IMAGE
+    ) {
+        ImageQuickLook(entry, modifier)
+        return
+    }
     if (large && entry.structuredKind != null) {
         StructuredQuickLook(entry, modifier)
         return

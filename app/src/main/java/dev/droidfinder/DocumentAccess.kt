@@ -23,7 +23,24 @@ fun isDocumentPath(path: String) = path.startsWith("content://")
  * Storage Access Framework gateway. Cloud/network authentication stays in the installed provider.
  */
 private val documentParentCacheLock = Any()
-private val documentPreviewLocks = Array(16) { Any() }
+private val documentPreviewLocks = Array(16) { java.util.concurrent.locks.ReentrantLock() }
+
+private inline fun <T> withDocumentPreviewLock(
+    path: String,
+    control: ListingControl?,
+    block: () -> T,
+): T {
+    val lock = documentPreviewLocks[(path.hashCode() and Int.MAX_VALUE) % documentPreviewLocks.size]
+    control?.check()
+    if (control == null) lock.lock()
+    else while (!lock.tryLock(100, java.util.concurrent.TimeUnit.MILLISECONDS)) control.check()
+    try {
+        control?.check()
+        return block()
+    } finally {
+        lock.unlock()
+    }
+}
 
 class PreviewSizeLimitException(message: String) : IllegalStateException(message)
 
@@ -256,9 +273,11 @@ class DocumentAccess(
         control.stream { signal ->
             if (!isDocumentPath(path)) File(path).inputStream()
             else
-                (resolver.openAssetFileDescriptor(Uri.parse(path), "r", signal)
-                        ?: error("Couldn't open this document"))
-                    .createInputStream()
+                DocumentPreviewInput(
+                    resolver.openAssetFileDescriptor(Uri.parse(path), "r", signal)
+                        ?: error("Couldn't open this document"),
+                    control::check,
+                )
         }
 
     private fun fromCursor(tree: Uri, cursor: android.database.Cursor, parent: String?): Entry {
@@ -328,12 +347,9 @@ class DocumentAccess(
     ): File = materialize(entry, limit, control)
 
     private fun materialize(entry: Entry, limit: Long, control: ListingControl?): File =
-        synchronized(
-            documentPreviewLocks[
-                (entry.path.hashCode() and Int.MAX_VALUE) % documentPreviewLocks.size],
-        ) {
+        withDocumentPreviewLock(entry.path, control) {
             control?.check()
-            if (entry.documentUri == null) return@synchronized entry.file
+            if (entry.documentUri == null) return@withDocumentPreviewLock entry.file
             check(!entry.folder)
             if (entry.size > limit)
                 throw PreviewSizeLimitException(
@@ -341,7 +357,7 @@ class DocumentAccess(
                 )
             val file = entry.file
             if (file.isFile && file.length() == entry.size && file.lastModified() >= entry.modified)
-                return@synchronized file
+                return@withDocumentPreviewLock file
             file.parentFile!!.mkdirs()
             val staging = File(file.parentFile, "preview.tmp")
             try {
