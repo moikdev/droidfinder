@@ -39,9 +39,9 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 ## 5. Peek and archives
 - [ ] PDF text search/selection, thumbnails/bookmarks; richer image metadata and large-image navigation. PDF thumbnails, embedded contents, saved page bookmarks/position, cancellable text-layer search and selectable reading text are implemented in 0.13.0; direct selection on the rendered page, richer image metadata and large-image navigation remain open.
 - [x] Video subtitles/speed/resume, structured data/code/Markdown/CSV previews. Media3 playback and subtitles/speed/resume are implemented in 0.14.0. Native Markdown, CSV/TSV, strict JSON formatting and code/text previews with explicit bounds and cancellable streams are implemented in 0.15.0; see docs/STRUCTURED-PEEK.md for supported rendering and limits.
-- [ ] Preview members inside archives, selective extraction, archive search and integrity testing.
+- [x] Preview members inside archives, selective extraction, archive search and integrity testing (0.16.0).
 - [ ] Encrypted ZIP and additional archive formats after compatibility/licensing checks.
-- [ ] ZIP64/large-file verification and configurable resource limits with archive-bomb protection.
+- [ ] ZIP64/large-file verification and configurable resource limits with archive-bomb protection. Persisted count/byte/member/ratio/cache budgets, streamed CRC/size checks, cancellation and small ZIP64 fixtures are implemented in 0.16.0; actual multi-GiB payload verification and measured large-file performance remain open.
 
 ## 6. Storage and integration
 - [ ] Clear volume/provider status, space/capabilities, reconnect and expired-grant flows.

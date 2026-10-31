@@ -10,7 +10,6 @@ import java.nio.file.attribute.BasicFileAttributes
 import java.util.Properties
 import java.util.UUID
 import java.util.zip.ZipEntry
-import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
 
 /** Local disk operations. Never overwrites an existing item. Call from an IO dispatcher. */
@@ -390,62 +389,64 @@ class FileEngine(
         return target
     }
 
-    fun extract(archive: File, parent: File, control: TransferControl = TransferControl()): File {
-        inspectZip(archive) // Reject corrupt central directories before creating any output.
-        val target = uniqueFile(parent, archive.nameWithoutExtension)
-        val staging = File(parent, ".droidfinder-${UUID.randomUUID()}").apply { check(mkdir()) }
-        try {
-            var count = 0
-            var bytes = 0L
-            val modified = mutableListOf<Pair<File, Long>>()
-            ZipInputStream(archive.inputStream().buffered()).use { zip ->
-                while (true) {
-                    val entry = zip.nextEntry ?: break
-                    control.item(entry.name)
-                    check(++count <= 10_000) {
-                        "This archive has too many entries (limit: 10,000)."
-                    }
-                    val file = File(staging, safeZipPath(entry.name)).canonicalFile
-                    check(
-                        file.toPath().startsWith(staging.canonicalFile.toPath()) &&
-                            file != staging.canonicalFile,
-                    ) {
-                        "Unsafe archive path: ${entry.name}"
-                    }
-                    if (entry.isDirectory) check(file.isDirectory || file.mkdirs())
-                    else {
-                        check(file.parentFile!!.isDirectory || file.parentFile!!.mkdirs())
-                        check(!file.exists()) { "Duplicate archive entry: ${entry.name}" }
-                        file.outputStream().use { output ->
-                            val buffer = ByteArray(64 * 1024)
-                            while (true) {
-                                control.check()
-                                val n = zip.read(buffer)
-                                if (n < 0) break
-                                bytes += n
-                                check(bytes <= 2L * 1024 * 1024 * 1024) {
-                                    "Archive exceeds the 2 GB extraction limit."
+    fun extract(
+        archive: File,
+        parent: File,
+        control: TransferControl = TransferControl(),
+        selection: Set<String>? = null,
+        limits: ZipLimits = ZipLimits(),
+    ): File {
+        control.check()
+        val stamp = archive.length() to archive.lastModified()
+        return java.util.zip.ZipFile(archive).use { zip ->
+            control.guard(zip) {
+                val contents = inspectZipOpen(zip, limits, control)
+                val items = selectedZipItems(contents, selection, control::check)
+                val total = validateZipWork(items, limits)
+                requireTransferSpace(total, freeBytes(parent))
+                val target = uniqueFile(parent, archive.nameWithoutExtension.ifBlank { "Archive" })
+                val staging =
+                    File(parent, ".droidfinder-${UUID.randomUUID()}").apply { check(mkdir()) }
+                try {
+                    control.phase("Extracting ZIP", total)
+                    val budget = ZipReadBudget()
+                    val modified = mutableListOf<Pair<File, Long>>()
+                    for (item in items) {
+                        control.item(item.path)
+                        val file = File(staging, item.path).canonicalFile
+                        check(
+                            file.toPath().startsWith(staging.canonicalFile.toPath()) &&
+                                file != staging.canonicalFile,
+                        ) {
+                            "Unsafe archive path: ${item.path}"
+                        }
+                        if (item.folder) check(file.isDirectory || file.mkdirs())
+                        else {
+                            check(file.parentFile!!.isDirectory || file.parentFile!!.mkdirs())
+                            check(!file.exists()) { "Duplicate archive entry: ${item.path}" }
+                            file.outputStream().use { output ->
+                                control.guard(output) {
+                                    readZipMember(zip, item, output, limits, budget, control)
                                 }
-                                output.write(buffer, 0, n)
-                                control.bytes(n)
                             }
                         }
+                        if (item.modified >= 0) modified += file to item.modified
                     }
-                    if (entry.time >= 0) modified += file to entry.time
-                    zip.closeEntry()
+                    control.check()
+                    check(stamp == (archive.length() to archive.lastModified())) {
+                        "The archive changed during extraction. Try again."
+                    }
+                    modified
+                        .sortedByDescending { it.first.path.length }
+                        .forEach { (file, time) -> file.setLastModified(time) }
+                    Files.move(staging.toPath(), target.toPath())
+                } catch (error: Exception) {
+                    staging.deleteRecursively()
+                    throw error
                 }
+                target
             }
-            control.check()
-            // Children must be written before restoring directory timestamps.
-            modified
-                .sortedByDescending { it.first.path.length }
-                .forEach { (file, time) -> file.setLastModified(time) }
-            Files.move(staging.toPath(), target.toPath())
-        } catch (error: Exception) {
-            staging.deleteRecursively()
-            throw error
         }
-        return target
     }
 }
 

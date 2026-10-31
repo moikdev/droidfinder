@@ -121,6 +121,9 @@ fun FinderApp(
             var cursorMenu by remember { mutableStateOf<FinderContextRequest?>(null) }
             var archiveEntry by remember { mutableStateOf<Entry?>(null) }
             var infoEntries by remember { mutableStateOf<List<Entry>>(emptyList()) }
+            var archiveSelection by remember { mutableStateOf<Set<String>?>(null) }
+            var archiveLimits by remember { mutableStateOf(ZipLimits()) }
+            var archiveExtractEntry by remember { mutableStateOf<Entry?>(null) }
             var archiveName by remember { mutableStateOf<String?>(null) }
             var archiveLevel by remember { mutableIntStateOf(-1) }
             var searchActive by
@@ -707,16 +710,25 @@ fun FinderApp(
                             model,
                             entry,
                             { dialog = null },
-                            { choose ->
+                            { choose, selection, limits ->
                                 model.clearSelection()
                                 model.select(entry)
-                                if (choose || !model.canCreate) dialog = "extractTo"
+                                archiveSelection = selection
+                                archiveLimits = limits
+                                archiveExtractEntry = entry
+                                if (choose || !model.canCreate) dialog = "archiveExtractTo"
                                 else {
-                                    model.extract()
+                                    model.extractEntryTo(
+                                        entry,
+                                        model.folderPath ?: model.workspace.path,
+                                        selection,
+                                        limits,
+                                    )
                                     dialog = null
                                 }
                             },
                             { onOpenWith(entry) },
+                            onMemberOpenWith = onOpenWith,
                         )
                     }
                 "folderInfo" ->
@@ -751,6 +763,19 @@ fun FinderApp(
                             dialog = null
                         },
                     )
+                "archiveExtractTo" ->
+                    DestinationDialog(
+                        model,
+                        false,
+                        extract = true,
+                        onDestination = { parent ->
+                            archiveExtractEntry?.let {
+                                model.extractEntryTo(it, parent, archiveSelection, archiveLimits)
+                            }
+                        },
+                    ) {
+                        dialog = null
+                    }
                 "extractTo" -> DestinationDialog(model, false, extract = true) { dialog = null }
                 "groupSelection" ->
                     NameDialog(

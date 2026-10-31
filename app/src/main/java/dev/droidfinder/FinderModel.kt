@@ -3409,16 +3409,25 @@ constructor(
     }
 
     fun extractTo(parent: String) {
-        if (isDocumentPath(parent) || focused?.documentUri != null) {
-            providerArchive(true, parent)
+        extractEntryTo(focused ?: return, parent)
+    }
+
+    fun extractEntryTo(
+        entry: Entry,
+        parent: String,
+        selection: Set<String>? = null,
+        limits: ZipLimits = ZipLimitsStore(getApplication<Application>()).read(),
+    ) {
+        if (isDocumentPath(parent) || entry.documentUri != null) {
+            providerArchive(true, parent, source = entry, selection = selection, limits = limits)
             return
         }
-        val file = focused?.file ?: return
+        val file = entry.file
         val folder = File(parent)
-        operation("Extracting…") {
+        operation("Extracting…", destination = parent) {
             val (result, step) =
                 withContext(Dispatchers.IO) {
-                    val extracted = engine.extract(file, folder, transferControl)
+                    val extracted = engine.extract(file, folder, transferControl, selection, limits)
                     extracted to FileStep.Created(extracted)
                 }
             rememberOperation("Extract", listOf(step))
@@ -3431,8 +3440,11 @@ constructor(
         parent: String,
         name: String? = null,
         level: Int = -1,
+        source: Entry? = null,
+        selection: Set<String>? = null,
+        limits: ZipLimits = ZipLimits(),
     ) {
-        val items = if (extract) listOfNotNull(focused) else actionEntries
+        val items = if (extract) listOfNotNull(source ?: focused) else actionEntries
         if (items.isEmpty()) return
         operation(if (extract) "Extracting archive…" else "Compressing…") {
             val staging =
@@ -3455,7 +3467,14 @@ constructor(
                             )
                         }
                         val output =
-                            if (extract) engine.extract(local.single(), staging, transferControl)
+                            if (extract)
+                                engine.extract(
+                                    local.single(),
+                                    staging,
+                                    transferControl,
+                                    selection,
+                                    limits,
+                                )
                             else engine.compress(local, staging, transferControl, name, level)
                         val result =
                             documents.copy(output.absolutePath, parent, false, transferControl)

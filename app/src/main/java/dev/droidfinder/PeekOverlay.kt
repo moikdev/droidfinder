@@ -36,6 +36,7 @@ fun PeekOverlay(
     onSelect: (Entry) -> Unit,
     onOpenWith: (Entry) -> Unit,
     onDismiss: () -> Unit,
+    sourceLabel: String? = null,
 ) {
     val focus = remember { FocusRequester() }
     val previewKeys = remember(entry.path, entry.modified) { PeekKeys() }
@@ -120,7 +121,13 @@ fun PeekOverlay(
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
-                        Text("Peek", color = Muted, fontSize = 10.sp)
+                        Text(
+                            sourceLabel ?: "Peek",
+                            color = Muted,
+                            fontSize = 10.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
                     }
                     if (!entry.folder)
                         TextButton(onClick = { onOpenWith(entry) }) {

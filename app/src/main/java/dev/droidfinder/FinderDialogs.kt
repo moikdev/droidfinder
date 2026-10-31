@@ -271,6 +271,7 @@ fun DestinationDialog(
     extract: Boolean = false,
     archiveName: String? = null,
     compressionLevel: Int = -1,
+    onDestination: ((String) -> Unit)? = null,
     dismiss: () -> Unit,
 ) {
     val paths = remember { model.selectedEntries.map { it.path } }
@@ -370,7 +371,8 @@ fun DestinationDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    if (archive) model.compressTo(folder, archiveName, compressionLevel)
+                    if (onDestination != null) onDestination(folder)
+                    else if (archive) model.compressTo(folder, archiveName, compressionLevel)
                     else if (extract) model.extractTo(folder)
                     else model.transferPaths(paths, folder, move)
                     dismiss()
