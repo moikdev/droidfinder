@@ -136,25 +136,91 @@ class WindowsShortcutWorkflowTest {
                 Triple(Key.L, true, false),
                 Triple(Key.F4, false, false),
             )) {
-            key(key, ctrl = ctrl, alt = alt)
+            val instrumentation = InstrumentationRegistry.getInstrumentation()
+            fun native(code: Int, modifiers: Int = 0) {
+                val now = SystemClock.uptimeMillis()
+                instrumentation.sendKeySync(
+                    AndroidKey(now, now, AndroidKey.ACTION_DOWN, code, 0, modifiers),
+                )
+                instrumentation.sendKeySync(
+                    AndroidKey(
+                        now,
+                        SystemClock.uptimeMillis(),
+                        AndroidKey.ACTION_UP,
+                        code,
+                        0,
+                        modifiers,
+                    ),
+                )
+                instrumentation.waitForIdleSync()
+                compose.waitForIdle()
+            }
+            native(
+                if (key == Key.D) AndroidKey.KEYCODE_D
+                else if (key == Key.L) AndroidKey.KEYCODE_L else AndroidKey.KEYCODE_F4,
+                if (ctrl) AndroidKey.META_CTRL_ON else if (alt) AndroidKey.META_ALT_ON else 0,
+            )
             val field = compose.onNode(hasContentDescription("Address bar") and hasSetTextAction())
             field.assertExists()
             if (key == Key.D) {
                 field.assertIsFocused()
-                val instrumentation = InstrumentationRegistry.getInstrumentation()
+                val input =
+                    compose.activity.getSystemService(
+                        android.view.inputmethod.InputMethodManager::class.java,
+                    )
+                compose.waitUntil(5000) {
+                    compose.runOnIdle {
+                        input.isAcceptingText &&
+                            input.isActive(compose.activity.window.decorView.findFocus())
+                    }
+                }
                 instrumentation.uiAutomation.waitForIdle(500, 5000)
-                instrumentation.sendStringSync(destination.path)
-                instrumentation.waitForIdleSync()
-                field.assertTextEquals(destination.path)
+                // IME callbacks and this controlled field must advance together under the
+                // Compose test clock. A single 80-character injection can outrun recomposition.
+                compose.waitForIdle()
+                destination.path.forEachIndexed { index, char ->
+                    instrumentation.sendStringSync(char.toString())
+                    compose.waitForIdle()
+                    val expected = destination.path.take(index + 1)
+                    compose.waitUntil(5000) {
+                        field
+                            .fetchSemanticsNode()
+                            .config[androidx.compose.ui.semantics.SemanticsProperties.EditableText]
+                            .text == expected
+                    }
+                }
             } else field.performTextReplacement(destination.path)
-            key(Key.A, ctrl = true)
+            // Advance Compose's test frame clock after editing before injecting native keys.
+            compose.waitForIdle()
+            native(AndroidKey.KEYCODE_A, AndroidKey.META_CTRL_ON)
+            field.assert(
+                SemanticsMatcher.expectValue(
+                    androidx.compose.ui.semantics.SemanticsProperties.TextSelectionRange,
+                    androidx.compose.ui.text.TextRange(0, destination.path.length),
+                ),
+            )
             assertTrue(File(source, "File01.txt").exists())
-            key(Key.Enter)
-            compose.waitUntil(10_000) {
-                File(model.location).canonicalPath == destination.canonicalPath && !model.loading
+            native(AndroidKey.KEYCODE_ENTER)
+            try {
+                compose.waitUntil(10_000) {
+                    File(model.location).canonicalPath == destination.canonicalPath &&
+                        !model.loading
+                }
+            } catch (error: Throwable) {
+                throw AssertionError(
+                    "Native address commit via $key: location=${model.location}, message=${model.message}, loading=${model.loading}; ${compose.onRoot().printToString()}",
+                    error,
+                )
             }
             compose.runOnIdle { model.navigate(source.path) }
             loaded()
+        }
+        key(Key.L, ctrl = true)
+        val address = compose.onNode(hasContentDescription("Address bar") and hasSetTextAction())
+        address.performTextReplacement(destination.path)
+        address.performImeAction()
+        compose.waitUntil(10_000) {
+            File(model.location).canonicalPath == destination.canonicalPath && !model.loading
         }
     }
 

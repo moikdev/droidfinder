@@ -106,6 +106,9 @@ class MainActivity : ComponentActivity() {
             }
             DisposableEffect(Unit) {
                 val observer = LifecycleEventObserver { _, event ->
+                    if (event == Lifecycle.Event.ON_STOP) {
+                        model.windowState.panes.toList().forEach { it.flushNavigationState() }
+                    }
                     if (event == Lifecycle.Event.ON_RESUME) {
                         model.onResume()
                         model.shareRequested?.let {

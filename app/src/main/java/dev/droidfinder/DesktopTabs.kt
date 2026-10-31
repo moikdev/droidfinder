@@ -17,20 +17,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.*
 import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlin.math.roundToInt
 
 @Composable
 fun DesktopTabStrip(model: FinderModel) {
     var context by remember { mutableStateOf<Pair<String, Offset?>?>(null) }
     val activeTabView = remember { BringIntoViewRequester() }
+    val tabBounds = remember { mutableMapOf<String, androidx.compose.ui.geometry.Rect>() }
     LaunchedEffect(model.activeTab, model.tabs.size, model.tabs[model.activeTab].id) {
         withFrameNanos {}
         activeTabView.bringIntoView()
@@ -45,10 +47,11 @@ fun DesktopTabStrip(model: FinderModel) {
         Row(Modifier.weight(1f, fill = false).horizontalScroll(rememberScrollState())) {
             model.tabs.forEach { tab ->
                 key(tab.id) {
+                    DisposableEffect(tab.id) { onDispose { tabBounds.remove(tab.id) } }
                     var coordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
                     val active = tab.id == model.tabs[model.activeTab].id
                     Column(
-                        Modifier.width(180.dp)
+                        Modifier.width(if (tab.pinned) 72.dp else 180.dp)
                             .testTag("tab-${tab.id}")
                             .then(
                                 if (active) Modifier.bringIntoViewRequester(activeTabView)
@@ -56,7 +59,10 @@ fun DesktopTabStrip(model: FinderModel) {
                             )
                             .fillMaxHeight()
                             .folderDropTarget(model, tab.location)
-                            .onGloballyPositioned { coordinates = it }
+                            .onGloballyPositioned {
+                                coordinates = it
+                                tabBounds[tab.id] = it.boundsInWindow()
+                            }
                             .pointerInput(tab.id) {
                                 awaitEachGesture {
                                     val down = awaitFirstDown(requireUnconsumed = false)
@@ -86,12 +92,8 @@ fun DesktopTabStrip(model: FinderModel) {
                                         }
                                         down.type == PointerType.Mouse &&
                                             currentEvent.buttons.isPrimaryPressed -> {
-                                            var distance = 0f
                                             val drag =
-                                                awaitTouchSlopOrCancellation(down.id) {
-                                                    change,
-                                                    delta ->
-                                                    distance += delta.x
+                                                awaitTouchSlopOrCancellation(down.id) { change, _ ->
                                                     change.consume()
                                                 }
                                             if (drag != null) {
@@ -102,27 +104,34 @@ fun DesktopTabStrip(model: FinderModel) {
                                                         event.changes.firstOrNull {
                                                             it.id == down.id
                                                         } ?: break
-                                                    distance += next.positionChange().x
                                                     next.consume()
                                                     pointer = next
                                                 }
                                                 val from =
                                                     model.tabs.indexOfFirst { it.id == tab.id }
-                                                val width =
-                                                    coordinates?.size?.width?.toFloat() ?: 1f
-                                                if (from >= 0)
-                                                    model.moveTab(
-                                                        from,
-                                                        (from + (distance / width).roundToInt())
-                                                            .coerceIn(0, model.tabs.lastIndex),
-                                                    )
+                                                val x =
+                                                    coordinates?.localToWindow(pointer.position)?.x
+                                                val target = x?.let { value ->
+                                                    model.tabs.indices.minByOrNull { i ->
+                                                        kotlin.math.abs(
+                                                            (tabBounds[model.tabs[i].id]?.center?.x
+                                                                ?: value) - value,
+                                                        )
+                                                    }
+                                                }
+                                                if (from >= 0 && target != null)
+                                                    model.moveTab(from, target)
                                             }
                                         }
                                     }
                                 }
                             }
                             .background(if (active) CanvasBackground else Sidebar)
-                            .semantics { selected = active }
+                            .semantics {
+                                selected = active
+                                if (tab.pinned)
+                                    contentDescription = "Pinned tab ${model.title(tab.location)}"
+                            }
                             .combinedClickable(
                                 role = Role.Tab,
                                 onLongClick = {
@@ -148,40 +157,72 @@ fun DesktopTabStrip(model: FinderModel) {
                         Row(
                             Modifier.weight(1f).padding(start = 12.dp, end = 3.dp),
                             verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement =
+                                if (tab.pinned) Arrangement.Center else Arrangement.Start,
                         ) {
-                            Icon(
-                                Icons.Outlined.FolderOpen,
-                                null,
-                                Modifier.size(15.dp),
-                                tint = if (active) SelectedInk else Muted,
-                            )
-                            Text(
-                                model.title(tab.location),
-                                Modifier.weight(1f).padding(horizontal = 8.dp),
-                                fontSize = 11.sp,
-                                color = if (active) Ink else Muted,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                            IconButton(
-                                onClick = {
-                                    model.activatePane()
-                                    model.tabs
-                                        .indexOfFirst { it.id == tab.id }
-                                        .takeIf { it >= 0 }
-                                        ?.let(model::closeTab)
-                                },
-                                Modifier.size(
-                                    if (LocalFinderDensity.current.touch) 48.dp else 30.dp,
-                                ),
-                            ) {
+                            if (tab.pinned)
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Box {
+                                        FolderGlyph(
+                                            22.dp,
+                                            model.folderStyles[tab.location]?.let {
+                                                tagColor(it.color)
+                                            },
+                                        )
+                                        Icon(
+                                            Icons.Outlined.PushPin,
+                                            null,
+                                            Modifier.align(Alignment.BottomEnd).size(9.dp),
+                                            tint = if (active) SelectedInk else Muted,
+                                        )
+                                    }
+                                    Text(
+                                        model.title(tab.location),
+                                        Modifier.width(52.dp),
+                                        fontSize = 9.sp,
+                                        lineHeight = 11.sp,
+                                        color = if (active) SelectedInk else Muted,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                                    )
+                                }
+                            else
                                 Icon(
-                                    Icons.Outlined.Close,
-                                    "Close ${model.title(tab.location)} tab",
-                                    Modifier.size(13.dp),
-                                    tint = Muted,
+                                    Icons.Outlined.FolderOpen,
+                                    null,
+                                    Modifier.size(15.dp),
+                                    tint = if (active) SelectedInk else Muted,
                                 )
-                            }
+                            if (!tab.pinned)
+                                Text(
+                                    model.title(tab.location),
+                                    Modifier.weight(1f).padding(horizontal = 8.dp),
+                                    fontSize = 11.sp,
+                                    color = if (active) Ink else Muted,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                )
+                            if (!tab.pinned)
+                                IconButton(
+                                    onClick = {
+                                        model.activatePane()
+                                        model.tabs
+                                            .indexOfFirst { it.id == tab.id }
+                                            .takeIf { it >= 0 }
+                                            ?.let(model::closeTab)
+                                    },
+                                    Modifier.size(
+                                        if (LocalFinderDensity.current.touch) 48.dp else 30.dp,
+                                    ),
+                                ) {
+                                    Icon(
+                                        Icons.Outlined.Close,
+                                        "Close ${model.title(tab.location)} tab",
+                                        Modifier.size(13.dp),
+                                        tint = Muted,
+                                    )
+                                }
                         }
                         Box(
                             Modifier.fillMaxWidth()
@@ -207,6 +248,16 @@ fun DesktopTabStrip(model: FinderModel) {
                 compact = true,
             )
         }
+        if (model.tabs.size > 1)
+            ToolButton(
+                Icons.Outlined.ExpandMore,
+                "Tab overview",
+                {
+                    model.activatePane()
+                    model.tabOverviewRequested = true
+                },
+                compact = true,
+            )
     }
     HorizontalDivider(color = Border, thickness = .5.dp)
     context?.let { (id, point) ->
@@ -229,6 +280,15 @@ fun DesktopTabStrip(model: FinderModel) {
                 ) {
                     run(model::reopenTab)
                 }
+                ContextItem(
+                    if (model.tabs[index].pinned) "Unpin tab" else "Pin tab",
+                    Icons.Outlined.PushPin,
+                ) {
+                    run { model.togglePinTab(index) }
+                }
+                ContextItem("Tab overview", Icons.Outlined.Tab) {
+                    run { model.tabOverviewRequested = true }
+                }
                 HorizontalDivider(color = Border)
                 ContextItem("Move tab left", Icons.Outlined.ChevronLeft, index > 0) {
                     run { model.moveTab(index, index - 1) }
@@ -244,7 +304,12 @@ fun DesktopTabStrip(model: FinderModel) {
                 ContextItem("Close other tabs", Icons.Outlined.Tab, model.tabs.size > 1) {
                     run { model.closeOtherTabs(index) }
                 }
-                ContextItem("Close tab", Icons.Outlined.Close, shortcut = "Ctrl W") {
+                ContextItem(
+                    "Close tab",
+                    Icons.Outlined.Close,
+                    enabled = !model.tabs[index].pinned,
+                    shortcut = "Ctrl W",
+                ) {
                     run { model.closeTab(index) }
                 }
             }

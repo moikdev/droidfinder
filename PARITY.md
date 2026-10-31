@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -72,9 +72,16 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Separate keyboard focus, additive ranges, navigation tree, Ctrl-wheel and explicit narrow-pane inspectors.
 - [x] Independent Android document tasks sharing the operation session; Android retains global OS shortcuts.
 
+## Navigation and preview reuse pass
+
+- [x] Per-tab selection, independent keyboard focus, expanded folders and scoped viewport restoration.
+- [x] Protected pinned tabs, searchable overview and touch reorder handles.
+- [x] Named two-pane layouts with atomic storage, write-failure retry and mutation path remapping.
+- [x] Shared byte-budget thumbnail cache, deduplicated work, consumer-aware cancellation and provider name/type refresh.
+
 ## Verification
 
-See [the current verification record](docs/WORKSPACES.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
+See [the current verification record](docs/NAVIGATION.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 

@@ -10,7 +10,11 @@ import kotlinx.coroutines.sync.Mutex
 import org.json.JSONArray
 
 /** App-owned shared operation state. Pane models own navigation and independent listing jobs. */
-class FinderSession(private val app: Application) {
+class FinderSession(
+    private val app: Application,
+    val workspaceStore: WorkspacePersistence =
+        SavedWorkspaceStore(File(app.filesDir, "workspaces.json")),
+) {
     private val prefs = app.getSharedPreferences("finder", 0)
     internal val panes = mutableListOf<FinderModel>()
     val workspace = File(app.filesDir, "Workspace").apply { mkdirs() }
@@ -47,6 +51,11 @@ class FinderSession(private val app: Application) {
     val sidebarVisible = mutableStateOf(prefs.getBoolean("sidebarVisible", true))
 
     val tagsVisible = mutableStateOf(prefs.getBoolean("tagsVisible", true))
+
+    val savedWorkspaces = mutableStateOf(workspaceStore.load())
+    val workspaceError = mutableStateOf(workspaceStore.error)
+    val workspaceMutex = Mutex()
+    val workspaceWrites = androidx.compose.runtime.mutableIntStateOf(0)
 
     val styleStore = FolderStyleStore(File(app.filesDir, "folder-styles.properties"))
 

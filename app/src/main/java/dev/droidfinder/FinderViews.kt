@@ -33,6 +33,7 @@ import androidx.compose.ui.input.pointer.*
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
@@ -192,7 +193,9 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
             if (model.fitColumns)
                 maxOf(maxWidth, measured.first + dateWidth + kindWidth + 75.dp + 185.dp)
             else maxWidth
-        Box(Modifier.horizontalScroll(rememberScrollState())) {
+        Box(
+            Modifier.horizontalScroll(rememberBrowserHorizontalState(model, "details-horizontal")),
+        ) {
             Column(Modifier.width(tableWidth).fillMaxHeight()) {
                 Row(
                     Modifier.fillMaxWidth()
@@ -215,7 +218,7 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                 }
                 HorizontalDivider(color = Border, thickness = .5.dp)
                 LazyColumn(
-                    Modifier.fillMaxSize(),
+                    Modifier.fillMaxSize().testTag("browser-list"),
                     state = listState,
                     contentPadding = PaddingValues(vertical = 6.dp),
                 ) {
@@ -322,8 +325,12 @@ fun ContentListView(model: FinderModel, open: (Entry) -> Unit) {
     val keys = groups.flatMap { (group, entries) ->
         (if (group.isNotEmpty()) listOf<String?>(null) else emptyList()) + entries.map { it.path }
     }
-    val state = rememberKeyboardListState(model, keys)
-    LazyColumn(Modifier.fillMaxSize(), state = state, contentPadding = PaddingValues(8.dp)) {
+    val state = rememberKeyboardListState(model, keys, "content")
+    LazyColumn(
+        Modifier.fillMaxSize().testTag("browser-content"),
+        state = state,
+        contentPadding = PaddingValues(8.dp),
+    ) {
         groups.forEach { (group, entries) ->
             if (group.isNotEmpty()) item(key = "group:$group") { GroupHeading(group, entries.size) }
             items(entries, key = { it.path }) { item ->
@@ -414,7 +421,7 @@ fun IconView(model: FinderModel, open: (Entry) -> Unit) {
         LazyVerticalGrid(
             GridCells.Adaptive(model.iconSize.dp),
             state = state,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().testTag("browser-grid"),
             contentPadding = PaddingValues(18.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -506,7 +513,10 @@ fun ColumnsView(model: FinderModel, open: (Entry) -> Unit) {
                         .orEmpty()
                 }
         }
-    Row(Modifier.fillMaxSize().horizontalScroll(rememberScrollState())) {
+    Row(
+        Modifier.fillMaxSize()
+            .horizontalScroll(rememberBrowserHorizontalState(model, "columns-horizontal")),
+    ) {
         if (parent != null && model.query.isEmpty()) {
             FileColumn(
                 model,
@@ -516,6 +526,7 @@ fun ColumnsView(model: FinderModel, open: (Entry) -> Unit) {
                 Modifier.width(180.dp),
                 { if (it.folder) model.navigate(it.path) else open(it) },
                 open,
+                viewport = "column:$parent",
             )
             VerticalDivider(color = Border)
         }
@@ -528,6 +539,7 @@ fun ColumnsView(model: FinderModel, open: (Entry) -> Unit) {
             { model.select(it) },
             open,
             { model.select(it, true) },
+            viewport = "column:${model.location}",
         )
         ResizeHandle(
             "Resize browsing columns",
@@ -542,6 +554,7 @@ fun ColumnsView(model: FinderModel, open: (Entry) -> Unit) {
                 Modifier.width(model.columnWidth.dp),
                 open,
                 open,
+                viewport = "column:${focus.path}",
             )
         else if (focus != null)
             Column(
@@ -570,6 +583,7 @@ private fun FileColumn(
     select: (Entry) -> Unit,
     open: (Entry) -> Unit,
     multi: ((Entry) -> Unit)? = null,
+    viewport: String = "column:$title",
 ) {
     Column(modifier.fillMaxHeight()) {
         Text(
@@ -584,8 +598,8 @@ private fun FileColumn(
             overflow = TextOverflow.Ellipsis,
         )
         LazyColumn(
-            Modifier.fillMaxSize().padding(5.dp),
-            state = rememberKeyboardListState(model, entries.map { it.path }),
+            Modifier.fillMaxSize().padding(5.dp).testTag("browser-column-$title"),
+            state = rememberKeyboardListState(model, entries.map { it.path }, viewport),
         ) {
             items(entries, key = { it.path }) { item ->
                 Row(
@@ -618,7 +632,7 @@ private fun FileColumn(
 
 @Composable
 fun GalleryView(model: FinderModel, open: (Entry) -> Unit) {
-    val stripState = rememberKeyboardListState(model, model.entries.map { it.path })
+    val stripState = rememberKeyboardListState(model, model.entries.map { it.path }, "gallery")
     val item = model.focused ?: model.entries.firstOrNull()
     Column(Modifier.fillMaxSize()) {
         if (item != null) {
@@ -644,7 +658,7 @@ fun GalleryView(model: FinderModel, open: (Entry) -> Unit) {
             }
             HorizontalDivider(color = Border)
             LazyRow(
-                Modifier.fillMaxWidth().height(128.dp),
+                Modifier.fillMaxWidth().height(128.dp).testTag("gallery-strip"),
                 state = stripState,
                 contentPadding = PaddingValues(12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -1007,6 +1021,7 @@ fun NameDialog(
     initial: String,
     button: String,
     onDismiss: () -> Unit,
+    validation: ((String) -> String?)? = null,
     onConfirm: (String) -> Unit,
 ) {
     var value by remember {
@@ -1026,7 +1041,8 @@ fun NameDialog(
     val focus = remember { FocusRequester() }
     fun confirm() {
         val problem =
-            if (title == "Go to folder") null
+            if (validation != null) validation(value.text)
+            else if (title == "Go to folder") null
             else runCatching { validateFilename(value.text) }.exceptionOrNull()?.message
         if (problem != null) error = problem else onConfirm(value.text)
     }

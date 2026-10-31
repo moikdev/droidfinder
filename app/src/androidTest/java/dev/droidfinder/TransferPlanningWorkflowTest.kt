@@ -49,6 +49,9 @@ class TransferPlanningWorkflowTest {
                     android.Manifest.permission.POST_NOTIFICATIONS,
                 )
         try {
+            compose.onNodeWithContentDescription("Actions").performClick()
+            compose.onNodeWithText("Transfers").performClick()
+            compose.onNodeWithTag("transfer-center").assertExists()
             compose.runOnIdle {
                 model.updateNotificationState()
                 model.clearTransferHistory()
@@ -75,6 +78,37 @@ class TransferPlanningWorkflowTest {
             assertEquals(source.length(), model.activeTransfer!!.estimate!!.totalBytes)
             assertEquals(1, model.activeTransfer!!.estimate!!.files)
             assertNotNull(model.activeTransfer!!.availableAtStart)
+            compose.onNodeWithTag("transfer-center").assertExists()
+            val panel = compose.onNodeWithTag("transfer-center").fetchSemanticsNode().boundsInRoot
+            val density = compose.activity.resources.displayMetrics.density
+            assertTrue("A single transfer must use a compact window", panel.width / density <= 600f)
+            assertTrue("A single transfer must wrap its contents", panel.height / density <= 380f)
+            try {
+                compose.waitUntil(3000) {
+                    compose
+                        .onAllNodesWithText("left", substring = true)
+                        .fetchSemanticsNodes()
+                        .isNotEmpty()
+                }
+            } catch (error: Throwable) {
+                throw AssertionError(
+                    "ETA not visible: progress=${model.transferProgress}; fresh=${model.transferProgress.fresh()}; active=${model.activeTransfer?.state}; ${compose.onNodeWithTag("transfer-center").printToString()}",
+                    error,
+                )
+            }
+            compose.runOnIdle { model.pauseTransfer(id) }
+            compose.waitUntil(5000) { model.activeTransfer?.state == TransferState.PAUSED }
+            compose
+                .onNode(hasText("Resume") and hasAnyAncestor(hasTestTag("transfer-center")))
+                .assertExists()
+            assertTrue(
+                compose
+                    .onAllNodesWithText("left", substring = true)
+                    .fetchSemanticsNodes()
+                    .isEmpty(),
+            )
+            // Observe notification totals while paused, after asserting the live ETA. Waiting
+            // for Android's notification delivery first can consume the short copy's ETA window.
             val manager = compose.activity.getSystemService(NotificationManager::class.java)
             compose.waitUntil(5000) {
                 manager.activeNotifications.any {
@@ -88,29 +122,6 @@ class TransferPlanningWorkflowTest {
                             .contains("16.0 MB")
                 }
             }
-            compose.onNodeWithText("Transfers", useUnmergedTree = true).performClick()
-            compose.onNodeWithTag("transfer-center").assertExists()
-            val panel = compose.onNodeWithTag("transfer-center").fetchSemanticsNode().boundsInRoot
-            val density = compose.activity.resources.displayMetrics.density
-            assertTrue("A single transfer must use a compact window", panel.width / density <= 600f)
-            assertTrue("A single transfer must wrap its contents", panel.height / density <= 380f)
-            compose.waitUntil(3000) {
-                compose
-                    .onAllNodesWithText("left", substring = true)
-                    .fetchSemanticsNodes()
-                    .isNotEmpty()
-            }
-            compose.runOnIdle { model.pauseTransfer(id) }
-            compose.waitUntil(5000) { model.activeTransfer?.state == TransferState.PAUSED }
-            compose
-                .onNode(hasText("Resume") and hasAnyAncestor(hasTestTag("transfer-center")))
-                .assertExists()
-            assertTrue(
-                compose
-                    .onAllNodesWithText("left", substring = true)
-                    .fetchSemanticsNodes()
-                    .isEmpty(),
-            )
             android.os.ParcelFileDescriptor.AutoCloseInputStream(
                     InstrumentationRegistry.getInstrumentation()
                         .uiAutomation

@@ -113,24 +113,7 @@ data class Entry(
                 ?: "application/octet-stream"
 }
 
-data class FinderTab(
-    val history: List<String>,
-    val index: Int = history.lastIndex,
-    val id: String = java.util.UUID.randomUUID().toString(),
-    val search: String = "",
-    val rules: SearchRules = SearchRules(),
-) {
-    val location
-        get() = history[index]
-}
-
 data class FinderContextRequest(val point: Offset? = null, val background: Boolean = false)
-
-private data class TabSelection(
-    val paths: Set<String>,
-    val lead: String?,
-    val expanded: Set<String>,
-)
 
 data class ClipboardFiles(val paths: List<String>, val cut: Boolean) {
     val files
@@ -212,6 +195,196 @@ constructor(
         if (!value.isFinite()) return
         windowState.paneRatio.value = value.coerceIn(.3f, .7f)
         windowState.prefs.edit().putFloat("paneRatio", paneRatio).apply()
+    }
+
+    val savedWorkspaces
+        get() = session.savedWorkspaces.value
+
+    val workspaceError
+        get() = session.workspaceError.value
+
+    private fun snapshotPane(): PaneSnapshot {
+        flushNavigationState()
+        return PaneSnapshot(
+            tabs,
+            activeTab,
+            mode,
+            windowsLayout,
+            sort,
+            ascending,
+            grouping,
+            showHidden,
+            foldersFirst,
+            previewVisible,
+            previewDetailsOnly,
+            iconSize,
+            columnWidth,
+            previewWidth,
+        )
+    }
+
+    private fun restorePane(saved: PaneSnapshot) {
+        navigationSaveJob?.cancel()
+        saveTabState()
+        closedTabs = (closedTabs + tabs.filterNot { it.pinned }).takeLast(20)
+        viewportPositions.clear()
+        tabs = saved.tabs.map { it.copy(id = java.util.UUID.randomUUID().toString()) }
+        activeTab = saved.active.coerceIn(tabs.indices)
+        mode = saved.mode
+        windowsLayout = saved.windowsLayout
+        sort = saved.sort
+        ascending = saved.ascending
+        grouping = saved.grouping
+        showHidden = saved.hidden
+        foldersFirst = saved.foldersFirst
+        previewVisible = saved.preview
+        previewDetailsOnly = saved.details
+        inspectorRequested = false
+        iconSize = saved.iconSize
+        columnWidth = saved.columnWidth
+        previewWidth = saved.previewWidth
+        fitColumns = false
+        panePrefs
+            .edit()
+            .putString("view", mode.name)
+            .putInt("windowsLayout", windowsLayout)
+            .putString("sort", sort.name)
+            .putBoolean("ascending", ascending)
+            .putString("group", grouping.name)
+            .putBoolean("hidden", showHidden)
+            .putBoolean("foldersFirst", foldersFirst)
+            .putBoolean("preview", previewVisible)
+            .putBoolean("previewDetailsOnly", previewDetailsOnly)
+            .putInt("iconSize", iconSize)
+            .putInt("columnWidth", columnWidth)
+            .putInt("previewWidth", previewWidth)
+            .apply()
+        restoreTabState()
+        persistTabs()
+    }
+
+    val workspaceSaving
+        get() = session.workspaceWrites.intValue > 0
+
+    private fun persistWorkspaces(success: String? = null) {
+        // All windows share this writer. Confirm saving only after atomic storage succeeds.
+        session.workspaceWrites.intValue++
+        TransferRuntime.scope.launch {
+            try {
+                session.workspaceMutex.withLock {
+                    val latest = savedWorkspaces
+                    runCatching {
+                        withContext(Dispatchers.IO) { session.workspaceStore.write(latest) }
+                    }
+                        .onSuccess {
+                            session.workspaceError.value = null
+                            if (success != null) message = success
+                        }
+                        .onFailure {
+                            session.workspaceError.value = it.message
+                            message = it.message
+                        }
+                }
+            } finally {
+                session.workspaceWrites.intValue--
+            }
+        }
+    }
+
+    fun saveWorkspace(name: String, replaceId: String? = null): Boolean {
+        val title = name.trim()
+        if (workspaceError != null) {
+            message = workspaceError
+            return false
+        }
+        if (title.isBlank() || title.length > 60 || title.any { it.isISOControl() }) {
+            message = "Use a name from 1 to 60 characters."
+            return false
+        }
+        if (savedWorkspaces.any { it.id != replaceId && it.name.equals(title, true) }) {
+            message = "A workspace with that name already exists."
+            return false
+        }
+        if (replaceId == null && savedWorkspaces.size >= 24) {
+            message = "There are already 24 saved workspaces."
+            return false
+        }
+        val value =
+            SavedWorkspace(
+                replaceId ?: java.util.UUID.randomUUID().toString(),
+                title,
+                primaryPane.snapshotPane(),
+                secondaryPane.snapshotPane(),
+                dualPane,
+                panesReversed,
+                paneRatio,
+                windowState.activePane.value,
+            )
+        session.savedWorkspaces.value =
+            (savedWorkspaces.filterNot { it.id == replaceId } + value).sortedBy {
+                it.name.lowercase()
+            }
+        message = "Saving $title…"
+        persistWorkspaces("Saved $title")
+        return true
+    }
+
+    fun workspaceNameError(name: String, exceptId: String? = null): String? {
+        val title = name.trim()
+        return when {
+            title.isBlank() || title.length > 60 || title.any { it.isISOControl() } ->
+                "Use a name from 1 to 60 characters."
+            savedWorkspaces.any { it.id != exceptId && it.name.equals(title, true) } ->
+                "A workspace with that name already exists."
+            else -> null
+        }
+    }
+
+    fun renameWorkspace(id: String, name: String): Boolean {
+        if (workspaceError != null) {
+            message = workspaceError
+            return false
+        }
+        workspaceNameError(name, id)?.let {
+            message = it
+            return false
+        }
+        session.savedWorkspaces.value =
+            savedWorkspaces
+                .map { if (it.id == id) it.copy(name = name.trim()) else it }
+                .sortedBy { it.name.lowercase() }
+        persistWorkspaces()
+        return true
+    }
+
+    fun retryWorkspaceSave() {
+        if (session.workspaceStore.error != null) return
+        session.workspaceError.value = null
+        persistWorkspaces("Workspaces saved")
+    }
+
+    fun removeWorkspace(id: String) {
+        if (workspaceError != null) return
+        session.savedWorkspaces.value = savedWorkspaces.filterNot { it.id == id }
+        persistWorkspaces()
+    }
+
+    fun openWorkspace(id: String) {
+        val saved = savedWorkspaces.firstOrNull { it.id == id } ?: return
+        primaryPane.restorePane(saved.primary)
+        secondaryPane.restorePane(saved.secondary)
+        windowState.dualPane.value = saved.dual
+        windowState.panesReversed.value = saved.reversed
+        windowState.paneRatio.value = saved.ratio
+        windowState.activePane.value = if (saved.dual) saved.activePane else "primary"
+        windowState.prefs
+            .edit()
+            .putBoolean("dualPane", saved.dual)
+            .putBoolean("panesReversed", saved.reversed)
+            .putFloat("paneRatio", saved.ratio)
+            .putString("activePane", windowState.activePane.value)
+            .apply()
+        message = "Opened ${saved.name}"
     }
 
     fun transferToOtherPane(move: Boolean) {
@@ -329,6 +502,11 @@ constructor(
         if (!entry.folder || !canExpandList) return
         if (entry.path in expandedFolders) {
             expandedFolders = expandedFolders - entry.path
+            scheduleNavigationSave()
+            return
+        }
+        if (expandedFolders.size >= 1000) {
+            message = "This tab already has 1,000 expanded folders."
             return
         }
         viewModelScope.launch {
@@ -341,6 +519,7 @@ constructor(
                 .onSuccess {
                     expandedChildren = expandedChildren + (entry.path to it)
                     expandedFolders = expandedFolders + entry.path
+                    scheduleNavigationSave()
                 }
                 .onFailure { message = it.message }
         }
@@ -421,11 +600,44 @@ constructor(
         private set
 
     var contextRequested by mutableStateOf<FinderContextRequest?>(null)
-    private var closedTabs by mutableStateOf<List<FinderTab>>(emptyList())
+    private var closedTabs by mutableStateOf(loadClosedTabs())
     val canReopenTab
         get() = closedTabs.isNotEmpty()
 
-    private val tabSelections = mutableMapOf<String, TabSelection>()
+    private val viewportPositions = mutableMapOf<String, Map<ViewportKey, ViewportAnchor>>()
+
+    private data class ViewportReader(val owner: Any, val capture: () -> ViewportAnchor?)
+
+    private val viewportReaders = mutableMapOf<Pair<String, ViewportKey>, ViewportReader>()
+
+    internal fun registerViewport(
+        tabId: String,
+        key: ViewportKey,
+        owner: Any,
+        capture: () -> ViewportAnchor?,
+    ) {
+        viewportReaders[tabId to key] = ViewportReader(owner, capture)
+    }
+
+    internal fun unregisterViewport(tabId: String, key: ViewportKey, owner: Any) {
+        val registered = viewportReaders[tabId to key] ?: return
+        if (registered.owner !== owner) return
+        registered.capture()?.let { recordViewport(tabId, key, it) }
+        viewportReaders.remove(tabId to key)
+    }
+
+    private fun captureViewports() {
+        val tabId = tabs[activeTab].id
+        viewportReaders.toMap().forEach { (pair, reader) ->
+            if (pair.first == tabId)
+                reader.capture()?.let { recordViewport(pair.first, pair.second, it) }
+        }
+    }
+
+    private var pendingTabRestore: Pair<String, TabNavigation>? = null
+    private var navigationSaveJob: Job? = null
+    private var savingNavigation = false
+    var tabOverviewRequested by mutableStateOf(false)
     var windowsLayout by mutableStateOf(panePrefs.getInt("windowsLayout", 0))
         private set
 
@@ -517,6 +729,8 @@ constructor(
     }
 
     fun selectBoundary(last: Boolean, extend: Boolean) {
+        pendingTabRestore = null
+        scheduleNavigationSave()
         val items = visibleEntries
         if (items.isEmpty()) return
         if (extend) {
@@ -537,6 +751,8 @@ constructor(
     }
 
     fun moveKeyboardFocus(delta: Int) {
+        pendingTabRestore = null
+        scheduleNavigationSave()
         keyboardScrollRequest++
         val items = visibleEntries
         if (items.isEmpty()) return
@@ -617,7 +833,8 @@ constructor(
                 .onSuccess { (children, limited) ->
                     if (location == at) {
                         expandedChildren = expandedChildren + children
-                        expandedFolders = expandedFolders + children.keys
+                        expandedFolders = (expandedFolders + children.keys).take(1000).toSet()
+                        scheduleNavigationSave()
                     }
                     if (limited) message = "Folder expansion stopped at the 1,000-folder limit."
                 }
@@ -893,7 +1110,7 @@ constructor(
         )
             interruptedTransfer = runCatching { marker.readText() }.getOrNull()
         journalError?.let { message = it }
-        refresh()
+        restoreTabState()
         if (navigationTreeVisible) revealNavigationTree(false)
     }
 
@@ -902,57 +1119,21 @@ constructor(
         interruptedTransfer = null
     }
 
-    private fun rulesJson(r: SearchRules) =
-        JSONObject()
-            .put("name", r.name)
-            .put("kind", r.kind)
-            .put("tag", r.tag)
-            .put("days", r.days)
-            .put("min", r.minimumBytes)
-            .put("max", r.maximumBytes)
-            .put("content", r.content)
-            .put("terms", JSONArray(r.nameTerms))
+    private fun rulesJson(r: SearchRules) = NavigationJson.rules(r)
 
-    private fun parseRules(r: JSONObject?) =
-        if (r == null) SearchRules()
-        else
-            SearchRules(
-                r.optString("name"),
-                r.optString("kind", "Any"),
-                r.optString("tag"),
-                r.optInt("days"),
-                r.optLong("min"),
-                r.optLong("max"),
-                r.optString("content"),
-                r.optJSONArray("terms")
-                    ?.let { terms -> (0 until terms.length()).map(terms::getString) }
-                    .orEmpty(),
-            )
+    private fun parseRules(r: JSONObject?) = NavigationJson.rules(r)
 
     private fun loadTabs(): List<FinderTab> = runCatching {
-        val array = JSONArray(panePrefs.getString("tabs", "[]"))
-        (0 until array.length())
-            .map { i ->
-                val value = array.optJSONObject(i)
-                if (value == null) FinderTab(listOf(array.getString(i)))
-                else {
-                    val h =
-                        value
-                            .getJSONArray("history")
-                            .let { history -> (0 until history.length()).map(history::getString) }
-                            .ifEmpty { listOf(workspace.path) }
-                    FinderTab(
-                        h,
-                        value.optInt("index", h.lastIndex).coerceIn(0, h.lastIndex),
-                        value.optString("id").ifBlank { java.util.UUID.randomUUID().toString() },
-                        value.optString("query"),
-                        parseRules(value.optJSONObject("rules")),
-                    )
-                }
-            }
-            .ifEmpty { listOf(FinderTab(listOf(workspace.absolutePath))) }
+        NavigationJson.tabs(JSONArray(panePrefs.getString("tabs", "[]")), workspace.path)
     }
-        .getOrElse { listOf(FinderTab(listOf(workspace.absolutePath))) }
+        .getOrElse { listOf(FinderTab(listOf(workspace.path))) }
+
+    private fun loadClosedTabs(): List<FinderTab> = runCatching {
+        val array = JSONArray(panePrefs.getString("closedTabs", "[]"))
+        if (array.length() == 0) emptyList()
+        else NavigationJson.tabs(array, workspace.path).takeLast(20)
+    }
+        .getOrDefault(emptyList())
 
     fun saveSmartFolder(name: String) {
         val folder = folderPath ?: currentSmartFolder?.root ?: return
@@ -1094,55 +1275,96 @@ constructor(
             entries.groupBy { groupLabel(it, grouping, tagAssignments[it.path].orEmpty()) }.toList()
 
     private fun saveTabState() {
+        captureViewports()
         val tab = tabs[activeTab]
+        val state =
+            if (pendingTabRestore?.first == tab.id) pendingTabRestore!!.second
+            else
+                TabNavigation(selected, leadSelection, rangeAnchor, expandedFolders, multiSelecting)
         tabs =
             tabs.toMutableList().also {
-                it[activeTab] = tab.copy(search = query, rules = searchRules)
+                it[activeTab] =
+                    tab.copy(
+                        search = query,
+                        rules = searchRules,
+                        navigation =
+                            state.copy(
+                                positions = viewportPositions[tab.id] ?: tab.navigation.positions,
+                            ),
+                    )
             }
-        tabSelections[tab.id] = TabSelection(selected, leadSelection, expandedFolders)
+    }
+
+    internal fun flushNavigationState() {
+        navigationSaveJob?.cancel()
+        persistTabs()
+    }
+
+    private fun scheduleNavigationSave() {
+        if (savingNavigation) return
+        navigationSaveJob?.cancel()
+        navigationSaveJob = viewModelScope.launch {
+            delay(300)
+            persistTabs()
+        }
+    }
+
+    internal fun viewportKey(view: String) =
+        ViewportKey(
+            location,
+            view,
+            JSONObject().put("query", query).put("rules", rulesJson(searchRules)).toString(),
+        )
+
+    internal fun savedViewport(tabId: String, key: ViewportKey): ViewportAnchor? =
+        (viewportPositions[tabId] ?: tabs.firstOrNull { it.id == tabId }?.navigation?.positions)
+            ?.get(key)
+
+    internal fun recordViewport(tabId: String, key: ViewportKey, point: ViewportAnchor) {
+        if (tabId != tabs[activeTab].id || key != viewportKey(key.view) || loading) return
+        val tab = (tabs + closedTabs).firstOrNull { it.id == tabId } ?: return
+        val before = viewportPositions[tabId] ?: tab.navigation.positions
+        if (before[key] == point) return
+        viewportPositions[tabId] =
+            (before - key + (key to point)).entries.toList().takeLast(32).associate { it.toPair() }
+        scheduleNavigationSave()
     }
 
     private fun persistTabs() {
-        saveTabState()
-        panePrefs
-            .edit()
-            .putString(
-                "tabs",
-                JSONArray(
-                        tabs.map { tab ->
-                            JSONObject()
-                                .put("id", tab.id)
-                                .put("history", JSONArray(tab.history))
-                                .put("index", tab.index)
-                                .put("query", tab.search)
-                                .put("rules", rulesJson(tab.rules))
-                        },
-                    )
-                    .toString(),
-            )
-            .putInt("activeTab", activeTab)
-            .apply()
+        if (savingNavigation) return
+        savingNavigation = true
+        try {
+            saveTabState()
+            fun positions(tab: FinderTab) =
+                tab.copy(
+                    navigation =
+                        tab.navigation.copy(
+                            positions = viewportPositions[tab.id] ?: tab.navigation.positions,
+                        ),
+                )
+            tabs = tabs.map(::positions)
+            closedTabs = closedTabs.map(::positions)
+            viewportPositions.keys.retainAll((tabs + closedTabs).map { it.id }.toSet())
+            panePrefs
+                .edit()
+                .putString("tabs", JSONArray(tabs.map(NavigationJson::tab)).toString())
+                .putString("closedTabs", JSONArray(closedTabs.map(NavigationJson::tab)).toString())
+                .putInt("activeTab", activeTab)
+                .apply()
+        } finally {
+            savingNavigation = false
+        }
     }
 
     private fun restoreTabState() {
         val tab = tabs[activeTab]
-        val saved = tabSelections[tab.id]
         query = tab.search
         searchRules = tab.rules
         clearSelection()
-        expandedFolders = tabSelections[tab.id]?.expanded.orEmpty()
+        pendingTabRestore = tab.id to tab.navigation
+        expandedFolders = tab.navigation.expanded
         expandedChildren = emptyMap()
         refresh()
-        val job = listingJob
-        viewModelScope.launch {
-            job?.join()
-            if (listingJob === job && tabs[activeTab].id == tab.id)
-                saved?.let { saved ->
-                    selectPaths(saved.paths.intersect(visibleEntries.map { it.path }.toSet()))
-                    leadSelection = saved.lead?.takeIf { it in selected }
-                    tabSelections[tab.id] = saved.copy(paths = selected)
-                }
-        }
     }
 
     fun title(path: String = location): String =
@@ -1190,41 +1412,59 @@ constructor(
             updateQuery("")
             return
         }
+        saveTabState()
         val current = tabs[activeTab]
         tabs =
             tabs.toMutableList().also {
                 val history = (current.history.take(current.index + 1) + path).takeLast(100)
-                it[activeTab] = current.copy(history = history, index = history.lastIndex)
+                it[activeTab] =
+                    current.copy(
+                        history = history,
+                        index = history.lastIndex,
+                        search = "",
+                        rules = SearchRules(),
+                        navigation = TabNavigation(positions = current.navigation.positions),
+                    )
             }
-        query = ""
-        searchRules = SearchRules()
-        clearSelection()
+        restoreTabState()
         persistTabs()
-        refresh()
     }
 
     fun back(): Boolean {
+        if (tabs[activeTab].index <= 0) return false
+        saveTabState()
         val tab = tabs[activeTab]
-        if (tab.index <= 0) return false
-        tabs = tabs.toMutableList().also { it[activeTab] = tab.copy(index = tab.index - 1) }
-        query = ""
-        searchRules = SearchRules()
-        clearSelection()
+        tabs =
+            tabs.toMutableList().also {
+                it[activeTab] =
+                    tab.copy(
+                        index = tab.index - 1,
+                        search = "",
+                        rules = SearchRules(),
+                        navigation = TabNavigation(positions = tab.navigation.positions),
+                    )
+            }
+        restoreTabState()
         persistTabs()
-        refresh()
         return true
     }
 
     fun forward() {
+        if (tabs[activeTab].index >= tabs[activeTab].history.lastIndex) return
+        saveTabState()
         val tab = tabs[activeTab]
-        if (tab.index < tab.history.lastIndex) {
-            tabs = tabs.toMutableList().also { it[activeTab] = tab.copy(index = tab.index + 1) }
-            query = ""
-            searchRules = SearchRules()
-            clearSelection()
-            persistTabs()
-            refresh()
-        }
+        tabs =
+            tabs.toMutableList().also {
+                it[activeTab] =
+                    tab.copy(
+                        index = tab.index + 1,
+                        search = "",
+                        rules = SearchRules(),
+                        navigation = TabNavigation(positions = tab.navigation.positions),
+                    )
+            }
+        restoreTabState()
+        persistTabs()
     }
 
     fun up() {
@@ -1232,8 +1472,12 @@ constructor(
     }
 
     fun newTab(path: String = location, activate: Boolean = true, atEnd: Boolean = false) {
+        if (tabs.size >= 64) {
+            message = "This pane already has 64 tabs."
+            return
+        }
         saveTabState()
-        val insertion = if (atEnd) tabs.size else activeTab + 1
+        val insertion = if (atEnd) tabs.size else maxOf(activeTab + 1, tabs.count { it.pinned })
         tabs = tabs.toMutableList().also { it.add(insertion, FinderTab(listOf(path))) }
         if (activate) {
             activeTab = insertion
@@ -1257,9 +1501,14 @@ constructor(
     fun duplicateTab(index: Int) {
         if (index !in tabs.indices) return
         saveTabState()
-        val copy = tabs[index].copy(id = java.util.UUID.randomUUID().toString())
-        tabs = tabs.toMutableList().also { it.add(index + 1, copy) }
-        activeTab = index + 1
+        if (tabs.size >= 64) {
+            message = "This pane already has 64 tabs."
+            return
+        }
+        val copy = tabs[index].copy(id = java.util.UUID.randomUUID().toString(), pinned = false)
+        val insertion = maxOf(index + 1, tabs.count { it.pinned })
+        tabs = tabs.toMutableList().also { it.add(insertion, copy) }
+        activeTab = insertion
         restoreTabState()
         persistTabs()
     }
@@ -1267,13 +1516,33 @@ constructor(
     fun moveTab(from: Int, to: Int) {
         if (from !in tabs.indices || to !in tabs.indices || from == to) return
         val active = tabs[activeTab].id
-        tabs = tabs.toMutableList().also { it.add(to, it.removeAt(from)) }
+        val pinned = tabs.count { it.pinned }
+        val target =
+            if (tabs[from].pinned) to.coerceIn(0, pinned - 1)
+            else to.coerceIn(pinned, tabs.lastIndex)
+        tabs = tabs.toMutableList().also { it.add(target, it.removeAt(from)) }
+        activeTab = tabs.indexOfFirst { it.id == active }
+        persistTabs()
+    }
+
+    fun togglePinTab(index: Int) {
+        if (index !in tabs.indices) return
+        saveTabState()
+        val active = tabs[activeTab].id
+        val target = tabs[index].copy(pinned = !tabs[index].pinned)
+        val rest = tabs.filterIndexed { i, _ -> i != index }
+        val at = rest.count { it.pinned }
+        tabs = rest.toMutableList().also { it.add(at, target) }
         activeTab = tabs.indexOfFirst { it.id == active }
         persistTabs()
     }
 
     fun closeTab(index: Int) {
         if (index !in tabs.indices) return
+        if (tabs[index].pinned) {
+            message = "Unpin this tab before closing it."
+            return
+        }
         saveTabState()
         val active = tabs[activeTab].id
         closedTabs = (closedTabs + tabs[index]).takeLast(20)
@@ -1292,20 +1561,28 @@ constructor(
         if (index !in tabs.indices) return
         saveTabState()
         val kept = tabs[index]
-        closedTabs = (closedTabs + tabs.filterIndexed { i, _ -> i != index }).takeLast(20)
-        tabs = listOf(kept)
-        activeTab = 0
+        closedTabs =
+            (closedTabs + tabs.filterIndexed { i, tab -> i != index && !tab.pinned }).takeLast(20)
+        tabs = tabs.filter { it.pinned || it.id == kept.id }
+        activeTab = tabs.indexOfFirst { it.id == kept.id }
         restoreTabState()
         persistTabs()
     }
 
     fun reopenTab() {
         if (closedTabs.isEmpty()) return
+        if (tabs.size >= 64) {
+            message = "This pane already has 64 tabs."
+            return
+        }
         saveTabState()
         val tab = closedTabs.last()
         closedTabs = closedTabs.dropLast(1)
-        tabs = tabs.toMutableList().also { it.add(activeTab + 1, tab) }
-        activeTab++
+        val insertion =
+            if (tab.pinned) tabs.count { it.pinned }
+            else maxOf(activeTab + 1, tabs.count { it.pinned })
+        tabs = tabs.toMutableList().also { it.add(insertion, tab) }
+        activeTab = insertion
         restoreTabState()
         persistTabs()
     }
@@ -1372,6 +1649,8 @@ constructor(
     }
 
     fun select(entry: Entry, multiple: Boolean = false, range: Boolean = false) {
+        pendingTabRestore = null
+        scheduleNavigationSave()
         keyboardRangeBase = null
         val items = visibleEntries
         val anchor = items.indexOfFirst { it.path == (rangeAnchor ?: leadSelection) }
@@ -1394,6 +1673,8 @@ constructor(
     }
 
     fun stepSelection(delta: Int, extend: Boolean, additive: Boolean = false) {
+        pendingTabRestore = null
+        scheduleNavigationSave()
         keyboardScrollRequest++
         val items = visibleEntries
         if (items.isEmpty()) return
@@ -1420,17 +1701,23 @@ constructor(
     }
 
     fun selectAll() {
+        pendingTabRestore = null
+        scheduleNavigationSave()
         selected = visibleEntries.map { it.path }.toSet()
         multiSelecting = true
     }
 
     fun selectPaths(paths: Set<String>) {
+        pendingTabRestore = null
+        scheduleNavigationSave()
         selected = paths.intersect(visibleEntries.map { it.path }.toSet())
         multiSelecting = selected.isNotEmpty()
         leadSelection = visibleEntries.lastOrNull { it.path in selected }?.path
     }
 
     fun clearSelection() {
+        pendingTabRestore = null
+        scheduleNavigationSave()
         keyboardRangeBase = null
         selected = emptySet()
         multiSelecting = false
@@ -1494,6 +1781,7 @@ constructor(
     }
 
     fun updateQuery(value: String) {
+        saveTabState()
         query = value
         clearSelection()
         persistTabs()
@@ -1501,6 +1789,7 @@ constructor(
     }
 
     fun changeMode(value: ViewMode) {
+        saveTabState()
         fitColumns = false
         windowsLayout = 0
         panePrefs.edit().putInt("windowsLayout", 0).apply()
@@ -1639,8 +1928,17 @@ constructor(
         prefs.edit().putStringSet("favorites", favorites).apply()
         smartFolders = smartFolders.map { it.copy(root = update(it.root)) }
         persistSmartFolders()
+        session.savedWorkspaces.value = savedWorkspaces.map { it.remap(names) }
+        if (savedWorkspaces.isNotEmpty()) persistWorkspaces()
         session.panes.forEach { pane ->
-            pane.tabs = pane.tabs.map { tab -> tab.copy(history = tab.history.map(::update)) }
+            pane.saveTabState()
+            pane.tabs = pane.tabs.map { it.remap(names) }
+            pane.closedTabs = pane.closedTabs.map { it.remap(names) }
+            pane.viewportPositions.replaceAll { _, points ->
+                TabNavigation(positions = points).remap(names).positions
+            }
+            pane.pendingTabRestore =
+                pane.pendingTabRestore?.let { it.first to it.second.remap(names) }
             pane.selected = pane.selected.map(::update).toSet()
             pane.leadSelection = pane.leadSelection?.let(::update)
             pane.rangeAnchor = pane.rangeAnchor?.let(::update)
@@ -1811,7 +2109,15 @@ constructor(
                                     }
                             }
                     }
-                    selected = selected.intersect(visibleEntries.map { it.path }.toSet())
+                    val visible = visibleEntries.map { it.path }.toSet()
+                    val saved = pendingTabRestore?.takeIf { it.first == tabs[activeTab].id }?.second
+                    if (saved != null) {
+                        selected = saved.selected.intersect(visible)
+                        leadSelection = saved.lead?.takeIf { it in visible }
+                        rangeAnchor = saved.anchor?.takeIf { it in visible }
+                        multiSelecting = saved.multiple && selected.isNotEmpty()
+                        pendingTabRestore = null
+                    } else selected = selected.intersect(visible)
                 }
                 .onFailure {
                     if (it is kotlinx.coroutines.CancellationException) throw it
@@ -2871,6 +3177,7 @@ constructor(
     }
 
     override fun onCleared() {
+        viewportReaders.clear()
         if (paneId == "primary") windowState.secondaryStore.clear()
         session.panes.remove(this)
         windowState.panes.remove(this)

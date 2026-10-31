@@ -218,6 +218,8 @@ fun FinderApp(
                         model.focused?.takeIf { it.folder }?.let { model.favoritePath(it.path) }
                     "tab" -> model.focused?.takeIf { it.folder }?.let { model.newTab(it.path) }
                     "transfers" -> dialog = "transfers"
+                    "tabs" -> dialog = "tabs"
+                    "workspaces" -> dialog = "workspaces"
                     "about" -> dialog = "about"
                     "filters" -> dialog = "filters"
                     "saveSearch" -> dialog = "saveSearch"
@@ -271,6 +273,12 @@ fun FinderApp(
                 model.quickLookRequested?.let {
                     showQuickLook(it)
                     model.quickLookRequested = null
+                }
+            }
+            LaunchedEffect(model.tabOverviewRequested) {
+                if (model.tabOverviewRequested) {
+                    model.tabOverviewRequested = false
+                    dialog = "tabs"
                 }
             }
             LaunchedEffect(model.contextRequested) {
@@ -376,7 +384,11 @@ fun FinderApp(
                                     "newTab" -> model.newTab(atEnd = true)
                                     "reopenTab" -> model.reopenTab()
                                     "closeTab" ->
-                                        if (model.tabs.size == 1) onCloseWindow()
+                                        if (
+                                            model.tabs.size == 1 &&
+                                                !model.tabs[model.activeTab].pinned
+                                        )
+                                            onCloseWindow()
                                         else model.closeTab(model.activeTab)
                                     "cycleTab" -> model.cycleTab(shortcut.amount)
                                     "selectTab" ->
@@ -583,6 +595,8 @@ fun FinderApp(
             }
 
             when (dialog) {
+                "tabs" -> TabOverviewDialog(model) { dialog = null }
+                "workspaces" -> SavedWorkspacesDialog(model) { dialog = null }
                 "shortcuts" -> ShortcutGuideDialog { dialog = null }
                 "comparePanes" ->
                     FolderComparisonDialog(
@@ -628,7 +642,7 @@ fun FinderApp(
                         model.query.ifBlank { "Smart Folder" },
                         "Save",
                         { dialog = null },
-                        {
+                        onConfirm = {
                             model.saveSmartFolder(it)
                             dialog = null
                         },
@@ -639,7 +653,7 @@ fun FinderApp(
                         model.title(),
                         "Rename",
                         { dialog = null },
-                        {
+                        onConfirm = {
                             model.renameSmartFolder(it)
                             dialog = null
                         },
@@ -712,7 +726,7 @@ fun FinderApp(
                         "Untitled.txt",
                         "Create",
                         { dialog = null },
-                        {
+                        onConfirm = {
                             model.createTextFile(it)
                             dialog = null
                         },
@@ -724,7 +738,7 @@ fun FinderApp(
                         "New folder",
                         "Create",
                         { dialog = null },
-                        {
+                        onConfirm = {
                             model.newFolderWithSelection(it)
                             dialog = null
                         },
@@ -1151,6 +1165,8 @@ internal fun ActionMenu(
         val entries = model.selectedEntries
         val idle = model.busy == null
         MenuAction("New window", Icons.AutoMirrored.Outlined.OpenInNew) { action("newWindow") }
+        MenuAction("Tab overview", Icons.Outlined.Tab) { action("tabs") }
+        MenuAction("Workspaces…", Icons.Outlined.DashboardCustomize) { action("workspaces") }
         MenuAction("Keyboard shortcuts", Icons.Outlined.Keyboard) { action("shortcuts") }
         MenuAction("Transfers", Icons.Outlined.SyncAlt) { action("transfers") }
         MenuAction(

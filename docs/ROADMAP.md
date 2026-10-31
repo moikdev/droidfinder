@@ -26,11 +26,11 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 ## 3. Tablet workspaces and navigation
 - [x] Two independently navigable, resizable panes with tabs, selection, history and search (0.8.0).
 - [x] Copy/move to other pane, native cross-pane dragging with Undo, pane swapping and recursive folder comparison (0.8.0). Comparison supports explicit top-level copying; deeper synchronization remains future work.
-- [ ] Per-tab scroll/focus/expansion restoration, pinned tabs, active-tab reveal and tab overview. Adjacent new-tab controls and active-tab reveal are implemented in 0.8.0; remaining restoration/overview work stays open.
-- [ ] Touch tab reorder, named workspaces and per-folder view/sort/group/column preferences.
+- [x] Per-tab scroll/focus/expansion restoration, pinned tabs, active-tab reveal and tab overview (0.9.0).
+- [ ] Touch tab reorder, named workspaces and per-folder view/sort/group/column preferences. Touch reorder and named layouts are implemented in 0.9.0; per-folder preferences remain open.
 
 ## 4. Performance and search
-- [ ] Progressive large-folder loading, bounded shared thumbnail caches and deduplicated work; invalidate thumbnails when provider names/types change while document URIs remain stable.
+- [ ] Progressive large-folder loading, bounded shared thumbnail caches and deduplicated work; invalidate thumbnails when provider names/types change while document URIs remain stable. Shared bounded caching, request deduplication/cancellation and name/type invalidation are implemented in 0.9.0; progressive loading remains open.
 - [ ] Cancellable verification/preview/search, measured startup/scroll/memory/battery benchmarks.
 - [ ] Optional local index scoped to chosen roots, filename/tag/metadata/document-content search.
 - [ ] Highlighted matches/snippets, scope/exclusions, suggestions/history and Smart Folder editor.

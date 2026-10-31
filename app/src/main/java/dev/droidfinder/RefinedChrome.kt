@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.ui.ExperimentalComposeUiApi::class)
+
 package dev.droidfinder
 
 import androidx.compose.foundation.background
@@ -94,10 +96,17 @@ fun RefinedToolbar(
                             .semantics { contentDescription = "Address bar" }
                             .focusRequester(addressFocus)
                             .onFocusChanged { onAddressFocused(it.isFocused) }
+                            // Hardware Enter must commit before an IME edits the selected path.
+                            .onPreInterceptKeyBeforeSoftKeyboard {
+                                if (it.key == Key.Enter || it.key == Key.NumPadEnter) {
+                                    if (it.type == KeyEventType.KeyDown) onAddressCommit()
+                                    true
+                                } else false
+                            }
                             .onPreviewKeyEvent {
                                 if (
                                     it.type == androidx.compose.ui.input.key.KeyEventType.KeyDown &&
-                                        it.key == androidx.compose.ui.input.key.Key.Enter
+                                        (it.key == Key.Enter || it.key == Key.NumPadEnter)
                                 ) {
                                     onAddressCommit()
                                     true

@@ -109,23 +109,21 @@ fun FileGlyph(entry: Entry, size: Dp = 44.dp, thumbnail: Boolean = true) {
     }
     val context = LocalContext.current
     val fileFamily = fileType(entry.extension, entry.mime).group
-    val bitmap by
-        produceState<Bitmap?>(null, entry.path, entry.modified, entry.size, entry.mime, thumbnail) {
-            if (thumbnail && fileFamily == FileTypeGroup.IMAGE)
-                value =
-                    withContext(Dispatchers.IO) {
-                        if (entry.documentUri != null)
-                            runCatching {
-                                context.contentResolver.loadThumbnail(
-                                    entry.documentUri,
-                                    android.util.Size(256, 256),
-                                    null,
-                                )
-                            }
-                                .getOrNull()
-                        else loadBitmap(entry.file, 256)
+    val bitmap =
+        if (thumbnail && fileFamily == FileTypeGroup.IMAGE) {
+            val request =
+                ThumbnailKey(entry.path, entry.name, entry.modified, entry.size, entry.mime)
+            key(request) {
+                val value by
+                    produceState<Bitmap?>(null, request) {
+                        value =
+                            (context.applicationContext as FinderApplication)
+                                .thumbnails
+                                .get(request)
                     }
-        }
+                value
+            }
+        } else null
     val image = bitmap
     if (image != null) {
         Image(
@@ -233,7 +231,13 @@ private fun DocumentGlyph(entry: Entry, size: Dp) {
     }
 }
 
-private fun loadBitmap(file: File, max: Int): Bitmap? = runCatching {
+internal fun loadBitmap(file: File, max: Int): Bitmap? = runCatching {
+    decodeBitmap(file, max)
+}
+    .getOrNull()
+
+/** The shared thumbnail owner handles allocation failures and evicts its own cache. */
+internal fun decodeBitmap(file: File, max: Int): Bitmap? {
     val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
     BitmapFactory.decodeFile(file.absolutePath, bounds)
     var sample = 1
@@ -242,9 +246,9 @@ private fun loadBitmap(file: File, max: Int): Bitmap? = runCatching {
         BitmapFactory.decodeFile(
             file.absolutePath,
             BitmapFactory.Options().apply { inSampleSize = sample },
-        ) ?: return@runCatching null
+        ) ?: return null
     val exif = runCatching { ExifInterface(file) }.getOrNull()
-    if (exif != null && (exif.rotationDegrees != 0 || exif.isFlipped)) {
+    return if (exif != null && (exif.rotationDegrees != 0 || exif.isFlipped)) {
         val matrix =
             Matrix().apply {
                 if (exif.isFlipped) postScale(-1f, 1f)
@@ -253,7 +257,6 @@ private fun loadBitmap(file: File, max: Int): Bitmap? = runCatching {
         Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     } else bitmap
 }
-    .getOrNull()
 
 private sealed interface Preview {
     data class Picture(val bitmap: Bitmap) : Preview

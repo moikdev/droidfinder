@@ -4,9 +4,11 @@ A native Android tablet file explorer inspired by macOS Finder. Kotlin, Jetpack 
 
 This is an independent implementation, not Apple source code or a macOS runtime. [Parity checklist and platform differences](PARITY.md).
 
-![DroidFinder tablet preview](docs/screenshots/workspace-landscape.png)
+![DroidFinder tablet preview](docs/screenshots/navigation-pinned.png)
 
-Actual optimized Android screenshot with synthetic QA documents. [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+Actual Android screenshot with synthetic QA documents. [Tab overview](docs/screenshots/navigation-overview.png) · [Saved layouts](docs/screenshots/navigation-workspaces.png). [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+
+**0.9.0:** Persistent per-tab selection/focus/expansion and scroll positions, protected pinned tabs, searchable tab overview with touch reorder, named two-pane layouts, and shared thumbnail caching. [Navigation and saved layouts](docs/NAVIGATION.md).
 
 **0.8.0:** Adjacent Chrome-style new-tab buttons, recognizable file-type icons, Windows Explorer keyboard controls and independent windows. Dual panes share transfers and recovery, support cross-pane copy/move, and offer recursive folder comparison with optional content verification. [Workflows and verification](docs/WORKSPACES.md). Earlier: [0.7.0 compact transfers and density](docs/TRANSFER-PLANNING.md), [0.6.0 folder merging](docs/FOLDER-MERGE.md).
 
@@ -16,7 +18,7 @@ Actual optimized Android screenshot with synthetic QA documents. [File icons](do
 
 ## Install or build
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.8.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.9.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -33,7 +35,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 
 | Area | Implementation |
 | --- | --- |
-| Browsing | Sidebar, favorites, shared storage, SD/USB volumes, provider locations, reorderable tabs with independent history/search, reopen closed tab, back/forward/up, clickable path bar, Go to Folder, reveal enclosing folder, independent dual panes with active-pane command routing |
+| Browsing | Sidebar, favorites, shared storage, SD/USB volumes, provider locations, pinned/reorderable tabs with independent history/search and restored selection/viewport, searchable tab overview, named layouts, reopen closed tab, back/forward/up, clickable path bar, Go to Folder, reveal enclosing folder, independent dual panes with active-pane command routing |
 | Views | Icons with adjustable size, sortable list with folder disclosure/expansion, browsing columns, gallery/filmstrip, resizable columns/preview/sidebar, adaptive toolbar, Comfortable/Compact density |
 | Selection/input | Tap/double-tap, touch multiple selection, Ctrl/Meta-click, Shift ranges, keyboard navigation, type-to-select, mouse context actions, rectangle selection, native dragging |
 | Organizing | Create folder/text file, New Folder with Selection, destination picker, rename, batch rename (replace/prefix/suffix/numbered format), duplicate, copy/cut/paste, copy/move to other pane, folder comparison with optional content verification |
@@ -45,7 +47,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | Archives/Trash | Named ZIP creation with compression levels, read-only archive browsing, extraction with path checks; recoverable Trash and restore, Undo, explicit confirmation for permanent deletion/emptying |
 | Transfers | Persistent copy/move queue, pause/resume/cancel, notification controls, per-file results/retry, reorder, foreground service, browsing during transfers, metadata estimates, capacity preflight, phase progress/ETA and explicit interruption review |
 | Conflicts | Compare incoming/existing items; keep both, skip, rename or replace with recoverable Undo/Redo; folder merging, nested member retries and apply-to-remaining choices |
-| Persistence | Tabs/current locations, view/sort/group settings, sizes, preview/hidden/extension preferences, theme, favorites, tags, Smart Folders, provider grants, folder appearance, Trash recovery metadata |
+| Persistence | Named two-pane layouts, per-tab selection/focus/expansion and scoped viewport positions, tabs/current locations, view/sort/group settings, sizes, preview/hidden/extension preferences, theme, favorites, tags, Smart Folders, provider grants, folder appearance, Trash recovery metadata |
 
 Mouse users can drag file icons. On touch, select items and hold the drag grip in the selection bar, then drop onto a folder, breadcrumb, sidebar location, or tab. Hold Ctrl when starting a drag to copy, Shift to move, or Alt / Ctrl+Shift to create an app shortcut. Files can also be dragged out to compatible Android apps; content-URI drops from other apps can be imported into writable folders.
 
@@ -124,9 +126,11 @@ The script validates preview/release version agreement, verifies the development
 - `DocumentAccess`: document-provider capabilities, grants, cross-storage IO, previews and recoverable provider Trash.
 - `TransferWorker`, `MergePlanner`, `TransferEstimate`, `SqliteTransferStore`: serialized jobs, safe folder merging, durable member plans and legacy migration.
 - `FinderSession`, `FinderModel`, `FinderApplication`, `TransferService`: shared operation state, independent pane navigation, app lifetime, queue/notification and recovery.
+- `NavigationState`, `SavedWorkspaces`, `WorkspaceDialogs`: bounded tab restoration, atomic named layouts and tab overview.
 - `FinderWorkspace`, `FolderComparison`, `FolderComparisonDialog`: resizable/adaptive panes and bounded, cancellable folder comparison.
 - `TagStore`, `FolderStyleStore`, `SearchRules`: persistent metadata, shortcuts, Smart Folder criteria and grouping.
 - `FinderApp`, `FinderViews`, `FinderDialogs`, `DesktopMenus`, `DesktopTabs`, `ArchiveDialogs`, `ViewModeSelector`, `TransferStrip`, `FinderDragDrop`, `MarqueeSelection`: tablet UI and pointer/keyboard workflows.
 - `ExplorerShortcuts`, `ShortcutGuideDialog`, `KeyboardScrolling`, `NavigationTree`: Windows controls, help, focus scrolling and folder disclosure.
+- `ThumbnailRepository`: shared 24 MiB image cache, deduplicated decoding and consumer-aware cancellation.
 - `FileType`, `FileVisuals`, `QuickLookMedia`: file graphics, MIME classification, previews, document/image zoom and media controls.
 - `MainActivity`: Android storage authorization, opening and sharing.

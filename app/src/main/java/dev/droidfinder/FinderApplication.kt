@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 /** Keeps the explorer and its active transfer alive when the Activity is recreated or closed. */
 class FinderApplication : Application(), ViewModelStoreOwner {
     override val viewModelStore = ViewModelStore()
+    internal val thumbnails by lazy { ThumbnailRepository(this) }
     internal val model: FinderModel by lazy {
         androidx.lifecycle
             .ViewModelProvider(
