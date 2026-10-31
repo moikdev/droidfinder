@@ -148,7 +148,8 @@ fun PeekOverlay(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        (if (entry.isPdfDocument) "PDF document" else entry.kind) +
+                        (if (entry.isPdfDocument) "PDF document"
+                        else entry.mediaKind?.replaceFirstChar { it.uppercase() } ?: entry.kind) +
                             if (entry.folder) "" else " · ${entry.displaySize}",
                         Modifier.weight(1f),
                         color = Muted,

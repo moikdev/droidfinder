@@ -272,7 +272,7 @@ private sealed interface Preview {
 
 @Composable
 fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean = false) {
-    if (large && !entry.isPdfDocument && entry.kind in listOf("Audio", "Video")) {
+    if (large && entry.mediaKind != null) {
         MediaQuickLook(entry, modifier)
         return
     }

@@ -9,6 +9,7 @@ import android.view.KeyEvent as AndroidKeyEvent
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import dev.droidfinder.testing.FixtureDocumentsProvider
 import java.io.File
 import org.junit.After
 import org.junit.Assert.*
@@ -171,12 +172,14 @@ class PeekWorkflowTest {
     }
 
     @Test
-    fun connectedProviderVideoPlaysDirectlyAndSpaceClosesAfterPlayback() {
+    fun providerVideoMimeWithoutExtensionPlaysDirectlyAndSpaceClosesAfterPlayback() {
         val provider =
             File(compose.activity.filesDir, "ProviderFixtures/Peek-${System.nanoTime()}").apply {
                 mkdirs()
             }
-        File(fixture, "C-film.mp4").copyTo(File(provider, "Provider-film.mp4"))
+        val film = File(provider, "Provider-film")
+        File(fixture, "C-film.mp4").copyTo(film)
+        FixtureDocumentsProvider.mimeOverrides = mapOf(film.canonicalPath to "video/mp4")
         val uri =
             DocumentsContract.buildTreeDocumentUri(
                 "dev.droidfinder.fixtures",
@@ -186,9 +189,9 @@ class PeekWorkflowTest {
             compose.runOnIdle { compose.activity.model.connectLocation(uri, false) }
             compose.waitUntil(10_000) {
                 !compose.activity.model.loading &&
-                    compose.activity.model.entries.any { it.name == "Provider-film.mp4" }
+                    compose.activity.model.entries.any { it.name == "Provider-film" }
             }
-            select("Provider-film.mp4")
+            select("Provider-film")
             openWithSpace()
             compose.waitUntil(15_000) {
                 compose
@@ -210,6 +213,7 @@ class PeekWorkflowTest {
                     .firstOrNull { it.name == provider.name }
                     ?.let { model.disconnectLocation(it.uri) }
             }
+            FixtureDocumentsProvider.mimeOverrides = emptyMap()
             provider.deleteRecursively()
         }
     }

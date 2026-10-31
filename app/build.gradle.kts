@@ -10,8 +10,8 @@ android {
         applicationId = "dev.droidfinder"
         minSdk = 30
         targetSdk = 36
-        versionCode = 13
-        versionName = "0.13.0"
+        versionCode = 14
+        versionName = "0.14.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
@@ -50,6 +50,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.6")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
+    implementation("androidx.media3:media3-exoplayer:1.11.1")
+    implementation("androidx.media3:media3-ui:1.11.1")
     implementation("androidx.exifinterface:exifinterface:1.3.7")
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
     // Keep the PDF reader's cryptographic dependencies aligned with the maintained release.
