@@ -20,6 +20,9 @@ data class PaneSnapshot(
     val iconSize: Int,
     val columnWidth: Int,
     val previewWidth: Int,
+    val columns: DetailColumns = DetailColumns(),
+    val fit: Boolean = false,
+    val defaults: FolderView? = null,
 ) {
     fun remap(routes: List<Pair<String, String>>) = copy(tabs = tabs.map { it.remap(routes) })
 }
@@ -135,6 +138,9 @@ class SavedWorkspaceStore(file: File) : WorkspacePersistence {
             .put("icons", p.iconSize)
             .put("column", p.columnWidth)
             .put("inspector", p.previewWidth)
+            .put("columns", FolderViewJson.columns(p.columns))
+            .put("fit", p.fit)
+            .put("defaults", p.defaults?.let(FolderViewJson::view))
 
     private fun pane(v: JSONObject): PaneSnapshot {
         val tabs = NavigationJson.tabs(v.optJSONArray("tabs"), "@recent")
@@ -153,6 +159,9 @@ class SavedWorkspaceStore(file: File) : WorkspacePersistence {
             v.optInt("icons", 120).coerceIn(90, 200),
             v.optInt("column", 240).coerceIn(150, 500),
             v.optInt("inspector", 280).coerceIn(200, 480),
+            FolderViewJson.columns(v.optJSONObject("columns")),
+            v.optBoolean("fit"),
+            v.optJSONObject("defaults")?.let(FolderViewJson::view),
         )
     }
 }

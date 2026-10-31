@@ -37,6 +37,7 @@ private fun finderColors(dark: Boolean) =
     if (dark)
         darkColorScheme(
             primary = Color(0xFF8DBBFF),
+            onPrimary = Color(0xFF12345A),
             primaryContainer = Color(0xFF304365),
             onPrimaryContainer = Color(0xFFB7CEFC),
             secondary = Color(0xFFB8BBC3),
@@ -220,6 +221,8 @@ fun FinderApp(
                     "transfers" -> dialog = "transfers"
                     "tabs" -> dialog = "tabs"
                     "workspaces" -> dialog = "workspaces"
+                    "viewSettings" -> dialog = "viewSettings"
+                    "folderViews" -> dialog = "folderViews"
                     "about" -> dialog = "about"
                     "filters" -> dialog = "filters"
                     "saveSearch" -> dialog = "saveSearch"
@@ -273,6 +276,12 @@ fun FinderApp(
                 model.quickLookRequested?.let {
                     showQuickLook(it)
                     model.quickLookRequested = null
+                }
+            }
+            LaunchedEffect(model.folderViewRequested) {
+                if (model.folderViewRequested) {
+                    model.folderViewRequested = false
+                    dialog = "viewSettings"
                 }
             }
             LaunchedEffect(model.tabOverviewRequested) {
@@ -595,6 +604,9 @@ fun FinderApp(
             }
 
             when (dialog) {
+                "viewSettings" ->
+                    FolderViewDialog(model, { dialog = "folderViews" }) { dialog = null }
+                "folderViews" -> FolderViewsManagerDialog(model) { dialog = null }
                 "tabs" -> TabOverviewDialog(model) { dialog = null }
                 "workspaces" -> SavedWorkspacesDialog(model) { dialog = null }
                 "shortcuts" -> ShortcutGuideDialog { dialog = null }
@@ -1166,6 +1178,7 @@ internal fun ActionMenu(
         val idle = model.busy == null
         MenuAction("New window", Icons.AutoMirrored.Outlined.OpenInNew) { action("newWindow") }
         MenuAction("Tab overview", Icons.Outlined.Tab) { action("tabs") }
+        MenuAction("Folder view settings…", Icons.Outlined.Tune) { action("viewSettings") }
         MenuAction("Workspaces…", Icons.Outlined.DashboardCustomize) { action("workspaces") }
         MenuAction("Keyboard shortcuts", Icons.Outlined.Keyboard) { action("shortcuts") }
         MenuAction("Transfers", Icons.Outlined.SyncAlt) { action("transfers") }

@@ -4,9 +4,11 @@ A native Android tablet file explorer inspired by macOS Finder. Kotlin, Jetpack 
 
 This is an independent implementation, not Apple source code or a macOS runtime. [Parity checklist and platform differences](PARITY.md).
 
-![DroidFinder tablet preview](docs/screenshots/navigation-pinned.png)
+![DroidFinder tablet preview](docs/screenshots/folder-views-workspace.png)
 
-Actual Android screenshot with synthetic QA documents. [Tab overview](docs/screenshots/navigation-overview.png) · [Saved layouts](docs/screenshots/navigation-workspaces.png). [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+Actual Android screenshot with synthetic QA documents. [Folder settings](docs/screenshots/folder-views-settings.png) · [Columns](docs/screenshots/folder-views-columns.png) · [Saved folders](docs/screenshots/folder-views-manager.png). [Tab overview](docs/screenshots/navigation-overview.png) · [Saved layouts](docs/screenshots/navigation-workspaces.png). [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+
+**0.10.0:** Remember views per folder across tabs, panes and windows, keep independent pane defaults, manage saved folder views, and customize detail columns with visibility controls, widths and native resizing. [Folder view workflows](docs/FOLDER-VIEWS.md).
 
 **0.9.0:** Persistent per-tab selection/focus/expansion and scroll positions, protected pinned tabs, searchable tab overview with touch reorder, named two-pane layouts, and shared thumbnail caching. [Navigation and saved layouts](docs/NAVIGATION.md).
 
@@ -18,7 +20,7 @@ Actual Android screenshot with synthetic QA documents. [Tab overview](docs/scree
 
 ## Install or build
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.9.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.10.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -36,11 +38,11 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | Area | Implementation |
 | --- | --- |
 | Browsing | Sidebar, favorites, shared storage, SD/USB volumes, provider locations, pinned/reorderable tabs with independent history/search and restored selection/viewport, searchable tab overview, named layouts, reopen closed tab, back/forward/up, clickable path bar, Go to Folder, reveal enclosing folder, independent dual panes with active-pane command routing |
-| Views | Icons with adjustable size, sortable list with folder disclosure/expansion, browsing columns, gallery/filmstrip, resizable columns/preview/sidebar, adaptive toolbar, Comfortable/Compact density |
+| Views | Remembered folder layouts, configurable detail-column visibility/widths and resizing, icons with adjustable size, sortable list with folder disclosure/expansion, browsing columns, gallery/filmstrip, resizable columns/preview/sidebar, adaptive toolbar, Comfortable/Compact density |
 | Selection/input | Tap/double-tap, touch multiple selection, Ctrl/Meta-click, Shift ranges, keyboard navigation, type-to-select, mouse context actions, rectangle selection, native dragging |
 | Organizing | Create folder/text file, New Folder with Selection, destination picker, rename, batch rename (replace/prefix/suffix/numbered format), duplicate, copy/cut/paste, copy/move to other pane, folder comparison with optional content verification |
 | Undo/Redo | Session history for create/copy/move/rename, batch rename, grouping, Trash/restore, archives, shortcuts, and tag edits; content fingerprints stop Undo from removing later edits |
-| Tags/appearance | Multiple named tags per item, custom tag colors/names, tag editing/deletion/filtering, custom folder color/symbol, persistent favorites and view preferences |
+| Tags/appearance | Multiple named tags per item, custom tag colors/names, tag editing/deletion/filtering, custom folder color/symbol, persistent favorites, per-folder views and pane defaults |
 | Search | Recursive names, kind/date/size/tag/text-content criteria, saved live Smart Folders, Recents, hidden files, groups by kind/date/tag/size |
 | Peek / Quick Look | Images with EXIF orientation, pinch/button zoom, all PDF pages with navigation/zoom, audio controls, video play/pause and seeking, text preview, folder counts/size and Get Info |
 | File integration | Android default apps/Open With, temporary read grants for sharing, full-path copy, inert `.finderlink` shortcuts |
@@ -126,6 +128,7 @@ The script validates preview/release version agreement, verifies the development
 - `DocumentAccess`: document-provider capabilities, grants, cross-storage IO, previews and recoverable provider Trash.
 - `TransferWorker`, `MergePlanner`, `TransferEstimate`, `SqliteTransferStore`: serialized jobs, safe folder merging, durable member plans and legacy migration.
 - `FinderSession`, `FinderModel`, `FinderApplication`, `TransferService`: shared operation state, independent pane navigation, app lifetime, queue/notification and recovery.
+- `FolderViews`, `FolderViewDialog`: atomic shared folder profiles, pane-default isolation, view settings and profile management.
 - `NavigationState`, `SavedWorkspaces`, `WorkspaceDialogs`: bounded tab restoration, atomic named layouts and tab overview.
 - `FinderWorkspace`, `FolderComparison`, `FolderComparisonDialog`: resizable/adaptive panes and bounded, cancellable folder comparison.
 - `TagStore`, `FolderStyleStore`, `SearchRules`: persistent metadata, shortcuts, Smart Folder criteria and grouping.

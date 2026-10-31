@@ -181,17 +181,32 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
         }
     BoxWithConstraints(Modifier.fillMaxSize().marqueeSelection(model, marquee, headerHeight)) {
         val namesOnly = model.windowsLayout == 5
+        val columns = model.detailColumns
         val roomy =
-            !namesOnly &&
-                (model.fitColumns || maxWidth > if (model.density.touch) 720.dp else 610.dp)
+            !columns.adaptive ||
+                model.fitColumns ||
+                maxWidth > if (model.density.touch) 720.dp else 610.dp
         val showDate =
             !namesOnly &&
-                (model.fitColumns || maxWidth > if (model.density.touch) 560.dp else 440.dp)
-        val dateWidth = if (model.fitColumns) measured.second else if (roomy) 150.dp else 125.dp
-        val kindWidth = if (model.fitColumns) measured.third else 110.dp
+                columns.date &&
+                (!columns.adaptive ||
+                    model.fitColumns ||
+                    maxWidth > if (model.density.touch) 560.dp else 440.dp)
+        val showSize = !namesOnly && columns.size
+        val showKind = !namesOnly && columns.kind && roomy
+        val dateWidth =
+            if (model.fitColumns) measured.second
+            else if (columns.adaptive && !roomy) minOf(columns.dateWidth.dp, 125.dp)
+            else columns.dateWidth.dp
+        val sizeWidth = columns.sizeWidth.dp
+        val kindWidth = if (model.fitColumns) measured.third else columns.kindWidth.dp
+        val fixed =
+            (if (showDate) dateWidth else 0.dp) +
+                (if (showSize) sizeWidth else 0.dp) +
+                (if (showKind) kindWidth else 0.dp)
         val tableWidth =
-            if (model.fitColumns)
-                maxOf(maxWidth, measured.first + dateWidth + kindWidth + 75.dp + 185.dp)
+            if (model.fitColumns || !columns.adaptive)
+                maxOf(maxWidth, fixed + (if (model.fitColumns) measured.first + 185.dp else 270.dp))
             else maxWidth
         Box(
             Modifier.horizontalScroll(rememberBrowserHorizontalState(model, "details-horizontal")),
@@ -206,14 +221,23 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                 ) {
                     SortHeader("Name", SortBy.NAME, model, Modifier.weight(1f))
                     if (showDate)
-                        SortHeader(
-                            "Date modified",
-                            SortBy.MODIFIED,
-                            model,
-                            Modifier.width(dateWidth),
-                        )
-                    if (!namesOnly) SortHeader("Size", SortBy.SIZE, model, Modifier.width(75.dp))
-                    if (roomy) SortHeader("Kind", SortBy.KIND, model, Modifier.width(kindWidth))
+                        DetailColumnHeader("Date modified", SortBy.MODIFIED, model, dateWidth) {
+                            model.changeDetailColumns(
+                                columns.copy(dateWidth = columns.dateWidth + it, adaptive = false),
+                            )
+                        }
+                    if (showSize)
+                        DetailColumnHeader("Size", SortBy.SIZE, model, sizeWidth) {
+                            model.changeDetailColumns(
+                                columns.copy(sizeWidth = columns.sizeWidth + it, adaptive = false),
+                            )
+                        }
+                    if (showKind)
+                        DetailColumnHeader("Kind", SortBy.KIND, model, kindWidth) {
+                            model.changeDetailColumns(
+                                columns.copy(kindWidth = columns.kindWidth + it, adaptive = false),
+                            )
+                        }
                     Spacer(Modifier.width(model.density.targetSize))
                 }
                 HorizontalDivider(color = Border, thickness = .5.dp)
@@ -287,23 +311,23 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                                 if (showDate)
                                     Text(
                                         formatDate(item.modified),
-                                        Modifier.width(dateWidth),
+                                        Modifier.width(dateWidth).padding(start = 14.dp),
                                         color = Muted,
                                         fontSize = 10.sp,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                     )
-                                if (!namesOnly)
+                                if (showSize)
                                     Text(
                                         item.displaySize,
-                                        Modifier.width(75.dp),
+                                        Modifier.width(sizeWidth).padding(start = 14.dp),
                                         color = Muted,
                                         fontSize = 10.sp,
                                     )
-                                if (roomy)
+                                if (showKind)
                                     Text(
                                         item.kind,
-                                        Modifier.width(kindWidth),
+                                        Modifier.width(kindWidth).padding(start = 14.dp),
                                         color = Muted,
                                         fontSize = 10.sp,
                                         maxLines = 1,
@@ -377,6 +401,35 @@ fun ContentListView(model: FinderModel, open: (Entry) -> Unit) {
 }
 
 @Composable
+private fun DetailColumnHeader(
+    title: String,
+    sort: SortBy,
+    model: FinderModel,
+    width: androidx.compose.ui.unit.Dp,
+    resize: (Int) -> Unit,
+) {
+    val scale = LocalDensity.current.density
+    Row(Modifier.width(width).fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
+        Box(
+            Modifier.width(14.dp)
+                .fillMaxHeight()
+                .semanticsLabel("Resize $title column")
+                .pointerHoverIcon(
+                    PointerIcon(android.view.PointerIcon.TYPE_HORIZONTAL_DOUBLE_ARROW),
+                )
+                .draggable(
+                    rememberDraggableState { resize((-it / scale).toInt()) },
+                    Orientation.Horizontal,
+                ),
+            contentAlignment = Alignment.Center,
+        ) {
+            Box(Modifier.width(1.dp).height(14.dp).background(Border))
+        }
+        SortHeader(title, sort, model, Modifier.weight(1f))
+    }
+}
+
+@Composable
 private fun SortHeader(title: String, sort: SortBy, model: FinderModel, modifier: Modifier) {
     Row(
         modifier.fillMaxHeight().clickable {
@@ -390,6 +443,9 @@ private fun SortHeader(title: String, sort: SortBy, model: FinderModel, modifier
             color = if (model.sort == sort) Ink else Muted,
             fontSize = 10.sp,
             fontWeight = FontWeight.Medium,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.weight(1f, fill = false),
         )
         if (model.sort == sort)
             Icon(

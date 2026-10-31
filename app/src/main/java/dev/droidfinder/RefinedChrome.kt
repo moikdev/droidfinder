@@ -371,6 +371,14 @@ private fun FinderSortMenu(model: FinderModel) {
             { sortMenu = true },
         )
         DropdownMenu(sortMenu, { sortMenu = false }) {
+            DropdownMenuItem(
+                text = { Text("Folder view settings…") },
+                onClick = {
+                    sortMenu = false
+                    model.folderViewRequested = true
+                },
+            )
+            HorizontalDivider()
             Text(
                 "SORT BY",
                 Modifier.padding(horizontal = 14.dp, vertical = 8.dp),

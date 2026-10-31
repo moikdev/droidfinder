@@ -29,18 +29,19 @@ import androidx.compose.ui.window.DialogProperties
 import kotlin.math.roundToInt
 
 @Composable
-private fun WorkspaceUtility(
+internal fun WorkspaceUtility(
     title: String,
     subtitle: String,
     tag: String,
     dismiss: () -> Unit,
+    width: androidx.compose.ui.unit.Dp = 620.dp,
     content: @Composable ColumnScope.(androidx.compose.ui.unit.Dp) -> Unit,
 ) {
     Dialog(dismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         BoxWithConstraints(Modifier.padding(24.dp)) {
             val limit = (maxHeight - 185.dp).coerceIn(100.dp, 480.dp)
             Surface(
-                Modifier.widthIn(max = 620.dp).fillMaxWidth().testTag(tag),
+                Modifier.widthIn(max = width).fillMaxWidth().testTag(tag),
                 shape = RoundedCornerShape(14.dp),
                 color = CanvasBackground,
                 shadowElevation = 16.dp,
@@ -64,6 +65,8 @@ private fun WorkspaceUtility(
                         Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
                         fontSize = 12.sp,
                         color = Muted,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
                     )
                     content(limit)
                 }

@@ -14,6 +14,8 @@ class FinderSession(
     private val app: Application,
     val workspaceStore: WorkspacePersistence =
         SavedWorkspaceStore(File(app.filesDir, "workspaces.json")),
+    folderViewPersistence: FolderViewPersistence =
+        FolderViewStore(File(app.filesDir, "folder-views.json")),
 ) {
     private val prefs = app.getSharedPreferences("finder", 0)
     internal val panes = mutableListOf<FinderModel>()
@@ -54,6 +56,7 @@ class FinderSession(
 
     val savedWorkspaces = mutableStateOf(workspaceStore.load())
     val workspaceError = mutableStateOf(workspaceStore.error)
+    val folderViews = FolderViews(folderViewPersistence)
     val workspaceMutex = Mutex()
     val workspaceWrites = androidx.compose.runtime.mutableIntStateOf(0)
 

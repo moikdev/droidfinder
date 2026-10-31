@@ -613,6 +613,20 @@ fun PreferencesDialog(model: FinderModel, dismiss: () -> Unit) {
                         }
                     }
                 Text("Views", fontWeight = FontWeight.SemiBold)
+                Text(
+                    if (model.folderRemembered) "Changes apply to this remembered folder"
+                    else "Changes update defaults for this pane",
+                    fontSize = 11.sp,
+                    color = Muted,
+                )
+                TextButton(
+                    onClick = {
+                        model.folderViewRequested = true
+                        dismiss()
+                    },
+                ) {
+                    Text("Folder view settings…")
+                }
                 Text("Icon size", fontSize = 12.sp, modifier = Modifier.padding(top = 12.dp))
                 Slider(
                     model.iconSize.toFloat(),

@@ -220,6 +220,9 @@ constructor(
             iconSize,
             columnWidth,
             previewWidth,
+            detailColumns,
+            fitColumns,
+            paneDefaults ?: currentFolderView(),
         )
     }
 
@@ -243,22 +246,9 @@ constructor(
         iconSize = saved.iconSize
         columnWidth = saved.columnWidth
         previewWidth = saved.previewWidth
-        fitColumns = false
-        panePrefs
-            .edit()
-            .putString("view", mode.name)
-            .putInt("windowsLayout", windowsLayout)
-            .putString("sort", sort.name)
-            .putBoolean("ascending", ascending)
-            .putString("group", grouping.name)
-            .putBoolean("hidden", showHidden)
-            .putBoolean("foldersFirst", foldersFirst)
-            .putBoolean("preview", previewVisible)
-            .putBoolean("previewDetailsOnly", previewDetailsOnly)
-            .putInt("iconSize", iconSize)
-            .putInt("columnWidth", columnWidth)
-            .putInt("previewWidth", previewWidth)
-            .apply()
+        detailColumns = saved.columns
+        fitColumns = saved.fit
+        persistPaneDefaults(saved.defaults ?: currentFolderView())
         restoreTabState()
         persistTabs()
     }
@@ -634,6 +624,7 @@ constructor(
         }
     }
 
+    private var paneDefaults: FolderView? = null
     private var pendingTabRestore: Pair<String, TabNavigation>? = null
     private var navigationSaveJob: Job? = null
     private var savingNavigation = false
@@ -641,7 +632,7 @@ constructor(
     var windowsLayout by mutableStateOf(panePrefs.getInt("windowsLayout", 0))
         private set
 
-    var fitColumns by mutableStateOf(false)
+    var fitColumns by mutableStateOf(panePrefs.getBoolean("fitColumns", false))
         private set
 
     var browserWidthDp = 0f
@@ -705,12 +696,13 @@ constructor(
                 },
             )
         fitColumns = false
-        panePrefs.edit().putInt("windowsLayout", number).apply()
+        persistViewChange()
     }
 
     fun fitColumnsToContents() {
         changeMode(ViewMode.LIST)
         fitColumns = true
+        persistViewChange()
     }
 
     fun toggleInspector(details: Boolean = false) {
@@ -721,11 +713,7 @@ constructor(
         previewVisible = !displayed
         inspectorRequested = !displayed
         previewDetailsOnly = details
-        panePrefs
-            .edit()
-            .putBoolean("preview", previewVisible)
-            .putBoolean("previewDetailsOnly", details)
-            .apply()
+        persistViewChange()
     }
 
     fun selectBoundary(last: Boolean, extend: Boolean) {
@@ -951,6 +939,15 @@ constructor(
     var foldersFirst by mutableStateOf(panePrefs.getBoolean("foldersFirst", true))
         private set
 
+    var detailColumns by
+        mutableStateOf(
+            runCatching {
+                    FolderViewJson.columns(JSONObject(panePrefs.getString("detailColumns", "{}")!!))
+                }
+                .getOrDefault(DetailColumns()),
+        )
+        private set
+
     var loading by mutableStateOf(false)
         private set
 
@@ -1099,6 +1096,7 @@ constructor(
         }
 
     init {
+        paneDefaults = currentFolderView()
         session.panes += this
         windowState.panes += this
         val marker = File(app.filesDir, "active-transfer.txt")
@@ -1214,24 +1212,156 @@ constructor(
         }
     }
 
+    var folderViewRequested by mutableStateOf(false)
+    val folderViews
+        get() = session.folderViews
+
+    val folderRemembered
+        get() = folderViewKey(location)?.let { it in folderViews.values } == true
+
+    internal fun currentFolderView() =
+        FolderView(
+            mode,
+            windowsLayout,
+            sort,
+            ascending,
+            grouping,
+            showHidden,
+            foldersFirst,
+            previewVisible,
+            previewDetailsOnly,
+            iconSize,
+            columnWidth,
+            previewWidth,
+            fitColumns,
+            detailColumns,
+        )
+
+    private fun persistPaneDefaults(value: FolderView) {
+        paneDefaults = value
+        panePrefs
+            .edit()
+            .putString("view", value.mode.name)
+            .putInt("windowsLayout", value.layout)
+            .putString("sort", value.sort.name)
+            .putBoolean("ascending", value.ascending)
+            .putString("group", value.group.name)
+            .putBoolean("hidden", value.hidden)
+            .putBoolean("foldersFirst", value.foldersFirst)
+            .putBoolean("preview", value.preview)
+            .putBoolean("previewDetailsOnly", value.details)
+            .putInt("iconSize", value.icons)
+            .putInt("columnWidth", value.column)
+            .putInt("previewWidth", value.inspector)
+            .putBoolean("fitColumns", value.fit)
+            .putString("detailColumns", FolderViewJson.columns(value.columns).toString())
+            .apply()
+    }
+
+    private fun applyFolderView(value: FolderView) {
+        mode = value.mode
+        windowsLayout = value.layout
+        sort = value.sort
+        ascending = value.ascending
+        grouping = value.group
+        showHidden = value.hidden
+        foldersFirst = value.foldersFirst
+        previewVisible = value.preview
+        previewDetailsOnly = value.details
+        iconSize = value.icons
+        columnWidth = value.column
+        previewWidth = value.inspector
+        fitColumns = value.fit
+        detailColumns = value.columns
+        inspectorRequested = false
+        if (mode != ViewMode.LIST) selected = selected.intersect(entries.map { it.path }.toSet())
+        entries = sorted(entries)
+    }
+
+    private fun applyLocationView() {
+        val saved = folderViewKey(location)?.let { folderViews.values[it] }
+        applyFolderView(saved ?: paneDefaults ?: currentFolderView())
+    }
+
+    private fun updateOtherFolderViews(key: String) {
+        session.panes
+            .filter { it !== this && folderViewKey(it.location) == key }
+            .forEach {
+                it.saveTabState()
+                val hidden = it.showHidden
+                it.applyLocationView()
+                if (hidden != it.showHidden) it.refresh()
+            }
+    }
+
+    private fun persistViewChange() {
+        val key = folderViewKey(location)
+        if (key != null && key in folderViews.values) {
+            if (!folderViews.put(key, currentFolderView())) message = folderViews.error
+            updateOtherFolderViews(key)
+        } else persistPaneDefaults(currentFolderView())
+    }
+
+    fun rememberFolderView(enabled: Boolean) {
+        val key = folderViewKey(location) ?: return
+        if (enabled) {
+            if (!folderViews.put(key, currentFolderView())) {
+                message = folderViews.error ?: "There are already 2,000 remembered folders."
+                return
+            }
+        } else {
+            if (folderViews.protectedFile) {
+                message = folderViews.error
+                return
+            }
+            folderViews.remove(key)
+            saveTabState()
+            val hidden = showHidden
+            applyLocationView()
+            if (hidden != showHidden) refresh()
+        }
+        updateOtherFolderViews(key)
+    }
+
+    fun forgetFolderView(path: String) {
+        val key = folderViewKey(path) ?: return
+        if (key == folderViewKey(location)) rememberFolderView(false)
+        else {
+            folderViews.remove(key)
+            updateOtherFolderViews(key)
+        }
+    }
+
+    fun useViewAsPaneDefaults() {
+        persistPaneDefaults(currentFolderView())
+        message = "View settings saved as defaults for this pane"
+    }
+
+    fun changeDetailColumns(value: DetailColumns) {
+        saveTabState()
+        detailColumns = value.normalized()
+        fitColumns = false
+        persistViewChange()
+    }
+
     fun changeGrouping(group: GroupBy) {
         grouping = group
-        panePrefs.edit().putString("group", group.name).apply()
+        persistViewChange()
     }
 
     fun changeIconSize(size: Int) {
         iconSize = size.coerceIn(90, 200)
-        panePrefs.edit().putInt("iconSize", iconSize).apply()
+        persistViewChange()
     }
 
     fun changeColumnWidth(size: Int) {
         columnWidth = size.coerceIn(150, 500)
-        panePrefs.edit().putInt("columnWidth", columnWidth).apply()
+        persistViewChange()
     }
 
     fun changePreviewWidth(size: Int) {
         previewWidth = size.coerceIn(200, 480)
-        panePrefs.edit().putInt("previewWidth", previewWidth).apply()
+        persistViewChange()
     }
 
     fun toggleExtensions() {
@@ -1358,6 +1488,7 @@ constructor(
 
     private fun restoreTabState() {
         val tab = tabs[activeTab]
+        applyLocationView()
         query = tab.search
         searchRules = tab.rules
         clearSelection()
@@ -1404,6 +1535,19 @@ constructor(
                     .takeIf { it.isNotEmpty() }
                     ?.let { " / " + it.replace("/", " / ") }
                     .orEmpty()
+        // Android can canonicalize /data/user/0 to /data/data. Compare canonical roots
+        // as a fallback so saved folder keys still receive familiar Workspace labels.
+        val canonical = runCatching { File(path).canonicalPath }.getOrDefault(path)
+        val aliasRoot =
+            (listOf(workspace, deviceRoot) + volumes)
+                .map { it to runCatching { it.canonicalPath }.getOrDefault(it.path) }
+                .filter { pathWithin(canonical, it.second) }
+                .maxByOrNull { it.second.length }
+        if (aliasRoot != null) {
+            val relative = canonical.removePrefix(aliasRoot.second).trimStart('/')
+            return title(aliasRoot.first.path) +
+                if (relative.isEmpty()) "" else " / " + relative.replace("/", " / ")
+        }
         return path
     }
 
@@ -1792,10 +1936,9 @@ constructor(
         saveTabState()
         fitColumns = false
         windowsLayout = 0
-        panePrefs.edit().putInt("windowsLayout", 0).apply()
         mode = value
         if (value != ViewMode.LIST) selected = selected.intersect(entries.map { it.path }.toSet())
-        panePrefs.edit().putString("view", value.name).apply()
+        persistViewChange()
     }
 
     fun changeSort(value: SortBy) {
@@ -1804,25 +1947,25 @@ constructor(
             sort = value
             ascending = true
         }
-        panePrefs.edit().putString("sort", sort.name).putBoolean("ascending", ascending).apply()
+        persistViewChange()
         entries = sorted(entries)
     }
 
     fun toggleHidden() {
         showHidden = !showHidden
-        panePrefs.edit().putBoolean("hidden", showHidden).apply()
+        persistViewChange()
         refresh()
     }
 
     fun togglePreview() {
         previewVisible = !previewVisible
         if (!previewVisible) inspectorRequested = false
-        panePrefs.edit().putBoolean("preview", previewVisible).apply()
+        persistViewChange()
     }
 
     fun toggleFoldersFirst() {
         foldersFirst = !foldersFirst
-        panePrefs.edit().putBoolean("foldersFirst", foldersFirst).apply()
+        persistViewChange()
         entries = sorted(entries)
     }
 
@@ -1928,6 +2071,7 @@ constructor(
         prefs.edit().putStringSet("favorites", favorites).apply()
         smartFolders = smartFolders.map { it.copy(root = update(it.root)) }
         persistSmartFolders()
+        folderViews.relocate(names)
         session.savedWorkspaces.value = savedWorkspaces.map { it.remap(names) }
         if (savedWorkspaces.isNotEmpty()) persistWorkspaces()
         session.panes.forEach { pane ->
@@ -1943,11 +2087,16 @@ constructor(
             pane.leadSelection = pane.leadSelection?.let(::update)
             pane.rangeAnchor = pane.rangeAnchor?.let(::update)
             pane.expandedFolders = pane.expandedFolders.map(::update).toSet()
+            val resolvedView =
+                folderViewKey(pane.location)?.let { folderViews.values[it] } ?: pane.paneDefaults
+            if (resolvedView != null && resolvedView != pane.currentFolderView())
+                pane.applyFolderView(resolvedView)
             pane.persistTabs()
         }
     }
 
     private fun copyTags(old: String, new: String) {
+        folderViews.relocate(listOf(old to new), copy = true)
         tagStore.relocate(listOf(old to new), copy = true)
         syncTags()
         styleStore.relocate(listOf(old to new), copy = true)
@@ -1955,6 +2104,7 @@ constructor(
     }
 
     private fun copyMetadataPaths(pairs: List<Pair<String, String>>) {
+        folderViews.relocate(pairs, copy = true)
         tagStore.relocate(pairs, copy = true)
         syncTags()
         styleStore.relocate(pairs, copy = true)

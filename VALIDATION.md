@@ -1,6 +1,6 @@
 # Tablet preview verification
 
-Latest: **0.9.0-preview — Navigation, saved layouts and shared thumbnails**. See [current workflows and validation](docs/NAVIGATION.md). [0.8.0 workspaces and desktop input](docs/WORKSPACES.md) is preserved. [0.7.0 compact transfers and density](docs/TRANSFER-PLANNING.md) is preserved. [0.6.0 folder merging](docs/FOLDER-MERGE.md), [0.5.0 transfer foundation](docs/TRANSFER-CENTER.md), [0.4.0 desktop workflows](docs/DESKTOP-WORKFLOWS.md) and [0.3.0 Refined Finder and Peek](docs/REFINED-FINDER.md) are preserved. The record below applies to the earlier 0.2.0 preview.
+Latest: **0.10.0-preview — Folder views and detail columns**. See [current workflows and validation](docs/FOLDER-VIEWS.md). [0.9.0 navigation and shared thumbnails](docs/NAVIGATION.md) is preserved. [0.8.0 workspaces and desktop input](docs/WORKSPACES.md) is preserved. [0.7.0 compact transfers and density](docs/TRANSFER-PLANNING.md) is preserved. [0.6.0 folder merging](docs/FOLDER-MERGE.md), [0.5.0 transfer foundation](docs/TRANSFER-CENTER.md), [0.4.0 desktop workflows](docs/DESKTOP-WORKFLOWS.md) and [0.3.0 Refined Finder and Peek](docs/REFINED-FINDER.md) are preserved. The record below applies to the earlier 0.2.0 preview.
 
 Version: **0.2.0-preview**. Verified locally on 2026-10-31 using a dedicated Android 16 / API 36 tablet emulator. These checks cover implemented Android workflows; they do not certify identical behavior to every macOS Finder service.
 

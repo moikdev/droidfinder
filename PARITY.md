@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -79,9 +79,16 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Named two-pane layouts with atomic storage, write-failure retry and mutation path remapping.
 - [x] Shared byte-budget thumbnail cache, deduplicated work, consumer-aware cancellation and provider name/type refresh.
 
+## Folder-view pass
+
+- [x] Opt-in folder layouts, independent pane defaults and shared updates across windows.
+- [x] Detail-column visibility, fixed/adaptive widths and native separator dragging.
+- [x] Profile management, atomic persistence/retry, canonical local keys and scoped provider keys.
+- [x] Workspace-default isolation and profile relocation/replacement recovery.
+
 ## Verification
 
-See [the current verification record](docs/NAVIGATION.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
+See [the current verification record](docs/FOLDER-VIEWS.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 
