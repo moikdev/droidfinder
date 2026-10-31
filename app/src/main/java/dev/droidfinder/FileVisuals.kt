@@ -231,7 +231,12 @@ fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean =
         return
     }
     if (entry.documentUri != null) {
-        ProviderPreview(entry, modifier, large)
+        val text =
+            entry.kind == "Text document" ||
+                entry.extension in listOf("yaml", "yml", "css", "js", "ts", "py", "sh", "toml")
+        if (entry.folder || entry.kind == "Image" || entry.extension == "pdf" || text)
+            ProviderPreview(entry, modifier, large)
+        else PreviewContent(entry.copy(documentUri = null), modifier, large)
         return
     }
     if (large && entry.extension == "pdf") {

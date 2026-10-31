@@ -4,15 +4,15 @@ A native Android tablet file explorer inspired by macOS Finder. Kotlin, Jetpack 
 
 This is an independent implementation, not Apple source code or a macOS runtime. [Parity checklist and platform differences](PARITY.md).
 
-![DroidFinder tablet preview](docs/screenshots/refined-landscape.png)
+![DroidFinder tablet preview](docs/screenshots/desktop-landscape.png)
 
-Actual Android screenshot with synthetic QA documents. [Portrait](docs/screenshots/refined-portrait.png) · [Compact window](docs/screenshots/refined-compact.png) · [Dark appearance](docs/screenshots/refined-dark.png)
+Actual Android screenshot with synthetic QA documents. [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png). [Portrait](docs/screenshots/desktop-portrait.png) · [Compact window](docs/screenshots/desktop-compact.png) · [Dark appearance](docs/screenshots/desktop-dark.png)
 
-**0.3.0:** Refined Finder design and keyboard-driven Peek. [What changed and verification](docs/REFINED-FINDER.md).
+**0.4.0:** Cursor menus, persistent desktop tabs, polished controls, named ZIP compression and archive browsing. [Workflows, verification, and limits](docs/DESKTOP-WORKFLOWS.md).
 
 ## Install or build
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.3.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.4.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -29,17 +29,17 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 
 | Area | Implementation |
 | --- | --- |
-| Browsing | Sidebar, favorites, shared storage, SD/USB volumes, provider locations, tabs with independent history, back/forward/up, clickable path bar, Go to Folder, reveal enclosing folder |
+| Browsing | Sidebar, favorites, shared storage, SD/USB volumes, provider locations, reorderable tabs with independent history/search, reopen closed tab, back/forward/up, clickable path bar, Go to Folder, reveal enclosing folder |
 | Views | Icons with adjustable size, sortable list with folder disclosure/expansion, browsing columns, gallery/filmstrip, resizable columns/preview/sidebar, compact toolbar |
 | Selection/input | Tap/double-tap, touch multiple selection, Ctrl/Meta-click, Shift ranges, keyboard navigation, type-to-select, mouse context actions, rectangle selection, native dragging |
-| Organizing | Create folder, New Folder with Selection, destination picker, rename, batch rename (replace/prefix/suffix/numbered format), duplicate, copy/cut/paste |
+| Organizing | Create folder/text file, New Folder with Selection, destination picker, rename, batch rename (replace/prefix/suffix/numbered format), duplicate, copy/cut/paste |
 | Undo/Redo | Session history for create/copy/move/rename, batch rename, grouping, Trash/restore, archives, shortcuts, and tag edits; content fingerprints stop Undo from removing later edits |
 | Tags/appearance | Multiple named tags per item, custom tag colors/names, tag editing/deletion/filtering, custom folder color/symbol, persistent favorites and view preferences |
 | Search | Recursive names, kind/date/size/tag/text-content criteria, saved live Smart Folders, Recents, hidden files, groups by kind/date/tag/size |
 | Peek / Quick Look | Images with EXIF orientation, pinch/button zoom, all PDF pages with navigation/zoom, audio controls, video play/pause and seeking, text preview, folder counts/size and Get Info |
 | File integration | Android default apps/Open With, temporary read grants for sharing, full-path copy, inert `.finderlink` shortcuts |
-| Archives/Trash | ZIP creation/extraction with path checks; recoverable Trash and restore, Undo, explicit confirmation for permanent deletion/emptying |
-| Transfers | Cross-provider/local copies and moves, byte/item progress, cancel, foreground service, activity-independent execution and an interruption journal |
+| Archives/Trash | Named ZIP creation with compression levels, read-only archive browsing, extraction with path checks; recoverable Trash and restore, Undo, explicit confirmation for permanent deletion/emptying |
+| Transfers | Cross-provider/local copies and moves, byte/item progress, cancel, foreground service, activity-independent execution, browsing during transfers, and an interruption journal |
 | Persistence | Tabs/current locations, view/sort/group settings, sizes, preview/hidden/extension preferences, theme, favorites, tags, Smart Folders, provider grants, folder appearance, Trash recovery metadata |
 
 Mouse users can drag file icons. On touch, select items and hold the drag grip in the selection bar, then drop onto a folder, breadcrumb, sidebar location, or tab. Hold Ctrl/Alt when starting a drag to copy. Files can also be dragged out to compatible Android apps; content-URI drops from other apps can be imported into writable folders.
@@ -49,7 +49,10 @@ Mouse users can drag file icons. On touch, select items and hold the drag grip i
 | Shortcut | Action |
 | --- | --- |
 | Ctrl/Meta F, L | Search; Go to Folder |
-| Ctrl/Meta T, W | New tab; close tab |
+| Ctrl/Meta T, W, Shift T | New tab; close tab; reopen closed tab |
+| Ctrl Tab / Shift Tab; Ctrl Page Up/Down | Next/previous tab |
+| Ctrl/Meta 1–4; R | Icons/list/columns/gallery; refresh |
+| Shift F10 | File or background context menu |
 | Ctrl/Meta N / Shift N | New folder |
 | Ctrl/Meta A, C, X, V, D | Select all; copy; cut; paste; duplicate |
 | Ctrl/Meta Z, Shift Z / Ctrl Y | Undo; Redo |
@@ -92,10 +95,10 @@ GitHub Actions is configured to run unit tests, lint and an optimized unsigned r
 
 ## Code map
 
-- `FileEngine`, `FileHistory`, `BatchRename`, `TransferControl`: safe local operations, session command history, name planning, cancellation/progress.
+- `FileEngine`, `ZipArchive`, `FileHistory`, `BatchRename`, `TransferControl`: safe local operations, session command history, name planning, cancellation/progress.
 - `DocumentAccess`: document-provider capabilities, grants, cross-storage IO, previews and recoverable provider Trash.
 - `FinderModel`, `FinderApplication`, `TransferService`: navigation/state, app lifetime, transfer execution/notification and recovery.
 - `TagStore`, `FolderStyleStore`, `SearchRules`: persistent metadata, shortcuts, Smart Folder criteria and grouping.
-- `FinderApp`, `FinderViews`, `FinderDialogs`, `FinderDragDrop`, `MarqueeSelection`: tablet UI and pointer/keyboard workflows.
+- `FinderApp`, `FinderViews`, `FinderDialogs`, `DesktopMenus`, `DesktopTabs`, `ArchiveDialogs`, `ViewModeSelector`, `TransferStrip`, `FinderDragDrop`, `MarqueeSelection`: tablet UI and pointer/keyboard workflows.
 - `FileVisuals`, `QuickLookMedia`: file graphics, previews, document/image zoom and media controls.
 - `MainActivity`: Android storage authorization, opening and sharing.

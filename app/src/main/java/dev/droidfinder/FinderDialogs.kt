@@ -268,6 +268,8 @@ fun DestinationDialog(
     move: Boolean,
     archive: Boolean = false,
     extract: Boolean = false,
+    archiveName: String? = null,
+    compressionLevel: Int = -1,
     dismiss: () -> Unit,
 ) {
     val paths = remember { model.selectedEntries.map { it.path } }
@@ -317,6 +319,15 @@ fun DestinationDialog(
                     model.connectedLocations.forEach { root ->
                         AssistChip(onClick = { folder = root.uri }, label = { Text(root.name) })
                     }
+                    model.tabs
+                        .mapNotNull { it.location.takeUnless { path -> path.startsWith("@") } }
+                        .distinct()
+                        .forEach { path ->
+                            AssistChip(
+                                onClick = { folder = path },
+                                label = { Text("Tab: ${model.title(path)}") },
+                            )
+                        }
                     model.favorites.forEach { path ->
                         AssistChip(onClick = { folder = path }, label = { Text(model.title(path)) })
                     }
@@ -358,7 +369,7 @@ fun DestinationDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    if (archive) model.compressTo(folder)
+                    if (archive) model.compressTo(folder, archiveName, compressionLevel)
                     else if (extract) model.extractTo(folder)
                     else model.transferPaths(paths, folder, move)
                     dismiss()
@@ -681,8 +692,12 @@ private fun PreferenceSwitch(label: String, checked: Boolean, toggle: () -> Unit
 }
 
 @Composable
-fun SelectionInfoDialog(model: FinderModel, dismiss: () -> Unit) {
-    val items = remember { model.actionEntries }
+fun SelectionInfoDialog(
+    model: FinderModel,
+    entries: List<Entry> = model.actionEntries,
+    dismiss: () -> Unit,
+) {
+    val items = remember { entries }
     val total by
         produceState<Pair<Long, Boolean>?>(null) {
             value =
@@ -705,7 +720,7 @@ fun SelectionInfoDialog(model: FinderModel, dismiss: () -> Unit) {
         }
     AlertDialog(
         onDismissRequest = dismiss,
-        title = { Text("Get info · ${model.selected.size} selected") },
+        title = { Text("Get info · ${items.size} selected") },
         text = {
             Column(Modifier.heightIn(max = 440.dp).verticalScroll(rememberScrollState())) {
                 items.take(20).forEach { entry ->

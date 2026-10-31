@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest UI pass: [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Desktop workflows and refined controls, 0.4.0](docs/DESKTOP-WORKFLOWS.md). Earlier: [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -31,11 +31,19 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Favorites/sidebar management, aliases as portable app shortcuts, folder appearance.
 - [x] Preference controls, folder information, display/extension options, dark theme.
 - [x] Expanded safety and workflow tests, tablet landscape/portrait/small-window checks.
-- [x] GitHub source, build instructions, [installable preview release](https://github.com/moikdev/droidfinder/releases/tag/v0.2.0-preview) and final verification.
+- [x] GitHub source, build instructions, [installable preview release](https://github.com/moikdev/droidfinder/releases/tag/v0.4.0-preview) and final verification.
+
+## Desktop workflow pass
+
+- [x] Cursor-positioned file/folder/background menus across all four views; touch action buttons and keyboard equivalents.
+- [x] Permanent tabs, mouse reordering, middle-click, duplicate/close-others/reopen, persisted per-tab history/search.
+- [x] Consistent view-selector icons, inset selected surface, hover states and non-interactive tooltips.
+- [x] Named ZIP archives, compression levels, destination selection, safe read-only archive browsing.
+- [x] Keep browsing, switching tabs, selecting, copying paths/items and previewing during a transfer.
 
 ## Verification
 
-See [VALIDATION.md](VALIDATION.md) for the 40 engine tests, 26 Android workflow tests, native integration checks, screenshots, optimized APK verification, and remaining device/provider coverage. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. This checklist closes the implemented tablet workflow scope; the platform boundaries below remain explicit.
+See [the current verification record](docs/DESKTOP-WORKFLOWS.md) for the 48 JVM tests, 42 Android workflow tests, screenshots, optimized APK checks, and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. This checklist closes the implemented tablet workflow scope; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 

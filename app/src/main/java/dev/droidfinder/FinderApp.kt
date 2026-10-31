@@ -7,9 +7,8 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -28,6 +27,7 @@ import androidx.compose.ui.input.key.*
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -109,7 +109,15 @@ fun FinderApp(
             var quickLookCandidates by remember { mutableStateOf<List<Entry>>(emptyList()) }
             var peekMultipleSelection by remember { mutableStateOf(false) }
             var menu by remember { mutableStateOf(false) }
-            var searchActive by remember { mutableStateOf(false) }
+            var cursorMenu by remember { mutableStateOf<FinderContextRequest?>(null) }
+            var archiveEntry by remember { mutableStateOf<Entry?>(null) }
+            var infoEntries by remember { mutableStateOf<List<Entry>>(emptyList()) }
+            var archiveName by remember { mutableStateOf<String?>(null) }
+            var archiveLevel by remember { mutableIntStateOf(-1) }
+            var searchActive by
+                remember(model.tabs[model.activeTab].id) {
+                    mutableStateOf(model.query.isNotEmpty())
+                }
             var searchFocused by remember { mutableStateOf(false) }
             val searchFocus = remember { FocusRequester() }
             val rootFocus = remember { FocusRequester() }
@@ -122,7 +130,12 @@ fun FinderApp(
                     model.followShortcut(entry) { target ->
                         if (target.folder) model.navigate(target.path) else onOpen(target)
                     }
-                else if (entry.folder) model.navigate(entry.path) else onOpen(entry)
+                else if (!entry.folder && entry.extension == "zip") {
+                    model.clearSelection()
+                    model.select(entry)
+                    archiveEntry = entry
+                    dialog = "archive"
+                } else if (entry.folder) model.navigate(entry.path) else onOpen(entry)
             }
             val showQuickLook: (Entry) -> Unit = { entry ->
                 val show: (Entry) -> Unit = { resolved ->
@@ -139,6 +152,10 @@ fun FinderApp(
             }
             LaunchedEffect(quickLook) {
                 if (quickLook == null && !searchActive) rootFocus.requestFocus()
+            }
+            LaunchedEffect(dialog, cursorMenu) {
+                if (dialog == null && cursorMenu == null && quickLook == null && !searchActive)
+                    rootFocus.requestFocus()
             }
             val action: (String) -> Unit = { command ->
                 menu = false
@@ -163,11 +180,16 @@ fun FinderApp(
                     "redo" -> model.redo()
                     "delete" -> dialog = "delete"
                     "empty" -> dialog = "empty"
-                    "compress" ->
-                        if (model.folderPath == null) dialog = "compressTo" else model.compress()
+                    "compress" -> dialog = "compress"
+                    "extractTo" -> dialog = "extractTo"
+                    "newText" -> dialog = "newText"
+                    "folderInfo" -> dialog = "folderInfo"
                     "extract" -> if (!model.canCreate) dialog = "extractTo" else model.extract()
                     "share" -> onShare(selected)
-                    "info" -> if (model.focused != null) dialog = "info"
+                    "info" -> {
+                        infoEntries = model.actionEntries
+                        if (infoEntries.isNotEmpty()) dialog = "info"
+                    }
                     "path" -> dialog = "path"
                     "copyPath" -> {
                         model.focused?.let { clipboard.setText(AnnotatedString(it.path)) }
@@ -201,7 +223,9 @@ fun FinderApp(
                     if (model.message == text) model.message = null
                 }
             }
-            LaunchedEffect(searchActive) { if (searchActive) searchFocus.requestFocus() }
+            LaunchedEffect(searchActive, model.tabs[model.activeTab].id) {
+                if (searchActive) searchFocus.requestFocus() else rootFocus.requestFocus()
+            }
             LaunchedEffect(Unit) { rootFocus.requestFocus() }
             LaunchedEffect(model.interruptedTransfer) {
                 if (model.interruptedTransfer != null) dialog = "recovery"
@@ -214,7 +238,7 @@ fun FinderApp(
             }
             LaunchedEffect(model.contextRequested) {
                 if (model.contextRequested != null) {
-                    menu = true
+                    cursorMenu = model.contextRequested
                     model.contextRequested = null
                 }
             }
@@ -239,7 +263,8 @@ fun FinderApp(
                         if (
                             event.type != KeyEventType.KeyDown ||
                                 dialog != null ||
-                                model.busy != null
+                                (model.busy != null &&
+                                    !browseKeyDuringTransfer(event, searchFocused))
                         )
                             false
                         else if (event.key == Key.Spacebar && event.nativeKeyEvent.repeatCount > 0)
@@ -255,8 +280,42 @@ fun FinderApp(
                                     true
                                 }
                                 Key.T -> {
-                                    model.newTab()
+                                    if (event.isShiftPressed) model.reopenTab() else model.newTab()
                                     true
+                                }
+                                Key.Tab -> {
+                                    model.cycleTab(if (event.isShiftPressed) -1 else 1)
+                                    true
+                                }
+                                Key.PageUp -> {
+                                    model.cycleTab(-1)
+                                    true
+                                }
+                                Key.PageDown -> {
+                                    model.cycleTab(1)
+                                    true
+                                }
+                                Key.One,
+                                Key.Two,
+                                Key.Three,
+                                Key.Four -> {
+                                    if (!searchFocused) {
+                                        model.changeMode(
+                                            when (event.key) {
+                                                Key.One -> ViewMode.ICONS
+                                                Key.Two -> ViewMode.LIST
+                                                Key.Three -> ViewMode.COLUMNS
+                                                else -> ViewMode.GALLERY
+                                            },
+                                        )
+                                        true
+                                    } else false
+                                }
+                                Key.R -> {
+                                    if (!searchFocused) {
+                                        model.refresh()
+                                        true
+                                    } else false
                                 }
                                 Key.W -> {
                                     model.closeTab(model.activeTab)
@@ -318,7 +377,7 @@ fun FinderApp(
                                         true
                                     } else false
                                 Key.I -> {
-                                    if (model.focused != null) dialog = "info"
+                                    action("info")
                                     true
                                 }
                                 Key.Period -> {
@@ -353,6 +412,13 @@ fun FinderApp(
                                 Key.Enter -> {
                                     model.focused?.let(open)
                                     true
+                                }
+                                Key.F10 -> {
+                                    if (event.isShiftPressed) {
+                                        model.focused?.let { model.requestContext(it) }
+                                            ?: model.requestBackgroundContext()
+                                        true
+                                    } else false
                                 }
                                 Key.F2 -> {
                                     if (selected.isNotEmpty() && !model.isTrash)
@@ -453,7 +519,7 @@ fun FinderApp(
                             menuExpanded = menu,
                             onMenuChange = { menu = it },
                         )
-                        if (model.tabs.size > 1) TabStrip(model)
+                        DesktopTabStrip(model)
                         Box(
                             Modifier.weight(1f)
                                 .fillMaxWidth()
@@ -471,6 +537,8 @@ fun FinderApp(
                                 Box(
                                     Modifier.weight(1f)
                                         .fillMaxHeight()
+                                        .testTag("file-browser")
+                                        .folderContextMenu(model)
                                         .folderDropTarget(model, model.folderPath),
                                 ) {
                                     when {
@@ -518,7 +586,11 @@ fun FinderApp(
                                                         "Items you move to Trash will appear here."
                                                     else
                                                         "Create a folder or paste files to get started.",
-                                                    if (model.canCreate && model.query.isEmpty())
+                                                    if (
+                                                        model.canCreate &&
+                                                            model.busy == null &&
+                                                            model.query.isEmpty()
+                                                    )
                                                         "New folder"
                                                     else null,
                                                     { action("new") },
@@ -527,11 +599,7 @@ fun FinderApp(
                                         model.mode == ViewMode.ICONS -> IconView(model, open)
                                         model.mode == ViewMode.LIST ->
                                             ListView(model, open) { entry ->
-                                                if (entry.path !in model.selected) {
-                                                    model.clearSelection()
-                                                    model.select(entry)
-                                                }
-                                                menu = true
+                                                model.requestContext(entry)
                                             }
                                         model.mode == ViewMode.COLUMNS -> ColumnsView(model, open)
                                         model.mode == ViewMode.GALLERY -> GalleryView(model, open)
@@ -564,54 +632,15 @@ fun FinderApp(
                                     )
                                 }
                             }
-                            if (model.busy != null)
-                                Box(
-                                    Modifier.fillMaxSize()
-                                        .background(CanvasBackground.copy(alpha = .9f))
-                                        .clickable(
-                                            interactionSource =
-                                                remember { MutableInteractionSource() },
-                                            indication = null,
-                                        ) {},
-                                    contentAlignment = Alignment.Center,
-                                ) {
-                                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        CircularProgressIndicator(
-                                            Modifier.size(30.dp),
-                                            strokeWidth = 2.dp,
-                                        )
-                                        Text(
-                                            model.busy!!,
-                                            Modifier.padding(top = 18.dp),
-                                            color = Ink,
-                                            fontSize = 14.sp,
-                                        )
-                                        Text(
-                                            "${model.transferProgress.items} items · ${formatSize(model.transferProgress.bytes)}",
-                                            Modifier.padding(top = 7.dp),
-                                            color = Muted,
-                                            fontSize = 11.sp,
-                                        )
-                                        Text(
-                                            model.transferProgress.current,
-                                            Modifier.padding(top = 6.dp).widthIn(max = 320.dp),
-                                            color = Muted,
-                                            fontSize = 11.sp,
-                                            maxLines = 1,
-                                            overflow = TextOverflow.Ellipsis,
-                                        )
-                                        TextButton(onClick = model::cancelTransfer) {
-                                            Text("Cancel transfer")
-                                        }
-                                    }
-                                }
                         }
+                        if (model.busy != null) TransferStrip(model)
                         PathBar(model) { action("path") }
                     }
                 }
                 SnackbarHost(
                     snackbar,
-                    Modifier.align(Alignment.BottomCenter).padding(bottom = 58.dp),
+                    Modifier.align(Alignment.BottomCenter)
+                        .padding(bottom = if (model.busy != null) 100.dp else 58.dp),
                 )
             }
 
@@ -671,7 +700,76 @@ fun FinderApp(
                 "tags" -> TagManagerDialog(model) { dialog = null }
                 "copyTo",
                 "moveTo" -> DestinationDialog(model, dialog == "moveTo") { dialog = null }
-                "compressTo" -> DestinationDialog(model, false, archive = true) { dialog = null }
+                "compress" ->
+                    CompressDialog(model, { dialog = null }) { name, level, choose ->
+                        archiveName = name
+                        archiveLevel = level
+                        if (choose) dialog = "compressTo"
+                        else {
+                            model.compress(name, level)
+                            dialog = null
+                        }
+                    }
+                "compressTo" ->
+                    DestinationDialog(
+                        model,
+                        false,
+                        archive = true,
+                        archiveName = archiveName,
+                        compressionLevel = archiveLevel,
+                    ) {
+                        dialog = null
+                    }
+                "archive" ->
+                    archiveEntry?.let { entry ->
+                        ArchiveBrowserDialog(
+                            model,
+                            entry,
+                            { dialog = null },
+                            { choose ->
+                                model.clearSelection()
+                                model.select(entry)
+                                if (choose || !model.canCreate) dialog = "extractTo"
+                                else {
+                                    model.extract()
+                                    dialog = null
+                                }
+                            },
+                            { onOpenWith(entry) },
+                        )
+                    }
+                "folderInfo" ->
+                    model.folderInfo?.let { entry ->
+                        AlertDialog(
+                            onDismissRequest = { dialog = null },
+                            title = { Text("Folder info") },
+                            text = {
+                                Column(
+                                    Modifier.widthIn(min = 300.dp)
+                                        .heightIn(max = 480.dp)
+                                        .verticalScroll(rememberScrollState()),
+                                ) {
+                                    Metadata(entry, model)
+                                    Text("Full path", color = Muted, fontSize = 11.sp)
+                                    Text(entry.path, fontSize = 12.sp)
+                                }
+                            },
+                            confirmButton = {
+                                TextButton(onClick = { dialog = null }) { Text("Done") }
+                            },
+                        )
+                    }
+                "newText" ->
+                    NameDialog(
+                        "New text file",
+                        "Untitled.txt",
+                        "Create",
+                        { dialog = null },
+                        {
+                            model.createTextFile(it)
+                            dialog = null
+                        },
+                    )
                 "extractTo" -> DestinationDialog(model, false, extract = true) { dialog = null }
                 "groupSelection" ->
                     NameDialog(
@@ -742,9 +840,10 @@ fun FinderApp(
                         },
                     )
                 "info" ->
-                    if (selected.size > 1) SelectionInfoDialog(model) { dialog = null }
+                    if (infoEntries.size > 1)
+                        SelectionInfoDialog(model, entries = infoEntries) { dialog = null }
                     else
-                        model.focused?.let { entry ->
+                        infoEntries.singleOrNull()?.let { entry ->
                             AlertDialog(
                                 onDismissRequest = { dialog = null },
                                 title = { Text("Get info") },
@@ -768,7 +867,7 @@ fun FinderApp(
                         text = {
                             Column {
                                 Text(
-                                    "DroidFinder 0.2 · Tablet edition",
+                                    "DroidFinder 0.4 · Tablet edition",
                                     fontWeight = FontWeight.SemiBold,
                                 )
                                 Spacer(Modifier.height(12.dp))
@@ -788,6 +887,9 @@ fun FinderApp(
                             TextButton(onClick = { dialog = null }) { Text("Done") }
                         },
                     )
+            }
+            cursorMenu?.let { request ->
+                FileContextMenu(request, model, action) { cursorMenu = null }
             }
             quickLook?.let { entry ->
                 PeekOverlay(
@@ -1041,6 +1143,7 @@ private fun SidebarItem(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToolButton(
     icon: ImageVector,
@@ -1050,82 +1153,35 @@ fun ToolButton(
     active: Boolean = false,
     compact: Boolean = false,
 ) {
-    IconButton(
-        onClick = onClick,
-        enabled = enabled,
-        modifier =
-            Modifier.size(if (compact) 34.dp else 38.dp)
-                .clip(RoundedCornerShape(5.dp))
-                .background(if (active) SelectionSurface else Color.Transparent),
+    val interaction = remember { MutableInteractionSource() }
+    val hovered by interaction.collectIsHoveredAsState()
+    TooltipBox(
+        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+        tooltip = { PlainTooltip { Text(label) } },
+        state = rememberTooltipState(),
+        focusable = false,
     ) {
-        Icon(
-            icon,
-            label,
-            Modifier.size(if (compact) 19.dp else 20.dp),
-            tint = if (!enabled) Muted.copy(alpha = .35f) else if (active) SelectedInk else Muted,
-        )
-    }
-}
-
-@Composable
-private fun TabStrip(model: FinderModel) {
-    Row(
-        Modifier.fillMaxWidth().height(35.dp).background(Sidebar),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Row(Modifier.weight(1f).horizontalScroll(rememberScrollState())) {
-            model.tabs.forEachIndexed { index, tab ->
-                Column(
-                    Modifier.folderDropTarget(model, tab.location)
-                        .widthIn(min = 120.dp, max = 200.dp)
-                        .fillMaxHeight()
-                        .background(
-                            if (index == model.activeTab) CanvasBackground else Color.Transparent,
-                        )
-                        .clickable { model.switchTab(index) },
-                ) {
-                    Row(
-                        Modifier.weight(1f).padding(start = 13.dp, end = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            if (tab.location.startsWith("@")) Icons.Outlined.FolderSpecial
-                            else Icons.Outlined.FolderOpen,
-                            null,
-                            Modifier.size(13.dp),
-                            tint = if (index == model.activeTab) Blue else Muted,
-                        )
-                        Text(
-                            model.title(tab.location),
-                            Modifier.widthIn(max = 120.dp).padding(start = 6.dp, end = 12.dp),
-                            fontSize = 10.sp,
-                            color = if (index == model.activeTab) Ink else Muted,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                        if (model.tabs.size > 1)
-                            IconButton(
-                                onClick = { model.closeTab(index) },
-                                modifier = Modifier.size(26.dp),
-                            ) {
-                                Icon(
-                                    Icons.Outlined.Close,
-                                    "Close ${model.title(tab.location)} tab",
-                                    Modifier.size(12.dp),
-                                    tint = Muted,
-                                )
-                            }
-                    }
-                    Box(
-                        Modifier.fillMaxWidth()
-                            .height(2.dp)
-                            .background(if (index == model.activeTab) Blue else Color.Transparent),
-                    )
-                }
-                VerticalDivider(color = Border)
-            }
+        IconButton(
+            onClick = onClick,
+            enabled = enabled,
+            interactionSource = interaction,
+            modifier =
+                Modifier.size(if (compact) 34.dp else 38.dp)
+                    .clip(RoundedCornerShape(6.dp))
+                    .hoverable(interaction)
+                    .background(
+                        if (active) SelectionSurface
+                        else if (hovered && enabled) ToolbarSurface else Color.Transparent,
+                    ),
+        ) {
+            Icon(
+                icon,
+                label,
+                Modifier.size(if (compact) 18.dp else 20.dp),
+                tint =
+                    if (!enabled) Muted.copy(alpha = .35f) else if (active) SelectedInk else Muted,
+            )
         }
-        ToolButton(Icons.Outlined.Add, "New tab", { model.newTab() }, compact = true)
     }
 }
 
@@ -1147,11 +1203,16 @@ internal fun ActionMenu(
                 action("redo")
             }
         MenuAction("New tab", Icons.Outlined.AddBox) { action("newTab") }
+        MenuAction("Reopen closed tab", Icons.Outlined.Restore, model.canReopenTab) {
+            model.reopenTab()
+            onDismiss()
+        }
+        MenuAction("New folder", Icons.Outlined.CreateNewFolder, model.canCreate) { action("new") }
+        MenuAction("New text file…", Icons.AutoMirrored.Outlined.NoteAdd, model.canCreate) {
+            action("newText")
+        }
         if (entries.isEmpty()) {
 
-            MenuAction("New folder", Icons.Outlined.CreateNewFolder, model.canCreate) {
-                action("new")
-            }
             MenuAction(
                 "Paste",
                 Icons.Outlined.ContentPaste,

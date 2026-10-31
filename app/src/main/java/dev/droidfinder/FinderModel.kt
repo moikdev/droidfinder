@@ -10,6 +10,7 @@ import android.webkit.MimeTypeMap
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import java.io.File
@@ -105,10 +106,24 @@ data class Entry(
                 ?: "application/octet-stream"
 }
 
-data class FinderTab(val history: List<String>, val index: Int = history.lastIndex) {
+data class FinderTab(
+    val history: List<String>,
+    val index: Int = history.lastIndex,
+    val id: String = java.util.UUID.randomUUID().toString(),
+    val search: String = "",
+    val rules: SearchRules = SearchRules(),
+) {
     val location
         get() = history[index]
 }
+
+data class FinderContextRequest(val point: Offset? = null, val background: Boolean = false)
+
+private data class TabSelection(
+    val paths: Set<String>,
+    val lead: String?,
+    val expanded: Set<String>,
+)
 
 data class ClipboardFiles(val paths: List<String>, val cut: Boolean) {
     val files
@@ -216,10 +231,10 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     private var rangeAnchor: String? = null
     var quickLookRequested by mutableStateOf<Entry?>(null)
     var shareRequested by mutableStateOf<List<Entry>?>(null)
-    var query by mutableStateOf("")
+    var query by mutableStateOf(tabs[activeTab].search)
         private set
 
-    var searchRules by mutableStateOf(SearchRules())
+    var searchRules by mutableStateOf(tabs[activeTab].rules)
         private set
 
     var smartFolders by mutableStateOf(loadSmartFolders())
@@ -270,7 +285,12 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     var folderStyles by mutableStateOf(styleStore.styles)
         private set
 
-    var contextRequested by mutableStateOf<String?>(null)
+    var contextRequested by mutableStateOf<FinderContextRequest?>(null)
+    private var closedTabs by mutableStateOf<List<FinderTab>>(emptyList())
+    val canReopenTab
+        get() = closedTabs.isNotEmpty()
+
+    private val tabSelections = mutableMapOf<String, TabSelection>()
     var gridColumns = 4
     private var typedPrefix = ""
     private var typedAt = 0L
@@ -387,10 +407,54 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         interruptedTransfer = null
     }
 
+    private fun rulesJson(r: SearchRules) =
+        JSONObject()
+            .put("name", r.name)
+            .put("kind", r.kind)
+            .put("tag", r.tag)
+            .put("days", r.days)
+            .put("min", r.minimumBytes)
+            .put("max", r.maximumBytes)
+            .put("content", r.content)
+            .put("terms", JSONArray(r.nameTerms))
+
+    private fun parseRules(r: JSONObject?) =
+        if (r == null) SearchRules()
+        else
+            SearchRules(
+                r.optString("name"),
+                r.optString("kind", "Any"),
+                r.optString("tag"),
+                r.optInt("days"),
+                r.optLong("min"),
+                r.optLong("max"),
+                r.optString("content"),
+                r.optJSONArray("terms")
+                    ?.let { terms -> (0 until terms.length()).map(terms::getString) }
+                    .orEmpty(),
+            )
+
     private fun loadTabs(): List<FinderTab> = runCatching {
         val array = JSONArray(prefs.getString("tabs", "[]"))
         (0 until array.length())
-            .map { FinderTab(listOf(array.getString(it))) }
+            .map { i ->
+                val value = array.optJSONObject(i)
+                if (value == null) FinderTab(listOf(array.getString(i)))
+                else {
+                    val h =
+                        value
+                            .getJSONArray("history")
+                            .let { history -> (0 until history.length()).map(history::getString) }
+                            .ifEmpty { listOf(workspace.path) }
+                    FinderTab(
+                        h,
+                        value.optInt("index", h.lastIndex).coerceIn(0, h.lastIndex),
+                        value.optString("id").ifBlank { java.util.UUID.randomUUID().toString() },
+                        value.optString("query"),
+                        parseRules(value.optJSONObject("rules")),
+                    )
+                }
+            }
             .ifEmpty { listOf(FinderTab(listOf(workspace.absolutePath))) }
     }
         .getOrElse { listOf(FinderTab(listOf(workspace.absolutePath))) }
@@ -564,12 +628,56 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         else
             entries.groupBy { groupLabel(it, grouping, tagAssignments[it.path].orEmpty()) }.toList()
 
+    private fun saveTabState() {
+        val tab = tabs[activeTab]
+        tabs =
+            tabs.toMutableList().also {
+                it[activeTab] = tab.copy(search = query, rules = searchRules)
+            }
+        tabSelections[tab.id] = TabSelection(selected, leadSelection, expandedFolders)
+    }
+
     private fun persistTabs() {
+        saveTabState()
         prefs
             .edit()
-            .putString("tabs", JSONArray(tabs.map { it.location }).toString())
+            .putString(
+                "tabs",
+                JSONArray(
+                        tabs.map { tab ->
+                            JSONObject()
+                                .put("id", tab.id)
+                                .put("history", JSONArray(tab.history))
+                                .put("index", tab.index)
+                                .put("query", tab.search)
+                                .put("rules", rulesJson(tab.rules))
+                        },
+                    )
+                    .toString(),
+            )
             .putInt("activeTab", activeTab)
             .apply()
+    }
+
+    private fun restoreTabState() {
+        val tab = tabs[activeTab]
+        val saved = tabSelections[tab.id]
+        query = tab.search
+        searchRules = tab.rules
+        clearSelection()
+        expandedFolders = tabSelections[tab.id]?.expanded.orEmpty()
+        expandedChildren = emptyMap()
+        refresh()
+        val job = listingJob
+        viewModelScope.launch {
+            job?.join()
+            if (listingJob === job && tabs[activeTab].id == tab.id)
+                saved?.let { saved ->
+                    selectPaths(saved.paths.intersect(visibleEntries.map { it.path }.toSet()))
+                    leadSelection = saved.lead?.takeIf { it in selected }
+                    tabSelections[tab.id] = saved.copy(paths = selected)
+                }
+        }
     }
 
     fun title(path: String = location): String =
@@ -587,7 +695,6 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         }
 
     fun navigate(path: String) {
-        if (busy != null) return
         if (path == location) {
             updateQuery("")
             return
@@ -595,7 +702,8 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         val current = tabs[activeTab]
         tabs =
             tabs.toMutableList().also {
-                it[activeTab] = FinderTab(current.history.take(current.index + 1) + path)
+                val history = (current.history.take(current.index + 1) + path).takeLast(100)
+                it[activeTab] = current.copy(history = history, index = history.lastIndex)
             }
         query = ""
         searchRules = SearchRules()
@@ -605,11 +713,11 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun back(): Boolean {
-        if (busy != null) return false
         val tab = tabs[activeTab]
         if (tab.index <= 0) return false
         tabs = tabs.toMutableList().also { it[activeTab] = tab.copy(index = tab.index - 1) }
         query = ""
+        searchRules = SearchRules()
         clearSelection()
         persistTabs()
         refresh()
@@ -618,9 +726,10 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     fun forward() {
         val tab = tabs[activeTab]
-        if (tab.index < tab.history.lastIndex && busy == null) {
+        if (tab.index < tab.history.lastIndex) {
             tabs = tabs.toMutableList().also { it[activeTab] = tab.copy(index = tab.index + 1) }
             query = ""
+            searchRules = SearchRules()
             clearSelection()
             persistTabs()
             refresh()
@@ -631,34 +740,83 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         parentPath()?.let(::navigate)
     }
 
-    fun newTab(path: String = location) {
-        if (busy != null) return
-        tabs = tabs + FinderTab(listOf(path))
-        activeTab = tabs.lastIndex
-        query = ""
-        clearSelection()
+    fun newTab(path: String = location, activate: Boolean = true) {
+        saveTabState()
+        val insertion = activeTab + 1
+        tabs = tabs.toMutableList().also { it.add(insertion, FinderTab(listOf(path))) }
+        if (activate) {
+            activeTab = insertion
+            restoreTabState()
+        }
         persistTabs()
-        refresh()
     }
 
     fun switchTab(index: Int) {
-        if (busy != null) return
+        if (index !in tabs.indices || index == activeTab) return
+        saveTabState()
         activeTab = index
-        query = ""
-        clearSelection()
+        restoreTabState()
         persistTabs()
-        refresh()
+    }
+
+    fun cycleTab(delta: Int) {
+        switchTab(Math.floorMod(activeTab + delta, tabs.size))
+    }
+
+    fun duplicateTab(index: Int) {
+        if (index !in tabs.indices) return
+        saveTabState()
+        val copy = tabs[index].copy(id = java.util.UUID.randomUUID().toString())
+        tabs = tabs.toMutableList().also { it.add(index + 1, copy) }
+        activeTab = index + 1
+        restoreTabState()
+        persistTabs()
+    }
+
+    fun moveTab(from: Int, to: Int) {
+        if (from !in tabs.indices || to !in tabs.indices || from == to) return
+        val active = tabs[activeTab].id
+        tabs = tabs.toMutableList().also { it.add(to, it.removeAt(from)) }
+        activeTab = tabs.indexOfFirst { it.id == active }
+        persistTabs()
     }
 
     fun closeTab(index: Int) {
-        if (tabs.size == 1 || busy != null) return
-        tabs = tabs.filterIndexed { i, _ -> i != index }
+        if (index !in tabs.indices) return
+        saveTabState()
+        val active = tabs[activeTab].id
+        closedTabs = (closedTabs + tabs[index]).takeLast(20)
+        tabs =
+            tabs
+                .filterIndexed { i, _ -> i != index }
+                .ifEmpty { listOf(FinderTab(listOf(workspace.path))) }
         activeTab =
-            (if (index < activeTab) activeTab - 1 else activeTab).coerceAtMost(tabs.lastIndex)
-        query = ""
-        clearSelection()
+            tabs.indexOfFirst { it.id == active }.takeIf { it >= 0 }
+                ?: index.coerceAtMost(tabs.lastIndex)
+        if (tabs[activeTab].id != active) restoreTabState()
         persistTabs()
-        refresh()
+    }
+
+    fun closeOtherTabs(index: Int) {
+        if (index !in tabs.indices) return
+        saveTabState()
+        val kept = tabs[index]
+        closedTabs = (closedTabs + tabs.filterIndexed { i, _ -> i != index }).takeLast(20)
+        tabs = listOf(kept)
+        activeTab = 0
+        restoreTabState()
+        persistTabs()
+    }
+
+    fun reopenTab() {
+        if (closedTabs.isEmpty()) return
+        saveTabState()
+        val tab = closedTabs.last()
+        closedTabs = closedTabs.dropLast(1)
+        tabs = tabs.toMutableList().also { it.add(activeTab + 1, tab) }
+        activeTab++
+        restoreTabState()
+        persistTabs()
     }
 
     fun allowed(file: File): Boolean = runCatching {
@@ -774,7 +932,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         rangeAnchor = null
     }
 
-    fun requestContext(entry: Entry) {
+    fun requestContext(entry: Entry, point: Offset? = null) {
         viewModelScope.launch {
             if (visibleEntries.none { it.path == entry.path }) {
                 entry.parentPath?.let {
@@ -786,8 +944,13 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 clearSelection()
                 select(entry)
             }
-            contextRequested = entry.path
+            contextRequested = FinderContextRequest(point)
         }
+    }
+
+    fun requestBackgroundContext(point: Offset? = null) {
+        clearSelection()
+        contextRequested = FinderContextRequest(point, true)
     }
 
     fun typeSelect(character: Char) {
@@ -824,6 +987,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     fun updateQuery(value: String) {
         query = value
         clearSelection()
+        persistTabs()
         refresh(debounce = true)
     }
 
@@ -1233,7 +1397,13 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         destination: String? = folderPath,
         work: suspend () -> String,
     ) {
-        if (busy != null) return
+        if (busy != null) {
+            message = "Another file operation is in progress."
+            return
+        }
+        val originTab = tabs[activeTab].id
+        val originLocation = location
+        val originSelection = selected
         message = null
         busy = label
         transferProgress = TransferProgress()
@@ -1262,7 +1432,12 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 marker.delete()
                 TransferRuntime.finish(getApplication())
                 busy = null
-                clearSelection()
+                if (
+                    tabs[activeTab].id == originTab &&
+                        location == originLocation &&
+                        selected == originSelection
+                )
+                    clearSelection()
                 syncHistory()
                 refresh()
             }
@@ -1398,6 +1573,20 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    fun createTextFile(name: String) {
+        val folder = folderPath ?: return
+        operation("Creating text file…") {
+            val step =
+                withContext(Dispatchers.IO) {
+                    documents.createdStep(
+                        documents.create(folder, validateFilename(name), false, "text/plain"),
+                    )
+                }
+            rememberOperation("New text file", listOf(step))
+            "Text file created"
+        }
+    }
+
     fun rename(name: String) {
         val item = focused ?: return
         if (name == item.name) return
@@ -1517,9 +1706,9 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun paste() {
+    fun paste(parent: String? = folderPath) {
         val clip = clipboard ?: return
-        val parent = folderPath ?: return
+        if (parent == null) return
         transferPaths(clip.paths, parent, clip.cut, clearClipboard = clip.cut)
     }
 
@@ -1534,6 +1723,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
             transferTo(paths.map(::File), File(parent), move, clearClipboard)
             return
         }
+        val originalClipboard = clipboard
         operation(if (move) "Moving items…" else "Copying items…", destination = parent) {
             val steps = mutableListOf<FileStep>()
             var completed = 0
@@ -1556,9 +1746,10 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                     if (move) relocateMetadataPaths(mappings) else copyMetadataPaths(mappings)
                     completed++
                 }
-                if (clearClipboard) clipboard = null
+                if (clearClipboard && clipboard === originalClipboard) clipboard = null
             } catch (error: Exception) {
-                if (clearClipboard) clipboard = ClipboardFiles(paths.drop(completed), true)
+                if (clearClipboard && clipboard === originalClipboard)
+                    clipboard = ClipboardFiles(paths.drop(completed), true)
                 error("$completed of ${paths.size} completed. ${error.message}")
             } finally {
                 rememberOperation(if (move) "Move" else "Copy", steps)
@@ -1574,6 +1765,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         clearClipboard: Boolean = false,
     ) {
         if (files.isEmpty()) return
+        val originalClipboard = clipboard
         operation(
             if (move) "Moving items…" else "Copying items…",
             destination = parent.absolutePath,
@@ -1593,9 +1785,9 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                     else copyTags(file.absolutePath, target.absolutePath)
                     completed++
                 }
-                if (clearClipboard) clipboard = null
+                if (clearClipboard && clipboard === originalClipboard) clipboard = null
             } catch (error: Exception) {
-                if (clearClipboard)
+                if (clearClipboard && clipboard === originalClipboard)
                     clipboard = ClipboardFiles(files.drop(completed).map { it.absolutePath }, true)
                 error("$completed of ${files.size} completed. ${error.message}")
             } finally {
@@ -1821,13 +2013,13 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun compress() {
-        compressTo(folderPath ?: workspace.absolutePath)
+    fun compress(name: String? = null, level: Int = -1) {
+        compressTo(folderPath ?: workspace.absolutePath, name, level)
     }
 
-    fun compressTo(parent: String) {
+    fun compressTo(parent: String, name: String? = null, level: Int = -1) {
         if (isDocumentPath(parent) || actionEntries.any { it.documentUri != null }) {
-            providerArchive(false, parent)
+            providerArchive(false, parent, name, level)
             return
         }
         val files = actionEntries.map { it.file }
@@ -1836,7 +2028,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         operation("Compressing…") {
             val (archive, step) =
                 withContext(Dispatchers.IO) {
-                    val file = engine.compress(files, folder, transferControl)
+                    val file = engine.compress(files, folder, transferControl, name, level)
                     file to FileStep.Created(file)
                 }
             rememberOperation("Compress", listOf(step))
@@ -1866,7 +2058,12 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    private fun providerArchive(extract: Boolean, parent: String) {
+    private fun providerArchive(
+        extract: Boolean,
+        parent: String,
+        name: String? = null,
+        level: Int = -1,
+    ) {
         val items = if (extract) listOfNotNull(focused) else actionEntries
         if (items.isEmpty()) return
         operation(if (extract) "Extracting archive…" else "Compressing…") {
@@ -1891,7 +2088,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                         }
                         val output =
                             if (extract) engine.extract(local.single(), staging, transferControl)
-                            else engine.compress(local, staging, transferControl)
+                            else engine.compress(local, staging, transferControl, name, level)
                         val result =
                             documents.copy(output.absolutePath, parent, false, transferControl)
                         result to documents.createdStep(result)

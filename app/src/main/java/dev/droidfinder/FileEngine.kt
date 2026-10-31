@@ -305,22 +305,36 @@ class FileEngine(private val stateDir: File) {
         items: List<File>,
         parent: File,
         control: TransferControl = TransferControl(),
+        name: String? = null,
+        level: Int = -1,
     ): File {
         require(items.isNotEmpty())
+        require(level in -1..9) { "Invalid ZIP compression level." }
         val target =
             uniqueFile(
                 parent,
-                if (items.size == 1) "${items.first().nameWithoutExtension}.zip" else "Archive.zip",
+                zipFilename(
+                    name
+                        ?: if (items.size == 1)
+                            (if (items.first().isDirectory) items.first().name
+                            else items.first().nameWithoutExtension)
+                        else "Archive",
+                ),
             )
         val staging = File(parent, ".droidfinder-${UUID.randomUUID()}")
         try {
             ZipOutputStream(staging.outputStream().buffered()).use { zip ->
+                zip.setLevel(level)
                 fun add(file: File, path: String) {
                     control.item(file.name)
                     check(!Files.isSymbolicLink(file.toPath())) {
                         "Symbolic links are not supported."
                     }
-                    zip.putNextEntry(ZipEntry(path + if (file.isDirectory) "/" else ""))
+                    zip.putNextEntry(
+                        ZipEntry(safeZipPath(path) + if (file.isDirectory) "/" else "").apply {
+                            time = file.lastModified()
+                        },
+                    )
                     if (file.isFile) file.inputStream().use { control.copy(it, zip) }
                     zip.closeEntry()
                     if (file.isDirectory)
@@ -328,7 +342,16 @@ class FileEngine(private val stateDir: File) {
                             add(it, "$path/${it.name}")
                         }
                 }
-                items.forEach { add(it, it.name) }
+                val roots = mutableSetOf<String>()
+                items.forEach { file ->
+                    var root = file.name
+                    var n = 2
+                    while (!roots.add(root)) root =
+                        if (file.isDirectory) "${file.name} ${n++}"
+                        else
+                            "${file.nameWithoutExtension} ${n++}${file.extension.takeIf { it.isNotEmpty() }?.let { ".$it" }.orEmpty()}"
+                    add(file, root)
+                }
             }
             control.check()
             Files.move(staging.toPath(), target.toPath())
@@ -340,11 +363,13 @@ class FileEngine(private val stateDir: File) {
     }
 
     fun extract(archive: File, parent: File, control: TransferControl = TransferControl()): File {
+        inspectZip(archive) // Reject corrupt central directories before creating any output.
         val target = uniqueFile(parent, archive.nameWithoutExtension)
         val staging = File(parent, ".droidfinder-${UUID.randomUUID()}").apply { check(mkdir()) }
         try {
             var count = 0
             var bytes = 0L
+            val modified = mutableListOf<Pair<File, Long>>()
             ZipInputStream(archive.inputStream().buffered()).use { zip ->
                 while (true) {
                     val entry = zip.nextEntry ?: break
@@ -352,7 +377,7 @@ class FileEngine(private val stateDir: File) {
                     check(++count <= 10_000) {
                         "This archive has too many entries (limit: 10,000)."
                     }
-                    val file = File(staging, entry.name).canonicalFile
+                    val file = File(staging, safeZipPath(entry.name)).canonicalFile
                     check(
                         file.toPath().startsWith(staging.canonicalFile.toPath()) &&
                             file != staging.canonicalFile,
@@ -378,10 +403,15 @@ class FileEngine(private val stateDir: File) {
                             }
                         }
                     }
+                    if (entry.time >= 0) modified += file to entry.time
                     zip.closeEntry()
                 }
             }
             control.check()
+            // Children must be written before restoring directory timestamps.
+            modified
+                .sortedByDescending { it.first.path.length }
+                .forEach { (file, time) -> file.setLastModified(time) }
             Files.move(staging.toPath(), target.toPath())
         } catch (error: Exception) {
             staging.deleteRecursively()

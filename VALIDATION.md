@@ -1,6 +1,6 @@
 # Tablet preview verification
 
-Latest: **0.3.0-preview — Refined Finder + Peek**. See [the current UI, preview workflows, and validation](docs/REFINED-FINDER.md). The record below applies to the earlier 0.2.0 preview.
+Latest: **0.4.0-preview — Desktop workflows**. See [the current UI, workflows, and validation](docs/DESKTOP-WORKFLOWS.md). [0.3.0 Refined Finder and Peek](docs/REFINED-FINDER.md) is also preserved. The record below applies to the earlier 0.2.0 preview.
 
 Version: **0.2.0-preview**. Verified locally on 2026-10-31 using a dedicated Android 16 / API 36 tablet emulator. These checks cover implemented Android workflows; they do not certify identical behavior to every macOS Finder service.
 

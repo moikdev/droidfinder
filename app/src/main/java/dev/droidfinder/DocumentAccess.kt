@@ -22,6 +22,11 @@ fun isDocumentPath(path: String) = path.startsWith("content://")
 /**
  * Storage Access Framework gateway. Cloud/network authentication stays in the installed provider.
  */
+private val documentParentCacheLock = Any()
+private val documentPreviewLocks = Array(16) { Any() }
+
+class PreviewSizeLimitException(message: String) : IllegalStateException(message)
+
 class DocumentAccess(
     private val context: Context,
     private val engine: FileEngine = FileEngine(context.filesDir),
@@ -30,7 +35,12 @@ class DocumentAccess(
     private val prefs = context.getSharedPreferences("locations", 0)
     private val parentFile = File(context.filesDir, "document-parents.properties")
     private val parents =
-        Properties().apply { if (parentFile.exists()) parentFile.inputStream().use(::load) }
+        Properties().apply {
+            synchronized(documentParentCacheLock) {
+                runCatching { android.util.AtomicFile(parentFile).openRead().use(::load) }
+            }
+        }
+    private val pendingParents = mutableMapOf<String, String>()
     private val titles = mutableMapOf<String, String>()
     private val notifications = mutableMapOf<String, Uri>()
 
@@ -127,9 +137,33 @@ class DocumentAccess(
     fun parent(path: String): String? =
         if (isDocumentPath(path)) parents.getProperty(path) else File(path).parent
 
-    private fun saveParents() {
-        parentFile.outputStream().use { parents.store(it, "Known document parents") }
-    }
+    private fun recordParent(path: String, parent: String) =
+        synchronized(documentParentCacheLock) {
+            if (parents.getProperty(path) != parent) {
+                parents.setProperty(path, parent)
+                pendingParents[path] = parent
+            }
+        }
+
+    private fun saveParents() =
+        synchronized(documentParentCacheLock) {
+            if (pendingParents.isEmpty()) return@synchronized
+            val latest = Properties()
+            val atomic = android.util.AtomicFile(parentFile)
+            var stream: java.io.FileOutputStream? = null
+            try {
+                runCatching { atomic.openRead().use(latest::load) }
+                pendingParents.forEach { (path, parent) -> latest.setProperty(path, parent) }
+                stream = atomic.startWrite()
+                latest.store(stream, "Known document parents")
+                atomic.finishWrite(stream)
+                parents.putAll(latest)
+                pendingParents.clear()
+            } catch (_: Exception) {
+                if (stream != null) atomic.failWrite(stream)
+                // Navigation can still use the in-memory cache when storage is full.
+            }
+        }
 
     private val projection =
         arrayOf(
@@ -161,7 +195,7 @@ class DocumentAccess(
         val folder = mime == Document.MIME_TYPE_DIR
         val file = cacheFile(uri.toString(), name)
         titles[uri.toString()] = name
-        if (parent != null) parents.setProperty(uri.toString(), parent)
+        if (parent != null) recordParent(uri.toString(), parent)
         return Entry(
             file,
             name,
@@ -204,42 +238,50 @@ class DocumentAccess(
         return File(context.cacheDir, "documents/$key/${name.replace('/','_')}")
     }
 
-    fun materialize(entry: Entry, limit: Long = 128L * 1024 * 1024): File {
-        if (entry.documentUri == null) return entry.file
-        check(!entry.folder)
-        check(entry.size <= limit) {
-            "This file is too large for an in-app preview. Open it with another app."
-        }
-        val file = entry.file
-        if (file.isFile && file.length() == entry.size && file.lastModified() >= entry.modified)
-            return file
-        file.parentFile!!.mkdirs()
-        val staging = File(file.parentFile, "preview.tmp")
-        try {
-            input(entry.path).use { source ->
-                staging.outputStream().use { output ->
-                    val buffer = ByteArray(64 * 1024)
-                    var bytes = 0L
-                    while (true) {
-                        val n = source.read(buffer)
-                        if (n < 0) break
-                        bytes += n
-                        check(bytes <= limit) { "Preview exceeds the 128 MB limit." }
-                        output.write(buffer, 0, n)
+    fun materialize(entry: Entry, limit: Long = 128L * 1024 * 1024): File =
+        synchronized(
+            documentPreviewLocks[
+                (entry.path.hashCode() and Int.MAX_VALUE) % documentPreviewLocks.size],
+        ) {
+            if (entry.documentUri == null) return@synchronized entry.file
+            check(!entry.folder)
+            if (entry.size > limit)
+                throw PreviewSizeLimitException(
+                    "This file is too large for the preview cache (128 MB limit).",
+                )
+            val file = entry.file
+            if (file.isFile && file.length() == entry.size && file.lastModified() >= entry.modified)
+                return@synchronized file
+            file.parentFile!!.mkdirs()
+            val staging = File(file.parentFile, "preview.tmp")
+            try {
+                input(entry.path).use { source ->
+                    staging.outputStream().use { output ->
+                        val buffer = ByteArray(64 * 1024)
+                        var bytes = 0L
+                        while (true) {
+                            val n = source.read(buffer)
+                            if (n < 0) break
+                            bytes += n
+                            if (bytes > limit)
+                                throw PreviewSizeLimitException(
+                                    "Preview exceeds the 128 MB cache limit.",
+                                )
+                            output.write(buffer, 0, n)
+                        }
                     }
                 }
+                Files.move(
+                    staging.toPath(),
+                    file.toPath(),
+                    java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+                )
+            } catch (error: Exception) {
+                staging.delete()
+                throw error
             }
-            Files.move(
-                staging.toPath(),
-                file.toPath(),
-                java.nio.file.StandardCopyOption.REPLACE_EXISTING,
-            )
-        } catch (error: Exception) {
-            staging.delete()
-            throw error
+            file
         }
-        return file
-    }
 
     fun input(path: String): InputStream =
         if (isDocumentPath(path))
@@ -276,7 +318,7 @@ class DocumentAccess(
                 if (folder) Document.MIME_TYPE_DIR else mime,
                 name,
             ) ?: error("The provider couldn't create $name.")
-        parents.setProperty(uri.toString(), parent)
+        recordParent(uri.toString(), parent)
         titles[uri.toString()] = name
         saveParents()
         return uri.toString()
@@ -293,7 +335,7 @@ class DocumentAccess(
         val result =
             DocumentsContract.renameDocument(resolver, Uri.parse(path), name)
                 ?: error("The provider couldn't rename this item.")
-        parents.setProperty(result.toString(), parent)
+        recordParent(result.toString(), parent)
         titles[result.toString()] = name
         saveParents()
         return result.toString()

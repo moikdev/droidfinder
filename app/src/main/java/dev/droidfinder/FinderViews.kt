@@ -29,6 +29,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.*
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.contentDescription
@@ -55,19 +57,34 @@ private fun Modifier.fileGestures(
     context: ((Entry) -> Unit)? = null,
     selectOverride: ((Entry) -> Unit)? = null,
 ): Modifier = composed {
+    var coordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
     var control by remember { mutableStateOf(false) }
     var shift by remember { mutableStateOf(false) }
-    pointerInput(entry.path) {
+    onGloballyPositioned { coordinates = it }
+        .pointerInput(entry.path) {
             awaitPointerEventScope {
+                var secondaryDown = false
                 while (true) {
                     val event = awaitPointerEvent(PointerEventPass.Initial)
+                    if (secondaryDown && event.type == PointerEventType.Release) {
+                        secondaryDown = false
+                        model.requestContext(
+                            entry,
+                            coordinates?.localToWindow(event.changes.first().position),
+                        )
+                        event.changes.forEach { it.consume() }
+                    }
                     if (event.type == PointerEventType.Press) {
                         control =
                             event.keyboardModifiers.isCtrlPressed ||
                                 event.keyboardModifiers.isMetaPressed
                         shift = event.keyboardModifiers.isShiftPressed
-                        if (event.buttons.isSecondaryPressed) {
-                            if (context != null) context(entry) else model.requestContext(entry)
+                        if (event.buttons.isTertiaryPressed && entry.folder) {
+                            model.newTab(entry.path, activate = false)
+                            event.changes.forEach { it.consume() }
+                        } else if (event.buttons.isSecondaryPressed) {
+                            // Complete the click before a focusable popup can capture mouse-up.
+                            secondaryDown = true
                             event.changes.forEach { it.consume() }
                         }
                     }
@@ -213,17 +230,7 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis,
                                 )
-                            IconButton(
-                                onClick = { context(item) },
-                                modifier = Modifier.size(28.dp),
-                            ) {
-                                Icon(
-                                    Icons.Outlined.MoreHoriz,
-                                    "Actions for ${item.name}",
-                                    Modifier.size(16.dp),
-                                    tint = Muted,
-                                )
-                            }
+                            FileActionsButton(model, item)
                         }
                     }
                 }

@@ -206,28 +206,7 @@ fun RefinedToolbar(
                     }
                 }
             } else {
-                Row(
-                    Modifier.clip(RoundedCornerShape(7.dp))
-                        .border(1.dp, Border, RoundedCornerShape(7.dp))
-                        .padding(2.dp),
-                ) {
-                    ViewMode.entries.forEach { mode ->
-                        val icon =
-                            when (mode) {
-                                ViewMode.ICONS -> Icons.Outlined.GridView
-                                ViewMode.LIST -> Icons.AutoMirrored.Outlined.ViewList
-                                ViewMode.COLUMNS -> Icons.Outlined.ViewColumn
-                                ViewMode.GALLERY -> Icons.Outlined.Panorama
-                            }
-                        ToolButton(
-                            icon,
-                            "${mode.title} view",
-                            { model.changeMode(mode) },
-                            active = model.mode == mode,
-                            compact = true,
-                        )
-                    }
-                }
+                ViewModeSelector(model)
                 Spacer(Modifier.width(6.dp))
                 FinderSortMenu(model)
             }
@@ -238,6 +217,16 @@ fun RefinedToolbar(
                     model::paste,
                     enabled = model.canCreate,
                 )
+            ToolButton(
+                if (selection.singleOrNull()?.extension == "zip") Icons.Outlined.Unarchive
+                else Icons.Outlined.FolderZip,
+                if (selection.singleOrNull()?.extension == "zip") "Browse archive"
+                else "Compress to ZIP",
+                {
+                    action(if (selection.singleOrNull()?.extension == "zip") "open" else "compress")
+                },
+                enabled = selection.isNotEmpty() && !model.isTrash && model.busy == null,
+            )
             ToolButton(
                 Icons.Outlined.Visibility,
                 "Peek selected file",
@@ -253,10 +242,6 @@ fun RefinedToolbar(
                     { action("new") },
                     enabled = model.canCreate && model.busy == null,
                 )
-                if (selection.isEmpty()) {
-                    if (model.tabs.size == 1)
-                        ToolButton(Icons.Outlined.AddBox, "New tab", { model.newTab() })
-                }
                 ToolButton(
                     Icons.Outlined.VerticalSplit,
                     "Toggle preview pane",
