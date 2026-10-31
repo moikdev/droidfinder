@@ -272,6 +272,10 @@ private sealed interface Preview {
 
 @Composable
 fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean = false) {
+    if (large && entry.structuredKind != null) {
+        StructuredQuickLook(entry, modifier)
+        return
+    }
     if (large && entry.mediaKind != null) {
         MediaQuickLook(entry, modifier)
         return

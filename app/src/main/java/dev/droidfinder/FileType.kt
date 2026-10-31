@@ -80,6 +80,15 @@ fun fileType(extension: String, mime: String): FileType {
                     "cpp",
                     "rs",
                     "go",
+                    "h",
+                    "hpp",
+                    "rb",
+                    "swift",
+                    "dart",
+                    "sql",
+                    "cs",
+                    "lua",
+                    "r",
                 ) ||
                 type in
                     setOf(

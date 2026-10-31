@@ -9,3 +9,7 @@ The app does not run PDF scripts, open external document actions, or extract emb
 # Media preview dependencies
 
 Audio and video Peek use [AndroidX Media3 1.11.1](https://developer.android.com/jetpack/androidx/releases/media3), specifically ExoPlayer and its Views UI, under Apache 2.0. The upstream license is distributed as `app/src/main/assets/licenses/Media3-LICENSE.txt`. Playback uses device codecs and local files/document-provider streams; no INTERNET permission is added.
+
+# Structured text dependencies
+
+Markdown parsing uses [CommonMark Java 0.30.0](https://github.com/commonmark/commonmark-java/releases/tag/commonmark-parent-0.30.0), including GFM tables, strikethrough and task lists, under its BSD 2-clause license. Strict streaming JSON validation/formatting uses [Gson 2.15.0](https://github.com/google/gson/releases/tag/gson-parent-2.15.0), under Apache 2.0. Upstream licenses are distributed in `app/src/main/assets/licenses/`. Markdown is rendered with native Compose text, without executing HTML or fetching remote images. No network permission is added by this increment.

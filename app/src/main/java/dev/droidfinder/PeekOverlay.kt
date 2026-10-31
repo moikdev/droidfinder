@@ -149,8 +149,15 @@ fun PeekOverlay(
                 ) {
                     Text(
                         (if (entry.isPdfDocument) "PDF document"
-                        else entry.mediaKind?.replaceFirstChar { it.uppercase() } ?: entry.kind) +
-                            if (entry.folder) "" else " · ${entry.displaySize}",
+                        else
+                            entry.mediaKind?.replaceFirstChar { it.uppercase() }
+                                ?: when (entry.structuredKind) {
+                                    "Markdown" -> "Markdown document"
+                                    "JSON" -> "JSON document"
+                                    "Table" -> "Delimited text"
+                                    "Code" -> "Source code"
+                                    else -> entry.kind
+                                }) + if (entry.folder) "" else " · ${entry.displaySize}",
                         Modifier.weight(1f),
                         color = Muted,
                         fontSize = 11.sp,
