@@ -4,8 +4,6 @@ package dev.droidfinder
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.*
@@ -24,10 +22,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.key.*
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -87,7 +83,12 @@ fun FinderApp(
     onConnectFolder: () -> Unit,
     onOpenWith: (Entry) -> Unit,
     onEnableNotifications: () -> Unit = {},
+    onNewWindow: (String) -> Unit = {},
+    onCloseWindow: () -> Unit = {},
+    onToggleFullscreen: () -> Unit = {},
 ) {
+    val workspaceModel = model
+    val model = workspaceModel.activePaneModel
     CompositionLocalProvider(
         LocalFinderDark provides model.darkTheme,
         LocalFinderDensity provides model.density,
@@ -123,6 +124,14 @@ fun FinderApp(
                     mutableStateOf(model.query.isNotEmpty())
                 }
             var searchFocused by remember { mutableStateOf(false) }
+            var addressActive by remember(model.tabs[model.activeTab].id) { mutableStateOf(false) }
+            var addressFocused by remember { mutableStateOf(false) }
+            var addressValue by remember {
+                mutableStateOf(androidx.compose.ui.text.input.TextFieldValue())
+            }
+            var keyboardArea by remember { mutableIntStateOf(0) }
+            var keyboardFocusRequest by remember { mutableIntStateOf(0) }
+            val addressFocus = remember { FocusRequester() }
             val searchFocus = remember { FocusRequester() }
             val rootFocus = remember { FocusRequester() }
             val snackbar = remember { SnackbarHostState() }
@@ -155,10 +164,16 @@ fun FinderApp(
                 else show(entry)
             }
             LaunchedEffect(quickLook) {
-                if (quickLook == null && !searchActive) rootFocus.requestFocus()
+                if (quickLook == null && !searchActive && !addressActive) rootFocus.requestFocus()
             }
             LaunchedEffect(dialog, cursorMenu) {
-                if (dialog == null && cursorMenu == null && quickLook == null && !searchActive)
+                if (
+                    dialog == null &&
+                        cursorMenu == null &&
+                        quickLook == null &&
+                        !searchActive &&
+                        !addressActive
+                )
                     rootFocus.requestFocus()
             }
             val action: (String) -> Unit = { command ->
@@ -213,6 +228,14 @@ fun FinderApp(
                     "shortcut" -> model.makeShortcut()
                     "sidebar" -> model.toggleSidebar()
                     "newTab" -> model.newTab()
+                    "dualPane" -> model.toggleDualPane()
+                    "otherPane" -> model.focusOtherPane()
+                    "swapPanes" -> model.swapPanes()
+                    "copyOtherPane" -> model.transferToOtherPane(false)
+                    "moveOtherPane" -> model.transferToOtherPane(true)
+                    "comparePanes" -> dialog = "comparePanes"
+                    "shortcuts" -> dialog = "shortcuts"
+                    "newWindow" -> onNewWindow(model.location)
                 }
             }
             LaunchedEffect(model.message) {
@@ -228,8 +251,17 @@ fun FinderApp(
                     if (model.message == text) model.message = null
                 }
             }
-            LaunchedEffect(searchActive, model.tabs[model.activeTab].id) {
-                if (searchActive) searchFocus.requestFocus() else rootFocus.requestFocus()
+            LaunchedEffect(
+                searchActive,
+                addressActive,
+                model.tabs[model.activeTab].id,
+                keyboardFocusRequest,
+            ) {
+                when {
+                    addressActive -> addressFocus.requestFocus()
+                    searchActive -> searchFocus.requestFocus()
+                    else -> rootFocus.requestFocus()
+                }
             }
             LaunchedEffect(Unit) { rootFocus.requestFocus() }
             LaunchedEffect(model.interruptedTransfer) {
@@ -265,231 +297,197 @@ fun FinderApp(
                     .windowInsetsPadding(WindowInsets.safeDrawing)
                     .focusRequester(rootFocus)
                     .onPreviewKeyEvent { event ->
-                        if (
-                            event.type != KeyEventType.KeyDown ||
-                                dialog != null ||
-                                (model.busy != null &&
-                                    !browseKeyDuringTransfer(event, searchFocused))
-                        )
-                            false
-                        else if (event.key == Key.Spacebar && event.nativeKeyEvent.repeatCount > 0)
-                            true
-                        else if (event.isCtrlPressed || event.isMetaPressed) {
-                            when (event.key) {
-                                Key.F -> {
-                                    searchActive = true
+                        if (event.type != KeyEventType.KeyDown || dialog != null) false
+                        else {
+                            val editing = searchFocused || addressFocused
+                            val shortcut =
+                                explorerShortcut(
+                                    event.key,
+                                    event.isCtrlPressed,
+                                    event.isMetaPressed,
+                                    event.isAltPressed,
+                                    event.isShiftPressed,
+                                    editing,
+                                )
+                            if (shortcut == null) {
+                                if (
+                                    !editing &&
+                                        !event.isCtrlPressed &&
+                                        !event.isMetaPressed &&
+                                        !event.isAltPressed &&
+                                        event.utf16CodePoint in 32..65535
+                                ) {
+                                    model.typeSelect(event.utf16CodePoint.toChar())
                                     true
-                                }
-                                Key.L -> {
-                                    dialog = "path"
-                                    true
-                                }
-                                Key.T -> {
-                                    if (event.isShiftPressed) model.reopenTab() else model.newTab()
-                                    true
-                                }
-                                Key.Tab -> {
-                                    model.cycleTab(if (event.isShiftPressed) -1 else 1)
-                                    true
-                                }
-                                Key.PageUp -> {
-                                    model.cycleTab(-1)
-                                    true
-                                }
-                                Key.PageDown -> {
-                                    model.cycleTab(1)
-                                    true
-                                }
-                                Key.One,
-                                Key.Two,
-                                Key.Three,
-                                Key.Four -> {
-                                    if (!searchFocused) {
-                                        model.changeMode(
-                                            when (event.key) {
-                                                Key.One -> ViewMode.ICONS
-                                                Key.Two -> ViewMode.LIST
-                                                Key.Three -> ViewMode.COLUMNS
-                                                else -> ViewMode.GALLERY
-                                            },
+                                } else false
+                            } else if (
+                                event.nativeKeyEvent.repeatCount > 0 &&
+                                    shortcut.action !in
+                                        setOf(
+                                            "moveSelection",
+                                            "left",
+                                            "right",
+                                            "page",
+                                            "home",
+                                            "end",
                                         )
-                                        true
-                                    } else false
+                            )
+                                true
+                            else if (
+                                model.busy != null &&
+                                    shortcut.action in
+                                        setOf(
+                                            "new",
+                                            "rename",
+                                            "trash",
+                                            "delete",
+                                            "empty",
+                                            "undo",
+                                            "redo",
+                                            "duplicate",
+                                        )
+                            ) {
+                                model.message = "Another file operation is in progress."
+                                true
+                            } else {
+                                fun focusAddress() {
+                                    keyboardFocusRequest++
+                                    val path = model.folderPath ?: model.workspace.path
+                                    addressValue =
+                                        androidx.compose.ui.text.input.TextFieldValue(
+                                            path,
+                                            androidx.compose.ui.text.TextRange(0, path.length),
+                                        )
+                                    addressActive = true
                                 }
-                                Key.R -> {
-                                    if (!searchFocused) {
-                                        model.refresh()
-                                        true
-                                    } else false
-                                }
-                                Key.W -> {
-                                    model.closeTab(model.activeTab)
-                                    true
-                                }
-                                Key.N -> {
-                                    if (model.canCreate) dialog = "new"
-                                    true
-                                }
-                                Key.A ->
-                                    if (!searchFocused) {
-                                        model.selectAll()
-                                        true
-                                    } else false
-                                Key.C ->
-                                    if (!searchFocused) {
-                                        model.copySelection(false)
-                                        true
-                                    } else false
-                                Key.X ->
-                                    if (!searchFocused && !model.isTrash) {
-                                        model.copySelection(true)
-                                        true
-                                    } else false
-                                Key.V ->
-                                    if (!searchFocused && !model.isTrash) {
-                                        model.paste()
-                                        true
-                                    } else false
-                                Key.D ->
-                                    if (!searchFocused && !model.isTrash) {
-                                        model.duplicate()
-                                        true
-                                    } else false
-                                Key.Z ->
-                                    if (!searchFocused) {
-                                        if (event.isShiftPressed) model.redo() else model.undo()
-                                        true
-                                    } else false
-                                Key.Y ->
-                                    if (!searchFocused) {
-                                        model.redo()
-                                        true
-                                    } else false
-                                Key.O -> {
-                                    model.focused?.let(open)
-                                    true
-                                }
-                                Key.S ->
-                                    if (event.isAltPressed) {
-                                        model.toggleSidebar()
-                                        true
-                                    } else false
-                                Key.Delete,
-                                Key.Backspace ->
-                                    if (!searchFocused) {
-                                        if (event.isShiftPressed) dialog = "empty"
-                                        else if (model.isTrash) dialog = "delete" else model.trash()
-                                        true
-                                    } else false
-                                Key.I -> {
-                                    action("info")
-                                    true
-                                }
-                                Key.Period -> {
-                                    model.toggleHidden()
-                                    true
-                                }
-                                else -> false
-                            }
-                        } else if (event.isAltPressed) {
-                            when (event.key) {
-                                Key.DirectionLeft -> {
-                                    model.back()
-                                    true
-                                }
-                                Key.DirectionRight -> {
-                                    model.forward()
-                                    true
-                                }
-                                Key.DirectionUp -> {
-                                    model.up()
-                                    true
-                                }
-                                else -> false
-                            }
-                        } else if (!searchFocused)
-                            when (event.key) {
-                                Key.Spacebar -> {
-                                    if (quickLook == null) model.focused?.let(showQuickLook)
-                                    else quickLook = null
-                                    true
-                                }
-                                Key.Enter -> {
-                                    model.focused?.let(open)
-                                    true
-                                }
-                                Key.F10 -> {
-                                    if (event.isShiftPressed) {
+                                fun step(delta: Int) =
+                                    if (kotlin.math.abs(delta) == 2 && model.mode == ViewMode.ICONS)
+                                        (if (delta < 0) -model.gridColumns else model.gridColumns)
+                                    else if (delta < 0) -1 else 1
+                                when (shortcut.action) {
+                                    "search" -> {
+                                        keyboardFocusRequest++
+                                        addressActive = false
+                                        searchActive = true
+                                    }
+                                    "path" -> focusAddress()
+                                    "newWindow" -> onNewWindow(model.location)
+                                    "closeWindow" -> onCloseWindow()
+                                    "newTab" -> model.newTab(atEnd = true)
+                                    "reopenTab" -> model.reopenTab()
+                                    "closeTab" ->
+                                        if (model.tabs.size == 1) onCloseWindow()
+                                        else model.closeTab(model.activeTab)
+                                    "cycleTab" -> model.cycleTab(shortcut.amount)
+                                    "selectTab" ->
+                                        model.switchTab(
+                                            if (shortcut.amount == 9) model.tabs.lastIndex
+                                            else shortcut.amount - 1,
+                                        )
+                                    "finderView" ->
+                                        model.changeMode(ViewMode.entries[shortcut.amount - 1])
+                                    "windowsView" -> model.windowsView(shortcut.amount)
+                                    "refresh" -> model.refresh()
+                                    "selectAll" -> model.selectAll()
+                                    "clearSelection" -> model.clearSelection()
+                                    "copy" -> model.copySelection(false)
+                                    "cut" -> if (!model.isTrash) model.copySelection(true)
+                                    "paste" -> if (!model.isTrash) model.paste()
+                                    "toggleFocused" -> model.toggleFocusedSelection()
+                                    "moveSelection" ->
+                                        if (shortcut.focusOnly)
+                                            model.moveKeyboardFocus(step(shortcut.amount))
+                                        else
+                                            model.stepSelection(
+                                                step(shortcut.amount),
+                                                shortcut.extend,
+                                                shortcut.additive,
+                                            )
+                                    "left" ->
+                                        if (shortcut.extend) model.stepSelection(-1, true)
+                                        else model.keyboardLeft()
+                                    "right" ->
+                                        if (shortcut.extend) model.stepSelection(1, true)
+                                        else model.keyboardRight()
+                                    "home" -> model.selectBoundary(false, shortcut.extend)
+                                    "end" -> model.selectBoundary(true, shortcut.extend)
+                                    "page" ->
+                                        model.stepSelection(
+                                            shortcut.amount * model.keyboardPageSize,
+                                            shortcut.extend,
+                                        )
+                                    "back" -> model.back()
+                                    "forward" -> model.forward()
+                                    "up" -> model.up()
+                                    "expand" -> model.expandKeyboardSelection()
+                                    "expandAll" -> model.expandKeyboardSelection(true)
+                                    "collapse" -> model.collapseKeyboardSelection()
+                                    "preview" -> model.toggleInspector()
+                                    "details" -> model.toggleInspector(true)
+                                    "navigationTree" -> model.revealNavigationTree()
+                                    "fitColumns" -> model.fitColumnsToContents()
+                                    "fullscreen" -> onToggleFullscreen()
+                                    "focusArea" -> {
+                                        val areas =
+                                            if (model.dualPane)
+                                                listOf("files", "otherPane", "address", "search")
+                                            else listOf("files", "address", "search")
+                                        val current =
+                                            when {
+                                                addressFocused -> areas.indexOf("address")
+                                                searchFocused -> areas.indexOf("search")
+                                                else -> keyboardArea.coerceAtMost(areas.lastIndex)
+                                            }
+                                        keyboardArea =
+                                            Math.floorMod(current + shortcut.amount, areas.size)
+                                        when (areas[keyboardArea]) {
+                                            "address" -> focusAddress()
+                                            "search" -> {
+                                                addressActive = false
+                                                searchActive = true
+                                            }
+                                            else -> {
+                                                addressActive = false
+                                                searchActive = false
+                                                if (areas[keyboardArea] == "otherPane")
+                                                    model.focusOtherPane()
+                                                rootFocus.requestFocus()
+                                            }
+                                        }
+                                    }
+                                    "quicklook" ->
+                                        if (quickLook != null) quickLook = null
+                                        else model.focused?.let(showQuickLook)
+                                    "context" ->
                                         model.focused?.let { model.requestContext(it) }
                                             ?: model.requestBackgroundContext()
-                                        true
-                                    } else false
+                                    "actions" -> menu = true
+                                    "cancel" -> {
+                                        if (addressActive) addressActive = false
+                                        else if (searchFocused) {
+                                            model.updateQuery("")
+                                            searchActive = false
+                                        } else {
+                                            model.clearSelection()
+                                            quickLook = null
+                                        }
+                                        rootFocus.requestFocus()
+                                    }
+                                    "trash" ->
+                                        if (model.isTrash) {
+                                            if (selected.isNotEmpty()) dialog = "delete"
+                                        } else model.trash()
+                                    "delete" -> if (selected.isNotEmpty()) dialog = "delete"
+                                    "rename" ->
+                                        if (selected.isNotEmpty() && !model.isTrash)
+                                            action("rename")
+                                    "new" -> if (model.canCreate) action("new")
+                                    "hidden" -> model.toggleHidden()
+                                    else -> action(shortcut.action)
                                 }
-                                Key.F2 -> {
-                                    if (selected.isNotEmpty() && !model.isTrash)
-                                        dialog = if (selected.size > 1) "batchRename" else "rename"
-                                    true
-                                }
-                                Key.DirectionDown -> {
-                                    model.stepSelection(
-                                        if (model.mode == ViewMode.ICONS) model.gridColumns else 1,
-                                        event.isShiftPressed,
-                                    )
-                                    true
-                                }
-                                Key.DirectionUp -> {
-                                    model.stepSelection(
-                                        if (model.mode == ViewMode.ICONS) -model.gridColumns
-                                        else -1,
-                                        event.isShiftPressed,
-                                    )
-                                    true
-                                }
-                                Key.DirectionLeft -> {
-                                    if (
-                                        model.mode == ViewMode.ICONS ||
-                                            model.mode == ViewMode.GALLERY
-                                    )
-                                        model.stepSelection(-1, event.isShiftPressed)
-                                    else model.up()
-                                    true
-                                }
-                                Key.DirectionRight -> {
-                                    if (
-                                        model.mode == ViewMode.ICONS ||
-                                            model.mode == ViewMode.GALLERY
-                                    )
-                                        model.stepSelection(1, event.isShiftPressed)
-                                    else model.focused?.takeIf { it.folder }?.let(open)
-                                    true
-                                }
-                                Key.MoveHome -> {
-                                    model.stepSelection(-model.entries.size, event.isShiftPressed)
-                                    true
-                                }
-                                Key.MoveEnd -> {
-                                    model.stepSelection(model.entries.size, event.isShiftPressed)
-                                    true
-                                }
-                                Key.Delete,
-                                Key.Backspace -> {
-                                    if (model.isTrash) {
-                                        if (selected.isNotEmpty()) dialog = "delete"
-                                    } else model.trash()
-                                    true
-                                }
-                                Key.Escape -> {
-                                    model.clearSelection()
-                                    quickLook = null
-                                    true
-                                }
-                                else ->
-                                    if (event.utf16CodePoint > 31 && event.utf16CodePoint < 65536) {
-                                        model.typeSelect(event.utf16CodePoint.toChar())
-                                        true
-                                    } else false
+                                true
                             }
-                        else false
+                        }
                     }
                     .focusable(),
             ) {
@@ -512,8 +510,25 @@ fun FinderApp(
                         RefinedToolbar(
                             model = model,
                             action = action,
+                            addressActive = addressActive,
+                            addressValue = addressValue,
+                            onAddressChange = { addressValue = it },
+                            addressFocus = addressFocus,
+                            onAddressFocused = { addressFocused = it },
+                            onAddressCommit = {
+                                model.goTo(addressValue.text)
+                                addressActive = false
+                                rootFocus.requestFocus()
+                            },
+                            onAddressClose = {
+                                addressActive = false
+                                rootFocus.requestFocus()
+                            },
                             searchActive = searchActive || model.query.isNotEmpty(),
-                            onSearch = { searchActive = true },
+                            onSearch = {
+                                keyboardFocusRequest++
+                                searchActive = true
+                            },
                             searchFocus = searchFocus,
                             onSearchFocused = { searchFocused = it },
                             onCloseSearch = {
@@ -524,123 +539,40 @@ fun FinderApp(
                             menuExpanded = menu,
                             onMenuChange = { menu = it },
                         )
-                        DesktopTabStrip(model)
-                        Box(
-                            Modifier.weight(1f)
-                                .fillMaxWidth()
-                                .background(CanvasBackground)
-                                .pointerInput(Unit) {
-                                    awaitEachGesture {
-                                        awaitFirstDown(requireUnconsumed = false)
-                                        // Selecting a search result returns keyboard control to
-                                        // files.
-                                        rootFocus.requestFocus()
+                        FinderWorkspace(
+                            model,
+                            onOpen = { pane, entry ->
+                                pane.activatePane()
+                                if (entry.extension == "finderlink")
+                                    pane.followShortcut(entry) { target ->
+                                        if (target.folder) pane.navigate(target.path)
+                                        else onOpen(target)
                                     }
-                                },
-                        ) {
-                            Row(Modifier.fillMaxSize()) {
-                                Box(
-                                    Modifier.weight(1f)
-                                        .fillMaxHeight()
-                                        .testTag("file-browser")
-                                        .folderContextMenu(model)
-                                        .folderDropTarget(model, model.folderPath),
-                                ) {
-                                    when {
-                                        model.listingError != null ->
-                                            EmptyState(
-                                                Icons.Outlined.FolderOff,
-                                                "Folder unavailable",
-                                                model.listingError!!,
-                                                "Try again",
-                                                model::refresh,
-                                            )
-                                        model.entries.isEmpty() && !model.loading -> {
-                                            if (
-                                                model.directory == model.workspace &&
-                                                    !model.effectiveSearchRules.active &&
-                                                    !model.hasAccess
-                                            )
-                                                WelcomeState(onGrantAccess, { action("new") })
-                                            else
-                                                EmptyState(
-                                                    if (
-                                                        (model.query.isNotEmpty() ||
-                                                            model.effectiveSearchRules.active ||
-                                                            model.currentSmartFolder != null)
-                                                    )
-                                                        Icons.Outlined.SearchOff
-                                                    else if (model.isTrash)
-                                                        Icons.Outlined.DeleteOutline
-                                                    else Icons.Outlined.FolderOpen,
-                                                    if (
-                                                        (model.query.isNotEmpty() ||
-                                                            model.effectiveSearchRules.active ||
-                                                            model.currentSmartFolder != null)
-                                                    )
-                                                        "No matching files"
-                                                    else if (model.isTrash) "Trash is empty"
-                                                    else "This folder is empty",
-                                                    if (
-                                                        (model.query.isNotEmpty() ||
-                                                            model.effectiveSearchRules.active ||
-                                                            model.currentSmartFolder != null)
-                                                    )
-                                                        "Try another name. Search includes subfolders."
-                                                    else if (model.isTrash)
-                                                        "Items you move to Trash will appear here."
-                                                    else
-                                                        "Create a folder or paste files to get started.",
-                                                    if (
-                                                        model.canCreate &&
-                                                            model.busy == null &&
-                                                            model.query.isEmpty()
-                                                    )
-                                                        "New folder"
-                                                    else null,
-                                                    { action("new") },
-                                                )
-                                        }
-                                        model.mode == ViewMode.ICONS -> IconView(model, open)
-                                        model.mode == ViewMode.LIST ->
-                                            ListView(model, open) { entry ->
-                                                model.requestContext(entry)
-                                            }
-                                        model.mode == ViewMode.COLUMNS -> ColumnsView(model, open)
-                                        model.mode == ViewMode.GALLERY -> GalleryView(model, open)
-                                    }
-                                    if (model.loading)
-                                        LinearProgressIndicator(
-                                            Modifier.fillMaxWidth().height(2.dp),
-                                            color = Blue,
-                                        )
-                                }
-                                if (
-                                    model.previewVisible &&
-                                        model.mode != ViewMode.GALLERY &&
-                                        screenWidth >= 900
-                                ) {
-                                    ResizeHandle(
-                                        "Resize preview pane",
-                                        { delta ->
-                                            model.changePreviewWidth(model.previewWidth - delta)
-                                        },
-                                    )
-                                    PreviewPane(
-                                        model,
-                                        showQuickLook,
-                                        onOpenWith,
-                                        Modifier.width(
-                                            minOf(model.previewWidth, (screenWidth * .3f).toInt())
-                                                .dp,
-                                        ),
-                                    )
-                                }
-                            }
-                        }
+                                else if (!entry.folder && entry.extension == "zip") {
+                                    pane.clearSelection()
+                                    pane.select(entry)
+                                    archiveEntry = entry
+                                    dialog = "archive"
+                                } else if (entry.folder) pane.navigate(entry.path)
+                                else onOpen(entry)
+                            },
+                            showQuickLook = showQuickLook,
+                            onOpenWith = onOpenWith,
+                            onGrantAccess = onGrantAccess,
+                            onNew = { pane ->
+                                pane.activatePane()
+                                dialog = "new"
+                            },
+                            onGoTo = { pane ->
+                                pane.activatePane()
+                                dialog = "path"
+                            },
+                            focusFiles = { rootFocus.requestFocus() },
+                            modifier = Modifier.weight(1f),
+                        )
                         if (model.busy != null || model.transferJobs.any { !it.terminal })
                             TransferStrip(model) { action("transfers") }
-                        PathBar(model) { action("path") }
+                        if (!model.dualPane) PathBar(model) { action("path") }
                     }
                 }
                 SnackbarHost(
@@ -651,6 +583,14 @@ fun FinderApp(
             }
 
             when (dialog) {
+                "shortcuts" -> ShortcutGuideDialog { dialog = null }
+                "comparePanes" ->
+                    FolderComparisonDialog(
+                        if (model.panesReversed) model.secondaryPane else model.primaryPane,
+                        if (model.panesReversed) model.primaryPane else model.secondaryPane,
+                    ) {
+                        dialog = null
+                    }
                 "transfers" -> TransferCenterDialog(model, { dialog = null }, onEnableNotifications)
                 "appearance" -> FolderAppearanceDialog(model) { dialog = null }
                 "recovery" ->
@@ -884,7 +824,7 @@ fun FinderApp(
                                 Spacer(Modifier.height(16.dp))
                                 Text("Keyboard shortcuts", fontWeight = FontWeight.SemiBold)
                                 Text(
-                                    "Ctrl F  Search\nCtrl T / W  New / close tab\nCtrl Shift N or Ctrl N  New folder\nCtrl C / X / V  Copy / cut / paste\nCtrl D  Duplicate\nCtrl Z / Shift Z  Undo / Redo\nCtrl L  Go to folder\nCtrl I  Get info\nCtrl .  Show hidden files\nAlt ← / → / ↑  Navigate\nSpace  Quick Look · F2  Rename",
+                                    "F1  Full keyboard shortcut guide\nCtrl N  New window\nCtrl T / W  New / close tab\nCtrl Shift N  New folder\nCtrl C / X / V  Copy / cut / paste\nCtrl D / Delete  Move to Trash\nCtrl Z / Y  Undo / Redo\nCtrl L / Alt D / F4  Address bar\nAlt Enter  Get info\nAlt P  Preview · Alt Shift P  Details\nSpace  Quick Look · F2  Rename",
                                     fontSize = 12.sp,
                                     modifier = Modifier.padding(top = 8.dp),
                                 )
@@ -1027,6 +967,7 @@ private fun FinderSidebar(
                 }
             }
             SidebarItem("Connect folder…", Icons.Outlined.Add, false) { onConnectFolder() }
+            NavigationTree(model)
             if (model.smartFolders.isNotEmpty()) {
                 Spacer(Modifier.height(8.dp))
                 SidebarHeading("Smart Folders")
@@ -1209,7 +1150,45 @@ internal fun ActionMenu(
     DropdownMenu(expanded, onDismiss) {
         val entries = model.selectedEntries
         val idle = model.busy == null
+        MenuAction("New window", Icons.AutoMirrored.Outlined.OpenInNew) { action("newWindow") }
+        MenuAction("Keyboard shortcuts", Icons.Outlined.Keyboard) { action("shortcuts") }
         MenuAction("Transfers", Icons.Outlined.SyncAlt) { action("transfers") }
+        MenuAction(
+            if (model.dualPane) "Hide dual panes" else "Show dual panes",
+            Icons.Outlined.VerticalSplit,
+        ) {
+            action("dualPane")
+        }
+        if (model.dualPane) {
+            MenuAction("Focus other pane", Icons.AutoMirrored.Outlined.CompareArrows) {
+                action("otherPane")
+            }
+            MenuAction("Swap panes", Icons.Outlined.SwapHoriz) { action("swapPanes") }
+            MenuAction(
+                "Compare folders…",
+                Icons.Outlined.Compare,
+                model.folderPath != null && model.otherPane.folderPath != null,
+            ) {
+                action("comparePanes")
+            }
+            MenuAction(
+                "Copy to other pane",
+                Icons.Outlined.ContentCopy,
+                entries.isNotEmpty() && !model.isTrash && model.otherPane.canCreate,
+            ) {
+                action("copyOtherPane")
+            }
+            MenuAction(
+                "Move to other pane",
+                Icons.AutoMirrored.Outlined.DriveFileMove,
+                entries.isNotEmpty() &&
+                    entries.all { it.canDelete } &&
+                    !model.isTrash &&
+                    model.otherPane.canCreate,
+            ) {
+                action("moveOtherPane")
+            }
+        }
         if (model.undoLabel != null)
             MenuAction("Undo ${model.undoLabel}", Icons.AutoMirrored.Outlined.Undo, idle) {
                 action("undo")

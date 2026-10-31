@@ -13,6 +13,15 @@ import org.junit.Test
 @OptIn(ExperimentalTestApi::class)
 class FinderWorkflowTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+
+    @org.junit.Before
+    fun singlePaneLayout() {
+        compose.runOnIdle {
+            val root = compose.activity.model
+            if (root.dualPane) root.toggleDualPane()
+        }
+    }
+
     private lateinit var fixture: File
 
     @Before
@@ -67,7 +76,9 @@ class FinderWorkflowTest {
         compose.onNodeWithText("Rename", useUnmergedTree = true).performClick()
         compose.waitUntil(10_000) { File(fixture, "Renamed.md").exists() }
         loaded()
-        compose.onNodeWithText("Renamed.md").performClick()
+        compose
+            .onNode(hasText("Renamed.md") and hasAnyAncestor(hasTestTag("file-browser")))
+            .performClick()
         compose.waitUntil(5_000) { compose.activity.model.focused?.name == "Renamed.md" }
         compose.onNodeWithContentDescription("Copy", useUnmergedTree = true).performClick()
         compose.runOnIdle {
@@ -80,14 +91,18 @@ class FinderWorkflowTest {
         loaded()
         assertEquals(File(fixture, "Renamed.md").readText(), copied.readText())
 
-        compose.onNodeWithText("Renamed.md").performClick()
+        compose
+            .onNode(hasText("Renamed.md") and hasAnyAncestor(hasTestTag("file-browser")))
+            .performClick()
         compose.waitUntil(5_000) { compose.activity.model.focused?.name == "Renamed.md" }
         compose.onNodeWithContentDescription("Move to Trash").performClick()
         compose.waitUntil(10_000) { !copied.exists() }
         loaded()
         compose.runOnIdle { compose.activity.model.navigate("@trash") }
         loaded()
-        compose.onNodeWithText("Renamed.md").performClick()
+        compose
+            .onNode(hasText("Renamed.md") and hasAnyAncestor(hasTestTag("file-browser")))
+            .performClick()
         compose.waitUntil(5_000) { compose.activity.model.focused?.name == "Renamed.md" }
         compose.onNodeWithText("Restore", useUnmergedTree = true).performClick()
         compose.waitUntil(10_000) { copied.exists() }

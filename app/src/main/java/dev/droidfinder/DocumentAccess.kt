@@ -42,8 +42,8 @@ class DocumentAccess(
             }
         }
     private val pendingParents = mutableMapOf<String, String>()
-    private val titles = mutableMapOf<String, String>()
-    private val notifications = mutableMapOf<String, Uri>()
+    private val titles = java.util.concurrent.ConcurrentHashMap<String, String>()
+    private val notifications = java.util.concurrent.ConcurrentHashMap<String, Uri>()
 
     fun notificationUri(path: String) = notifications[path] ?: Uri.parse(path)
 
@@ -53,6 +53,7 @@ class DocumentAccess(
     var lastRestoreMappings: List<Pair<String, String>> = emptyList()
         private set
 
+    @Volatile
     var locations: List<ConnectedLocation> = runCatching {
         val array = JSONArray(prefs.getString("roots", "[]"))
         (0 until array.length()).map {
@@ -87,14 +88,14 @@ class DocumentAccess(
         val entry = read(uri)
         require(entry.folder) { "Choose a folder rather than a single file." }
         val root = ConnectedLocation(uri, tree.toString(), entry.name)
-        locations = locations.filterNot { it.uri == uri } + root
+        locations = locations.filterNot { it.uri == root.uri } + root
         saveLocations()
         return root
     }
 
     fun disconnect(uri: String) {
-        val root = locations.firstOrNull { it.uri == uri } ?: return
-        locations = locations.filterNot { it.uri == uri }
+        val root = locations.firstOrNull { it.uri == uri || it.grant == uri } ?: return
+        locations = locations.filterNot { it.uri == root.uri }
         saveLocations()
         listOf(Intent.FLAG_GRANT_READ_URI_PERMISSION, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
             .forEach { flag ->

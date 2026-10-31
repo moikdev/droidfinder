@@ -36,7 +36,8 @@ data class TransferProgress(
             return kotlin.math.ceil((total - phaseBytes).toDouble() / rate).toLong()
         }
 
-    fun fresh(now: Long = transferClockMillis()) = now - updatedAtMillis in 0..3000
+    // The UI clock ticks once a second; a newly reported sample can be newer than that tick.
+    fun fresh(now: Long = transferClockMillis()) = now - updatedAtMillis <= 3000
 }
 
 /** Shared cancellation token. Checks run between files and between 64 KiB stream chunks. */

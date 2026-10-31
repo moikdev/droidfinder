@@ -258,7 +258,7 @@ fun FileContextMenu(
                     "New folder",
                     Icons.Outlined.CreateNewFolder,
                     model.canCreate,
-                    "Ctrl N",
+                    "Ctrl Shift N",
                 ) {
                     run("new")
                 }
@@ -385,7 +385,7 @@ fun FileContextMenu(
                     "Duplicate",
                     Icons.Outlined.FileCopy,
                     enabled = idle,
-                    shortcut = "Ctrl D",
+                    shortcut = "Meta D",
                 ) {
                     run("duplicate")
                 }

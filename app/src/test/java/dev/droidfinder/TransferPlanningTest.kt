@@ -169,6 +169,12 @@ class TransferPlanningTest {
         assertEquals(300, token.snapshot.bytes)
         assertEquals(100, token.snapshot.phaseBytes)
         assertEquals(4L, token.snapshot.secondsRemaining)
+        assertTrue(
+            "A sample newer than the UI clock tick is fresh",
+            token.snapshot.fresh(clock - 500),
+        )
+        assertTrue(token.snapshot.fresh(clock + 3000))
+        assertFalse(token.snapshot.fresh(clock + 3001))
         assertFalse(token.snapshot.fresh(clock + 4000))
     }
 

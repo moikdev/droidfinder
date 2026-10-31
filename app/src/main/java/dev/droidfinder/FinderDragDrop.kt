@@ -32,7 +32,24 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import java.io.File
 
-private data class FinderDrag(val paths: List<String>, val copy: Boolean)
+enum class FinderDragMode {
+    MOVE,
+    COPY,
+    SHORTCUT,
+}
+
+fun finderDragMode(ctrl: Boolean, shift: Boolean, alt: Boolean) =
+    when {
+        alt || ctrl && shift -> FinderDragMode.SHORTCUT
+        ctrl -> FinderDragMode.COPY
+        else -> FinderDragMode.MOVE
+    }
+
+private data class FinderDrag(
+    val origin: FinderModel,
+    val paths: List<String>,
+    val mode: FinderDragMode,
+)
 
 private fun Context.activity(): Activity? =
     when (this) {
@@ -41,8 +58,13 @@ private fun Context.activity(): Activity? =
         else -> null
     }
 
-private fun dragData(context: Context, items: List<Entry>, copy: Boolean): DragAndDropTransferData {
-    val local = FinderDrag(items.map { it.path }, copy)
+private fun dragData(
+    context: Context,
+    model: FinderModel,
+    items: List<Entry>,
+    mode: FinderDragMode,
+): DragAndDropTransferData {
+    val local = FinderDrag(model, items.map { it.path }, mode)
     val files = items.filterNot { it.folder }
     val clip =
         if (files.size == items.size) {
@@ -91,14 +113,18 @@ fun Modifier.mouseFileDrag(model: FinderModel, entry: Entry): Modifier = compose
                     currentEvent.buttons.isPrimaryPressed &&
                     !model.isTrash
             ) {
-                val copy =
-                    currentEvent.keyboardModifiers.isAltPressed ||
-                        currentEvent.keyboardModifiers.isCtrlPressed
+                val mode =
+                    finderDragMode(
+                        currentEvent.keyboardModifiers.isCtrlPressed ||
+                            currentEvent.keyboardModifiers.isMetaPressed,
+                        currentEvent.keyboardModifiers.isShiftPressed,
+                        currentEvent.keyboardModifiers.isAltPressed,
+                    )
                 awaitTouchSlopOrCancellation(down.id) { change, _ ->
                     change.consume()
                     val items =
                         if (entry.path in model.selected) model.actionEntries else listOf(entry)
-                    if (items.isNotEmpty()) startTransfer(dragData(context, items, copy))
+                    if (items.isNotEmpty()) startTransfer(dragData(context, model, items, mode))
                 }
             }
         }
@@ -109,7 +135,8 @@ fun Modifier.mouseFileDrag(model: FinderModel, entry: Entry): Modifier = compose
 fun DragSelectionHandle(model: FinderModel) {
     val context = LocalContext.current
     val selection by rememberUpdatedState(model.actionEntries)
-    var copy by remember { mutableStateOf(false) }
+    var mode by remember { mutableStateOf(FinderDragMode.MOVE) }
+    val origin by rememberUpdatedState(model)
     Box(
         Modifier.size(if (LocalFinderDensity.current.touch) 48.dp else 38.dp)
             .semanticsLabel("Hold to drag selected files into a folder")
@@ -118,9 +145,13 @@ fun DragSelectionHandle(model: FinderModel) {
                     while (true) {
                         val event = awaitPointerEvent(PointerEventPass.Initial)
                         if (event.type == PointerEventType.Press)
-                            copy =
-                                event.keyboardModifiers.isAltPressed ||
-                                    event.keyboardModifiers.isCtrlPressed
+                            mode =
+                                finderDragMode(
+                                    event.keyboardModifiers.isCtrlPressed ||
+                                        event.keyboardModifiers.isMetaPressed,
+                                    event.keyboardModifiers.isShiftPressed,
+                                    event.keyboardModifiers.isAltPressed,
+                                )
                     }
                 }
             }
@@ -128,8 +159,8 @@ fun DragSelectionHandle(model: FinderModel) {
                 detectTapGestures(
                     onLongPress = {
                         val items = selection
-                        if (items.isNotEmpty() && !model.isTrash) {
-                            startTransfer(dragData(context, items, copy))
+                        if (items.isNotEmpty() && !origin.isTrash) {
+                            startTransfer(dragData(context, origin, items, mode))
                         }
                     },
                 )
@@ -171,7 +202,15 @@ fun Modifier.folderDropTarget(model: FinderModel, folder: String?): Modifier = c
                     val native = event.toAndroidDragEvent()
                     val local = native.localState as? FinderDrag
                     if (local != null) {
-                        model.transferPaths(local.paths, folder, move = !local.copy)
+                        if (local.mode == FinderDragMode.SHORTCUT) {
+                            if (local.origin.busy != null) return false
+                            local.origin.makeShortcuts(local.paths, folder)
+                        } else
+                            local.origin.transferPaths(
+                                local.paths,
+                                folder,
+                                move = local.mode == FinderDragMode.MOVE,
+                            )
                         return true
                     }
                     if (model.busy != null) return false

@@ -17,6 +17,9 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.input.key.*
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -28,6 +31,13 @@ import androidx.compose.ui.unit.sp
 fun RefinedToolbar(
     model: FinderModel,
     action: (String) -> Unit,
+    addressActive: Boolean,
+    addressValue: androidx.compose.ui.text.input.TextFieldValue,
+    onAddressChange: (androidx.compose.ui.text.input.TextFieldValue) -> Unit,
+    addressFocus: FocusRequester,
+    onAddressFocused: (Boolean) -> Unit,
+    onAddressCommit: () -> Unit,
+    onAddressClose: () -> Unit,
     searchActive: Boolean,
     onSearch: () -> Unit,
     searchFocus: FocusRequester,
@@ -72,7 +82,68 @@ fun RefinedToolbar(
                     model::up,
                     enabled = model.parentPath() != null,
                 )
-            if (searchActive) {
+            if (addressActive) {
+                BasicTextField(
+                    value = addressValue,
+                    onValueChange = onAddressChange,
+                    singleLine = true,
+                    modifier =
+                        Modifier.weight(1f)
+                            .padding(horizontal = 8.dp)
+                            .height(36.dp)
+                            .semantics { contentDescription = "Address bar" }
+                            .focusRequester(addressFocus)
+                            .onFocusChanged { onAddressFocused(it.isFocused) }
+                            .onPreviewKeyEvent {
+                                if (
+                                    it.type == androidx.compose.ui.input.key.KeyEventType.KeyDown &&
+                                        it.key == androidx.compose.ui.input.key.Key.Enter
+                                ) {
+                                    onAddressCommit()
+                                    true
+                                } else false
+                            },
+                    textStyle = TextStyle(color = Ink, fontSize = 12.sp),
+                    cursorBrush = SolidColor(Blue),
+                    keyboardOptions =
+                        androidx.compose.foundation.text.KeyboardOptions(
+                            keyboardType = androidx.compose.ui.text.input.KeyboardType.Uri,
+                            autoCorrectEnabled = false,
+                            imeAction = androidx.compose.ui.text.input.ImeAction.Go,
+                        ),
+                    keyboardActions =
+                        androidx.compose.foundation.text.KeyboardActions(
+                            onGo = { onAddressCommit() },
+                        ),
+                    decorationBox = { inner ->
+                        Row(
+                            Modifier.fillMaxSize()
+                                .background(CanvasBackground, RoundedCornerShape(7.dp))
+                                .border(1.dp, Blue, RoundedCornerShape(7.dp))
+                                .padding(start = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Icon(
+                                Icons.Outlined.FolderOpen,
+                                null,
+                                Modifier.size(16.dp),
+                                tint = Muted,
+                            )
+                            Box(
+                                Modifier.weight(1f).padding(horizontal = 8.dp),
+                            ) {
+                                inner()
+                            }
+                            ToolButton(
+                                Icons.Outlined.Close,
+                                "Close address bar",
+                                onAddressClose,
+                                compact = true,
+                            )
+                        }
+                    },
+                )
+            } else if (searchActive) {
                 BasicTextField(
                     value = model.query,
                     onValueChange = model::updateQuery,
@@ -262,7 +333,7 @@ fun RefinedToolbar(
                     ToolButton(
                         Icons.Outlined.VerticalSplit,
                         "Toggle preview pane",
-                        model::togglePreview,
+                        { model.toggleInspector() },
                         active = model.previewVisible,
                     )
                 }

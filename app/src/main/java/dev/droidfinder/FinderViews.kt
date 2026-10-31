@@ -28,6 +28,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.key.*
 import androidx.compose.ui.input.pointer.*
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -61,6 +62,11 @@ private fun Modifier.fileGestures(
     var control by remember { mutableStateOf(false) }
     var shift by remember { mutableStateOf(false) }
     onGloballyPositioned { coordinates = it }
+        .then(
+            if (entry.path == model.keyboardFocusPath && entry.path !in model.selected)
+                Modifier.border(1.dp, Blue, RoundedCornerShape(4.dp))
+            else Modifier,
+        )
         .pointerInput(entry.path) {
             awaitPointerEventScope {
                 var secondaryDown = false
@@ -94,12 +100,19 @@ private fun Modifier.fileGestures(
         .combinedClickable(
             onClickLabel = "Select ${entry.name}",
             onClick = {
+                model.activatePane()
                 if (selectOverride != null && !control && !shift) selectOverride(entry)
                 else model.select(entry, multiple = control, range = shift)
             },
-            onDoubleClick = { open(entry) },
+            onDoubleClick = {
+                model.activatePane()
+                open(entry)
+            },
             onLongClickLabel = "Select multiple files",
-            onLongClick = { model.select(entry, true) },
+            onLongClick = {
+                model.activatePane()
+                model.select(entry, true)
+            },
         )
         .semantics {
             this.selected = entry.path in model.selected
@@ -110,6 +123,7 @@ private fun Modifier.fileGestures(
                         true
                     },
                     CustomAccessibilityAction("Quick Look") {
+                        model.activatePane()
                         model.quickLookRequested = entry
                         true
                     },
@@ -125,114 +139,175 @@ private fun Modifier.fileGestures(
 fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit) {
     val marquee = remember(model.location) { MarqueeState() }
     val headerHeight = if (model.density.touch) 48.dp else 32.dp
-    BoxWithConstraints(Modifier.fillMaxSize().marqueeSelection(model, marquee, headerHeight)) {
-        val roomy = maxWidth > if (model.density.touch) 720.dp else 610.dp
-        val showDate = maxWidth > if (model.density.touch) 560.dp else 440.dp
-        Column {
-            Row(
-                Modifier.fillMaxWidth()
-                    .height(headerHeight)
-                    .background(SubtleSurface)
-                    .padding(start = 26.dp, end = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                SortHeader("Name", SortBy.NAME, model, Modifier.weight(1f))
-                if (showDate)
-                    SortHeader(
-                        "Date modified",
-                        SortBy.MODIFIED,
-                        model,
-                        Modifier.width(if (roomy) 150.dp else 125.dp),
-                    )
-                SortHeader("Size", SortBy.SIZE, model, Modifier.width(75.dp))
-                if (roomy) SortHeader("Kind", SortBy.KIND, model, Modifier.width(110.dp))
-                Spacer(Modifier.width(28.dp))
+    val rows = model.listRows()
+    val depths = rows.associate { it.first.path to it.second }
+    val groups = if (model.canExpandList) listOf("" to rows.map { it.first }) else model.groups()
+    val paths = groups.flatMap { (group, items) ->
+        (if (group.isNotEmpty()) listOf<String?>(null) else emptyList()) + items.map { it.path }
+    }
+    val listState = rememberKeyboardListState(model, paths)
+    val measurer = androidx.compose.ui.text.rememberTextMeasurer()
+    val density = LocalDensity.current
+    val measured =
+        remember(model.fitColumns, model.entries, model.showExtensions, depths) {
+            if (!model.fitColumns) Triple(0.dp, 0.dp, 0.dp)
+            else {
+                fun width(text: String, font: Int) =
+                    with(density) {
+                        measurer
+                            .measure(
+                                text,
+                                style = androidx.compose.ui.text.TextStyle(fontSize = font.sp),
+                                maxLines = 1,
+                                softWrap = false,
+                            )
+                            .size
+                            .width
+                            .toDp()
+                    }
+                Triple(
+                    rows.maxOfOrNull {
+                        width(model.displayName(it.first), 12) + (it.second * 16).dp
+                    } ?: 0.dp,
+                    maxOf(
+                        125.dp,
+                        rows.maxOfOrNull { width(formatDate(it.first.modified), 10) + 16.dp }
+                            ?: 0.dp,
+                    ),
+                    maxOf(90.dp, rows.maxOfOrNull { width(it.first.kind, 10) + 16.dp } ?: 0.dp),
+                )
             }
-            HorizontalDivider(color = Border, thickness = .5.dp)
-            LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(vertical = 6.dp)) {
-                val rows = model.listRows()
-                val depths = rows.associate { it.first.path to it.second }
-                val groups =
-                    if (model.canExpandList) listOf("" to rows.map { it.first }) else model.groups()
-                groups.forEach { (group, entries) ->
-                    if (group.isNotEmpty())
-                        item(key = "group:$group") { GroupHeading(group, entries.size) }
-                    itemsIndexed(entries, key = { _, item -> item.path }) { _, item ->
-                        val selected = item.path in model.selected
-                        Row(
-                            Modifier.fileFrame(marquee, item.path)
-                                .folderDropTarget(model, if (item.folder) item.path else null)
-                                .fillMaxWidth()
-                                .height(model.density.rowHeight)
-                                .padding(horizontal = 8.dp)
-                                .background(
-                                    if (selected) SelectionSurface else CanvasBackground,
-                                    RoundedCornerShape(5.dp),
+        }
+    BoxWithConstraints(Modifier.fillMaxSize().marqueeSelection(model, marquee, headerHeight)) {
+        val namesOnly = model.windowsLayout == 5
+        val roomy =
+            !namesOnly &&
+                (model.fitColumns || maxWidth > if (model.density.touch) 720.dp else 610.dp)
+        val showDate =
+            !namesOnly &&
+                (model.fitColumns || maxWidth > if (model.density.touch) 560.dp else 440.dp)
+        val dateWidth = if (model.fitColumns) measured.second else if (roomy) 150.dp else 125.dp
+        val kindWidth = if (model.fitColumns) measured.third else 110.dp
+        val tableWidth =
+            if (model.fitColumns)
+                maxOf(maxWidth, measured.first + dateWidth + kindWidth + 75.dp + 185.dp)
+            else maxWidth
+        Box(Modifier.horizontalScroll(rememberScrollState())) {
+            Column(Modifier.width(tableWidth).fillMaxHeight()) {
+                Row(
+                    Modifier.fillMaxWidth()
+                        .height(headerHeight)
+                        .background(SubtleSurface)
+                        .padding(start = 26.dp, end = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    SortHeader("Name", SortBy.NAME, model, Modifier.weight(1f))
+                    if (showDate)
+                        SortHeader(
+                            "Date modified",
+                            SortBy.MODIFIED,
+                            model,
+                            Modifier.width(dateWidth),
+                        )
+                    if (!namesOnly) SortHeader("Size", SortBy.SIZE, model, Modifier.width(75.dp))
+                    if (roomy) SortHeader("Kind", SortBy.KIND, model, Modifier.width(kindWidth))
+                    Spacer(Modifier.width(model.density.targetSize))
+                }
+                HorizontalDivider(color = Border, thickness = .5.dp)
+                LazyColumn(
+                    Modifier.fillMaxSize(),
+                    state = listState,
+                    contentPadding = PaddingValues(vertical = 6.dp),
+                ) {
+                    groups.forEach { (group, entries) ->
+                        if (group.isNotEmpty())
+                            item(key = "group:$group") { GroupHeading(group, entries.size) }
+                        itemsIndexed(entries, key = { _, item -> item.path }) { _, item ->
+                            val selected = item.path in model.selected
+                            Row(
+                                Modifier.fileFrame(marquee, item.path)
+                                    .folderDropTarget(model, if (item.folder) item.path else null)
+                                    .fillMaxWidth()
+                                    .height(model.density.rowHeight)
+                                    .padding(horizontal = 8.dp)
+                                    .background(
+                                        if (selected) SelectionSurface else CanvasBackground,
+                                        RoundedCornerShape(5.dp),
+                                    )
+                                    .fileGestures(model, item, open, context)
+                                    .padding(start = 14.dp, end = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Spacer(Modifier.width(((depths[item.path] ?: 0) * 16).dp))
+                                if (item.folder && model.canExpandList)
+                                    IconButton(
+                                        onClick = { model.toggleExpanded(item) },
+                                        modifier =
+                                            Modifier.size(
+                                                if (model.density.touch) 48.dp else 28.dp,
+                                            ),
+                                    ) {
+                                        Icon(
+                                            if (item.path in model.expandedFolders)
+                                                Icons.Outlined.KeyboardArrowDown
+                                            else Icons.Outlined.ChevronRight,
+                                            if (item.path in model.expandedFolders)
+                                                "Collapse ${item.name}"
+                                            else "Expand ${item.name}",
+                                            Modifier.size(14.dp),
+                                            tint = Muted,
+                                        )
+                                    }
+                                else
+                                    Spacer(
+                                        Modifier.width(if (model.density.touch) 48.dp else 28.dp),
+                                    )
+                                DraggableFileGlyph(model, item, 27.dp)
+                                Text(
+                                    model.displayName(item),
+                                    Modifier.weight(1f).padding(horizontal = 9.dp),
+                                    fontSize = 12.sp,
+                                    color = if (selected) SelectedInk else Ink,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
                                 )
-                                .fileGestures(model, item, open, context)
-                                .padding(start = 14.dp, end = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Spacer(Modifier.width(((depths[item.path] ?: 0) * 16).dp))
-                            if (item.folder && model.canExpandList)
-                                IconButton(
-                                    onClick = { model.toggleExpanded(item) },
-                                    modifier =
-                                        Modifier.size(if (model.density.touch) 48.dp else 28.dp),
-                                ) {
-                                    Icon(
-                                        if (item.path in model.expandedFolders)
-                                            Icons.Outlined.KeyboardArrowDown
-                                        else Icons.Outlined.ChevronRight,
-                                        if (item.path in model.expandedFolders)
-                                            "Collapse ${item.name}"
-                                        else "Expand ${item.name}",
-                                        Modifier.size(14.dp),
-                                        tint = Muted,
+                                model.tags[item.path]?.let {
+                                    Box(
+                                        Modifier.padding(end = 10.dp)
+                                            .size(6.dp)
+                                            .background(
+                                                tagColor(model.tagColorName(it)),
+                                                CircleShape,
+                                            ),
                                     )
                                 }
-                            else Spacer(Modifier.width(if (model.density.touch) 48.dp else 28.dp))
-                            DraggableFileGlyph(model, item, 27.dp)
-                            Text(
-                                model.displayName(item),
-                                Modifier.weight(1f).padding(horizontal = 9.dp),
-                                fontSize = 12.sp,
-                                color = if (selected) SelectedInk else Ink,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                            model.tags[item.path]?.let {
-                                Box(
-                                    Modifier.padding(end = 10.dp)
-                                        .size(6.dp)
-                                        .background(tagColor(model.tagColorName(it)), CircleShape),
-                                )
+                                if (showDate)
+                                    Text(
+                                        formatDate(item.modified),
+                                        Modifier.width(dateWidth),
+                                        color = Muted,
+                                        fontSize = 10.sp,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                    )
+                                if (!namesOnly)
+                                    Text(
+                                        item.displaySize,
+                                        Modifier.width(75.dp),
+                                        color = Muted,
+                                        fontSize = 10.sp,
+                                    )
+                                if (roomy)
+                                    Text(
+                                        item.kind,
+                                        Modifier.width(kindWidth),
+                                        color = Muted,
+                                        fontSize = 10.sp,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                    )
+                                FileActionsButton(model, item)
                             }
-                            if (showDate)
-                                Text(
-                                    formatDate(item.modified),
-                                    Modifier.width(if (roomy) 150.dp else 125.dp),
-                                    color = Muted,
-                                    fontSize = 10.sp,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                )
-                            Text(
-                                item.displaySize,
-                                Modifier.width(75.dp),
-                                color = Muted,
-                                fontSize = 10.sp,
-                            )
-                            if (roomy)
-                                Text(
-                                    item.kind,
-                                    Modifier.width(110.dp),
-                                    color = Muted,
-                                    fontSize = 10.sp,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                )
-                            FileActionsButton(model, item)
                         }
                     }
                 }
@@ -242,9 +317,65 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
 }
 
 @Composable
+fun ContentListView(model: FinderModel, open: (Entry) -> Unit) {
+    val groups = model.groups()
+    val keys = groups.flatMap { (group, entries) ->
+        (if (group.isNotEmpty()) listOf<String?>(null) else emptyList()) + entries.map { it.path }
+    }
+    val state = rememberKeyboardListState(model, keys)
+    LazyColumn(Modifier.fillMaxSize(), state = state, contentPadding = PaddingValues(8.dp)) {
+        groups.forEach { (group, entries) ->
+            if (group.isNotEmpty()) item(key = "group:$group") { GroupHeading(group, entries.size) }
+            items(entries, key = { it.path }) { item ->
+                Row(
+                    Modifier.fillMaxWidth()
+                        .height(if (model.density.touch) 78.dp else 66.dp)
+                        .folderDropTarget(model, item.path.takeIf { item.folder })
+                        .background(
+                            if (item.path in model.selected) SelectionSurface else CanvasBackground,
+                            RoundedCornerShape(6.dp),
+                        )
+                        .fileGestures(model, item, open)
+                        .padding(horizontal = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    DraggableFileGlyph(model, item, 42.dp)
+                    Column(Modifier.weight(1f).padding(horizontal = 14.dp)) {
+                        Text(
+                            model.displayName(item),
+                            fontSize = 12.sp,
+                            color = Ink,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                        Text(
+                            "${item.kind} · ${item.displaySize}",
+                            Modifier.padding(top = 4.dp),
+                            fontSize = 10.sp,
+                            color = Muted,
+                        )
+                    }
+                    Text(
+                        formatDate(item.modified),
+                        Modifier.widthIn(max = 150.dp),
+                        fontSize = 10.sp,
+                        color = Muted,
+                        maxLines = 1,
+                    )
+                    FileActionsButton(model, item)
+                }
+            }
+        }
+    }
+}
+
+@Composable
 private fun SortHeader(title: String, sort: SortBy, model: FinderModel, modifier: Modifier) {
     Row(
-        modifier.fillMaxHeight().clickable { model.changeSort(sort) },
+        modifier.fillMaxHeight().clickable {
+            model.activatePane()
+            model.changeSort(sort)
+        },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
@@ -267,18 +398,28 @@ private fun SortHeader(title: String, sort: SortBy, model: FinderModel, modifier
 @Composable
 fun IconView(model: FinderModel, open: (Entry) -> Unit) {
     val marquee = remember(model.location) { MarqueeState() }
+    val groups = model.groups()
+    val state =
+        rememberKeyboardGridState(
+            model,
+            groups.flatMap { (group, entries) ->
+                (if (group.isNotEmpty()) listOf<String?>(null) else emptyList()) +
+                    entries.map { it.path }
+            },
+        )
     BoxWithConstraints(Modifier.fillMaxSize().marqueeSelection(model, marquee)) {
         LaunchedEffect(maxWidth, model.iconSize) {
             model.gridColumns = (maxWidth.value / (model.iconSize + 8)).toInt().coerceAtLeast(1)
         }
         LazyVerticalGrid(
             GridCells.Adaptive(model.iconSize.dp),
-            Modifier.fillMaxSize(),
+            state = state,
+            modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(18.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            model.groups().forEach { (group, entries) ->
+            groups.forEach { (group, entries) ->
                 if (group.isNotEmpty())
                     item(key = "group:$group", span = { GridItemSpan(maxLineSpan) }) {
                         GroupHeading(group, entries.size)
@@ -288,7 +429,7 @@ fun IconView(model: FinderModel, open: (Entry) -> Unit) {
                     Column(
                         Modifier.fileFrame(marquee, item.path)
                             .folderDropTarget(model, if (item.folder) item.path else null)
-                            .height((model.iconSize + 19).dp)
+                            .height((model.iconSize + if (model.windowsLayout == 7) 37 else 19).dp)
                             .background(
                                 if (selected) SelectionSurface else Color.Transparent,
                                 RoundedCornerShape(8.dp),
@@ -320,6 +461,14 @@ fun IconView(model: FinderModel, open: (Entry) -> Unit) {
                             textAlign = TextAlign.Center,
                             overflow = TextOverflow.Ellipsis,
                         )
+                        if (model.windowsLayout == 7)
+                            Text(
+                                item.kind,
+                                fontSize = 10.sp,
+                                color = Muted,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                            )
                         model.tags[item.path]?.let {
                             Box(
                                 Modifier.padding(top = 4.dp)
@@ -434,7 +583,10 @@ private fun FileColumn(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
-        LazyColumn(Modifier.fillMaxSize().padding(5.dp)) {
+        LazyColumn(
+            Modifier.fillMaxSize().padding(5.dp),
+            state = rememberKeyboardListState(model, entries.map { it.path }),
+        ) {
             items(entries, key = { it.path }) { item ->
                 Row(
                     Modifier.folderDropTarget(model, if (item.folder) item.path else null)
@@ -466,6 +618,7 @@ private fun FileColumn(
 
 @Composable
 fun GalleryView(model: FinderModel, open: (Entry) -> Unit) {
+    val stripState = rememberKeyboardListState(model, model.entries.map { it.path })
     val item = model.focused ?: model.entries.firstOrNull()
     Column(Modifier.fillMaxSize()) {
         if (item != null) {
@@ -492,6 +645,7 @@ fun GalleryView(model: FinderModel, open: (Entry) -> Unit) {
             HorizontalDivider(color = Border)
             LazyRow(
                 Modifier.fillMaxWidth().height(128.dp),
+                state = stripState,
                 contentPadding = PaddingValues(12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
@@ -540,7 +694,7 @@ fun PreviewPane(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                "Preview",
+                if (model.previewDetailsOnly) "Details" else "Preview",
                 Modifier.weight(1f),
                 fontSize = 9.sp,
                 letterSpacing = 0.sp,
@@ -579,12 +733,13 @@ fun PreviewPane(
             }
         } else {
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
-                PreviewContent(
-                    entry,
-                    Modifier.fillMaxWidth()
-                        .height(205.dp)
-                        .padding(horizontal = 14.dp, vertical = 8.dp),
-                )
+                if (!model.previewDetailsOnly)
+                    PreviewContent(
+                        entry,
+                        Modifier.fillMaxWidth()
+                            .height(205.dp)
+                            .padding(horizontal = 14.dp, vertical = 8.dp),
+                    )
                 Metadata(entry, model, Modifier.padding(horizontal = 20.dp, vertical = 14.dp))
                 if (model.selected.size > 1)
                     Text(
@@ -667,7 +822,10 @@ fun PathBar(model: FinderModel, goTo: () -> Unit) {
                         Modifier.folderDropTarget(model, path)
                             .height(if (model.density.touch) 48.dp else 34.dp)
                             .widthIn(min = if (model.density.touch) 48.dp else 0.dp)
-                            .clickable { model.navigate(path) }
+                            .clickable {
+                                model.activatePane()
+                                model.navigate(path)
+                            }
                             .padding(horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
@@ -883,7 +1041,21 @@ fun NameDialog(
                     value = it
                     error = null
                 },
-                Modifier.fillMaxWidth().focusRequester(focus),
+                Modifier.fillMaxWidth().focusRequester(focus).onPreviewKeyEvent {
+                    if (it.type != androidx.compose.ui.input.key.KeyEventType.KeyDown) false
+                    else
+                        when (it.key) {
+                            androidx.compose.ui.input.key.Key.Escape -> {
+                                onDismiss()
+                                true
+                            }
+                            androidx.compose.ui.input.key.Key.Enter -> {
+                                confirm()
+                                true
+                            }
+                            else -> false
+                        }
+                },
                 singleLine = true,
                 isError = error != null,
                 supportingText = error?.let { { Text(it) } },

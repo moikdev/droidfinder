@@ -13,6 +13,15 @@ import org.junit.Test
 
 class TransferQueueWorkflowTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+
+    @org.junit.Before
+    fun singlePaneLayout() {
+        compose.runOnIdle {
+            val root = compose.activity.model
+            if (root.dualPane) root.toggleDualPane()
+        }
+    }
+
     private val model
         get() = compose.activity.model
 

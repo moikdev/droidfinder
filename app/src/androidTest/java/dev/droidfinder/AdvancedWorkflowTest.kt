@@ -62,6 +62,7 @@ class AdvancedWorkflowTest {
         File(fixture, "Audio.wav").writeBytes(wav.array())
         compose.runOnIdle {
             val model = compose.activity.model
+            if (model.dualPane) model.toggleDualPane()
             model.changeMode(ViewMode.LIST)
             model.changeGrouping(GroupBy.NONE)
             model.clearSelection()

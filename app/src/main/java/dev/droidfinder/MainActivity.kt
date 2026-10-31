@@ -17,8 +17,45 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 
 class MainActivity : ComponentActivity() {
+    internal val finderWindowId: String
+        get() =
+            intent.getStringExtra("finderWindowId")?.takeIf {
+                it.matches(Regex("[a-zA-Z0-9-]{1,64}"))
+            } ?: "main"
+
     internal val model: FinderModel
-        get() = (application as FinderApplication).model
+        get() =
+            (application as FinderApplication).windowModel(
+                finderWindowId,
+                intent.getStringExtra("finderLocation"),
+            )
+
+    internal fun openFinderWindow(path: String) {
+        startActivity(
+            Intent(this, MainActivity::class.java)
+                .putExtra("finderWindowId", java.util.UUID.randomUUID().toString())
+                .putExtra("finderLocation", path)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK),
+        )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFinishing) (application as FinderApplication).releaseWindow(finderWindowId)
+    }
+
+    private var immersive = false
+
+    private fun toggleFullscreen() {
+        immersive = !immersive
+        androidx.core.view.WindowCompat.getInsetsController(window, window.decorView).apply {
+            systemBarsBehavior =
+                androidx.core.view.WindowInsetsControllerCompat
+                    .BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            if (immersive) hide(androidx.core.view.WindowInsetsCompat.Type.systemBars())
+            else show(androidx.core.view.WindowInsetsCompat.Type.systemBars())
+        }
+    }
 
     private val requestNotifications =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
@@ -45,9 +82,12 @@ class MainActivity : ComponentActivity() {
             )
     }
 
+    private var folderRequestPane: FinderModel? = null
+
     private val connectFolder =
         registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
-            if (uri != null) model.connectLocation(uri)
+            if (uri != null) (folderRequestPane ?: model.activePaneModel).connectLocation(uri)
+            folderRequestPane = null
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,8 +126,14 @@ class MainActivity : ComponentActivity() {
             }
             FinderApp(
                 model,
-                onConnectFolder = { connectFolder.launch(null) },
+                onConnectFolder = {
+                    folderRequestPane = model.activePaneModel
+                    connectFolder.launch(null)
+                },
                 onEnableNotifications = ::enableNotifications,
+                onNewWindow = ::openFinderWindow,
+                onCloseWindow = { finish() },
+                onToggleFullscreen = ::toggleFullscreen,
                 onGrantAccess = {
                     try {
                         startActivity(
@@ -104,7 +150,9 @@ class MainActivity : ComponentActivity() {
                 onOpenWith = { entry -> openFile(entry, true) },
                 onShare = { entries ->
                     if (entries.any { it.folder })
-                        model.prepareFolderShare(model.actionEntries) { model.shareRequested = it }
+                        model.activePaneModel.prepareFolderShare(entries) {
+                            model.shareRequested = it
+                        }
                     else shareFiles(entries)
                 },
             )
@@ -152,7 +200,7 @@ class MainActivity : ComponentActivity() {
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             startActivity(if (chooser) Intent.createChooser(intent, "Open with") else intent)
         } catch (_: ActivityNotFoundException) {
-            model.quickLookRequested = entry
+            model.activePaneModel.quickLookRequested = entry
         } catch (error: Exception) {
             model.message = error.message ?: "Couldn't open this file."
         }

@@ -12,6 +12,15 @@ import org.junit.Test
 
 class ProviderWorkflowTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+
+    @org.junit.Before
+    fun singlePaneLayout() {
+        compose.runOnIdle {
+            val root = compose.activity.model
+            if (root.dualPane) root.toggleDualPane()
+        }
+    }
+
     private lateinit var fixture: File
     private lateinit var local: File
     private lateinit var root: String

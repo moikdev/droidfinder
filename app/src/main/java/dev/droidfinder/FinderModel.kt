@@ -8,6 +8,7 @@ import android.os.storage.StorageManager
 import android.provider.OpenableColumns
 import android.webkit.MimeTypeMap
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
@@ -23,7 +24,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
@@ -139,19 +139,121 @@ data class ClipboardFiles(val paths: List<String>, val cut: Boolean) {
 
 val tagNames = listOf("Red", "Orange", "Yellow", "Green", "Blue", "Purple")
 
-class FinderModel(app: Application) : AndroidViewModel(app) {
+class FinderModel
+@JvmOverloads
+constructor(
+    app: Application,
+    internal val session: FinderSession = FinderSession(app),
+    val paneId: String = "primary",
+    internal val windowState: FinderWindowState = FinderWindowState(app),
+) : AndroidViewModel(app) {
+    val primaryPane: FinderModel
+        get() = windowState.panes.first { it.paneId == "primary" }
+
+    val secondaryPane: FinderModel
+        get() =
+            androidx.lifecycle
+                .ViewModelProvider(
+                    windowState.secondaryStore,
+                    object : androidx.lifecycle.ViewModelProvider.Factory {
+                        override fun <T : androidx.lifecycle.ViewModel> create(
+                            modelClass: Class<T>,
+                        ): T {
+                            @Suppress("UNCHECKED_CAST")
+                            return FinderModel(getApplication(), session, "secondary", windowState)
+                                as T
+                        }
+                    },
+                )[FinderModel::class.java]
+
+    val activePaneModel: FinderModel
+        get() =
+            if (dualPane && windowState.activePane.value == "secondary") secondaryPane
+            else primaryPane
+
+    val otherPane: FinderModel
+        get() = if (paneId == "primary") secondaryPane else primaryPane
+
+    val dualPane
+        get() = windowState.dualPane.value
+
+    val paneRatio
+        get() = windowState.paneRatio.value
+
+    val panesReversed
+        get() = windowState.panesReversed.value
+
+    val paneActive
+        get() = activePaneModel === this
+
+    fun activatePane() {
+        if (windowState.activePane.value == paneId) return
+        windowState.activePane.value = paneId
+        windowState.prefs.edit().putString("activePane", paneId).apply()
+    }
+
+    fun toggleDualPane() {
+        if (!dualPane) secondaryPane
+        windowState.dualPane.value = !dualPane
+        if (!dualPane) primaryPane.activatePane()
+        windowState.prefs.edit().putBoolean("dualPane", dualPane).apply()
+    }
+
+    fun focusOtherPane() {
+        if (dualPane) otherPane.activatePane()
+    }
+
+    fun swapPanes() {
+        windowState.panesReversed.value = !panesReversed
+        windowState.prefs.edit().putBoolean("panesReversed", panesReversed).apply()
+    }
+
+    fun changePaneRatio(value: Float) {
+        if (!value.isFinite()) return
+        windowState.paneRatio.value = value.coerceIn(.3f, .7f)
+        windowState.prefs.edit().putFloat("paneRatio", paneRatio).apply()
+    }
+
+    fun transferToOtherPane(move: Boolean) {
+        if (!dualPane || isTrash) return
+        val destination = otherPane
+        val parent = destination.folderPath
+        if (parent == null || !destination.canCreate) {
+            message = "Open a writable folder in the other pane."
+            return
+        }
+        if (move && actionEntries.any { !it.canDelete }) {
+            message = "Some selected items cannot be moved."
+            return
+        }
+        val paths = actionEntries.map { it.path }
+        if (paths.isNotEmpty()) transferPaths(paths, parent, move)
+    }
+
     private val prefs = app.getSharedPreferences("finder", 0)
-    val workspace = File(app.filesDir, "Workspace").apply { mkdirs() }
-    val deviceRoot: File = Environment.getExternalStorageDirectory()
-    val engine = FileEngine(app.filesDir)
-    val documents = DocumentAccess(app, engine)
-    var connectedLocations by mutableStateOf(documents.locations)
+    private val panePrefs =
+        app.getSharedPreferences(
+            if (windowState.id == "main")
+                if (paneId == "primary") "finder" else "finder-pane-$paneId"
+            else "finder-window-${windowState.id}-$paneId",
+            0,
+        )
+    val workspace
+        get() = session.workspace
+
+    val deviceRoot
+        get() = session.deviceRoot
+
+    val engine
+        get() = session.engine
+
+    val documents
+        get() = session.documents
+
+    var connectedLocations by session.connectedLocations
         private set
 
-    var notificationsEnabled by
-        mutableStateOf(
-            androidx.core.app.NotificationManagerCompat.from(app).areNotificationsEnabled(),
-        )
+    var notificationsEnabled by session.notificationsEnabled
         private set
 
     fun updateNotificationState() {
@@ -160,13 +262,13 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 .areNotificationsEnabled()
     }
 
-    var hasAccess by mutableStateOf(Environment.isExternalStorageManager())
+    var hasAccess by session.hasAccess
         private set
 
     var tabs by mutableStateOf(loadTabs())
         private set
 
-    var activeTab by mutableStateOf(prefs.getInt("activeTab", 0).coerceIn(0, tabs.lastIndex))
+    var activeTab by mutableStateOf(panePrefs.getInt("activeTab", 0).coerceIn(0, tabs.lastIndex))
         private set
 
     val location: String
@@ -196,7 +298,11 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     private var expandedChildren by mutableStateOf<Map<String, List<Entry>>>(emptyMap())
     val canExpandList
         get() =
-            folderPath != null && query.isBlank() && !searchRules.active && grouping == GroupBy.NONE
+            folderPath != null &&
+                query.isBlank() &&
+                !searchRules.active &&
+                grouping == GroupBy.NONE &&
+                windowsLayout != 8
 
     fun listRows(): List<Pair<Entry, Int>> {
         if (!canExpandList) return entries.map { it to 0 }
@@ -249,14 +355,14 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     private var leadSelection by mutableStateOf<String?>(null)
     private var rangeAnchor: String? = null
     var quickLookRequested by mutableStateOf<Entry?>(null)
-    var shareRequested by mutableStateOf<List<Entry>?>(null)
+    var shareRequested by windowState.shareRequested
     var query by mutableStateOf(tabs[activeTab].search)
         private set
 
     var searchRules by mutableStateOf(tabs[activeTab].rules)
         private set
 
-    var smartFolders by mutableStateOf(loadSmartFolders())
+    var smartFolders by session.smartFolders
         private set
 
     val currentSmartFolder
@@ -271,16 +377,12 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     var grouping by
         mutableStateOf(
-            runCatching { GroupBy.valueOf(prefs.getString("group", "NONE")!!) }
+            runCatching { GroupBy.valueOf(panePrefs.getString("group", "NONE")!!) }
                 .getOrDefault(GroupBy.NONE),
         )
         private set
 
-    var density by
-        mutableStateOf(
-            runCatching { FinderDensity.valueOf(prefs.getString("density", "COMFORTABLE")!!) }
-                .getOrDefault(FinderDensity.COMFORTABLE),
-        )
+    var density by session.density
         private set
 
     fun changeDensity(value: FinderDensity) {
@@ -288,32 +390,34 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         prefs.edit().putString("density", value.name).apply()
     }
 
-    var iconSize by mutableStateOf(prefs.getInt("iconSize", 120))
+    var iconSize by mutableStateOf(panePrefs.getInt("iconSize", 120))
         private set
 
-    var columnWidth by mutableStateOf(prefs.getInt("columnWidth", 240))
+    var columnWidth by mutableStateOf(panePrefs.getInt("columnWidth", 240))
         private set
 
-    var previewWidth by mutableStateOf(prefs.getInt("previewWidth", 280))
+    var previewWidth by mutableStateOf(panePrefs.getInt("previewWidth", 280))
         private set
 
-    var showExtensions by mutableStateOf(prefs.getBoolean("extensions", true))
+    var showExtensions by session.showExtensions
         private set
 
-    var darkTheme by mutableStateOf(prefs.getBoolean("dark", false))
+    var darkTheme by session.darkTheme
         private set
 
-    var sidebarWidth by mutableStateOf(prefs.getInt("sidebarWidth", 206))
+    var sidebarWidth by session.sidebarWidth
         private set
 
-    var sidebarVisible by mutableStateOf(prefs.getBoolean("sidebarVisible", true))
+    var sidebarVisible by session.sidebarVisible
         private set
 
-    var tagsVisible by mutableStateOf(prefs.getBoolean("tagsVisible", true))
+    var tagsVisible by session.tagsVisible
         private set
 
-    private val styleStore = FolderStyleStore(File(app.filesDir, "folder-styles.properties"))
-    var folderStyles by mutableStateOf(styleStore.styles)
+    private val styleStore
+        get() = session.styleStore
+
+    var folderStyles by session.folderStyles
         private set
 
     var contextRequested by mutableStateOf<FinderContextRequest?>(null)
@@ -322,84 +426,354 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         get() = closedTabs.isNotEmpty()
 
     private val tabSelections = mutableMapOf<String, TabSelection>()
+    var windowsLayout by mutableStateOf(panePrefs.getInt("windowsLayout", 0))
+        private set
+
+    var fitColumns by mutableStateOf(false)
+        private set
+
+    var browserWidthDp = 0f
+    var browserHeightDp = 0f
+    var keyboardScrollRequest by mutableIntStateOf(0)
+        private set
+
+    val keyboardFocusPath
+        get() = leadSelection
+
+    val keyboardPageSize
+        get() =
+            when (mode) {
+                ViewMode.ICONS ->
+                    gridColumns * (browserHeightDp / (iconSize + 31)).toInt().coerceAtLeast(1)
+                ViewMode.GALLERY -> (browserWidthDp / 103).toInt().coerceAtLeast(1)
+                else ->
+                    (browserHeightDp /
+                            if (windowsLayout == 8) 72 else if (density.touch) 48 else 36)
+                        .toInt()
+                        .coerceAtLeast(1)
+            }
+
+    var inspectorRequested by mutableStateOf(false)
+        private set
+
+    var previewDetailsOnly by mutableStateOf(panePrefs.getBoolean("previewDetailsOnly", false))
+        private set
+
+    var navigationTreeVisible by mutableStateOf(panePrefs.getBoolean("navigationTree", false))
+        private set
+
+    var navigationRoots by mutableStateOf<List<Entry>>(emptyList())
+        private set
+
+    var navigationExpanded by mutableStateOf<Set<String>>(emptySet())
+        private set
+
+    private var navigationChildren by mutableStateOf<Map<String, List<Entry>>>(emptyMap())
+    private var keyboardRangeBase: Set<String>? = null
+    private var keyboardRangeAdditive = false
+
+    fun windowsView(number: Int) {
+        changeMode(
+            when (number) {
+                in 1..4,
+                7 -> ViewMode.ICONS
+                9 -> ViewMode.GALLERY
+                else -> ViewMode.LIST
+            },
+        )
+        windowsLayout = number
+        if (number in 1..4 || number == 7)
+            changeIconSize(
+                when (number) {
+                    1 -> 200
+                    2 -> 160
+                    3 -> 120
+                    4 -> 90
+                    else -> 150
+                },
+            )
+        fitColumns = false
+        panePrefs.edit().putInt("windowsLayout", number).apply()
+    }
+
+    fun fitColumnsToContents() {
+        changeMode(ViewMode.LIST)
+        fitColumns = true
+    }
+
+    fun toggleInspector(details: Boolean = false) {
+        val displayed =
+            previewVisible &&
+                (browserWidthDp >= 900 || inspectorRequested) &&
+                previewDetailsOnly == details
+        previewVisible = !displayed
+        inspectorRequested = !displayed
+        previewDetailsOnly = details
+        panePrefs
+            .edit()
+            .putBoolean("preview", previewVisible)
+            .putBoolean("previewDetailsOnly", details)
+            .apply()
+    }
+
+    fun selectBoundary(last: Boolean, extend: Boolean) {
+        val items = visibleEntries
+        if (items.isEmpty()) return
+        if (extend) {
+            if (focused == null) {
+                leadSelection = items.first().path
+                rangeAnchor = leadSelection
+            }
+            stepSelection(if (last) items.size else -items.size, true)
+        } else {
+            keyboardRangeBase = null
+            val path = (if (last) items.last() else items.first()).path
+            selected = setOf(path)
+            leadSelection = path
+            rangeAnchor = path
+            multiSelecting = false
+            keyboardScrollRequest++
+        }
+    }
+
+    fun moveKeyboardFocus(delta: Int) {
+        keyboardScrollRequest++
+        val items = visibleEntries
+        if (items.isEmpty()) return
+        val current = items.indexOfFirst { it.path == leadSelection }
+        leadSelection =
+            items[(if (current < 0) 0 else current + delta).coerceIn(0, items.lastIndex)].path
+        keyboardRangeBase = null
+    }
+
+    fun toggleFocusedSelection() {
+        focused?.let { select(it, multiple = true) }
+    }
+
+    fun keyboardLeft() {
+        val item = focused
+        when {
+            mode == ViewMode.ICONS || mode == ViewMode.GALLERY -> stepSelection(-1, false)
+            item != null && item.path in expandedFolders -> toggleExpanded(item)
+            mode == ViewMode.LIST && item?.parentPath != folderPath ->
+                visibleEntries
+                    .firstOrNull { it.path == item?.parentPath }
+                    ?.let {
+                        clearSelection()
+                        select(it)
+                    } ?: up()
+            else -> up()
+        }
+    }
+
+    fun keyboardRight() {
+        val item = focused ?: return
+        when {
+            mode == ViewMode.ICONS || mode == ViewMode.GALLERY -> stepSelection(1, false)
+            mode == ViewMode.LIST && canExpandList && item.folder ->
+                if (item.path !in expandedFolders) toggleExpanded(item)
+                else
+                    visibleEntries
+                        .firstOrNull { it.parentPath == item.path }
+                        ?.let {
+                            clearSelection()
+                            select(it)
+                        }
+            item.folder -> navigate(item.path)
+        }
+    }
+
+    fun expandKeyboardSelection(recursive: Boolean = false) {
+        val item = focused?.takeIf { it.folder } ?: return
+        if (mode != ViewMode.LIST) changeMode(ViewMode.LIST)
+        if (!recursive) {
+            if (item.path !in expandedFolders) toggleExpanded(item)
+            return
+        }
+        val at = location
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    val pending = ArrayDeque<Pair<String, Int>>()
+                    pending.add(item.path to 0)
+                    val children = linkedMapOf<String, List<Entry>>()
+                    while (pending.isNotEmpty() && children.size < 1000) {
+                        coroutineContext.ensureActive()
+                        val (path, depth) = pending.removeFirst()
+                        if (path in children || depth >= 16) continue
+                        val files = listPath(path)
+                        children[path] = files
+                        files
+                            .filter {
+                                it.folder &&
+                                    (it.documentUri != null ||
+                                        !java.nio.file.Files.isSymbolicLink(it.file.toPath()))
+                            }
+                            .forEach { pending.add(it.path to depth + 1) }
+                    }
+                    children to pending.isNotEmpty()
+                }
+            }
+                .onSuccess { (children, limited) ->
+                    if (location == at) {
+                        expandedChildren = expandedChildren + children
+                        expandedFolders = expandedFolders + children.keys
+                    }
+                    if (limited) message = "Folder expansion stopped at the 1,000-folder limit."
+                }
+                .onFailure {
+                    if (it is kotlinx.coroutines.CancellationException) throw it
+                    message = it.message
+                }
+        }
+    }
+
+    fun collapseKeyboardSelection() {
+        focused?.takeIf { it.path in expandedFolders }?.let(::toggleExpanded)
+    }
+
+    fun navigationRows(): List<Pair<Entry, Int>> {
+        val result = mutableListOf<Pair<Entry, Int>>()
+        fun visit(entry: Entry, depth: Int) {
+            if (result.size >= 1000 || depth > 16) return
+            result += entry to depth
+            if (entry.path in navigationExpanded)
+                navigationChildren[entry.path].orEmpty().forEach { visit(it, depth + 1) }
+        }
+        navigationRoots.forEach { visit(it, 0) }
+        return result
+    }
+
+    fun hideNavigationTree() {
+        navigationTreeVisible = false
+        panePrefs.edit().putBoolean("navigationTree", false).apply()
+    }
+
+    fun revealNavigationTree(showSidebar: Boolean = true) {
+        if (showSidebar && !sidebarVisible) toggleSidebar()
+        navigationTreeVisible = true
+        panePrefs.edit().putBoolean("navigationTree", true).apply()
+        val path = folderPath
+        val chain =
+            path?.let { generateSequence(it) { parentPath(it) }.take(32).toList() }.orEmpty()
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    val roots =
+                        (listOf(workspace.path) +
+                                (if (hasAccess) listOf(deviceRoot.path) + volumes.map { it.path }
+                                else emptyList()) +
+                                connectedLocations.map { it.uri })
+                            .distinct()
+                    val rootEntries = roots.mapNotNull {
+                        runCatching { documents.read(it) }.getOrNull()
+                    }
+                    rootEntries to
+                        chain.associateWith {
+                            runCatching {
+                                    listPath(it).filter { child -> child.folder }.take(500)
+                                }
+                                .getOrDefault(emptyList())
+                        }
+                }
+            }
+                .onSuccess { (roots, children) ->
+                    navigationRoots = roots
+                    navigationChildren = navigationChildren + children
+                    navigationExpanded = navigationExpanded + chain
+                }
+                .onFailure { message = it.message }
+        }
+    }
+
+    fun toggleNavigationFolder(entry: Entry) {
+        if (entry.path in navigationExpanded) {
+            navigationExpanded = navigationExpanded - entry.path
+            return
+        }
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    listPath(entry.path).filter { it.folder }.take(500)
+                }
+            }
+                .onSuccess {
+                    navigationChildren = navigationChildren + (entry.path to it)
+                    navigationExpanded = navigationExpanded + entry.path
+                }
+                .onFailure { message = it.message }
+        }
+    }
+
     var gridColumns = 4
     private var typedPrefix = ""
     private var typedAt = 0L
     var mode by
         mutableStateOf(
-            runCatching { ViewMode.valueOf(prefs.getString("view", "LIST")!!) }
+            runCatching { ViewMode.valueOf(panePrefs.getString("view", "LIST")!!) }
                 .getOrDefault(ViewMode.LIST),
         )
         private set
 
     var sort by
         mutableStateOf(
-            runCatching { SortBy.valueOf(prefs.getString("sort", "NAME")!!) }
+            runCatching { SortBy.valueOf(panePrefs.getString("sort", "NAME")!!) }
                 .getOrDefault(SortBy.NAME),
         )
         private set
 
-    var ascending by mutableStateOf(prefs.getBoolean("ascending", true))
+    var ascending by mutableStateOf(panePrefs.getBoolean("ascending", true))
         private set
 
-    var showHidden by mutableStateOf(prefs.getBoolean("hidden", false))
+    var showHidden by mutableStateOf(panePrefs.getBoolean("hidden", false))
         private set
 
-    var previewVisible by mutableStateOf(prefs.getBoolean("preview", true))
+    var previewVisible by mutableStateOf(panePrefs.getBoolean("preview", true))
         private set
 
-    var foldersFirst by mutableStateOf(prefs.getBoolean("foldersFirst", true))
+    var foldersFirst by mutableStateOf(panePrefs.getBoolean("foldersFirst", true))
         private set
 
     var loading by mutableStateOf(false)
         private set
 
-    var busy by mutableStateOf<String?>(null)
+    var busy by session.busy
         private set
 
-    private val transferJournal: TransferStore = SqliteTransferStore(app)
-    private val journalMutex = Mutex()
-    var journalError by mutableStateOf<String?>(null)
+    private val transferJournal
+        get() = session.transferJournal
+
+    private val journalMutex
+        get() = session.journalMutex
+
+    var journalError by session.journalError
         private set
 
-    var damagedTransferJournal by mutableStateOf(false)
+    var damagedTransferJournal by session.damagedTransferJournal
         private set
 
-    var transferJobs by
-        mutableStateOf(
-            runCatching { transferJournal.load().map { it.afterRestart() } }
-                .getOrElse {
-                    journalError = it.message
-                    damagedTransferJournal = true
-                    emptyList()
-                },
-        )
+    var transferJobs by session.transferJobs
         private set
 
-    var activeTransferId by mutableStateOf<String?>(null)
+    var activeTransferId by session.activeTransferId
         private set
 
     val activeTransfer
         get() = transferJobs.firstOrNull { it.id == activeTransferId }
 
-    private data class TransferSubmission(
-        val clipboard: ClipboardFiles?,
-        val clearClipboard: Boolean,
-        val tab: String,
-        val location: String,
-        val selection: Set<String>,
-    )
+    private val transferSubmissions
+        get() = session.transferSubmissions
 
-    private val transferSubmissions = mutableMapOf<String, TransferSubmission>()
-    var fileConflict by mutableStateOf<FileConflict?>(null)
+    var fileConflict by session.fileConflict
         private set
 
-    @Volatile private var conflictAnswer: CompletableDeferred<ConflictDecision>? = null
-    var conflictPolicy by
-        mutableStateOf(
-            runCatching { ConflictPolicy.valueOf(prefs.getString("conflictPolicy", "ASK")!!) }
-                .getOrDefault(ConflictPolicy.ASK),
-        )
+    private var conflictAnswer: CompletableDeferred<ConflictDecision>?
+        get() = session.conflictAnswer
+        set(value) {
+            session.conflictAnswer = value
+        }
+
+    var conflictPolicy by session.conflictPolicy
         private set
 
     fun changeConflictPolicy(value: ConflictPolicy) {
@@ -430,8 +804,8 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    var message by mutableStateOf<String?>(null)
-    var interruptedTransfer by mutableStateOf<String?>(null)
+    var message by session.message
+    var interruptedTransfer by session.interruptedTransfer
         private set
 
     var listingError by mutableStateOf<String?>(null)
@@ -440,43 +814,52 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     var truncated by mutableStateOf(false)
         private set
 
-    var clipboard by mutableStateOf<ClipboardFiles?>(null)
+    var clipboard by session.clipboard
         private set
 
-    private val history = FileHistory(engine)
-    var undoLabel by mutableStateOf<String?>(null)
+    private val history
+        get() = session.history
+
+    var undoLabel by session.undoLabel
         private set
 
-    var redoLabel by mutableStateOf<String?>(null)
+    var redoLabel by session.redoLabel
         private set
 
     val canUndoTrash
         get() = undoLabel == "Move to Trash"
 
-    var transferProgress by mutableStateOf(TransferProgress())
+    var transferProgress by session.transferProgress
         private set
 
-    private var transferControl = TransferControl()
-    var favorites by mutableStateOf(prefs.getStringSet("favorites", emptySet())!!.toSet())
+    private var transferControl: TransferControl
+        get() = session.transferControl
+        set(value) {
+            session.transferControl = value
+        }
+
+    var favorites by session.favorites
         private set
 
-    private val tagStore =
-        TagStore(File(app.filesDir, "tags.properties")).also { it.migrate(loadTags()) }
-    var tagAssignments by mutableStateOf(tagStore.assignments)
+    private val tagStore
+        get() = session.tagStore
+
+    var tagAssignments by session.tagAssignments
         private set
 
-    var tagDefinitions by mutableStateOf(tagStore.definitions)
+    var tagDefinitions by session.tagDefinitions
         private set
 
-    var tags by mutableStateOf(tagAssignments.mapValues { it.value.firstOrNull().orEmpty() })
+    var tags by session.tags
         private set
 
     val tagNames
         get() = tagDefinitions.map { it.name }
 
-    var volumes by mutableStateOf<List<File>>(emptyList())
+    var volumes by session.volumes
         private set
 
+    private var listingLocation: String? = null
     private var listingJob: Job? = null
     private var observer: FileObserver? = null
     private var providerObserver: android.database.ContentObserver? = null
@@ -485,8 +868,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     val focused
         get() =
-            visibleEntries.firstOrNull { it.path == leadSelection && it.path in selected }
-                ?: selectedEntries.lastOrNull()
+            visibleEntries.firstOrNull { it.path == leadSelection } ?: selectedEntries.lastOrNull()
 
     val actionEntries
         get(): List<Entry> {
@@ -500,11 +882,19 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         }
 
     init {
+        session.panes += this
+        windowState.panes += this
         val marker = File(app.filesDir, "active-transfer.txt")
-        if (marker.exists() && TransferRuntime.label == null)
+        if (
+            windowState.id == "main" &&
+                paneId == "primary" &&
+                marker.exists() &&
+                TransferRuntime.label == null
+        )
             interruptedTransfer = runCatching { marker.readText() }.getOrNull()
         journalError?.let { message = it }
         refresh()
+        if (navigationTreeVisible) revealNavigationTree(false)
     }
 
     fun dismissRecovery() {
@@ -540,7 +930,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
             )
 
     private fun loadTabs(): List<FinderTab> = runCatching {
-        val array = JSONArray(prefs.getString("tabs", "[]"))
+        val array = JSONArray(panePrefs.getString("tabs", "[]"))
         (0 until array.length())
             .map { i ->
                 val value = array.optJSONObject(i)
@@ -563,38 +953,6 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
             .ifEmpty { listOf(FinderTab(listOf(workspace.absolutePath))) }
     }
         .getOrElse { listOf(FinderTab(listOf(workspace.absolutePath))) }
-
-    private fun loadTags(): Map<String, String> =
-        prefs.all
-            .filterKeys { it.startsWith("tag:") }
-            .mapKeys { it.key.removePrefix("tag:") }
-            .mapValues { it.value.toString() }
-
-    private fun loadSmartFolders(): List<SmartFolder> = runCatching {
-        val array = JSONArray(prefs.getString("smartFolders", "[]"))
-        (0 until array.length()).map { index ->
-            val item = array.getJSONObject(index)
-            val r = item.getJSONObject("rules")
-            SmartFolder(
-                item.getString("id"),
-                item.getString("name"),
-                item.getString("root"),
-                SearchRules(
-                    r.optString("name"),
-                    r.optString("kind", "Any"),
-                    r.optString("tag"),
-                    r.optInt("days"),
-                    r.optLong("min"),
-                    r.optLong("max"),
-                    r.optString("content"),
-                    r.optJSONArray("terms")
-                        ?.let { terms -> (0 until terms.length()).map(terms::getString) }
-                        .orEmpty(),
-                ),
-            )
-        }
-    }
-        .getOrDefault(emptyList())
 
     fun saveSmartFolder(name: String) {
         val folder = folderPath ?: currentSmartFolder?.root ?: return
@@ -644,7 +1002,9 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     fun removeSmartFolder(id: String) {
         smartFolders = smartFolders.filterNot { it.id == id }
         persistSmartFolders()
-        if (location == "@smart:$id") navigate(workspace.absolutePath)
+        session.panes
+            .filter { it.location == "@smart:$id" }
+            .forEach { it.navigate(workspace.absolutePath) }
     }
 
     fun updateSearchRules(rules: SearchRules) {
@@ -675,22 +1035,22 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     fun changeGrouping(group: GroupBy) {
         grouping = group
-        prefs.edit().putString("group", group.name).apply()
+        panePrefs.edit().putString("group", group.name).apply()
     }
 
     fun changeIconSize(size: Int) {
         iconSize = size.coerceIn(90, 200)
-        prefs.edit().putInt("iconSize", iconSize).apply()
+        panePrefs.edit().putInt("iconSize", iconSize).apply()
     }
 
     fun changeColumnWidth(size: Int) {
         columnWidth = size.coerceIn(150, 500)
-        prefs.edit().putInt("columnWidth", columnWidth).apply()
+        panePrefs.edit().putInt("columnWidth", columnWidth).apply()
     }
 
     fun changePreviewWidth(size: Int) {
         previewWidth = size.coerceIn(200, 480)
-        prefs.edit().putInt("previewWidth", previewWidth).apply()
+        panePrefs.edit().putInt("previewWidth", previewWidth).apply()
     }
 
     fun toggleExtensions() {
@@ -721,7 +1081,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     fun setFolderStyle(style: FolderStyle?) {
         selectedEntries.filter { it.folder }.forEach { styleStore.set(it.path, style) }
         folderStyles = styleStore.styles
-        refresh()
+        session.panes.forEach { it.refresh() }
     }
 
     fun displayName(entry: Entry) =
@@ -744,7 +1104,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     private fun persistTabs() {
         saveTabState()
-        prefs
+        panePrefs
             .edit()
             .putString(
                 "tabs",
@@ -871,9 +1231,9 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         parentPath()?.let(::navigate)
     }
 
-    fun newTab(path: String = location, activate: Boolean = true) {
+    fun newTab(path: String = location, activate: Boolean = true, atEnd: Boolean = false) {
         saveTabState()
-        val insertion = activeTab + 1
+        val insertion = if (atEnd) tabs.size else activeTab + 1
         tabs = tabs.toMutableList().also { it.add(insertion, FinderTab(listOf(path))) }
         if (activate) {
             activeTab = insertion
@@ -990,22 +1350,29 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     fun disconnectLocation(uri: String) {
         documents.disconnect(uri)
         connectedLocations = documents.locations
-        if (location == uri || !allowedPath(location)) navigate(workspace.absolutePath)
+        session.panes.forEach { pane ->
+            if (pane.location == uri || !pane.allowedPath(pane.location))
+                pane.navigate(workspace.absolutePath)
+        }
     }
 
-    fun goTo(path: String) {
+    fun goTo(path: String, preservePath: Boolean = false) {
         viewModelScope.launch {
             val valid =
                 withContext(Dispatchers.IO) {
                     allowedPath(path) &&
                         runCatching { documents.read(path).folder }.getOrDefault(false)
                 }
-            if (valid) navigate(if (isDocumentPath(path)) path else File(path).canonicalPath)
+            if (valid)
+                navigate(
+                    if (isDocumentPath(path) || preservePath) path else File(path).canonicalPath,
+                )
             else message = "That folder isn't available. Check its path and storage access."
         }
     }
 
     fun select(entry: Entry, multiple: Boolean = false, range: Boolean = false) {
+        keyboardRangeBase = null
         val items = visibleEntries
         val anchor = items.indexOfFirst { it.path == (rangeAnchor ?: leadSelection) }
         val end = items.indexOfFirst { it.path == entry.path }
@@ -1026,18 +1393,25 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         if (selected.isEmpty()) multiSelecting = false
     }
 
-    fun stepSelection(delta: Int, extend: Boolean) {
+    fun stepSelection(delta: Int, extend: Boolean, additive: Boolean = false) {
+        keyboardScrollRequest++
         val items = visibleEntries
         if (items.isEmpty()) return
         val current = items.indexOfFirst { it.path == focused?.path }
         val next = items[(if (current < 0) 0 else current + delta).coerceIn(0, items.lastIndex)]
         if (extend) {
+            if (keyboardRangeBase == null || keyboardRangeAdditive != additive) {
+                keyboardRangeBase = if (additive) selected else emptySet()
+                keyboardRangeAdditive = additive
+            }
             if (rangeAnchor == null) rangeAnchor = focused?.path ?: next.path
             val anchor = items.indexOfFirst { it.path == rangeAnchor }.coerceAtLeast(0)
             val end = items.indexOf(next)
             selected =
-                items.subList(minOf(anchor, end), maxOf(anchor, end) + 1).map { it.path }.toSet()
+                keyboardRangeBase.orEmpty() +
+                    items.subList(minOf(anchor, end), maxOf(anchor, end) + 1).map { it.path }
         } else {
+            keyboardRangeBase = null
             selected = setOf(next.path)
             multiSelecting = false
             rangeAnchor = next.path
@@ -1057,6 +1431,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun clearSelection() {
+        keyboardRangeBase = null
         selected = emptySet()
         multiSelecting = false
         leadSelection = null
@@ -1064,6 +1439,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun requestContext(entry: Entry, point: Offset? = null) {
+        activatePane()
         viewModelScope.launch {
             if (visibleEntries.none { it.path == entry.path }) {
                 entry.parentPath?.let {
@@ -1080,11 +1456,13 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun requestBackgroundContext(point: Offset? = null) {
+        activatePane()
         clearSelection()
         contextRequested = FinderContextRequest(point, true)
     }
 
     fun typeSelect(character: Char) {
+        keyboardScrollRequest++
         if (character.isISOControl() || character.isWhitespace()) return
         val items = visibleEntries
         if (items.isEmpty()) return
@@ -1123,9 +1501,12 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun changeMode(value: ViewMode) {
+        fitColumns = false
+        windowsLayout = 0
+        panePrefs.edit().putInt("windowsLayout", 0).apply()
         mode = value
         if (value != ViewMode.LIST) selected = selected.intersect(entries.map { it.path }.toSet())
-        prefs.edit().putString("view", value.name).apply()
+        panePrefs.edit().putString("view", value.name).apply()
     }
 
     fun changeSort(value: SortBy) {
@@ -1134,24 +1515,25 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
             sort = value
             ascending = true
         }
-        prefs.edit().putString("sort", sort.name).putBoolean("ascending", ascending).apply()
+        panePrefs.edit().putString("sort", sort.name).putBoolean("ascending", ascending).apply()
         entries = sorted(entries)
     }
 
     fun toggleHidden() {
         showHidden = !showHidden
-        prefs.edit().putBoolean("hidden", showHidden).apply()
+        panePrefs.edit().putBoolean("hidden", showHidden).apply()
         refresh()
     }
 
     fun togglePreview() {
         previewVisible = !previewVisible
-        prefs.edit().putBoolean("preview", previewVisible).apply()
+        if (!previewVisible) inspectorRequested = false
+        panePrefs.edit().putBoolean("preview", previewVisible).apply()
     }
 
     fun toggleFoldersFirst() {
         foldersFirst = !foldersFirst
-        prefs.edit().putBoolean("foldersFirst", foldersFirst).apply()
+        panePrefs.edit().putBoolean("foldersFirst", foldersFirst).apply()
         entries = sorted(entries)
     }
 
@@ -1196,7 +1578,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
             syncTags()
             syncHistory()
             if (route != null) relocateMetadataPaths(listOf(route))
-            if (location.startsWith("@tag:")) refresh()
+            session.panes.filter { it.location.startsWith("@tag:") }.forEach { it.refresh() }
         }
             .onFailure { message = it.message }
     }
@@ -1214,7 +1596,9 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     fun removeTag(name: String) {
         tagEdit("Delete tag") { tagStore.remove(name) }
-        if (location == "@tag:$name") navigate(workspace.absolutePath)
+        session.panes
+            .filter { it.location == "@tag:$name" }
+            .forEach { it.navigate(workspace.absolutePath) }
     }
 
     fun tagColorName(name: String) = tagDefinitions.firstOrNull { it.name == name }?.color ?: "Blue"
@@ -1239,7 +1623,12 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 it.copy(rules = it.rules.copy(tag = replacements[it.rules.tag] ?: it.rules.tag))
             }
             persistSmartFolders()
-            searchRules = searchRules.copy(tag = replacements[searchRules.tag] ?: searchRules.tag)
+            session.panes.forEach { pane ->
+                pane.searchRules =
+                    pane.searchRules.copy(
+                        tag = replacements[pane.searchRules.tag] ?: pane.searchRules.tag,
+                    )
+            }
         }
         tagStore.relocate(names)
         syncTags()
@@ -1250,8 +1639,14 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         prefs.edit().putStringSet("favorites", favorites).apply()
         smartFolders = smartFolders.map { it.copy(root = update(it.root)) }
         persistSmartFolders()
-        tabs = tabs.map { tab -> tab.copy(history = tab.history.map(::update)) }
-        persistTabs()
+        session.panes.forEach { pane ->
+            pane.tabs = pane.tabs.map { tab -> tab.copy(history = tab.history.map(::update)) }
+            pane.selected = pane.selected.map(::update).toSet()
+            pane.leadSelection = pane.leadSelection?.let(::update)
+            pane.rangeAnchor = pane.rangeAnchor?.let(::update)
+            pane.expandedFolders = pane.expandedFolders.map(::update).toSet()
+            pane.persistTabs()
+        }
     }
 
     private fun copyTags(old: String, new: String) {
@@ -1278,9 +1673,9 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 .storageVolumes
                 .mapNotNull { it.directory }
                 .filter { it != deviceRoot && it.canRead() }
-        if (!before && hasAccess && location == workspace.absolutePath)
-            navigate(deviceRoot.absolutePath)
-        else refresh()
+        if (!before && hasAccess && activePaneModel.location == workspace.absolutePath)
+            activePaneModel.navigate(deviceRoot.absolutePath)
+        else session.panes.forEach { it.refresh() }
     }
 
     private fun sorted(items: List<Entry>): List<Entry> {
@@ -1305,11 +1700,17 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         val hidden = showHidden
         val smart = smartFolders.firstOrNull { path == "@smart:${it.id}" }
         val rules = effectiveSearchRules
+        if (listingLocation != path) {
+            entries = emptyList()
+            folderInfo = null
+            expandedChildren = emptyMap()
+            listingLocation = path
+        }
+        loading = true
+        listingError = null
+        truncated = false
         listingJob = viewModelScope.launch {
             if (debounce) delay(220)
-            loading = true
-            listingError = null
-            truncated = false
             val result = runCatching {
                 withContext(Dispatchers.IO) {
                     var traversalLimited = false
@@ -1454,8 +1855,23 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                                     CREATE or DELETE or MOVED_FROM or MOVED_TO or CLOSE_WRITE,
                                 ) {
                                 override fun onEvent(event: Int, path: String?) {
+                                    // Android can deliver IN_IGNORED when an old watch is stopped,
+                                    // even though it is outside the requested mask.
+                                    if (
+                                        event and
+                                            (CREATE or
+                                                DELETE or
+                                                MOVED_FROM or
+                                                MOVED_TO or
+                                                CLOSE_WRITE) == 0
+                                    )
+                                        return
                                     viewModelScope.launch {
-                                        if (busy == null && query.isEmpty())
+                                        if (
+                                            directory?.path == folder.path &&
+                                                busy == null &&
+                                                query.isEmpty()
+                                        )
                                             refresh(debounce = true)
                                     }
                                 }
@@ -1600,7 +2016,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 )
                     clearSelection()
                 syncHistory()
-                refresh()
+                session.panes.forEach { it.refresh() }
                 busy = null
                 startNextTransfer()
             }
@@ -1641,24 +2057,38 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     fun makeShortcut() {
         val item = focused ?: return
-        val parent = folderPath ?: item.parentPath ?: return
-        operation("Creating shortcut…") {
+        makeShortcuts(listOf(item.path), folderPath ?: item.parentPath ?: return)
+    }
+
+    fun makeShortcuts(paths: List<String>, parent: String) {
+        if (paths.isEmpty()) return
+        operation("Creating shortcuts…", destination = parent, clearOriginSelection = false) {
             val staging =
-                File(getApplication<Application>().filesDir, "shortcut-staging").apply { mkdirs() }
-            val local = File(staging, validateFilename("${item.name}.finderlink"))
+                File(
+                        getApplication<Application>().cacheDir,
+                        "shortcuts/${java.util.UUID.randomUUID()}",
+                    )
+                    .apply { mkdirs() }
+            val steps = mutableListOf<FileStep>()
             try {
-                val result =
-                    withContext(Dispatchers.IO) {
-                        FinderShortcut.write(local, item.path)
-                        val result =
-                            documents.copy(local.absolutePath, parent, false, transferControl)
-                        result to documents.createdStep(result)
+                withContext(Dispatchers.IO) {
+                    check(allowedPath(parent)) { "This destination needs storage access." }
+                    for (path in paths.distinct()) {
+                        transferControl.check()
+                        check(allowedPath(path)) { "The shortcut target needs storage access." }
+                        val entry = documents.read(path)
+                        val local = File(staging, validateFilename("${entry.name}.finderlink"))
+                        FinderShortcut.write(local, path)
+                        val result = documents.copy(local.path, parent, false, transferControl)
+                        steps += documents.createdStep(result)
+                        local.delete()
                     }
-                rememberOperation("Make shortcut", listOf(result.second))
-                "Shortcut created"
+                }
             } finally {
-                local.delete()
+                rememberOperation("Make shortcuts", steps)
+                staging.deleteRecursively()
             }
+            "${steps.size} shortcut${if(steps.size==1) "" else "s"} created"
         }
     }
 
@@ -1940,7 +2370,14 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 conflictPolicy = policy,
             )
         transferSubmissions[job.id] =
-            TransferSubmission(clipboard, clearClipboard, tabs[activeTab].id, location, selected)
+            TransferSubmission(
+                this,
+                clipboard,
+                clearClipboard,
+                tabs[activeTab].id,
+                location,
+                selected,
+            )
         transferJobs = transferJobs + job
         TransferRuntime.scope.launch {
             try {
@@ -1968,6 +2405,11 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     private fun startNextTransfer() {
         if (busy != null || activeTransferId != null || journalError != null) return
         val job = transferJobs.firstOrNull { it.state == TransferState.QUEUED } ?: return
+        val origin = transferSubmissions[job.id]?.pane
+        if (origin != null && origin !== this) {
+            origin.startNextTransfer()
+            return
+        }
         activeTransferId = job.id
         updateTransfer(job.id) {
             it.copy(state = TransferState.RUNNING, started = System.currentTimeMillis())
@@ -2303,17 +2745,27 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun deleteForever() {
-        val files = actionEntries.map { it.file }
-        if (files.isEmpty()) return
+        val fromTrash = isTrash
+        val items = actionEntries
+        if (items.isEmpty()) return
         operation("Deleting permanently…") {
-            withContext(Dispatchers.IO) {
-                files.forEach {
-                    transferControl.check()
-                    engine.deleteForever(it)
+            var attempted = false
+            try {
+                withContext(Dispatchers.IO) {
+                    items.forEach { item ->
+                        transferControl.check()
+                        check(item.canDelete) { "${item.name} cannot be deleted." }
+                        attempted = true
+                        val file =
+                            if (fromTrash) item.file
+                            else documents.trash(item.path, transferControl)
+                        engine.deleteForever(file)
+                    }
                 }
+            } finally {
+                if (attempted) history.clear()
             }
-            history.clear()
-            "${files.size} items deleted permanently"
+            "${items.size} items deleted permanently"
         }
     }
 
@@ -2419,6 +2871,9 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     }
 
     override fun onCleared() {
+        if (paneId == "primary") windowState.secondaryStore.clear()
+        session.panes.remove(this)
+        windowState.panes.remove(this)
         observer?.stopWatching()
         providerObserver?.let {
             getApplication<Application>().contentResolver.unregisterContentObserver(it)

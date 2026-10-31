@@ -7,7 +7,7 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [x] Comfortable/compact density, accessible primary targets and adaptive tablet controls (0.7.0).
 - [ ] Complete the remaining spacing/dialog/input/accessibility refinements.
 - [ ] Grouped overflow menus, stable primary actions, useful loading/empty/error/permission states.
-- [ ] Focus navigation, mouse/trackpad scrolling, drag feedback, edge scrolling and spring-loaded folders.
+- [ ] Focus navigation, mouse/trackpad scrolling, drag feedback, edge scrolling and spring-loaded folders. Windows keyboard controls, selection focus, Ctrl-wheel and a searchable guide are implemented in 0.8.0; broader focus/accessibility and drag refinements remain.
 
 ## 2. Transfer center and conflicts
 - [x] Durable copy/move queue, completed history, per-item errors and retry remaining items (0.5.0).
@@ -24,13 +24,13 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [ ] Appropriate Android background execution per local/network operation.
 
 ## 3. Tablet workspaces and navigation
-- [ ] Two independently navigable, resizable panes with tabs, selection, history and search.
-- [ ] Copy/move to other pane, drag between panes, swap panes and folder comparison.
-- [ ] Per-tab scroll/focus/expansion restoration, pinned tabs, active-tab reveal and tab overview.
+- [x] Two independently navigable, resizable panes with tabs, selection, history and search (0.8.0).
+- [x] Copy/move to other pane, native cross-pane dragging with Undo, pane swapping and recursive folder comparison (0.8.0). Comparison supports explicit top-level copying; deeper synchronization remains future work.
+- [ ] Per-tab scroll/focus/expansion restoration, pinned tabs, active-tab reveal and tab overview. Adjacent new-tab controls and active-tab reveal are implemented in 0.8.0; remaining restoration/overview work stays open.
 - [ ] Touch tab reorder, named workspaces and per-folder view/sort/group/column preferences.
 
 ## 4. Performance and search
-- [ ] Progressive large-folder loading, bounded shared thumbnail caches and deduplicated work.
+- [ ] Progressive large-folder loading, bounded shared thumbnail caches and deduplicated work; invalidate thumbnails when provider names/types change while document URIs remain stable.
 - [ ] Cancellable verification/preview/search, measured startup/scroll/memory/battery benchmarks.
 - [ ] Optional local index scoped to chosen roots, filename/tag/metadata/document-content search.
 - [ ] Highlighted matches/snippets, scope/exclusions, suggestions/history and Smart Folder editor.
@@ -46,7 +46,7 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 ## 6. Storage and integration
 - [ ] Clear volume/provider status, space/capabilities, reconnect and expired-grant flows.
 - [ ] Direct SMB/SFTP/WebDAV, saved connections, secure credentials and offline handling.
-- [ ] Save-to-DroidFinder share destination, Android document provider and cross-app drag/multi-window.
+- [ ] Save-to-DroidFinder share destination, Android document provider and cross-app drag/multi-window. Independent Android windows with shared transfers/history are implemented in 0.8.0; system-provider/share-destination integration remains open.
 - [ ] Honor Android protected directories; no claim of unrestricted private-app access.
 
 ## 7. Analysis and organization

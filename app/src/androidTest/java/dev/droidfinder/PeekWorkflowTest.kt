@@ -19,6 +19,15 @@ import org.junit.Test
 @OptIn(ExperimentalTestApi::class)
 class PeekWorkflowTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+
+    @org.junit.Before
+    fun singlePaneLayout() {
+        compose.runOnIdle {
+            val root = compose.activity.model
+            if (root.dualPane) root.toggleDualPane()
+        }
+    }
+
     private lateinit var fixture: File
 
     @Before

@@ -5,6 +5,8 @@ package dev.droidfinder
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -28,6 +30,11 @@ import kotlin.math.roundToInt
 @Composable
 fun DesktopTabStrip(model: FinderModel) {
     var context by remember { mutableStateOf<Pair<String, Offset?>?>(null) }
+    val activeTabView = remember { BringIntoViewRequester() }
+    LaunchedEffect(model.activeTab, model.tabs.size, model.tabs[model.activeTab].id) {
+        withFrameNanos {}
+        activeTabView.bringIntoView()
+    }
     Row(
         Modifier.fillMaxWidth()
             .height(LocalFinderDensity.current.tabHeight)
@@ -35,7 +42,7 @@ fun DesktopTabStrip(model: FinderModel) {
             .selectableGroup(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Row(Modifier.weight(1f).horizontalScroll(rememberScrollState())) {
+        Row(Modifier.weight(1f, fill = false).horizontalScroll(rememberScrollState())) {
             model.tabs.forEach { tab ->
                 key(tab.id) {
                     var coordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
@@ -43,6 +50,10 @@ fun DesktopTabStrip(model: FinderModel) {
                     Column(
                         Modifier.width(180.dp)
                             .testTag("tab-${tab.id}")
+                            .then(
+                                if (active) Modifier.bringIntoViewRequester(activeTabView)
+                                else Modifier,
+                            )
                             .fillMaxHeight()
                             .folderDropTarget(model, tab.location)
                             .onGloballyPositioned { coordinates = it }
@@ -115,6 +126,7 @@ fun DesktopTabStrip(model: FinderModel) {
                             .combinedClickable(
                                 role = Role.Tab,
                                 onLongClick = {
+                                    model.activatePane()
                                     context =
                                         tab.id to
                                             coordinates?.localToWindow(
@@ -125,6 +137,7 @@ fun DesktopTabStrip(model: FinderModel) {
                                             )
                                 },
                                 onClick = {
+                                    model.activatePane()
                                     model.tabs
                                         .indexOfFirst { it.id == tab.id }
                                         .takeIf { it >= 0 }
@@ -152,6 +165,7 @@ fun DesktopTabStrip(model: FinderModel) {
                             )
                             IconButton(
                                 onClick = {
+                                    model.activatePane()
                                     model.tabs
                                         .indexOfFirst { it.id == tab.id }
                                         .takeIf { it >= 0 }
@@ -182,7 +196,17 @@ fun DesktopTabStrip(model: FinderModel) {
                 }
             }
         }
-        ToolButton(Icons.Outlined.Add, "New tab", { model.newTab() })
+        Box(Modifier.padding(horizontal = 4.dp)) {
+            ToolButton(
+                Icons.Outlined.Add,
+                "New tab",
+                {
+                    model.activatePane()
+                    model.newTab(atEnd = true)
+                },
+                compact = true,
+            )
+        }
     }
     HorizontalDivider(color = Border, thickness = .5.dp)
     context?.let { (id, point) ->

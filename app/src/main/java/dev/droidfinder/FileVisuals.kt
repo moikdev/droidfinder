@@ -13,6 +13,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
+import androidx.compose.material.icons.automirrored.outlined.Subject
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -106,9 +108,10 @@ fun FileGlyph(entry: Entry, size: Dp = 44.dp, thumbnail: Boolean = true) {
         return
     }
     val context = LocalContext.current
+    val fileFamily = fileType(entry.extension, entry.mime).group
     val bitmap by
-        produceState<Bitmap?>(null, entry.path, entry.modified, thumbnail) {
-            if (thumbnail && entry.kind == "Image")
+        produceState<Bitmap?>(null, entry.path, entry.modified, entry.size, entry.mime, thumbnail) {
+            if (thumbnail && fileFamily == FileTypeGroup.IMAGE)
                 value =
                     withContext(Dispatchers.IO) {
                         if (entry.documentUri != null)
@@ -132,61 +135,101 @@ fun FileGlyph(entry: Entry, size: Dp = 44.dp, thumbnail: Boolean = true) {
             contentScale = ContentScale.Crop,
         )
     } else {
-        val color =
-            when (entry.kind) {
-                "PDF document" -> Color(0xFFDA6866)
-                "Image" -> Color(0xFF8B81C7)
-                "Video" -> Color(0xFF9C7ABF)
-                "Audio" -> Color(0xFFE18CA3)
-                "ZIP archive" -> Color(0xFFB59C68)
-                else -> Color(0xFF8AABC8)
-            }
-        Box(Modifier.size(size), contentAlignment = Alignment.Center) {
-            Canvas(
-                Modifier.fillMaxSize().padding(horizontal = size * .16f, vertical = size * .09f),
-            ) {
-                val w = this.size.width
-                val h = this.size.height
-                val page =
-                    Path().apply {
-                        moveTo(0f, h * .04f)
-                        lineTo(w * .7f, h * .04f)
-                        lineTo(w, h * .3f)
-                        lineTo(w, h * .96f)
-                        lineTo(0f, h * .96f)
-                        close()
-                    }
-                drawPath(page, Color(0xFFE8EDF2))
-                drawRect(Color.White, Offset(w * .03f, h * .07f), Size(w * .91f, h * .86f))
-                drawPath(
-                    Path().apply {
-                        moveTo(w * .7f, h * .04f)
-                        lineTo(w * .7f, h * .3f)
-                        lineTo(w, h * .3f)
-                        close()
-                    },
-                    Color(0xFFD4DDE6),
-                )
-                if (size < 40.dp) {
-                    for (i in 0..2) drawLine(
-                        color.copy(alpha = .7f),
-                        Offset(w * .2f, h * (.48f + .13f * i)),
-                        Offset(w * .78f, h * (.48f + .13f * i)),
-                        w * .06f,
-                    )
-                }
-            }
-            if (size >= 40.dp)
-                Text(
-                    entry.extension.uppercase().take(5).ifEmpty { "FILE" },
-                    Modifier.offset(y = size * .16f)
-                        .background(color, RoundedCornerShape(2.dp))
-                        .padding(horizontal = 4.dp, vertical = 2.dp),
-                    color = Color.White,
-                    fontSize = if (size > 80.dp) 14.sp else 9.sp,
-                    fontWeight = FontWeight.Bold,
-                )
+        DocumentGlyph(entry, size)
+    }
+}
+
+@Composable
+private fun DocumentGlyph(entry: Entry, size: Dp) {
+    val type = fileType(entry.extension, entry.mime)
+    val (color, symbol) =
+        when (type.group) {
+            FileTypeGroup.PDF ->
+                Color(0xFFD64F4F) to
+                    if (size < 40.dp) Icons.Outlined.PictureAsPdf
+                    else Icons.AutoMirrored.Outlined.Subject
+            FileTypeGroup.ARCHIVE -> Color(0xFFB58035) to Icons.Outlined.FolderZip
+            FileTypeGroup.IMAGE -> Color(0xFF427FAD) to Icons.Outlined.Image
+            FileTypeGroup.VIDEO -> Color(0xFF8760BD) to Icons.Outlined.PlayArrow
+            FileTypeGroup.AUDIO -> Color(0xFFCC5E89) to Icons.Outlined.MusicNote
+            FileTypeGroup.TABLE -> Color(0xFF388A68) to Icons.Outlined.TableChart
+            FileTypeGroup.PRESENTATION -> Color(0xFFCC7547) to Icons.Outlined.Slideshow
+            FileTypeGroup.CODE -> Color(0xFF5975AC) to Icons.Outlined.Code
+            FileTypeGroup.ANDROID -> Color(0xFF528E67) to Icons.Outlined.Android
+            FileTypeGroup.SHORTCUT -> Color(0xFF687EAA) to Icons.Outlined.Link
+            FileTypeGroup.TEXT -> Color(0xFF527FB7) to Icons.AutoMirrored.Outlined.Subject
+            FileTypeGroup.UNKNOWN ->
+                Color(0xFF7C8799) to Icons.AutoMirrored.Outlined.InsertDriveFile
         }
+    val small = size < 40.dp
+    Box(Modifier.size(size), contentAlignment = Alignment.Center) {
+        Canvas(Modifier.fillMaxSize()) {
+            val w = this.size.width
+            val h = this.size.height
+            val left = w * .17f
+            val right = w * .83f
+            val top = h * .06f
+            val bottom = h * .94f
+            val fold = w * .20f
+            val radius = w * .045f
+            val page =
+                Path().apply {
+                    moveTo(left + radius, top)
+                    lineTo(right - fold, top)
+                    lineTo(right, top + fold)
+                    lineTo(right, bottom - radius)
+                    quadraticTo(right, bottom, right - radius, bottom)
+                    lineTo(left + radius, bottom)
+                    quadraticTo(left, bottom, left, bottom - radius)
+                    lineTo(left, top + radius)
+                    quadraticTo(left, top, left + radius, top)
+                    close()
+                }
+            drawPath(page, Color.White)
+            drawPath(
+                page,
+                color.copy(alpha = .42f),
+                style =
+                    androidx.compose.ui.graphics.drawscope.Stroke(
+                        width = (w * .018f).coerceAtLeast(1f),
+                    ),
+            )
+            val corner =
+                Path().apply {
+                    moveTo(right - fold, top)
+                    lineTo(right - fold, top + fold - radius)
+                    quadraticTo(right - fold, top + fold, right - fold + radius, top + fold)
+                    lineTo(right, top + fold)
+                    close()
+                }
+            drawPath(corner, color.copy(alpha = .16f))
+            drawLine(
+                color.copy(alpha = .35f),
+                Offset(right - fold, top),
+                Offset(right - fold, top + fold),
+                (w * .014f).coerceAtLeast(1f),
+            )
+        }
+        Icon(
+            symbol,
+            null,
+            Modifier.size(size * if (small) .45f else .34f)
+                .offset(y = size * if (small) .12f else -.02f),
+            tint = color,
+        )
+        if (!small)
+            Text(
+                type.label,
+                Modifier.align(Alignment.BottomCenter)
+                    .offset(y = -size * .07f)
+                    .background(color, RoundedCornerShape(size * .04f))
+                    .padding(horizontal = size * .08f, vertical = size * .025f),
+                color = Color.White,
+                fontSize = (size.value * .16f).coerceIn(8f, 17f).sp,
+                lineHeight = (size.value * .18f).coerceIn(10f, 19f).sp,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+            )
     }
 }
 

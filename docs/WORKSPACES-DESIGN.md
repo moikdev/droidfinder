@@ -1,6 +1,6 @@
 # Dual-pane workspace design
 
-Status: planned next implementation phase; none of the items below are claimed as shipped. The full scope remains in [ROADMAP.md](ROADMAP.md).
+Status: the shared session, dual-pane browsing and initial comparison are implemented in [0.8.0](WORKSPACES.md). This document preserves the design and follow-on requirements; it does not claim that every planned workspace feature has shipped. The full scope remains in [ROADMAP.md](ROADMAP.md).
 
 ## Ownership
 

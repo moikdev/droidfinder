@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -56,9 +56,25 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Metadata-only transfer estimates, advisory capacity checks and phase-aware progress.
 - [x] Pause-aware fresh rate/ETA, persistent estimates and schema upgrade coverage.
 
+## Dual-pane pass
+
+- [x] Independent pane tabs/history/search/selection and actual-width file layouts.
+- [x] One shared operation session, clipboard, mutation guard, queue, journal and Undo/Redo.
+- [x] Active-pane toolbar/sidebar/keyboard routing, resize/swap and narrow-window switching.
+- [x] Copy/move to other pane with destination snapshots and source-aware native drag payloads.
+- [x] Recursive read-only comparison, optional content verification and top-level copying through the queue.
+
+## Desktop keyboard and visual pass
+
+- [x] Adjacent new-tab button, reachable overflow control and active-tab reveal.
+- [x] File-type symbols, folded-paper icons and MIME-based classification.
+- [x] Windows-style tab/window, address/search, file operations and view shortcuts, with a searchable F1 guide.
+- [x] Separate keyboard focus, additive ranges, navigation tree, Ctrl-wheel and explicit narrow-pane inspectors.
+- [x] Independent Android document tasks sharing the operation session; Android retains global OS shortcuts.
+
 ## Verification
 
-See [the current verification record](docs/TRANSFER-PLANNING.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
+See [the current verification record](docs/WORKSPACES.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 
