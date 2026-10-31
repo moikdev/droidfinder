@@ -43,6 +43,7 @@ class FolderMergeTest {
         val control = TransferControl()
         val steps = mutableListOf<FileStep>()
         var onSave: (TransferJob) -> Unit = {}
+        var metadata: (List<Pair<String, String>>, Boolean) -> Unit = { _, _ -> }
         var choose: (Entry, Entry, Boolean) -> ConflictDecision = { incoming, existing, allowed ->
             if (allowed && incoming.folder && existing.folder)
                 ConflictDecision(ConflictAction.MERGE)
@@ -101,7 +102,7 @@ class FolderMergeTest {
                             ask = { incoming, existing, allowed ->
                                 choose(incoming, existing, allowed)
                             },
-                            metadata = { _, _ -> },
+                            metadata = { routes, move -> metadata(routes, move) },
                             steps = steps,
                         )
                         .run()
@@ -364,4 +365,41 @@ class FolderMergeTest {
         assertEquals("incoming file", File(target, "Asset").readText())
         assertEquals("incoming folder", File(target, "Package/Child.txt").readText())
     }
+
+    private fun tagRecovery(provider: Boolean, partial: Boolean) = exercise {
+        file(source, "Shared/New.txt", "new")
+        File(target, "Shared").mkdir()
+        if (partial) {
+            file(source, "Shared/Skip.txt", "incoming")
+            file(target, "Shared/Skip.txt", "original")
+        }
+        val from = if (provider) provider(source) else source.path
+        val sourceChild =
+            docs.list(docs.list(from).single().path).first { it.name == "New.txt" }.path
+        val tags = TagStore(File(folder, "tags.properties"))
+        tags.assign(listOf(sourceChild), "Blue")
+        metadata = { routes, move -> tags.relocate(routes, copy = !move) }
+        run(true, from)
+        val destination = File(target, "Shared/New.txt").path
+        assertEquals(setOf("Blue"), tags.assignments[destination])
+        assertNull(tags.assignments[sourceChild])
+        assertTrue(tags.assignments.keys.any { it.contains("/Trash/") })
+        tags.relocate(history.undo())
+        val restoredRoot = if (provider) provider(source) else source.path
+        val restored =
+            docs.list(docs.list(restoredRoot).single().path).first { it.name == "New.txt" }.path
+        assertEquals(setOf("Blue"), tags.assignments[restored])
+        assertFalse(tags.assignments.keys.any { it.contains("/Trash/") })
+        tags.relocate(history.redo())
+        assertNull(tags.assignments[restored])
+        assertEquals(setOf("Blue"), tags.assignments[destination])
+        assertTrue(tags.assignments.keys.any { it.contains("/Trash/") })
+    }
+
+    @Test fun localMoveMergeTagsFollowSourceRecoveryAndUndoRedo() = tagRecovery(false, false)
+
+    @Test fun providerMoveMergeTagsFollowSourceRecoveryAndUndoRedo() = tagRecovery(true, false)
+
+    @Test
+    fun partialProviderMoveMergeTagsFollowMemberRecoveryAndUndoRedo() = tagRecovery(true, true)
 }

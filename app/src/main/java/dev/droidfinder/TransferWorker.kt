@@ -336,7 +336,7 @@ class TransferWorker(
                 recovered = recovery
                 // This step restores source units before Undo removes their destination copies.
                 try {
-                    steps += io { documents.trashedStep(before, recovery) }
+                    steps += io { documents.trashedStep(before, recovery, relocateMetadata = true) }
                 } catch (error: Exception) {
                     blockUndo(
                         "The merge source is in Trash, but its Undo record could not be created. Restore it from Trash before changing the destination.",
@@ -347,7 +347,7 @@ class TransferWorker(
                         error,
                     )
                 }
-                metadata(listOf(path to recovery.path), true)
+                metadata(documents.trashMappings(recovery), true)
                 plan =
                     if (complete)
                         plan.copy(

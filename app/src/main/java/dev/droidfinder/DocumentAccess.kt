@@ -803,8 +803,14 @@ class DocumentAccess(
         )
     }
 
-    fun trashedStep(before: Entry, item: File): FileStep {
-        if (before.documentUri == null) return FileStep.Trashed(before.file, item)
+    fun trashMappings(item: File): List<Pair<String, String>> =
+        engine.originalMappings(item).ifEmpty {
+            engine.originalPath(item)?.let { listOf(it to item.path) }.orEmpty()
+        }
+
+    fun trashedStep(before: Entry, item: File, relocateMetadata: Boolean = false): FileStep {
+        if (before.documentUri == null && !relocateMetadata)
+            return FileStep.Trashed(before.file, item)
         var stash = item
         var restored: String? = null
         var stamp = fingerprint(item)
@@ -825,13 +831,19 @@ class DocumentAccess(
             perform = { undo ->
                 if (undo) {
                     val old = before.path
+                    val recoveryRoutes = if (relocateMetadata) trashMappings(stash) else emptyList()
                     restored = restore(stash)
                     restoredStamp = digest(restored!!)
-                    lastRestoreMappings.ifEmpty { listOf(old to restored!!) }
+                    val routes = lastRestoreMappings.ifEmpty { listOf(old to restored!!) }
+                    val restoredPaths = routes.toMap()
+                    routes +
+                        recoveryRoutes.mapNotNull { (original, recovery) ->
+                            restoredPaths[original]?.let { recovery to it }
+                        }
                 } else {
                     stash = trash(restored!!)
                     stamp = fingerprint(stash)
-                    emptyList()
+                    if (relocateMetadata) trashMappings(stash) else emptyList()
                 }
             },
         )

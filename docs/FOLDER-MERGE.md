@@ -12,7 +12,7 @@ The complete merge plan is saved before any member is written. Existing folder p
 
 Move-merges first copy their planned units. Before source cleanup, content hashes verify the unchanged source tree and successful destination copies. A complete move-merge sends the source root to recoverable Trash. If members were skipped or failed, only successfully copied source units go to Trash; the source root and existing source parent folders remain.
 
-Undo restores source units before undoing destination copies and replacements. Redo reapplies those changes. Existing destination folders and unrelated files survive both directions. Changed-file checks stop Undo/Redo before modifying later edits. Replacing a destination folder that contains the incoming source is rejected before touching either location.
+Undo restores source units before undoing destination copies and replacements. Redo reapplies those changes. Existing destination folders and unrelated files survive both directions. Explicit recovery mappings carry tags and folder appearance back from Trash during Undo, including provider restore identities, and return them to recovery on Redo. Changed-file checks stop Undo/Redo before modifying later edits. Replacing a destination folder that contains the incoming source is rejected before touching either location.
 
 If a provider fails while removing a source, a completed recovery backup stays in Trash. The transfer records its location and blocks destructive Undo for that command, so Undo cannot remove the only remaining destination copy. Review the source, destination and Trash before further changes. These checks do not provide a filesystem snapshot or eliminate races with edits by other apps.
 
@@ -28,7 +28,7 @@ Completed transfer history and merge plans survive restart. Undo/Redo remains a 
 
 ## Verification
 
-Verified locally on 2026-10-31: **61 JVM tests and 69 Android tests passed together in the full release run**, with zero failures or skips. One additional file/folder type-conflict move-merge test passed afterwards, bringing the verified Android coverage to 70 distinct tests. Lint completed with zero errors and 59 warnings. Optimized preview and unsigned release APKs built successfully. Checks use the dedicated `DroidFinder_Tablet_API_36` emulator; GitHub Actions is manual-only and no hosted runners were used.
+Verified locally on 2026-10-31: **61 JVM tests and 69 Android tests passed together in the full release run**, with zero failures or skips. A file/folder type-conflict case and three tag-recovery cases bring verified Android coverage to 73 distinct tests. After the tag-recovery adjustment, all 27 affected merge/provider/conflict tests passed together. Lint completed with zero errors and 59 warnings. Optimized preview and unsigned release APKs built successfully. Checks use the dedicated `DroidFinder_Tablet_API_36` emulator; GitHub Actions is manual-only and no hosted runners were used.
 
 Coverage added for normalized database migration/order/incremental updates/rollback/corruption preservation, framed tree hashes and blocked-stream cancellation, nested/empty merges, local/provider combinations, copy and complete/partial move Undo/Redo, source/destination edits, simulated partial provider removal, ancestor replacement rejection, cancellation and nested member retries through the native UI.
 
