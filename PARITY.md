@@ -29,7 +29,7 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Favorites/sidebar management, aliases as portable app shortcuts, folder appearance.
 - [x] Preference controls, folder information, display/extension options, dark theme.
 - [x] Expanded safety and workflow tests, tablet landscape/portrait/small-window checks.
-- [ ] GitHub source, build instructions, installable preview release and final verification.
+- [x] GitHub source, build instructions, [installable preview release](https://github.com/moikdev/droidfinder/releases/tag/v0.2.0-preview) and final verification.
 
 ## Verification
 
