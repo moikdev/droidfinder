@@ -186,4 +186,44 @@ class SqliteTransferStoreTest {
         assertTrue(preserved.any { it.readBytes().contentEquals(damaged) })
         assertTrue(store.load().isEmpty())
     }
+
+    @Test
+    fun upgradesVersionOneWithoutChangingJobsAndRoundTripsNullableEstimates() =
+        exercise { store, name, legacy ->
+            val job =
+                TransferJob(
+                    paths = listOf("/source"),
+                    destination = "/out",
+                    move = false,
+                    mergePlans =
+                        listOf(
+                            MergePlan(
+                                "/source",
+                                "/out/source",
+                                "stamp",
+                                listOf(MergeMember("/source/file", "/out/source")),
+                            ),
+                        ),
+                )
+            store.save(listOf(job))
+            store.close()
+            connection(name).use { db ->
+                db.execSQL("DROP TABLE estimates")
+                db.version = 1
+            }
+            SqliteTransferStore(context, name, legacy).use { upgraded ->
+                assertEquals(listOf(job), upgraded.load())
+                val estimated =
+                    job.copy(
+                        estimate = TransferEstimate(20, 3, 1, unknownFiles = 1),
+                        availableAtStart = 100,
+                    )
+                upgraded.save(listOf(estimated))
+                assertEquals(listOf(estimated), upgraded.load())
+                upgraded.save(listOf(estimated.copy(availableAtStart = null)))
+                assertNull(upgraded.load().single().availableAtStart)
+                upgraded.save(emptyList())
+                connection(name).use { assertEquals(0, count(it, "estimates")) }
+            }
+        }
 }

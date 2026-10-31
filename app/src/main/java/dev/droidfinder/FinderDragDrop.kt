@@ -111,7 +111,7 @@ fun DragSelectionHandle(model: FinderModel) {
     val selection by rememberUpdatedState(model.actionEntries)
     var copy by remember { mutableStateOf(false) }
     Box(
-        Modifier.size(38.dp)
+        Modifier.size(if (LocalFinderDensity.current.touch) 48.dp else 38.dp)
             .semanticsLabel("Hold to drag selected files into a folder")
             .pointerInput(Unit) {
                 awaitPointerEventScope {

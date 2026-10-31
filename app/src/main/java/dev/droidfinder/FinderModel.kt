@@ -56,9 +56,13 @@ data class Entry(
     val canDelete: Boolean = file.canWrite(),
     val mimeType: String? = null,
     val style: FolderStyle? = null,
+    val sizeKnown: Boolean = true,
 ) {
     val path: String
         get() = documentUri?.toString() ?: file.absolutePath
+
+    val displaySize: String
+        get() = if (folder) "—" else if (sizeKnown) formatSize(size) else "Unknown size"
 
     val extension: String
         get() = name.substringAfterLast('.', "").lowercase()
@@ -271,6 +275,18 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 .getOrDefault(GroupBy.NONE),
         )
         private set
+
+    var density by
+        mutableStateOf(
+            runCatching { FinderDensity.valueOf(prefs.getString("density", "COMFORTABLE")!!) }
+                .getOrDefault(FinderDensity.COMFORTABLE),
+        )
+        private set
+
+    fun changeDensity(value: FinderDensity) {
+        density = value
+        prefs.edit().putString("density", value.name).apply()
+    }
 
     var iconSize by mutableStateOf(prefs.getInt("iconSize", 120))
         private set
@@ -1527,10 +1543,12 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         busy = label
         transferProgress = TransferProgress()
         var lastReport = 0L
+        var lastPhase = ""
         transferControl = TransferControl { progress ->
             val now = android.os.SystemClock.elapsedRealtime()
-            if (now - lastReport > 80) {
+            if (now - lastReport > 80 || progress.phase != lastPhase) {
                 lastReport = now
+                lastPhase = progress.phase
                 val jobId = activeTransferId
                 TransferRuntime.scope.launch {
                     transferProgress = progress

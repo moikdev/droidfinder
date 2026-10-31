@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ViewModeSelector(model: FinderModel) {
     Row(
-        Modifier.height(44.dp)
+        Modifier.height(if (LocalFinderDensity.current.touch) 56.dp else 44.dp)
             .clip(RoundedCornerShape(9.dp))
             .background(ToolbarSurface)
             .border(.5.dp, Border, RoundedCornerShape(9.dp))
@@ -44,7 +44,7 @@ fun ViewModeSelector(model: FinderModel) {
                 focusable = false,
             ) {
                 Box(
-                    Modifier.size(38.dp)
+                    Modifier.size(if (LocalFinderDensity.current.touch) 48.dp else 38.dp)
                         .shadow(if (selected) 1.dp else 0.dp, RoundedCornerShape(6.dp))
                         .clip(RoundedCornerShape(6.dp))
                         .background(

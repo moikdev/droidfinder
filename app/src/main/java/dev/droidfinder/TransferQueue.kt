@@ -42,6 +42,8 @@ data class TransferJob(
     val inFlight: String? = null,
     val conflictPolicy: ConflictPolicy = ConflictPolicy.ASK,
     val mergePlans: List<MergePlan> = emptyList(),
+    val estimate: TransferEstimate? = null,
+    val availableAtStart: Long? = null,
 ) {
     val title
         get() =
@@ -150,8 +152,12 @@ class TransferJournal(private val file: File) : TransferStore {
 
     @Synchronized
     override fun save(jobs: List<TransferJob>) {
-        require(jobs.all { it.mergePlans.isEmpty() }) {
-            "Merge plans require the database journal."
+        require(
+            jobs.all {
+                it.mergePlans.isEmpty() && it.estimate == null && it.availableAtStart == null
+            },
+        ) {
+            "Transfer details require the database journal."
         }
         val p =
             Properties().apply {

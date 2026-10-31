@@ -124,13 +124,14 @@ private fun Modifier.fileGestures(
 @Composable
 fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit) {
     val marquee = remember(model.location) { MarqueeState() }
-    BoxWithConstraints(Modifier.fillMaxSize().marqueeSelection(model, marquee, 32.dp)) {
-        val roomy = maxWidth > 610.dp
-        val showDate = maxWidth > 440.dp
+    val headerHeight = if (model.density.touch) 48.dp else 32.dp
+    BoxWithConstraints(Modifier.fillMaxSize().marqueeSelection(model, marquee, headerHeight)) {
+        val roomy = maxWidth > if (model.density.touch) 720.dp else 610.dp
+        val showDate = maxWidth > if (model.density.touch) 560.dp else 440.dp
         Column {
             Row(
                 Modifier.fillMaxWidth()
-                    .height(32.dp)
+                    .height(headerHeight)
                     .background(SubtleSurface)
                     .padding(start = 26.dp, end = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -162,7 +163,7 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                             Modifier.fileFrame(marquee, item.path)
                                 .folderDropTarget(model, if (item.folder) item.path else null)
                                 .fillMaxWidth()
-                                .height(48.dp)
+                                .height(model.density.rowHeight)
                                 .padding(horizontal = 8.dp)
                                 .background(
                                     if (selected) SelectionSurface else CanvasBackground,
@@ -176,7 +177,8 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                             if (item.folder && model.canExpandList)
                                 IconButton(
                                     onClick = { model.toggleExpanded(item) },
-                                    modifier = Modifier.size(22.dp),
+                                    modifier =
+                                        Modifier.size(if (model.density.touch) 48.dp else 28.dp),
                                 ) {
                                     Icon(
                                         if (item.path in model.expandedFolders)
@@ -189,7 +191,7 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                                         tint = Muted,
                                     )
                                 }
-                            else Spacer(Modifier.width(22.dp))
+                            else Spacer(Modifier.width(if (model.density.touch) 48.dp else 28.dp))
                             DraggableFileGlyph(model, item, 27.dp)
                             Text(
                                 model.displayName(item),
@@ -216,7 +218,7 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                                     overflow = TextOverflow.Ellipsis,
                                 )
                             Text(
-                                if (item.folder) "—" else formatSize(item.size),
+                                item.displaySize,
                                 Modifier.width(75.dp),
                                 color = Muted,
                                 fontSize = 10.sp,
@@ -437,7 +439,7 @@ private fun FileColumn(
                 Row(
                     Modifier.folderDropTarget(model, if (item.folder) item.path else null)
                         .fillMaxWidth()
-                        .height(36.dp)
+                        .height(model.density.rowHeight)
                         .background(
                             if (selected == item.path) SelectionSurface else Color.Transparent,
                             RoundedCornerShape(4.dp),
@@ -532,7 +534,9 @@ fun PreviewPane(
     val entry = model.focused
     Column(modifier.fillMaxHeight().background(SubtleSurface)) {
         Row(
-            Modifier.fillMaxWidth().height(36.dp).padding(start = 18.dp, end = 5.dp),
+            Modifier.fillMaxWidth()
+                .height(LocalFinderDensity.current.rowHeight)
+                .padding(start = 18.dp, end = 5.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
@@ -625,7 +629,10 @@ fun PreviewPane(
 fun PathBar(model: FinderModel, goTo: () -> Unit) {
     HorizontalDivider(color = Border)
     Row(
-        Modifier.fillMaxWidth().height(34.dp).background(SubtleSurface).padding(horizontal = 14.dp),
+        Modifier.fillMaxWidth()
+            .height(if (model.density.touch) 48.dp else 34.dp)
+            .background(SubtleSurface)
+            .padding(horizontal = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(
@@ -658,8 +665,10 @@ fun PathBar(model: FinderModel, goTo: () -> Unit) {
                         )
                     Row(
                         Modifier.folderDropTarget(model, path)
+                            .height(if (model.density.touch) 48.dp else 34.dp)
+                            .widthIn(min = if (model.density.touch) 48.dp else 0.dp)
                             .clickable { model.navigate(path) }
-                            .padding(vertical = 6.dp),
+                            .padding(horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         if (index == 0)
@@ -692,7 +701,10 @@ fun PathBar(model: FinderModel, goTo: () -> Unit) {
             fontSize = 10.sp,
             modifier = Modifier.padding(horizontal = 12.dp),
         )
-        IconButton(onClick = goTo, modifier = Modifier.size(28.dp)) {
+        IconButton(
+            onClick = goTo,
+            modifier = Modifier.size(if (model.density.touch) 48.dp else 28.dp),
+        ) {
             Icon(Icons.Outlined.EditLocationAlt, "Go to folder", Modifier.size(14.dp), tint = Muted)
         }
     }

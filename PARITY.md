@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -49,9 +49,16 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Transactional SQLite migration/checkpoints, per-member retry destinations and explicit ambiguity review.
 - [x] Cancellation-aware merge verification and source/destination content checks before cleanup.
 
+## Tablet controls and planning pass
+
+- [x] Content-sized transfer utility window with expandable paths/results and bounded history.
+- [x] Persisted Comfortable/Compact density and width-aware toolbar/list columns.
+- [x] Metadata-only transfer estimates, advisory capacity checks and phase-aware progress.
+- [x] Pause-aware fresh rate/ETA, persistent estimates and schema upgrade coverage.
+
 ## Verification
 
-See [the current verification record](docs/FOLDER-MERGE.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
+See [the current verification record](docs/TRANSFER-PLANNING.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 

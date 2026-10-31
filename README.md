@@ -4,19 +4,19 @@ A native Android tablet file explorer inspired by macOS Finder. Kotlin, Jetpack 
 
 This is an independent implementation, not Apple source code or a macOS runtime. [Parity checklist and platform differences](PARITY.md).
 
-![DroidFinder tablet preview](docs/screenshots/transfer-landscape.png)
+![DroidFinder tablet preview](docs/screenshots/planning-compact.png)
 
-Actual Android screenshot with synthetic QA documents. [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png). [Portrait](docs/screenshots/desktop-portrait.png) · [Compact window](docs/screenshots/desktop-compact.png) · [Dark appearance](docs/screenshots/desktop-dark.png)
+Actual Android screenshot with synthetic QA documents. [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png). [Comfortable density](docs/screenshots/planning-comfortable.png) · [Portrait](docs/screenshots/planning-portrait.png) · [Compact window](docs/screenshots/planning-window.png) · [Dark appearance](docs/screenshots/planning-dark.png)
 
-**0.6.0:** Folder merging with per-member conflicts, local/provider move recovery, Undo/Redo, and transactional transfer history. [Workflows and verification](docs/FOLDER-MERGE.md). Earlier: [0.5.0 transfer center](docs/TRANSFER-CENTER.md).
+**0.7.0:** Compact Transfers window, expandable details, Comfortable/Compact density, adaptive tablet controls, source-size planning, capacity checks and phase progress. [Workflows and verification](docs/TRANSFER-PLANNING.md). Earlier: [0.6.0 folder merging](docs/FOLDER-MERGE.md), [0.5.0 transfer center](docs/TRANSFER-CENTER.md).
 
-[Transfer center](docs/screenshots/transfer-center.png) · [Conflict choices](docs/screenshots/file-conflict.png)
+[Compact transfer window](docs/screenshots/transfer-compact.png) · [Expanded details](docs/screenshots/transfer-details-compact.png) · [Conflict choices](docs/screenshots/file-conflict.png)
 
 [Full improvement roadmap](docs/ROADMAP.md) — delivery continues in verified increments; unchecked items remain in progress.
 
 ## Install or build
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.6.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.7.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -34,7 +34,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | Area | Implementation |
 | --- | --- |
 | Browsing | Sidebar, favorites, shared storage, SD/USB volumes, provider locations, reorderable tabs with independent history/search, reopen closed tab, back/forward/up, clickable path bar, Go to Folder, reveal enclosing folder |
-| Views | Icons with adjustable size, sortable list with folder disclosure/expansion, browsing columns, gallery/filmstrip, resizable columns/preview/sidebar, compact toolbar |
+| Views | Icons with adjustable size, sortable list with folder disclosure/expansion, browsing columns, gallery/filmstrip, resizable columns/preview/sidebar, adaptive toolbar, Comfortable/Compact density |
 | Selection/input | Tap/double-tap, touch multiple selection, Ctrl/Meta-click, Shift ranges, keyboard navigation, type-to-select, mouse context actions, rectangle selection, native dragging |
 | Organizing | Create folder/text file, New Folder with Selection, destination picker, rename, batch rename (replace/prefix/suffix/numbered format), duplicate, copy/cut/paste |
 | Undo/Redo | Session history for create/copy/move/rename, batch rename, grouping, Trash/restore, archives, shortcuts, and tag edits; content fingerprints stop Undo from removing later edits |
@@ -43,7 +43,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | Peek / Quick Look | Images with EXIF orientation, pinch/button zoom, all PDF pages with navigation/zoom, audio controls, video play/pause and seeking, text preview, folder counts/size and Get Info |
 | File integration | Android default apps/Open With, temporary read grants for sharing, full-path copy, inert `.finderlink` shortcuts |
 | Archives/Trash | Named ZIP creation with compression levels, read-only archive browsing, extraction with path checks; recoverable Trash and restore, Undo, explicit confirmation for permanent deletion/emptying |
-| Transfers | Persistent copy/move queue, pause/resume/cancel, notification controls, per-file results/retry, reorder, foreground service, browsing during transfers and explicit interruption review |
+| Transfers | Persistent copy/move queue, pause/resume/cancel, notification controls, per-file results/retry, reorder, foreground service, browsing during transfers, metadata estimates, capacity preflight, phase progress/ETA and explicit interruption review |
 | Conflicts | Compare incoming/existing items; keep both, skip, rename or replace with recoverable Undo/Redo; folder merging, nested member retries and apply-to-remaining choices |
 | Persistence | Tabs/current locations, view/sort/group settings, sizes, preview/hidden/extension preferences, theme, favorites, tags, Smart Folders, provider grants, folder appearance, Trash recovery metadata |
 
@@ -112,7 +112,7 @@ The script validates preview/release version agreement, verifies the development
 
 - `FileEngine`, `ZipArchive`, `FileHistory`, `BatchRename`, `TransferControl`: safe local operations, session command history, name planning, cancellation/progress.
 - `DocumentAccess`: document-provider capabilities, grants, cross-storage IO, previews and recoverable provider Trash.
-- `TransferWorker`, `MergePlanner`, `SqliteTransferStore`: serialized jobs, safe folder merging, durable member plans and legacy migration.
+- `TransferWorker`, `MergePlanner`, `TransferEstimate`, `SqliteTransferStore`: serialized jobs, safe folder merging, durable member plans and legacy migration.
 - `FinderModel`, `FinderApplication`, `TransferService`: navigation/state, app lifetime, transfer queue/notification and recovery.
 - `TagStore`, `FolderStyleStore`, `SearchRules`: persistent metadata, shortcuts, Smart Folder criteria and grouping.
 - `FinderApp`, `FinderViews`, `FinderDialogs`, `DesktopMenus`, `DesktopTabs`, `ArchiveDialogs`, `ViewModeSelector`, `TransferStrip`, `FinderDragDrop`, `MarqueeSelection`: tablet UI and pointer/keyboard workflows.

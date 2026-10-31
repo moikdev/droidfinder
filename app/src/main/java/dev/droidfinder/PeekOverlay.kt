@@ -174,7 +174,7 @@ fun PeekOverlay(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        entry.kind + if (entry.folder) "" else " · ${formatSize(entry.size)}",
+                        entry.kind + if (entry.folder) "" else " · ${entry.displaySize}",
                         Modifier.weight(1f),
                         color = Muted,
                         fontSize = 11.sp,

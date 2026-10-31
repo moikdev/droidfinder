@@ -14,7 +14,10 @@ import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
 
 /** Local disk operations. Never overwrites an existing item. Call from an IO dispatcher. */
-class FileEngine(private val stateDir: File) {
+class FileEngine(
+    private val stateDir: File,
+    private val freeBytes: (File) -> Long? = { runCatching { it.usableSpace }.getOrNull() },
+) {
     private val trashDir = File(stateDir, "Trash").apply { mkdirs() }
     private val indexFile = File(stateDir, "trash.properties")
     private val index =
@@ -138,6 +141,7 @@ class FileEngine(private val stateDir: File) {
         move: Boolean = false,
         control: TransferControl = TransferControl(),
         requestedName: String? = null,
+        phaseTitle: String = if (move) "Moving" else "Copying",
     ): File {
         control.check()
         checkDestination(source, parent)
@@ -155,11 +159,16 @@ class FileEngine(private val stateDir: File) {
                 }
             } ?: uniqueFile(parent, source.name)
         if (move) {
+            control.phase(phaseTitle)
             control.item(source.name)
             control.check()
             // Publication must not be followed by a cancellation check that hides its result.
             if (source.renameTo(target)) return target
         }
+        control.phase("Checking files")
+        val estimate = estimateLocalTransfer(listOf(source.path), control)
+        requireTransferSpace(estimate.knownBytes, freeBytes(parent))
+        control.phase(phaseTitle, estimate.totalBytes)
         // Hide incomplete copies and only expose the result after a successful copy.
         val staging = File(parent, ".droidfinder-${UUID.randomUUID()}")
         try {
@@ -223,7 +232,13 @@ class FileEngine(private val stateDir: File) {
         index.setProperty(id, source.absolutePath)
         saveIndex()
         try {
-            return copy(source, bucket, move = true, control = control)
+            return copy(
+                source,
+                bucket,
+                move = true,
+                control = control,
+                phaseTitle = "Saving recovery copy",
+            )
         } catch (error: Exception) {
             if (bucket.listFiles().isNullOrEmpty()) {
                 bucket.delete()

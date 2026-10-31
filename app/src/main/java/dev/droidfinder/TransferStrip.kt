@@ -55,23 +55,43 @@ fun browseKeyDuringTransfer(event: KeyEvent, editing: Boolean): Boolean {
 
 @Composable
 fun TransferStrip(model: FinderModel, openTransfers: () -> Unit) {
+    val now = rememberTransferClock()
+    val progress = model.transferProgress
+    val paused = model.activeTransfer?.state == TransferState.PAUSED
     HorizontalDivider(color = Border, thickness = .5.dp)
     Row(
         Modifier.fillMaxWidth().height(52.dp).background(SubtleSurface).padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        if (model.busy != null) CircularProgressIndicator(Modifier.size(19.dp), strokeWidth = 2.dp)
+        if (model.busy != null) {
+            val fraction = progress.fraction
+            if (fraction != null)
+                CircularProgressIndicator(
+                    progress = { fraction },
+                    modifier = Modifier.size(19.dp),
+                    strokeWidth = 2.dp,
+                )
+            else CircularProgressIndicator(Modifier.size(19.dp), strokeWidth = 2.dp)
+        }
         Column(Modifier.weight(1f).padding(horizontal = 13.dp)) {
             Text(
-                (if (model.activeTransfer?.state == TransferState.PAUSED) "Paused · " else "") +
-                    (model.busy ?: "Transfers queued or paused"),
+                (if (paused) "Paused · " else "") +
+                    (progress.phase.takeIf { model.busy != null && it.isNotEmpty() }
+                        ?: model.busy
+                        ?: "Transfers queued or paused") +
+                    progress.current
+                        .takeIf { model.busy != null && it.isNotEmpty() }
+                        ?.let { " · $it" }
+                        .orEmpty(),
                 color = Ink,
                 fontSize = 12.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                "${model.transferProgress.items} items · ${formatSize(model.transferProgress.bytes)} · ${model.transferProgress.current}",
+                transferPhaseSummary(progress, paused, now).ifEmpty {
+                    model.activeTransfer?.estimate?.description() ?: "Checking source totals"
+                },
                 color = Muted,
                 fontSize = 10.sp,
                 maxLines = 1,

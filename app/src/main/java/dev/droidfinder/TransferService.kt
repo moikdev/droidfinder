@@ -56,9 +56,10 @@ object TransferRuntime {
         "MissingPermission",
     ) // A foreground-service notification is required even without POST_NOTIFICATIONS.
     fun report(context: Context, value: TransferProgress) {
+        val phaseChanged = progress.phase != value.phase
         progress = value
         val now = android.os.SystemClock.elapsedRealtime()
-        if (label != null && now - lastNotification > 500) {
+        if (label != null && (phaseChanged || now - lastNotification > 500)) {
             lastNotification = now
             context
                 .getSystemService(NotificationManager::class.java)
@@ -117,12 +118,18 @@ object TransferRuntime {
             .setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle((if (paused) "Paused · " else "") + (label ?: "DroidFinder"))
             .setContentText(
-                "${progress.items} items · ${formatSize(progress.bytes)} · ${progress.current}",
+                listOf(progress.phase, transferPhaseAmount(progress), progress.current)
+                    .filter { it.isNotEmpty() }
+                    .joinToString(" · "),
             )
             .setContentIntent(open)
             .setOngoing(true)
             .setOnlyAlertOnce(true)
-            .setProgress(0, 0, true)
+            .setProgress(
+                1000,
+                ((progress.fraction ?: 0f) * 1000).toInt(),
+                progress.fraction == null,
+            )
             .apply {
                 if (pausable)
                     addAction(

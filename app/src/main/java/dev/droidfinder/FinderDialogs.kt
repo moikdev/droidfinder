@@ -4,6 +4,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -574,6 +575,26 @@ fun PreferencesDialog(model: FinderModel, dismiss: () -> Unit) {
                     .heightIn(max = 490.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                Text("Interface density", fontWeight = FontWeight.SemiBold)
+                FinderDensity.entries.forEach { density ->
+                    Row(
+                        Modifier.fillMaxWidth()
+                            .heightIn(min = 56.dp)
+                            .selectable(
+                                selected = model.density == density,
+                                role = androidx.compose.ui.semantics.Role.RadioButton,
+                                onClick = { model.changeDensity(density) },
+                            ),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        RadioButton(model.density == density, null)
+                        Column(Modifier.padding(start = 8.dp)) {
+                            Text(density.title, fontSize = 13.sp)
+                            Text(density.description, fontSize = 11.sp, color = Muted)
+                        }
+                    }
+                }
+                HorizontalDivider(Modifier.padding(vertical = 12.dp))
                 Text("File conflicts", fontWeight = FontWeight.SemiBold)
                 ConflictPolicy.entries
                     .filter { it != ConflictPolicy.REPLACE }

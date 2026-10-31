@@ -71,7 +71,8 @@ fun ZoomableBitmap(
         }
         if (controls)
             Row(
-                Modifier.fillMaxWidth().height(40.dp),
+                Modifier.fillMaxWidth()
+                    .height(if (LocalFinderDensity.current.touch) 48.dp else 40.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -154,7 +155,7 @@ fun PdfQuickLook(entry: Entry, modifier: Modifier = Modifier) {
             else CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
         }
         Row(
-            Modifier.fillMaxWidth().height(42.dp),
+            Modifier.fillMaxWidth().height(if (LocalFinderDensity.current.touch) 48.dp else 42.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
         ) {

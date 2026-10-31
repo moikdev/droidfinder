@@ -75,10 +75,17 @@ class DesktopWorkflowTest {
             }
             // Route a real platform mouse click through the focused Android window.
             // This exercises dialog-to-activity transitions as well as Compose hit testing.
-            val point = compose.onNodeWithText(name).fetchSemanticsNode().boundsInWindow.center
             val instrumentation =
                 androidx.test.platform.app.InstrumentationRegistry.getInstrumentation()
             instrumentation.uiAutomation.waitForIdle(500, 5000)
+            compose.waitForIdle()
+            // Hit the actual filename, not the merged row whose center can be a drag source.
+            val point =
+                compose
+                    .onNodeWithText(name, useUnmergedTree = true)
+                    .fetchSemanticsNode()
+                    .boundsInWindow
+                    .center
             val properties =
                 arrayOf(
                     android.view.MotionEvent.PointerProperties().apply {
@@ -95,7 +102,7 @@ class DesktopWorkflowTest {
                         size = 1f
                     },
                 )
-            val time = android.os.SystemClock.uptimeMillis()
+            var downTime = android.os.SystemClock.uptimeMillis()
             for ((action, buttons) in
                 listOf(
                     android.view.MotionEvent.ACTION_HOVER_MOVE to 0,
@@ -103,9 +110,13 @@ class DesktopWorkflowTest {
                         android.view.MotionEvent.BUTTON_SECONDARY,
                     android.view.MotionEvent.ACTION_UP to 0,
                 )) {
+                if (action == android.view.MotionEvent.ACTION_DOWN)
+                    downTime = android.os.SystemClock.uptimeMillis()
+                coordinates[0].pressure =
+                    if (action == android.view.MotionEvent.ACTION_DOWN) 1f else 0f
                 val event =
                     android.view.MotionEvent.obtain(
-                        time,
+                        downTime,
                         android.os.SystemClock.uptimeMillis(),
                         action,
                         1,
@@ -123,7 +134,21 @@ class DesktopWorkflowTest {
                 try {
                     assertTrue(instrumentation.uiAutomation.injectInputEvent(event, true))
                     instrumentation.waitForIdleSync()
-                    if (action == android.view.MotionEvent.ACTION_HOVER_MOVE) compose.waitForIdle()
+                    if (action != android.view.MotionEvent.ACTION_UP) {
+                        // Let Android commit hover/press state before the next native event.
+                        // Compose's test clock does not advance Choreographer's input frames.
+                        val frame = java.util.concurrent.CountDownLatch(1)
+                        instrumentation.runOnMainSync {
+                            android.view.Choreographer.getInstance().postFrameCallback {
+                                android.view.Choreographer.getInstance().postFrameCallback {
+                                    frame.countDown()
+                                }
+                            }
+                        }
+                        assertTrue(frame.await(2, java.util.concurrent.TimeUnit.SECONDS))
+                        instrumentation.waitForIdleSync()
+                        compose.waitForIdle()
+                    }
                 } finally {
                     event.recycle()
                 }
@@ -171,24 +196,26 @@ class DesktopWorkflowTest {
 
     @Test
     fun rightClickWorksInEveryBrowsingView() {
-        ViewMode.entries.forEach { mode ->
-            compose.runOnIdle {
-                model.changeMode(mode)
-                model.clearSelection()
-            }
-            loaded()
-            right("Notes.md")
-            compose.onNodeWithText("Compress to ZIP…").assertExists()
-            compose.onNodeWithText("Get info").performSemanticsAction(
-                androidx.compose.ui.semantics.SemanticsActions.OnClick,
-            ) {
-                it()
-            }
-            compose.onNodeWithText("Full path").assertExists()
-            compose.onNodeWithText("Done").performSemanticsAction(
-                androidx.compose.ui.semantics.SemanticsActions.OnClick,
-            ) {
-                it()
+        repeat(4) {
+            ViewMode.entries.forEach { mode ->
+                compose.runOnIdle {
+                    model.changeMode(mode)
+                    model.clearSelection()
+                }
+                loaded()
+                right("Notes.md")
+                compose.onNodeWithText("Compress to ZIP…").assertExists()
+                compose.onNodeWithText("Get info").performSemanticsAction(
+                    androidx.compose.ui.semantics.SemanticsActions.OnClick,
+                ) {
+                    it()
+                }
+                compose.onNodeWithText("Full path").assertExists()
+                compose.onNodeWithText("Done").performSemanticsAction(
+                    androidx.compose.ui.semantics.SemanticsActions.OnClick,
+                ) {
+                    it()
+                }
             }
         }
     }
@@ -254,6 +281,12 @@ class DesktopWorkflowTest {
         compose.waitUntil(10_000) {
             compose
                 .onAllNodesWithText("ZIP archive · read-only contents")
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+        compose.waitUntil(10_000) {
+            compose
+                .onAllNodesWithContentDescription("Browse Folder")
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }

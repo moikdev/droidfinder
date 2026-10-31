@@ -6,10 +6,44 @@ import java.io.OutputStream
 import java.util.concurrent.CancellationException
 import java.util.concurrent.ConcurrentHashMap
 
-data class TransferProgress(val bytes: Long = 0, val items: Int = 0, val current: String = "")
+data class TransferProgress(
+    val bytes: Long = 0,
+    val items: Int = 0,
+    val current: String = "",
+    val phase: String = "",
+    val phaseBytes: Long = 0,
+    val phaseTotalBytes: Long? = null,
+    val activeMillis: Long = 0,
+    val updatedAtMillis: Long = 0,
+) {
+    val fraction: Float?
+        get() =
+            phaseTotalBytes
+                ?.takeIf { it > 0 && phaseBytes <= it }
+                ?.let { (phaseBytes.toDouble() / it).coerceIn(0.0, 1.0).toFloat() }
+
+    val bytesPerSecond: Long?
+        get() =
+            if (activeMillis >= 1500 && phaseBytes > 0)
+                (phaseBytes.toDouble() * 1000 / activeMillis).toLong().coerceAtLeast(1)
+            else null
+
+    val secondsRemaining: Long?
+        get() {
+            val rate = bytesPerSecond ?: return null
+            val total = phaseTotalBytes ?: return null
+            if (phaseBytes > total || total <= 0) return null
+            return kotlin.math.ceil((total - phaseBytes).toDouble() / rate).toLong()
+        }
+
+    fun fresh(now: Long = transferClockMillis()) = now - updatedAtMillis in 0..3000
+}
 
 /** Shared cancellation token. Checks run between files and between 64 KiB stream chunks. */
-class TransferControl(private val progress: (TransferProgress) -> Unit = {}) {
+class TransferControl(
+    private val clockMillis: () -> Long = ::transferClockMillis,
+    private val progress: (TransferProgress) -> Unit = {},
+) {
     @Volatile
     var cancelled: Boolean = false
         private set
@@ -21,19 +55,46 @@ class TransferControl(private val progress: (TransferProgress) -> Unit = {}) {
     private val pauseLock = Object()
 
     fun pause() {
-        paused = true
+        synchronized(pauseLock) {
+            if (!paused) pausedAt = clockMillis()
+            paused = true
+        }
+        report()
     }
 
     fun resume() {
         synchronized(pauseLock) {
+            pausedAt?.let { pausedMillis += (clockMillis() - it).coerceAtLeast(0) }
+            pausedAt = null
             paused = false
             pauseLock.notifyAll()
         }
+        report()
     }
 
     private var bytes = 0L
     private var items = 0
     private var current = ""
+    private var phase = ""
+    private var phaseBytes = 0L
+    private var phaseTotalBytes: Long? = null
+    private var phaseStarted = clockMillis()
+    private var pausedMillis = 0L
+    private var pausedAt: Long? = null
+
+    /** Reporting a phase must not hide a result by throwing after atomic publication. */
+    fun phase(title: String, totalBytes: Long? = null) {
+        synchronized(pauseLock) {
+            phase = title
+            phaseBytes = 0
+            phaseTotalBytes = totalBytes?.takeIf { it >= 0 }
+            phaseStarted = clockMillis()
+            pausedMillis = 0
+            pausedAt = phaseStarted.takeIf { paused }
+        }
+        report()
+    }
+
     @Volatile
     var snapshot = TransferProgress()
         private set
@@ -66,20 +127,41 @@ class TransferControl(private val progress: (TransferProgress) -> Unit = {}) {
 
     fun item(name: String) {
         check()
-        current = name
-        items++
+        synchronized(pauseLock) {
+            current = name
+            items++
+        }
         report()
     }
 
     fun bytes(count: Int) {
         check()
-        bytes += count
+        synchronized(pauseLock) {
+            bytes += count
+            phaseBytes += count
+            if (phaseTotalBytes?.let { phaseBytes > it } == true) phaseTotalBytes = null
+        }
         report()
     }
 
     private fun report() {
-        snapshot = TransferProgress(bytes, items, current)
-        progress(snapshot)
+        val value =
+            synchronized(pauseLock) {
+                val now = clockMillis()
+                TransferProgress(
+                    bytes,
+                    items,
+                    current,
+                    phase,
+                    phaseBytes,
+                    phaseTotalBytes,
+                    (now - phaseStarted - pausedMillis - (pausedAt?.let { now - it } ?: 0))
+                        .coerceAtLeast(0),
+                    now,
+                )
+            }
+        snapshot = value
+        progress(value)
     }
 
     fun <T> guard(stream: Closeable, work: () -> T): T {

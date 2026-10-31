@@ -423,7 +423,7 @@ fun Metadata(entry: Entry, model: FinderModel, modifier: Modifier = Modifier) {
             overflow = TextOverflow.Ellipsis,
         )
         Text(
-            entry.kind + if (!entry.folder) " · ${formatSize(entry.size)}" else "",
+            entry.kind + if (!entry.folder) " · ${entry.displaySize}" else "",
             color = Muted,
             fontSize = 12.sp,
             modifier = Modifier.padding(top = 5.dp, bottom = 14.dp),

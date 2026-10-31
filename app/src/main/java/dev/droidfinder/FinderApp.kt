@@ -88,7 +88,10 @@ fun FinderApp(
     onOpenWith: (Entry) -> Unit,
     onEnableNotifications: () -> Unit = {},
 ) {
-    CompositionLocalProvider(LocalFinderDark provides model.darkTheme) {
+    CompositionLocalProvider(
+        LocalFinderDark provides model.darkTheme,
+        LocalFinderDensity provides model.density,
+    ) {
         MaterialTheme(
             colorScheme = finderColors(model.darkTheme),
             typography =
@@ -1024,9 +1027,6 @@ private fun FinderSidebar(
                 }
             }
             SidebarItem("Connect folder…", Icons.Outlined.Add, false) { onConnectFolder() }
-            SidebarItem("Trash", Icons.Outlined.DeleteOutline, model.isTrash) {
-                model.navigate("@trash")
-            }
             if (model.smartFolders.isNotEmpty()) {
                 Spacer(Modifier.height(8.dp))
                 SidebarHeading("Smart Folders")
@@ -1055,6 +1055,12 @@ private fun FinderSidebar(
                 }
             }
             Spacer(Modifier.height(20.dp))
+        }
+        HorizontalDivider(color = Border, thickness = .5.dp)
+        Box(Modifier.padding(horizontal = 10.dp)) {
+            SidebarItem("Trash", Icons.Outlined.DeleteOutline, model.isTrash) {
+                model.navigate("@trash")
+            }
         }
         val disk by
             produceState<Pair<Long, Long>?>(null, model.location, model.hasAccess, model.busy) {
@@ -1117,7 +1123,7 @@ private fun SidebarItem(
     Row(
         modifier
             .fillMaxWidth()
-            .height(36.dp)
+            .height(LocalFinderDensity.current.rowHeight)
             .clip(RoundedCornerShape(6.dp))
             .background(if (active) SelectionSurface else Color.Transparent)
             .clickable(onClick = onClick)
@@ -1171,7 +1177,10 @@ fun ToolButton(
             enabled = enabled,
             interactionSource = interaction,
             modifier =
-                Modifier.size(if (compact) 34.dp else 38.dp)
+                Modifier.size(
+                        if (LocalFinderDensity.current.touch) 48.dp
+                        else if (compact) 34.dp else 38.dp,
+                    )
                     .clip(RoundedCornerShape(6.dp))
                     .hoverable(interaction)
                     .background(
@@ -1209,6 +1218,35 @@ internal fun ActionMenu(
             MenuAction("Redo ${model.redoLabel}", Icons.AutoMirrored.Outlined.Redo, idle) {
                 action("redo")
             }
+        HorizontalDivider()
+        MenuAction(
+            "Back",
+            Icons.AutoMirrored.Outlined.ArrowBack,
+            model.tabs[model.activeTab].index > 0,
+        ) {
+            model.back()
+            onDismiss()
+        }
+        MenuAction(
+            "Forward",
+            Icons.AutoMirrored.Outlined.ArrowForward,
+            model.tabs[model.activeTab].index < model.tabs[model.activeTab].history.lastIndex,
+        ) {
+            model.forward()
+            onDismiss()
+        }
+        MenuAction("Enclosing folder", Icons.Outlined.ArrowUpward, model.parentPath() != null) {
+            model.up()
+            onDismiss()
+        }
+        MenuAction(
+            if (model.previewVisible) "Hide preview pane" else "Show preview pane",
+            Icons.Outlined.VerticalSplit,
+        ) {
+            model.togglePreview()
+            onDismiss()
+        }
+        HorizontalDivider()
         MenuAction("New tab", Icons.Outlined.AddBox) { action("newTab") }
         MenuAction("Reopen closed tab", Icons.Outlined.Restore, model.canReopenTab) {
             model.reopenTab()

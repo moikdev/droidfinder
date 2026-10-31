@@ -103,7 +103,9 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                         else
                             MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.extension)
                                 ?: "application/octet-stream"
-                    Document.COLUMN_SIZE -> if (file.isDirectory) 0L else file.length()
+                    Document.COLUMN_SIZE ->
+                        if (file.name == "Unknown-size.bin") null
+                        else if (file.isDirectory) 0L else file.length()
                     Document.COLUMN_LAST_MODIFIED -> file.lastModified()
                     Document.COLUMN_FLAGS ->
                         if (readOnly(file)) 0

@@ -184,7 +184,7 @@ class FileConflictWorkflowTest {
         assertEquals("good", File(target, "Good.txt").readText())
         compose.onNodeWithContentDescription("Actions").performClick()
         compose.onNodeWithText("Transfers", useUnmergedTree = true).performClick()
-        compose.onNodeWithText("Show files").performClick()
+        compose.onNodeWithText("Details").performClick()
         compose.onNodeWithText("Folder merge", substring = true).assertExists()
         android.os.ParcelFileDescriptor.AutoCloseInputStream(
                 androidx.test.platform.app.InstrumentationRegistry.getInstrumentation()

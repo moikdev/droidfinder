@@ -4,19 +4,22 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 
 ## 1. Interface and input
 - [x] Consistent read-only commands during transfers across toolbar, menus and keyboard (0.5.0).
-- [ ] Comfortable/compact density with accessible touch targets, consistent spacing/icons/dialogs.
+- [x] Comfortable/compact density, accessible primary targets and adaptive tablet controls (0.7.0).
+- [ ] Complete the remaining spacing/dialog/input/accessibility refinements.
 - [ ] Grouped overflow menus, stable primary actions, useful loading/empty/error/permission states.
 - [ ] Focus navigation, mouse/trackpad scrolling, drag feedback, edge scrolling and spring-loaded folders.
 
 ## 2. Transfer center and conflicts
 - [x] Durable copy/move queue, completed history, per-item errors and retry remaining items (0.5.0).
 - [x] In-process boundary pause/resume, queue reorder/cancel, byte progress and average speed (0.5.0).
-- [ ] Preflight totals/ETA and safe independent concurrent transfers.
+- [x] Metadata preflight totals, explicit partial counts and phase estimates (0.7.0).
+- [ ] Safe independent concurrent transfers.
 - [x] Explicit interruption review; never silently replay an ambiguous published move/copy (0.5.0).
 - [x] Conflict comparison: keep both, skip, rename and replace with recoverable Undo/Redo (0.5.0).
 - [x] Folder merge with per-member conflict handling, local/provider recovery and nested retry destinations (0.6.0).
 - [x] Apply choices to remaining conflicts, capability/descendant checks and changed-destination guard (0.5.0); ancestor replacement rejection (0.6.0).
-- [ ] Free-space preflight and dedicated Unicode/case-only rename coverage.
+- [x] Known-capacity checks before staged copies and replacement rollback (0.7.0).
+- [ ] Dedicated Unicode/case-only rename coverage.
 - [x] Optional transfer notifications with pause/resume/cancel (0.5.0).
 - [ ] Appropriate Android background execution per local/network operation.
 
@@ -68,4 +71,4 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 
 ## External validation and deferred scope
 
-Hardware/provider credentials and production signing are not supplied by the repository. Implement testable support locally, clearly record external coverage, and do not claim physical-device or hosted-CI success without evidence. GitHub Actions is manual-only at the user’s request because hosted quota is exhausted. Run checks on this PC, or use the authorized Linux box if needed. Do not spend money or alter billing. Phone layout remains deferred.
+Hardware/provider credentials and production signing are not supplied by the repository. Implement testable support locally, clearly record external coverage, and do not claim physical-device or hosted-CI success without evidence. GitHub Actions is manual-only at the user’s request because hosted quota is exhausted. Run checks on this PC, or use the authorized Linux box if needed. Do not spend money or alter billing. Phone layout remains deferred. The user requests a screenshot with every UI-change update; capture the actual Android UI, inspect it, and include current screenshots in the user-facing result.

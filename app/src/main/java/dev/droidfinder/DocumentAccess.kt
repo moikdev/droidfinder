@@ -30,6 +30,7 @@ class PreviewSizeLimitException(message: String) : IllegalStateException(message
 class DocumentAccess(
     private val context: Context,
     private val engine: FileEngine = FileEngine(context.filesDir),
+    private val spaceProbe: ((String) -> Long?)? = null,
 ) {
     private val resolver = context.contentResolver
     private val prefs = context.getSharedPreferences("locations", 0)
@@ -209,6 +210,9 @@ class DocumentAccess(
             flags and Document.FLAG_SUPPORTS_RENAME != 0,
             flags and Document.FLAG_SUPPORTS_DELETE != 0,
             mime,
+            sizeKnown =
+                !cursor.isNull(cursor.getColumnIndexOrThrow(Document.COLUMN_SIZE)) &&
+                    number(Document.COLUMN_SIZE) >= 0,
         )
     }
 
@@ -387,6 +391,59 @@ class DocumentAccess(
         }
     }
 
+    fun estimate(paths: List<String>, control: TransferControl): TransferEstimate {
+        fun node(entry: Entry) =
+            EstimateNode(
+                entry.path,
+                entry.folder,
+                entry.size.takeIf { entry.sizeKnown },
+                entry.documentUri == null && Files.isSymbolicLink(entry.file.toPath()),
+            )
+        return estimateTransfer(
+            paths,
+            { path ->
+                if (!isDocumentPath(path))
+                    check(File(path).exists()) { "This item is unavailable." }
+                node(read(path))
+            },
+            { list(it).asSequence().map(::node).asIterable() },
+            control,
+        )
+    }
+
+    /** Match an actual provider root; never apply one volume's capacity to another volume. */
+    fun availableSpace(path: String): Long? {
+        if (spaceProbe != null) return spaceProbe.invoke(path)?.takeIf { it >= 0 }
+        if (!isDocumentPath(path)) return runCatching { File(path).usableSpace }.getOrNull()
+        return runCatching {
+            val uri = Uri.parse(path)
+            val authority = uri.authority ?: return@runCatching null
+            val columns =
+                arrayOf(
+                    DocumentsContract.Root.COLUMN_DOCUMENT_ID,
+                    DocumentsContract.Root.COLUMN_AVAILABLE_BYTES,
+                )
+            resolver
+                .query(DocumentsContract.buildRootsUri(authority), columns, null, null, null)
+                ?.use { cursor ->
+                    while (cursor.moveToNext()) {
+                        val id = cursor.getString(0) ?: continue
+                        val root = DocumentsContract.buildDocumentUriUsingTree(uri, id)
+                        val matches =
+                            id == DocumentsContract.getDocumentId(uri) ||
+                                runCatching {
+                                        DocumentsContract.isChildDocument(resolver, root, uri)
+                                    }
+                                    .getOrDefault(false)
+                        if (matches && !cursor.isNull(1))
+                            return@use cursor.getLong(1).takeIf { it >= 0 }
+                    }
+                    null
+                }
+        }
+            .getOrNull()
+    }
+
     fun validateReplacement(source: String, existing: String) {
         if (!isDocumentPath(source) && !isDocumentPath(existing)) {
             require(
@@ -428,12 +485,13 @@ class DocumentAccess(
         move: Boolean,
         control: TransferControl = TransferControl(),
         requestedName: String? = null,
+        phaseTitle: String = if (move) "Moving" else "Copying",
     ): String {
         lastCopyMappings = emptyList()
         validateTransfer(source, parent, move, requestedName != null)
         if (!isDocumentPath(source) && !isDocumentPath(parent))
             return engine
-                .copy(File(source), File(parent), move, control, requestedName)
+                .copy(File(source), File(parent), move, control, requestedName, phaseTitle)
                 .absolutePath
         checkDestination(source, parent)
         val entry = read(source)
@@ -448,6 +506,10 @@ class DocumentAccess(
                 validateFilename(it)
                 check(list(parent).none { child -> child.name == it }) { "$it already exists." }
             } ?: uniqueName(parent, entry.name)
+        control.phase("Checking files")
+        val estimate = estimate(listOf(source), control)
+        requireTransferSpace(estimate.knownBytes, availableSpace(parent))
+        control.phase(phaseTitle, estimate.totalBytes)
         val staging = create(parent, ".droidfinder-${UUID.randomUUID()}", entry.folder, entry.mime)
         val mappings = mutableListOf<Pair<String, String>>()
         fun copyContents(from: Entry, to: String) {
@@ -527,7 +589,14 @@ class DocumentAccess(
         val staging =
             File(context.filesDir, "provider-staging/${UUID.randomUUID()}").apply { mkdirs() }
         try {
-            val copy = copy(path, staging.absolutePath, false, control)
+            val copy =
+                copy(
+                    path,
+                    staging.absolutePath,
+                    false,
+                    control,
+                    phaseTitle = "Saving recovery copy",
+                )
             val trashed = engine.trash(File(copy), control)
             engine.rememberOriginal(trashed, path, parent)
             engine.rememberMappings(

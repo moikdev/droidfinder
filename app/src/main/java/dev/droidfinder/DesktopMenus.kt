@@ -170,7 +170,7 @@ fun ContextItem(
         trailingIcon = shortcut?.let { { Text(it, color = Muted, fontSize = 10.sp) } },
         onClick = onClick,
         enabled = enabled,
-        modifier = Modifier.height(36.dp),
+        modifier = Modifier.height(LocalFinderDensity.current.rowHeight),
         contentPadding = PaddingValues(horizontal = 13.dp),
     )
 }
@@ -185,7 +185,10 @@ fun FileActionsButton(model: FinderModel, entry: Entry) {
             }
             model.requestContext(entry, position)
         },
-        modifier = Modifier.size(32.dp).onGloballyPositioned { coordinates = it },
+        modifier =
+            Modifier.size(LocalFinderDensity.current.targetSize).onGloballyPositioned {
+                coordinates = it
+            },
     ) {
         Icon(
             Icons.Outlined.MoreHoriz,

@@ -122,7 +122,7 @@ fun FileConflictDialog(model: FinderModel, conflict: FileConflict) {
 private fun ConflictDetails(label: String, entry: Entry, displayPath: (String) -> String) {
     Text(label, Modifier.padding(top = 14.dp), fontSize = 13.sp)
     Text(
-        "${entry.kind} · ${if(entry.folder) "Folder contents" else formatSize(entry.size)} · ${formatDate(entry.modified)}",
+        "${entry.kind} · ${if(entry.folder) "Folder contents" else entry.displaySize} · ${formatDate(entry.modified)}",
         fontSize = 11.sp,
         color = Muted,
     )

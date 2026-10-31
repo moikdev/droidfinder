@@ -29,7 +29,7 @@ class SqliteTransferStore(
                     this.context,
                     name,
                     null,
-                    1,
+                    2,
                     DatabaseErrorHandler {
                         // Android's default handler deletes corrupt databases. Preserve them for
                         // explicit recovery.
@@ -61,15 +61,23 @@ class SqliteTransferStore(
                         "CREATE TABLE merge_members (job_id TEXT NOT NULL, root TEXT NOT NULL, source TEXT NOT NULL, position INTEGER NOT NULL, parent TEXT NOT NULL, destination TEXT, error TEXT, skipped INTEGER NOT NULL, cleanup TEXT NOT NULL, recovery TEXT, PRIMARY KEY(job_id,root,source), FOREIGN KEY(job_id,root) REFERENCES merge_plans(job_id,source) ON DELETE CASCADE)",
                     )
                     db.execSQL("CREATE INDEX job_order ON jobs(position)")
+                    createEstimates(db)
                 }
 
                 override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-                    error(
-                        "Unsupported transfer database upgrade: $oldVersion to $newVersion. Database kept.",
-                    )
+                    check(oldVersion == 1 && newVersion == 2) {
+                        "Unsupported transfer database upgrade: $oldVersion to $newVersion. Database kept."
+                    }
+                    createEstimates(db)
                 }
             }
             .apply { setWriteAheadLoggingEnabled(true) }
+
+    private fun createEstimates(db: SQLiteDatabase) {
+        db.execSQL(
+            "CREATE TABLE estimates (job_id TEXT PRIMARY KEY REFERENCES jobs(id) ON DELETE CASCADE, known_bytes INTEGER NOT NULL, files INTEGER NOT NULL, folders INTEGER NOT NULL, unknown_files INTEGER NOT NULL, unreadable INTEGER NOT NULL, limited INTEGER NOT NULL, available INTEGER)",
+        )
+    }
 
     private fun <T> transaction(db: SQLiteDatabase, work: () -> T): T {
         db.beginTransactionNonExclusive()
@@ -87,6 +95,20 @@ class SqliteTransferStore(
         jobs.forEach { job ->
             require(job.paths.isNotEmpty() && job.paths.distinct().size == job.paths.size) {
                 "Invalid transfer sources."
+            }
+            job.estimate?.let {
+                require(
+                    it.knownBytes >= 0 &&
+                        it.files >= 0 &&
+                        it.folders >= 0 &&
+                        it.unknownFiles in 0..it.files &&
+                        it.unreadable >= 0,
+                ) {
+                    "Invalid transfer estimate."
+                }
+            }
+            require(job.availableAtStart == null || job.availableAtStart >= 0) {
+                "Invalid available space."
             }
             require(job.results.map { it.source }.distinct().size == job.results.size) {
                 "Duplicate transfer results."
@@ -200,6 +222,31 @@ class SqliteTransferStore(
             val oldPosition = oldPositions[job.id] ?: -1
             if (previous == null || row != header(previous, oldPosition))
                 upsert(db, "jobs", row, "id=?", arrayOf(job.id))
+            if (
+                previous == null ||
+                    previous.estimate != job.estimate ||
+                    previous.availableAtStart != job.availableAtStart
+            ) {
+                val estimate = job.estimate
+                if (estimate == null) db.delete("estimates", "job_id=?", arrayOf(job.id))
+                else
+                    upsert(
+                        db,
+                        "estimates",
+                        values(
+                            "job_id" to job.id,
+                            "known_bytes" to estimate.knownBytes,
+                            "files" to estimate.files,
+                            "folders" to estimate.folders,
+                            "unknown_files" to estimate.unknownFiles,
+                            "unreadable" to estimate.unreadable,
+                            "limited" to estimate.limited,
+                            "available" to job.availableAtStart,
+                        ),
+                        "job_id=?",
+                        arrayOf(job.id),
+                    )
+            }
             if (previous == null || previous.paths !== job.paths && previous.paths != job.paths) {
                 db.delete("sources", "job_id=?", arrayOf(job.id))
                 job.paths.forEachIndexed { index, path ->
@@ -336,8 +383,26 @@ class SqliteTransferStore(
     private fun read(db: SQLiteDatabase): List<TransferJob> =
         query(db, "jobs", null, null) { row ->
             val id = row.string("id")
+            val estimateRow =
+                db.query("estimates", null, "job_id=?", arrayOf(id), null, null, null).use { e ->
+                    if (!e.moveToFirst()) null
+                    else
+                        TransferEstimate(
+                            e.long("known_bytes"),
+                            e.int("files"),
+                            e.int("folders"),
+                            e.int("unknown_files"),
+                            e.int("unreadable"),
+                            e.int("limited") == 1,
+                        ) to
+                            e.getColumnIndexOrThrow("available").let {
+                                if (e.isNull(it)) null else e.getLong(it)
+                            }
+                }
             TransferJob(
                 id = id,
+                estimate = estimateRow?.first,
+                availableAtStart = estimateRow?.second,
                 destination = row.string("destination"),
                 move = row.int("move") == 1,
                 state = TransferState.valueOf(row.string("state")),

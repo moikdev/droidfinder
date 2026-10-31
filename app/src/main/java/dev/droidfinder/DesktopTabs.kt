@@ -29,7 +29,10 @@ import kotlin.math.roundToInt
 fun DesktopTabStrip(model: FinderModel) {
     var context by remember { mutableStateOf<Pair<String, Offset?>?>(null) }
     Row(
-        Modifier.fillMaxWidth().height(40.dp).background(Sidebar).selectableGroup(),
+        Modifier.fillMaxWidth()
+            .height(LocalFinderDensity.current.tabHeight)
+            .background(Sidebar)
+            .selectableGroup(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(Modifier.weight(1f).horizontalScroll(rememberScrollState())) {
@@ -154,7 +157,9 @@ fun DesktopTabStrip(model: FinderModel) {
                                         .takeIf { it >= 0 }
                                         ?.let(model::closeTab)
                                 },
-                                Modifier.size(30.dp),
+                                Modifier.size(
+                                    if (LocalFinderDensity.current.touch) 48.dp else 30.dp,
+                                ),
                             ) {
                                 Icon(
                                     Icons.Outlined.Close,
