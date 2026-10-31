@@ -4,13 +4,15 @@ A native Android tablet file explorer inspired by macOS Finder. Kotlin, Jetpack 
 
 This is an independent implementation, not Apple source code or a macOS runtime. [Parity checklist and platform differences](PARITY.md).
 
-![DroidFinder tablet preview](docs/screenshots/tablet-landscape.png)
+![DroidFinder tablet preview](docs/screenshots/refined-landscape.png)
 
-Actual Android screenshot with synthetic QA documents. [Portrait](docs/screenshots/tablet-portrait.png) · [Compact window](docs/screenshots/compact-window.png) · [Dark appearance](docs/screenshots/tablet-dark.png)
+Actual Android screenshot with synthetic QA documents. [Portrait](docs/screenshots/refined-portrait.png) · [Compact window](docs/screenshots/refined-compact.png) · [Dark appearance](docs/screenshots/refined-dark.png)
+
+**0.3.0:** Refined Finder design and keyboard-driven Peek. [What changed and verification](docs/REFINED-FINDER.md).
 
 ## Install or build
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.2.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.3.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -34,7 +36,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | Undo/Redo | Session history for create/copy/move/rename, batch rename, grouping, Trash/restore, archives, shortcuts, and tag edits; content fingerprints stop Undo from removing later edits |
 | Tags/appearance | Multiple named tags per item, custom tag colors/names, tag editing/deletion/filtering, custom folder color/symbol, persistent favorites and view preferences |
 | Search | Recursive names, kind/date/size/tag/text-content criteria, saved live Smart Folders, Recents, hidden files, groups by kind/date/tag/size |
-| Quick Look | Images with EXIF orientation, pinch/button zoom, all PDF pages with navigation/zoom, audio controls, video playback, text preview, folder counts/size and Get Info |
+| Peek / Quick Look | Images with EXIF orientation, pinch/button zoom, all PDF pages with navigation/zoom, audio controls, video play/pause and seeking, text preview, folder counts/size and Get Info |
 | File integration | Android default apps/Open With, temporary read grants for sharing, full-path copy, inert `.finderlink` shortcuts |
 | Archives/Trash | ZIP creation/extraction with path checks; recoverable Trash and restore, Undo, explicit confirmation for permanent deletion/emptying |
 | Transfers | Cross-provider/local copies and moves, byte/item progress, cancel, foreground service, activity-independent execution and an interruption journal |
@@ -56,7 +58,8 @@ Mouse users can drag file icons. On touch, select items and hold the drag grip i
 | Ctrl/Meta Alt S | Sidebar |
 | Alt Left/Right/Up | Back; forward; enclosing folder |
 | Arrow keys; Home/End | Select/navigate; Shift extends selection |
-| Space; Enter; F2 | Quick Look; open; rename/batch rename |
+| Space; Enter; F2 | Peek; open; rename/batch rename |
+| Space / Escape in Peek; arrows | Close preview; browse files |
 | Delete / Ctrl/Meta Delete | Move to Trash |
 | Ctrl/Meta Shift Delete | Empty Trash confirmation |
 
@@ -73,7 +76,7 @@ Normal text-field editing shortcuts remain available while editing. Toolbar acti
 - Symlinks are not copied/compressed. Trash deletion and folder-size traversal do not follow symlinks. App shortcuts are inspectable data files, not executable links or macOS aliases.
 - ZIP extraction rejects traversal/duplicate paths, caps output at 10,000 entries / 2 GiB, and cleans staging on ordinary failures/cancellation.
 - Search examines up to 50,000 entries per root, lists at most 5,000 results, and reports limited/inaccessible results. Recents shows up to 200 newest modified files across accessible roots. Text-content search reads the first 1 MiB of supported text files; it is an on-demand search, not Spotlight's system index.
-- Provider previews cache up to 128 MiB per file. Larger/unsupported files can open in another app. Cloud providers choose supported formats, offline behavior, naming and timestamp semantics. Real third-party accounts and physical USB/SD hardware still require device testing.
+- Provider image/document previews cache up to 128 MiB per file; Peek audio/video uses the authorized content URI directly. Larger/unsupported files can open in another app. Cloud providers choose supported formats, offline behavior, naming and timestamp semantics. Real third-party accounts and physical USB/SD hardware still require device testing.
 - Tags, shortcuts, favorites and folder appearance are app metadata. App-initiated moves/copies/renames update stored paths. Edits made outside DroidFinder can invalidate path-based metadata and shortcuts. They are not macOS extended attributes.
 
 ## Verification

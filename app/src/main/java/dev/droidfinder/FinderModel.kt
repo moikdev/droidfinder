@@ -248,7 +248,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     var columnWidth by mutableStateOf(prefs.getInt("columnWidth", 240))
         private set
 
-    var previewWidth by mutableStateOf(prefs.getInt("previewWidth", 258))
+    var previewWidth by mutableStateOf(prefs.getInt("previewWidth", 280))
         private set
 
     var showExtensions by mutableStateOf(prefs.getBoolean("extensions", true))
@@ -257,7 +257,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     var darkTheme by mutableStateOf(prefs.getBoolean("dark", false))
         private set
 
-    var sidebarWidth by mutableStateOf(prefs.getInt("sidebarWidth", 220))
+    var sidebarWidth by mutableStateOf(prefs.getInt("sidebarWidth", 206))
         private set
 
     var sidebarVisible by mutableStateOf(prefs.getBoolean("sidebarVisible", true))

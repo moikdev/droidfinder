@@ -5,9 +5,9 @@ import android.graphics.pdf.PdfRenderer
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.ParcelFileDescriptor
-import android.widget.MediaController
 import android.widget.VideoView
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.*
@@ -20,9 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -205,27 +210,60 @@ fun MediaQuickLook(entry: Entry, modifier: Modifier = Modifier) {
         }
         return
     }
-    if (entry.kind == "Video") {
-        var video by remember(entry.path) { mutableStateOf<VideoView?>(null) }
-        var error by remember(entry.path) { mutableStateOf(false) }
-        DisposableEffect(entry.path) {
-            onDispose {
-                video?.stopPlayback()
-                video = null
-            }
+    if (entry.kind == "Video") VideoQuickLook(entry, modifier) else AudioQuickLook(entry, modifier)
+}
+
+@Composable
+private fun VideoQuickLook(entry: Entry, modifier: Modifier) {
+    var video by remember(entry.path) { mutableStateOf<VideoView?>(null) }
+    var ready by remember(entry.path) { mutableStateOf(false) }
+    var playing by remember(entry.path) { mutableStateOf(false) }
+    var position by remember(entry.path) { mutableIntStateOf(0) }
+    var duration by remember(entry.path) { mutableIntStateOf(0) }
+    var error by remember(entry.path) { mutableStateOf(false) }
+    DisposableEffect(entry.path) {
+        onDispose {
+            ready = false
+            video?.stopPlayback()
+            video = null
         }
-        Box(modifier, contentAlignment = Alignment.Center) {
+    }
+    LaunchedEffect(playing) {
+        while (playing) {
+            position = runCatching { video?.currentPosition ?: 0 }.getOrDefault(0)
+            delay(250)
+        }
+    }
+    Column(
+        modifier.testTag("video-preview").semantics {
+            contentDescription = "Video preview of ${entry.name}"
+        },
+    ) {
+        Box(
+            Modifier.weight(1f).fillMaxWidth().background(Color.Black),
+            contentAlignment = Alignment.Center,
+        ) {
             AndroidView(
                 factory = { context ->
                     VideoView(context).apply {
                         video = this
-                        setMediaController(MediaController(context).also { it.setAnchorView(this) })
+                        isFocusable = false
+                        isFocusableInTouchMode = false
                         setOnErrorListener { _, _, _ ->
                             error = true
+                            playing = false
                             true
                         }
-                        setVideoURI(Uri.fromFile(entry.file))
-                        setOnPreparedListener { seekTo(1) }
+                        setOnPreparedListener {
+                            duration = it.duration
+                            ready = true
+                            seekTo(1)
+                        }
+                        setOnCompletionListener {
+                            playing = false
+                            position = duration
+                        }
+                        setVideoURI(entry.documentUri ?: Uri.fromFile(entry.file))
                     }
                 },
                 modifier = Modifier.fillMaxSize(),
@@ -233,14 +271,44 @@ fun MediaQuickLook(entry: Entry, modifier: Modifier = Modifier) {
             if (error)
                 Text(
                     "This device can't decode this video. Open it with another app.",
-                    color = Muted,
+                    Modifier.padding(24.dp),
+                    color = Color.White,
+                )
+            else if (!ready)
+                CircularProgressIndicator(
+                    Modifier.size(24.dp),
+                    color = Color.White,
+                    strokeWidth = 2.dp,
                 )
         }
-    } else AudioQuickLook(entry, modifier)
+        Row(Modifier.fillMaxWidth().height(48.dp), verticalAlignment = Alignment.CenterVertically) {
+            ToolButton(
+                if (playing) Icons.Outlined.Pause else Icons.Outlined.PlayArrow,
+                if (playing) "Pause video" else "Play video",
+                {
+                    if (playing) video?.pause() else video?.start()
+                    playing = !playing
+                },
+                enabled = ready && !error,
+            )
+            Slider(
+                position.toFloat(),
+                {
+                    position = it.toInt()
+                    if (ready) video?.seekTo(position)
+                },
+                valueRange = 0f..duration.coerceAtLeast(1).toFloat(),
+                enabled = ready && !error,
+                modifier = Modifier.weight(1f).padding(horizontal = 12.dp),
+            )
+            Text("${mediaTime(position)} / ${mediaTime(duration)}", color = Muted, fontSize = 11.sp)
+        }
+    }
 }
 
 @Composable
 private fun AudioQuickLook(entry: Entry, modifier: Modifier) {
+    val context = LocalContext.current
     var player by remember(entry.path) { mutableStateOf<MediaPlayer?>(null) }
     var ready by remember(entry.path) { mutableStateOf(false) }
     var playing by remember(entry.path) { mutableStateOf(false) }
@@ -251,7 +319,8 @@ private fun AudioQuickLook(entry: Entry, modifier: Modifier) {
         val media = MediaPlayer()
         player = media
         runCatching {
-            media.setDataSource(entry.file.absolutePath)
+            if (entry.documentUri != null) media.setDataSource(context, entry.documentUri)
+            else media.setDataSource(entry.file.absolutePath)
             media.setOnPreparedListener {
                 ready = true
                 duration = it.duration

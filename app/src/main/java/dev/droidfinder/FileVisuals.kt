@@ -226,16 +226,16 @@ private sealed interface Preview {
 
 @Composable
 fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean = false) {
+    if (large && entry.kind in listOf("Audio", "Video")) {
+        MediaQuickLook(entry, modifier)
+        return
+    }
     if (entry.documentUri != null) {
         ProviderPreview(entry, modifier, large)
         return
     }
     if (large && entry.extension == "pdf") {
         PdfQuickLook(entry, modifier)
-        return
-    }
-    if (large && entry.kind in listOf("Audio", "Video")) {
-        MediaQuickLook(entry, modifier)
         return
     }
     var loading by remember(entry.path, entry.modified) { mutableStateOf(true) }
@@ -412,7 +412,7 @@ fun Metadata(entry: Entry, model: FinderModel, modifier: Modifier = Modifier) {
         Text(
             entry.name,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 15.sp,
+            fontSize = 14.sp,
             color = Ink,
             maxLines = 3,
             overflow = TextOverflow.Ellipsis,
@@ -421,14 +421,13 @@ fun Metadata(entry: Entry, model: FinderModel, modifier: Modifier = Modifier) {
             entry.kind + if (!entry.folder) " · ${formatSize(entry.size)}" else "",
             color = Muted,
             fontSize = 12.sp,
-            modifier = Modifier.padding(top = 5.dp, bottom = 22.dp),
+            modifier = Modifier.padding(top = 5.dp, bottom = 14.dp),
         )
         MetaLine("Modified", formatDate(entry.modified))
         MetaLine(
             "Location",
             if (model.isTrash) model.engine.originalPath(entry.file) ?: "Trash"
-            else
-                entry.parentPath?.let { if (isDocumentPath(it)) model.title(it) else it }.orEmpty(),
+            else entry.parentPath?.let(model::title).orEmpty(),
         )
         MetaLine("Access", if (entry.writable) "Read & write" else "Read only")
         if (entry.folder && entry.documentUri == null) {
@@ -514,8 +513,8 @@ private fun ProviderPreview(entry: Entry, modifier: Modifier, large: Boolean) {
 
 @Composable
 private fun MetaLine(label: String, value: String) {
-    Column(Modifier.padding(bottom = 12.dp)) {
-        Text(label, fontSize = 10.sp, color = Muted, fontWeight = FontWeight.Medium)
-        Text(value, fontSize = 11.sp, color = Ink, modifier = Modifier.padding(top = 3.dp))
+    Row(Modifier.fillMaxWidth().padding(bottom = 12.dp), verticalAlignment = Alignment.Top) {
+        Text(label, Modifier.width(66.dp), fontSize = 10.sp, color = Muted)
+        Text(value, Modifier.weight(1f), fontSize = 11.sp, color = Ink)
     }
 }

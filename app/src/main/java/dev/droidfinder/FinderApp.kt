@@ -4,6 +4,8 @@ package dev.droidfinder
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.items
@@ -20,10 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.key.*
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.AnnotatedString
@@ -31,8 +33,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -41,23 +41,41 @@ private fun finderColors(dark: Boolean) =
     if (dark)
         darkColorScheme(
             primary = Color(0xFF8DBBFF),
-            background = Color(0xFF1B222C),
-            surface = Color(0xFF252D39),
-            onSurface = Color(0xFFE4E9F1),
-            onSurfaceVariant = Color(0xFF9BA8BA),
-            outline = Color(0xFF343D4B),
-            surfaceContainer = Color(0xFF222A35),
+            primaryContainer = Color(0xFF304365),
+            onPrimaryContainer = Color(0xFFB7CEFC),
+            secondary = Color(0xFFB8BBC3),
+            secondaryContainer = Color(0xFF3A3C42),
+            onSecondaryContainer = Color(0xFFEDEDEF),
+            background = Color(0xFF202123),
+            surface = Color(0xFF26272A),
+            onSurface = Color(0xFFEDEDEF),
+            onSurfaceVariant = Color(0xFFA6A8AF),
+            outline = Color(0xFF3A3B3F),
+            surfaceContainer = Color(0xFF292A2D),
+            surfaceContainerLow = Color(0xFF242528),
+            surfaceContainerHigh = Color(0xFF2E2F32),
+            surfaceContainerHighest = Color(0xFF343539),
+            surfaceTint = Color.Transparent,
         )
     else
         lightColorScheme(
             primary = Blue,
             onPrimary = Color.White,
+            primaryContainer = Color(0xFFE8F0FE),
+            onPrimaryContainer = Color(0xFF2465D4),
+            secondary = Color(0xFF6E727A),
+            secondaryContainer = Color(0xFFE7E9EE),
+            onSecondaryContainer = Color(0xFF4C5058),
             background = Color.White,
             surface = Color.White,
-            onSurface = Color(0xFF273341),
-            onSurfaceVariant = Color(0xFF7B8491),
-            outline = Color(0xFFE1E5EA),
-            surfaceContainer = Color(0xFFF0F3F7),
+            onSurface = Color(0xFF282A2F),
+            onSurfaceVariant = Color(0xFF747880),
+            outline = Color(0xFFE5E6E9),
+            surfaceContainer = Color(0xFFF1F2F4),
+            surfaceContainerLow = Color(0xFFFAFAFB),
+            surfaceContainerHigh = Color(0xFFF3F4F6),
+            surfaceContainerHighest = Color(0xFFECEDEF),
+            surfaceTint = Color.Transparent,
         )
 
 @Composable
@@ -73,13 +91,24 @@ fun FinderApp(
         MaterialTheme(
             colorScheme = finderColors(model.darkTheme),
             typography =
-                Typography(bodyMedium = MaterialTheme.typography.bodyMedium.copy(fontSize = 13.sp)),
+                Typography(
+                    bodyLarge = MaterialTheme.typography.bodyLarge.copy(letterSpacing = 0.sp),
+                    bodyMedium =
+                        MaterialTheme.typography.bodyMedium.copy(
+                            fontSize = 13.sp,
+                            letterSpacing = 0.sp,
+                        ),
+                    bodySmall = MaterialTheme.typography.bodySmall.copy(letterSpacing = 0.sp),
+                    labelLarge = MaterialTheme.typography.labelLarge.copy(letterSpacing = 0.sp),
+                    labelMedium = MaterialTheme.typography.labelMedium.copy(letterSpacing = 0.sp),
+                    labelSmall = MaterialTheme.typography.labelSmall.copy(letterSpacing = 0.sp),
+                ),
         ) {
             var dialog by remember { mutableStateOf<String?>(null) }
             var quickLook by remember { mutableStateOf<Entry?>(null) }
+            var quickLookCandidates by remember { mutableStateOf<List<Entry>>(emptyList()) }
+            var peekMultipleSelection by remember { mutableStateOf(false) }
             var menu by remember { mutableStateOf(false) }
-            var sortMenu by remember { mutableStateOf(false) }
-            var viewMenu by remember { mutableStateOf(false) }
             var searchActive by remember { mutableStateOf(false) }
             var searchFocused by remember { mutableStateOf(false) }
             val searchFocus = remember { FocusRequester() }
@@ -87,7 +116,6 @@ fun FinderApp(
             val snackbar = remember { SnackbarHostState() }
             val clipboard = LocalClipboardManager.current
             val screenWidth = LocalConfiguration.current.screenWidthDp
-            val compactToolbar = screenWidth < 900
             val selected = model.selectedEntries
             val open: (Entry) -> Unit = { entry ->
                 if (entry.extension == "finderlink")
@@ -97,8 +125,20 @@ fun FinderApp(
                 else if (entry.folder) model.navigate(entry.path) else onOpen(entry)
             }
             val showQuickLook: (Entry) -> Unit = { entry ->
-                if (entry.extension == "finderlink") model.followShortcut(entry) { quickLook = it }
-                else quickLook = entry
+                val show: (Entry) -> Unit = { resolved ->
+                    peekMultipleSelection = model.selectedEntries.size > 1
+                    val candidates =
+                        if (peekMultipleSelection) model.selectedEntries else model.visibleEntries
+                    quickLookCandidates =
+                        if (candidates.any { it.path == resolved.path }) candidates
+                        else listOf(resolved)
+                    quickLook = resolved
+                }
+                if (entry.extension == "finderlink") model.followShortcut(entry, show)
+                else show(entry)
+            }
+            LaunchedEffect(quickLook) {
+                if (quickLook == null && !searchActive) rootFocus.requestFocus()
             }
             val action: (String) -> Unit = { command ->
                 menu = false
@@ -145,6 +185,7 @@ fun FinderApp(
                     "appearance" -> dialog = "appearance"
                     "shortcut" -> model.makeShortcut()
                     "sidebar" -> model.toggleSidebar()
+                    "newTab" -> model.newTab()
                 }
             }
             LaunchedEffect(model.message) {
@@ -201,6 +242,8 @@ fun FinderApp(
                                 model.busy != null
                         )
                             false
+                        else if (event.key == Key.Spacebar && event.nativeKeyEvent.repeatCount > 0)
+                            true
                         else if (event.isCtrlPressed || event.isMetaPressed) {
                             when (event.key) {
                                 Key.F -> {
@@ -395,285 +438,35 @@ fun FinderApp(
                         )
                     }
                     Column(Modifier.weight(1f).fillMaxHeight()) {
-                        Row(
-                            Modifier.fillMaxWidth().height(74.dp).padding(horizontal = 20.dp),
-                            verticalAlignment = Alignment.CenterVertically,
+                        RefinedToolbar(
+                            model = model,
+                            action = action,
+                            searchActive = searchActive || model.query.isNotEmpty(),
+                            onSearch = { searchActive = true },
+                            searchFocus = searchFocus,
+                            onSearchFocused = { searchFocused = it },
+                            onCloseSearch = {
+                                model.updateQuery("")
+                                searchActive = false
+                                rootFocus.requestFocus()
+                            },
+                            menuExpanded = menu,
+                            onMenuChange = { menu = it },
+                        )
+                        if (model.tabs.size > 1) TabStrip(model)
+                        Box(
+                            Modifier.weight(1f)
+                                .fillMaxWidth()
+                                .background(CanvasBackground)
+                                .pointerInput(Unit) {
+                                    awaitEachGesture {
+                                        awaitFirstDown(requireUnconsumed = false)
+                                        // Selecting a search result returns keyboard control to
+                                        // files.
+                                        rootFocus.requestFocus()
+                                    }
+                                },
                         ) {
-                            Column(Modifier.weight(1f)) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(
-                                        model.title(),
-                                        fontSize = 23.sp,
-                                        fontWeight = FontWeight.SemiBold,
-                                        letterSpacing = (-.6).sp,
-                                        color = Ink,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis,
-                                    )
-                                    if (model.location.startsWith("@tag:"))
-                                        Box(
-                                            Modifier.padding(start = 10.dp)
-                                                .size(9.dp)
-                                                .background(
-                                                    tagColor(model.tagColorName(model.title())),
-                                                    CircleShape,
-                                                ),
-                                        )
-                                }
-                                Text(
-                                    when {
-                                        model.isTrash ->
-                                            "Deleted items stay here until you empty Trash"
-                                        model.location == "@recent" ->
-                                            "Your 200 most recently modified files"
-                                        model.location.startsWith("@tag:") ->
-                                            "Files with the ${model.title().lowercase()} tag"
-                                        model.directory == model.workspace ->
-                                            "Your private space · saved on this tablet"
-                                        isDocumentPath(model.location) ->
-                                            "Connected provider · ${if(model.canCreate)"read & write"else "read only"}"
-                                        else ->
-                                            model.directory
-                                                ?.parent
-                                                ?.replace(model.deviceRoot.absolutePath, "Tablet")
-                                                ?: ""
-                                    },
-                                    fontSize = 11.sp,
-                                    color = Muted,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    modifier = Modifier.padding(top = 4.dp),
-                                )
-                            }
-                            if (searchActive || model.query.isNotEmpty()) {
-                                OutlinedTextField(
-                                    model.query,
-                                    model::updateQuery,
-                                    Modifier.width(235.dp)
-                                        .height(48.dp)
-                                        .focusRequester(searchFocus)
-                                        .onFocusChanged { searchFocused = it.isFocused },
-                                    singleLine = true,
-                                    placeholder = {
-                                        Text("Search this location", fontSize = 12.sp)
-                                    },
-                                    leadingIcon = {
-                                        Icon(Icons.Outlined.Search, null, Modifier.size(18.dp))
-                                    },
-                                    trailingIcon = {
-                                        IconButton(
-                                            onClick = {
-                                                model.updateQuery("")
-                                                searchActive = false
-                                                rootFocus.requestFocus()
-                                            },
-                                        ) {
-                                            Icon(
-                                                Icons.Outlined.Close,
-                                                "Close search",
-                                                Modifier.size(16.dp),
-                                            )
-                                        }
-                                    },
-                                    shape = RoundedCornerShape(9.dp),
-                                    textStyle = LocalTextStyle.current.copy(fontSize = 12.sp),
-                                )
-                            } else
-                                ToolButton(Icons.Outlined.Search, "Search", { searchActive = true })
-                            ToolButton(
-                                Icons.Outlined.FilterAlt,
-                                "Search filters",
-                                { action("filters") },
-                                active = model.effectiveSearchRules.active,
-                            )
-                            Spacer(Modifier.width(8.dp))
-                            ToolButton(
-                                Icons.Outlined.Add,
-                                "New folder",
-                                { action("new") },
-                                enabled = model.canCreate && model.busy == null,
-                            )
-                        }
-                        HorizontalDivider(color = Border)
-                        Row(
-                            Modifier.fillMaxWidth().height(53.dp).padding(horizontal = 12.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            ToolButton(
-                                Icons.AutoMirrored.Outlined.ArrowBack,
-                                "Back",
-                                { model.back() },
-                                enabled = model.tabs[model.activeTab].index > 0,
-                            )
-                            ToolButton(
-                                Icons.AutoMirrored.Outlined.ArrowForward,
-                                "Forward",
-                                model::forward,
-                                enabled =
-                                    model.tabs[model.activeTab].index <
-                                        model.tabs[model.activeTab].history.lastIndex,
-                            )
-                            if (!compactToolbar)
-                                ToolButton(
-                                    Icons.Outlined.ArrowUpward,
-                                    "Enclosing folder",
-                                    model::up,
-                                    enabled = model.parentPath() != null,
-                                )
-                            Spacer(Modifier.width(12.dp))
-                            if (compactToolbar)
-                                Box {
-                                    ToolButton(
-                                        Icons.Outlined.Dashboard,
-                                        "Change view",
-                                        { viewMenu = true },
-                                    )
-                                    DropdownMenu(viewMenu, { viewMenu = false }) {
-                                        ViewMode.entries.forEach { mode ->
-                                            DropdownMenuItem(
-                                                text = { Text("${mode.title} view") },
-                                                onClick = {
-                                                    model.changeMode(mode)
-                                                    viewMenu = false
-                                                },
-                                            )
-                                        }
-                                    }
-                                }
-                            else {
-                                Row(
-                                    Modifier.clip(RoundedCornerShape(7.dp))
-                                        .background(ToolbarSurface)
-                                        .padding(3.dp),
-                                ) {
-                                    ViewMode.entries.forEach { mode ->
-                                        val icon =
-                                            when (mode) {
-                                                ViewMode.ICONS -> Icons.Outlined.GridView
-                                                ViewMode.LIST ->
-                                                    Icons.AutoMirrored.Outlined.ViewList
-                                                ViewMode.COLUMNS -> Icons.Outlined.ViewColumn
-                                                ViewMode.GALLERY -> Icons.Outlined.Panorama
-                                            }
-                                        ToolButton(
-                                            icon,
-                                            "${mode.title} view",
-                                            { model.changeMode(mode) },
-                                            active = model.mode == mode,
-                                            compact = true,
-                                        )
-                                    }
-                                }
-                            }
-                            Spacer(Modifier.width(10.dp))
-                            Box {
-                                ToolButton(
-                                    Icons.AutoMirrored.Outlined.Sort,
-                                    "Sort and view options",
-                                    { sortMenu = true },
-                                )
-                                DropdownMenu(sortMenu, { sortMenu = false }) {
-                                    Text(
-                                        "SORT BY",
-                                        Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
-                                        fontSize = 10.sp,
-                                        color = Muted,
-                                    )
-                                    SortBy.entries.forEach { type ->
-                                        DropdownMenuItem(
-                                            text = {
-                                                Text(
-                                                    type.title +
-                                                        if (model.sort == type)
-                                                            if (model.ascending) " ↑" else " ↓"
-                                                        else "",
-                                                )
-                                            },
-                                            onClick = {
-                                                model.changeSort(type)
-                                                sortMenu = false
-                                            },
-                                        )
-                                    }
-                                    HorizontalDivider()
-                                    DropdownMenuItem(
-                                        text = { Text("Folders first") },
-                                        trailingIcon = {
-                                            if (model.foldersFirst) Icon(Icons.Outlined.Check, null)
-                                        },
-                                        onClick = {
-                                            model.toggleFoldersFirst()
-                                            sortMenu = false
-                                        },
-                                    )
-                                    DropdownMenuItem(
-                                        text = { Text("Show hidden files") },
-                                        trailingIcon = {
-                                            if (model.showHidden) Icon(Icons.Outlined.Check, null)
-                                        },
-                                        onClick = {
-                                            model.toggleHidden()
-                                            sortMenu = false
-                                        },
-                                    )
-                                    HorizontalDivider()
-                                    Text(
-                                        "GROUP BY",
-                                        Modifier.padding(14.dp),
-                                        fontSize = 10.sp,
-                                        color = Muted,
-                                    )
-                                    GroupBy.entries.forEach { group ->
-                                        DropdownMenuItem(
-                                            text = { Text(group.title) },
-                                            trailingIcon = {
-                                                if (model.grouping == group)
-                                                    Icon(Icons.Outlined.Check, null)
-                                            },
-                                            onClick = {
-                                                model.changeGrouping(group)
-                                                sortMenu = false
-                                            },
-                                        )
-                                    }
-                                }
-                            }
-                            Spacer(Modifier.weight(1f))
-                            if (model.clipboard != null)
-                                ToolButton(
-                                    Icons.Outlined.ContentPaste,
-                                    "Paste ${model.clipboard!!.files.size} items",
-                                    model::paste,
-                                    enabled = model.canCreate,
-                                )
-                            if (!compactToolbar) {
-                                ToolButton(
-                                    Icons.Outlined.IosShare,
-                                    "Share",
-                                    { action("share") },
-                                    enabled = selected.isNotEmpty() && !model.isTrash,
-                                )
-                                ToolButton(
-                                    Icons.Outlined.VerticalSplit,
-                                    "Toggle preview pane",
-                                    model::togglePreview,
-                                    active = model.previewVisible,
-                                    enabled = screenWidth >= 900,
-                                )
-                            }
-                            Box {
-                                ToolButton(
-                                    Icons.Outlined.MoreHoriz,
-                                    "Actions",
-                                    { menu = true },
-                                    enabled = model.busy == null,
-                                )
-                                ActionMenu(menu, { menu = false }, model, action)
-                            }
-                        }
-                        TabStrip(model)
-                        if (selected.isNotEmpty() && model.busy == null) SelectionBar(model, action)
-                        Box(Modifier.weight(1f).fillMaxWidth().background(CanvasBackground)) {
                             Row(Modifier.fillMaxSize()) {
                                 Box(
                                     Modifier.weight(1f)
@@ -814,7 +607,6 @@ fun FinderApp(
                                 }
                         }
                         PathBar(model) { action("path") }
-                        StatusBar(model)
                     }
                 }
                 SnackbarHost(
@@ -998,77 +790,19 @@ fun FinderApp(
                     )
             }
             quickLook?.let { entry ->
-                Dialog(
-                    onDismissRequest = { quickLook = null },
-                    properties = DialogProperties(usePlatformDefaultWidth = false),
-                ) {
-                    Surface(
-                        Modifier.fillMaxWidth(.82f).fillMaxHeight(.87f),
-                        shape = RoundedCornerShape(14.dp),
-                        color = AppBackground,
-                        shadowElevation = 16.dp,
-                    ) {
-                        Column {
-                            Row(
-                                Modifier.fillMaxWidth().height(62.dp).padding(horizontal = 18.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                FileGlyph(entry, 28.dp)
-                                Text(
-                                    entry.name,
-                                    Modifier.weight(1f).padding(start = 10.dp),
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    fontWeight = FontWeight.SemiBold,
-                                    fontSize = 14.sp,
-                                )
-                                if (!entry.folder)
-                                    TextButton(onClick = { onOpenWith(entry) }) {
-                                        Text("Open with app")
-                                    }
-                                ToolButton(
-                                    Icons.Outlined.Close,
-                                    "Close Quick Look",
-                                    { quickLook = null },
-                                )
-                            }
-                            HorizontalDivider(color = Border)
-                            PreviewContent(
-                                entry,
-                                Modifier.weight(1f).fillMaxWidth().padding(18.dp),
-                                large = true,
-                            )
-                            Row(
-                                Modifier.fillMaxWidth().height(45.dp).padding(horizontal = 20.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Text(
-                                    entry.kind +
-                                        if (entry.folder) "" else " · ${formatSize(entry.size)}",
-                                    Modifier.weight(1f),
-                                    color = Muted,
-                                    fontSize = 12.sp,
-                                )
-                                val index = model.entries.indexOfFirst { it.path == entry.path }
-                                ToolButton(
-                                    Icons.Outlined.ChevronLeft,
-                                    "Previous file",
-                                    { if (index > 0) quickLook = model.entries[index - 1] },
-                                    enabled = index > 0,
-                                )
-                                ToolButton(
-                                    Icons.Outlined.ChevronRight,
-                                    "Next file",
-                                    {
-                                        if (index < model.entries.lastIndex)
-                                            quickLook = model.entries[index + 1]
-                                    },
-                                    enabled = index >= 0 && index < model.entries.lastIndex,
-                                )
-                            }
+                PeekOverlay(
+                    entry = entry,
+                    entries = quickLookCandidates,
+                    onSelect = { next ->
+                        quickLook = next
+                        if (!peekMultipleSelection) {
+                            model.clearSelection()
+                            model.select(next)
                         }
-                    }
-                }
+                    },
+                    onOpenWith = onOpenWith,
+                    onDismiss = { quickLook = null },
+                )
             }
         }
     }
@@ -1083,40 +817,34 @@ private fun FinderSidebar(
 ) {
     Column(modifier.fillMaxHeight().background(Sidebar)) {
         Row(
-            Modifier.height(74.dp).padding(horizontal = 20.dp),
+            Modifier.height(60.dp).padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
-                Modifier.size(32.dp).clip(RoundedCornerShape(9.dp)).background(Blue),
+                Modifier.size(24.dp).clip(RoundedCornerShape(7.dp)).background(Blue),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
                     Icons.Outlined.FolderOpen,
                     null,
                     tint = Color.White,
-                    modifier = Modifier.size(21.dp),
+                    modifier = Modifier.size(16.dp),
                 )
             }
             Column(Modifier.padding(start = 10.dp)) {
                 Text(
                     "DroidFinder",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Medium,
                     color = Ink,
                     letterSpacing = (-.4).sp,
-                )
-                Text(
-                    "A place for everything",
-                    fontSize = 9.sp,
-                    color = Muted,
-                    modifier = Modifier.padding(top = 2.dp),
                 )
             }
         }
         Column(
             Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 10.dp),
         ) {
-            SidebarHeading("FAVORITES")
+            SidebarHeading("Favorites")
             SidebarItem("Recents", Icons.Outlined.Schedule, model.location == "@recent") {
                 model.navigate("@recent")
             }
@@ -1158,8 +886,8 @@ private fun FinderSidebar(
                     model.navigate(path)
                 }
             }
-            Spacer(Modifier.height(17.dp))
-            SidebarHeading("LOCATIONS")
+            Spacer(Modifier.height(8.dp))
+            SidebarHeading("Locations")
             SidebarItem(
                 "This tablet",
                 Icons.Outlined.TabletMac,
@@ -1193,8 +921,8 @@ private fun FinderSidebar(
                 model.navigate("@trash")
             }
             if (model.smartFolders.isNotEmpty()) {
-                Spacer(Modifier.height(17.dp))
-                SidebarHeading("SMART FOLDERS")
+                Spacer(Modifier.height(8.dp))
+                SidebarHeading("Smart Folders")
                 model.smartFolders.forEach { smart ->
                     SidebarItem(
                         smart.name,
@@ -1205,9 +933,9 @@ private fun FinderSidebar(
                     }
                 }
             }
-            Spacer(Modifier.height(17.dp))
+            Spacer(Modifier.height(8.dp))
             if (model.tagsVisible) {
-                SidebarHeading("TAGS")
+                SidebarHeading("Tags")
                 model.tagNames.forEach { tag ->
                     SidebarItem(
                         tag,
@@ -1229,7 +957,7 @@ private fun FinderSidebar(
                         root.usableSpace to root.totalSpace
                     }
             }
-        Column(Modifier.padding(20.dp)) {
+        Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Outlined.Storage, null, Modifier.size(15.dp), tint = Muted)
                 Text(
@@ -1247,8 +975,8 @@ private fun FinderSidebar(
                             .padding(top = 12.dp, bottom = 7.dp)
                             .height(4.dp)
                             .clip(CircleShape),
-                    color = Blue.copy(alpha = .7f),
-                    trackColor = Color(0xFFDBE0E8),
+                    color = Muted.copy(alpha = .65f),
+                    trackColor = Border,
                 )
                 Text("${formatSize(free)} available", fontSize = 9.sp, color = Muted)
             }
@@ -1263,7 +991,7 @@ private fun SidebarHeading(text: String) {
         Modifier.padding(start = 12.dp, top = 8.dp, bottom = 7.dp),
         fontWeight = FontWeight.SemiBold,
         fontSize = 9.sp,
-        letterSpacing = 1.sp,
+        letterSpacing = 0.sp,
         color = Muted,
     )
 }
@@ -1282,7 +1010,7 @@ private fun SidebarItem(
     Row(
         modifier
             .fillMaxWidth()
-            .height(35.dp)
+            .height(36.dp)
             .clip(RoundedCornerShape(6.dp))
             .background(if (active) SelectionSurface else Color.Transparent)
             .clickable(onClick = onClick)
@@ -1294,7 +1022,7 @@ private fun SidebarItem(
                 icon,
                 null,
                 Modifier.size(18.dp),
-                tint = if (active) Blue else if (enabled) Color(0xFF75859B) else Color(0xFFADB7C4),
+                tint = if (active) SelectedInk else Muted.copy(alpha = if (enabled) 1f else .55f),
             )
         if (dot != null)
             Box(Modifier.size(18.dp), contentAlignment = Alignment.Center) {
@@ -1328,13 +1056,13 @@ fun ToolButton(
         modifier =
             Modifier.size(if (compact) 34.dp else 38.dp)
                 .clip(RoundedCornerShape(5.dp))
-                .background(if (active) CanvasBackground else Color.Transparent),
+                .background(if (active) SelectionSurface else Color.Transparent),
     ) {
         Icon(
             icon,
             label,
             Modifier.size(if (compact) 19.dp else 20.dp),
-            tint = if (!enabled) Color(0xFFC3C8D0) else if (active) Blue else Color(0xFF667383),
+            tint = if (!enabled) Muted.copy(alpha = .35f) else if (active) SelectedInk else Muted,
         )
     }
 }
@@ -1402,51 +1130,7 @@ private fun TabStrip(model: FinderModel) {
 }
 
 @Composable
-private fun SelectionBar(model: FinderModel, action: (String) -> Unit) {
-    Row(
-        Modifier.fillMaxWidth()
-            .height(43.dp)
-            .background(SelectionSurface)
-            .padding(horizontal = 12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        ToolButton(Icons.Outlined.Close, "Clear selection", model::clearSelection, compact = true)
-        Text(
-            "${model.selected.size} selected",
-            Modifier.weight(1f).padding(start = 6.dp),
-            fontSize = 11.sp,
-            color = Blue,
-        )
-        if (model.isTrash) {
-            TextButton(onClick = { action("restore") }) { Text("Restore", fontSize = 11.sp) }
-            ToolButton(Icons.Outlined.DeleteForever, "Delete permanently", { action("delete") })
-        } else {
-            DragSelectionHandle(model)
-            ToolButton(Icons.Outlined.ContentCopy, "Copy", { action("copy") })
-            ToolButton(
-                Icons.Outlined.ContentCut,
-                "Cut",
-                { action("cut") },
-                enabled = model.selectedEntries.all { it.canDelete },
-            )
-            ToolButton(
-                Icons.Outlined.DriveFileRenameOutline,
-                "Rename",
-                { action("rename") },
-                enabled = model.selectedEntries.all { it.canRename },
-            )
-            ToolButton(
-                Icons.Outlined.DeleteOutline,
-                "Move to Trash",
-                { action("trash") },
-                enabled = model.selectedEntries.all { it.canDelete },
-            )
-        }
-    }
-}
-
-@Composable
-private fun ActionMenu(
+internal fun ActionMenu(
     expanded: Boolean,
     onDismiss: () -> Unit,
     model: FinderModel,
@@ -1462,6 +1146,7 @@ private fun ActionMenu(
             MenuAction("Redo ${model.redoLabel}", Icons.AutoMirrored.Outlined.Redo) {
                 action("redo")
             }
+        MenuAction("New tab", Icons.Outlined.AddBox) { action("newTab") }
         if (entries.isEmpty()) {
 
             MenuAction("New folder", Icons.Outlined.CreateNewFolder, model.canCreate) {

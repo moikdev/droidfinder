@@ -1,5 +1,7 @@
 # Tablet preview verification
 
+Latest: **0.3.0-preview — Refined Finder + Peek**. See [the current UI, preview workflows, and validation](docs/REFINED-FINDER.md). The record below applies to the earlier 0.2.0 preview.
+
 Version: **0.2.0-preview**. Verified locally on 2026-10-31 using a dedicated Android 16 / API 36 tablet emulator. These checks cover implemented Android workflows; they do not certify identical behavior to every macOS Finder service.
 
 Published [preview release](https://github.com/moikdev/droidfinder/releases/tag/v0.2.0-preview), built from `f399ca769b2f526adc744b57b5ad950860dbc65a`. The 2,461,555-byte installable APK has SHA-256 `ce16f380409e47dc0f3ce63d43657bfa531c29fa1cdc2e6d44e9aed1cb398ff1`; GitHub's uploaded-asset digest matches. The unsigned release and checksums are included alongside it.

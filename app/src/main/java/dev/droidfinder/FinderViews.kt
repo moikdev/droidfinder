@@ -139,17 +139,16 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                 groups.forEach { (group, entries) ->
                     if (group.isNotEmpty())
                         item(key = "group:$group") { GroupHeading(group, entries.size) }
-                    itemsIndexed(entries, key = { _, item -> item.path }) { index, item ->
+                    itemsIndexed(entries, key = { _, item -> item.path }) { _, item ->
                         val selected = item.path in model.selected
                         Row(
                             Modifier.fileFrame(marquee, item.path)
                                 .folderDropTarget(model, if (item.folder) item.path else null)
                                 .fillMaxWidth()
-                                .height(43.dp)
+                                .height(48.dp)
                                 .padding(horizontal = 8.dp)
                                 .background(
-                                    if (selected) SelectionSurface
-                                    else if (index % 2 == 1) AppBackground else CanvasBackground,
+                                    if (selected) SelectionSurface else CanvasBackground,
                                     RoundedCornerShape(5.dp),
                                 )
                                 .fileGestures(model, item, open, context)
@@ -530,10 +529,10 @@ fun PreviewPane(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                "PREVIEW",
+                "Preview",
                 Modifier.weight(1f),
                 fontSize = 9.sp,
-                letterSpacing = 1.sp,
+                letterSpacing = 0.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Muted,
             )
@@ -593,7 +592,18 @@ fun PreviewPane(
                         contentPadding = PaddingValues(8.dp),
                     ) {
                         Icon(Icons.Outlined.Visibility, null, Modifier.size(15.dp))
-                        Text("Quick Look", Modifier.padding(start = 8.dp), fontSize = 11.sp)
+                        Text(
+                            "Quick Look",
+                            Modifier.weight(1f).padding(start = 8.dp),
+                            fontSize = 11.sp,
+                        )
+                        Text(
+                            "Space",
+                            Modifier.background(ToolbarSurface, RoundedCornerShape(3.dp))
+                                .padding(horizontal = 5.dp, vertical = 2.dp),
+                            color = Muted,
+                            fontSize = 9.sp,
+                        )
                     }
                     if (!entry.folder)
                         TextButton(onClick = { open(entry) }, modifier = Modifier.fillMaxWidth()) {
@@ -662,6 +672,19 @@ fun PathBar(model: FinderModel, goTo: () -> Unit) {
                 }
             }
         }
+        Text(
+            when {
+                model.loading -> "Loading…"
+                model.selected.isNotEmpty() ->
+                    "${model.selected.size} of ${model.entries.size} selected"
+                model.effectiveSearchRules.active || model.currentSmartFolder != null ->
+                    "${model.entries.size} matches"
+                else -> "${model.entries.size} item${if (model.entries.size == 1) "" else "s"}"
+            } + if (model.truncated) " · limited" else "",
+            color = Muted,
+            fontSize = 10.sp,
+            modifier = Modifier.padding(horizontal = 12.dp),
+        )
         IconButton(onClick = goTo, modifier = Modifier.size(28.dp)) {
             Icon(Icons.Outlined.EditLocationAlt, "Go to folder", Modifier.size(14.dp), tint = Muted)
         }
@@ -698,7 +721,7 @@ fun StatusBar(model: FinderModel) {
         Spacer(Modifier.weight(1f))
         Text(
             if (model.selected.isEmpty()) "Double-tap to open · Hold to select multiple"
-            else "Space for Quick Look",
+            else "Space to peek",
             fontSize = 9.sp,
             color = Muted,
         )
@@ -779,7 +802,7 @@ fun WelcomeState(grant: () -> Unit, create: () -> Unit) {
         )
         Button(
             onClick = grant,
-            modifier = Modifier.padding(top = 24.dp).height(43.dp),
+            modifier = Modifier.padding(top = 24.dp).height(48.dp),
             shape = RoundedCornerShape(8.dp),
             contentPadding = PaddingValues(horizontal = 22.dp),
         ) {
