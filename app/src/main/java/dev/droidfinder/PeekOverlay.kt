@@ -38,6 +38,7 @@ fun PeekOverlay(
     onDismiss: () -> Unit,
 ) {
     val focus = remember { FocusRequester() }
+    val previewKeys = remember(entry.path, entry.modified) { PeekKeys() }
     val index = entries.indexOfFirst { it.path == entry.path }
     val compact = LocalConfiguration.current.screenWidthDp < 700
     fun step(delta: Int) {
@@ -53,13 +54,10 @@ fun PeekOverlay(
         val handleNativeKey by
             rememberUpdatedState<(AndroidKeyEvent) -> Boolean>(
                 { event ->
-                    if (
-                        event.action != AndroidKeyEvent.ACTION_DOWN ||
-                            event.isCtrlPressed ||
-                            event.isMetaPressed ||
-                            event.isAltPressed
-                    )
-                        false
+                    if (event.action != AndroidKeyEvent.ACTION_DOWN) false
+                    else if (previewKeys.handle?.invoke(event) == true) true
+                    else if (previewKeys.editing) false
+                    else if (event.isCtrlPressed || event.isMetaPressed || event.isAltPressed) false
                     else
                         when (event.keyCode) {
                             AndroidKeyEvent.KEYCODE_SPACE,
@@ -96,37 +94,11 @@ fun PeekOverlay(
         Surface(
             Modifier.fillMaxWidth(if (compact) .96f else .86f)
                 .fillMaxHeight(.9f)
+                .imePadding()
                 .testTag("peek-window")
                 .semantics { paneTitle = "Peek" }
                 .focusRequester(focus)
-                .onPreviewKeyEvent { event ->
-                    if (
-                        event.type != KeyEventType.KeyDown ||
-                            event.isCtrlPressed ||
-                            event.isMetaPressed ||
-                            event.isAltPressed
-                    )
-                        false
-                    else
-                        when (event.key) {
-                            Key.Spacebar,
-                            Key.Escape -> {
-                                if (event.nativeKeyEvent.repeatCount == 0) onDismiss()
-                                true
-                            }
-                            Key.DirectionLeft,
-                            Key.DirectionUp -> {
-                                step(-1)
-                                true
-                            }
-                            Key.DirectionRight,
-                            Key.DirectionDown -> {
-                                step(1)
-                                true
-                            }
-                            else -> false
-                        }
-                }
+                .onPreviewKeyEvent { event -> handleNativeKey(event.nativeKeyEvent) }
                 .focusable(),
             shape = RoundedCornerShape(12.dp),
             color = AppBackground,
@@ -159,14 +131,16 @@ fun PeekOverlay(
                 // A changed file creates a new native player/rendering session and releases the old
                 // one.
                 key(entry.path, entry.modified) {
-                    PreviewContent(
-                        entry,
-                        Modifier.weight(1f)
-                            .fillMaxWidth()
-                            .background(CanvasBackground)
-                            .padding(14.dp),
-                        large = true,
-                    )
+                    CompositionLocalProvider(LocalPeekKeys provides previewKeys) {
+                        PreviewContent(
+                            entry,
+                            Modifier.weight(1f)
+                                .fillMaxWidth()
+                                .background(CanvasBackground)
+                                .padding(14.dp),
+                            large = true,
+                        )
+                    }
                 }
                 HorizontalDivider(color = Border, thickness = .5.dp)
                 Row(
@@ -174,7 +148,8 @@ fun PeekOverlay(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        entry.kind + if (entry.folder) "" else " · ${entry.displaySize}",
+                        (if (entry.isPdfDocument) "PDF document" else entry.kind) +
+                            if (entry.folder) "" else " · ${entry.displaySize}",
                         Modifier.weight(1f),
                         color = Muted,
                         fontSize = 11.sp,

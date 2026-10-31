@@ -175,6 +175,10 @@ class FinderWindowState(app: Application, val id: String = "main") {
     internal val panes = mutableListOf<FinderModel>()
     internal val secondaryStore = ViewModelStore()
     val shareRequested = mutableStateOf<List<Entry>?>(null)
+    // Retained by the window across Activity recreation, without serializing file catalogs.
+    internal val peekEntry = mutableStateOf<Entry?>(null)
+    internal val peekCandidates = mutableStateOf<List<Entry>>(emptyList())
+    internal val peekMultipleSelection = mutableStateOf(false)
     val dualPane = mutableStateOf(prefs.getBoolean("dualPane", false))
     val activePane =
         mutableStateOf(

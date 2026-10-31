@@ -17,6 +17,7 @@ import java.io.FileNotFoundException
 /** Isolated fixture provider: compiled only into the debug/test build, never preview/release. */
 class FixtureDocumentsProvider : DocumentsProvider() {
     companion object {
+        @Volatile var mimeOverrides: Map<String, String> = emptyMap()
         @Volatile var transferGate: java.util.concurrent.CountDownLatch? = null
         @Volatile var gateOpened: java.util.concurrent.CountDownLatch? = null
         @Volatile var beforeDelete: ((String) -> Unit)? = null
@@ -111,7 +112,9 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                     Document.COLUMN_MIME_TYPE ->
                         if (file.isDirectory) Document.MIME_TYPE_DIR
                         else
-                            MimeTypeMap.getSingleton().getMimeTypeFromExtension(file.extension)
+                            mimeOverrides[file.canonicalPath]
+                                ?: MimeTypeMap.getSingleton()
+                                    .getMimeTypeFromExtension(file.extension)
                                 ?: "application/octet-stream"
                     Document.COLUMN_SIZE ->
                         if (file.name == "Unknown-size.bin") null
@@ -192,18 +195,21 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         signal?.throwIfCanceled()
         val file = file(documentId)
         if (mode.contains('w') && readOnly(file)) throw FileNotFoundException("Read only fixture")
-        if (file.name in listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt") && mode == "r") {
+        if (
+            file.name in listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt", "Gate.pdf") &&
+                mode == "r"
+        ) {
             val pipe = ParcelFileDescriptor.createPipe()
             signal?.setOnCancelListener {
                 streamCancellation?.countDown()
                 runCatching { pipe[1].close() }
                 runCatching { pipe[0].close() }
-                if (file.name == "Gate.txt") transferGate?.countDown()
+                if (file.name == "Gate.txt" || file.name == "Gate.pdf") transferGate?.countDown()
             }
             Thread(
                     {
                         runCatching {
-                            if (file.name == "Gate.bin" || file.name == "Gate.txt") {
+                            if (file.name in listOf("Gate.bin", "Gate.txt", "Gate.pdf")) {
                                 gateOpened?.countDown()
                                 transferGate?.await(15, java.util.concurrent.TimeUnit.SECONDS)
                             }

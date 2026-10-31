@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Progressive folders and search, 0.12.0](docs/LOADING.md). Earlier: [Dragging, spring loading and precise resizing, 0.11.0](docs/DRAGGING.md). Earlier: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [PDF Peek, 0.13.0](docs/PDF-PEEK.md). Earlier: [Progressive folders and search, 0.12.0](docs/LOADING.md). Earlier: [Dragging, spring loading and precise resizing, 0.11.0](docs/DRAGGING.md). Earlier: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -94,9 +94,17 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Streaming text-content matching beyond 1 MiB, cancellation and read-error reporting.
 - [x] Saved-viewport interaction guards and stable status-row geometry during native dragging.
 
+## PDF Peek pass
+
+- [x] Page thumbnails, jump-to-page, internal document contents and saved page bookmarks/reading position.
+- [x] Cancellable document text search, result snippets/highlights, next/previous matches and explicit partial results.
+- [x] Selectable reading-text view, page-text copying, image-only/permission/error states and keyboard editing ownership.
+- [x] Shared page/zoom controls, retained zoom, bounded panning and cancellable provider materialization.
+- [ ] Direct text selection on rendered pages, OCR/password entry and tiled high-resolution PDF rendering.
+
 ## Verification
 
-See [the current verification record](docs/LOADING.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
+See [the current verification record](docs/PDF-PEEK.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 

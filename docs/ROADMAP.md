@@ -31,13 +31,13 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 
 ## 4. Performance and search
 - [ ] Progressive large-folder loading, bounded shared thumbnail caches and deduplicated work; invalidate thumbnails when provider names/types change while document URIs remain stable. Shared bounded caching, request deduplication/cancellation and name/type invalidation are implemented in 0.9.0; primary folder/search progressive loading, stop/restart, explicit limits and larger per-tab budgets are implemented in 0.12.0. Auxiliary child listings, indexed paging and measured large-catalog performance remain open.
-- [ ] Cancellable verification/preview/search, measured startup/scroll/memory/battery benchmarks.
+- [ ] Cancellable verification/preview/search, measured startup/scroll/memory/battery benchmarks. Primary search cancellation is implemented in 0.12.0; provider preview streams and PDF text searches gain cancellation in 0.13.0. Complete preview/verification coverage and measured benchmarks remain open.
 - [ ] Optional local index scoped to chosen roots, filename/tag/metadata/document-content search.
 - [ ] Highlighted matches/snippets, scope/exclusions, suggestions/history and Smart Folder editor.
 - [ ] Clear incomplete/offline/inaccessible results and index maintenance controls. Primary scans now expose stopped/capped/provider-pending/read errors and retry details (0.12.0); index maintenance remains open.
 
 ## 5. Peek and archives
-- [ ] PDF text search/selection, thumbnails/bookmarks; richer image metadata and large-image navigation.
+- [ ] PDF text search/selection, thumbnails/bookmarks; richer image metadata and large-image navigation. PDF thumbnails, embedded contents, saved page bookmarks/position, cancellable text-layer search and selectable reading text are implemented in 0.13.0; direct selection on the rendered page, richer image metadata and large-image navigation remain open.
 - [ ] Video subtitles/speed/resume, structured data/code/Markdown/CSV previews.
 - [ ] Preview members inside archives, selective extraction, archive search and integrity testing.
 - [ ] Encrypted ZIP and additional archive formats after compatibility/licensing checks.

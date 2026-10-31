@@ -114,9 +114,9 @@ fun FinderApp(
                 ),
         ) {
             var dialog by remember { mutableStateOf<String?>(null) }
-            var quickLook by remember { mutableStateOf<Entry?>(null) }
-            var quickLookCandidates by remember { mutableStateOf<List<Entry>>(emptyList()) }
-            var peekMultipleSelection by remember { mutableStateOf(false) }
+            var quickLook by workspaceModel.windowState.peekEntry
+            var quickLookCandidates by workspaceModel.windowState.peekCandidates
+            var peekMultipleSelection by workspaceModel.windowState.peekMultipleSelection
             var menu by remember { mutableStateOf(false) }
             var cursorMenu by remember { mutableStateOf<FinderContextRequest?>(null) }
             var archiveEntry by remember { mutableStateOf<Entry?>(null) }
@@ -885,7 +885,11 @@ fun FinderApp(
                         }
                     },
                     onOpenWith = onOpenWith,
-                    onDismiss = { quickLook = null },
+                    onDismiss = {
+                        quickLook = null
+                        quickLookCandidates = emptyList()
+                        peekMultipleSelection = false
+                    },
                 )
             }
         }

@@ -272,7 +272,7 @@ private sealed interface Preview {
 
 @Composable
 fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean = false) {
-    if (large && entry.kind in listOf("Audio", "Video")) {
+    if (large && !entry.isPdfDocument && entry.kind in listOf("Audio", "Video")) {
         MediaQuickLook(entry, modifier)
         return
     }
@@ -280,12 +280,12 @@ fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean =
         val text =
             entry.kind == "Text document" ||
                 entry.extension in listOf("yaml", "yml", "css", "js", "ts", "py", "sh", "toml")
-        if (entry.folder || entry.kind == "Image" || entry.extension == "pdf" || text)
+        if (entry.folder || entry.kind == "Image" || entry.isPdfDocument || text)
             ProviderPreview(entry, modifier, large)
         else PreviewContent(entry.copy(documentUri = null), modifier, large)
         return
     }
-    if (large && entry.extension == "pdf") {
+    if (large && entry.isPdfDocument) {
         PdfQuickLook(entry, modifier)
         return
     }
@@ -300,11 +300,11 @@ fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean =
                                 Preview.Folder(
                                     entry.file.listFiles()?.count { !it.name.startsWith('.') },
                                 )
-                            entry.kind == "Image" ->
+                            entry.kind == "Image" && !entry.isPdfDocument ->
                                 loadBitmap(entry.file, if (large) 1600 else 640)?.let {
                                     Preview.Picture(it)
                                 } ?: Preview.Error("Couldn't decode this image")
-                            entry.extension == "pdf" ->
+                            entry.isPdfDocument ->
                                 ParcelFileDescriptor.open(
                                         entry.file,
                                         ParcelFileDescriptor.MODE_READ_ONLY,
@@ -519,19 +519,27 @@ fun Metadata(entry: Entry, model: FinderModel, modifier: Modifier = Modifier) {
 private fun ProviderPreview(entry: Entry, modifier: Modifier, large: Boolean) {
     val context = LocalContext.current
     val gateway = remember(context) { DocumentAccess(context.applicationContext) }
-    var error by remember(entry.path) { mutableStateOf<String?>(null) }
+    val identity = listOf(entry.path, entry.modified, entry.size, entry.name, entry.mimeType)
+    val control = remember(identity) { ListingControl() }
+    DisposableEffect(control) { onDispose { control.cancel() } }
+    var error by remember(identity) { mutableStateOf<String?>(null) }
     val local by
-        produceState<Entry?>(null, entry.path, entry.modified) {
+        produceState<Entry?>(null, identity) {
+            value = null
             value =
                 withContext(Dispatchers.IO) {
-                    runCatching {
+                    try {
                         if (entry.folder) entry
-                        else entry.copy(file = gateway.materialize(entry), documentUri = null)
+                        else
+                            entry.copy(
+                                file = gateway.materialize(entry, control),
+                                documentUri = null,
+                            )
+                    } catch (failure: Exception) {
+                        if (failure is kotlinx.coroutines.CancellationException) throw failure
+                        error = failure.message ?: "The provider couldn't prepare a preview."
+                        null
                     }
-                        .onFailure {
-                            error = it.message ?: "The provider couldn't prepare a preview."
-                        }
-                        .getOrNull()
                 }
         }
     Box(modifier, contentAlignment = Alignment.Center) {
@@ -555,8 +563,11 @@ private fun ProviderPreview(entry: Entry, modifier: Modifier, large: Boolean) {
                     fontSize = 12.sp,
                 )
             }
-        } else if (local != null) PreviewContent(local!!, Modifier.fillMaxSize(), large)
-        else if (error != null)
+        } else if (local != null) {
+            if (large && entry.isPdfDocument)
+                PdfQuickLook(local!!, Modifier.fillMaxSize(), entry.path)
+            else PreviewContent(local!!, Modifier.fillMaxSize(), large)
+        } else if (error != null)
             Text(error!!, Modifier.padding(16.dp), color = Muted, fontSize = 12.sp)
         else CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
     }

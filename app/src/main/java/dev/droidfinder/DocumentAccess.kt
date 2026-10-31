@@ -319,10 +319,20 @@ class DocumentAccess(
     }
 
     fun materialize(entry: Entry, limit: Long = 128L * 1024 * 1024): File =
+        materialize(entry, limit, null)
+
+    internal fun materialize(
+        entry: Entry,
+        control: ListingControl,
+        limit: Long = 128L * 1024 * 1024,
+    ): File = materialize(entry, limit, control)
+
+    private fun materialize(entry: Entry, limit: Long, control: ListingControl?): File =
         synchronized(
             documentPreviewLocks[
                 (entry.path.hashCode() and Int.MAX_VALUE) % documentPreviewLocks.size],
         ) {
+            control?.check()
             if (entry.documentUri == null) return@synchronized entry.file
             check(!entry.folder)
             if (entry.size > limit)
@@ -335,11 +345,12 @@ class DocumentAccess(
             file.parentFile!!.mkdirs()
             val staging = File(file.parentFile, "preview.tmp")
             try {
-                input(entry.path).use { source ->
+                (control?.let { input(entry.path, it) } ?: input(entry.path)).use { source ->
                     staging.outputStream().use { output ->
                         val buffer = ByteArray(64 * 1024)
                         var bytes = 0L
                         while (true) {
+                            control?.check()
                             val n = source.read(buffer)
                             if (n < 0) break
                             bytes += n
@@ -351,6 +362,7 @@ class DocumentAccess(
                         }
                     }
                 }
+                control?.check()
                 Files.move(
                     staging.toPath(),
                     file.toPath(),

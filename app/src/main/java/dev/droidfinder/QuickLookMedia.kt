@@ -1,29 +1,30 @@
 package dev.droidfinder
 
 import android.graphics.Bitmap
-import android.graphics.pdf.PdfRenderer
 import android.media.MediaPlayer
 import android.net.Uri
-import android.os.ParcelFileDescriptor
 import android.widget.VideoView
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.LastPage
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
@@ -34,157 +35,121 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 
-@Composable
-fun ZoomableBitmap(
-    bitmap: Bitmap,
-    description: String,
-    modifier: Modifier = Modifier,
-    controls: Boolean = true,
-) {
-    var zoom by remember(bitmap) { mutableStateOf(1f) }
-    var pan by remember(bitmap) { mutableStateOf(Offset.Zero) }
-    val transform = rememberTransformableState { scale, offset, _ ->
-        zoom = (zoom * scale).coerceIn(1f, 5f)
-        pan = if (zoom == 1f) Offset.Zero else pan + offset
-    }
-    Column(modifier) {
-        Box(
-            Modifier.weight(1f).fillMaxWidth().clipToBounds().transformable(transform),
-            contentAlignment = Alignment.Center,
-        ) {
-            Image(
-                bitmap.asImageBitmap(),
-                description,
-                Modifier.fillMaxSize()
-                    .graphicsLayer(
-                        scaleX = zoom,
-                        scaleY = zoom,
-                        translationX = pan.x,
-                        translationY = pan.y,
-                    ),
-                contentScale = ContentScale.Fit,
-            )
-        }
-        if (controls)
-            Row(
-                Modifier.fillMaxWidth()
-                    .height(if (LocalFinderDensity.current.touch) 48.dp else 40.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                ToolButton(
-                    Icons.Outlined.Remove,
-                    "Zoom out",
-                    {
-                        zoom = (zoom - .25f).coerceAtLeast(1f)
-                        if (zoom == 1f) pan = Offset.Zero
-                    },
-                    enabled = zoom > 1f,
-                )
-                TextButton(
-                    onClick = {
-                        zoom = 1f
-                        pan = Offset.Zero
-                    },
-                ) {
-                    Text("${(zoom*100).toInt()}%", fontSize = 11.sp)
-                }
-                ToolButton(
-                    Icons.Outlined.Add,
-                    "Zoom in",
-                    { zoom = (zoom + .25f).coerceAtMost(5f) },
-                    enabled = zoom < 5f,
-                )
-            }
+internal class BitmapZoomState {
+    var zoom by mutableStateOf(1f)
+    var pan by mutableStateOf(Offset.Zero)
+
+    fun reset() {
+        zoom = 1f
+        pan = Offset.Zero
     }
 }
 
 @Composable
-fun PdfQuickLook(entry: Entry, modifier: Modifier = Modifier) {
-    var page by remember(entry.path) { mutableIntStateOf(0) }
-    var pages by remember(entry.path) { mutableIntStateOf(0) }
-    var error by remember(entry.path) { mutableStateOf<String?>(null) }
-    val bitmap by
-        produceState<Bitmap?>(null, entry.path, page, entry.modified) {
-            value = null
-            value =
-                withContext(Dispatchers.IO) {
-                    runCatching {
-                        ParcelFileDescriptor.open(entry.file, ParcelFileDescriptor.MODE_READ_ONLY)
-                            .use { descriptor ->
-                                PdfRenderer(descriptor).use { renderer ->
-                                    pages = renderer.pageCount
-                                    check(pages > 0) { "This PDF has no pages." }
-                                    renderer.openPage(page.coerceIn(0, pages - 1)).use { pdfPage ->
-                                        val scale =
-                                            minOf(
-                                                1600f / pdfPage.width.coerceAtLeast(1),
-                                                2400f / pdfPage.height.coerceAtLeast(1),
-                                            )
-                                        Bitmap.createBitmap(
-                                                (pdfPage.width * scale).toInt().coerceAtLeast(1),
-                                                (pdfPage.height * scale).toInt().coerceAtLeast(1),
-                                                Bitmap.Config.ARGB_8888,
-                                            )
-                                            .also { image ->
-                                                image.eraseColor(android.graphics.Color.WHITE)
-                                                pdfPage.render(
-                                                    image,
-                                                    null,
-                                                    null,
-                                                    PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY,
-                                                )
-                                            }
-                                    }
-                                }
-                            }
-                    }
-                        .onFailure { error = it.message ?: "Couldn't render PDF" }
-                        .getOrNull()
-                }
-        }
+internal fun BitmapZoomButtons(state: BitmapZoomState) {
+    ToolButton(
+        Icons.Outlined.Remove,
+        "Zoom out",
+        { state.zoom = (state.zoom - .25f).coerceAtLeast(1f) },
+        enabled = state.zoom > 1f,
+    )
+    TextButton(onClick = state::reset) {
+        Text(if (state.zoom == 1f) "Fit" else "${(state.zoom * 100).toInt()}%", fontSize = 11.sp)
+    }
+    ToolButton(
+        Icons.Outlined.Add,
+        "Zoom in",
+        { state.zoom = (state.zoom + .25f).coerceAtMost(5f) },
+        enabled = state.zoom < 5f,
+    )
+}
+
+@Composable
+internal fun ZoomableBitmap(
+    bitmap: Bitmap,
+    description: String,
+    modifier: Modifier = Modifier,
+    controls: Boolean = true,
+    highlights: List<android.graphics.RectF> = emptyList(),
+    activeHighlights: List<android.graphics.RectF> = emptyList(),
+    stateKey: Any = bitmap,
+    zoomState: BitmapZoomState = remember(stateKey) { BitmapZoomState() },
+    paper: Boolean = false,
+) {
+    var viewport by remember { mutableStateOf(androidx.compose.ui.unit.IntSize.Zero) }
+    fun clampPan() {
+        val scale =
+            minOf(
+                viewport.width.toFloat() / bitmap.width,
+                viewport.height.toFloat() / bitmap.height,
+            )
+        val dx = ((bitmap.width * scale * zoomState.zoom - viewport.width) / 2).coerceAtLeast(0f)
+        val dy = ((bitmap.height * scale * zoomState.zoom - viewport.height) / 2).coerceAtLeast(0f)
+        zoomState.pan = Offset(zoomState.pan.x.coerceIn(-dx, dx), zoomState.pan.y.coerceIn(-dy, dy))
+    }
+    val transform = rememberTransformableState { scale, offset, _ ->
+        zoomState.zoom = (zoomState.zoom * scale).coerceIn(1f, 5f)
+        zoomState.pan += offset
+        clampPan()
+    }
+    LaunchedEffect(zoomState.zoom, viewport, bitmap) { clampPan() }
     Column(modifier) {
-        Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
-            val image = bitmap
-            if (image != null) ZoomableBitmap(image, "PDF page ${page+1}", Modifier.fillMaxSize())
-            else if (error != null) Text(error!!, color = Muted)
-            else CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
-        }
-        Row(
-            Modifier.fillMaxWidth().height(if (LocalFinderDensity.current.touch) 48.dp else 42.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
+        BoxWithConstraints(
+            Modifier.weight(1f)
+                .fillMaxWidth()
+                .clipToBounds()
+                .transformable(transform)
+                .onSizeChanged { viewport = it },
+            contentAlignment = Alignment.Center,
         ) {
-            ToolButton(Icons.Outlined.FirstPage, "First PDF page", { page = 0 }, enabled = page > 0)
-            ToolButton(
-                Icons.Outlined.ChevronLeft,
-                "Previous PDF page",
-                { page-- },
-                enabled = page > 0,
-            )
-            Text(
-                "Page ${page+1} of $pages",
-                fontSize = 12.sp,
-                color = Ink,
-                modifier = Modifier.padding(horizontal = 12.dp),
-            )
-            ToolButton(
-                Icons.Outlined.ChevronRight,
-                "Next PDF page",
-                { page++ },
-                enabled = page + 1 < pages,
-            )
-            ToolButton(
-                Icons.AutoMirrored.Outlined.LastPage,
-                "Last PDF page",
-                { page = pages - 1 },
-                enabled = page + 1 < pages,
-            )
+            val scale = minOf(maxWidth.value / bitmap.width, maxHeight.value / bitmap.height)
+            Box(
+                Modifier.width((bitmap.width * scale).dp)
+                    .height((bitmap.height * scale).dp)
+                    .graphicsLayer(
+                        scaleX = zoomState.zoom,
+                        scaleY = zoomState.zoom,
+                        translationX = zoomState.pan.x,
+                        translationY = zoomState.pan.y,
+                    )
+                    .then(
+                        if (paper)
+                            Modifier.shadow(2.dp).border(.5.dp, Border).background(Color.White)
+                        else Modifier,
+                    ),
+            ) {
+                Image(
+                    bitmap.asImageBitmap(),
+                    description,
+                    Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Fit,
+                )
+                Canvas(Modifier.fillMaxSize()) {
+                    fun mark(rect: android.graphics.RectF, color: Color) {
+                        drawRect(
+                            color,
+                            Offset(rect.left * size.width, rect.top * size.height),
+                            androidx.compose.ui.geometry.Size(
+                                (rect.width() * size.width).coerceAtLeast(1f),
+                                (rect.height() * size.height).coerceAtLeast(1f),
+                            ),
+                        )
+                    }
+                    highlights.forEach { mark(it, Color(0x55FFD54F)) }
+                    activeHighlights.forEach { mark(it, Color(0x66FF9800)) }
+                }
+            }
         }
+        if (controls)
+            Row(
+                Modifier.fillMaxWidth().height(48.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                BitmapZoomButtons(zoomState)
+            }
     }
 }
 
