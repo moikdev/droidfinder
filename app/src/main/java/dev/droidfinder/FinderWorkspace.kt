@@ -160,7 +160,12 @@ fun FinderWorkspace(
                         val width = workspaceWidth
                         ResizeHandle(
                             "Resize panes",
-                            { delta -> model.changePaneRatio(ratio + delta / (width - 6f)) },
+                            { delta ->
+                                model.changePaneRatio(
+                                    model.paneRatio.coerceIn(minimumRatio, 1f - minimumRatio) +
+                                        delta / (width - 6f),
+                                )
+                            },
                         )
                     }
                 }
@@ -193,7 +198,7 @@ private fun BoxWithConstraintsScope.PaneFiles(
                     .fillMaxHeight()
                     .testTag("file-browser")
                     .folderContextMenu(model)
-                    .folderDropTarget(model, model.folderPath),
+                    .folderDropTarget(model, model.folderPath, spring = false),
             ) {
                 when {
                     model.listingError != null ->

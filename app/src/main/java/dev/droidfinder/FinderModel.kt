@@ -1551,6 +1551,29 @@ constructor(
         return path
     }
 
+    internal fun captureSpringNavigation(): SpringNavigationState {
+        saveTabState()
+        return SpringNavigationState(tabs.toList(), activeTab)
+    }
+
+    internal fun restoreSpringNavigation(
+        original: SpringNavigationState,
+        expected: SpringNavigationState,
+    ) {
+        // Keep explicit tab/navigation changes made outside this drag. Scroll/selection updates
+        // within a temporary folder don't relinquish ownership of the spring-loaded route.
+        if (!matchesSpringNavigation(expected)) return
+        tabs = original.tabs
+        activeTab = original.active
+        restoreTabState()
+        persistTabs()
+    }
+
+    internal fun matchesSpringNavigation(expected: SpringNavigationState): Boolean {
+        fun routes(tabs: List<FinderTab>) = tabs.map { it.copy(navigation = TabNavigation()) }
+        return activeTab == expected.active && routes(tabs) == routes(expected.tabs)
+    }
+
     fun navigate(path: String) {
         if (path == location) {
             updateQuery("")
@@ -2683,7 +2706,7 @@ constructor(
             onComplete()
             return
         }
-        operation("Importing files…") {
+        operation("Importing files…", onFinished = { onComplete() }) {
             val steps = mutableListOf<FileStep>()
             try {
                 for (uri in uris) {
@@ -2723,7 +2746,6 @@ constructor(
                 }
             } finally {
                 rememberOperation("Import", steps)
-                onComplete()
             }
             "${uris.size} files imported"
         }
@@ -2738,7 +2760,7 @@ constructor(
             onComplete()
             return
         }
-        operation("Importing files…") {
+        operation("Importing files…", onFinished = { onComplete() }) {
             val steps = mutableListOf<FileStep>()
             try {
                 for (uri in uris) {
@@ -2749,7 +2771,6 @@ constructor(
                 }
             } finally {
                 rememberOperation("Import", steps)
-                onComplete()
             }
             "${uris.size} files imported"
         }

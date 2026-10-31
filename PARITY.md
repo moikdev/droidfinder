@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Dragging, spring loading and precise resizing, 0.11.0](docs/DRAGGING.md). Earlier: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -25,6 +25,7 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Complete PDF navigation/zoom, oriented images, audio/video Quick Look.
 - [x] Mouse context menus in every view, selection ranges, type-to-select.
 - [x] Native drag-and-drop onto folders, tabs/sidebar, and URI import/export with Android apps. Internal native dragging verified; external app compatibility remains target-dependent.
+- [x] Action/destination feedback, hover opening for folders/tabs with cancellation restoration, proportional viewport edge scrolling, and fractional-dp resizing (0.11.0).
 - [x] Android document-provider locations, persistable grants, read-only capabilities.
 - [x] Cross-provider/local copy/move, create/rename, provider previews/sharing.
 - [x] Cancellable transfers with byte/item progress, recovery journal and lifecycle handling.

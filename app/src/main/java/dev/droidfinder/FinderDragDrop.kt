@@ -7,17 +7,13 @@ import android.content.ClipData
 import android.content.Context
 import android.content.ContextWrapper
 import android.view.View
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.draganddrop.dragAndDropSource
-import androidx.compose.foundation.draganddrop.dragAndDropTarget
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.awaitTouchSlopOrCancellation
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DragIndicator
 import androidx.compose.material3.Icon
@@ -26,11 +22,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draganddrop.*
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.input.pointer.*
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
-import java.io.File
 
 enum class FinderDragMode {
     MOVE,
@@ -45,13 +43,13 @@ fun finderDragMode(ctrl: Boolean, shift: Boolean, alt: Boolean) =
         else -> FinderDragMode.MOVE
     }
 
-private data class FinderDrag(
+internal data class FinderDrag(
     val origin: FinderModel,
     val paths: List<String>,
     val mode: FinderDragMode,
 )
 
-private fun Context.activity(): Activity? =
+internal fun Context.activity(): Activity? =
     when (this) {
         is Activity -> this
         is ContextWrapper -> baseContext.activity()
@@ -173,78 +171,47 @@ fun DragSelectionHandle(model: FinderModel) {
 
 @Composable
 fun DraggableFileGlyph(model: FinderModel, entry: Entry, size: androidx.compose.ui.unit.Dp) {
-    Box(Modifier.size(size).mouseFileDrag(model, entry)) { FileGlyph(entry, size) }
+    Box(Modifier.size(size).testTag("drag-icon-${entry.path}").mouseFileDrag(model, entry)) {
+        FileGlyph(entry, size)
+    }
 }
 
-fun Modifier.folderDropTarget(model: FinderModel, folder: String?): Modifier = composed {
+/** Logical targets remain live when a native drag opens a folder or scrolls new rows into view. */
+fun Modifier.folderDropTarget(
+    model: FinderModel,
+    folder: String?,
+    spring: Boolean = true,
+    tabId: String? = null,
+    visible: (() -> Boolean)? = null,
+): Modifier = composed {
     if (folder == null || folder.startsWith("@")) return@composed this
-    val context = LocalContext.current
-    var hovering by remember(folder) { mutableStateOf(false) }
-    val target =
-        remember(folder, model) {
-            object : DragAndDropTarget {
-                override fun onEntered(event: DragAndDropEvent) {
-                    hovering = true
-                }
-
-                override fun onExited(event: DragAndDropEvent) {
-                    hovering = false
-                }
-
-                override fun onEnded(event: DragAndDropEvent) {
-                    hovering = false
-                }
-
-                override fun onDrop(event: DragAndDropEvent): Boolean {
-                    hovering = false
-                    val parent = File(folder)
-                    if (!model.allowedPath(folder)) return false
-                    val native = event.toAndroidDragEvent()
-                    val local = native.localState as? FinderDrag
-                    if (local != null) {
-                        if (local.mode == FinderDragMode.SHORTCUT) {
-                            if (local.origin.busy != null) return false
-                            local.origin.makeShortcuts(local.paths, folder)
-                        } else
-                            local.origin.transferPaths(
-                                local.paths,
-                                folder,
-                                move = local.mode == FinderDragMode.MOVE,
-                            )
-                        return true
-                    }
-                    if (model.busy != null) return false
-                    val data = native.clipData ?: return false
-                    val uris =
-                        (0 until data.itemCount)
-                            .mapNotNull { data.getItemAt(it).uri }
-                            .filter { it.scheme == "content" }
-                    if (uris.isEmpty()) return false
-                    val permission = context.activity()?.requestDragAndDropPermissions(native)
-                    model.importToPath(uris, folder) { permission?.release() }
-                    return true
-                }
+    val controller = LocalFinderDrag.current ?: return@composed this
+    val currentVisible by rememberUpdatedState(visible)
+    val zone =
+        remember(controller, model, folder, spring, tabId) {
+            DropZone(model, folder, spring, tabId) { currentVisible?.invoke() != false }
+        }
+    DisposableEffect(zone) {
+        controller.zones.add(zone)
+        onDispose { controller.zones.remove(zone) }
+    }
+    val hovering = controller.hovered === zone
+    onGloballyPositioned { zone.coordinates = it }
+        .drawWithContent {
+            drawContent()
+            if (hovering) {
+                val color =
+                    if (controller.error == null) Blue
+                    else androidx.compose.ui.graphics.Color(0xFFC95454)
+                drawRoundRect(
+                    color.copy(alpha = .10f),
+                    cornerRadius = androidx.compose.ui.geometry.CornerRadius(5.dp.toPx()),
+                )
+                drawRoundRect(
+                    color,
+                    cornerRadius = androidx.compose.ui.geometry.CornerRadius(5.dp.toPx()),
+                    style = androidx.compose.ui.graphics.drawscope.Stroke(2.dp.toPx()),
+                )
             }
         }
-    then(
-            if (hovering)
-                Modifier.background(Blue.copy(alpha = .12f))
-                    .border(2.dp, Blue, RoundedCornerShape(5.dp))
-            else Modifier,
-        )
-        .dragAndDropTarget(
-            shouldStartDragAndDrop = { event ->
-                event.toAndroidDragEvent().localState is FinderDrag ||
-                    (model.busy == null &&
-                        event.mimeTypes().any {
-                            it.startsWith("image/") ||
-                                it.startsWith("application/") ||
-                                it == "text/uri-list" ||
-                                it.startsWith("audio/") ||
-                                it.startsWith("video/") ||
-                                it == "text/plain"
-                        })
-            },
-            target = target,
-        )
 }

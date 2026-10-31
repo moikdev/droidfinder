@@ -208,8 +208,10 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
             if (model.fitColumns || !columns.adaptive)
                 maxOf(maxWidth, fixed + (if (model.fitColumns) measured.first + 185.dp else 270.dp))
             else maxWidth
+        val horizontalState = rememberBrowserHorizontalState(model, "details-horizontal")
         Box(
-            Modifier.horizontalScroll(rememberBrowserHorizontalState(model, "details-horizontal")),
+            Modifier.dragAutoScroll(horizontalState, horizontal = true)
+                .horizontalScroll(horizontalState),
         ) {
             Column(Modifier.width(tableWidth).fillMaxHeight()) {
                 Row(
@@ -222,27 +224,43 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                     SortHeader("Name", SortBy.NAME, model, Modifier.weight(1f))
                     if (showDate)
                         DetailColumnHeader("Date modified", SortBy.MODIFIED, model, dateWidth) {
+                            val from =
+                                if (model.fitColumns || model.detailColumns.adaptive)
+                                    dateWidth.value.toInt()
+                                else model.detailColumns.dateWidth
                             model.changeDetailColumns(
-                                columns.copy(dateWidth = columns.dateWidth + it, adaptive = false),
+                                model.detailColumns.copy(
+                                    dateWidth = from + it,
+                                    adaptive = false,
+                                ),
                             )
                         }
                     if (showSize)
                         DetailColumnHeader("Size", SortBy.SIZE, model, sizeWidth) {
                             model.changeDetailColumns(
-                                columns.copy(sizeWidth = columns.sizeWidth + it, adaptive = false),
+                                model.detailColumns.copy(
+                                    sizeWidth = model.detailColumns.sizeWidth + it,
+                                    adaptive = false,
+                                ),
                             )
                         }
                     if (showKind)
                         DetailColumnHeader("Kind", SortBy.KIND, model, kindWidth) {
+                            val from =
+                                if (model.fitColumns) kindWidth.value.toInt()
+                                else model.detailColumns.kindWidth
                             model.changeDetailColumns(
-                                columns.copy(kindWidth = columns.kindWidth + it, adaptive = false),
+                                model.detailColumns.copy(
+                                    kindWidth = from + it,
+                                    adaptive = false,
+                                ),
                             )
                         }
                     Spacer(Modifier.width(model.density.targetSize))
                 }
                 HorizontalDivider(color = Border, thickness = .5.dp)
                 LazyColumn(
-                    Modifier.fillMaxSize().testTag("browser-list"),
+                    Modifier.fillMaxSize().dragAutoScroll(listState).testTag("browser-list"),
                     state = listState,
                     contentPadding = PaddingValues(vertical = 6.dp),
                 ) {
@@ -253,7 +271,15 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                             val selected = item.path in model.selected
                             Row(
                                 Modifier.fileFrame(marquee, item.path)
-                                    .folderDropTarget(model, if (item.folder) item.path else null)
+                                    .folderDropTarget(
+                                        model,
+                                        item.path.takeIf { item.folder },
+                                        visible = {
+                                            listState.layoutInfo.visibleItemsInfo.any {
+                                                it.key == item.path
+                                            }
+                                        },
+                                    )
                                     .fillMaxWidth()
                                     .height(model.density.rowHeight)
                                     .padding(horizontal = 8.dp)
@@ -351,7 +377,7 @@ fun ContentListView(model: FinderModel, open: (Entry) -> Unit) {
     }
     val state = rememberKeyboardListState(model, keys, "content")
     LazyColumn(
-        Modifier.fillMaxSize().testTag("browser-content"),
+        Modifier.fillMaxSize().dragAutoScroll(state).testTag("browser-content"),
         state = state,
         contentPadding = PaddingValues(8.dp),
     ) {
@@ -361,7 +387,13 @@ fun ContentListView(model: FinderModel, open: (Entry) -> Unit) {
                 Row(
                     Modifier.fillMaxWidth()
                         .height(if (model.density.touch) 78.dp else 66.dp)
-                        .folderDropTarget(model, item.path.takeIf { item.folder })
+                        .folderDropTarget(
+                            model,
+                            item.path.takeIf { item.folder },
+                            visible = {
+                                state.layoutInfo.visibleItemsInfo.any { it.key == item.path }
+                            },
+                        )
                         .background(
                             if (item.path in model.selected) SelectionSurface else CanvasBackground,
                             RoundedCornerShape(6.dp),
@@ -409,6 +441,8 @@ private fun DetailColumnHeader(
     resize: (Int) -> Unit,
 ) {
     val scale = LocalDensity.current.density
+    val precision = remember { DragPrecision() }
+    val currentResize by rememberUpdatedState(resize)
     Row(Modifier.width(width).fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
         Box(
             Modifier.width(14.dp)
@@ -418,8 +452,12 @@ private fun DetailColumnHeader(
                     PointerIcon(android.view.PointerIcon.TYPE_HORIZONTAL_DOUBLE_ARROW),
                 )
                 .draggable(
-                    rememberDraggableState { resize((-it / scale).toInt()) },
+                    rememberDraggableState { delta ->
+                        precision.consume(-delta / scale).takeIf { it != 0 }?.let(currentResize)
+                    },
                     Orientation.Horizontal,
+                    onDragStarted = { precision.reset() },
+                    onDragStopped = { precision.reset() },
                 ),
             contentAlignment = Alignment.Center,
         ) {
@@ -477,7 +515,7 @@ fun IconView(model: FinderModel, open: (Entry) -> Unit) {
         LazyVerticalGrid(
             GridCells.Adaptive(model.iconSize.dp),
             state = state,
-            modifier = Modifier.fillMaxSize().testTag("browser-grid"),
+            modifier = Modifier.fillMaxSize().dragAutoScroll(state).testTag("browser-grid"),
             contentPadding = PaddingValues(18.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -491,7 +529,13 @@ fun IconView(model: FinderModel, open: (Entry) -> Unit) {
                     val selected = item.path in model.selected
                     Column(
                         Modifier.fileFrame(marquee, item.path)
-                            .folderDropTarget(model, if (item.folder) item.path else null)
+                            .folderDropTarget(
+                                model,
+                                item.path.takeIf { item.folder },
+                                visible = {
+                                    state.layoutInfo.visibleItemsInfo.any { it.key == item.path }
+                                },
+                            )
                             .height((model.iconSize + if (model.windowsLayout == 7) 37 else 19).dp)
                             .background(
                                 if (selected) SelectionSurface else Color.Transparent,
@@ -569,9 +613,11 @@ fun ColumnsView(model: FinderModel, open: (Entry) -> Unit) {
                         .orEmpty()
                 }
         }
+    val horizontalState = rememberBrowserHorizontalState(model, "columns-horizontal")
     Row(
         Modifier.fillMaxSize()
-            .horizontalScroll(rememberBrowserHorizontalState(model, "columns-horizontal")),
+            .dragAutoScroll(horizontalState, horizontal = true)
+            .horizontalScroll(horizontalState),
     ) {
         if (parent != null && model.query.isEmpty()) {
             FileColumn(
@@ -653,13 +699,23 @@ private fun FileColumn(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
+        val columnState = rememberKeyboardListState(model, entries.map { it.path }, viewport)
         LazyColumn(
-            Modifier.fillMaxSize().padding(5.dp).testTag("browser-column-$title"),
-            state = rememberKeyboardListState(model, entries.map { it.path }, viewport),
+            Modifier.fillMaxSize()
+                .padding(5.dp)
+                .dragAutoScroll(columnState)
+                .testTag("browser-column-$title"),
+            state = columnState,
         ) {
             items(entries, key = { it.path }) { item ->
                 Row(
-                    Modifier.folderDropTarget(model, if (item.folder) item.path else null)
+                    Modifier.folderDropTarget(
+                            model,
+                            item.path.takeIf { item.folder },
+                            visible = {
+                                columnState.layoutInfo.visibleItemsInfo.any { it.key == item.path }
+                            },
+                        )
                         .fillMaxWidth()
                         .height(model.density.rowHeight)
                         .background(
@@ -714,7 +770,10 @@ fun GalleryView(model: FinderModel, open: (Entry) -> Unit) {
             }
             HorizontalDivider(color = Border)
             LazyRow(
-                Modifier.fillMaxWidth().height(128.dp).testTag("gallery-strip"),
+                Modifier.fillMaxWidth()
+                    .height(128.dp)
+                    .dragAutoScroll(stripState, horizontal = true)
+                    .testTag("gallery-strip"),
                 state = stripState,
                 contentPadding = PaddingValues(12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -722,6 +781,15 @@ fun GalleryView(model: FinderModel, open: (Entry) -> Unit) {
                 items(model.entries, key = { it.path }) { entry ->
                     Column(
                         Modifier.width(95.dp)
+                            .folderDropTarget(
+                                model,
+                                entry.path.takeIf { entry.folder },
+                                visible = {
+                                    stripState.layoutInfo.visibleItemsInfo.any {
+                                        it.key == entry.path
+                                    }
+                                },
+                            )
                             .fillMaxHeight()
                             .background(
                                 if (entry.path == item.path) SelectionSurface
@@ -1173,14 +1241,21 @@ fun GroupHeading(name: String, count: Int) {
 @Composable
 fun ResizeHandle(description: String, resize: (Int) -> Unit) {
     val density = LocalDensity.current.density
+    val precision = remember { DragPrecision() }
+    val currentResize by rememberUpdatedState(resize)
     Box(
         Modifier.width(6.dp)
             .fillMaxHeight()
             .background(Border.copy(alpha = .6f))
             .semanticsLabel(description)
+            .pointerHoverIcon(PointerIcon(android.view.PointerIcon.TYPE_HORIZONTAL_DOUBLE_ARROW))
             .draggable(
-                rememberDraggableState { resize((it / density).toInt()) },
+                rememberDraggableState { delta ->
+                    precision.consume(delta / density).takeIf { it != 0 }?.let(currentResize)
+                },
                 Orientation.Horizontal,
+                onDragStarted = { precision.reset() },
+                onDragStopped = { precision.reset() },
             ),
     )
 }

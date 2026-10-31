@@ -88,9 +88,12 @@ fun FinderApp(
     onCloseWindow: () -> Unit = {},
     onToggleFullscreen: () -> Unit = {},
 ) {
+    val dragScope = rememberCoroutineScope()
+    val dragController = remember { FinderDragController(dragScope) }
     val workspaceModel = model
     val model = workspaceModel.activePaneModel
     CompositionLocalProvider(
+        LocalFinderDrag provides dragController,
         LocalFinderDark provides model.darkTheme,
         LocalFinderDensity provides model.density,
     ) {
@@ -310,6 +313,7 @@ fun FinderApp(
             }
             Box(
                 Modifier.fillMaxSize()
+                    .finderDragHost(dragController)
                     .background(AppBackground)
                     .windowInsetsPadding(WindowInsets.safeDrawing)
                     .focusRequester(rootFocus)
@@ -600,6 +604,10 @@ fun FinderApp(
                     snackbar,
                     Modifier.align(Alignment.BottomCenter)
                         .padding(bottom = if (model.busy != null) 100.dp else 58.dp),
+                )
+                DragFeedback(
+                    dragController,
+                    Modifier.align(Alignment.BottomCenter).padding(bottom = 60.dp),
                 )
             }
 
@@ -917,8 +925,12 @@ private fun FinderSidebar(
                 )
             }
         }
+        val sidebarScroll = rememberScrollState()
         Column(
-            Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 10.dp),
+            Modifier.weight(1f)
+                .dragAutoScroll(sidebarScroll)
+                .verticalScroll(sidebarScroll)
+                .padding(horizontal = 10.dp),
         ) {
             SidebarHeading("Favorites")
             SidebarItem("Recents", Icons.Outlined.Schedule, model.location == "@recent") {

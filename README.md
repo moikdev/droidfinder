@@ -4,9 +4,11 @@ A native Android tablet file explorer inspired by macOS Finder. Kotlin, Jetpack 
 
 This is an independent implementation, not Apple source code or a macOS runtime. [Parity checklist and platform differences](PARITY.md).
 
-![DroidFinder tablet preview](docs/screenshots/folder-views-workspace.png)
+![DroidFinder tablet preview](docs/screenshots/dragging-workspace.png)
 
-Actual Android screenshot with synthetic QA documents. [Folder settings](docs/screenshots/folder-views-settings.png) · [Columns](docs/screenshots/folder-views-columns.png) · [Saved folders](docs/screenshots/folder-views-manager.png). [Tab overview](docs/screenshots/navigation-overview.png) · [Saved layouts](docs/screenshots/navigation-workspaces.png). [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+Actual Android screenshot with synthetic QA documents. [Drag feedback](docs/screenshots/dragging-cross-pane.png) · [Hover to open](docs/screenshots/dragging-hover.png) · [Opened folder](docs/screenshots/dragging-opened.png) · [Cancel restores](docs/screenshots/dragging-restored.png). [Folder settings](docs/screenshots/folder-views-settings.png) · [Columns](docs/screenshots/folder-views-columns.png) · [Saved folders](docs/screenshots/folder-views-manager.png). [Tab overview](docs/screenshots/navigation-overview.png) · [Saved layouts](docs/screenshots/navigation-workspaces.png). [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+
+**0.11.0:** Compact move/copy/shortcut feedback, spring-loaded folders and tabs, proportional edge scrolling, and precise one-pixel resizing. [Dragging and resizing](docs/DRAGGING.md).
 
 **0.10.0:** Remember views per folder across tabs, panes and windows, keep independent pane defaults, manage saved folder views, and customize detail columns with visibility controls, widths and native resizing. [Folder view workflows](docs/FOLDER-VIEWS.md).
 
@@ -20,7 +22,7 @@ Actual Android screenshot with synthetic QA documents. [Folder settings](docs/sc
 
 ## Install or build
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.10.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.11.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -39,7 +41,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | --- | --- |
 | Browsing | Sidebar, favorites, shared storage, SD/USB volumes, provider locations, pinned/reorderable tabs with independent history/search and restored selection/viewport, searchable tab overview, named layouts, reopen closed tab, back/forward/up, clickable path bar, Go to Folder, reveal enclosing folder, independent dual panes with active-pane command routing |
 | Views | Remembered folder layouts, configurable detail-column visibility/widths and resizing, icons with adjustable size, sortable list with folder disclosure/expansion, browsing columns, gallery/filmstrip, resizable columns/preview/sidebar, adaptive toolbar, Comfortable/Compact density |
-| Selection/input | Tap/double-tap, touch multiple selection, Ctrl/Meta-click, Shift ranges, keyboard navigation, type-to-select, mouse context actions, rectangle selection, native dragging |
+| Selection/input | Tap/double-tap, touch multiple selection, Ctrl/Meta-click, Shift ranges, keyboard navigation, type-to-select, mouse context actions, rectangle selection, native dragging with action/destination feedback, spring-loaded folder/tab navigation and viewport edge scrolling |
 | Organizing | Create folder/text file, New Folder with Selection, destination picker, rename, batch rename (replace/prefix/suffix/numbered format), duplicate, copy/cut/paste, copy/move to other pane, folder comparison with optional content verification |
 | Undo/Redo | Session history for create/copy/move/rename, batch rename, grouping, Trash/restore, archives, shortcuts, and tag edits; content fingerprints stop Undo from removing later edits |
 | Tags/appearance | Multiple named tags per item, custom tag colors/names, tag editing/deletion/filtering, custom folder color/symbol, persistent favorites, per-folder views and pane defaults |
@@ -51,7 +53,7 @@ On first launch, either use the private **Workspace**, choose **Connect tablet s
 | Conflicts | Compare incoming/existing items; keep both, skip, rename or replace with recoverable Undo/Redo; folder merging, nested member retries and apply-to-remaining choices |
 | Persistence | Named two-pane layouts, per-tab selection/focus/expansion and scoped viewport positions, tabs/current locations, view/sort/group settings, sizes, preview/hidden/extension preferences, theme, favorites, tags, Smart Folders, provider grants, folder appearance, Trash recovery metadata |
 
-Mouse users can drag file icons. On touch, select items and hold the drag grip in the selection bar, then drop onto a folder, breadcrumb, sidebar location, or tab. Hold Ctrl when starting a drag to copy, Shift to move, or Alt / Ctrl+Shift to create an app shortcut. Files can also be dragged out to compatible Android apps; content-URI drops from other apps can be imported into writable folders.
+Mouse users can drag file icons. On touch, select items and hold the drag grip in the selection bar, then drop onto a folder, breadcrumb, sidebar location, or tab. Hold Ctrl when starting a drag to copy, Shift to move, or Alt / Ctrl+Shift to create an app shortcut. Hold over a valid folder or inactive tab to open it; cancellation restores temporary navigation. Hold near a viewport edge to scroll. [Interaction details](docs/DRAGGING.md). Files can also be dragged out to compatible Android apps; content-URI drops from other apps can be imported into writable folders.
 
 ## Keyboard
 

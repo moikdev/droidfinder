@@ -86,6 +86,59 @@ class ProviderWorkflowTest {
     }
 
     @Test
+    fun importCompletionRunsExactlyOnceForLocalAndProviderSuccessAndFailure() {
+        val source =
+            File(
+                    File(compose.activity.cacheDir, "shared").apply { mkdirs() },
+                    "Import-${System.nanoTime()}.txt",
+                )
+                .apply {
+                    writeText("import callback")
+                }
+        val uri =
+            androidx.core.content.FileProvider.getUriForFile(
+                compose.activity,
+                "dev.droidfinder.files",
+                source,
+            )
+        try {
+            for (destination in listOf(local.path, root)) {
+                var completions = 0
+                compose.runOnIdle {
+                    compose.activity.model.importToPath(listOf(uri), destination) { completions++ }
+                }
+                compose.waitUntil(10_000) {
+                    compose.activity.model.busy == null && completions == 1
+                }
+                val file =
+                    if (destination == local.path) File(local, source.name)
+                    else File(fixture, source.name)
+                assertEquals("import callback", file.readText())
+                compose.runOnIdle {
+                    compose.activity.model.importToPath(
+                        listOf(
+                            android.net.Uri.parse(
+                                "content://dev.droidfinder.missing/document/invalid",
+                            ),
+                        ),
+                        destination,
+                    ) {
+                        completions++
+                    }
+                }
+                compose.waitUntil(10_000) {
+                    compose.activity.model.busy == null && completions == 2
+                }
+                assertNotNull(compose.activity.model.message)
+                compose.waitForIdle()
+                assertEquals(2, completions)
+            }
+        } finally {
+            source.delete()
+        }
+    }
+
+    @Test
     fun providerQuickLookAndCreateRename() {
         compose.onNodeWithText("Notes.md").performClick()
         compose.waitUntil(5000) { compose.activity.model.focused?.name == "Notes.md" }

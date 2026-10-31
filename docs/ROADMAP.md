@@ -7,7 +7,7 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [x] Comfortable/compact density, accessible primary targets and adaptive tablet controls (0.7.0).
 - [ ] Complete the remaining spacing/dialog/input/accessibility refinements.
 - [ ] Grouped overflow menus, stable primary actions, useful loading/empty/error/permission states.
-- [ ] Focus navigation, mouse/trackpad scrolling, drag feedback, edge scrolling and spring-loaded folders. Windows keyboard controls, selection focus, Ctrl-wheel and a searchable guide are implemented in 0.8.0; broader focus/accessibility, fractional-motion precision resizing and drag refinements remain.
+- [ ] Focus navigation, mouse/trackpad scrolling, drag feedback, edge scrolling and spring-loaded folders. Windows keyboard controls, selection focus, Ctrl-wheel and a searchable guide are implemented in 0.8.0. Fractional-motion resizing, destination feedback, proportional edge scrolling and spring-loaded folders/tabs are implemented in 0.11.0; broader focus/accessibility and trackpad validation remain.
 
 ## 2. Transfer center and conflicts
 - [x] Durable copy/move queue, completed history, per-item errors and retry remaining items (0.5.0).

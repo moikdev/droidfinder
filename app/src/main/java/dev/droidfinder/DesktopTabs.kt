@@ -58,7 +58,7 @@ fun DesktopTabStrip(model: FinderModel) {
                                 else Modifier,
                             )
                             .fillMaxHeight()
-                            .folderDropTarget(model, tab.location)
+                            .folderDropTarget(model, tab.location, tabId = tab.id)
                             .onGloballyPositioned {
                                 coordinates = it
                                 tabBounds[tab.id] = it.boundsInWindow()
