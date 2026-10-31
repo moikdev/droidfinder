@@ -121,7 +121,7 @@ fun RefinedToolbar(
                 if (selection.isNotEmpty())
                     Text("${selection.size} selected", color = Muted, fontSize = 10.sp)
             }
-            if (selection.isNotEmpty() && model.busy == null) {
+            if (selection.isNotEmpty()) {
                 ToolButton(
                     Icons.Outlined.Close,
                     "Clear selection",
@@ -129,13 +129,14 @@ fun RefinedToolbar(
                     compact = true,
                 )
                 if (model.isTrash && !compact) {
-                    TextButton(onClick = { action("restore") }) {
+                    TextButton(onClick = { action("restore") }, enabled = model.busy == null) {
                         Text("Restore", fontSize = 11.sp)
                     }
                     ToolButton(
                         Icons.Outlined.DeleteForever,
                         "Delete permanently",
                         { action("delete") },
+                        enabled = model.busy == null,
                     )
                 } else if (!model.isTrash) {
                     DragSelectionHandle(model)
@@ -151,13 +152,13 @@ fun RefinedToolbar(
                             Icons.Outlined.DriveFileRenameOutline,
                             "Rename",
                             { action("rename") },
-                            enabled = selection.all { it.canRename },
+                            enabled = selection.all { it.canRename } && model.busy == null,
                         )
                         ToolButton(
                             Icons.Outlined.DeleteOutline,
                             "Move to Trash",
                             { action("trash") },
-                            enabled = selection.all { it.canDelete },
+                            enabled = selection.all { it.canDelete } && model.busy == null,
                         )
                     }
                 }
@@ -225,13 +226,16 @@ fun RefinedToolbar(
                 {
                     action(if (selection.singleOrNull()?.extension == "zip") "open" else "compress")
                 },
-                enabled = selection.isNotEmpty() && !model.isTrash && model.busy == null,
+                enabled =
+                    selection.isNotEmpty() &&
+                        !model.isTrash &&
+                        (selection.singleOrNull()?.extension == "zip" || model.busy == null),
             )
             ToolButton(
                 Icons.Outlined.Visibility,
                 "Peek selected file",
                 { action("quicklook") },
-                enabled = model.focused != null && model.busy == null,
+                enabled = model.focused != null,
             )
             if (!compact || selection.isEmpty())
                 ToolButton(Icons.Outlined.Search, "Search", onSearch)
@@ -255,7 +259,6 @@ fun RefinedToolbar(
                 Icons.Outlined.MoreHoriz,
                 "Actions",
                 { onMenuChange(true) },
-                enabled = model.busy == null,
             )
             ActionMenu(menuExpanded, { onMenuChange(false) }, model, action)
         }

@@ -30,10 +30,19 @@ object TransferRuntime {
 
     @Volatile private var control: TransferControl? = null
     private var lastNotification = 0L
+    @Volatile private var paused = false
+    @Volatile private var pausable = false
     private var foregroundReady: CompletableDeferred<Unit>? = null
 
-    suspend fun begin(context: Context, title: String, token: TransferControl) {
+    suspend fun begin(
+        context: Context,
+        title: String,
+        token: TransferControl,
+        allowPause: Boolean = false,
+    ) {
         label = title
+        paused = false
+        pausable = allowPause
         progress = TransferProgress()
         control = token
         val ready = CompletableDeferred<Unit>()
@@ -55,6 +64,13 @@ object TransferRuntime {
                 .getSystemService(NotificationManager::class.java)
                 .notify(TRANSFER_NOTIFICATION, notification(context))
         }
+    }
+
+    fun setPaused(context: Context, value: Boolean) {
+        paused = value
+        context
+            .getSystemService(NotificationManager::class.java)
+            .notify(TRANSFER_NOTIFICATION, notification(context))
     }
 
     fun cancel() {
@@ -90,9 +106,16 @@ object TransferRuntime {
                 Intent(context, TransferService::class.java).setAction("cancel"),
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             )
+        val toggle =
+            PendingIntent.getService(
+                context,
+                2,
+                Intent(context, TransferService::class.java).setAction("toggle-pause"),
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
         return NotificationCompat.Builder(context, CHANNEL)
             .setSmallIcon(R.drawable.ic_launcher)
-            .setContentTitle(label ?: "DroidFinder")
+            .setContentTitle((if (paused) "Paused · " else "") + (label ?: "DroidFinder"))
             .setContentText(
                 "${progress.items} items · ${formatSize(progress.bytes)} · ${progress.current}",
             )
@@ -100,6 +123,15 @@ object TransferRuntime {
             .setOngoing(true)
             .setOnlyAlertOnce(true)
             .setProgress(0, 0, true)
+            .apply {
+                if (pausable)
+                    addAction(
+                        if (paused) android.R.drawable.ic_media_play
+                        else android.R.drawable.ic_media_pause,
+                        if (paused) "Resume" else "Pause",
+                        toggle,
+                    )
+            }
             .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Cancel", cancel)
             .build()
     }
@@ -120,7 +152,14 @@ class TransferService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         TransferRuntime.foreground(this)
-        if (intent?.action == "cancel") TransferRuntime.cancel()
+        if (intent?.action == "cancel") (application as FinderApplication).model.cancelTransfer()
+        if (intent?.action == "toggle-pause") {
+            val model = (application as FinderApplication).model
+            model.activeTransferId?.let {
+                if (model.activeTransfer?.state == TransferState.PAUSED) model.resumeTransfer(it)
+                else model.pauseTransfer(it)
+            }
+        }
         if (TransferRuntime.label == null) stopSelf()
         return START_NOT_STICKY
     }

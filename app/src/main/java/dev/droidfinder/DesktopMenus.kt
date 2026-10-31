@@ -269,7 +269,7 @@ fun FileContextMenu(
                 ContextItem(
                     "Paste",
                     Icons.Outlined.ContentPaste,
-                    model.clipboard != null && model.canCreate && idle,
+                    model.clipboard != null && model.canCreate,
                     "Ctrl V",
                 ) {
                     run("paste")
@@ -365,7 +365,7 @@ fun FileContextMenu(
                     ContextItem(
                         "Paste into folder",
                         Icons.Outlined.ContentPaste,
-                        model.clipboard != null && one.writable && idle,
+                        model.clipboard != null && one.writable,
                     ) {
                         model.paste(one.path)
                         onDismiss()
@@ -386,11 +386,11 @@ fun FileContextMenu(
                 ) {
                     run("duplicate")
                 }
-                ContextItem("Copy to…", Icons.Outlined.FolderCopy, idle) { run("copyTo") }
+                ContextItem("Copy to…", Icons.Outlined.FolderCopy) { run("copyTo") }
                 ContextItem(
                     "Move to…",
                     Icons.AutoMirrored.Outlined.DriveFileMove,
-                    items.all { it.canDelete } && idle,
+                    items.all { it.canDelete },
                 ) {
                     run("moveTo")
                 }

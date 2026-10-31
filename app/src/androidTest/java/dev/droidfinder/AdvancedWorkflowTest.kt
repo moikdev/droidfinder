@@ -44,7 +44,7 @@ class AdvancedWorkflowTest {
         } finally {
             pdf.close()
         }
-        val samples = 44100
+        val samples = 44100 * 6
         val bytes = samples * 2
         val wav = ByteBuffer.allocate(44 + bytes).order(ByteOrder.LITTLE_ENDIAN)
         wav.put("RIFF".toByteArray())
@@ -171,6 +171,11 @@ class AdvancedWorkflowTest {
         }
         compose.waitUntil(10_000) { File(fixture, "Nested.finderlink").exists() }
         loaded()
+        compose.waitUntil(10_000) {
+            compose.activity.model.entries.any {
+                it.path == File(fixture, "Nested.finderlink").path
+            }
+        }
         compose.runOnIdle {
             val model = compose.activity.model
             model.followShortcut(model.entries.first { it.name == "Nested.finderlink" }) {

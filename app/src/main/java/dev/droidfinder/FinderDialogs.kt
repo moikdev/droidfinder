@@ -574,6 +574,23 @@ fun PreferencesDialog(model: FinderModel, dismiss: () -> Unit) {
                     .heightIn(max = 490.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                Text("File conflicts", fontWeight = FontWeight.SemiBold)
+                ConflictPolicy.entries
+                    .filter { it != ConflictPolicy.REPLACE }
+                    .forEach { policy ->
+                        Row(
+                            Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable {
+                                model.changeConflictPolicy(policy)
+                            },
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            RadioButton(
+                                model.conflictPolicy == policy,
+                                { model.changeConflictPolicy(policy) },
+                            )
+                            Text(policy.title, fontSize = 12.sp)
+                        }
+                    }
                 Text("Views", fontWeight = FontWeight.SemiBold)
                 Text("Icon size", fontSize = 12.sp, modifier = Modifier.padding(top = 12.dp))
                 Slider(

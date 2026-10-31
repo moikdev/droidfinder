@@ -73,7 +73,61 @@ class DesktopWorkflowTest {
             compose.waitUntil(5000) {
                 compose.runOnIdle { compose.activity.window.decorView.hasWindowFocus() }
             }
-            compose.onNodeWithText(name).performMouseInput { click(button = MouseButton.Secondary) }
+            // Route a real platform mouse click through the focused Android window.
+            // This exercises dialog-to-activity transitions as well as Compose hit testing.
+            val point = compose.onNodeWithText(name).fetchSemanticsNode().boundsInWindow.center
+            val instrumentation =
+                androidx.test.platform.app.InstrumentationRegistry.getInstrumentation()
+            instrumentation.uiAutomation.waitForIdle(500, 5000)
+            val properties =
+                arrayOf(
+                    android.view.MotionEvent.PointerProperties().apply {
+                        id = 0
+                        toolType = android.view.MotionEvent.TOOL_TYPE_MOUSE
+                    },
+                )
+            val coordinates =
+                arrayOf(
+                    android.view.MotionEvent.PointerCoords().apply {
+                        x = point.x
+                        y = point.y
+                        pressure = 1f
+                        size = 1f
+                    },
+                )
+            val time = android.os.SystemClock.uptimeMillis()
+            for ((action, buttons) in
+                listOf(
+                    android.view.MotionEvent.ACTION_HOVER_MOVE to 0,
+                    android.view.MotionEvent.ACTION_DOWN to
+                        android.view.MotionEvent.BUTTON_SECONDARY,
+                    android.view.MotionEvent.ACTION_UP to 0,
+                )) {
+                val event =
+                    android.view.MotionEvent.obtain(
+                        time,
+                        android.os.SystemClock.uptimeMillis(),
+                        action,
+                        1,
+                        properties,
+                        coordinates,
+                        0,
+                        buttons,
+                        1f,
+                        1f,
+                        0,
+                        0,
+                        android.view.InputDevice.SOURCE_MOUSE,
+                        0,
+                    )
+                try {
+                    assertTrue(instrumentation.uiAutomation.injectInputEvent(event, true))
+                    instrumentation.waitForIdleSync()
+                    if (action == android.view.MotionEvent.ACTION_HOVER_MOVE) compose.waitForIdle()
+                } finally {
+                    event.recycle()
+                }
+            }
             compose.waitUntil(5000) {
                 compose.onAllNodesWithTag("file-context-menu").fetchSemanticsNodes().isNotEmpty()
             }
@@ -125,9 +179,17 @@ class DesktopWorkflowTest {
             loaded()
             right("Notes.md")
             compose.onNodeWithText("Compress to ZIP…").assertExists()
-            compose.onNodeWithText("Get info").performClick()
+            compose.onNodeWithText("Get info").performSemanticsAction(
+                androidx.compose.ui.semantics.SemanticsActions.OnClick,
+            ) {
+                it()
+            }
             compose.onNodeWithText("Full path").assertExists()
-            compose.onNodeWithText("Done").performClick()
+            compose.onNodeWithText("Done").performSemanticsAction(
+                androidx.compose.ui.semantics.SemanticsActions.OnClick,
+            ) {
+                it()
+            }
         }
     }
 

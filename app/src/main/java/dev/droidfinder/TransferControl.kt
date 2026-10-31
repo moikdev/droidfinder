@@ -14,15 +14,37 @@ class TransferControl(private val progress: (TransferProgress) -> Unit = {}) {
     var cancelled: Boolean = false
         private set
 
+    @Volatile
+    var paused = false
+        private set
+
+    private val pauseLock = Object()
+
+    fun pause() {
+        paused = true
+    }
+
+    fun resume() {
+        synchronized(pauseLock) {
+            paused = false
+            pauseLock.notifyAll()
+        }
+    }
+
     private var bytes = 0L
     private var items = 0
     private var current = ""
+    @Volatile
+    var snapshot = TransferProgress()
+        private set
+
     private val activeStreams = ConcurrentHashMap.newKeySet<Closeable>()
 
     @Synchronized
     fun cancel() {
         if (cancelled) return
         cancelled = true
+        resume()
         val streams = activeStreams.toList()
         if (streams.isNotEmpty())
             Thread({ streams.forEach { runCatching { it.close() } } }, "cancel-file-transfer")
@@ -33,6 +55,11 @@ class TransferControl(private val progress: (TransferProgress) -> Unit = {}) {
     }
 
     fun check() {
+        synchronized(pauseLock) {
+            while (paused && !cancelled && !Thread.currentThread().isInterrupted) pauseLock.wait(
+                250,
+            )
+        }
         if (cancelled || Thread.currentThread().isInterrupted)
             throw CancellationException("Transfer cancelled. Completed items were kept.")
     }
@@ -50,7 +77,10 @@ class TransferControl(private val progress: (TransferProgress) -> Unit = {}) {
         report()
     }
 
-    private fun report() = progress(TransferProgress(bytes, items, current))
+    private fun report() {
+        snapshot = TransferProgress(bytes, items, current)
+        progress(snapshot)
+    }
 
     fun copy(input: InputStream, output: OutputStream) {
         check()

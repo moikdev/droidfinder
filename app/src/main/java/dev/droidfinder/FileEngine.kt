@@ -105,7 +105,7 @@ class FileEngine(private val stateDir: File) {
         return changed.zip(targets).map { (proposal, target) -> proposal.file to target }
     }
 
-    private fun checkDestination(source: File, parent: File) {
+    internal fun checkDestination(source: File, parent: File) {
         require(!Files.isSymbolicLink(source.toPath())) { "Symbolic links are not supported." }
         val origin = source.canonicalFile
         val destination = parent.canonicalFile
@@ -137,13 +137,23 @@ class FileEngine(private val stateDir: File) {
         parent: File,
         move: Boolean = false,
         control: TransferControl = TransferControl(),
+        requestedName: String? = null,
     ): File {
         control.check()
         checkDestination(source, parent)
-        require(!move || source.parentFile?.canonicalFile != parent.canonicalFile) {
+        require(
+            !move ||
+                source.parentFile?.canonicalFile != parent.canonicalFile ||
+                (requestedName != null && requestedName != source.name),
+        ) {
             "This item is already in that folder."
         }
-        val target = uniqueFile(parent, source.name)
+        val target =
+            requestedName?.let {
+                File(parent, validateName(it)).also { target ->
+                    check(!target.exists()) { "$it already exists." }
+                }
+            } ?: uniqueFile(parent, source.name)
         if (move && source.renameTo(target)) {
             control.item(source.name)
             return target
@@ -158,10 +168,11 @@ class FileEngine(private val stateDir: File) {
             staging.deleteRecursively()
             throw error
         }
-        if (move)
-            check(source.deleteRecursively()) {
-                "Copied to ${target.absolutePath}, but some original items could not be removed. The destination copy was kept."
-            }
+        if (move && !source.deleteRecursively())
+            throw TransferPublicationException(
+                target.absolutePath,
+                "Copied to ${target.absolutePath}, but some original items could not be removed. The destination copy was kept.",
+            )
         return target
     }
 

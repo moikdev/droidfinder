@@ -387,6 +387,28 @@ class DocumentAccess(
         }
     }
 
+    fun validateTransfer(
+        source: String,
+        parent: String,
+        move: Boolean,
+        allowRename: Boolean = false,
+    ) {
+        if (!isDocumentPath(source) && !isDocumentPath(parent))
+            engine.checkDestination(File(source), File(parent))
+        else checkDestination(source, parent)
+        val before = read(source)
+        val destination = read(parent)
+        check(destination.folder && destination.writable) {
+            "The destination folder is not writable."
+        }
+        if (move) {
+            check(before.canDelete) { "The source is read only. Copy it instead." }
+            require(before.parentPath != parent || allowRename) {
+                "This item is already in that folder."
+            }
+        }
+    }
+
     fun copy(
         source: String,
         parent: String,
@@ -395,10 +417,11 @@ class DocumentAccess(
         requestedName: String? = null,
     ): String {
         lastCopyMappings = emptyList()
+        validateTransfer(source, parent, move, requestedName != null)
         if (!isDocumentPath(source) && !isDocumentPath(parent))
-            return if (move && requestedName != null)
-                engine.relocate(File(source), File(parent, requestedName), control).absolutePath
-            else engine.copy(File(source), File(parent), move, control).absolutePath
+            return engine
+                .copy(File(source), File(parent), move, control, requestedName)
+                .absolutePath
         checkDestination(source, parent)
         val entry = read(source)
         if (move) {
@@ -437,7 +460,16 @@ class DocumentAccess(
         lastCopyMappings = mappings.map {
             it.first to remapPath(it.second, listOf(staging to completed))
         }
-        if (move) delete(source)
+        if (move)
+            try {
+                delete(source)
+            } catch (error: Exception) {
+                throw TransferPublicationException(
+                    completed,
+                    "The destination copy was kept, but removing the source failed: ${error.message}",
+                    error,
+                )
+            }
         return completed
     }
 

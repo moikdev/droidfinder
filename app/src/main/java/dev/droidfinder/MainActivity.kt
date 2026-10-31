@@ -15,15 +15,36 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : ComponentActivity() {
-    internal val model: FinderModel by lazy {
-        ViewModelProvider(
-            application as FinderApplication,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application),
-        )[FinderModel::class.java]
+    internal val model: FinderModel
+        get() = (application as FinderApplication).model
+
+    private val requestNotifications =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            model.updateNotificationState()
+        }
+
+    private fun enableNotifications() {
+        val asked = getSharedPreferences("notification-permission", 0)
+        if (
+            android.os.Build.VERSION.SDK_INT >= 33 &&
+                checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) !=
+                    android.content.pm.PackageManager.PERMISSION_GRANTED &&
+                (!asked.getBoolean("asked", false) ||
+                    shouldShowRequestPermissionRationale(
+                        android.Manifest.permission.POST_NOTIFICATIONS,
+                    ))
+        ) {
+            asked.edit().putBoolean("asked", true).apply()
+            requestNotifications.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        } else
+            startActivity(
+                Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                    .putExtra(Settings.EXTRA_APP_PACKAGE, packageName),
+            )
     }
+
     private val connectFolder =
         registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
             if (uri != null) model.connectLocation(uri)
@@ -66,6 +87,7 @@ class MainActivity : ComponentActivity() {
             FinderApp(
                 model,
                 onConnectFolder = { connectFolder.launch(null) },
+                onEnableNotifications = ::enableNotifications,
                 onGrantAccess = {
                     try {
                         startActivity(

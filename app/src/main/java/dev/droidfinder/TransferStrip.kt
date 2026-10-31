@@ -32,6 +32,7 @@ fun browseKeyDuringTransfer(event: KeyEvent, editing: Boolean): Boolean {
                 Key.X,
                 Key.I,
                 Key.O,
+                Key.V,
             ) || editing && event.key in setOf(Key.A, Key.V, Key.Z, Key.Y)
     if (event.isAltPressed)
         return event.key in setOf(Key.DirectionLeft, Key.DirectionRight, Key.DirectionUp)
@@ -53,16 +54,17 @@ fun browseKeyDuringTransfer(event: KeyEvent, editing: Boolean): Boolean {
 }
 
 @Composable
-fun TransferStrip(model: FinderModel) {
+fun TransferStrip(model: FinderModel, openTransfers: () -> Unit) {
     HorizontalDivider(color = Border, thickness = .5.dp)
     Row(
         Modifier.fillMaxWidth().height(52.dp).background(SubtleSurface).padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        CircularProgressIndicator(Modifier.size(19.dp), strokeWidth = 2.dp)
+        if (model.busy != null) CircularProgressIndicator(Modifier.size(19.dp), strokeWidth = 2.dp)
         Column(Modifier.weight(1f).padding(horizontal = 13.dp)) {
             Text(
-                model.busy.orEmpty(),
+                (if (model.activeTransfer?.state == TransferState.PAUSED) "Paused · " else "") +
+                    (model.busy ?: "Transfers queued or paused"),
                 color = Ink,
                 fontSize = 12.sp,
                 maxLines = 1,
@@ -76,6 +78,25 @@ fun TransferStrip(model: FinderModel) {
                 overflow = TextOverflow.Ellipsis,
             )
         }
-        TextButton(onClick = model::cancelTransfer) { Text("Cancel transfer", fontSize = 11.sp) }
+        TextButton(onClick = openTransfers) { Text("Transfers", fontSize = 11.sp) }
+        if (model.activeTransfer != null)
+            TextButton(
+                onClick = {
+                    model.activeTransferId?.let {
+                        if (model.activeTransfer?.state == TransferState.PAUSED)
+                            model.resumeTransfer(it)
+                        else model.pauseTransfer(it)
+                    }
+                },
+            ) {
+                Text(
+                    if (model.activeTransfer?.state == TransferState.PAUSED) "Resume" else "Pause",
+                    fontSize = 11.sp,
+                )
+            }
+        if (model.busy != null)
+            TextButton(onClick = model::cancelTransfer) {
+                Text("Cancel transfer", fontSize = 11.sp)
+            }
     }
 }

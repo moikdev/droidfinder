@@ -86,6 +86,7 @@ fun FinderApp(
     onShare: (List<Entry>) -> Unit,
     onConnectFolder: () -> Unit,
     onOpenWith: (Entry) -> Unit,
+    onEnableNotifications: () -> Unit = {},
 ) {
     CompositionLocalProvider(LocalFinderDark provides model.darkTheme) {
         MaterialTheme(
@@ -198,6 +199,7 @@ fun FinderApp(
                     "favorite" ->
                         model.focused?.takeIf { it.folder }?.let { model.favoritePath(it.path) }
                     "tab" -> model.focused?.takeIf { it.folder }?.let { model.newTab(it.path) }
+                    "transfers" -> dialog = "transfers"
                     "about" -> dialog = "about"
                     "filters" -> dialog = "filters"
                     "saveSearch" -> dialog = "saveSearch"
@@ -633,7 +635,8 @@ fun FinderApp(
                                 }
                             }
                         }
-                        if (model.busy != null) TransferStrip(model)
+                        if (model.busy != null || model.transferJobs.any { !it.terminal })
+                            TransferStrip(model) { action("transfers") }
                         PathBar(model) { action("path") }
                     }
                 }
@@ -645,6 +648,7 @@ fun FinderApp(
             }
 
             when (dialog) {
+                "transfers" -> TransferCenterDialog(model, { dialog = null }, onEnableNotifications)
                 "appearance" -> FolderAppearanceDialog(model) { dialog = null }
                 "recovery" ->
                     AlertDialog(
@@ -867,7 +871,7 @@ fun FinderApp(
                         text = {
                             Column {
                                 Text(
-                                    "DroidFinder 0.4 · Tablet edition",
+                                    "DroidFinder ${BuildConfig.VERSION_NAME} · Tablet edition",
                                     fontWeight = FontWeight.SemiBold,
                                 )
                                 Spacer(Modifier.height(12.dp))
@@ -888,6 +892,7 @@ fun FinderApp(
                         },
                     )
             }
+            model.fileConflict?.let { FileConflictDialog(model, it) }
             cursorMenu?.let { request ->
                 FileContextMenu(request, model, action) { cursorMenu = null }
             }
@@ -1194,12 +1199,14 @@ internal fun ActionMenu(
 ) {
     DropdownMenu(expanded, onDismiss) {
         val entries = model.selectedEntries
+        val idle = model.busy == null
+        MenuAction("Transfers", Icons.Outlined.SyncAlt) { action("transfers") }
         if (model.undoLabel != null)
-            MenuAction("Undo ${model.undoLabel}", Icons.AutoMirrored.Outlined.Undo) {
+            MenuAction("Undo ${model.undoLabel}", Icons.AutoMirrored.Outlined.Undo, idle) {
                 action("undo")
             }
         if (model.redoLabel != null)
-            MenuAction("Redo ${model.redoLabel}", Icons.AutoMirrored.Outlined.Redo) {
+            MenuAction("Redo ${model.redoLabel}", Icons.AutoMirrored.Outlined.Redo, idle) {
                 action("redo")
             }
         MenuAction("New tab", Icons.Outlined.AddBox) { action("newTab") }
@@ -1207,8 +1214,10 @@ internal fun ActionMenu(
             model.reopenTab()
             onDismiss()
         }
-        MenuAction("New folder", Icons.Outlined.CreateNewFolder, model.canCreate) { action("new") }
-        MenuAction("New text file…", Icons.AutoMirrored.Outlined.NoteAdd, model.canCreate) {
+        MenuAction("New folder", Icons.Outlined.CreateNewFolder, model.canCreate && idle) {
+            action("new")
+        }
+        MenuAction("New text file…", Icons.AutoMirrored.Outlined.NoteAdd, model.canCreate && idle) {
             action("newText")
         }
         if (entries.isEmpty()) {
@@ -1236,9 +1245,11 @@ internal fun ActionMenu(
                 action("path")
             }
         } else if (model.isTrash) {
-            MenuAction("Restore", Icons.Outlined.Restore) { action("restore") }
+            MenuAction("Restore", Icons.Outlined.Restore, idle) { action("restore") }
             MenuAction("Copy", Icons.Outlined.ContentCopy) { action("copy") }
-            MenuAction("Delete permanently…", Icons.Outlined.DeleteForever) { action("delete") }
+            MenuAction("Delete permanently…", Icons.Outlined.DeleteForever, idle) {
+                action("delete")
+            }
         } else {
             if (entries.size > 1) MenuAction("Get info", Icons.Outlined.Info) { action("info") }
             if (entries.size == 1) {
@@ -1265,8 +1276,10 @@ internal fun ActionMenu(
                         action("favorite")
                     }
                 if (entries.first().folder)
-                    MenuAction("Customize folder…", Icons.Outlined.Palette) { action("appearance") }
-                MenuAction("Make shortcut", Icons.AutoMirrored.Outlined.Shortcut) {
+                    MenuAction("Customize folder…", Icons.Outlined.Palette, idle) {
+                        action("appearance")
+                    }
+                MenuAction("Make shortcut", Icons.AutoMirrored.Outlined.Shortcut, idle) {
                     action("shortcut")
                 }
             }
@@ -1274,14 +1287,14 @@ internal fun ActionMenu(
             MenuAction(
                 if (entries.size == 1) "Rename…" else "Rename ${entries.size} items…",
                 Icons.Outlined.DriveFileRenameOutline,
-                entries.all { it.canRename },
+                entries.all { it.canRename } && idle,
             ) {
                 action("rename")
             }
             MenuAction(
                 "New folder with selection…",
                 Icons.Outlined.CreateNewFolder,
-                model.canCreate,
+                model.canCreate && idle,
             ) {
                 action("groupSelection")
             }
@@ -1294,17 +1307,17 @@ internal fun ActionMenu(
             MenuAction("Cut", Icons.Outlined.ContentCut, entries.all { it.canDelete }) {
                 action("cut")
             }
-            MenuAction("Duplicate", Icons.Outlined.FileCopy) { action("duplicate") }
-            MenuAction("Compress", Icons.Outlined.FolderZip) { action("compress") }
+            MenuAction("Duplicate", Icons.Outlined.FileCopy, idle) { action("duplicate") }
+            MenuAction("Compress", Icons.Outlined.FolderZip, idle) { action("compress") }
             if (entries.size == 1 && entries.first().extension == "zip")
-                MenuAction("Extract archive", Icons.Outlined.Unarchive) { action("extract") }
+                MenuAction("Extract archive", Icons.Outlined.Unarchive, idle) { action("extract") }
             MenuAction("Share…", Icons.Outlined.IosShare) { action("share") }
             if (entries.size == 1)
                 MenuAction("Copy full path", Icons.Outlined.Link) { action("copyPath") }
             MenuAction(
                 "Move to Trash",
                 Icons.Outlined.DeleteOutline,
-                entries.all { it.canDelete },
+                entries.all { it.canDelete } && idle,
             ) {
                 action("trash")
             }
@@ -1322,6 +1335,7 @@ internal fun ActionMenu(
                             model.tag(tag)
                             onDismiss()
                         },
+                        enabled = idle,
                         modifier = Modifier.size(30.dp),
                     ) {
                         Box(
@@ -1350,7 +1364,7 @@ internal fun ActionMenu(
                 }
             }
         }
-        MenuAction("Tags…", Icons.AutoMirrored.Outlined.Label) { action("tags") }
+        MenuAction("Tags…", Icons.AutoMirrored.Outlined.Label, idle) { action("tags") }
         MenuAction("Search filters…", Icons.Outlined.FilterAlt) { action("filters") }
         MenuAction(
             "Save search as Smart Folder…",

@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Desktop workflows and refined controls, 0.4.0](docs/DESKTOP-WORKFLOWS.md). Earlier: [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 

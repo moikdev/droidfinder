@@ -17,11 +17,14 @@ import java.io.File
 import java.text.DateFormat
 import java.util.Date
 import kotlin.coroutines.coroutineContext
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
@@ -140,6 +143,18 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     val documents = DocumentAccess(app, engine)
     var connectedLocations by mutableStateOf(documents.locations)
         private set
+
+    var notificationsEnabled by
+        mutableStateOf(
+            androidx.core.app.NotificationManagerCompat.from(app).areNotificationsEnabled(),
+        )
+        private set
+
+    fun updateNotificationState() {
+        notificationsEnabled =
+            androidx.core.app.NotificationManagerCompat.from(getApplication())
+                .areNotificationsEnabled()
+    }
 
     var hasAccess by mutableStateOf(Environment.isExternalStorageManager())
         private set
@@ -326,6 +341,78 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     var busy by mutableStateOf<String?>(null)
         private set
 
+    private val transferJournal = TransferJournal(File(app.filesDir, "transfer-jobs.properties"))
+    private val journalMutex = Mutex()
+    var journalError by mutableStateOf<String?>(null)
+        private set
+
+    var damagedTransferJournal by mutableStateOf(false)
+        private set
+
+    var transferJobs by
+        mutableStateOf(
+            runCatching { transferJournal.load().map { it.afterRestart() } }
+                .getOrElse {
+                    journalError = it.message
+                    damagedTransferJournal = true
+                    emptyList()
+                },
+        )
+        private set
+
+    var activeTransferId by mutableStateOf<String?>(null)
+        private set
+
+    val activeTransfer
+        get() = transferJobs.firstOrNull { it.id == activeTransferId }
+
+    private data class TransferSubmission(
+        val clipboard: ClipboardFiles?,
+        val clearClipboard: Boolean,
+        val tab: String,
+        val location: String,
+        val selection: Set<String>,
+    )
+
+    private val transferSubmissions = mutableMapOf<String, TransferSubmission>()
+    var fileConflict by mutableStateOf<FileConflict?>(null)
+        private set
+
+    @Volatile private var conflictAnswer: CompletableDeferred<ConflictDecision>? = null
+    var conflictPolicy by
+        mutableStateOf(
+            runCatching { ConflictPolicy.valueOf(prefs.getString("conflictPolicy", "ASK")!!) }
+                .getOrDefault(ConflictPolicy.ASK),
+        )
+        private set
+
+    fun changeConflictPolicy(value: ConflictPolicy) {
+        conflictPolicy = value
+        prefs.edit().putString("conflictPolicy", value.name).apply()
+    }
+
+    fun resolveConflict(decision: ConflictDecision) {
+        conflictAnswer?.complete(decision)
+    }
+
+    private suspend fun askConflict(
+        job: TransferJob,
+        source: Entry,
+        existing: Entry,
+    ): ConflictDecision {
+        val answer = CompletableDeferred<ConflictDecision>()
+        conflictAnswer = answer
+        fileConflict = FileConflict(job.id, source, existing)
+        try {
+            return answer.await()
+        } finally {
+            if (conflictAnswer === answer) {
+                fileConflict = null
+                conflictAnswer = null
+            }
+        }
+    }
+
     var message by mutableStateOf<String?>(null)
     var interruptedTransfer by mutableStateOf<String?>(null)
         private set
@@ -399,6 +486,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         val marker = File(app.filesDir, "active-transfer.txt")
         if (marker.exists() && TransferRuntime.label == null)
             interruptedTransfer = runCatching { marker.readText() }.getOrNull()
+        journalError?.let { message = it }
         refresh()
     }
 
@@ -693,6 +781,32 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
             path == workspace.absolutePath -> "Workspace"
             else -> File(path).name.ifBlank { "Storage" }
         }
+
+    fun displayPath(path: String): String {
+        if (isDocumentPath(path)) {
+            val chain = mutableListOf<String>()
+            val seen = mutableSetOf<String>()
+            var cursor: String? = path
+            while (cursor != null && seen.add(cursor) && chain.size < 24) {
+                chain += documents.title(cursor)
+                cursor = documents.parent(cursor)
+            }
+            return chain.asReversed().joinToString(" / ")
+        }
+        val root =
+            (listOf(workspace, deviceRoot) + volumes)
+                .filter { pathWithin(path, it.path) }
+                .maxByOrNull { it.path.length }
+        if (root != null)
+            return title(root.path) +
+                File(path)
+                    .relativeTo(root)
+                    .path
+                    .takeIf { it.isNotEmpty() }
+                    ?.let { " / " + it.replace("/", " / ") }
+                    .orEmpty()
+        return path
+    }
 
     fun navigate(path: String) {
         if (path == location) {
@@ -1138,6 +1252,7 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun onResume() {
+        updateNotificationState()
         val before = hasAccess
         hasAccess = Environment.isExternalStorageManager()
         volumes =
@@ -1390,11 +1505,14 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
 
     fun cancelTransfer() {
         transferControl.cancel()
+        conflictAnswer?.complete(ConflictDecision(ConflictAction.CANCEL))
     }
 
     private fun operation(
         label: String,
         destination: String? = folderPath,
+        clearOriginSelection: Boolean = true,
+        onFinished: suspend (Exception?) -> Unit = {},
         work: suspend () -> String,
     ) {
         if (busy != null) {
@@ -1412,14 +1530,32 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
             val now = android.os.SystemClock.elapsedRealtime()
             if (now - lastReport > 80) {
                 lastReport = now
-                TransferRuntime.scope.launch { transferProgress = progress }
+                val jobId = activeTransferId
+                TransferRuntime.scope.launch {
+                    transferProgress = progress
+                    jobId?.let { id ->
+                        updateTransfer(id) {
+                            it.copy(
+                                bytes = progress.bytes,
+                                items = progress.items,
+                                current = progress.current,
+                            )
+                        }
+                    }
+                }
                 TransferRuntime.report(getApplication(), progress)
             }
         }
         TransferRuntime.scope.launch {
             val marker = File(getApplication<Application>().filesDir, "active-transfer.txt")
+            var failure: Exception? = null
             try {
-                TransferRuntime.begin(getApplication(), label, transferControl)
+                TransferRuntime.begin(
+                    getApplication(),
+                    label,
+                    transferControl,
+                    activeTransferId != null,
+                )
                 withContext(Dispatchers.IO) {
                     marker.writeText(
                         "$label\n${destination?:location}\n${System.currentTimeMillis()}",
@@ -1427,19 +1563,27 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
                 }
                 message = work()
             } catch (error: Exception) {
+                failure = error
                 message = error.message ?: "Couldn't complete the operation."
             } finally {
+                try {
+                    onFinished(failure)
+                } catch (error: Exception) {
+                    message = "Transfer history: ${error.message}"
+                }
                 marker.delete()
                 TransferRuntime.finish(getApplication())
-                busy = null
                 if (
-                    tabs[activeTab].id == originTab &&
+                    clearOriginSelection &&
+                        tabs[activeTab].id == originTab &&
                         location == originLocation &&
                         selected == originSelection
                 )
                     clearSelection()
                 syncHistory()
                 refresh()
+                busy = null
+                startNextTransfer()
             }
         }
     }
@@ -1712,49 +1856,86 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         transferPaths(clip.paths, parent, clip.cut, clearClipboard = clip.cut)
     }
 
+    private fun updateTransfer(id: String, change: (TransferJob) -> TransferJob) {
+        transferJobs = transferJobs.map { if (it.id == id) change(it) else it }
+    }
+
+    private suspend fun saveTransfers() {
+        journalMutex.withLock {
+            val snapshot = transferJobs
+            try {
+                withContext(Dispatchers.IO) { transferJournal.save(snapshot) }
+            } catch (error: Exception) {
+                journalError = "Transfer journal could not be saved: ${error.message}"
+                throw error
+            }
+        }
+    }
+
+    fun preserveAndResetTransferJournal() {
+        TransferRuntime.scope.launch {
+            try {
+                withContext(Dispatchers.IO) { transferJournal.preserveDamaged() }
+                damagedTransferJournal = false
+                saveTransfers()
+                journalError = null
+                startNextTransfer()
+                message =
+                    "Damaged history was preserved in app storage. File contents were not changed."
+            } catch (error: Exception) {
+                message = error.message
+            }
+        }
+    }
+
+    fun retryTransferJournal() {
+        if (damagedTransferJournal) return
+        TransferRuntime.scope.launch {
+            try {
+                saveTransfers()
+                journalError = null
+                startNextTransfer()
+            } catch (error: Exception) {
+                message = journalError
+            }
+        }
+    }
+
     fun transferPaths(
         paths: List<String>,
         parent: String,
         move: Boolean,
         clearClipboard: Boolean = false,
+        policy: ConflictPolicy = conflictPolicy,
     ) {
         if (paths.isEmpty()) return
-        if (paths.none(::isDocumentPath) && !isDocumentPath(parent)) {
-            transferTo(paths.map(::File), File(parent), move, clearClipboard)
+        if (journalError != null) {
+            message = journalError
             return
         }
-        val originalClipboard = clipboard
-        operation(if (move) "Moving items…" else "Copying items…", destination = parent) {
-            val steps = mutableListOf<FileStep>()
-            var completed = 0
+        val job =
+            TransferJob(
+                paths = paths.distinct(),
+                destination = parent,
+                move = move,
+                conflictPolicy = policy,
+            )
+        transferSubmissions[job.id] =
+            TransferSubmission(clipboard, clearClipboard, tabs[activeTab].id, location, selected)
+        transferJobs = transferJobs + job
+        TransferRuntime.scope.launch {
             try {
-                for (path in paths) {
-                    val (before, result, step) =
-                        withContext(Dispatchers.IO) {
-                            val before = documents.read(path)
-                            val result = documents.copy(path, parent, move, transferControl)
-                            Triple(
-                                before,
-                                result,
-                                if (move) documents.movedStep(before, result)
-                                else documents.createdStep(result),
-                            )
-                        }
-                    steps += step
-                    val mappings =
-                        documents.lastCopyMappings.ifEmpty { listOf(before.path to result) }
-                    if (move) relocateMetadataPaths(mappings) else copyMetadataPaths(mappings)
-                    completed++
-                }
-                if (clearClipboard && clipboard === originalClipboard) clipboard = null
+                saveTransfers()
+                startNextTransfer()
             } catch (error: Exception) {
-                if (clearClipboard && clipboard === originalClipboard)
-                    clipboard = ClipboardFiles(paths.drop(completed), true)
-                error("$completed of ${paths.size} completed. ${error.message}")
-            } finally {
-                rememberOperation(if (move) "Move" else "Copy", steps)
+                updateTransfer(job.id) {
+                    it.copy(
+                        state = TransferState.FAILED,
+                        current = "Journal write failed: ${error.message}",
+                    )
+                }
+                message = "Couldn't safely queue the transfer: ${error.message}"
             }
-            "$completed items ${if(move)"moved"else "copied"}"
         }
     }
 
@@ -1763,38 +1944,302 @@ class FinderModel(app: Application) : AndroidViewModel(app) {
         parent: File,
         move: Boolean,
         clearClipboard: Boolean = false,
-    ) {
-        if (files.isEmpty()) return
-        val originalClipboard = clipboard
+    ) = transferPaths(files.map { it.absolutePath }, parent.absolutePath, move, clearClipboard)
+
+    private fun startNextTransfer() {
+        if (busy != null || activeTransferId != null || journalError != null) return
+        val job = transferJobs.firstOrNull { it.state == TransferState.QUEUED } ?: return
+        activeTransferId = job.id
+        updateTransfer(job.id) {
+            it.copy(state = TransferState.RUNNING, started = System.currentTimeMillis())
+        }
         operation(
-            if (move) "Moving items…" else "Copying items…",
-            destination = parent.absolutePath,
+            if (job.move) "Moving items…" else "Copying items…",
+            destination = job.destination,
+            clearOriginSelection = false,
+            onFinished = { failure ->
+                val current = transferJobs.first { it.id == job.id }
+                updateTransfer(job.id) {
+                    it.copy(
+                        state =
+                            when {
+                                transferControl.cancelled -> TransferState.CANCELLED
+                                failure != null ||
+                                    it.results.any { result -> result.error != null } ->
+                                    TransferState.FAILED
+                                else -> TransferState.COMPLETED
+                            },
+                        bytes = transferControl.snapshot.bytes,
+                        items = transferControl.snapshot.items,
+                        current = failure?.message ?: it.current,
+                        finished = System.currentTimeMillis(),
+                    )
+                }
+                transferSubmissions.remove(job.id)?.let { submitted ->
+                    if (submitted.clearClipboard && clipboard === submitted.clipboard)
+                        clipboard =
+                            current.remaining
+                                .takeIf { it.isNotEmpty() }
+                                ?.let { ClipboardFiles(it, true) }
+                    if (
+                        tabs[activeTab].id == submitted.tab &&
+                            location == submitted.location &&
+                            selected == submitted.selection
+                    )
+                        clearSelection()
+                }
+                activeTransferId = null
+                saveTransfers()
+            },
         ) {
             val steps = mutableListOf<FileStep>()
-            var completed = 0
+            var policy = job.conflictPolicy
             try {
-                for (file in files) {
-                    val (target, step) =
-                        withContext(Dispatchers.IO) {
-                            val result = engine.copy(file, parent, move, transferControl)
-                            result to
-                                if (move) FileStep.Moved(file, result) else FileStep.Created(result)
+                saveTransfers()
+                for (path in job.paths) {
+                    withContext(Dispatchers.IO) { transferControl.check() }
+                    updateTransfer(job.id) {
+                        it.copy(inFlight = path, current = path.substringAfterLast('/'))
+                    }
+                    saveTransfers()
+                    try {
+                        val before =
+                            withContext(Dispatchers.IO) {
+                                documents.validateTransfer(path, job.destination, job.move)
+                                documents.read(path)
+                            }
+                        val existing =
+                            withContext(Dispatchers.IO) {
+                                documents.list(job.destination).firstOrNull {
+                                    it.name == before.name && it.path != path
+                                }
+                            }
+                        var desiredName: String? = null
+                        var replaced: Pair<Entry, File>? = null
+                        if (existing != null) {
+                            val decision =
+                                when (policy) {
+                                    ConflictPolicy.ASK -> askConflict(job, before, existing)
+                                    ConflictPolicy.KEEP_BOTH ->
+                                        ConflictDecision(ConflictAction.KEEP_BOTH)
+                                    ConflictPolicy.SKIP -> ConflictDecision(ConflictAction.SKIP)
+                                    ConflictPolicy.REPLACE ->
+                                        ConflictDecision(ConflictAction.REPLACE)
+                                }
+                            if (decision.applyAll)
+                                policy =
+                                    when (decision.action) {
+                                        ConflictAction.KEEP_BOTH -> ConflictPolicy.KEEP_BOTH
+                                        ConflictAction.SKIP -> ConflictPolicy.SKIP
+                                        ConflictAction.REPLACE -> ConflictPolicy.REPLACE
+                                        else -> policy
+                                    }
+                            when (decision.action) {
+                                ConflictAction.CANCEL -> {
+                                    cancelTransfer()
+                                    withContext(Dispatchers.IO) { transferControl.check() }
+                                }
+                                ConflictAction.SKIP -> {
+                                    updateTransfer(job.id) {
+                                        it.copy(
+                                            results =
+                                                it.results +
+                                                    TransferItemResult(path, skipped = true),
+                                            inFlight = null,
+                                        )
+                                    }
+                                    saveTransfers()
+                                    continue
+                                }
+                                ConflictAction.RENAME ->
+                                    desiredName = validateFilename(decision.name.orEmpty())
+                                ConflictAction.REPLACE -> {
+                                    check(existing.canDelete) {
+                                        "The existing item cannot be replaced."
+                                    }
+                                    val stash =
+                                        withContext(Dispatchers.IO) {
+                                            val latest = documents.read(existing.path)
+                                            check(
+                                                latest.size == existing.size &&
+                                                    latest.modified == existing.modified &&
+                                                    latest.folder == existing.folder,
+                                            ) {
+                                                "The destination changed while choosing. Review it and retry."
+                                            }
+                                            documents.trash(existing.path, transferControl)
+                                        }
+                                    replaced = existing to stash
+                                    relocateMetadata(existing.path, stash.path)
+                                    desiredName = existing.name
+                                }
+                                else -> Unit
+                            }
                         }
-                    steps += step
-                    if (move) relocateMetadata(file.absolutePath, target.absolutePath)
-                    else copyTags(file.absolutePath, target.absolutePath)
-                    completed++
+                        val result =
+                            try {
+                                withContext(Dispatchers.IO) {
+                                    documents.copy(
+                                        path,
+                                        job.destination,
+                                        job.move,
+                                        transferControl,
+                                        desiredName,
+                                    )
+                                }
+                            } catch (error: Exception) {
+                                if (replaced != null && error !is TransferPublicationException) {
+                                    val restored =
+                                        withContext(Dispatchers.IO) {
+                                            documents.restore(replaced.second)
+                                        }
+                                    relocateMetadata(replaced.second.path, restored)
+                                }
+                                throw error
+                            }
+                        updateTransfer(job.id) {
+                            it.copy(
+                                results = it.results + TransferItemResult(path, result),
+                                inFlight = null,
+                            )
+                        }
+                        saveTransfers()
+                        try {
+                            steps +=
+                                withContext(Dispatchers.IO) {
+                                    if (replaced != null)
+                                        replacementStep(
+                                            documents,
+                                            replaced.first,
+                                            replaced.second,
+                                            before,
+                                            result,
+                                            job.move,
+                                        )
+                                    else if (job.move) documents.movedStep(before, result)
+                                    else documents.createdStep(result)
+                                }
+                        } catch (error: Exception) {
+                            updateTransfer(job.id) {
+                                it.copy(
+                                    results =
+                                        it.results.map { r ->
+                                            if (r.source == path)
+                                                r.copy(
+                                                    error =
+                                                        "File transferred; Undo unavailable: ${error.message}",
+                                                )
+                                            else r
+                                        },
+                                )
+                            }
+                        }
+                        val mappings =
+                            documents.lastCopyMappings.ifEmpty { listOf(before.path to result) }
+                        if (job.move) relocateMetadataPaths(mappings)
+                        else copyMetadataPaths(mappings)
+                    } catch (error: Exception) {
+                        withContext(Dispatchers.IO) { transferControl.check() }
+                        if (
+                            transferJobs
+                                .first { it.id == job.id }
+                                .results
+                                .none { it.source == path }
+                        )
+                            updateTransfer(job.id) {
+                                it.copy(
+                                    results =
+                                        it.results +
+                                            TransferItemResult(
+                                                path,
+                                                (error as? TransferPublicationException)
+                                                    ?.destination,
+                                                error.message ?: "Transfer failed",
+                                            ),
+                                    inFlight = null,
+                                )
+                            }
+                        else throw error
+                    }
+                    saveTransfers()
                 }
-                if (clearClipboard && clipboard === originalClipboard) clipboard = null
-            } catch (error: Exception) {
-                if (clearClipboard && clipboard === originalClipboard)
-                    clipboard = ClipboardFiles(files.drop(completed).map { it.absolutePath }, true)
-                error("$completed of ${files.size} completed. ${error.message}")
             } finally {
-                rememberOperation(if (move) "Move" else "Copy", steps)
+                rememberOperation(if (job.move) "Move" else "Copy", steps)
             }
-            "$completed item${if (completed == 1) "" else "s"} ${if (move) "moved" else "copied"}"
+            val result = transferJobs.first { it.id == job.id }
+            "${result.successful.size} of ${job.paths.size} items ${if (job.move) "moved" else "copied"}" +
+                if (result.results.any { it.error != null })
+                    ". Some items need attention in Transfers."
+                else ""
         }
+    }
+
+    fun pauseTransfer(id: String) {
+        if (id == activeTransferId) {
+            transferControl.pause()
+            TransferRuntime.setPaused(getApplication(), true)
+            updateTransfer(id) { it.copy(state = TransferState.PAUSED) }
+        } else
+            updateTransfer(id) {
+                if (it.state == TransferState.QUEUED) it.copy(state = TransferState.PAUSED) else it
+            }
+        TransferRuntime.scope.launch { saveTransfers() }
+    }
+
+    fun resumeTransfer(id: String) {
+        if (id == activeTransferId) {
+            transferControl.resume()
+            TransferRuntime.setPaused(getApplication(), false)
+            updateTransfer(id) { it.copy(state = TransferState.RUNNING) }
+        } else
+            updateTransfer(id) {
+                if (it.state == TransferState.PAUSED) it.copy(state = TransferState.QUEUED) else it
+            }
+        TransferRuntime.scope.launch {
+            saveTransfers()
+            startNextTransfer()
+        }
+    }
+
+    fun cancelQueuedTransfer(id: String) {
+        if (id == activeTransferId) cancelTransfer()
+        else {
+            updateTransfer(id) {
+                if (!it.terminal)
+                    it.copy(state = TransferState.CANCELLED, finished = System.currentTimeMillis())
+                else it
+            }
+            transferSubmissions.remove(id)
+            TransferRuntime.scope.launch { saveTransfers() }
+        }
+    }
+
+    fun retryTransfer(id: String) {
+        val job = transferJobs.firstOrNull { it.id == id && it.terminal } ?: return
+        if (job.remaining.isNotEmpty())
+            transferPaths(
+                job.remaining,
+                job.destination,
+                job.move,
+                policy = ConflictPolicy.KEEP_BOTH,
+            )
+    }
+
+    fun moveQueuedTransfer(id: String, delta: Int) {
+        val from = transferJobs.indexOfFirst {
+            it.id == id &&
+                it.state in setOf(TransferState.QUEUED, TransferState.PAUSED) &&
+                it.id != activeTransferId
+        }
+        if (from < 0) return
+        val to = (from + delta).coerceIn(0, transferJobs.lastIndex)
+        transferJobs = transferJobs.toMutableList().also { it.add(to, it.removeAt(from)) }
+        TransferRuntime.scope.launch { saveTransfers() }
+    }
+
+    fun clearTransferHistory() {
+        transferJobs = transferJobs.filter { !it.terminal }
+        TransferRuntime.scope.launch { saveTransfers() }
     }
 
     fun duplicate() {

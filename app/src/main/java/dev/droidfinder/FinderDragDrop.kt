@@ -167,13 +167,14 @@ fun Modifier.folderDropTarget(model: FinderModel, folder: String?): Modifier = c
                 override fun onDrop(event: DragAndDropEvent): Boolean {
                     hovering = false
                     val parent = File(folder)
-                    if (model.busy != null || !model.allowedPath(folder)) return false
+                    if (!model.allowedPath(folder)) return false
                     val native = event.toAndroidDragEvent()
                     val local = native.localState as? FinderDrag
                     if (local != null) {
                         model.transferPaths(local.paths, folder, move = !local.copy)
                         return true
                     }
+                    if (model.busy != null) return false
                     val data = native.clipData ?: return false
                     val uris =
                         (0 until data.itemCount)
@@ -194,8 +195,8 @@ fun Modifier.folderDropTarget(model: FinderModel, folder: String?): Modifier = c
         )
         .dragAndDropTarget(
             shouldStartDragAndDrop = { event ->
-                model.busy == null &&
-                    (event.toAndroidDragEvent().localState is FinderDrag ||
+                event.toAndroidDragEvent().localState is FinderDrag ||
+                    (model.busy == null &&
                         event.mimeTypes().any {
                             it.startsWith("image/") ||
                                 it.startsWith("application/") ||

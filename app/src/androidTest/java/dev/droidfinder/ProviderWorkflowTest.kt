@@ -54,6 +54,12 @@ class ProviderWorkflowTest {
     fun cleanup() {
         compose.runOnIdle {
             val model = compose.activity.model
+            model.transferJobs.filter { !it.terminal }.forEach { model.cancelQueuedTransfer(it.id) }
+            if (model.busy != null) model.cancelTransfer()
+        }
+        compose.waitUntil(15_000) { compose.activity.model.busy == null }
+        compose.runOnIdle {
+            val model = compose.activity.model
             model.navigate(model.workspace.path)
             model.connectedLocations
                 .filter { it.uri == root }
