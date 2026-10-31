@@ -4,7 +4,13 @@ A native Android tablet file explorer inspired by macOS Finder. Kotlin, Jetpack 
 
 This is an independent implementation, not Apple source code or a macOS runtime. [Parity checklist and platform differences](PARITY.md).
 
+![DroidFinder tablet preview](docs/screenshots/tablet-landscape.png)
+
+Actual Android screenshot with synthetic QA documents. [Portrait](docs/screenshots/tablet-portrait.png) · [Compact window](docs/screenshots/compact-window.png) · [Dark appearance](docs/screenshots/tablet-dark.png)
+
 ## Install or build
+
+[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.2.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
 
 The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
 
@@ -79,7 +85,7 @@ ANDROID_SERIAL=emulator-5582 ./scripts/check.sh --device
 
 Use a dedicated emulator/device for instrumentation, so other apps' tests cannot take focus. The test suite covers filesystem collisions, nested/cancelled transfers, Undo/Redo and edited-file protection, batch rename, malicious archives, tags/shortcuts, actual tablet UI workflows, a debug-only document provider, PDF/audio Quick Look, and transfer lifecycle behavior. The fixture provider is excluded from preview/release builds.
 
-GitHub Actions runs unit tests, lint and an optimized unsigned release build on pushes/PRs, and uploads reports plus the unsigned APK. The installable preview release is development-signed separately; a production release needs your signing key.
+GitHub Actions is configured to run unit tests, lint and an optimized unsigned release build on pushes/PRs, and upload reports plus the unsigned APK. GitHub currently prevents this account's runners from starting because of a billing/spending-limit issue; local verification is recorded in [VALIDATION.md](VALIDATION.md). The installable preview release is development-signed separately; a production release needs your signing key.
 
 ## Code map
 

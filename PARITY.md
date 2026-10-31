@@ -21,19 +21,19 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Grouping by kind/date/tag, icon zoom, resizable columns and preview pane.
 - [x] Saved Smart Folders with name/kind/date/size/tag/content criteria.
 - [x] Complete PDF navigation/zoom, oriented images, audio/video Quick Look.
-- [ ] Mouse context menus in every view, selection ranges, type-to-select.
-- [ ] Native drag-and-drop onto folders, tabs/sidebar, and import/export with Android apps.
+- [x] Mouse context menus in every view, selection ranges, type-to-select.
+- [x] Native drag-and-drop onto folders, tabs/sidebar, and URI import/export with Android apps. Internal native dragging verified; external app compatibility remains target-dependent.
 - [x] Android document-provider locations, persistable grants, read-only capabilities.
 - [x] Cross-provider/local copy/move, create/rename, provider previews/sharing.
 - [x] Cancellable transfers with byte/item progress, recovery journal and lifecycle handling.
 - [x] Favorites/sidebar management, aliases as portable app shortcuts, folder appearance.
 - [x] Preference controls, folder information, display/extension options, dark theme.
-- [ ] Expanded safety and workflow tests, tablet landscape/portrait/small-window checks.
+- [x] Expanded safety and workflow tests, tablet landscape/portrait/small-window checks.
 - [ ] GitHub source, build instructions, installable preview release and final verification.
 
-## Verification still in progress
+## Verification
 
-Native dragging, advanced pointer selection, final UI regression, optimized APK smoke tests and the downloadable GitHub preview are the final gates. Existing device tests run on the isolated `DroidFinder_Tablet_API_36` emulator.
+See [VALIDATION.md](VALIDATION.md) for the 40 engine tests, 26 Android workflow tests, native integration checks, screenshots, optimized APK verification, and remaining device/provider coverage. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. This checklist closes the implemented tablet workflow scope; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 
