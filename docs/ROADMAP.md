@@ -67,4 +67,4 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 
 ## External validation and deferred scope
 
-Hardware/provider credentials and production signing are not supplied by the repository. Implement testable support locally, clearly record external coverage, and do not claim physical-device or hosted-CI success without evidence. Existing GitHub runners are blocked by account billing. Do not spend money or alter billing. Phone layout remains deferred.
+Hardware/provider credentials and production signing are not supplied by the repository. Implement testable support locally, clearly record external coverage, and do not claim physical-device or hosted-CI success without evidence. GitHub Actions is manual-only at the user’s request because hosted quota is exhausted. Run checks on this PC, or use the authorized Linux box if needed. Do not spend money or alter billing. Phone layout remains deferred.

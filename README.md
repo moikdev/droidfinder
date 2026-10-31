@@ -96,7 +96,7 @@ ANDROID_SERIAL=emulator-5582 ./scripts/check.sh --device
 
 Use a dedicated emulator/device for instrumentation, so other apps' tests cannot take focus. The test suite covers filesystem collisions, nested/cancelled transfers, Undo/Redo and edited-file protection, batch rename, malicious archives, tags/shortcuts, actual tablet UI workflows, a debug-only document provider, PDF/audio Quick Look, and transfer lifecycle behavior. The fixture provider is excluded from preview/release builds.
 
-GitHub Actions is configured to run unit tests, lint and an optimized unsigned release build on pushes/PRs, and upload reports plus the unsigned APK. GitHub currently prevents this account's runners from starting because of a billing/spending-limit issue; local verification is recorded in [VALIDATION.md](VALIDATION.md). The installable preview release is development-signed separately; a production release needs your signing key.
+GitHub Actions is manual-only while hosted runner quota is unavailable. Pushes and pull requests do not start runners. Builds, unit tests, lint and tablet instrumentation run on this PC using the scripts above; the Linux box can be used separately if needed. The manual workflow remains available for a future explicit run and uploads reports plus the unsigned APK. Local verification is recorded in [VALIDATION.md](VALIDATION.md). The installable preview is development-signed; production distribution requires your signing key.
 
 To produce validated preview artifacts and SHA-256 checksums with Python 3.9+:
 
