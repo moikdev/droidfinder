@@ -6,9 +6,16 @@
     <queries><intent><action android:name="android.content.action.DOCUMENTS_PROVIDER" /></intent></queries>
     <application android:name=".FinderApplication" android:allowBackup="false" android:label="DroidFinder" android:icon="@drawable/ic_launcher" android:theme="@style/Theme.DroidFinder" android:supportsRtl="true">
         <service android:name=".TransferService" android:exported="false" android:foregroundServiceType="dataSync" />
+        <activity android:name=".ReceiveFilesActivity" android:exported="true" android:label="Save to DroidFinder" android:windowSoftInputMode="adjustResize">
+            <intent-filter><action android:name="android.intent.action.SEND"/><category android:name="android.intent.category.DEFAULT"/><data android:mimeType="*/*"/></intent-filter>
+            <intent-filter><action android:name="android.intent.action.SEND_MULTIPLE"/><category android:name="android.intent.category.DEFAULT"/><data android:mimeType="*/*"/></intent-filter>
+        </activity>
         <activity android:name=".MainActivity" android:exported="true" android:windowSoftInputMode="adjustResize">
             <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
         </activity>
+        <provider android:name=".WorkspaceDocumentsProvider" android:authorities="${applicationId}.documents" android:exported="true" android:grantUriPermissions="true" android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter><action android:name="android.content.action.DOCUMENTS_PROVIDER" /></intent-filter>
+        </provider>
         <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.files" android:exported="false" android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
         </provider>

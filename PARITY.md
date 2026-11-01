@@ -1,6 +1,6 @@
 # Finder parity worklist
 
-Latest pass: [Storage and recovery, 0.18.0](docs/STORAGE.md). Earlier: [Image Peek, 0.17.0](docs/IMAGE-PEEK.md). Earlier: [Archive browser, 0.16.0](docs/ARCHIVES.md). Earlier: [Structured Peek, 0.15.0](docs/STRUCTURED-PEEK.md). Earlier: [Media Peek, 0.14.0](docs/MEDIA-PEEK.md). Earlier: [PDF Peek, 0.13.0](docs/PDF-PEEK.md). Earlier: [Progressive folders and search, 0.12.0](docs/LOADING.md). Earlier: [Dragging, spring loading and precise resizing, 0.11.0](docs/DRAGGING.md). Earlier: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest pass: [Android picker and incoming shares, 0.19.0](docs/ANDROID-INTEGRATION.md). Earlier: [Storage and recovery, 0.18.0](docs/STORAGE.md). Earlier: [Image Peek, 0.17.0](docs/IMAGE-PEEK.md). Earlier: [Archive browser, 0.16.0](docs/ARCHIVES.md). Earlier: [Structured Peek, 0.15.0](docs/STRUCTURED-PEEK.md). Earlier: [Media Peek, 0.14.0](docs/MEDIA-PEEK.md). Earlier: [PDF Peek, 0.13.0](docs/PDF-PEEK.md). Earlier: [Progressive folders and search, 0.12.0](docs/LOADING.md). Earlier: [Dragging, spring loading and precise resizing, 0.11.0](docs/DRAGGING.md). Earlier: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
 The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
@@ -135,3 +135,12 @@ Image codec/device/performance coverage remains open in the roadmap; see the sup
 - [x] Explicit different-folder choice, provider-app access and connection removal without discarding tabs.
 - [x] Protected-directory guidance and canonical local path checks, including symlinks.
 - [ ] Physical USB/SD disconnect, third-party provider/account and multiple Android-version coverage.
+
+## Android integration pass
+
+- [x] Workspace document provider with Android URI grants, saved IDs, browsing/search, reads/writes and file operations.
+- [x] Save-to-DroidFinder share destination with reviewed names/selection, local/provider destinations, staged keep-both publication, cancellation, partial retry and session Undo.
+- [x] Compact completion, recreation without automatic replay, and an opt-out for new Workspace provider requests.
+- [ ] External cross-app drag/drop and physical device/third-party provider matrices.
+
+See [supported behavior and limits](docs/ANDROID-INTEGRATION.md); other-app edits and already-open descriptors remain ordinary live file operations.

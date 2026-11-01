@@ -17,3 +17,6 @@ dependencyResolutionManagement {
 rootProject.name = "DroidFinder"
 
 include(":app")
+
+// Synthetic, separately installed cross-UID QA client; not a shipping app dependency.
+include(":interop-client")

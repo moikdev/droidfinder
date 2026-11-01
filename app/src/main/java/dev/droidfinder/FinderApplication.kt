@@ -6,15 +6,28 @@ import androidx.lifecycle.ViewModelStoreOwner
 
 /** Keeps the explorer and its active transfer alive when the Activity is recreated or closed. */
 class FinderApplication : Application(), ViewModelStoreOwner {
-    override val viewModelStore = ViewModelStore()
-    internal val thumbnails by lazy { ThumbnailRepository(this) }
-    internal val model: FinderModel by lazy {
+    internal val localEngine by lazy { FileEngine(filesDir) }
+    internal val workspaceDocuments by lazy { WorkspaceDocuments(this) }
+    private val mainModel = lazy {
         androidx.lifecycle
             .ViewModelProvider(
                 this,
                 androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.getInstance(this),
             )[FinderModel::class.java]
     }
+
+    internal fun workspaceChanged(routes: List<Pair<String, String>> = emptyList()) {
+        if (!mainModel.isInitialized()) return
+        android.os.Handler(android.os.Looper.getMainLooper()).post {
+            model.externalWorkspaceChanged(routes)
+        }
+    }
+
+    override val viewModelStore = ViewModelStore()
+    internal val thumbnails by lazy { ThumbnailRepository(this) }
+    internal val model: FinderModel
+        get() = mainModel.value
+
     private val windowStores = mutableMapOf<String, ViewModelStore>()
 
     internal fun windowModel(id: String, initialPath: String?): FinderModel {

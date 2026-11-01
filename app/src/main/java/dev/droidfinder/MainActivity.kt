@@ -235,7 +235,15 @@ class MainActivity : ComponentActivity() {
                                     }
                                 }
                     }
-            startActivity(Intent.createChooser(intent, "Share files"))
+            startActivity(
+                Intent.createChooser(intent, "Share files")
+                    .putExtra(
+                        Intent.EXTRA_EXCLUDE_COMPONENTS,
+                        arrayOf(
+                            android.content.ComponentName(this, ReceiveFilesActivity::class.java),
+                        ),
+                    ),
+            )
         }
             .onFailure { model.message = it.message ?: "Couldn't share these files." }
     }

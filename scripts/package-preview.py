@@ -47,6 +47,13 @@ def manifest(analyzer, apk):
     if any("dev.droidfinder.fixtures" in provider.get(ANDROID + "authorities", "")
            for provider in application.findall("provider")):
         raise SystemExit(f"Debug fixture provider is present: {apk}")
+    workspace = [provider for provider in application.findall("provider")
+                 if provider.get(ANDROID + "name", "").endswith(".WorkspaceDocumentsProvider")]
+    if len(workspace) != 1 or any(workspace[0].get(ANDROID + key) != value for key, value in {
+            "permission": "android.permission.MANAGE_DOCUMENTS",
+            "exported": "true", "grantUriPermissions": "true",
+            "authorities": root.get("package", "") + ".documents"}.items()):
+        raise SystemExit(f"Workspace provider permission/grant contract is invalid: {apk}")
     return root
 
 
@@ -58,9 +65,10 @@ def main():
     if args.device and not os.environ.get("ANDROID_SERIAL"):
         parser.error("--device requires ANDROID_SERIAL for a dedicated tablet/emulator")
     if not args.skip_build:
-        run(ROOT / "gradlew", "testDebugUnitTest", "lintDebug", "assemblePreview", "assembleRelease")
+        run(ROOT / "gradlew", ":app:testDebugUnitTest", ":app:lintDebug",
+            ":app:assemblePreview", ":app:assembleRelease")
     if args.device:
-        run(ROOT / "gradlew", "connectedDebugAndroidTest")
+        run(ROOT / "gradlew", ":app:connectedDebugAndroidTest")
     sdk = sdk_directory()
     analyzer = sdk / "cmdline-tools/latest/bin/apkanalyzer"
     if not analyzer.exists():

@@ -490,7 +490,7 @@ class DocumentAccess(
                 ?: error("The provider couldn't open this file.")
         else File(path).inputStream()
 
-    private fun output(path: String): OutputStream =
+    internal fun output(path: String): OutputStream =
         if (isDocumentPath(path))
             resolver.openOutputStream(Uri.parse(path), "wt")
                 ?: error("The provider couldn't write this file.")
@@ -556,7 +556,7 @@ class DocumentAccess(
         }
     }
 
-    private fun uniqueName(parent: String, name: String): String {
+    internal fun uniqueName(parent: String, name: String): String {
         val names = list(parent).map { it.name }.toSet()
         val dot = name.lastIndexOf('.').takeIf { it > 0 } ?: name.length
         var result = name

@@ -659,6 +659,19 @@ fun PreferencesDialog(model: FinderModel, dismiss: () -> Unit) {
                     model::toggleFoldersFirst,
                 )
                 PreferenceSwitch("Dark appearance", model.darkTheme, model::toggleTheme)
+                HorizontalDivider(Modifier.padding(vertical = 12.dp))
+                Text("Android integration", fontWeight = FontWeight.SemiBold)
+                PreferenceSwitch(
+                    "Workspace in Android's file picker",
+                    model.workspaceInPicker,
+                    model::toggleWorkspacePicker,
+                )
+                Text(
+                    "Other apps can open or save files you select in Workspace. Turning this off blocks new requests; already opened files stay open until closed.",
+                    fontSize = 11.sp,
+                    color = Muted,
+                )
+                HorizontalDivider(Modifier.padding(vertical = 12.dp))
                 Text("Sidebar width", fontSize = 12.sp)
                 Slider(
                     model.sidebarWidth.toFloat(),

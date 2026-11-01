@@ -34,7 +34,7 @@ import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-private fun finderColors(dark: Boolean) =
+internal fun finderColors(dark: Boolean) =
     if (dark)
         darkColorScheme(
             primary = Color(0xFF8DBBFF),

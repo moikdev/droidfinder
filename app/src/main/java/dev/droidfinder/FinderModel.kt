@@ -1899,6 +1899,24 @@ constructor(
             reconnectChoice = ReconnectChoice(original, uri.toString())
             return
         }
+        if (uri.authority == "${getApplication<Application>().packageName}.documents") {
+            viewModelScope.launch {
+                runCatching {
+                    withContext(Dispatchers.IO) {
+                        getApplication<FinderApplication>()
+                            .workspaceDocuments
+                            .ids
+                            .file(android.provider.DocumentsContract.getTreeDocumentId(uri))
+                    }
+                }
+                    .onSuccess {
+                        navigate(it.path)
+                        message = "This folder is already available in Workspace"
+                    }
+                    .onFailure { message = "That Workspace folder is no longer available." }
+            }
+            return
+        }
         viewModelScope.launch {
             runCatching { withContext(Dispatchers.IO) { documents.connect(uri, persist) } }
                 .onSuccess {
@@ -2205,6 +2223,7 @@ constructor(
 
     private fun relocateMetadataPaths(names: List<Pair<String, String>>) {
         if (names.isEmpty()) return
+        getApplication<FinderApplication>().workspaceDocuments.relocated(names)
         val tagRoutes = names.filter {
             it.first.startsWith("@tag:") && it.second.startsWith("@tag:")
         }
@@ -2257,6 +2276,30 @@ constructor(
                 pane.applyFolderView(resolvedView)
             pane.persistTabs()
         }
+    }
+
+    internal val workspaceInPicker
+        get() = session.workspaceInPicker.value
+
+    internal fun toggleWorkspacePicker() {
+        val enabled = !workspaceInPicker
+        getApplication<FinderApplication>().workspaceDocuments.setEnabled(enabled)
+        session.workspaceInPicker.value = enabled
+    }
+
+    internal fun externalWorkspaceChanged(routes: List<Pair<String, String>>) {
+        if (routes.isNotEmpty()) {
+            fun local(path: String): String {
+                if (isDocumentPath(path) || path.startsWith("@")) return path
+                val canonical = File(path).canonicalFile.toPath()
+                val root = workspace.canonicalFile.toPath()
+                return if (canonical.startsWith(root))
+                    workspace.toPath().resolve(root.relativize(canonical)).toString()
+                else path
+            }
+            relocateMetadataPaths(routes.map { local(it.first) to local(it.second) })
+        }
+        session.panes.forEach { it.refresh() }
     }
 
     private fun copyTags(old: String, new: String) {
@@ -2599,10 +2642,18 @@ constructor(
         destination: String? = folderPath,
         clearOriginSelection: Boolean = true,
         onFinished: suspend (Exception?) -> Unit = {},
+        onRejected: () -> Unit = {},
+        onStarted: (TransferControl) -> Unit = {},
         work: suspend () -> String,
     ) {
         if (busy != null) {
             message = "Another file operation is in progress."
+            onRejected()
+            return
+        }
+        if (!WorkspaceMutationGate.beginApp()) {
+            message = "Another app is changing Workspace. Try again shortly."
+            onRejected()
             return
         }
         val originTab = tabs[activeTab].id
@@ -2634,6 +2685,7 @@ constructor(
                 TransferRuntime.report(getApplication(), progress)
             }
         }
+        onStarted(transferControl)
         TransferRuntime.scope.launch {
             val marker = File(getApplication<Application>().filesDir, "active-transfer.txt")
             var failure: Exception? = null
@@ -2655,22 +2707,29 @@ constructor(
                 message = error.message ?: "Couldn't complete the operation."
             } finally {
                 try {
-                    onFinished(failure)
+                    try {
+                        onFinished(failure)
+                    } catch (error: Exception) {
+                        message = "Transfer history: ${error.message}"
+                    }
+                    marker.delete()
+                    TransferRuntime.finish(getApplication())
+                    if (
+                        clearOriginSelection &&
+                            tabs[activeTab].id == originTab &&
+                            location == originLocation &&
+                            selected == originSelection
+                    )
+                        clearSelection()
+                    syncHistory()
+                    session.panes.forEach { it.refresh() }
                 } catch (error: Exception) {
-                    message = "Transfer history: ${error.message}"
+                    message = "Files were kept, but operation cleanup failed: ${error.message}"
+                } finally {
+                    busy = null
+                    WorkspaceMutationGate.endApp()
+                    getApplication<FinderApplication>().workspaceDocuments.changed()
                 }
-                marker.delete()
-                TransferRuntime.finish(getApplication())
-                if (
-                    clearOriginSelection &&
-                        tabs[activeTab].id == originTab &&
-                        location == originLocation &&
-                        selected == originSelection
-                )
-                    clearSelection()
-                syncHistory()
-                session.panes.forEach { it.refresh() }
-                busy = null
                 startNextTransfer()
             }
         }
@@ -2873,6 +2932,119 @@ constructor(
         clipboard = ClipboardFiles(actionEntries.map { it.path }, cut)
         message =
             "${selected.size} item${if (selected.size == 1) "" else "s"} ready to ${if (cut) "move" else "copy"}"
+    }
+
+    internal fun saveIncoming(
+        items: List<IncomingItem>,
+        parent: String,
+        text: String?,
+        onStarted: (TransferControl) -> Unit,
+        onComplete: (IncomingSaveResult) -> Unit,
+    ) {
+        val saved = mutableListOf<String>()
+        val errors = mutableListOf<Pair<Int, String>>()
+        val reject = {
+            onComplete(
+                IncomingSaveResult(
+                    emptyList(),
+                    items.map {
+                        it.id to "Another file operation is in progress. Try again shortly."
+                    },
+                ),
+            )
+        }
+        operation(
+            "Saving shared files…",
+            destination = parent,
+            clearOriginSelection = false,
+            onRejected = reject,
+            onStarted = onStarted,
+            onFinished = { failure ->
+                if (failure != null && errors.isEmpty())
+                    errors +=
+                        items
+                            .filter { index -> saved.size <= items.indexOf(index) }
+                            .map { it.id to (failure.message ?: "Save interrupted") }
+                onComplete(
+                    IncomingSaveResult(saved.toList(), errors.toList(), transferControl.cancelled),
+                )
+            },
+        ) {
+            val steps = mutableListOf<FileStep>()
+            try {
+                withContext(Dispatchers.IO) {
+                    check(allowedPath(parent)) { "This destination needs storage access." }
+                    check(documents.read(parent).let { it.folder && it.writable }) {
+                        "Choose a writable folder."
+                    }
+                }
+                for ((position, item) in items.withIndex()) {
+                    try {
+                        val target =
+                            withContext(Dispatchers.IO) {
+                                transferControl.check()
+                                transferControl.item(item.name)
+                                transferControl.phase(
+                                    "Saving ${position + 1} of ${items.size}",
+                                    item.bytes,
+                                )
+                                val name = validateFilename(item.name)
+                                require(!name.startsWith(".droidfinder-")) {
+                                    "Reserved working-file name"
+                                }
+                                val desired =
+                                    if (isDocumentPath(parent)) documents.uniqueName(parent, name)
+                                    else engine.uniqueFile(File(parent), name).name
+                                val staging =
+                                    documents.create(
+                                        parent,
+                                        ".droidfinder-${java.util.UUID.randomUUID()}",
+                                        false,
+                                        item.mime,
+                                    )
+                                try {
+                                    val readControl = ListingControl()
+                                    transferControl.guard(
+                                        java.io.Closeable { readControl.cancel() },
+                                    ) {
+                                        val input =
+                                            if (item.uri == null)
+                                                (text ?: error("Shared text is missing"))
+                                                    .byteInputStream(Charsets.UTF_8)
+                                            else documents.input(item.uri.toString(), readControl)
+                                        input.use { source ->
+                                            documents.output(staging).use {
+                                                transferControl.copy(source, it)
+                                            }
+                                        }
+                                    }
+                                    transferControl.check()
+                                    documents.rename(staging, desired)
+                                } catch (error: Exception) {
+                                    runCatching { documents.delete(staging) }
+                                    throw error
+                                }
+                            }
+                        saved += target
+                        steps += withContext(Dispatchers.IO) { documents.createdStep(target) }
+                    } catch (error: Exception) {
+                        if (
+                            transferControl.cancelled ||
+                                error is java.util.concurrent.CancellationException ||
+                                error is kotlinx.coroutines.CancellationException
+                        ) {
+                            errors +=
+                                items.drop(position).map { it.id to "Not saved: operation stopped" }
+                            throw error
+                        }
+                        errors += item.id to (error.message ?: "Couldn't save this file")
+                    }
+                }
+            } finally {
+                rememberOperation("Save shared files", steps)
+            }
+            "${saved.size} saved${if (errors.isNotEmpty()) ", ${errors.size} couldn't be saved" else ""}"
+        }
     }
 
     fun importUris(uris: List<Uri>, parent: File, onComplete: () -> Unit = {}) {
@@ -3354,6 +3526,12 @@ constructor(
         val items = actionEntries
         if (items.isEmpty()) return
         operation("Moving to Trash…") {
+            withContext(Dispatchers.IO) {
+                getApplication<FinderApplication>()
+                    .workspaceDocuments
+                    .ids
+                    .forget(items.map { it.path })
+            }
             val steps = mutableListOf<FileStep>()
             try {
                 for (item in items) {
@@ -3400,6 +3578,12 @@ constructor(
         val items = actionEntries
         if (items.isEmpty()) return
         operation("Deleting permanently…") {
+            withContext(Dispatchers.IO) {
+                getApplication<FinderApplication>()
+                    .workspaceDocuments
+                    .ids
+                    .forget(items.map { it.path })
+            }
             var attempted = false
             try {
                 withContext(Dispatchers.IO) {

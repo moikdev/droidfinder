@@ -23,11 +23,14 @@ class FinderSession(
 
     val deviceRoot: File = Environment.getExternalStorageDirectory()
 
-    val engine = FileEngine(app.filesDir)
+    val engine = (app as? FinderApplication)?.localEngine ?: FileEngine(app.filesDir)
 
     val documents = DocumentAccess(app, engine)
 
     internal val storage = StorageMonitor(app, workspace, deviceRoot, documents)
+
+    internal val workspaceInPicker =
+        mutableStateOf((app as? FinderApplication)?.workspaceDocuments?.enabled ?: true)
 
     val connectedLocations = mutableStateOf(documents.locations)
 
