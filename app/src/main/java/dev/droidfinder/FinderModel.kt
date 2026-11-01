@@ -1893,6 +1893,42 @@ constructor(
     internal val storage
         get() = session.storage
 
+    private val analysisSourceState = lazy { DocumentAnalysisSource(documents, ::allowedPath) }
+    internal val analysisSource
+        get() = analysisSourceState.value
+
+    private val analysisState = lazy {
+        AnalysisController(getApplication(), viewModelScope, analysisSource)
+    }
+    internal val analysis
+        get() = analysisState.value
+
+    private val checksumState = lazy { ChecksumController(viewModelScope, analysisSource) }
+    internal val checksums
+        get() = checksumState.value
+
+    internal fun stopAnalysisForBackground() {
+        if (analysisState.isInitialized() && analysis.running) analysis.stop()
+        if (checksumState.isInitialized() && checksums.running) checksums.stop()
+    }
+
+    internal fun revealAnalyzed(node: AnalysisNode) {
+        analysis.close()
+        checksums.close()
+        if (node.folder) goTo(node.path)
+        else
+            documents.parent(node.path)?.takeIf(::allowedPath)?.let { parent ->
+                navigate(parent)
+                viewModelScope.launch {
+                    listingJob?.join()
+                    if (location == parent) {
+                        selected = setOf(node.path)
+                        leadSelection = node.path
+                    }
+                }
+            }
+    }
+
     fun connectLocation(uri: Uri, persist: Boolean = true, replacing: String? = null) {
         val original = replacing?.let { old -> connectedLocations.firstOrNull { it.uri == old } }
         if (original != null && !documents.sameTree(original.grant, uri.toString())) {
@@ -2892,6 +2928,180 @@ constructor(
         }
     }
 
+    internal fun saveChecksum(sum: FileChecksum, name: String) {
+        val parent =
+            documents.parent(sum.node.path)
+                ?: run {
+                    checksums.error = "Open the containing folder before saving a checksum file."
+                    return
+                }
+        operation(
+            "Saving checksum…",
+            destination = parent,
+            clearOriginSelection = false,
+            onFinished = { failure -> if (failure != null) checksums.error = failure.message },
+        ) {
+            val path =
+                withContext(Dispatchers.IO) {
+                    require(!name.startsWith(".droidfinder-")) {
+                        "That name is reserved for working files."
+                    }
+                    check(allowedPath(parent)) { "This destination needs storage access." }
+                    val control = ListingControl()
+                    transferControl.guard(java.io.Closeable { control.cancel() }) {
+                        check(
+                            analysisSource.read(sum.node.path, control).revision ==
+                                sum.node.revision,
+                        ) {
+                            "The source changed. Calculate its checksum again."
+                        }
+                    }
+                    val desired = documents.uniqueName(parent, validateFilename(name))
+                    val staging =
+                        documents.create(
+                            parent,
+                            ".droidfinder-${java.util.UUID.randomUUID()}",
+                            false,
+                            "text/plain",
+                        )
+                    try {
+                        documents.output(staging).use { output ->
+                            checksumLine(sum).byteInputStream().use {
+                                transferControl.copy(it, output)
+                            }
+                        }
+                        transferControl.check()
+                        documents.rename(staging, desired)
+                    } catch (e: Exception) {
+                        runCatching { documents.delete(staging) }
+                        throw e
+                    }
+                }
+            rememberOperation(
+                "Save checksum",
+                listOf(withContext(Dispatchers.IO) { documents.createdStep(path) }),
+            )
+            checksums.error =
+                "Checksum file saved. Existing files were kept; Undo is available in the explorer."
+            "Checksum saved"
+        }
+    }
+
+    internal fun trashAnalyzed(
+        report: AnalysisReport,
+        chosen: Set<String>,
+        duplicateReport: DuplicateReport?,
+    ) {
+        val files = report.files.filter { it.node.path in chosen }
+        if (files.isEmpty()) return
+        val removed = mutableListOf<String>()
+        val failures = mutableListOf<String>()
+        val groups =
+            duplicateReport
+                ?.groups
+                .orEmpty()
+                .flatMap { g -> g.files.map { it.node.path to g } }
+                .toMap()
+        operation(
+            "Cleaning reviewed files…",
+            destination = report.root.path,
+            clearOriginSelection = false,
+            onFinished = { failure ->
+                if (failure != null) failures += failure.message ?: "Cleanup stopped"
+                analysis.removed(report, removed, failures)
+            },
+        ) {
+            val steps = mutableListOf<FileStep>()
+            try {
+                for (file in files) {
+                    transferControl.check()
+                    transferControl.item(file.relative)
+                    try {
+                        val step =
+                            withContext(Dispatchers.IO) {
+                                val control = ListingControl()
+                                transferControl.guard(java.io.Closeable { control.cancel() }) {
+                                    val current = analysisSource.read(file.node.path, control)
+                                    val root = analysisSource.read(report.root.path, control)
+                                    check(
+                                        root.objectId == report.root.objectId &&
+                                            root.folder &&
+                                            !root.link,
+                                    ) {
+                                        "The analyzed folder changed. Refresh before cleanup."
+                                    }
+                                    check(
+                                        current.revision == file.node.revision &&
+                                            current.canDelete &&
+                                            !current.folder &&
+                                            !current.link,
+                                    ) {
+                                        "File changed or cannot be moved to Trash. Refresh and review it again."
+                                    }
+                                    file.node.observedHash?.let { expected ->
+                                        check(
+                                            fileChecksum(
+                                                    analysisSource,
+                                                    current,
+                                                    ChecksumAlgorithm.SHA256,
+                                                    control,
+                                                )
+                                                .hex == expected,
+                                        ) {
+                                            "Previously read contents changed. Refresh before cleanup."
+                                        }
+                                    }
+                                    groups[file.node.path]?.let { group ->
+                                        val kept =
+                                            group.files.firstOrNull { it.node.path !in chosen }
+                                                ?: error(
+                                                    "Keep at least one file from every duplicate group.",
+                                                )
+                                        transferControl.phase("Rechecking duplicate contents")
+                                        check(
+                                            fileChecksum(
+                                                    analysisSource,
+                                                    current,
+                                                    ChecksumAlgorithm.SHA256,
+                                                    control,
+                                                )
+                                                .hex == group.hash &&
+                                                fileChecksum(
+                                                        analysisSource,
+                                                        kept.node,
+                                                        ChecksumAlgorithm.SHA256,
+                                                        control,
+                                                    )
+                                                    .hex == group.hash,
+                                        ) {
+                                            "Duplicate contents changed. Refresh before cleaning up."
+                                        }
+                                    }
+                                    val entry = documents.read(current.path, control)
+                                    getApplication<FinderApplication>()
+                                        .workspaceDocuments
+                                        .ids
+                                        .forget(listOf(current.path))
+                                    documents.trashedStep(
+                                        entry,
+                                        documents.trash(current.path, transferControl),
+                                    )
+                                }
+                            }
+                        steps += step
+                        removed += file.node.path
+                    } catch (e: Exception) {
+                        if (transferControl.cancelled) throw e
+                        failures += "${file.node.name}: ${e.message ?: "Not removed"}"
+                    }
+                }
+            } finally {
+                rememberOperation("Analysis cleanup", steps)
+            }
+            "${removed.size} moved to Trash; ${failures.size} skipped"
+        }
+    }
+
     fun rename(name: String) {
         val item = focused ?: return
         if (name == item.name) return
@@ -3725,6 +3935,8 @@ constructor(
     }
 
     override fun onCleared() {
+        if (analysisState.isInitialized()) analysis.close()
+        if (checksumState.isInitialized()) checksums.close()
         listingControl?.cancel()
         listingJob?.cancel()
         viewportReaders.clear()

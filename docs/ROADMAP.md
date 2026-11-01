@@ -50,8 +50,8 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [x] Honor Android protected directories; no claim of unrestricted private-app access (0.18.0).
 
 ## 7. Analysis and organization
-- [ ] Space analysis by folder/category, large/old/duplicate/empty-file discovery with review before cleanup.
-- [ ] Trash/cache size and retention, checksum generation/verification.
+- [x] Space analysis by folder/category, large/old/duplicate/empty-file discovery with review before cleanup (0.20.0). Logical-size snapshots, full-content duplicate checks, provider unknown sizes, limits/partial states and recoverable review/Undo are implemented; persistent indexing, cross-root duplicate scopes and device performance matrices remain separate open work.
+- [ ] Trash/cache size and retention, checksum generation/verification. Complete-file checksum generation/comparison and staged sidecar saving with Undo are implemented in 0.20.0; Trash/cache sizing and retention remain open.
 - [ ] Rich batch rename/templates/metadata, virtual collections and improved tag editing/search/export.
 - [ ] Reusable operation presets and previewable organization rules.
 

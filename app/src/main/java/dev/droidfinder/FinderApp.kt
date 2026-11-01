@@ -122,6 +122,8 @@ fun FinderApp(
             var peekMultipleSelection by workspaceModel.windowState.peekMultipleSelection
             var menu by remember { mutableStateOf(false) }
             var cursorMenu by remember { mutableStateOf<FinderContextRequest?>(null) }
+            if (model.analysis.visible) FileAnalysisDialog(model)
+            if (model.checksums.visible) FileChecksumDialog(model)
             LaunchedEffect(model.storageRequested) {
                 if (model.storageRequested) {
                     dialog = "storage"
@@ -278,6 +280,12 @@ fun FinderApp(
                     "storage" -> {
                         model.storageRequested = true
                     }
+                    "analysis" ->
+                        (model.focused?.takeIf { it.folder }?.path ?: model.folderPath)?.let {
+                            model.analysis.open(it)
+                        }
+                    "checksums" ->
+                        model.focused?.takeIf { !it.folder }?.let { model.checksums.open(it.path) }
                     "appearance" -> dialog = "appearance"
                     "shortcut" -> model.makeShortcut()
                     "sidebar" -> model.toggleSidebar()
@@ -1406,6 +1414,8 @@ internal fun ActionMenu(
                     MenuAction("Open with app", Icons.AutoMirrored.Outlined.OpenInNew) {
                         action("external")
                     }
+                if (!entries.first().folder)
+                    MenuAction("Checksums…", Icons.Outlined.Fingerprint) { action("checksums") }
                 if (entries.first().folder)
                     MenuAction("Open in new tab", Icons.Outlined.Tab) { action("tab") }
                 MenuAction("Get info", Icons.Outlined.Info) { action("info") }
@@ -1520,6 +1530,13 @@ internal fun ActionMenu(
             MenuAction("Rename Smart Folder…", Icons.Outlined.DriveFileRenameOutline) {
                 action("renameSmart")
             }
+        MenuAction(
+            "Analyze storage…",
+            Icons.Outlined.DataUsage,
+            model.folderPath != null || entries.singleOrNull()?.folder == true,
+        ) {
+            action("analysis")
+        }
         MenuAction("Storage locations…", Icons.Outlined.Storage) { action("storage") }
         MenuAction("Preferences…", Icons.Outlined.Tune) { action("settings") }
         MenuAction("Connect provider folder…", Icons.Outlined.CloudQueue) {
