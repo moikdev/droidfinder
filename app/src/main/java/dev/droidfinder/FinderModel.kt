@@ -1907,9 +1907,16 @@ constructor(
     internal val checksums
         get() = checksumState.value
 
+    private val housekeepingState = lazy {
+        HousekeepingController(getApplication(), viewModelScope, engine)
+    }
+    internal val housekeeping
+        get() = housekeepingState.value
+
     internal fun stopAnalysisForBackground() {
         if (analysisState.isInitialized() && analysis.running) analysis.stop()
         if (checksumState.isInitialized() && checksums.running) checksums.stop()
+        if (housekeepingState.isInitialized() && housekeeping.running) housekeeping.stop()
     }
 
     internal fun revealAnalyzed(node: AnalysisNode) {
@@ -3827,6 +3834,73 @@ constructor(
         }
     }
 
+    internal fun cleanHousekeeping(trash: List<TrashSpaceItem>, cache: List<CacheSpaceItem>) {
+        if (trash.isEmpty() && cache.isEmpty()) return
+        require(trash.isEmpty() || cache.isEmpty()) { "Review Trash and cache separately." }
+        operation(
+            if (trash.isNotEmpty()) "Removing reviewed Trash…" else "Clearing reviewed cache…",
+            clearOriginSelection = false,
+            onStarted = { housekeeping.outcome = null },
+            onFinished = { failure ->
+                if (failure != null)
+                    housekeeping.outcome =
+                        listOfNotNull(
+                                housekeeping.outcome,
+                                "Cleanup stopped. Reviewed folders may be partly removed; completed deletions cannot be undone.",
+                                failure.message,
+                            )
+                            .joinToString("\n")
+                if (housekeeping.visible) housekeeping.refresh()
+            },
+        ) {
+            var removed = 0
+            var attemptedTrash = false
+            val skipped = mutableListOf<String>()
+            try {
+                withContext(Dispatchers.IO) {
+                    for (item in trash.distinctBy { it.file.path }) {
+                        transferControl.check()
+                        transferControl.item(item.file.name)
+                        try {
+                            attemptedTrash = true
+                            if (engine.deleteReviewedTrash(item, transferControl::check)) removed++
+                            else skipped += "${item.file.name}: changed or incomplete; kept."
+                        } catch (error: Exception) {
+                            if (error is java.util.concurrent.CancellationException) throw error
+                            skipped += "${item.file.name}: ${error.message}"
+                        }
+                    }
+                    for (item in cache.distinctBy { it.file.path }) {
+                        transferControl.check()
+                        transferControl.item(item.file.name)
+                        try {
+                            if (
+                                housekeeping.cache.remove(
+                                    item,
+                                    System.currentTimeMillis(),
+                                    transferControl::check,
+                                )
+                            )
+                                removed++
+                            else
+                                skipped +=
+                                    "${item.displayName}: changed, recently shared or in use; kept."
+                        } catch (error: Exception) {
+                            if (error is java.util.concurrent.CancellationException) throw error
+                            skipped += "${item.displayName}: ${error.message}"
+                        }
+                    }
+                }
+            } finally {
+                if (attemptedTrash) history.clear()
+                housekeeping.outcome =
+                    "$removed removed · ${skipped.size} skipped" +
+                        if (skipped.isNotEmpty()) "\n" + skipped.take(4).joinToString("\n") else ""
+            }
+            housekeeping.outcome ?: "Cleanup finished"
+        }
+    }
+
     fun compress(name: String? = null, level: Int = -1) {
         compressTo(folderPath ?: workspace.absolutePath, name, level)
     }
@@ -3937,6 +4011,7 @@ constructor(
     override fun onCleared() {
         if (analysisState.isInitialized()) analysis.close()
         if (checksumState.isInitialized()) checksums.close()
+        if (housekeepingState.isInitialized()) housekeeping.close()
         listingControl?.cancel()
         listingJob?.cancel()
         viewportReaders.clear()

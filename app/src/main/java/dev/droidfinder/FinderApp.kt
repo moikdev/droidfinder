@@ -124,6 +124,7 @@ fun FinderApp(
             var cursorMenu by remember { mutableStateOf<FinderContextRequest?>(null) }
             if (model.analysis.visible) FileAnalysisDialog(model)
             if (model.checksums.visible) FileChecksumDialog(model)
+            if (model.housekeeping.visible) HousekeepingDialog(model)
             LaunchedEffect(model.storageRequested) {
                 if (model.storageRequested) {
                     dialog = "storage"
@@ -276,6 +277,7 @@ fun FinderApp(
                     "saveSearch" -> dialog = "saveSearch"
                     "renameSmart" -> dialog = "renameSmart"
                     "settings" -> dialog = "settings"
+                    "housekeeping" -> model.housekeeping.open()
                     "connectFolder" -> onConnectFolder()
                     "storage" -> {
                         model.storageRequested = true
@@ -1538,6 +1540,7 @@ internal fun ActionMenu(
             action("analysis")
         }
         MenuAction("Storage locations…", Icons.Outlined.Storage) { action("storage") }
+        MenuAction("Trash & cache…", Icons.Outlined.CleaningServices) { action("housekeeping") }
         MenuAction("Preferences…", Icons.Outlined.Tune) { action("settings") }
         MenuAction("Connect provider folder…", Icons.Outlined.CloudQueue) {
             action("connectFolder")

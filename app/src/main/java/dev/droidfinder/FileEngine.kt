@@ -229,6 +229,7 @@ class FileEngine(
         val bucket = File(trashDir, id).apply { check(mkdir()) }
         // Persist recovery information before touching the source.
         index.setProperty(id, source.absolutePath)
+        index.setProperty("$id.trashedAt", System.currentTimeMillis().toString())
         saveIndex()
         try {
             return copy(
@@ -242,6 +243,7 @@ class FileEngine(
             if (bucket.listFiles().isNullOrEmpty()) {
                 bucket.delete()
                 index.remove(id)
+                index.remove("$id.trashedAt")
                 saveIndex()
             }
             throw error
@@ -250,7 +252,49 @@ class FileEngine(
 
     @Synchronized
     fun trashItems(): List<File> =
-        trashDir.listFiles()?.flatMap { it.listFiles()?.toList().orEmpty() }.orEmpty()
+        trashDir
+            .listFiles()
+            ?.filter { !Files.isSymbolicLink(it.toPath()) && it.isDirectory }
+            ?.flatMap { it.listFiles()?.toList().orEmpty() }
+            .orEmpty()
+
+    @Synchronized
+    fun trashedAt(item: File): Long? =
+        index.getProperty("${item.parentFile?.name}.trashedAt")?.toLongOrNull()?.takeIf { it > 0 }
+
+    @Synchronized
+    internal fun trashInventory(check: () -> Unit): Pair<List<File>, List<String>> {
+        val items = mutableListOf<File>()
+        val issues = mutableListOf<String>()
+        Files.newDirectoryStream(trashDir.toPath()).use { buckets ->
+            for (bucket in buckets) {
+                check()
+                if (
+                    Files.isSymbolicLink(bucket) ||
+                        !Files.isDirectory(bucket, java.nio.file.LinkOption.NOFOLLOW_LINKS)
+                ) {
+                    issues += "An unsupported Trash bucket was excluded."
+                    continue
+                }
+                try {
+                    Files.newDirectoryStream(bucket).use { children ->
+                        for (child in children) {
+                            check()
+                            if (items.size == 10_000) {
+                                issues +=
+                                    "Trash inventory limited to 10,000 items; refresh after cleaning."
+                                return items to issues
+                            }
+                            items += child.toFile()
+                        }
+                    }
+                } catch (error: IOException) {
+                    issues += "A Trash bucket could not be read: ${error.message}"
+                }
+            }
+        }
+        return items to issues
+    }
 
     fun originalPath(item: File): String? = index.getProperty(item.parentFile?.name)
 
@@ -306,6 +350,25 @@ class FileEngine(
 
     @Synchronized
     fun deleteForever(item: File) {
+        deleteTrashControlled(item)
+    }
+
+    @Synchronized
+    internal fun deleteReviewedTrash(item: TrashSpaceItem, check: () -> Unit): Boolean {
+        check()
+        if (
+            !item.disk.complete ||
+                trashedAt(item.file) != item.trashedAt ||
+                originalPath(item.file) != item.original
+        )
+            return false
+        val fresh = inspectDisk(item.file, check)
+        if (!fresh.complete || fresh.revision != item.disk.revision) return false
+        deleteTrashControlled(item.file, check)
+        return true
+    }
+
+    private fun deleteTrashControlled(item: File, check: () -> Unit = {}) {
         check(item.parentFile?.canonicalFile?.parentFile == trashDir.canonicalFile) {
             "Only items in Trash can be permanently deleted."
         }
@@ -314,11 +377,13 @@ class FileEngine(
             item.toPath(),
             object : SimpleFileVisitor<Path>() {
                 override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
+                    check()
                     Files.delete(file)
                     return FileVisitResult.CONTINUE
                 }
 
                 override fun postVisitDirectory(dir: Path, error: IOException?): FileVisitResult {
+                    check()
                     if (error != null) throw error
                     Files.delete(dir)
                     return FileVisitResult.CONTINUE

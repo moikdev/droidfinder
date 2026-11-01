@@ -151,6 +151,15 @@ See [supported behavior and limits](docs/ANDROID-INTEGRATION.md); other-app edit
 - [x] Full SHA-256 duplicate checks, including unknown provider sizes and hard-link exclusion, with configurable read limits.
 - [x] Reviewed recoverable cleanup, changed-file/keep-one guards, partial outcomes and session Undo.
 - [x] Complete-file checksums, expected-value comparison, copied digests and staged GNU-style checksum sidecars.
-- [ ] Persistent indexes, multi-root duplicate discovery, measured hardware performance and Trash/cache retention.
+- [ ] Persistent indexes, multi-root duplicate discovery and measured hardware performance.
 
-See [behavior, limits and verification](docs/ANALYSIS.md).
+See [analysis behavior, limits and verification](docs/ANALYSIS.md).
+
+## Housekeeping pass
+
+- [x] Persisted Trash dates, bounded logical-size inventories and reviewed age-based selection.
+- [x] Changed-item guards, explicit permanent-deletion confirmation and partial outcomes.
+- [x] Known disposable-cache categories, native reader/writer leases, shared-file grace and reviewed cleanup.
+- [x] Separate thumbnail-memory controls and retained panel/threshold preferences.
+
+See [housekeeping behavior, limits and verification](docs/HOUSEKEEPING.md). Retention is reviewed; it does not automatically delete files.

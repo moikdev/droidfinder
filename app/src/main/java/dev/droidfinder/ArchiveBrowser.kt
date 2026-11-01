@@ -42,6 +42,7 @@ fun ArchiveBrowserDialog(
     onOpenWith: () -> Unit,
     onMemberOpenWith: (Entry) -> Unit,
 ) {
+    ProtectPreviewCache(entry)
     val context = LocalContext.current
     val store = remember { ZipLimitsStore(context) }
     val identity = listOf(entry.path, entry.modified, entry.size, entry.name)

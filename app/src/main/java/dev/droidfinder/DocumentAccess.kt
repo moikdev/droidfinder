@@ -441,47 +441,56 @@ class DocumentAccess(
 
     private fun materialize(entry: Entry, limit: Long, control: ListingControl?): File =
         withDocumentPreviewLock(entry.path, control) {
-            control?.check()
-            if (entry.documentUri == null) return@withDocumentPreviewLock entry.file
-            check(!entry.folder)
-            if (entry.size > limit)
-                throw PreviewSizeLimitException(
-                    "This file is too large for the preview cache (128 MB limit).",
-                )
-            val file = entry.file
-            if (file.isFile && file.length() == entry.size && file.lastModified() >= entry.modified)
-                return@withDocumentPreviewLock file
-            file.parentFile!!.mkdirs()
-            val staging = File(file.parentFile, "preview.tmp")
-            try {
-                (control?.let { input(entry.path, it) } ?: input(entry.path)).use { source ->
-                    staging.outputStream().use { output ->
-                        val buffer = ByteArray(64 * 1024)
-                        var bytes = 0L
-                        while (true) {
-                            control?.check()
-                            val n = source.read(buffer)
-                            if (n < 0) break
-                            bytes += n
-                            if (bytes > limit)
-                                throw PreviewSizeLimitException(
-                                    "Preview exceeds the 128 MB cache limit.",
-                                )
-                            output.write(buffer, 0, n)
+            CacheLeases.pin(entry.file).use {
+                control?.check()
+                if (entry.documentUri == null) return@withDocumentPreviewLock entry.file
+                check(!entry.folder)
+                if (entry.size > limit)
+                    throw PreviewSizeLimitException(
+                        "This file is too large for the preview cache (128 MB limit).",
+                    )
+                val file = entry.file
+                if (
+                    file.isFile &&
+                        file.length() == entry.size &&
+                        file.lastModified() >= entry.modified
+                ) {
+                    file.parentFile?.setLastModified(System.currentTimeMillis())
+                    return@withDocumentPreviewLock file
+                }
+                file.parentFile!!.mkdirs()
+                val staging = File(file.parentFile, "preview.tmp")
+                try {
+                    (control?.let { input(entry.path, it) } ?: input(entry.path)).use { source ->
+                        staging.outputStream().use { output ->
+                            val buffer = ByteArray(64 * 1024)
+                            var bytes = 0L
+                            while (true) {
+                                control?.check()
+                                val n = source.read(buffer)
+                                if (n < 0) break
+                                bytes += n
+                                if (bytes > limit)
+                                    throw PreviewSizeLimitException(
+                                        "Preview exceeds the 128 MB cache limit.",
+                                    )
+                                output.write(buffer, 0, n)
+                            }
                         }
                     }
+                    control?.check()
+                    Files.move(
+                        staging.toPath(),
+                        file.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+                    )
+                } catch (error: Exception) {
+                    staging.delete()
+                    throw error
                 }
-                control?.check()
-                Files.move(
-                    staging.toPath(),
-                    file.toPath(),
-                    java.nio.file.StandardCopyOption.REPLACE_EXISTING,
-                )
-            } catch (error: Exception) {
-                staging.delete()
-                throw error
+                file.parentFile?.setLastModified(System.currentTimeMillis())
+                file
             }
-            file
         }
 
     fun input(path: String): InputStream =

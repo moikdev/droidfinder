@@ -34,6 +34,7 @@ import kotlinx.coroutines.flow.*
 
 @Composable
 internal fun ImageQuickLook(entry: Entry, modifier: Modifier = Modifier) {
+    ProtectPreviewCache(entry)
     val context = LocalContext.current
     val gateway = remember { DocumentAccess(context.applicationContext) }
     val identity = listOf(entry.path, entry.name, entry.size, entry.modified, entry.mimeType)

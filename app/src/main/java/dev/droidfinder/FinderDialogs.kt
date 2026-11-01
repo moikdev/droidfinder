@@ -615,6 +615,14 @@ fun PreferencesDialog(model: FinderModel, dismiss: () -> Unit) {
                         }
                     }
                 Text("Views", fontWeight = FontWeight.SemiBold)
+                TextButton(
+                    onClick = {
+                        model.housekeeping.open()
+                        dismiss()
+                    },
+                ) {
+                    Text("Trash & cache…")
+                }
                 Text(
                     if (model.folderRemembered) "Changes apply to this remembered folder"
                     else "Changes update defaults for this pane",

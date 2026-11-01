@@ -171,6 +171,7 @@ internal class PdfReadingStore(context: Context) {
  */
 internal class PdfReadingSession(private val context: Context, private val entry: Entry) :
     Closeable {
+    private val scratchLease = CacheLeases.pin(File(context.cacheDir, "pdf-scratch"))
     private val closed = AtomicBoolean(false)
     private val renderLock = Mutex()
     private val textLock = Mutex()
@@ -490,9 +491,13 @@ internal class PdfReadingSession(private val context: Context, private val entry
         }
         cleanup.launch {
             textLock.withLock {
-                runCatching { document?.close() }
-                document = null
-                texts.clear()
+                try {
+                    runCatching { document?.close() }
+                    document = null
+                    texts.clear()
+                } finally {
+                    scratchLease.close()
+                }
             }
         }
     }

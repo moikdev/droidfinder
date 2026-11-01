@@ -38,7 +38,7 @@ Expected values can be plain hexadecimal, colon-separated hex, an algorithm-pref
 - Stop marks the request immediately, signals supported provider cancellation and closes streams. A provider already blocked inside a Binder/cursor operation can take time to return. Late results cannot replace a newer scope. Stopped scans retain completed rows; stopped checksums publish no digest.
 - Read jobs stop when their explorer window is backgrounded. Activity recreation retains the in-memory view/results/selection; backgrounding does not automatically restart reads or cleanup. Reopening analysis refreshes its snapshot. This is not a persistent index or a resumable background-analysis queue.
 
-Full-device/indexed paging, measured large-catalog memory/performance across tablets, duplicate checking across multiple disjoint roots, Trash/cache retention, and other unchecked work remain in the [roadmap](ROADMAP.md). Phone-specific layouts remain deferred.
+Full-device/indexed paging, measured large-catalog memory/performance across tablets, duplicate checking across multiple disjoint roots and other unchecked work remain in the [roadmap](ROADMAP.md). Phone-specific layouts remain deferred. Reviewed Trash/cache housekeeping was added separately in [0.21.0](HOUSEKEEPING.md).
 
 ## Local validation
 
