@@ -668,7 +668,9 @@ fun FinderApp(
                     snackbar,
                     Modifier.align(Alignment.BottomCenter)
                         .padding(bottom = if (model.busy != null) 100.dp else 58.dp),
-                )
+                ) { data ->
+                    FinderFeedback(data)
+                }
                 DragFeedback(
                     dragController,
                     Modifier.align(Alignment.BottomCenter).padding(bottom = 60.dp),
@@ -1530,7 +1532,11 @@ internal fun ActionMenu(
                             Modifier.size(15.dp)
                                 .background(tagColor(model.tagColorName(tag)), CircleShape),
                         ) {
-                            if (entries.all { tag in model.tagAssignments[it.path].orEmpty() })
+                            if (
+                                entries.all {
+                                    tag in model.tagAssignments[it.organizationPath].orEmpty()
+                                }
+                            )
                                 Icon(
                                     Icons.Outlined.Check,
                                     "Tag $tag",

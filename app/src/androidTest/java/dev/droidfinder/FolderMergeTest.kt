@@ -381,18 +381,18 @@ class FolderMergeTest {
         metadata = { routes, move -> tags.relocate(routes, copy = !move) }
         run(true, from)
         val destination = File(target, "Shared/New.txt").path
-        assertEquals(setOf("Blue"), tags.assignments[destination])
-        assertNull(tags.assignments[sourceChild])
+        assertEquals(setOf("Blue"), tags.assignments[organizationKey(destination)])
+        assertNull(tags.assignments[organizationKey(sourceChild)])
         assertTrue(tags.assignments.keys.any { it.contains("/Trash/") })
         tags.relocate(history.undo())
         val restoredRoot = if (provider) provider(source) else source.path
         val restored =
             docs.list(docs.list(restoredRoot).single().path).first { it.name == "New.txt" }.path
-        assertEquals(setOf("Blue"), tags.assignments[restored])
+        assertEquals(setOf("Blue"), tags.assignments[organizationKey(restored)])
         assertFalse(tags.assignments.keys.any { it.contains("/Trash/") })
         tags.relocate(history.redo())
-        assertNull(tags.assignments[restored])
-        assertEquals(setOf("Blue"), tags.assignments[destination])
+        assertNull(tags.assignments[organizationKey(restored)])
+        assertEquals(setOf("Blue"), tags.assignments[organizationKey(destination)])
         assertTrue(tags.assignments.keys.any { it.contains("/Trash/") })
     }
 

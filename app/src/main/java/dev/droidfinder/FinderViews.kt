@@ -324,7 +324,7 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis,
                                 )
-                                model.tags[item.path]?.let {
+                                model.tags[item.organizationPath]?.let {
                                     Box(
                                         Modifier.padding(end = 10.dp)
                                             .size(6.dp)
@@ -576,7 +576,7 @@ fun IconView(model: FinderModel, open: (Entry) -> Unit) {
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                             )
-                        model.tags[item.path]?.let {
+                        model.tags[item.organizationPath]?.let {
                             Box(
                                 Modifier.padding(top = 4.dp)
                                     .size(5.dp)

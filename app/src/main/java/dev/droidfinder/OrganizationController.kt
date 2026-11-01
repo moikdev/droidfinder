@@ -9,13 +9,22 @@ internal data class OrganizationItem(
     val entry: Entry? = null,
     val node: AnalysisNode? = null,
     val problem: String? = null,
-)
+) {
+    // A provider may resolve the requested URI to a different spelling/ID. Keep the
+    // saved reference key so it can be explicitly relinked to the observed document.
+    val key = if (isDocumentPath(path)) path else entry?.organizationPath ?: organizationKey(path)
+}
 
 /** Pane-owned review state, retained across activity recreation; opening never writes metadata. */
 internal class OrganizationController(
     private val model: FinderModel,
     private val scope: CoroutineScope,
 ) {
+    val repair = ReferenceRepairController(model, scope)
+    val locations = SavedLocationsController(model, scope)
+    val hasReads
+        get() = running || membersLoading || repair.running || locations.running
+
     private var job: Job? = null
     private var token = ListingControl()
     private var generation = 0
@@ -90,7 +99,7 @@ internal class OrganizationController(
 
     fun openExport() {
         val value = model.session.tagStore.snapshot()
-        exportPaths = included.map { it.path }.toSet()
+        exportPaths = included.map { it.key }.toSet()
         exportReview =
             LibraryExport(value, model.workspace.path, exportPaths.takeIf { it.isNotEmpty() })
         exportError = null
@@ -124,7 +133,7 @@ internal class OrganizationController(
 
     private var selectionFresh by mutableStateOf(false)
     val included by derivedStateOf { items.filter { it.path !in excluded } }
-    val changed by derivedStateOf { included.count { before(it.path) != after(it.path) } }
+    val changed by derivedStateOf { included.count { before(it.key) != after(it.key) } }
     val catalogReady
         get() = !applying && snapshot != null && model.libraryError == null
 
@@ -148,7 +157,7 @@ internal class OrganizationController(
         }
         close()
         visible = true
-        frozen = entries.distinctBy { it.path }
+        frozen = entries.distinctBy { it.organizationPath }
         changes = emptyMap()
         clearAll = false
         excluded = emptySet()
@@ -191,7 +200,7 @@ internal class OrganizationController(
                 val rows =
                     withContext(Dispatchers.IO) {
                         frozen.mapIndexed { index, entry ->
-                            val row = read(entry.path, entry.name, control)
+                            val row = readLocation(entry.path, entry.name, control)
                             if (index % 32 == 0)
                                 withContext(Dispatchers.Main.immediate) {
                                     if (id == generation)
@@ -218,10 +227,21 @@ internal class OrganizationController(
         }
     }
 
-    private fun read(path: String, name: String, control: ListingControl): OrganizationItem =
+    internal fun readLocation(
+        path: String,
+        name: String,
+        control: ListingControl,
+    ): OrganizationItem =
         try {
             control.check()
-            check(model.allowedPath(path)) { "Reconnect this location to review it." }
+            check(model.organizationScopeAllowed(path)) { "Reconnect this location to review it." }
+            check(
+                isDocumentPath(path) ||
+                    java.io.File(path).exists() ||
+                    java.nio.file.Files.isSymbolicLink(java.io.File(path).toPath()),
+            ) {
+                "This file or folder is missing. Locate its replacement."
+            }
             val entry = model.documents.read(path, control)
             OrganizationItem(path, entry.name, entry, model.analysisSource.node(entry))
         } catch (e: Exception) {
@@ -248,7 +268,7 @@ internal class OrganizationController(
                     withContext(Dispatchers.IO) {
                         val result = ArrayList<OrganizationItem>()
                         paths.forEachIndexed { index, path ->
-                            result.add(read(path, model.title(path), control))
+                            result.add(readLocation(path, model.title(path), control))
                             if (index % 32 == 0) {
                                 val partial = result.toList()
                                 withContext(Dispatchers.Main.immediate) {
@@ -374,6 +394,8 @@ internal class OrganizationController(
         }
 
     fun stop(showError: Boolean = true) {
+        repair.stop(showError)
+        locations.stop(showError)
         ++generation
         token.cancel()
         job?.cancel()
@@ -390,8 +412,10 @@ internal class OrganizationController(
     }
 
     fun close() {
-        if (applying || exportSaving) return
+        if (applying || exportSaving || repair.applying) return
         stop(false)
+        repair.dismiss()
+        locations.dismiss()
         visible = false
     }
 }

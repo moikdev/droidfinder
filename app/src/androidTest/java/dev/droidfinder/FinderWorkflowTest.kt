@@ -165,7 +165,7 @@ class FinderWorkflowTest {
         assertEquals(
             setOf("Notes.md", "Destination"),
             compose.activity.model.entries
-                .filter { it.path.startsWith(fixture.path) }
+                .filter { pathWithin(it.organizationPath, organizationKey(fixture.path)) }
                 .map { it.name }
                 .toSet(),
         )
@@ -290,5 +290,23 @@ class FinderWorkflowTest {
                 .filter { it.root == fixture.path }
                 .forEach { model.removeSmartFolder(it.id) }
         }
+    }
+
+    @Test
+    fun trashFeedbackActionStillRestoresTheOriginalFile() {
+        val model = compose.activity.model
+        val file = File(fixture, "Notes.md")
+        val before = file.readText()
+        compose.runOnIdle {
+            model.clearSelection()
+            model.select(model.entries.first { it.name == "Notes.md" })
+            model.trash()
+        }
+        compose.waitUntil(10_000) { model.busy == null && !file.exists() }
+        compose
+            .onNode(hasText("Undo") and hasAnyAncestor(hasTestTag("finder-feedback")))
+            .performClick()
+        compose.waitUntil(10_000) { model.busy == null && file.exists() }
+        assertEquals(before, file.readText())
     }
 }

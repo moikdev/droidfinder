@@ -508,7 +508,7 @@ fun Metadata(entry: Entry, model: FinderModel, modifier: Modifier = Modifier) {
                 MetaLine("Size", formatSize(it.bytes))
             }
         }
-        val itemTags = model.tagAssignments[entry.path].orEmpty()
+        val itemTags = model.tagAssignments[entry.organizationPath].orEmpty()
         itemTags.forEach { tag ->
             Row(Modifier.padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Box(

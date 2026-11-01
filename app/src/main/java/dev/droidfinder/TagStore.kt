@@ -49,7 +49,12 @@ class TagStore(private val file: File) {
     }
 
     private val writeLock =
-        locks.computeIfAbsent(file.absoluteFile.toPath().normalize().toString()) { Any() }
+        locks.computeIfAbsent(
+            runCatching { file.canonicalPath }
+                .getOrElse { file.absoluteFile.toPath().normalize().toString() },
+        ) {
+            Any()
+        }
     var definitions: List<FinderTag> = defaultTags
         private set
 
@@ -76,7 +81,9 @@ class TagStore(private val file: File) {
     private fun accept(value: OrganizationSnapshot) {
         definitions = value.tags.definitions.sortedBy { it.name.lowercase(java.util.Locale.ROOT) }
         assignments =
-            value.tags.assignments.mapValues { it.value.toSet() }.filterValues { it.isNotEmpty() }
+            value.tags.assignments
+                .mapValues { it.value.sorted().toSet() }
+                .filterValues { it.isNotEmpty() }
         collections =
             value.collections
                 .sortedBy { it.name.lowercase(java.util.Locale.ROOT) }
@@ -231,7 +238,10 @@ class TagStore(private val file: File) {
         require(keys.all { it in known }) {
             "Unrecognized library fields; the original file was kept."
         }
-        return OrganizationSnapshot(TagSnapshot(tags, values), groups).also(::validate)
+        return normalizedOrganization(
+                OrganizationSnapshot(TagSnapshot(tags, values), groups).also(::validate),
+            )
+            .also(::validate)
     }
 
     private fun publish(value: OrganizationSnapshot) {
@@ -300,7 +310,7 @@ class TagStore(private val file: File) {
         synchronized(writeLock) {
             val current = reload()
             check(error == null) { error!! }
-            val next = edit(current)
+            val next = normalizedOrganization(edit(current))
             if (next != current) publish(next)
         }
 
@@ -342,9 +352,10 @@ class TagStore(private val file: File) {
         require(tag == null || current.tags.definitions.any { it.name == tag }) {
             "That tag no longer exists."
         }
+        val keys = paths.map(::organizationKey).distinct()
         val updated = current.tags.assignments.toMutableMap()
-        val remove = tag != null && paths.isNotEmpty() && paths.all { tag in updated[it].orEmpty() }
-        paths.forEach { path ->
+        val remove = tag != null && keys.isNotEmpty() && keys.all { tag in updated[it].orEmpty() }
+        keys.forEach { path ->
             val value =
                 if (tag == null) emptySet()
                 else if (remove) updated[path].orEmpty() - tag else updated[path].orEmpty() + tag
@@ -459,14 +470,19 @@ class TagStore(private val file: File) {
                     else
                         c.copy(
                             paths =
-                                if (add) (c.paths + paths).distinct() else c.paths - paths.toSet(),
+                                if (add) (c.paths + paths.map(::organizationKey)).distinct()
+                                else c.paths - paths.map(::organizationKey).toSet(),
                         )
                 },
         )
     }
 
-    fun relocate(pairs: List<Pair<String, String>>, copy: Boolean = false) {
-        if (pairs.none { libraryPath(it.first) && libraryPath(it.second) }) return
+    fun relocate(routes: List<Pair<String, String>>, copy: Boolean = false) {
+        val pairs =
+            routes
+                .filter { libraryPath(it.first) && libraryPath(it.second) }
+                .map { organizationKey(it.first) to organizationKey(it.second) }
+        if (pairs.isEmpty()) return
         change { current ->
             val source = current.tags.assignments
             val updated = source.toMutableMap()
@@ -477,7 +493,10 @@ class TagStore(private val file: File) {
             source.forEach { (path, tags) ->
                 val match =
                     pairs.filter { pathWithin(path, it.first) }.maxByOrNull { it.first.length }
-                if (match != null) updated[match.second + path.removePrefix(match.first)] = tags
+                if (match != null) {
+                    val target = match.second + path.removePrefix(match.first)
+                    updated[target] = updated[target].orEmpty() + tags
+                }
             }
             current.copy(
                 tags = current.tags.copy(assignments = updated),
@@ -491,6 +510,25 @@ class TagStore(private val file: File) {
                         },
             )
         }
+    }
+
+    fun verifyOrganization(expected: OrganizationSnapshot) {
+        val actual = reload()
+        check(error == null && actual == expected) {
+            "Organization metadata changed. Refresh the repair review before continuing."
+        }
+    }
+
+    @Synchronized
+    fun restoreOrganization(
+        expected: OrganizationSnapshot,
+        replacement: OrganizationSnapshot,
+    ): OrganizationSnapshot {
+        change {
+            check(it == expected) { "Organization metadata changed. Refresh and review again." }
+            replacement
+        }
+        return snapshot()
     }
 
     fun migrate(legacy: Map<String, String>) {

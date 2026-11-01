@@ -194,7 +194,7 @@ internal class RenameController(private val model: FinderModel, private val scop
                                 progress = "Reading ${index + 1} of ${paths.size}"
                             }
                             runCatching {
-                                capture(entry.path, savedTags[entry.path].orEmpty(), control)
+                                capture(entry.path, savedTags[entry.organizationPath].orEmpty(), control)
                             }
                                 .getOrElse {
                                     if (it is CancellationException) throw it

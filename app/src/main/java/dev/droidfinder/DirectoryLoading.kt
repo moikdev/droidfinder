@@ -251,7 +251,7 @@ internal class DirectoryLoader(
                 eligible &&
                     request.rules.matches(
                         entry,
-                        request.tags[entry.path].orEmpty(),
+                        request.tags[entry.organizationPath].orEmpty(),
                         read = { source.input(it, control) },
                         check = control::check,
                         contentIssue = { issue(entry.path, it) },

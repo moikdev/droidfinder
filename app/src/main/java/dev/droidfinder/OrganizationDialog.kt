@@ -279,6 +279,8 @@ internal fun OrganizationDialog(model: FinderModel) {
     deletion?.let { type -> key(type) { LibraryDeleteReview(model, type) { deletion = null } } }
     detail?.let { item -> ReferenceDetails(model, item) { detail = null } }
     if (state.exportReview != null) LibraryExportDialog(model)
+    if (state.locations.visible) SavedLocationsDialog(model)
+    if (state.repair.visible) ReferenceRepairDialog(model)
 }
 
 @Composable
@@ -570,6 +572,13 @@ private fun TagCatalog(
                 Text("New tag", Modifier.padding(start = 6.dp))
             }
         }
+        TextButton(
+            onClick = { model.organization.locations.open() },
+            enabled = model.busy == null,
+        ) {
+            Icon(Icons.Outlined.Link, null, Modifier.size(17.dp))
+            Text("Saved locations…", Modifier.padding(start = 7.dp), fontSize = 12.sp)
+        }
         Text(
             "${model.tagDefinitions.size} tags · ${model.tagAssignments.size} tagged locations",
             Modifier.padding(vertical = 10.dp),
@@ -685,7 +694,7 @@ private fun SelectionTagChoices(model: FinderModel, modifier: Modifier) {
         LazyColumn(Modifier.weight(1f)) {
             items(catalog, key = { it.name }) { tag ->
                 val change = state.changes[tag.name] ?: TagChange.KEEP
-                val count = state.included.count { tag.name in state.before(it.path) }
+                val count = state.included.count { tag.name in state.before(it.key) }
                 val all = state.included.isNotEmpty() && count == state.included.size
                 val toggle =
                     when (change) {
@@ -798,8 +807,8 @@ private fun SelectionTagRows(
         LazyColumn(Modifier.weight(1f).testTag("organization-tag-preview")) {
             items(rows, key = { it.path }) { item ->
                 val included = item.path !in state.excluded
-                val before = state.before(item.path)
-                val after = state.after(item.path)
+                val before = state.before(item.key)
+                val after = state.after(item.key)
                 Row(
                     Modifier.fillMaxWidth().heightIn(min = 80.dp),
                     verticalAlignment = Alignment.CenterVertically,
@@ -1049,7 +1058,7 @@ private fun LibraryDeleteReview(model: FinderModel, type: String, dismiss: () ->
 }
 
 @Composable
-private fun ReferenceDetails(model: FinderModel, item: OrganizationItem, dismiss: () -> Unit) {
+internal fun ReferenceDetails(model: FinderModel, item: OrganizationItem, dismiss: () -> Unit) {
     val clipboard = LocalClipboardManager.current
     AlertDialog(
         onDismissRequest = dismiss,
@@ -1074,17 +1083,32 @@ private fun ReferenceDetails(model: FinderModel, item: OrganizationItem, dismiss
                     )
                 if (model.organization.page == 2) {
                     Text(
-                        "Current: ${model.organization.before(item.path).sorted().joinToString(", ").ifEmpty { "Untagged" }}",
+                        "Current: ${model.organization.before(item.key).sorted().joinToString(", ").ifEmpty { "Untagged" }}",
                         Modifier.padding(top = 12.dp),
                         color = Muted,
                         fontSize = 12.sp,
                     )
                     Text(
-                        "Result: ${model.organization.after(item.path).sorted().joinToString(", ").ifEmpty { "Untagged" }}",
+                        "Result: ${model.organization.after(item.key).sorted().joinToString(", ").ifEmpty { "Untagged" }}",
                         color = Ink,
                         fontSize = 12.sp,
                     )
                 }
+                if (
+                    model.libraryError == null &&
+                        (item.key in model.tagAssignments ||
+                            model.collections.any { item.key in it.paths })
+                )
+                    TextButton(
+                        onClick = {
+                            model.organization.repair.open(item.key)
+                            dismiss()
+                        },
+                        enabled = model.busy == null,
+                    ) {
+                        Icon(Icons.Outlined.Link, null, Modifier.size(17.dp))
+                        Text("Locate replacement…", Modifier.padding(start = 7.dp))
+                    }
                 TextButton(onClick = { clipboard.setText(AnnotatedString(item.path)) }) {
                     Text("Copy location")
                 }

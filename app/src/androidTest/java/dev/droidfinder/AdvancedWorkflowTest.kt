@@ -239,11 +239,13 @@ class AdvancedWorkflowTest {
             model.undo()
         }
         compose.waitUntil(10_000) {
-            before in compose.activity.model.tagAssignments[path].orEmpty()
+            before in compose.activity.model.tagAssignments[organizationKey(path)].orEmpty()
         }
         loaded()
         compose.runOnIdle { compose.activity.model.redo() }
-        compose.waitUntil(10_000) { after in compose.activity.model.tagAssignments[path].orEmpty() }
+        compose.waitUntil(10_000) {
+            after in compose.activity.model.tagAssignments[organizationKey(path)].orEmpty()
+        }
         loaded()
     }
 

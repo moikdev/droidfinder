@@ -35,7 +35,10 @@ class OrganizationWorkflowTest {
         val id = System.nanoTime()
         original = model.session.tagStore.reload()
         topic = "Topic $id"
-        folder = File(compose.activity.filesDir, "Workspace/Organize-$id").apply { mkdirs() }
+        folder =
+            File(compose.activity.filesDir, "Workspace/Organize-$id").canonicalFile.apply {
+                mkdirs()
+            }
         File(folder, "First note.txt").writeText("FIRST_CONTENT_82736")
         File(folder, "Planning").mkdir()
         File(folder, "Planning/Second note.txt").writeText("SECOND_CONTENT_82736")
@@ -229,12 +232,12 @@ class OrganizationWorkflowTest {
         assertEquals(2, state.changed)
         compose.onNodeWithText("Apply tags").performClick()
         settled()
-        assertEquals(setOf("Blue", "Green"), model.tagAssignments[a.path])
-        assertEquals(setOf(topic, "Green"), model.tagAssignments[b.path])
+        assertEquals(setOf("Blue", "Green"), model.tagAssignments[organizationKey(a.path)])
+        assertEquals(setOf(topic, "Green"), model.tagAssignments[organizationKey(b.path)])
         undo()
         assertEquals(before, model.tagAssignments)
         redo()
-        assertEquals(setOf("Blue", "Green"), model.tagAssignments[a.path])
+        assertEquals(setOf("Blue", "Green"), model.tagAssignments[organizationKey(a.path)])
         assertEquals("FIRST_CONTENT_82736", a.file.readText())
     }
 
@@ -265,7 +268,7 @@ class OrganizationWorkflowTest {
         a.file.writeText("changed content and size")
         apply()
         assertNotNull(state.error)
-        assertNull(model.tagAssignments[a.path])
+        assertNull(model.tagAssignments[organizationKey(a.path)])
         compose.runOnIdle { state.refresh() }
         ready()
         compose.runOnIdle {
@@ -282,8 +285,8 @@ class OrganizationWorkflowTest {
             model.syncLibrary()
         }
         apply()
-        assertEquals(setOf("Red", "Blue"), model.tagAssignments[a.path])
-        assertEquals(setOf(topic), model.tagAssignments[b.path])
+        assertEquals(setOf("Red", "Blue"), model.tagAssignments[organizationKey(a.path)])
+        assertEquals(setOf(topic), model.tagAssignments[organizationKey(b.path)])
     }
 
     @Test
@@ -405,7 +408,7 @@ class OrganizationWorkflowTest {
         compose.onNodeWithText("Delete", substring = false).performClick()
         settled()
         assertTrue(model.tagDefinitions.any { it.name == topic })
-        assertEquals(setOf(topic), model.tagAssignments[entry("Budget.csv").path])
+        assertEquals(setOf(topic), model.tagAssignments[organizationKey(entry("Budget.csv").path)])
         assertTrue(state.error.orEmpty().contains("changed"))
         compose.onNodeWithText("Cancel").performClick()
     }
@@ -549,7 +552,7 @@ class OrganizationWorkflowTest {
             .assertExists()
         apply()
         assertEquals(23, model.tagAssignments.keys.count { it in entries.map { e -> e.path } })
-        assertNull(model.tagAssignments[entries.last().path])
+        assertNull(model.tagAssignments[organizationKey(entries.last().path)])
     }
 
     @Test
@@ -593,7 +596,7 @@ class OrganizationWorkflowTest {
         opened(listOf(after, afterChild, cloud))
         compose.runOnIdle { state.change("Green", TagChange.ADD) }
         apply()
-        assertEquals(setOf("Green"), model.tagAssignments[cloud.path])
+        assertEquals(setOf("Green"), model.tagAssignments[organizationKey(cloud.path)])
         assertEquals("CLOUD_CONTENT_82736", File(provider, "readonly/Cloud note.txt").readText())
     }
 

@@ -322,16 +322,16 @@ class RenameWorkflowTest {
         apply()
         val newUri = uri("New-Source.txt")
         assertTrue(File(provider, "New-Source.txt").exists())
-        assertEquals(setOf(tag), model.tagAssignments[newUri])
+        assertEquals(setOf(tag), model.tagAssignments[organizationKey(newUri)])
         compose.runOnIdle { model.undo() }
         compose.waitUntil(10_000) { model.busy == null && File(provider, "Source.txt").exists() }
-        assertEquals(setOf(tag), model.tagAssignments[sourceUri])
+        assertEquals(setOf(tag), model.tagAssignments[organizationKey(sourceUri)])
         assertTrue(File(folder, "File 2.txt").exists())
         compose.runOnIdle { model.redo() }
         compose.waitUntil(10_000) {
             model.busy == null && File(provider, "New-Source.txt").exists()
         }
-        assertEquals(setOf(tag), model.tagAssignments[newUri])
+        assertEquals(setOf(tag), model.tagAssignments[organizationKey(newUri)])
     }
 
     @Test
@@ -385,7 +385,7 @@ class RenameWorkflowTest {
         assertEquals("provider second", File(provider, "Second.txt").readText())
         val recovery = provider.listFiles()!!.single { it.name == "Recovered Source.txt" }
         assertEquals("provider source", recovery.readText())
-        assertEquals(setOf(tag), model.tagAssignments[uri(recovery.name)])
+        assertEquals(setOf(tag), model.tagAssignments[organizationKey(uri(recovery.name))])
         assertNull(model.undoLabel)
         assertNotNull(state.error)
         compose.onNodeWithText("Recovery items").performClick()

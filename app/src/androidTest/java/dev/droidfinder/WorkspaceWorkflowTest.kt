@@ -250,12 +250,12 @@ class WorkspaceWorkflowTest {
                 left.busy == null && moved.exists() && right.location == moved.parent
             }
             assertEquals(setOf(moved.path), right.selected)
-            assertTrue("Red" in left.tagAssignments[moved.path].orEmpty())
+            assertTrue("Red" in left.tagAssignments[organizationKey(moved.path)].orEmpty())
             compose.runOnIdle { right.undo() }
             compose.waitUntil(15_000) {
                 right.busy == null && note.exists() && right.location == folder.path
             }
-            assertTrue("Red" in right.tagAssignments[note.path].orEmpty())
+            assertTrue("Red" in right.tagAssignments[organizationKey(note.path)].orEmpty())
             assertFalse(moved.exists())
         } finally {
             cleanup()
@@ -480,6 +480,64 @@ class WorkspaceWorkflowTest {
                     scale >= 359f,
             )
         } finally {
+            cleanup()
+        }
+    }
+
+    @Test
+    fun informationalFeedbackDoesNotBlockPassiveGalleryContextMenus() {
+        setup()
+        val message =
+            "Organization metadata updated. Saved locations and collections are ready for review. You can keep browsing, selecting and opening files while this informational feedback is visible."
+        try {
+            compose.runOnIdle {
+                left.activatePane()
+                right.clearSelection()
+                right.changeMode(ViewMode.GALLERY)
+                left.message = message
+            }
+            compose.waitForIdle()
+            val point =
+                compose
+                    .onNode(
+                        hasText("Right.txt") and
+                            hasAnyAncestor(hasTestTag("gallery-strip")) and
+                            hasAnyAncestor(hasTestTag("pane-secondary")),
+                        useUnmergedTree = true,
+                    )
+                    .fetchSemanticsNode()
+                    .boundsInWindow
+                    .center
+            val node = compose.onNodeWithText(message).fetchSemanticsNode()
+            val feedback =
+                compose
+                    .onAllNodesWithTag("finder-feedback")
+                    .fetchSemanticsNodes()
+                    .firstOrNull()
+                    ?.boundsInWindow ?: node.parent!!.boundsInWindow
+            assertTrue(
+                "Feedback must cover the test pointer: feedback=$feedback, point=$point",
+                feedback.contains(point),
+            )
+            val bitmap =
+                androidx.test.platform.app.InstrumentationRegistry.getInstrumentation()
+                    .uiAutomation
+                    .takeScreenshot()
+            val shot =
+                File(compose.activity.getExternalFilesDir(null), "reference-qa/feedback-before.png")
+            shot.parentFile!!.mkdirs()
+            shot.outputStream().use {
+                bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, it)
+            }
+            bitmap.recycle()
+            NativeMouse.secondaryClick(point) { compose.waitForIdle() }
+            compose.waitUntil(5000) {
+                left.activePaneModel === right && right.focused?.name == "Right.txt"
+            }
+            compose.onNodeWithTag("file-context-menu").assertExists()
+            compose.onNodeWithTag("file-context-menu").performKeyInput { pressKey(Key.Escape) }
+        } finally {
+            compose.runOnIdle { left.message = null }
             cleanup()
         }
     }

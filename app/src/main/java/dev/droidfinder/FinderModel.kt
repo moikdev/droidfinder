@@ -61,6 +61,8 @@ data class Entry(
     val path: String
         get() = documentUri?.toString() ?: file.absolutePath
 
+    val organizationPath: String = organizationKey(path)
+
     val displaySize: String
         get() = if (folder) "—" else if (sizeKnown) formatSize(size) else "Unknown size"
 
@@ -1500,7 +1502,9 @@ constructor(
     fun groups(): List<Pair<String, List<Entry>>> =
         if (grouping == GroupBy.NONE) listOf("" to entries)
         else
-            entries.groupBy { groupLabel(it, grouping, tagAssignments[it.path].orEmpty()) }.toList()
+            entries
+                .groupBy { groupLabel(it, grouping, tagAssignments[it.organizationPath].orEmpty()) }
+                .toList()
 
     private fun saveTabState() {
         captureViewports()
@@ -1870,8 +1874,10 @@ constructor(
         persistTabs()
     }
 
-    fun allowed(file: File): Boolean = runCatching {
-        if (!file.exists()) return@runCatching false
+    fun allowed(file: File): Boolean = localAllowed(file, requireExists = true)
+
+    private fun localAllowed(file: File, requireExists: Boolean): Boolean = runCatching {
+        if (requireExists && !file.exists()) return@runCatching false
         val path = file.canonicalFile.toPath()
         if (
             protectedStoragePath(
@@ -1887,6 +1893,10 @@ constructor(
                     volumes.any { path.startsWith(it.canonicalFile.toPath()) }))
     }
         .getOrDefault(false)
+
+    internal fun organizationScopeAllowed(path: String) =
+        if (isDocumentPath(path)) documents.allowed(path)
+        else localAllowed(File(path), requireExists = false)
 
     fun allowedPath(path: String) =
         if (isDocumentPath(path)) documents.allowed(path) else allowed(File(path))
@@ -1937,11 +1947,7 @@ constructor(
         get() = organizationState.value
 
     internal fun stopAnalysisForBackground() {
-        if (
-            organizationState.isInitialized() &&
-                (organization.running || organization.membersLoading)
-        )
-            organization.stop()
+        if (organizationState.isInitialized() && organization.hasReads) organization.stop()
         if (analysisState.isInitialized() && analysis.running) analysis.stop()
         if (checksumState.isInitialized() && checksums.running) checksums.stop()
         if (housekeepingState.isInitialized() && housekeeping.running) housekeeping.stop()
@@ -2338,7 +2344,12 @@ constructor(
             check(row.problem == null && row.node != null) {
                 "Refresh unavailable items before applying changes."
             }
-            check(analysisSource.read(row.path, control).revision == row.node.revision) {
+            check(allowedPath(row.path)) { "Reconnect this location before applying changes." }
+            val current = documents.read(row.path, control)
+            check(
+                current.organizationPath == row.key &&
+                    analysisSource.node(current).revision == row.node.revision,
+            ) {
                 "${row.name} changed. Refresh and review the selection again."
             }
         }
@@ -2367,16 +2378,16 @@ constructor(
                         check(
                             before.definitions == baseline.definitions &&
                                 rows.all {
-                                    before.assignments[it.path].orEmpty() ==
-                                        baseline.assignments[it.path].orEmpty()
+                                    before.assignments[it.key].orEmpty() ==
+                                        baseline.assignments[it.key].orEmpty()
                                 },
                         ) {
                             "Tags changed while this review was open. Refresh before applying."
                         }
                         val values = before.assignments.toMutableMap()
                         rows.forEach { row ->
-                            val tags = reviewedTags(values[row.path].orEmpty(), changes, clear)
-                            if (tags.isEmpty()) values.remove(row.path) else values[row.path] = tags
+                            val tags = reviewedTags(values[row.key].orEmpty(), changes, clear)
+                            if (tags.isEmpty()) values.remove(row.key) else values[row.key] = tags
                         }
                         control.check()
                         tagStore.restoreTags(before, before.copy(assignments = values))
@@ -2483,6 +2494,62 @@ constructor(
                 else "$label Session Undo is available.",
             )
             label
+        }
+    }
+
+    internal fun repairOrganization(value: ReferenceReview, done: (String?) -> Unit) {
+        operation(
+            "Relinking saved location…",
+            clearOriginSelection = false,
+            onRejected = { done("Wait for the current operation.") },
+            onFinished = { error ->
+                if (error != null) done(error.message ?: "Couldn't relink this location.")
+            },
+        ) {
+            val after =
+                withContext(Dispatchers.IO) {
+                    val after = value.repair.after
+                    val control = ListingControl()
+                    transferControl.guard(java.io.Closeable { control.cancel() }) {
+                        validateOrganizationItems(listOf(value.replacement), control)
+                        val source =
+                            organization.readLocation(
+                                value.repair.source,
+                                value.original.name,
+                                control,
+                            )
+                        check(
+                            source.key == value.original.key &&
+                                source.node?.revision == value.original.node?.revision,
+                        ) {
+                            "The original location changed or became available. Choose the replacement again and review."
+                        }
+                        control.check()
+                        tagStore.restoreOrganization(value.repair.before, after)
+                    }
+                }
+            history.record(
+                "Relink saved location",
+                listOf(
+                    FileStep.Callback(
+                        check = { undo ->
+                            tagStore.verifyOrganization(if (undo) after else value.repair.before)
+                        },
+                        perform = { undo ->
+                            tagStore.restoreOrganization(
+                                if (undo) after else value.repair.before,
+                                if (undo) value.repair.before else after,
+                            )
+                            emptyList()
+                        },
+                    ),
+                ),
+            )
+            syncLibrary()
+            syncHistory()
+            session.panes.forEach { it.refresh() }
+            done(null)
+            "Saved location relinked. Original files were kept."
         }
     }
 
@@ -3500,7 +3567,7 @@ constructor(
                                     val input =
                                         batchRename.capture(
                                             row.input.id,
-                                            currentTags[row.input.id].orEmpty(),
+                                            currentTags[organizationKey(row.input.id)].orEmpty(),
                                             reads,
                                         )
                                     check(
@@ -3574,7 +3641,7 @@ constructor(
                                     batchRename
                                         .capture(
                                             row.input.id,
-                                            currentTags[row.input.id].orEmpty(),
+                                            currentTags[organizationKey(row.input.id)].orEmpty(),
                                             reads,
                                         )
                                         .revision == row.input.revision,
