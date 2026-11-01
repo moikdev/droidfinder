@@ -100,10 +100,15 @@ class FinderWorkflowTest {
         loaded()
         compose.runOnIdle { compose.activity.model.navigate("@trash") }
         loaded()
-        compose
-            .onNode(hasText("Renamed.md") and hasAnyAncestor(hasTestTag("file-browser")))
-            .performClick()
-        compose.waitUntil(5_000) { compose.activity.model.focused?.name == "Renamed.md" }
+        val model = compose.activity.model
+        val restoreEntry =
+            model.entries.single { model.engine.originalPath(it.file) == copied.path }
+        // Trash may contain identically named items from other workflows.
+        compose.runOnIdle {
+            model.clearSelection()
+            model.select(restoreEntry)
+        }
+        compose.waitUntil(5_000) { model.focused?.path == restoreEntry.path }
         compose.onNodeWithText("Restore", useUnmergedTree = true).performClick()
         compose.waitUntil(10_000) { copied.exists() }
         loaded()
@@ -168,6 +173,7 @@ class FinderWorkflowTest {
 
     @Test
     fun tabsKeepIndependentHistory() {
+        val originalTab = compose.activity.model.tabs[compose.activity.model.activeTab].id
         compose.onNodeWithContentDescription("New tab").performClick()
         compose.runOnIdle {
             compose.activity.model.navigate(File(fixture, "Destination").absolutePath)
@@ -180,6 +186,7 @@ class FinderWorkflowTest {
         compose.runOnIdle {
             val model = compose.activity.model
             model.closeTab(model.activeTab)
+            model.switchTab(model.tabs.indexOfFirst { it.id == originalTab })
         }
         loaded()
         assertEquals(fixture.absolutePath, compose.activity.model.location)

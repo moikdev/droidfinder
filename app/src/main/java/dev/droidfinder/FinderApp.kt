@@ -2,6 +2,7 @@
 
 package dev.droidfinder
 
+import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -87,6 +88,8 @@ fun FinderApp(
     onNewWindow: (String) -> Unit = {},
     onCloseWindow: () -> Unit = {},
     onToggleFullscreen: () -> Unit = {},
+    onReconnectFolder: (ConnectedLocation) -> Unit = {},
+    onProviderApp: (String) -> Unit = {},
 ) {
     val dragScope = rememberCoroutineScope()
     val dragController = remember { FinderDragController(dragScope) }
@@ -119,6 +122,43 @@ fun FinderApp(
             var peekMultipleSelection by workspaceModel.windowState.peekMultipleSelection
             var menu by remember { mutableStateOf(false) }
             var cursorMenu by remember { mutableStateOf<FinderContextRequest?>(null) }
+            LaunchedEffect(model.storageRequested) {
+                if (model.storageRequested) {
+                    dialog = "storage"
+                    model.storageRequested = false
+                }
+            }
+            model.reconnectChoice?.let { choice ->
+                AlertDialog(
+                    onDismissRequest = { model.reconnectChoice = null },
+                    title = { Text("Different folder selected") },
+                    text = {
+                        Text(
+                            "The original location is ${choice.original.name}. Add the selected folder as a separate connection, or choose the original folder again.",
+                        )
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                model.reconnectChoice = null
+                                model.connectLocation(Uri.parse(choice.selected))
+                            },
+                        ) {
+                            Text("Add as new location")
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                model.reconnectChoice = null
+                                onReconnectFolder(choice.original)
+                            },
+                        ) {
+                            Text("Choose original folder")
+                        }
+                    },
+                )
+            }
             var archiveEntry by remember { mutableStateOf<Entry?>(null) }
             var infoEntries by remember { mutableStateOf<List<Entry>>(emptyList()) }
             var archiveSelection by remember { mutableStateOf<Set<String>?>(null) }
@@ -235,6 +275,9 @@ fun FinderApp(
                     "renameSmart" -> dialog = "renameSmart"
                     "settings" -> dialog = "settings"
                     "connectFolder" -> onConnectFolder()
+                    "storage" -> {
+                        model.storageRequested = true
+                    }
                     "appearance" -> dialog = "appearance"
                     "shortcut" -> model.makeShortcut()
                     "sidebar" -> model.toggleSidebar()
@@ -704,6 +747,16 @@ fun FinderApp(
                     ) {
                         dialog = null
                     }
+                "storage" ->
+                    StorageLocationsDialog(
+                        model,
+                        onGrantAccess,
+                        onConnectFolder,
+                        onReconnectFolder,
+                        onProviderApp,
+                    ) {
+                        dialog = null
+                    }
                 "archive" ->
                     archiveEntry?.let { entry ->
                         ArchiveBrowserDialog(
@@ -1034,6 +1087,9 @@ private fun FinderSidebar(
                 }
             }
             SidebarItem("Connect folder…", Icons.Outlined.Add, false) { onConnectFolder() }
+            SidebarItem("Storage locations…", Icons.Outlined.Storage, false) {
+                model.storageRequested = true
+            }
             NavigationTree(model)
             if (model.smartFolders.isNotEmpty()) {
                 Spacer(Modifier.height(8.dp))
@@ -1464,6 +1520,7 @@ internal fun ActionMenu(
             MenuAction("Rename Smart Folder…", Icons.Outlined.DriveFileRenameOutline) {
                 action("renameSmart")
             }
+        MenuAction("Storage locations…", Icons.Outlined.Storage) { action("storage") }
         MenuAction("Preferences…", Icons.Outlined.Tune) { action("settings") }
         MenuAction("Connect provider folder…", Icons.Outlined.CloudQueue) {
             action("connectFolder")

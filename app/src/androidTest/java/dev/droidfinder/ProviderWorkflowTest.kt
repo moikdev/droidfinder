@@ -189,6 +189,7 @@ class ProviderWorkflowTest {
 
     @Test
     fun providerTrashAndRestorePreserveOriginalLocation() {
+        val originalPath = compose.activity.model.entries.first { it.name == "Notes.md" }.path
         compose.runOnIdle {
             val model = compose.activity.model
             model.select(model.entries.first { it.name == "Notes.md" })
@@ -202,7 +203,7 @@ class ProviderWorkflowTest {
             val model = compose.activity.model
             model.select(
                 model.entries.first {
-                    model.engine.originalPath(it.file)?.startsWith("content://") == true
+                    model.engine.originalPath(it.file) == originalPath
                 },
             )
             model.restore()

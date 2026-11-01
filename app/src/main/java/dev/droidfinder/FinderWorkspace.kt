@@ -204,6 +204,8 @@ private fun BoxWithConstraintsScope.PaneFiles(
                     ListingStatus(model)
                     Box(Modifier.weight(1f).fillMaxWidth()) {
                         when {
+                            model.folderStorageIssue != null ->
+                                StorageRecovery(model, model.folderStorageIssue!!, onGrantAccess)
                             model.listingError != null ->
                                 EmptyState(
                                     Icons.Outlined.FolderOff,

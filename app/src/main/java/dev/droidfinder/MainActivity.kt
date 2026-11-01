@@ -82,16 +82,65 @@ class MainActivity : ComponentActivity() {
             )
     }
 
-    private var folderRequestPane: FinderModel? = null
+    private var folderRequestPaneId: String? = null
+    private var folderReconnectRoot: String? = null
+
+    private fun chooseFolder(root: ConnectedLocation? = null) {
+        folderRequestPaneId = model.activePaneModel.paneId
+        folderReconnectRoot = root?.uri
+        try {
+            connectFolder.launch(root?.grant?.let(Uri::parse))
+        } catch (error: ActivityNotFoundException) {
+            model.message = "Android's folder picker isn't available."
+        }
+    }
 
     private val connectFolder =
         registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
-            if (uri != null) (folderRequestPane ?: model.activePaneModel).connectLocation(uri)
-            folderRequestPane = null
+            val pane =
+                model.windowState.panes.firstOrNull { it.paneId == folderRequestPaneId }
+                    ?: model.activePaneModel
+            if (uri != null) {
+                pane.activatePane()
+                pane.connectLocation(uri, replacing = folderReconnectRoot)
+            }
+            folderRequestPaneId = null
+            folderReconnectRoot = null
         }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("folderRequestPane", folderRequestPaneId)
+        outState.putString("folderReconnectRoot", folderReconnectRoot)
+        super.onSaveInstanceState(outState)
+    }
+
+    private fun openProviderApp(authority: String) {
+        val provider =
+            packageManager.resolveContentProvider(
+                authority,
+                android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS,
+            )
+        if (provider == null) {
+            model.message = "The provider app isn't installed or visible to Android."
+            return
+        }
+        try {
+            startActivity(
+                packageManager.getLaunchIntentForPackage(provider.packageName)
+                    ?: Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.parse("package:${provider.packageName}"),
+                    ),
+            )
+        } catch (error: Exception) {
+            model.message = "Couldn't open the provider's settings."
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        folderRequestPaneId = savedInstanceState?.getString("folderRequestPane")
+        folderReconnectRoot = savedInstanceState?.getString("folderReconnectRoot")
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(0xFFF5F6F8.toInt(), 0xFFF5F6F8.toInt()),
             navigationBarStyle = SystemBarStyle.light(0xFFF5F6F8.toInt(), 0xFFF5F6F8.toInt()),
@@ -129,10 +178,9 @@ class MainActivity : ComponentActivity() {
             }
             FinderApp(
                 model,
-                onConnectFolder = {
-                    folderRequestPane = model.activePaneModel
-                    connectFolder.launch(null)
-                },
+                onConnectFolder = { chooseFolder() },
+                onReconnectFolder = { chooseFolder(it) },
+                onProviderApp = ::openProviderApp,
                 onEnableNotifications = ::enableNotifications,
                 onNewWindow = ::openFinderWindow,
                 onCloseWindow = { finish() },

@@ -28,6 +28,11 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         @Volatile var listingGateOpened: java.util.concurrent.CountDownLatch? = null
         @Volatile var listingExtras: android.os.Bundle? = null
         @Volatile var listingFailure: String? = null
+        @Volatile var metadataDirectory: String? = null
+        @Volatile var metadataGate: java.util.concurrent.CountDownLatch? = null
+        @Volatile var metadataOpened: java.util.concurrent.CountDownLatch? = null
+        @Volatile var metadataFailure: String? = null
+        @Volatile var metadataDenied = false
         val listingClosed = java.util.concurrent.atomic.AtomicInteger(0)
     }
 
@@ -136,6 +141,16 @@ class FixtureDocumentsProvider : DocumentsProvider() {
     override fun queryDocument(documentId: String, projection: Array<out String>?): Cursor =
         MatrixCursor(projection ?: columns).apply {
             val file = file(documentId)
+            if (file.canonicalPath == metadataDirectory) {
+                metadataOpened?.countDown()
+                check(metadataGate?.await(15, java.util.concurrent.TimeUnit.SECONDS) != false) {
+                    "Fixture metadata gate timed out"
+                }
+            }
+            if (file.canonicalPath == metadataFailure) {
+                if (metadataDenied) throw SecurityException("Fixture permission was revoked")
+                throw FileNotFoundException("Fixture location is offline")
+            }
             if (!file.exists()) throw FileNotFoundException(documentId)
             row(this, file)
         }

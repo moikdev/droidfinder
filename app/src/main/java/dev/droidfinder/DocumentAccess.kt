@@ -92,6 +92,95 @@ class DocumentAccess(
         locations.forEach { titles[it.uri] = it.name }
     }
 
+    @Volatile
+    private var savedGrants: Map<Pair<String, String>, Pair<Boolean, Boolean>> = emptyMap()
+
+    internal fun refreshGrantState() {
+        savedGrants =
+            runCatching {
+                    resolver.persistedUriPermissions
+                        .mapNotNull { permission ->
+                            documentTreeKey(permission.uri.toString())?.let {
+                                it to (permission.isReadPermission to permission.isWritePermission)
+                            }
+                        }
+                        .toMap()
+                }
+                .getOrDefault(emptyMap())
+    }
+
+    internal fun grantState(path: String) = documentTreeKey(path)?.let { savedGrants[it] }
+
+    internal fun sameTree(first: String, second: String): Boolean =
+        documentTreeKey(first)?.let { it == documentTreeKey(second) } ?: false
+
+    internal fun reportedAvailableBytes(path: String, control: ListingControl): Long? =
+        runCatching {
+            val document = Uri.parse(path)
+            val id = DocumentsContract.getDocumentId(document)
+            control.withSignal { signal ->
+                resolver
+                    .query(
+                        DocumentsContract.buildRootsUri(document.authority!!),
+                        arrayOf(
+                            DocumentsContract.Root.COLUMN_DOCUMENT_ID,
+                            DocumentsContract.Root.COLUMN_AVAILABLE_BYTES,
+                            DocumentsContract.Root.COLUMN_FLAGS,
+                        ),
+                        null,
+                        null,
+                        null,
+                        signal,
+                    )
+                    ?.use { cursor ->
+                        var result: Long? = null
+                        var rows = 0
+                        while (cursor.moveToNext()) {
+                            if (++rows > 64) return@use null
+                            control.check()
+                            val rootId =
+                                cursor.getString(
+                                    cursor.getColumnIndexOrThrow(
+                                        DocumentsContract.Root.COLUMN_DOCUMENT_ID,
+                                    ),
+                                ) ?: continue
+                            val availableIndex =
+                                cursor.getColumnIndex(DocumentsContract.Root.COLUMN_AVAILABLE_BYTES)
+                            if (availableIndex < 0 || cursor.isNull(availableIndex)) continue
+                            val available = cursor.getLong(availableIndex)
+                            if (available < 0) continue
+                            val flagsIndex =
+                                cursor.getColumnIndex(DocumentsContract.Root.COLUMN_FLAGS)
+                            val supportsChild =
+                                flagsIndex >= 0 &&
+                                    cursor.getInt(flagsIndex) and
+                                        DocumentsContract.Root.FLAG_SUPPORTS_IS_CHILD != 0
+                            val matches =
+                                rootId == id ||
+                                    supportsChild &&
+                                        runCatching {
+                                                DocumentsContract.isChildDocument(
+                                                    resolver,
+                                                    DocumentsContract.buildDocumentUri(
+                                                        document.authority!!,
+                                                        rootId,
+                                                    ),
+                                                    document,
+                                                )
+                                            }
+                                            .getOrDefault(false)
+                            if (matches) {
+                                if (result != null) return@use null
+                                result = available
+                            }
+                        }
+                        result
+                    }
+            }
+        }
+        .getOrNull()
+        .also { control.check() }
+
     fun connect(tree: Uri, persist: Boolean = true): ConnectedLocation {
         if (persist) {
             resolver.takePersistableUriPermission(tree, Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -105,10 +194,11 @@ class DocumentAccess(
                     DocumentsContract.getTreeDocumentId(tree),
                 )
                 .toString()
+        refreshGrantState()
         val entry = read(uri)
         require(entry.folder) { "Choose a folder rather than a single file." }
         val root = ConnectedLocation(uri, tree.toString(), entry.name)
-        locations = locations.filterNot { it.uri == root.uri } + root
+        locations = locations.filterNot { sameTree(it.grant, root.grant) } + root
         saveLocations()
         return root
     }
@@ -123,6 +213,7 @@ class DocumentAccess(
                     resolver.releasePersistableUriPermission(Uri.parse(root.grant), flag)
                 }
             }
+        refreshGrantState()
     }
 
     private fun saveLocations() {
@@ -288,6 +379,7 @@ class DocumentAccess(
         val name = string(Document.COLUMN_DISPLAY_NAME)
         val mime = string(Document.COLUMN_MIME_TYPE)
         val flags = number(Document.COLUMN_FLAGS).toInt()
+        val mayWrite = grantState(uri.toString())?.second != false
         val folder = mime == Document.MIME_TYPE_DIR
         val file = cacheFile(uri.toString(), name)
         titles[uri.toString()] = name
@@ -300,10 +392,11 @@ class DocumentAccess(
             number(Document.COLUMN_LAST_MODIFIED),
             uri,
             parent,
-            if (folder) flags and Document.FLAG_DIR_SUPPORTS_CREATE != 0
-            else flags and Document.FLAG_SUPPORTS_WRITE != 0,
-            flags and Document.FLAG_SUPPORTS_RENAME != 0,
-            flags and Document.FLAG_SUPPORTS_DELETE != 0,
+            mayWrite &&
+                (if (folder) flags and Document.FLAG_DIR_SUPPORTS_CREATE != 0
+                else flags and Document.FLAG_SUPPORTS_WRITE != 0),
+            mayWrite && (flags and Document.FLAG_SUPPORTS_RENAME != 0),
+            mayWrite && (flags and Document.FLAG_SUPPORTS_DELETE != 0),
             mime,
             sizeKnown =
                 !cursor.isNull(cursor.getColumnIndexOrThrow(Document.COLUMN_SIZE)) &&

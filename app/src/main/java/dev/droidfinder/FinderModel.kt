@@ -448,7 +448,7 @@ constructor(
         private set
 
     val canCreate
-        get() = folderPath != null && (folderInfo?.writable ?: directory?.canWrite() ?: false)
+        get() = folderPath != null && folderStorageIssue == null && folderInfo?.writable == true
 
     val isTrash: Boolean
         get() = location == "@trash"
@@ -1025,6 +1025,12 @@ constructor(
     var message by session.message
     var interruptedTransfer by session.interruptedTransfer
         private set
+
+    internal var folderStorageIssue by mutableStateOf<StorageIssue?>(null)
+        private set
+
+    internal var reconnectChoice by mutableStateOf<ReconnectChoice?>(null)
+    internal var storageRequested by mutableStateOf(false)
 
     var listingError by mutableStateOf<String?>(null)
         private set
@@ -1850,7 +1856,16 @@ constructor(
     }
 
     fun allowed(file: File): Boolean = runCatching {
+        if (!file.exists()) return@runCatching false
         val path = file.canonicalFile.toPath()
+        if (
+            protectedStoragePath(
+                path.toString(),
+                listOf(deviceRoot.path) + volumes.map { it.path },
+                getApplication<Application>().packageName,
+            )
+        )
+            return@runCatching false
         path.startsWith(workspace.canonicalFile.toPath()) ||
             (hasAccess &&
                 (path.startsWith(deviceRoot.canonicalFile.toPath()) ||
@@ -1875,23 +1890,48 @@ constructor(
                     .thenBy(String.CASE_INSENSITIVE_ORDER) { it.name },
             )
 
-    fun connectLocation(uri: Uri, persist: Boolean = true) {
+    internal val storage
+        get() = session.storage
+
+    fun connectLocation(uri: Uri, persist: Boolean = true, replacing: String? = null) {
+        val original = replacing?.let { old -> connectedLocations.firstOrNull { it.uri == old } }
+        if (original != null && !documents.sameTree(original.grant, uri.toString())) {
+            reconnectChoice = ReconnectChoice(original, uri.toString())
+            return
+        }
         viewModelScope.launch {
             runCatching { withContext(Dispatchers.IO) { documents.connect(uri, persist) } }
                 .onSuccess {
                     connectedLocations = documents.locations
-                    navigate(it.uri)
+                    storage.refresh(hasAccess)
+                    if (original == null) navigate(it.uri)
+                    else {
+                        session.panes.forEach { pane ->
+                            if (
+                                isDocumentPath(pane.location) &&
+                                    documents.sameTree(original.grant, pane.location)
+                            )
+                                pane.refresh()
+                        }
+                        message = "Folder permission restored"
+                    }
                 }
                 .onFailure { message = it.message ?: "Couldn't connect this folder." }
         }
     }
 
     fun disconnectLocation(uri: String) {
+        if (session.busy.value != null) {
+            message = "Wait for the current operation before removing a connection."
+            return
+        }
+        val root = connectedLocations.firstOrNull { it.uri == uri } ?: return
         documents.disconnect(uri)
         connectedLocations = documents.locations
+        storage.refresh(hasAccess)
         session.panes.forEach { pane ->
-            if (pane.location == uri || !pane.allowedPath(pane.location))
-                pane.navigate(workspace.absolutePath)
+            if (isDocumentPath(pane.location) && documents.sameTree(root.grant, pane.location))
+                pane.refresh()
         }
     }
 
@@ -2235,19 +2275,27 @@ constructor(
         folderStyles = styleStore.styles
     }
 
-    fun onResume() {
-        updateNotificationState()
-        val before = hasAccess
-        hasAccess = Environment.isExternalStorageManager()
+    internal fun refreshStorageVolumes() {
         volumes =
             getApplication<Application>()
                 .getSystemService(StorageManager::class.java)
                 .storageVolumes
                 .mapNotNull { it.directory }
                 .filter { it != deviceRoot && it.canRead() }
-        if (!before && hasAccess && activePaneModel.location == workspace.absolutePath)
-            activePaneModel.navigate(deviceRoot.absolutePath)
-        else session.panes.forEach { it.refresh() }
+    }
+
+    fun onResume() {
+        updateNotificationState()
+        val before = hasAccess
+        hasAccess = Environment.isExternalStorageManager()
+        refreshStorageVolumes()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { documents.refreshGrantState() }
+            storage.refresh(hasAccess)
+            if (!before && hasAccess && activePaneModel.location == workspace.absolutePath)
+                activePaneModel.navigate(deviceRoot.absolutePath)
+            else session.panes.forEach { it.refresh() }
+        }
     }
 
     private fun entryComparator(
@@ -2305,6 +2353,8 @@ constructor(
         }
         loading = true
         listingError = null
+        folderStorageIssue = null
+        folderInfo = null
         truncated = false
         listingProgress = ListingProgress()
         listingJob = viewModelScope.launch {
@@ -2458,6 +2508,8 @@ constructor(
                     if (generation == listingGeneration) {
                         entries = emptyList()
                         listingError = it.message ?: "Couldn't load this folder."
+                        if (!path.startsWith("@"))
+                            folderStorageIssue = storage.issue(path, it, hasAccess)
                         finishListingSelection()
                     }
                 }

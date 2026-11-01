@@ -44,10 +44,10 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [ ] ZIP64/large-file verification and configurable resource limits with archive-bomb protection. Persisted count/byte/member/ratio/cache budgets, streamed CRC/size checks, cancellation and small ZIP64 fixtures are implemented in 0.16.0; actual multi-GiB payload verification and measured large-file performance remain open.
 
 ## 6. Storage and integration
-- [ ] Clear volume/provider status, space/capabilities, reconnect and expired-grant flows.
+- [x] Clear volume/provider status, space/capabilities, reconnect and expired-grant flows (0.18.0). Physical USB/SD and third-party provider matrices remain open.
 - [ ] Direct SMB/SFTP/WebDAV, saved connections, secure credentials and offline handling.
 - [ ] Save-to-DroidFinder share destination, Android document provider and cross-app drag/multi-window. Independent Android windows with shared transfers/history are implemented in 0.8.0; system-provider/share-destination integration remains open.
-- [ ] Honor Android protected directories; no claim of unrestricted private-app access.
+- [x] Honor Android protected directories; no claim of unrestricted private-app access (0.18.0).
 
 ## 7. Analysis and organization
 - [ ] Space analysis by folder/category, large/old/duplicate/empty-file discovery with review before cleanup.

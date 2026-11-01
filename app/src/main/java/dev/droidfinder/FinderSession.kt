@@ -27,6 +27,8 @@ class FinderSession(
 
     val documents = DocumentAccess(app, engine)
 
+    internal val storage = StorageMonitor(app, workspace, deviceRoot, documents)
+
     val connectedLocations = mutableStateOf(documents.locations)
 
     val notificationsEnabled =
