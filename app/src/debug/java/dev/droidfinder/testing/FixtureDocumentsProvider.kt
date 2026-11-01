@@ -21,6 +21,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         @Volatile var transferGate: java.util.concurrent.CountDownLatch? = null
         @Volatile var gateOpened: java.util.concurrent.CountDownLatch? = null
         @Volatile var beforeDelete: ((String) -> Unit)? = null
+        @Volatile var beforeRename: ((String, String) -> Unit)? = null
         @Volatile var listingDirectory: String? = null
         @Volatile var listingTitle: String? = null
         @Volatile var streamCancellation: java.util.concurrent.CountDownLatch? = null
@@ -280,6 +281,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
     }
 
     override fun renameDocument(documentId: String, displayName: String): String {
+        beforeRename?.invoke(documentId, displayName)
         val before = file(documentId)
         if (readOnly(before)) throw FileNotFoundException("Read only")
         val after = File(before.parentFile, validateFilename(displayName))

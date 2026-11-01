@@ -11,7 +11,7 @@ internal class DocumentAnalysisSource(
     private val documents: DocumentAccess,
     private val allowed: (String) -> Boolean,
 ) : AnalysisSource {
-    private fun node(entry: Entry): AnalysisNode {
+    internal fun node(entry: Entry): AnalysisNode {
         check(allowed(entry.path)) {
             "This item needs storage access or is outside the authorized locations."
         }

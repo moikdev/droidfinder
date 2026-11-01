@@ -24,6 +24,8 @@ class FinderSession(
     val deviceRoot: File = Environment.getExternalStorageDirectory()
 
     val engine = (app as? FinderApplication)?.localEngine ?: FileEngine(app.filesDir)
+    internal val renamePresetStore =
+        RenamePresetStore(File(app.filesDir, "rename-presets.properties"))
 
     val documents = DocumentAccess(app, engine)
 

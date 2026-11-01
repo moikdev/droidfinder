@@ -103,30 +103,32 @@ private fun dragData(
 /** Mouse users drag an icon directly; touch users can hold the selection's drag grip. */
 fun Modifier.mouseFileDrag(model: FinderModel, entry: Entry): Modifier = composed {
     val context = LocalContext.current
-    dragAndDropSource {
-        awaitEachGesture {
-            val down = awaitFirstDown(requireUnconsumed = false)
-            if (
-                down.type == PointerType.Mouse &&
-                    currentEvent.buttons.isPrimaryPressed &&
-                    !model.isTrash
-            ) {
-                val mode =
-                    finderDragMode(
-                        currentEvent.keyboardModifiers.isCtrlPressed ||
-                            currentEvent.keyboardModifiers.isMetaPressed,
-                        currentEvent.keyboardModifiers.isShiftPressed,
-                        currentEvent.keyboardModifiers.isAltPressed,
-                    )
-                awaitTouchSlopOrCancellation(down.id) { change, _ ->
-                    change.consume()
-                    val items =
-                        if (entry.path in model.selected) model.actionEntries else listOf(entry)
-                    if (items.isNotEmpty()) startTransfer(dragData(context, model, items, mode))
+    dragAndDropSource(
+        block = {
+            awaitEachGesture {
+                val down = awaitFirstDown(requireUnconsumed = false)
+                if (
+                    down.type == PointerType.Mouse &&
+                        currentEvent.buttons.isPrimaryPressed &&
+                        !model.isTrash
+                ) {
+                    val mode =
+                        finderDragMode(
+                            currentEvent.keyboardModifiers.isCtrlPressed ||
+                                currentEvent.keyboardModifiers.isMetaPressed,
+                            currentEvent.keyboardModifiers.isShiftPressed,
+                            currentEvent.keyboardModifiers.isAltPressed,
+                        )
+                    awaitTouchSlopOrCancellation(down.id) { change, _ ->
+                        change.consume()
+                        val items =
+                            if (entry.path in model.selected) model.actionEntries else listOf(entry)
+                        if (items.isNotEmpty()) startTransfer(dragData(context, model, items, mode))
+                    }
                 }
             }
-        }
-    }
+        },
+    )
 }
 
 @Composable
@@ -153,16 +155,18 @@ fun DragSelectionHandle(model: FinderModel) {
                     }
                 }
             }
-            .dragAndDropSource {
-                detectTapGestures(
-                    onLongPress = {
-                        val items = selection
-                        if (items.isNotEmpty() && !origin.isTrash) {
-                            startTransfer(dragData(context, origin, items, mode))
-                        }
-                    },
-                )
-            },
+            .dragAndDropSource(
+                block = {
+                    detectTapGestures(
+                        onLongPress = {
+                            val items = selection
+                            if (items.isNotEmpty() && !origin.isTrash) {
+                                startTransfer(dragData(context, origin, items, mode))
+                            }
+                        },
+                    )
+                },
+            ),
         contentAlignment = Alignment.Center,
     ) {
         Icon(Icons.Outlined.DragIndicator, null, tint = Muted, modifier = Modifier.size(21.dp))

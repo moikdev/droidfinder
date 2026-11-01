@@ -125,6 +125,7 @@ fun FinderApp(
             if (model.analysis.visible) FileAnalysisDialog(model)
             if (model.checksums.visible) FileChecksumDialog(model)
             if (model.housekeeping.visible) HousekeepingDialog(model)
+            if (model.batchRename.visible) ReviewedRenameDialog(model, onOpenWith)
             LaunchedEffect(model.storageRequested) {
                 if (model.storageRequested) {
                     dialog = "storage"
@@ -233,7 +234,10 @@ fun FinderApp(
                     "external" -> model.focused?.let(onOpenWith)
                     "quicklook" -> model.focused?.let(showQuickLook)
                     "new" -> dialog = "new"
-                    "rename" -> dialog = if (selected.size > 1) "batchRename" else "rename"
+                    "rename" ->
+                        if (selected.size > 1) model.batchRename.open(selected)
+                        else dialog = "rename"
+                    "batchRename" -> model.batchRename.open(selected)
                     "groupSelection" -> dialog = "groupSelection"
                     "tags" -> dialog = "tags"
                     "copyTo" -> dialog = "copyTo"
@@ -709,7 +713,6 @@ fun FinderApp(
                             }
                         },
                     )
-                "batchRename" -> BatchRenameDialog(model) { dialog = null }
                 "filters" -> SearchFiltersDialog(model) { dialog = null }
                 "settings" -> PreferencesDialog(model) { dialog = null }
                 "saveSearch" ->
@@ -1461,6 +1464,9 @@ internal fun ActionMenu(
             MenuAction("Copy", Icons.Outlined.ContentCopy) { action("copy") }
             MenuAction("Cut", Icons.Outlined.ContentCut, entries.all { it.canDelete }) {
                 action("cut")
+            }
+            MenuAction("Rename with rules…", Icons.Outlined.DriveFileRenameOutline, idle) {
+                action("batchRename")
             }
             MenuAction("Duplicate", Icons.Outlined.FileCopy, idle) { action("duplicate") }
             MenuAction("Compress", Icons.Outlined.FolderZip, idle) { action("compress") }

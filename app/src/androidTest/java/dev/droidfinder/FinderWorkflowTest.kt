@@ -234,10 +234,12 @@ class FinderWorkflowTest {
     fun batchRenameDialogPreviewsAndUndoRedoRestoresNames() {
         compose.runOnIdle { compose.activity.model.selectAll() }
         compose.onNodeWithContentDescription("Rename").performClick()
+        compose.onNodeWithContentDescription("Rename method").performClick()
         compose.onNodeWithText("Name and index").performClick()
         compose
             .onNode(hasSetTextAction() and hasText("Custom name", substring = true))
             .performTextInput("Batch")
+        compose.waitUntil(10_000) { compose.activity.model.batchRename.plan?.canApply == true }
         compose.onNodeWithText("Rename items").performClick()
         compose.waitUntil(10_000) {
             File(fixture, "Batch 1").exists() && File(fixture, "Batch 2.md").exists()

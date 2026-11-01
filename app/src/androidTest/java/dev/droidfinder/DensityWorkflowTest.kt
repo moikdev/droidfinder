@@ -22,6 +22,7 @@ class DensityWorkflowTest {
         compose.runOnIdle {
             val root = compose.activity.model
             if (root.dualPane) root.toggleDualPane()
+            root.changeDetailColumns(DetailColumns())
         }
     }
 

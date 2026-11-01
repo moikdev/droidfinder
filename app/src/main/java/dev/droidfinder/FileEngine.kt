@@ -44,21 +44,24 @@ class FileEngine(
     fun rename(source: File, name: String): File {
         val target = File(source.parentFile!!, validateName(name))
         if (source == target) return source
-        check(!target.exists()) { "An item with that name already exists." }
-        Files.move(source.toPath(), target.toPath())
-        return target
+        if (!Files.exists(target.toPath(), java.nio.file.LinkOption.NOFOLLOW_LINKS)) {
+            Files.move(source.toPath(), target.toPath())
+            return target
+        }
+        return renameBatch(listOf(RenameProposal(source, name))).single().second
     }
 
     /** Staging all names first permits swaps; a failed batch restores the original names. */
-    fun renameBatch(proposals: List<RenameProposal>): List<Pair<File, File>> {
-        val sources = proposals.map { it.file.absolutePath }.toSet()
+    fun renameBatch(
+        proposals: List<RenameProposal>,
+        control: TransferControl? = null,
+    ): List<Pair<File, File>> {
+        control?.check()
+        requireRenameDestinations(proposals)
         val changed = proposals.filter { it.file.name != it.name }
         val targets = changed.map { File(it.file.parentFile!!, validateName(it.name)) }
         require(targets.map { it.absolutePath }.distinct().size == targets.size) {
             "Two items would have the same name."
-        }
-        targets.forEach {
-            require(!it.exists() || it.absolutePath in sources) { "${it.name} already exists." }
         }
         require(
             changed.none { a ->
@@ -70,12 +73,14 @@ class FileEngine(
         val positions = changed.associate { it.file to it.file }.toMutableMap()
         try {
             changed.forEach { proposal ->
+                control?.item(proposal.file.name)
                 val temporary =
                     File(proposal.file.parentFile!!, ".droidfinder-rename-${UUID.randomUUID()}")
                 Files.move(proposal.file.toPath(), temporary.toPath())
                 positions[proposal.file] = temporary
             }
             changed.zip(targets).forEach { (proposal, target) ->
+                control?.check()
                 Files.move(positions.getValue(proposal.file).toPath(), target.toPath())
                 positions[proposal.file] = target
             }
@@ -95,11 +100,27 @@ class FileEngine(
                 positions
                     .filter { (original, current) -> current != original }
                     .filter { (original, current) ->
-                        runCatching { Files.move(current.toPath(), original.toPath()) }.isFailure
+                        runCatching {
+                            Files.move(current.toPath(), original.toPath())
+                            positions[original] = original
+                        }
+                            .isFailure
                     }
             if (failures.isNotEmpty())
-                throw IOException(
-                    "Rename failed. Recovery files were kept: ${failures.values.joinToString { it.absolutePath }}",
+                throw RenameRecoveryException(
+                    failures.map { (original, current) ->
+                        val visible = runCatching {
+                            val recovered =
+                                uniqueFile(
+                                    original.parentFile!!,
+                                    recoveredRenameName(original.name),
+                                )
+                            Files.move(current.toPath(), recovered.toPath())
+                            recovered
+                        }
+                            .getOrDefault(current)
+                        original.absolutePath to visible.absolutePath
+                    },
                     error,
                 )
             throw error

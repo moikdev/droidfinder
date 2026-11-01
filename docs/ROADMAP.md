@@ -19,7 +19,7 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 - [x] Folder merge with per-member conflict handling, local/provider recovery and nested retry destinations (0.6.0).
 - [x] Apply choices to remaining conflicts, capability/descendant checks and changed-destination guard (0.5.0); ancestor replacement rejection (0.6.0).
 - [x] Known-capacity checks before staged copies and replacement rollback (0.7.0).
-- [ ] Dedicated Unicode/case-only rename coverage.
+- [x] Dedicated Unicode/case-only rename coverage (0.22.0): local and provider cases, normalization, host case aliases, edited-file guards, hard links, Undo/Redo and rollback/recovery routes.
 - [x] Optional transfer notifications with pause/resume/cancel (0.5.0).
 - [ ] Appropriate Android background execution per local/network operation.
 
@@ -52,8 +52,8 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 ## 7. Analysis and organization
 - [x] Space analysis by folder/category, large/old/duplicate/empty-file discovery with review before cleanup (0.20.0). Logical-size snapshots, full-content duplicate checks, provider unknown sizes, limits/partial states and recoverable review/Undo are implemented; persistent indexing, cross-root duplicate scopes and device performance matrices remain separate open work.
 - [x] Trash/cache size and retention, checksum generation/verification. Checksums shipped in 0.20.0; persisted Trash dates, reviewed age policies, bounded inventories, native preview leases and reviewed idle-cache cleanup are implemented in 0.21.0. Retention requires confirmation and does not silently delete expired items.
-- [ ] Rich batch rename/templates/metadata, virtual collections and improved tag editing/search/export.
-- [ ] Reusable operation presets and previewable organization rules.
+- [ ] Rich batch rename/templates/metadata, virtual collections and improved tag editing/search/export. Reviewed rename rules, filesystem/EXIF templates, complete previews and saved presets are implemented in 0.22.0; virtual collections and broader tag editing/search/export remain open.
+- [ ] Reusable operation presets and previewable organization rules. Rename presets with explicit update/delete and protected persistence are implemented in 0.22.0; broader operation presets and organization rules remain open.
 
 ## 8. Recovery, privacy and accessibility
 - [x] Transactional transfer database, legacy migration, merge member outcomes and corruption preservation (0.6.0).

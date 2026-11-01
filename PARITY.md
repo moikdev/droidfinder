@@ -163,3 +163,13 @@ See [analysis behavior, limits and verification](docs/ANALYSIS.md).
 - [x] Separate thumbnail-memory controls and retained panel/threshold preferences.
 
 See [housekeeping behavior, limits and verification](docs/HOUSEKEEPING.md). Retention is reviewed; it does not automatically delete files.
+
+## Reviewed rename pass
+
+- [x] Complete before/after review, stable selection, row exclusion, filtering and ordering.
+- [x] Literal/linear regex, name/extension rules, numbering, Unicode case/normalization and metadata templates.
+- [x] Explicit EXIF reading, missing-field states and bounded cancellation.
+- [x] Saved rename presets, activity recreation and source/destination rechecks.
+- [x] Local/provider case-only and Unicode Undo/Redo, staged rollback and visible recovery routes.
+
+See [supported behavior, limits and validation](docs/RENAMING.md). Other organization and recovery work remains in the full roadmap.

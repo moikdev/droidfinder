@@ -178,6 +178,19 @@ class TransferControl(
         }
     }
 
+    internal suspend fun <T> guardSuspending(stream: Closeable, work: suspend () -> T): T {
+        activeStreams.add(stream)
+        try {
+            check()
+            return work()
+        } catch (error: Exception) {
+            check()
+            throw error
+        } finally {
+            activeStreams.remove(stream)
+        }
+    }
+
     fun copy(input: InputStream, output: OutputStream) {
         check()
         activeStreams.add(input)

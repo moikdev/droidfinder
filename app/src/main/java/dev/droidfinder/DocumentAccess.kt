@@ -845,59 +845,83 @@ class DocumentAccess(
     }
 
     fun digest(path: String, control: TransferControl? = null): String {
-        fun content(entry: Entry): Pair<ByteArray, Long> {
-            control?.check()
-            require(entry.documentUri != null || !Files.isSymbolicLink(entry.file.toPath())) {
-                "Symbolic links are not verified implicitly."
-            }
-            val hash = MessageDigest.getInstance("SHA-256")
-            var bytes = 0L
-            input(entry.path).use { source ->
-                fun read() {
-                    val buffer = ByteArray(64 * 1024)
-                    while (true) {
-                        control?.check()
-                        val n = source.read(buffer)
-                        if (n < 0) break
-                        bytes += n
-                        hash.update(buffer, 0, n)
-                    }
+        val reads = if (control != null) ListingControl() else null
+        fun calculate(): String {
+            fun content(entry: Entry): Pair<ByteArray, Long> {
+                control?.check()
+                require(entry.documentUri != null || !Files.isSymbolicLink(entry.file.toPath())) {
+                    "Symbolic links are not verified implicitly."
                 }
-                if (control != null) control.guard(source, ::read) else read()
+                val hash = MessageDigest.getInstance("SHA-256")
+                var bytes = 0L
+                (reads?.let { input(entry.path, it) } ?: input(entry.path)).use { source ->
+                    fun read() {
+                        val buffer = ByteArray(64 * 1024)
+                        while (true) {
+                            control?.check()
+                            val n = source.read(buffer)
+                            if (n < 0) break
+                            bytes += n
+                            hash.update(buffer, 0, n)
+                        }
+                    }
+                    if (control != null) control.guard(source, ::read) else read()
+                }
+                return hash.digest() to bytes
             }
-            return hash.digest() to bytes
+            val root = reads?.let { read(path, it) } ?: read(path)
+            if (!root.folder) return content(root).first.joinToString("") { "%02x".format(it) }
+            val digest = MessageDigest.getInstance("SHA-256")
+            val seen = mutableSetOf<String>()
+            var visited = 0
+            fun add(entry: Entry, relative: String, depth: Int) {
+                control?.check()
+                require(++visited <= 100_000 && depth <= 128) {
+                    "This verification exceeds the safe traversal limit."
+                }
+                require(entry.documentUri != null || !Files.isSymbolicLink(entry.file.toPath())) {
+                    "Symbolic links are not verified implicitly."
+                }
+                digest.update(if (entry.folder) 0.toByte() else 1.toByte())
+                val name = relative.toByteArray(Charsets.UTF_8)
+                digest.update(java.nio.ByteBuffer.allocate(4).putInt(name.size).array())
+                digest.update(name)
+                if (entry.folder) {
+                    require(seen.add(entry.path)) { "A provider folder cycle was found." }
+                    val children =
+                        if (reads == null) list(entry.path)
+                        else
+                            kotlinx.coroutines.runBlocking {
+                                val children = mutableListOf<Entry>()
+                                val reply =
+                                    visitChildren(entry.path, reads) {
+                                        require(children.size + visited < 100_000) {
+                                            "Undo verification exceeds the safe traversal limit."
+                                        }
+                                        children += it
+                                        true
+                                    }
+                                check(!reply.loading && reply.error == null) {
+                                    reply.error ?: "This folder listing is incomplete."
+                                }
+                                children
+                            }
+                    children
+                        .sortedBy { it.name }
+                        .forEach { add(it, "$relative/${it.name}", depth + 1) }
+                    digest.update(2.toByte())
+                } else {
+                    val (hash, bytes) = content(entry)
+                    digest.update(java.nio.ByteBuffer.allocate(8).putLong(bytes).array())
+                    digest.update(hash)
+                }
+            }
+            add(root, "", 0)
+            return "tree-sha256-v1:" + digest.digest().joinToString("") { "%02x".format(it) }
         }
-        val root = read(path)
-        if (!root.folder) return content(root).first.joinToString("") { "%02x".format(it) }
-        val digest = MessageDigest.getInstance("SHA-256")
-        val seen = mutableSetOf<String>()
-        var visited = 0
-        fun add(entry: Entry, relative: String, depth: Int) {
-            control?.check()
-            require(++visited <= 100_000 && depth <= 128) {
-                "This verification exceeds the safe traversal limit."
-            }
-            require(entry.documentUri != null || !Files.isSymbolicLink(entry.file.toPath())) {
-                "Symbolic links are not verified implicitly."
-            }
-            digest.update(if (entry.folder) 0.toByte() else 1.toByte())
-            val name = relative.toByteArray(Charsets.UTF_8)
-            digest.update(java.nio.ByteBuffer.allocate(4).putInt(name.size).array())
-            digest.update(name)
-            if (entry.folder) {
-                require(seen.add(entry.path)) { "A provider folder cycle was found." }
-                list(entry.path)
-                    .sortedBy { it.name }
-                    .forEach { add(it, "$relative/${it.name}", depth + 1) }
-                digest.update(2.toByte())
-            } else {
-                val (hash, bytes) = content(entry)
-                digest.update(java.nio.ByteBuffer.allocate(8).putLong(bytes).array())
-                digest.update(hash)
-            }
-        }
-        add(root, "", 0)
-        return "tree-sha256-v1:" + digest.digest().joinToString("") { "%02x".format(it) }
+        return if (control != null)
+            control.guard(java.io.Closeable { reads!!.cancel() }, ::calculate)
+        else calculate()
     }
 
     fun createdStep(path: String): FileStep {
@@ -991,31 +1015,50 @@ class DocumentAccess(
         )
     }
 
-    fun renameBatch(items: List<Pair<Entry, String>>): List<Pair<String, String>> {
+    fun renameBatch(
+        items: List<Pair<Entry, String>>,
+        control: TransferControl? = null,
+    ): List<Pair<String, String>> {
+        control?.check()
         if (items.all { it.first.documentUri == null })
-            return engine.renameBatch(items.map { RenameProposal(it.first.file, it.second) }).map {
-                it.first.absolutePath to it.second.absolutePath
-            }
+            return engine
+                .renameBatch(items.map { RenameProposal(it.first.file, it.second) }, control)
+                .map {
+                    it.first.absolutePath to it.second.absolutePath
+                }
         val targets = items.map { (entry, name) ->
             validateFilename(name)
             (entry.parentPath ?: error("Parent folder unavailable")) to name
         }
         require(targets.distinct().size == targets.size) { "Two items would have the same name." }
-        val sources = items.map { it.first.path }.toSet()
-        items.forEach { (entry, name) ->
+        val changed = items.filter { it.first.name != it.second }
+        if (changed.isEmpty()) return emptyList()
+        val sources = changed.map { it.first.path }.toSet()
+        val parents = changed.map { it.first.parentPath!! }.distinct().associateWith(::list)
+        changed.forEach { (entry, name) ->
+            control?.check()
             check(entry.canRename) { "${entry.name} can't be renamed by this provider." }
-            check(list(entry.parentPath!!).none { it.name == name && it.path !in sources }) {
+            check(
+                parents.getValue(entry.parentPath!!).none {
+                    it.name == name && it.path !in sources
+                },
+            ) {
                 "$name already exists."
             }
         }
-        val positions = items.associate { it.first.path to it.first.path }.toMutableMap()
+        val positions = changed.associate { it.first.path to it.first.path }.toMutableMap()
         try {
-            items.forEach { (entry, _) ->
+            changed.forEach { (entry, _) ->
+                control?.item(entry.name)
                 positions[entry.path] =
                     rename(entry.path, ".droidfinder-rename-${UUID.randomUUID()}")
             }
-            items.forEach { (entry, name) ->
+            changed.forEach { (entry, name) ->
+                control?.check()
                 positions[entry.path] = rename(positions.getValue(entry.path), name)
+                check(read(positions.getValue(entry.path)).name == name) {
+                    "The provider adjusted the requested name. Original names will be restored."
+                }
             }
         } catch (error: Exception) {
             positions.toMap().forEach { (original, current) ->
@@ -1025,30 +1068,50 @@ class DocumentAccess(
                             rename(current, ".droidfinder-rollback-${UUID.randomUUID()}")
                     }
             }
-            val recovery = items.mapNotNull { (entry, _) ->
+            changed.forEach { (entry, _) ->
                 val current = positions.getValue(entry.path)
-                if (current == entry.path) null
-                else
+                if (current != entry.path)
                     runCatching {
-                        rename(current, entry.name)
-                        null
+                        positions[entry.path] = rename(current, entry.name)
                     }
-                        .getOrElse { current }
             }
-            if (recovery.isNotEmpty())
-                error("Rename stopped. Recovery items were kept: ${recovery.joinToString()}")
+            changed.forEach { (entry, _) ->
+                val current = positions.getValue(entry.path)
+                if (current != entry.path)
+                    runCatching {
+                        if (read(current).name != entry.name) {
+                            positions[entry.path] =
+                                rename(
+                                    current,
+                                    uniqueName(entry.parentPath!!, recoveredRenameName(entry.name)),
+                                )
+                        }
+                    }
+            }
+            val recovery = positions.toList().filter { it.first != it.second }
+            if (recovery.isNotEmpty()) throw RenameRecoveryException(recovery, error)
             throw error
         }
         return positions.toList()
     }
 
-    fun renamedBatchStep(before: List<Entry>, pairs: List<Pair<String, String>>): FileStep {
+    fun renamedBatchStep(
+        before: List<Entry>,
+        pairs: List<Pair<String, String>>,
+        checkedStamps: Map<String, String>? = null,
+        requestedNames: Map<String, String>? = null,
+    ): FileStep {
         if (before.all { it.documentUri == null })
-            return FileStep.Renamed(pairs.map { File(it.first) to File(it.second) })
+            return FileStep.Renamed(
+                pairs.map { File(it.first) to File(it.second) },
+                checkedStamps?.let { stamps -> pairs.map { stamps.getValue(it.first) } },
+            )
         var current = pairs.map { it.second }
         val original = before.associateBy { it.path }
-        val names = pairs.map { read(it.second).name }
-        val stamps = current.map(::digest)
+        val names = pairs.map { requestedNames?.get(it.first) ?: read(it.second).name }
+        val stamps =
+            checkedStamps?.let { values -> pairs.map { values.getValue(it.first) } }
+                ?: current.map(::digest)
         return FileStep.Callback(
             check = { undo ->
                 current.forEachIndexed { index, path ->

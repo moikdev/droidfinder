@@ -1913,10 +1913,16 @@ constructor(
     internal val housekeeping
         get() = housekeepingState.value
 
+    private val batchRenameState = lazy { RenameController(this, viewModelScope) }
+    internal val batchRename
+        get() = batchRenameState.value
+
     internal fun stopAnalysisForBackground() {
         if (analysisState.isInitialized() && analysis.running) analysis.stop()
         if (checksumState.isInitialized() && checksums.running) checksums.stop()
         if (housekeepingState.isInitialized() && housekeeping.running) housekeeping.stop()
+        if (batchRenameState.isInitialized() && (batchRename.loading || batchRename.planning))
+            batchRename.stop()
     }
 
     internal fun revealAnalyzed(node: AnalysisNode) {
@@ -2264,9 +2270,13 @@ constructor(
         relocateMetadataPaths(pairs.map { it.first.absolutePath to it.second.absolutePath })
     }
 
-    private fun relocateMetadataPaths(names: List<Pair<String, String>>) {
+    private fun relocateMetadataPaths(
+        names: List<Pair<String, String>>,
+        relocateWorkspaceDocuments: Boolean = true,
+    ) {
         if (names.isEmpty()) return
-        getApplication<FinderApplication>().workspaceDocuments.relocated(names)
+        if (relocateWorkspaceDocuments)
+            getApplication<FinderApplication>().workspaceDocuments.relocated(names)
         val tagRoutes = names.filter {
             it.first.startsWith("@tag:") && it.second.startsWith("@tag:")
         }
@@ -2340,7 +2350,12 @@ constructor(
                     workspace.toPath().resolve(root.relativize(canonical)).toString()
                 else path
             }
-            relocateMetadataPaths(routes.map { local(it.first) to local(it.second) })
+            // The provider updated stable IDs synchronously. Replaying the routes here
+            // could capture a new copy created at a vacated path before this UI callback.
+            relocateMetadataPaths(
+                routes.map { local(it.first) to local(it.second) },
+                relocateWorkspaceDocuments = false,
+            )
         }
         session.panes.forEach { it.refresh() }
     }
@@ -2747,6 +2762,10 @@ constructor(
                 message = work()
             } catch (error: Exception) {
                 failure = error
+                if (error is RenameRecoveryException) {
+                    relocateMetadataPaths(error.changes)
+                    history.clear()
+                }
                 message = error.message ?: "Couldn't complete the operation."
             } finally {
                 try {
@@ -3141,6 +3160,168 @@ constructor(
             relocateMetadataPaths(pairs)
             rememberOperation("Rename ${items.size} items", listOf(step))
             "${items.size} items renamed"
+        }
+    }
+
+    internal fun renameReviewed(
+        reviewed: RenamePlan,
+        prepareUndo: Boolean,
+        finished: (Exception?) -> Unit,
+    ) {
+        val rows = reviewed.changes
+        if (!reviewed.canApply || rows.isEmpty()) {
+            finished(IllegalStateException("Refresh and review the names first."))
+            return
+        }
+        operation(
+            "Renaming ${rows.size} reviewed ${if (rows.size == 1) "item" else "items"}…",
+            onRejected = {
+                finished(IllegalStateException("Another file operation is in progress."))
+            },
+            onFinished = { finished(it) },
+        ) {
+            val currentTags = tagAssignments.toMap()
+            val checked =
+                withContext(Dispatchers.IO) {
+                    val control = transferControl
+                    val reads = ListingControl()
+                    control.guardSuspending(java.io.Closeable { reads.cancel() }) {
+                        control.phase("Checking reviewed names")
+                        val fresh =
+                            reviewed.rows.map { row ->
+                                if (!row.included) row.input
+                                else {
+                                    val input =
+                                        batchRename.capture(
+                                            row.input.id,
+                                            currentTags[row.input.id].orEmpty(),
+                                            reads,
+                                        )
+                                    check(
+                                        input.revision == row.input.revision &&
+                                            input.tags == row.input.tags &&
+                                            input.parentName == row.input.parentName &&
+                                            input.parent == row.input.parent &&
+                                            input.problem == null,
+                                    ) {
+                                        "${row.input.name} changed or lost rename permission. Refresh the preview."
+                                    }
+                                    input.copy(photo = row.input.photo)
+                                }
+                            }
+                        val neighbors = mutableListOf<RenameSibling>()
+                        for (parent in
+                            fresh
+                                .filterIndexed { index, _ -> reviewed.rows[index].included }
+                                .map { it.parent }
+                                .distinct()) {
+                            val reply =
+                                documents.visitChildren(parent, reads) {
+                                    check(neighbors.size < 100_000) {
+                                        "Destination verification exceeds 100,000 entries."
+                                    }
+                                    neighbors += RenameSibling(it.path, parent, it.name)
+                                    true
+                                }
+                            check(!reply.loading && reply.error == null) {
+                                reply.error
+                                    ?: "The destination listing is incomplete. Refresh before renaming."
+                            }
+                        }
+                        val excluded =
+                            reviewed.rows.filterNot { it.included }.map { it.input.id }.toSet()
+                        val rechecked =
+                            planRecipeRename(
+                                fresh,
+                                neighbors,
+                                excluded,
+                                reviewed.recipe,
+                                java.time.ZoneId.of(reviewed.zone),
+                                control::check,
+                            )
+                        check(
+                            rechecked.canApply &&
+                                rechecked.rows.map { it.name } == reviewed.rows.map { it.name },
+                        ) {
+                            "Destination names changed. Refresh the preview."
+                        }
+                        val entries = rows.map { documents.read(it.input.id, reads) }
+                        val stamps = mutableMapOf<String, String>()
+                        val purelyLocal = entries.all { it.documentUri == null }
+                        if (prepareUndo) {
+                            control.phase("Preparing Undo checks")
+                            for (entry in entries) {
+                                control.item(entry.name)
+                                stamps[entry.path] =
+                                    if (purelyLocal) {
+                                        if (entry.folder)
+                                            check(
+                                                inspectDisk(entry.file, control::check).complete,
+                                            ) {
+                                                "Folder verification is incomplete. Narrow the selection or disable Undo preparation."
+                                            }
+                                        fingerprint(entry.file, control)
+                                    } else documents.digest(entry.path, control)
+                            }
+                            for (row in reviewed.rows.filter { it.included }) {
+                                check(
+                                    batchRename
+                                        .capture(
+                                            row.input.id,
+                                            currentTags[row.input.id].orEmpty(),
+                                            reads,
+                                        )
+                                        .revision == row.input.revision,
+                                ) {
+                                    "${row.input.name} changed during Undo preparation. Refresh the preview."
+                                }
+                            }
+                        }
+                        Triple(entries, stamps.toMap(), rows.associate { it.input.id to it.name!! })
+                    }
+                }
+            transferControl.phase("Renaming reviewed items")
+            val pairs =
+                withContext(Dispatchers.IO) {
+                    documents.renameBatch(
+                        checked.first.map { it to checked.third.getValue(it.path) },
+                        transferControl,
+                    )
+                }
+            relocateMetadataPaths(pairs)
+            if (prepareUndo) {
+                val step =
+                    documents.renamedBatchStep(checked.first, pairs, checked.second, checked.third)
+                rememberOperation(
+                    "Rename ${pairs.size} ${if (pairs.size == 1) "item" else "items"}",
+                    listOf(step),
+                )
+            } else history.clear()
+            "${pairs.size} ${if (pairs.size == 1) "item" else "items"} renamed${if (!prepareUndo) " · Undo was disabled" else ""}"
+        }
+    }
+
+    internal fun openRenameRecovery(
+        path: String,
+        openFile: (Entry) -> Unit,
+        failure: (String) -> Unit,
+    ) {
+        viewModelScope.launch {
+            try {
+                val entry =
+                    withContext(Dispatchers.IO) {
+                        check(allowedPath(path)) { "Reconnect this recovery location first." }
+                        documents.read(path).also {
+                            check(it.documentUri != null || it.file.exists()) {
+                                "The recovery item is unavailable."
+                            }
+                        }
+                    }
+                batchRename.close()
+                if (entry.folder) goTo(entry.path) else openFile(entry)
+            } catch (error: Exception) {
+                failure(error.message ?: "Couldn't open the recovery item.")
+            }
         }
     }
 
@@ -4012,6 +4193,7 @@ constructor(
         if (analysisState.isInitialized()) analysis.close()
         if (checksumState.isInitialized()) checksums.close()
         if (housekeepingState.isInitialized()) housekeeping.close()
+        if (batchRenameState.isInitialized()) batchRename.close()
         listingControl?.cancel()
         listingJob?.cancel()
         viewportReaders.clear()

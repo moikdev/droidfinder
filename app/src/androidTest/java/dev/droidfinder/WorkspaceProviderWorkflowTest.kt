@@ -122,6 +122,46 @@ class WorkspaceProviderWorkflowTest {
     }
 
     @Test
+    fun delayedUiRefreshDoesNotRetargetCopiesAtVacatedPaths() {
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        instrumentation.runOnMainSync { app.model }
+        val parent = uri(access.ids.id(folder))
+        val source = uri(access.ids.id(File(folder, "Notes.txt")))
+        val sub =
+            DocumentsContract.createDocument(resolver, parent, Document.MIME_TYPE_DIR, "Moved")!!
+        instrumentation.waitForIdleSync()
+        val entered = java.util.concurrent.CountDownLatch(1)
+        val release = java.util.concurrent.CountDownLatch(1)
+        android.os.Handler(android.os.Looper.getMainLooper()).post {
+            entered.countDown()
+            check(release.await(10, java.util.concurrent.TimeUnit.SECONDS))
+        }
+        assertTrue(entered.await(5, java.util.concurrent.TimeUnit.SECONDS))
+        lateinit var moved: Uri
+        lateinit var copied: Uri
+        try {
+            moved = DocumentsContract.moveDocument(resolver, source, parent, sub)!!
+            copied = DocumentsContract.copyDocument(resolver, moved, parent)!!
+        } finally {
+            release.countDown()
+        }
+        instrumentation.waitForIdleSync()
+        assertEquals(
+            DocumentsContract.getDocumentId(source),
+            DocumentsContract.getDocumentId(moved),
+        )
+        assertNotEquals(
+            DocumentsContract.getDocumentId(moved),
+            DocumentsContract.getDocumentId(copied),
+        )
+        assertEquals("Workspace provider fixture", read(source))
+        assertEquals("Workspace provider fixture", read(copied))
+        assertTrue(DocumentsContract.deleteDocument(resolver, moved))
+        failing { read(source) }
+        assertEquals("Workspace provider fixture", read(copied))
+    }
+
+    @Test
     fun reservedFilesSymlinksUnknownIdsAndRootMutationsAreRejected() {
         val hidden = File(folder, ".droidfinder-working").apply { writeText("not published") }
         val outside =

@@ -332,21 +332,45 @@ class DragWorkflowTest {
                 error,
             )
         }
-        // Stop edge motion before resolving the row. Lazy composition also exposes
-        // prefetched rows whose center is still outside the viewport.
-        drag.moveDirect(viewport.center)
-        SystemClock.sleep(100)
-        drag.moveDirect(point("Folder35"))
+        // Park over the header so no folder springs open while the final scroll
+        // frame settles. Lazy semantics can expose a row before its bounds stabilize.
+        drag.moveDirect(Offset(viewport.center.x, viewport.top - 30f))
+        var lastBounds: androidx.compose.ui.geometry.Rect? = null
+        var stableSince = SystemClock.uptimeMillis()
         compose.waitUntil(5000) {
-            compose
-                .onAllNodesWithText("Move 1 item to Folder35")
-                .fetchSemanticsNodes()
-                .isNotEmpty() &&
-                (compose.onAllNodesWithText("Hold to open").fetchSemanticsNodes().isNotEmpty() ||
-                    compose
-                        .onAllNodesWithText("Release to move")
+            val bounds = file("Folder35").fetchSemanticsNode().boundsInWindow
+            if (lastBounds != bounds) {
+                lastBounds = bounds
+                stableSince = SystemClock.uptimeMillis()
+                false
+            } else SystemClock.uptimeMillis() - stableSince >= 250
+        }
+        drag.moveDirect(point("Folder35"))
+        try {
+            compose.waitUntil(5000) {
+                compose
+                    .onAllNodesWithText("Move 1 item to Folder35")
+                    .fetchSemanticsNodes()
+                    .isNotEmpty() &&
+                    (compose
+                        .onAllNodesWithText("Hold to open")
                         .fetchSemanticsNodes()
-                        .isNotEmpty())
+                        .isNotEmpty() ||
+                        compose
+                            .onAllNodesWithText("Release to move")
+                            .fetchSemanticsNodes()
+                            .isNotEmpty())
+            }
+        } catch (error: Throwable) {
+            val image = InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot()
+            File(compose.activity.filesDir, "drag-edge-feedback-failure.png").outputStream().use {
+                image.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, it)
+            }
+            image.recycle()
+            throw AssertionError(
+                "Revealed target at ${point("Folder35")}, viewport=$viewport, location=${model.location}; ${compose.onRoot().printToString()}",
+                error,
+            )
         }
         val bitmap = InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot()
         File(compose.activity.filesDir, "drag-edge-before-drop.png").outputStream().use {

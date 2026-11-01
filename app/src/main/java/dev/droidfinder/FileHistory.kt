@@ -10,8 +10,12 @@ fun fingerprint(file: File, control: TransferControl? = null): String {
         "${file.name} is no longer available."
     }
     val digest = MessageDigest.getInstance("SHA-256")
-    fun add(item: File, relative: String) {
+    var visited = 0
+    fun add(item: File, relative: String, depth: Int = 0) {
         control?.check()
+        require(++visited <= 100_000 && depth <= 128) {
+            "Undo verification exceeds the safe traversal limit."
+        }
         digest.update(relative.toByteArray())
         if (Files.isSymbolicLink(item.toPath())) {
             digest.update("link:${Files.readSymbolicLink(item.toPath())}".toByteArray())
@@ -19,7 +23,7 @@ fun fingerprint(file: File, control: TransferControl? = null): String {
             digest.update(0)
             (item.listFiles() ?: error("Couldn't read ${item.name}."))
                 .sortedBy { it.name }
-                .forEach { add(it, "$relative/${it.name}") }
+                .forEach { add(it, "$relative/${it.name}", depth + 1) }
         } else {
             digest.update("file:${item.length()}:${item.lastModified()}:".toByteArray())
             item.inputStream().buffered().use { input ->
@@ -144,16 +148,25 @@ sealed interface FileStep {
         }
     }
 
-    class Renamed(private val pairs: List<Pair<File, File>>) : FileStep {
-        private val stamps = pairs.map { fingerprint(it.second) }
+    class Renamed(private val pairs: List<Pair<File, File>>, checkedStamps: List<String>? = null) :
+        FileStep {
+        private val stamps = checkedStamps ?: pairs.map { fingerprint(it.second) }
+
+        init {
+            require(stamps.size == pairs.size)
+        }
 
         override fun validate(undo: Boolean) {
-            val current =
-                pairs.map { if (undo) it.second else it.first }.map { it.absolutePath }.toSet()
+            requireRenameDestinations(
+                pairs.map { (before, after) ->
+                    RenameProposal(
+                        if (undo) after else before,
+                        if (undo) before.name else after.name,
+                    )
+                },
+            )
             pairs.forEachIndexed { index, (before, after) ->
                 verify(if (undo) after else before, stamps[index])
-                val target = if (undo) before else after
-                if (target.absolutePath !in current) vacant(target)
             }
         }
 
@@ -248,6 +261,10 @@ class FileHistory(private val engine: FileEngine) {
                 command.applied[index] = !backward
             }
         } catch (error: Exception) {
+            if (error is RenameRecoveryException) {
+                changes += error.changes
+                clear()
+            }
             throw HistoryFailure(changes, error)
         }
         source.removeLast()
