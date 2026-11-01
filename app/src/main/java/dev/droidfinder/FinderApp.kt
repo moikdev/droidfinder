@@ -126,6 +126,7 @@ fun FinderApp(
             if (model.checksums.visible) FileChecksumDialog(model)
             if (model.housekeeping.visible) HousekeepingDialog(model)
             if (model.batchRename.visible) ReviewedRenameDialog(model, onOpenWith)
+            if (model.organization.visible) OrganizationDialog(model)
             LaunchedEffect(model.storageRequested) {
                 if (model.storageRequested) {
                     dialog = "storage"
@@ -217,10 +218,11 @@ fun FinderApp(
             LaunchedEffect(quickLook) {
                 if (quickLook == null && !searchActive && !addressActive) rootFocus.requestFocus()
             }
-            LaunchedEffect(dialog, cursorMenu) {
+            LaunchedEffect(dialog, cursorMenu, model.organization.visible) {
                 if (
                     dialog == null &&
                         cursorMenu == null &&
+                        !model.organization.visible &&
                         quickLook == null &&
                         !searchActive &&
                         !addressActive
@@ -239,7 +241,9 @@ fun FinderApp(
                         else dialog = "rename"
                     "batchRename" -> model.batchRename.open(selected)
                     "groupSelection" -> dialog = "groupSelection"
-                    "tags" -> dialog = "tags"
+                    "tags" ->
+                        model.organization.open(initialPage = if (selected.isEmpty()) 1 else 2)
+                    "collections" -> model.organization.open(initialPage = 0)
                     "copyTo" -> dialog = "copyTo"
                     "moveTo" -> dialog = "moveTo"
                     "reveal" -> model.revealSelection()
@@ -737,7 +741,6 @@ fun FinderApp(
                             dialog = null
                         },
                     )
-                "tags" -> TagManagerDialog(model) { dialog = null }
                 "copyTo",
                 "moveTo" -> DestinationDialog(model, dialog == "moveTo") { dialog = null }
                 "compress" ->
@@ -1104,6 +1107,30 @@ private fun FinderSidebar(
                 model.storageRequested = true
             }
             NavigationTree(model)
+            Spacer(Modifier.height(8.dp))
+            SidebarHeading("Collections")
+            (model.collections.take(6) + listOfNotNull(model.currentCollection))
+                .distinctBy { it.id }
+                .forEach { collection ->
+                    SidebarItem(
+                        collection.name,
+                        Icons.Outlined.CollectionsBookmark,
+                        model.location == "@collection:${collection.id}",
+                        dot = tagColor(collection.color),
+                    ) {
+                        model.navigate("@collection:${collection.id}")
+                    }
+                }
+            SidebarItem(
+                "All collections…",
+                Icons.Outlined.CollectionsBookmark,
+                false,
+                badge =
+                    if (model.libraryError != null || model.libraryNotice != null) "Review"
+                    else null,
+            ) {
+                model.organization.open(initialPage = 0)
+            }
             if (model.smartFolders.isNotEmpty()) {
                 Spacer(Modifier.height(8.dp))
                 SidebarHeading("Smart Folders")
@@ -1526,6 +1553,9 @@ internal fun ActionMenu(
             }
         }
         MenuAction("Tags…", Icons.AutoMirrored.Outlined.Label, idle) { action("tags") }
+        MenuAction("Collections…", Icons.Outlined.CollectionsBookmark, idle) {
+            action("collections")
+        }
         MenuAction("Search filters…", Icons.Outlined.FilterAlt) { action("filters") }
         MenuAction(
             "Save search as Smart Folder…",

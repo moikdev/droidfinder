@@ -11,122 +11,32 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-@Composable
-fun TagManagerDialog(model: FinderModel, dismiss: () -> Unit) {
-    var name by remember { mutableStateOf("") }
-    var color by remember { mutableStateOf("Blue") }
-    var editing by remember { mutableStateOf<String?>(null) }
-    AlertDialog(
-        onDismissRequest = dismiss,
-        title = {
-            Text(
-                if (model.selected.isEmpty()) "Manage tags"
-                else "Tags for ${model.selected.size} items",
-            )
-        },
-        text = {
-            Column(Modifier.heightIn(max = 460.dp).verticalScroll(rememberScrollState())) {
-                model.tagDefinitions.forEach { tag ->
-                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                        if (model.selected.isNotEmpty())
-                            Checkbox(
-                                checked =
-                                    model.selected.all {
-                                        tag.name in model.tagAssignments[it].orEmpty()
-                                    },
-                                onCheckedChange = { model.tag(tag.name) },
-                            )
-                        Box(Modifier.size(9.dp).background(tagColor(tag.color), CircleShape))
-                        Text(tag.name, Modifier.weight(1f).padding(start = 9.dp), fontSize = 12.sp)
-                        IconButton(
-                            onClick = {
-                                editing = tag.name
-                                name = tag.name
-                                color = tag.color
-                            },
-                        ) {
-                            Icon(
-                                Icons.Outlined.Edit,
-                                "Edit tag ${tag.name}",
-                                Modifier.size(15.dp),
-                                tint = Muted,
-                            )
-                        }
-                        IconButton(onClick = { model.removeTag(tag.name) }) {
-                            Icon(
-                                Icons.Outlined.Close,
-                                "Delete tag ${tag.name}",
-                                Modifier.size(15.dp),
-                                tint = Muted,
-                            )
-                        }
-                    }
-                }
-                HorizontalDivider(Modifier.padding(vertical = 14.dp))
-                OutlinedTextField(
-                    name,
-                    { name = it },
-                    label = { Text("New tag name") },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Row(
-                    Modifier.padding(top = 10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    defaultTags.forEach { tag ->
-                        IconButton(
-                            onClick = { color = tag.color },
-                            modifier =
-                                Modifier.size(34.dp).semanticsLabel("${tag.color} tag color"),
-                        ) {
-                            Box(
-                                Modifier.size(20.dp).background(tagColor(tag.color), CircleShape),
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                if (color == tag.color)
-                                    Icon(
-                                        Icons.Outlined.Check,
-                                        null,
-                                        tint = Color.White,
-                                        modifier = Modifier.size(14.dp),
-                                    )
-                            }
-                        }
-                    }
-                }
-                TextButton(
-                    onClick = {
-                        if (editing != null) model.renameTag(editing!!, name, color)
-                        else model.defineTag(name, color)
-                        if (model.tagDefinitions.any { it.name == name.trim() }) {
-                            name = ""
-                            editing = null
-                        }
-                    },
-                    enabled = name.isNotBlank(),
-                ) {
-                    Text(if (editing == null) "Add tag" else "Save tag")
-                }
-                if (model.selected.isNotEmpty())
-                    TextButton(onClick = { model.tag(null) }) {
-                        Text("Remove all tags from selection")
-                    }
-            }
-        },
-        confirmButton = { TextButton(onClick = dismiss) { Text("Done") } },
-    )
-}
+private data class DestinationStatus(
+    val path: String,
+    val loading: Boolean = true,
+    val writable: Boolean = false,
+    val error: String? = null,
+)
+
+private data class DestinationFolders(
+    val path: String,
+    val loading: Boolean = true,
+    val entries: List<Entry> = emptyList(),
+    val error: String? = null,
+)
 
 @Composable
 fun DestinationDialog(
@@ -136,34 +46,79 @@ fun DestinationDialog(
     extract: Boolean = false,
     archiveName: String? = null,
     compressionLevel: Int = -1,
+    titleOverride: String? = null,
+    confirmLabel: String? = null,
     onDestination: ((String) -> Unit)? = null,
     dismiss: () -> Unit,
 ) {
     val paths = remember { model.selectedEntries.map { it.path } }
-    var folder by remember {
-        mutableStateOf(model.folderPath?.takeIf { model.canCreate } ?: model.workspace.absolutePath)
+    var folder by rememberSaveable {
+        mutableStateOf(model.folderPath ?: model.workspace.absolutePath)
     }
-    val writable by
-        produceState(false, folder) {
-            value = false
+    val requested = folder
+    val control = remember(requested) { ListingControl() }
+    DisposableEffect(control) { onDispose { control.cancel() } }
+    val status by
+        produceState(DestinationStatus(requested), requested) {
+            value = DestinationStatus(requested)
             value =
                 withContext(Dispatchers.IO) {
-                    runCatching { model.documents.read(folder).writable }.getOrDefault(false)
+                    try {
+                        check(model.allowedPath(requested)) {
+                            "Reconnect storage for this destination."
+                        }
+                        val entry = model.documents.read(requested, control)
+                        check(entry.folder) { "Choose a folder as the destination." }
+                        DestinationStatus(
+                            requested,
+                            false,
+                            entry.writable,
+                            if (entry.writable) null
+                            else "This location is read only. Choose another destination.",
+                        )
+                    } catch (e: Exception) {
+                        if (e is CancellationException) throw e
+                        DestinationStatus(
+                            requested,
+                            false,
+                            error = e.message ?: "Couldn't check this destination.",
+                        )
+                    }
                 }
         }
-    val children by
-        produceState<List<Entry>>(emptyList(), folder) {
+    val choices by
+        produceState(DestinationFolders(requested), requested) {
+            value = DestinationFolders(requested)
             value =
                 withContext(Dispatchers.IO) {
-                    runCatching { model.listPath(folder).filter { it.folder } }
-                        .getOrDefault(emptyList())
+                    try {
+                        check(model.allowedPath(requested)) {
+                            "Reconnect storage to browse this destination."
+                        }
+                        DestinationFolders(
+                            requested,
+                            false,
+                            model.listPath(requested).filter { it.folder },
+                        )
+                    } catch (e: Exception) {
+                        if (e is CancellationException) throw e
+                        DestinationFolders(
+                            requested,
+                            false,
+                            error = e.message ?: "Couldn't list folders here.",
+                        )
+                    }
                 }
         }
+    val writable = status.path == requested && !status.loading && status.writable
+    val children = choices.entries.takeIf { choices.path == requested }.orEmpty()
     AlertDialog(
+        modifier = Modifier.testTag("destination-picker"),
         onDismissRequest = dismiss,
         title = {
             Text(
-                if (archive) "Save archive in…"
+                if (titleOverride != null) titleOverride
+                else if (archive) "Save archive in…"
                 else if (extract) "Extract archive to…"
                 else if (move) "Move ${paths.size} items to…" else "Copy ${paths.size} items to…",
             )
@@ -206,8 +161,22 @@ fun DestinationDialog(
                         { model.parentPath(folder)?.let { folder = it } },
                         enabled = model.parentPath(folder) != null,
                     )
-                    Text(model.title(folder), Modifier.weight(1f), fontSize = 12.sp, color = Muted)
+                    Text(
+                        model.title(folder),
+                        Modifier.weight(1f).semanticsLabel("Destination folder $folder"),
+                        fontSize = 12.sp,
+                        color = Muted,
+                    )
                 }
+                if (status.path != requested || status.loading)
+                    Text("Checking destination…", color = Muted, fontSize = 12.sp)
+                val problem =
+                    status.error.takeIf { status.path == requested }
+                        ?: choices.error.takeIf { choices.path == requested }
+                if (problem != null)
+                    Text(problem, color = MaterialTheme.colorScheme.error, fontSize = 12.sp)
+                else if (choices.path != requested || choices.loading)
+                    Text("Reading folders…", color = Muted, fontSize = 12.sp)
                 LazyColumn(Modifier.heightIn(min = 160.dp, max = 280.dp)) {
                     items(children, key = { it.path }) { entry ->
                         Row(
@@ -242,10 +211,11 @@ fun DestinationDialog(
                     else model.transferPaths(paths, folder, move)
                     dismiss()
                 },
-                enabled = paths.isNotEmpty() && writable,
+                enabled = (paths.isNotEmpty() || onDestination != null) && writable,
             ) {
                 Text(
-                    if (archive) "Save here"
+                    if (confirmLabel != null) confirmLabel
+                    else if (archive) "Save here"
                     else if (extract) "Extract here" else if (move) "Move here" else "Copy here",
                 )
             }

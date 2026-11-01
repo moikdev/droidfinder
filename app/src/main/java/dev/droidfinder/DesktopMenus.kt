@@ -412,6 +412,9 @@ fun FileContextMenu(
                     }
                 }
                 ContextItem("Tags…", Icons.AutoMirrored.Outlined.Label, idle) { run("tags") }
+                ContextItem("Collections…", Icons.Outlined.CollectionsBookmark, idle) {
+                    run("collections")
+                }
                 if (one != null)
                     ContextItem("Copy full path", Icons.Outlined.Link) { run("copyPath") }
                 ContextItem("Share…", Icons.Outlined.IosShare) { run("share") }

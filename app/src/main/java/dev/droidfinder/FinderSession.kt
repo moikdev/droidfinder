@@ -129,6 +129,10 @@ class FinderSession(
 
     val tagDefinitions = mutableStateOf(tagStore.definitions)
 
+    val collections = mutableStateOf(tagStore.collections)
+    val libraryError = mutableStateOf(tagStore.error)
+    val libraryNotice = mutableStateOf<String?>(null)
+
     val tags = mutableStateOf(tagAssignments.value.mapValues { it.value.firstOrNull().orEmpty() })
 
     val volumes = mutableStateOf<List<File>>(emptyList())

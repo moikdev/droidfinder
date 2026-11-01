@@ -1074,6 +1074,18 @@ constructor(
     var tagDefinitions by session.tagDefinitions
         private set
 
+    var collections by session.collections
+        private set
+
+    var libraryError by session.libraryError
+        private set
+
+    var libraryNotice by session.libraryNotice
+        internal set
+
+    val currentCollection
+        get() = collections.firstOrNull { location == "@collection:${it.id}" }
+
     var tags by session.tags
         private set
 
@@ -1591,6 +1603,9 @@ constructor(
         when {
             path == "@trash" -> "Trash"
             path == "@recent" -> "Recents"
+            path.startsWith("@collection:") ->
+                collections.firstOrNull { path == "@collection:${it.id}" }?.name
+                    ?: "Collection unavailable"
             path.startsWith("@tag:") -> path.removePrefix("@tag:")
             path.startsWith("@smart:") ->
                 smartFolders.firstOrNull { it.id == path.removePrefix("@smart:") }?.name
@@ -1917,7 +1932,16 @@ constructor(
     internal val batchRename
         get() = batchRenameState.value
 
+    private val organizationState = lazy { OrganizationController(this, viewModelScope) }
+    internal val organization
+        get() = organizationState.value
+
     internal fun stopAnalysisForBackground() {
+        if (
+            organizationState.isInitialized() &&
+                (organization.running || organization.membersLoading)
+        )
+            organization.stop()
         if (analysisState.isInitialized() && analysis.running) analysis.stop()
         if (checksumState.isInitialized() && checksums.running) checksums.stop()
         if (housekeepingState.isInitialized() && housekeeping.running) housekeeping.stop()
@@ -2003,6 +2027,20 @@ constructor(
     }
 
     fun goTo(path: String, preservePath: Boolean = false) {
+        if (
+            path == "@recent" ||
+                path == "@trash" ||
+                collections.any { path == "@collection:${it.id}" } ||
+                tagDefinitions.any { path == "@tag:${it.name}" } ||
+                smartFolders.any { path == "@smart:${it.id}" }
+        ) {
+            navigate(path)
+            return
+        }
+        if (path.startsWith("@")) {
+            message = "This saved location is no longer available."
+            return
+        }
         viewModelScope.launch {
             val valid =
                 withContext(Dispatchers.IO) {
@@ -2204,43 +2242,297 @@ constructor(
         prefs.edit().putStringSet("favorites", favorites).apply()
     }
 
-    private fun syncTags() {
+    internal fun syncLibrary() {
+        collections = tagStore.collections
+        libraryError = tagStore.error
         tagAssignments = tagStore.assignments
         tagDefinitions = tagStore.definitions
         tags = tagAssignments.mapValues { it.value.firstOrNull().orEmpty() }
     }
 
-    private fun tagEdit(label: String, route: Pair<String, String>? = null, edit: () -> Unit) {
-        if (busy != null) return
-        message = null
-        val before = tagStore.assignments
-        val catalog = tagStore.definitions
-        runCatching {
-            edit()
-            val after = tagStore.assignments
-            val newCatalog = tagStore.definitions
-            history.record(
-                label,
-                listOf(
-                    FileStep.Callback(
-                        check = {},
-                        perform = { undo ->
-                            tagStore.restore(
-                                if (undo) catalog else newCatalog,
-                                if (undo) before else after,
-                            )
-                            if (route == null) emptyList()
-                            else listOf(if (undo) route.second to route.first else route)
-                        },
-                    ),
+    private fun syncTags() = syncLibrary()
+
+    private fun recordTags(
+        label: String,
+        before: TagSnapshot,
+        after: TagSnapshot,
+        route: Pair<String, String>? = null,
+    ) {
+        if (before == after) return
+        history.record(
+            label,
+            listOf(
+                FileStep.Callback(
+                    check = { undo -> tagStore.verifyTags(if (undo) after else before) },
+                    perform = { undo ->
+                        tagStore.restoreTags(
+                            if (undo) after else before,
+                            if (undo) before else after,
+                        )
+                        if (route == null) emptyList()
+                        else listOf(if (undo) route.second to route.first else route)
+                    },
                 ),
-            )
-            syncTags()
-            syncHistory()
-            if (route != null) relocateMetadataPaths(listOf(route))
-            session.panes.filter { it.location.startsWith("@tag:") }.forEach { it.refresh() }
+            ),
+        )
+        syncLibrary()
+        syncHistory()
+        if (route != null) relocateMetadataPaths(listOf(route))
+        session.panes.filter { it.location.startsWith("@tag:") }.forEach { it.refresh() }
+    }
+
+    private fun tagEdit(
+        label: String,
+        route: Pair<String, String>? = null,
+        edit: () -> Unit,
+    ): Boolean {
+        if (busy != null) {
+            message = "Wait for the current operation."
+            return false
         }
-            .onFailure { message = it.message }
+        message = null
+        return runCatching {
+            val before = tagStore.reload().tags
+            check(tagStore.error == null) { tagStore.error!! }
+            edit()
+            recordTags(label, before, tagStore.snapshot().tags, route)
+            syncLibrary()
+            true
+        }
+            .getOrElse {
+                message = it.message
+                syncLibrary()
+                false
+            }
+    }
+
+    private fun recordCollections(
+        label: String,
+        before: List<FinderCollection>,
+        after: List<FinderCollection>,
+    ) {
+        if (before == after) return
+        history.record(
+            label,
+            listOf(
+                FileStep.Callback(
+                    check = { undo -> tagStore.verifyCollections(if (undo) after else before) },
+                    perform = { undo ->
+                        tagStore.restoreCollections(
+                            if (undo) after else before,
+                            if (undo) before else after,
+                        )
+                        emptyList()
+                    },
+                ),
+            ),
+        )
+        syncLibrary()
+        syncHistory()
+        session.panes.filter { it.location.startsWith("@collection:") }.forEach { it.refresh() }
+    }
+
+    private fun validateOrganizationItems(rows: List<OrganizationItem>, control: ListingControl) {
+        rows.forEach { row ->
+            control.check()
+            check(row.problem == null && row.node != null) {
+                "Refresh unavailable items before applying changes."
+            }
+            check(analysisSource.read(row.path, control).revision == row.node.revision) {
+                "${row.name} changed. Refresh and review the selection again."
+            }
+        }
+    }
+
+    internal fun applyReviewedTags(
+        state: OrganizationController,
+        baseline: TagSnapshot,
+        rows: List<OrganizationItem>,
+        changes: Map<String, TagChange>,
+        clear: Boolean,
+    ) {
+        operation(
+            "Updating tags…",
+            clearOriginSelection = false,
+            onRejected = { state.selectionFailed("Wait for the current operation.") },
+            onFinished = { error -> if (error != null) state.selectionFailed(error.message) },
+        ) {
+            val result =
+                withContext(Dispatchers.IO) {
+                    val control = ListingControl()
+                    transferControl.guard(java.io.Closeable { control.cancel() }) {
+                        validateOrganizationItems(rows, control)
+                        val before = tagStore.reload().tags
+                        check(tagStore.error == null) { tagStore.error!! }
+                        check(
+                            before.definitions == baseline.definitions &&
+                                rows.all {
+                                    before.assignments[it.path].orEmpty() ==
+                                        baseline.assignments[it.path].orEmpty()
+                                },
+                        ) {
+                            "Tags changed while this review was open. Refresh before applying."
+                        }
+                        val values = before.assignments.toMutableMap()
+                        rows.forEach { row ->
+                            val tags = reviewedTags(values[row.path].orEmpty(), changes, clear)
+                            if (tags.isEmpty()) values.remove(row.path) else values[row.path] = tags
+                        }
+                        control.check()
+                        tagStore.restoreTags(before, before.copy(assignments = values))
+                        before to tagStore.snapshot().tags
+                    }
+                }
+            recordTags("Edit selected tags", result.first, result.second)
+            state.completed(
+                "Tags updated for ${rows.size} items. Session Undo is available.",
+                reset = true,
+            )
+            "Tags updated"
+        }
+    }
+
+    internal fun addReviewedCollection(
+        state: OrganizationController,
+        id: String?,
+        name: String?,
+        color: String,
+        rows: List<OrganizationItem>,
+    ) {
+        operation(
+            if (id == null) "Creating collection…" else "Adding collection references…",
+            clearOriginSelection = false,
+            onRejected = { state.selectionFailed("Wait for the current operation.") },
+            onFinished = { error -> if (error != null) state.selectionFailed(error.message) },
+        ) {
+            val result =
+                withContext(Dispatchers.IO) {
+                    val control = ListingControl()
+                    transferControl.guard(java.io.Closeable { control.cancel() }) {
+                        validateOrganizationItems(rows, control)
+                        val before = tagStore.reload().collections
+                        check(tagStore.error == null) { tagStore.error!! }
+                        control.check()
+                        val currentId =
+                            if (id == null)
+                                tagStore.createCollection(name!!, color, rows.map { it.path })
+                            else
+                                id.also {
+                                    tagStore.collectionItems(it, rows.map { row -> row.path }, true)
+                                }
+                        Triple(before, tagStore.snapshot().collections, currentId)
+                    }
+                }
+            recordCollections(
+                if (id == null) "New collection" else "Add collection references",
+                result.first,
+                result.second,
+            )
+            state.inspect(result.third)
+            state.completed(
+                if (result.first == result.second) "These references are already in the collection."
+                else "Collection saved. Original files stay in their folders.",
+            )
+            "Collection saved"
+        }
+    }
+
+    internal fun editOrganizationLibrary(
+        state: OrganizationController,
+        label: String,
+        tags: Boolean,
+        route: Pair<String, String>?,
+        edit: (TagStore) -> Unit,
+    ) {
+        operation(
+            "Updating organization library…",
+            clearOriginSelection = false,
+            onRejected = { state.selectionFailed("Wait for the current operation.") },
+            onFinished = { error -> if (error != null) state.selectionFailed(error.message) },
+        ) {
+            val result =
+                withContext(Dispatchers.IO) {
+                    val before = tagStore.reload()
+                    check(tagStore.error == null) { tagStore.error!! }
+                    transferControl.check()
+                    edit(tagStore)
+                    before to tagStore.snapshot()
+                }
+            if (tags)
+                recordTags(label.removeSuffix("."), result.first.tags, result.second.tags, route)
+            else
+                recordCollections(
+                    label.removeSuffix("."),
+                    result.first.collections,
+                    result.second.collections,
+                )
+            val removedTags =
+                result.first.tags.definitions.map { it.name }.toSet() -
+                    result.second.tags.definitions.map { it.name }.toSet()
+            val removedCollections =
+                result.first.collections.map { it.id }.toSet() -
+                    result.second.collections.map { it.id }.toSet()
+            session.panes
+                .filter { pane ->
+                    removedTags.any { pane.location == "@tag:$it" } ||
+                        removedCollections.any { pane.location == "@collection:$it" }
+                }
+                .forEach { it.navigate(workspace.path) }
+            state.completed(
+                if (result.first == result.second) "$label No changes were needed."
+                else "$label Session Undo is available.",
+            )
+            label
+        }
+    }
+
+    internal fun exportLibrary(
+        value: LibraryExport,
+        parent: String,
+        name: String,
+        done: (String?) -> Unit,
+    ) {
+        operation(
+            "Exporting organization library…",
+            destination = parent,
+            clearOriginSelection = false,
+            onRejected = { done("Wait for the current operation.") },
+            onFinished = { error -> if (error != null) done(error.message ?: "Export failed.") },
+        ) {
+            val path =
+                withContext(Dispatchers.IO) {
+                    check(allowedPath(parent)) { "Reconnect the destination before exporting." }
+                    require(!name.startsWith(".droidfinder-")) {
+                        "That filename is reserved for working files."
+                    }
+                    val desired = documents.uniqueName(parent, validateFilename(name))
+                    val bytes = value.json().toByteArray(Charsets.UTF_8)
+                    transferControl.check()
+                    val staged =
+                        documents.create(
+                            parent,
+                            ".droidfinder-${java.util.UUID.randomUUID()}",
+                            false,
+                            "application/json",
+                        )
+                    try {
+                        documents.output(staged).use { output ->
+                            bytes.inputStream().use { transferControl.copy(it, output) }
+                        }
+                        transferControl.check()
+                        documents.rename(staged, desired)
+                    } catch (e: Exception) {
+                        runCatching { documents.delete(staged) }
+                        throw e
+                    }
+                }
+            rememberOperation(
+                "Export organization library",
+                listOf(withContext(Dispatchers.IO) { documents.createdStep(path) }),
+            )
+            done(null)
+            "Organization library exported. Existing files were kept."
+        }
     }
 
     fun tag(color: String?) {
@@ -2254,8 +2546,8 @@ constructor(
             tagStore.rename(old, name, color)
         }
 
-    fun removeTag(name: String) {
-        tagEdit("Delete tag") { tagStore.remove(name) }
+    fun removeTag(name: String, expected: TagSnapshot? = null) {
+        if (!tagEdit("Delete tag") { tagStore.remove(name, expected) }) return
         session.panes
             .filter { it.location == "@tag:$name" }
             .forEach { it.navigate(workspace.absolutePath) }
@@ -2295,7 +2587,7 @@ constructor(
                     )
             }
         }
-        tagStore.relocate(names)
+        relocateOrganization(names)
         syncTags()
         styleStore.relocate(names)
         folderStyles = styleStore.styles
@@ -2360,9 +2652,17 @@ constructor(
         session.panes.forEach { it.refresh() }
     }
 
+    private fun relocateOrganization(routes: List<Pair<String, String>>, copy: Boolean = false) {
+        runCatching { tagStore.relocate(routes, copy) }
+            .onFailure {
+                libraryNotice =
+                    "Files were kept, but organization metadata couldn't follow this change: ${it.message}. Review affected references in Organize. The original library was preserved."
+            }
+    }
+
     private fun copyTags(old: String, new: String) {
         folderViews.relocate(listOf(old to new), copy = true)
-        tagStore.relocate(listOf(old to new), copy = true)
+        relocateOrganization(listOf(old to new), copy = true)
         syncTags()
         styleStore.relocate(listOf(old to new), copy = true)
         folderStyles = styleStore.styles
@@ -2370,7 +2670,7 @@ constructor(
 
     private fun copyMetadataPaths(pairs: List<Pair<String, String>>) {
         folderViews.relocate(pairs, copy = true)
-        tagStore.relocate(pairs, copy = true)
+        relocateOrganization(pairs, copy = true)
         syncTags()
         styleStore.relocate(pairs, copy = true)
         folderStyles = styleStore.styles
@@ -2428,6 +2728,7 @@ constructor(
         val search = query.trim()
         val hidden = showHidden
         val smart = smartFolders.firstOrNull { path == "@smart:${it.id}" }
+        val collection = collections.firstOrNull { path == "@collection:${it.id}" }
         val rules = effectiveSearchRules
         val identity = listOf(path, rules, hidden, smart?.root, tabs[activeTab].id)
         val budgetKey = ListingScope(path, rules, hidden, smart?.root)
@@ -2469,8 +2770,13 @@ constructor(
                             }
                             documents.read(path, control)
                         } else null
+                    if (path.startsWith("@collection:")) {
+                        check(libraryError == null) { libraryError!! }
+                        check(collection != null) { "This collection is no longer in the library." }
+                    }
                     val explicit =
                         when {
+                            collection != null -> collection.paths
                             path == "@trash" -> engine.trashItems().map { it.path }
                             path.startsWith("@tag:") ->
                                 tagsSnapshot
@@ -4194,6 +4500,7 @@ constructor(
         if (checksumState.isInitialized()) checksums.close()
         if (housekeepingState.isInitialized()) housekeeping.close()
         if (batchRenameState.isInitialized()) batchRename.close()
+        if (organizationState.isInitialized()) organization.close()
         listingControl?.cancel()
         listingJob?.cancel()
         viewportReaders.clear()

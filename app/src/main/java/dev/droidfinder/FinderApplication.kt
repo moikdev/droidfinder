@@ -50,6 +50,9 @@ class FinderApplication : Application(), ViewModelStoreOwner {
                                 initialPath == "@recent" ||
                                     initialPath == "@trash" ||
                                     pane.tagDefinitions.any { initialPath == "@tag:${it.name}" } ||
+                                    pane.collections.any {
+                                        initialPath == "@collection:${it.id}"
+                                    } ||
                                     pane.smartFolders.any { initialPath == "@smart:${it.id}" }
                             if (virtual) pane.navigate(initialPath)
                             else pane.goTo(initialPath, preservePath = true)
