@@ -25,7 +25,7 @@ Keep the signing key stable and backed up privately. These development previews 
 
 JVM tests cover manifest bounds, source restrictions, credential/cleartext rejection, path traversal and tampered/truncated/oversized downloads. Native tests use APK fixtures generated with the current checkout's debug key; the fixture private key and APKs stay in ignored build outputs and never enter a shipping build. Native checks cover package/version/certificate/Android compatibility, cancellation/retry, cached-download verification and recovery, update controls, feed errors and Android's installer handoff.
 
-Build and native results are recorded in [VALIDATION.md](../VALIDATION.md). Public manifest/APK downloads through the production source passed on both API 30 and API 36. The exact optimized preview shows [“You’re up to date”](screenshots/app-updates-tablet.png) against the published feed. The release also includes a validation archive with the artifact manifest, final test logs, installation-preservation evidence and live feed checks. No physical-device or third-party provider success is implied by emulator checks.
+Build and native results are recorded in [VALIDATION.md](../VALIDATION.md). Public manifest/APK downloads through the production source passed on both API 30 and API 36. The exact optimized preview shows [“You’re up to date”](screenshots/app-updates-030.png) against the published feed. The release also includes a validation archive with the artifact manifest, final test logs, installation-preservation evidence and live feed checks. No physical-device or third-party provider success is implied by emulator checks.
 
 
 To run the opt-in public-feed acceptance check after installing the debug and test APKs on a dedicated emulator:
