@@ -267,7 +267,7 @@ class LoadingWorkflowTest {
         compose.waitUntil(5000) { model.selected.size == 1 }
         val grip =
             compose
-                .onNodeWithContentDescription("Hold to drag selected files into a folder")
+                .onNodeWithContentDescription("Hold to drag selected files")
                 .fetchSemanticsNode()
                 .boundsInWindow
                 .center
