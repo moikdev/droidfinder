@@ -144,7 +144,7 @@ def main():
         return node
     def fully_visible(tree,node):
         l,t,r,b=device.bounds(node);w,h=device.screen
-        if not (0<=l<r<=w and 0<=t<b<=h and b-t>=48*density):return False
+        if not (0<=l<r<=w and 0<=t<b<=h and r-l>=48*density and b-t>=48*density):return False
         parents={child:parent for parent in tree.iter() for child in parent}
         parent=node
         while parent in parents:

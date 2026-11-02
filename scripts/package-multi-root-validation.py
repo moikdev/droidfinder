@@ -42,7 +42,7 @@ def full_control(tree,title,label,footer,width,height,minimum):
         box=bounds(node)
         if len(box)!=4:continue
         l,t,r,b=box
-        if node.get('enabled')!='true' or not (0<=l<r<=width and 0<=t<b<=height and b-t>=minimum):continue
+        if node.get('enabled')!='true' or not (0<=l<r<=width and 0<=t<b<=height and r-l>=minimum and b-t>=minimum):continue
         parent=node;clipped=False
         while parent in parents:
             parent=parents[parent]
@@ -116,11 +116,21 @@ def main():
     restored=read(PROOF/'restored-public-tablets.json');assert len(restored)==2 and all(r['privateOriginalMetadataAndPreferencesRestored'] and r['installedPublicApkSha256']==expected and float(r['fontScale'])==1 for r in restored)
     signing=read(PROOF/'signing-continuity.json');assert signing['sameSigningCertificate']
     for name in ('native-source-hashes.json','native-classes.txt','final-debug-checks.txt','release-build.txt','native-selector-build.txt',
-                 'public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','signing-continuity.json','rejected-attempts.json'):
+                 'public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','signing-continuity.json','rejected-attempts.json',
+                 'local-acceptance.json','verify-local.py','verify-public.py','verify-validation.py','run-live-feed.py',
+                 'restore-public-tablets.py','write-release-body.py','finalize-docs.py'):
         files.append(PROOF/name)
     for api in (30,36):
         for suffix in ('first','second','third'):
             for ext in ('txt','json'):files.append(PROOF/f'api{api}-focused-{suffix}.{ext}')
+    rejected=read(PROOF/'rejected-attempts.json');assert rejected['rejectedAttemptsExcludedFromAcceptance']
+    for attempt in rejected['optimizedAttempts']:
+        assert attempt['countedTowardFinalAcceptance'] is False
+        log=ROOT/attempt['console'];folder=ROOT/attempt['directory']
+        assert log.parent==PROOF and re.fullmatch(r'api(30|36)-optimized-console-before-[a-z0-9-]+\.txt',log.name)
+        assert folder.parent==PROOF and re.fullmatch(r'api(30|36)-optimized-before-[a-z0-9-]+',folder.name)
+        files.append(log)
+        files += [path for path in folder.iterdir() if path.is_file() and path.suffix in ('.png','.xml','.json')]
     for name,target in (('search-locations-draft','search-locations-draft'),('search-locations-tablet','search-locations-tablet'),
                         ('search-locations-unavailable','search-locations-unavailable'),('search-locations-large-text','600dp-font1.6-scope')):
         assert sha(ROOT/'docs/screenshots'/(name+'.png'))==sha(PROOF/'api36-optimized'/(target+'.png'))
