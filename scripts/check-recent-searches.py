@@ -111,11 +111,17 @@ def main():
     def menu(name,label):
         device.click(name+'-open','Actions')
         # Start from the top even when DropdownMenu retained its previous scroll position.
+        def menu_panes(tree):
+            # Focus/IME transitions can briefly expose no application window.
+            # The actual popup title is retained on both assigned Android APIs.
+            return [n for w in tree.iter('window') if w.get('title')=='Pop-Up Window'
+                    for n in w.iter('node') if n.get('class')=='android.widget.ScrollView'
+                    and n.get('scrollable')=='true' and n.get('package')=='dev.findroid']
         for _ in range(12):
-            tree = device.dump(name+'-top')
+            tree = device.wait(name+'-top',lambda t: len(menu_panes(t))==1)
             if device.nodes(tree,label): device.tap(device.one(tree,label)); return
             if device.nodes(tree,'App updates'): break
-            panes = [n for n in tree.iter('node') if n.get('class')=='android.widget.ScrollView' and n.get('scrollable')=='true' and n.get('package')=='dev.findroid']
+            panes = menu_panes(tree)
             assert len(panes)==1
             l,t,r,b=device.bounds(panes[0]); x=(l+r)//2
             device.shell('input','swipe',x,round(t+(b-t)*.25),x,round(t+(b-t)*.8),300)
@@ -191,7 +197,13 @@ def main():
         # delivering the focus/cursor update, making an immediate End unreliable.
         if old: device.shell('input','keyevent',*([67]*len(old)),*([112]*len(old)))
         device.wait(name+'-empty',lambda t: editable(t).get('text','')=='')
-        if text: device.shell('input','text',text.replace(' ','%s'))
+        # Long bursts can outrun the emulator IME. Check every chunk before
+        # sending the next, preserving the same exact final-value requirement.
+        for offset in range(0,len(text),12):
+            part=text[offset:offset+12]
+            device.shell('input','text',part.replace(' ','%s'))
+            prefix=text[:offset+len(part)]
+            device.wait(name+f'-typed-{offset+len(part)}',lambda t: editable(t).get('text','')==prefix)
         device.wait(name+'-replaced',lambda t: editable(t).get('text','')==text)
     def go(name,path):
         device.shell('input','keyevent',134)  # Existing F4 address shortcut.

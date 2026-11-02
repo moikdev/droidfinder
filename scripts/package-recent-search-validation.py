@@ -159,8 +159,8 @@ def main():
     assert all(row['privateOriginalMetadataAndPreferencesRestored'] and row['installedPublicApkSha256']==expected and float(row['fontScale'])==1.0 for row in restored)
     files += [ROOT/'captures/workspace-recovery/native-environment.py']
     files += [EVIDENCE/name for name in ('native-source-hashes.json','native-classes.txt','public-downloads.json','api36-live-feed.json',
-        'api36-live-feed.txt','restored-public-tablets.json','final-debug-checks.txt','release-build.txt','signing-continuity.json','rejected-attempts.json',
-        'verify-public.py','restore-public-tablets.py','run-live-feed.py','verify-validation.py','write-release-body.py','finalize-docs.py')]
+        'api36-live-feed.txt','restored-public-tablets.json','final-debug-checks.txt','release-build.txt','history-visibility-test-build.txt','signing-continuity.json','rejected-attempts.json',
+        'verify-public.py','verify-local.py','local-acceptance.json','restore-public-tablets.py','run-live-feed.py','verify-validation.py','write-release-body.py','finalize-docs.py')]
     # Retain rejected candidate failures separately from the accepted build's counts.
     files += [EVIDENCE/name for name in ('rejected-native/api30-organization-first.json','rejected-native/api30-organization-first.txt',
         'api30-organization-diagnostic.json','api30-organization-diagnostic.txt',
@@ -172,6 +172,9 @@ def main():
     second=load(EVIDENCE/'rejected-native/api30-history-filter-second.json')
     assert not second['success'] and second['passed']==19 and second['failed']==1
     files += [EVIDENCE/'rejected-native/api30-history-filter-second.json',EVIDENCE/'rejected-native/api30-history-filter-second.txt']
+    loading=load(EVIDENCE/'rejected-native/api30-loading-first.json')
+    assert not loading['success'] and loading['passed']==9 and loading['failed']==1
+    files += [EVIDENCE/'rejected-native/api30-loading-first.json',EVIDENCE/'rejected-native/api30-loading-first.txt']
     for attempt in range(1,4):
         report=load(EVIDENCE/f'api30-history-filter-diagnostic-{attempt}.json'); accepted(report)
         assert report['passed']==1 and report['apkSha256']==report['installedApkSha256']
@@ -188,7 +191,8 @@ def main():
         assert path.is_file() and path.is_relative_to(ROOT),path
         assert path.suffix not in ('.apk','.jks','.keystore','.bin')
         assert 'native-original' not in path.parts and 'bugreport' not in path.name
-    manifest={'applicationSourceCommit':info['source_commit'],'evidenceCommit':evidence_commit,'previewApkSha256':expected,
+    test_commit=subprocess.check_output(['git','log','-1','--format=%H','--','app/src/androidTest'],cwd=ROOT,text=True).strip()
+    manifest={'applicationSourceCommit':info['source_commit'],'nativeTestSourceCommit':test_commit,'evidenceCommit':evidence_commit,'previewApkSha256':expected,
               'jvmCases':422,'nativeCasesPerApi':279,'isolatedBatchesPerApi':29,
               'files':[{'path':str(path.relative_to(ROOT)),'sha256':sha(path),'bytes':path.stat().st_size} for path in files]}
     args.output.parent.mkdir(parents=True,exist_ok=True)
@@ -196,7 +200,7 @@ def main():
         archive.writestr('EVIDENCE.json',json.dumps(manifest,indent=2)+'\n')
         for path in files: archive.write(path,path.relative_to(ROOT))
     result={'archive':args.output.name,'bytes':args.output.stat().st_size,'sha256':sha(args.output),'entries':len(files)+1,
-            'applicationSourceCommit':info['source_commit'],'evidenceCommit':evidence_commit,'jvmCases':422,'nativeCasesPerApi':279,'isolatedBatchesPerApi':29}
+            'applicationSourceCommit':info['source_commit'],'nativeTestSourceCommit':test_commit,'evidenceCommit':evidence_commit,'jvmCases':422,'nativeCasesPerApi':279,'isolatedBatchesPerApi':29}
     (EVIDENCE/'validation-package.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
 
