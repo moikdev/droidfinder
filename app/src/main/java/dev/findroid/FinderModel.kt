@@ -551,6 +551,11 @@ constructor(
     internal val recentSearchHistory get() = session.recentSearches
     internal fun recentSearchRoot(): String? = (currentSmartFolder?.root ?: location).takeIf(::recentSearchRootSupported)
     internal fun discardSearchDraft() { searchHistoryDraft = null }
+    internal fun submitSearchQuery() {
+        // An explicit submit is a fresh intent, even for a restored/previously cleared query.
+        editedSearch()
+        rememberCurrentSearch()
+    }
     internal fun finishAndClearSearchQuery() {
         rememberCurrentSearch()
         updateQuery("")

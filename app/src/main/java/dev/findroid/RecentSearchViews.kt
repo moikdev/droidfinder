@@ -65,7 +65,7 @@ internal fun SearchQueryField(
     val expanded = focused && windowFocused && !applying && model.query.isNotBlank() && dismissedQuery != model.query && suggestions.isNotEmpty()
     DisposableEffect(model) { onDispose { model.rememberCurrentSearch() } }
     fun submit() {
-        model.rememberCurrentSearch()
+        model.submitSearchQuery()
         dismissedQuery = model.query
         focus.clearFocus()
         keyboard?.hide()

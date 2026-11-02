@@ -39,7 +39,7 @@ Exact exclusions keep their saved file/folder references when you choose Search 
 
 ## Control history on this tablet
 
-**Remember searches** is on by default. Turn it off to pause new entries; existing entries can still be reviewed, reused, or removed. **Clear history** immediately empties the list and keeps the recording preference you chose. Clearing, removing, or pausing also invalidates drafts in other panes, so they cannot bring back an entry you just cleared.
+**Remember searches** is on by default. Turn it off to pause new entries; existing entries can still be reviewed, reused, or removed. **Clear history** immediately empties the list and keeps the recording preference you chose. Clearing, removing, or pausing also invalidates drafts in other panes, so they cannot bring back an entry you just cleared. Deliberately submitting the query again can add it back.
 
 The list and its recording preference persist across restarts and are shared by Findroid’s panes and windows on the same tablet. They are excluded from setup export/import and Android’s automatic backups. The list stores query/filter text, location references, an identity, and a last-used time. It stores no result entries or content snippets.
 

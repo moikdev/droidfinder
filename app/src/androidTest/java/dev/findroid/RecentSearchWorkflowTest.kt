@@ -140,6 +140,26 @@ class RecentSearchWorkflowTest {
         compose.onNodeWithContentDescription("Close search").performClick()
         compose.runOnIdle { assertEquals(1, history.state.searches.size); assertEquals("", model.query) }
     }
+    @Test fun explicitlySubmittingARestoredOrClearedQueryStartsANewHistoryIntent() {
+        compose.runOnIdle {
+            model.updateQuery("Report")
+            val original = model.tabs[model.activeTab].id
+            model.newTab(target.path)
+            model.switchTab(model.tabs.indexOfFirst { it.id == original })
+            history.clear()
+            model.flushNavigationState()
+            assertTrue(history.state.searches.isEmpty())
+        }
+        loaded(); openSearch(); field().performImeAction(); loaded()
+        compose.runOnIdle {
+            assertEquals(listOf("Report"), history.state.searches.map { it.rules.name })
+            assertEquals(source.path, history.state.searches.single().root)
+            history.clear(); model.flushNavigationState()
+            assertTrue(history.state.searches.isEmpty())
+        }
+        field().performClick(); field().performImeAction(); loaded()
+        compose.runOnIdle { assertEquals(listOf("Report"), history.state.searches.map { it.rules.name }) }
+    }
     @Test fun leavingAnEditedFieldRecordsOnceAndTheNamedMenuOpensHistory() {
         openSearch(); field().performTextInput("Notes")
         recent()

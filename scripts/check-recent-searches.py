@@ -198,6 +198,12 @@ def main():
         report.update(actual036Upgrade=True,installedOptimizedBytes=True)
         recent('upgraded-history'); device.wait('initial-empty',lambda t: bool(device.nodes(t,'No recent searches')))
         device.capture('history-initial-empty'); close_history('close-initial')
+        device.shell('input','keyevent',133)  # Explicit Enter on an unchanged restored query.
+        device.wait('restored-query-field',lambda t: bool(device.nodes(t,'Search files')))
+        device.shell('input','keyevent',66)
+        recent('explicit-restored-submit')
+        device.wait('restored-query-recorded',lambda t: any(n.get('text','').startswith('Writing project · ') for n in t.iter('node')))
+        close_history('close-explicit-submit'); report['explicitRestoredQuerySubmit']=True
         menu('apply-existing-rules','Search filters…'); device.click('apply-filters','Apply filters')
         browser('finished-rules','Report current.txt'); recent('first-history')
         click_history('expand-filters','Show filters','Writing project')
@@ -245,10 +251,31 @@ def main():
         assert len(searches)==2 and {s['root'] for s in searches}=={source,target}
         assert all(s['rules']==rules for s in searches),searches
         assert all(s['rules']['name']!='Rep' for s in searches)
+        # This list was seeded and exercised entirely with disposable synthetic data.
+        (args.output/'synthetic-history.json').write_text(json.dumps({'version':1,'searches':searches},indent=2)+'\n')
         report.update(exactFullCriteriaPersisted=True,noTypedPrefixPollution=True,noSavedResultBytes=True)
         optimized_resume('after-history-restart'); tree=recent('restarted-history')
         assert any(n.get('text','').startswith('Writing project · ') for n in tree.iter('node'))
         report['historySurvivesRestart']=True
+        close_history('close-restarted-history')
+        # Reuse must materialize a plain search rather than edit shared Smart Folder rules.
+        device.shell('input','keyevent',133); replace_field('smart-query','Search files','Notes')
+        device.shell('input','keyevent',66)
+        menu('save-smart','Save search as Smart Folder…')
+        tree=device.wait('smart-name',lambda t: bool(device.nodes(t,'Save Smart Folder')) and device.ready(t,'Save'))
+        parents={child:parent for parent in tree.iter() for child in parent}
+        scope=device.one(tree,'Save Smart Folder')
+        while not any(n.get('class')=='android.widget.EditText' for n in scope.iter('node')):
+            assert scope in parents; scope=parents[scope]
+        fields=[n for n in scope.iter('node') if n.get('class')=='android.widget.EditText']
+        assert len(fields)==1
+        device.tap(fields[0]); device.shell('input','keyevent',123,*([67]*len(fields[0].get('text',''))))
+        device.shell('input','text','Working%snotes')
+        device.click('save-smart-name','Save')
+        device.wait('saved-smart',lambda t: not device.nodes(t,'Save Smart Folder') and bool(device.nodes(t,'Working notes')))
+        recent('history-from-smart'); click_history('reuse-smart-here','Search here','Writing project')
+        browser('plain-search-after-smart','Report here.txt'); device.capture('recent-search-smart-copy')
+        recent('history-to-pause')
         click_history('pause-recording','Remember searches'); close_history('close-paused')
         device.shell('input','keyevent',133); replace_field('paused-query','Search files','Notes')
         device.shell('input','keyevent',66); recent('paused-history')
@@ -261,6 +288,11 @@ def main():
         close_history('close-final-history')
         prefs,searches=audit_history()
         assert searches==[] and prefs.find("./boolean[@name='rememberRecentSearches']").get('value')=='false'
+        smart=json.loads(prefs.find("./string[@name='smartFolders']").text)
+        assert len(smart)==1 and smart[0]['name']=='Working notes' and smart[0]['root']==target
+        assert smart[0]['rules']==dict(rules,name='Notes')
+        (args.output/'synthetic-smart-folders.json').write_text(json.dumps(smart,indent=2)+'\n')
+        report['smartFolderCopyIndependent']=True
         assert prefs.find("./string[@name='recentSearchAcceptanceSentinel']").text==demo
         assert json.loads(prefs.find("./string[@name='sidebarLayoutV1']").text)['favorites'][0]['path']==source
         for name in paths: assert device.call('exec-out','cat',demo+'/'+name)==payload
