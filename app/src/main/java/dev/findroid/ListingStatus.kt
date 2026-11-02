@@ -40,7 +40,7 @@ internal fun ListingStatus(model: FinderModel) {
         (model.loading && showLoading) ||
             progress.incomplete ||
             progress.providerInfo.isNotEmpty() ||
-            scoped
+            scoped || rules.choiceDescription.isNotBlank()
     val visible = if (dragging) pinnedVisibility else wanted
     SideEffect { if (!dragging) pinnedVisibility = wanted }
     if (!visible) return
@@ -76,6 +76,7 @@ internal fun ListingStatus(model: FinderModel) {
                         progress.issueCount > 0 -> "Some items couldn't be scanned"
                         progress.providerInfo.isNotEmpty() -> "Storage information"
                         scoped -> "Search scope · ${model.entries.size} results"
+                        rules.choiceDescription.isNotBlank() -> "Search · ${model.entries.size} results"
                         else -> "Ready · ${model.entries.size} items"
                     }
                 Text(
@@ -99,7 +100,7 @@ internal fun ListingStatus(model: FinderModel) {
                             else "${progress.issueCount} checks need attention"
                         else ->
                             progress.providerInfo.firstOrNull()
-                                ?: if (scoped) rules.scopeDescription else "Scan complete"
+                                ?: if (scoped) rules.scopeDescription else rules.choiceDescription.ifBlank { "Scan complete" }
                     },
                     color = Muted,
                     fontSize = 10.sp,
@@ -181,6 +182,11 @@ internal fun ListingDetails(model: FinderModel) {
                 lineHeight = 18.sp,
             )
             progress.providerInfo.forEach { Text(it, color = Muted, fontSize = 12.sp) }
+            model.effectiveSearchRules.choiceDescription.takeIf { it.isNotBlank() }?.let {
+                Text(it, color = Ink, fontSize = 12.sp)
+                if (model.effectiveSearchRules.date != SearchDate.ANY)
+                    Text(searchCalendarDescription(model.effectiveSearchRules.date, SearchCalendar()), color = Muted, fontSize = 12.sp)
+            }
             if (model.effectiveSearchRules.scoped) {
                 val rules = model.effectiveSearchRules
                 Text(rules.scopeDescription, color = Ink, fontSize = 12.sp)
@@ -188,6 +194,12 @@ internal fun ListingDetails(model: FinderModel) {
                     Text("Excluded folder names (exact match):", color = Muted, fontSize = 12.sp)
                     rules.excludedFolderNames.sorted().forEach {
                         Text(it, color = Ink, fontSize = 12.sp)
+                    }
+                }
+                if (rules.excludedLocations.isNotEmpty()) {
+                    Text("Excluded exact locations:", color = Muted, fontSize = 12.sp)
+                    rules.excludedLocations.forEach {
+                        Text((if (it.folder) "Folder: " else "File: ") + model.displayPath(it.path), color = Ink, fontSize = 12.sp)
                     }
                 }
             }

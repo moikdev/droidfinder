@@ -328,4 +328,69 @@ class DirectoryLoaderTest {
         assertEquals((201..400).map { "$it.txt" }.toSet(), result.entries.map { it.name }.toSet())
         assertFalse(result.progress.incomplete)
     }
+    @Test fun exactExclusionsPruneRootsAndSubtreesAndKeepSiblingCacheFolders() = runBlocking {
+        val cache = file("Cache", folder = true)
+        val work = file("Work", folder = true)
+        val otherCache = file("Cache", work.path, folder = true)
+        val source = Source(mapOf("/root" to listOf(cache, work), work.path to listOf(otherCache),
+            otherCache.path to listOf(file("Report.txt", otherCache.path))), failures = setOf(cache.path))
+        val rules = SearchRules(name = "Report", excludedLocations = listOf(SearchExclusion(cache.path)))
+        val result = DirectoryLoader(source).load(request(recursive = true, rules = rules), ListingControl()) {}
+        assertEquals(listOf("Report.txt"), result.entries.map { it.name })
+        assertFalse(source.opened.contains(cache.path))
+        assertFalse(result.progress.incomplete)
+        val beneath = DirectoryLoader(source).load(request(recursive = true, rules = rules).copy(roots = listOf(cache.path + "/Nested")), ListingControl()) {}
+        assertTrue(beneath.entries.isEmpty())
+        assertFalse(source.opened.contains(cache.path + "/Nested"))
+        val explicit = DirectoryLoader(source).load(request(rules = rules).copy(explicitPaths = listOf(otherCache.path + "/Report.txt")), ListingControl()) {}
+        assertEquals(listOf("Report.txt"), explicit.entries.map { it.name })
+    }
+
+    @Test fun oneCalendarReferenceAndOneContentReadSupplyAdmissionAndEvidence() = runBlocking {
+        var reads = 0
+        val source = object : ListingSource {
+            override suspend fun children(path: String, control: ListingControl, visit: suspend (Entry) -> Boolean): DirectoryReply {
+                visit(file("Report.txt", modified = java.time.Instant.parse("2026-11-03T00:01:00Z").toEpochMilli()))
+                visit(file("Old.txt", modified = 0))
+                visit(file(".Hidden.txt"))
+                return DirectoryReply()
+            }
+            override fun read(path: String, control: ListingControl): Entry = error("Not needed")
+            override fun input(entry: Entry, control: ListingControl): InputStream { reads++; return "literal needle snippet".byteInputStream() }
+            override fun traversable(entry: Entry) = true
+        }
+        val calendar = SearchCalendar(java.time.Instant.parse("2026-11-03T23:59:59Z").toEpochMilli(), java.time.ZoneId.of("UTC"), java.util.Locale.US)
+        val result = DirectoryLoader(source).load(request(rules = SearchRules(date = SearchDate.TODAY, content = "needle")).copy(calendar = calendar), ListingControl()) {}
+        assertEquals(listOf("Report.txt"), result.entries.map { it.name })
+        assertEquals(1, reads)
+        assertTrue(result.entries.single().searchEvidence!!.snippet!!.text.contains("needle"))
+    }
+
+    @Test fun unverifiedExactProviderExclusionsSkipContentAndReportIncompleteResults() = runBlocking {
+        var reads = 0
+        val source = object : ListingSource {
+            override suspend fun children(path: String, control: ListingControl, visit: suspend (Entry) -> Boolean): DirectoryReply = error("Unknown branch must not open")
+            override fun read(path: String, control: ListingControl) = file("Report.txt").copy(documentUri = null)
+            override fun input(entry: Entry, control: ListingControl): InputStream { reads++; error("Unknown branch must not read") }
+            override fun traversable(entry: Entry) = true
+            override fun searchIdentity(path: String) = path
+            override fun searchAncestry(path: String, ancestor: String, control: ListingControl) = SearchAncestry.UNKNOWN
+        }
+        val result = DirectoryLoader(source).load(request(recursive = true, rules = SearchRules(content = "secret", excludedLocations = listOf(SearchExclusion("content://provider/document/cache"))))
+            .copy(roots = listOf("content://provider/document/root")), ListingControl()) {}
+        assertTrue(result.entries.isEmpty())
+        assertTrue(result.progress.incomplete)
+        assertTrue(result.progress.issues.single().reason.contains("exclusions couldn't be verified"))
+        assertEquals(0, reads)
+    }
+
+    @Test fun sizePresetsReportUnknownSizesBeforeContentReads() = runBlocking {
+        val item = file("Large.txt").copy(sizeKnown = false)
+        val source = Source(mapOf("/root" to listOf(item)))
+        val result = DirectoryLoader(source).load(request(rules = SearchRules(size = SearchSize.OVER_1_GB, content = "text")), ListingControl()) {}
+        assertTrue(result.entries.isEmpty())
+        assertTrue(result.progress.incomplete)
+        assertTrue(result.progress.issues.single().reason.startsWith("Unknown size"))
+    }
+
 }

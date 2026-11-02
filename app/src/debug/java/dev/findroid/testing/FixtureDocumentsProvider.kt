@@ -36,6 +36,10 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         @Volatile var metadataOpened: java.util.concurrent.CountDownLatch? = null
         @Volatile var metadataFailure: String? = null
         @Volatile var metadataDenied = false
+        @Volatile var ancestryUnsupported = false
+        val ancestryCalls = java.util.concurrent.ConcurrentLinkedQueue<Pair<String, String>>()
+        val ancestryChecks = java.util.concurrent.atomic.AtomicInteger(0)
+        val contentReads = java.util.concurrent.ConcurrentHashMap<String, java.util.concurrent.atomic.AtomicInteger>()
         val listingClosed = java.util.concurrent.atomic.AtomicInteger(0)
     }
 
@@ -212,6 +216,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
     ): ParcelFileDescriptor {
         signal?.throwIfCanceled()
         val file = file(documentId)
+        if (mode == "r") contentReads.getOrPut(file.canonicalPath) { java.util.concurrent.atomic.AtomicInteger(0) }.incrementAndGet()
         if (mode.contains('w') && readOnly(file)) throw FileNotFoundException("Read only fixture")
         readByteLimits[file.canonicalPath]?.takeIf { mode == "r" }?.let { limit ->
             val pipe = ParcelFileDescriptor.createPipe()
@@ -312,6 +317,10 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         changed(file.parentFile)
     }
 
-    override fun isChildDocument(parentDocumentId: String, documentId: String) =
-        documentId.startsWith("$parentDocumentId/")
+    override fun isChildDocument(parentDocumentId: String, documentId: String): Boolean {
+        ancestryChecks.incrementAndGet()
+        ancestryCalls.add(parentDocumentId to documentId)
+        if (ancestryUnsupported) throw UnsupportedOperationException("Fixture provider cannot verify ancestry")
+        return documentId.startsWith("$parentDocumentId/")
+    }
 }

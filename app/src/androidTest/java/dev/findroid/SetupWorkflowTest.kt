@@ -328,4 +328,27 @@ class SetupWorkflowTest {
         untouched()
     }
 
+    @Test fun reviewedSetupRemapsExactSearchExclusionsInSmartFoldersAndWorkspaceBudgets() {
+        val original = incoming()
+        val rules = SearchRules(name = "Keep", date = SearchDate.THIS_WEEK,
+            excludedLocations = listOf(SearchExclusion("$old/Reference"), SearchExclusion("$old/Projects/Keep.txt", false)))
+        fun tabRules(pane: PaneSnapshot) = pane.copy(tabs = pane.tabs.map { it.copy(rules = rules,
+            navigation = it.navigation.copy(budgets = mapOf(ListingScope(it.location, rules) to ListingBudget()))) })
+        val snapshot = original.snapshot.copy(searches = original.snapshot.searches.map { it.copy(rules = rules) },
+            workspaces = original.snapshot.workspaces.map { it.copy(primary = tabRules(it.primary)) },
+            openTabs = original.snapshot.openTabs?.let { it.copy(primary = tabRules(it.primary)) })
+        val source = original.copy(snapshot = snapshot, references = snapshot.locations().sorted().map {
+            SetupReference(it, rootId, it.removePrefix("$old/").split('/')) })
+        load(source); review()
+        assertEquals(0, state.review!!.resolution.issueCount)
+        apply()
+        val expected = listOf(File(target, "Reference").path, File(target, "Projects/Keep.txt").path)
+        assertEquals(expected, model.smartFolders.single { it.name == "Writing notes" }.rules.excludedLocations.map { it.path })
+        val saved = model.savedWorkspaces.single { it.name == "Writing desk" }.primary.tabs.single()
+        assertEquals(expected, saved.rules.excludedLocations.map { it.path })
+        assertEquals(expected, saved.navigation.budgets.keys.single().rules.excludedLocations.map { it.path })
+        assertEquals(SearchDate.THIS_WEEK, saved.rules.date)
+        untouched()
+    }
+
 }

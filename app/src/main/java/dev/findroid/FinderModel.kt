@@ -56,6 +56,7 @@ data class Entry(
     val mimeType: String? = null,
     val style: FolderStyle? = null,
     val sizeKnown: Boolean = true,
+    val searchEvidence: SearchEvidence? = null,
 ) {
     val path: String
         get() = documentUri?.toString() ?: file.absolutePath
@@ -1567,7 +1568,8 @@ constructor(
     }
 
     fun displayName(entry: Entry) =
-        if (showExtensions || entry.folder || !entry.name.contains('.')) entry.name
+        if (showExtensions || entry.folder || !entry.name.contains('.') ||
+            entry.searchEvidence?.nameRanges?.any { it.end > entry.name.substringBeforeLast('.').length } == true) entry.name
         else entry.name.substringBeforeLast('.')
 
     fun groups(): List<Pair<String, List<Entry>>> =
@@ -2783,7 +2785,7 @@ constructor(
         folderStyles = styleStore.styles
         fun update(path: String): String = remapPath(path, names)
         editSidebar { it.remap(names) }
-        smartFolders = smartFolders.map { it.copy(root = update(it.root)) }
+        smartFolders = smartFolders.map { it.copy(root = update(it.root), rules = it.rules.remapRoutes(names)) }
         persistSmartFolders()
         folderViews.relocate(names)
         session.savedWorkspaces.value = savedWorkspaces.map { it.remap(names) }
@@ -2791,6 +2793,7 @@ constructor(
         session.panes.forEach { pane ->
             pane.saveTabState()
             pane.tabs = pane.tabs.map { it.remap(names) }
+            pane.searchRules = pane.tabs[pane.activeTab].rules
             pane.closedTabs = pane.closedTabs.map { it.remap(names) }
             pane.viewportPositions.replaceAll { _, points ->
                 TabNavigation(positions = points).remap(names).positions
@@ -3014,6 +3017,11 @@ constructor(
 
                             override fun input(entry: Entry, control: ListingControl) =
                                 documents.input(entry.path, control)
+
+                            override fun searchIdentity(path: String) = documents.searchIdentity(path)
+
+                            override fun searchAncestry(path: String, ancestor: String, control: ListingControl) =
+                                documents.searchAncestry(path, ancestor, control)
 
                             override fun searchable(entry: Entry) =
                                 entry.documentUri != null ||

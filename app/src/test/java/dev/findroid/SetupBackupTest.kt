@@ -190,4 +190,25 @@ class SetupBackupTest {
         assertEquals(listOf("@tag:new-missing"), SetupResolution(emptyMap(), emptyList(), 0, 0).withVirtualReferences(newlyMissing, before).issues.map { it.target })
     }
 
+    @Test fun exactSearchExclusionsAreInventoriedAndRemappedAcrossEveryRulesContainer() {
+        val exclusions = listOf(SearchExclusion("/old/Cache"), SearchExclusion("content://cloud/document/opaque-1", false))
+        val rules = SearchRules(excludedLocations = exclusions, date = SearchDate.THIS_MONTH, size = SearchSize.OVER_1_GB)
+        val tab = FinderTab(listOf("/root"), rules = rules, navigation = TabNavigation(budgets = mapOf(ListingScope("/root", rules) to ListingBudget())))
+        val workspace = workspace(path = "/root").copy(primary = pane("/root").copy(tabs = listOf(tab)))
+        val source = empty().copy(searches = listOf(SmartFolder(id(), "Exact", "/root", rules)), workspaces = listOf(workspace), openTabs = workspace.copy(id = "open"))
+        assertTrue(source.locations().containsAll(exclusions.map { it.path }))
+        val mapping = mapOf("/old/Cache" to "/new/Cache", "content://cloud/document/opaque-1" to "content://new/document/random-7")
+        val result = source.mapLocations(mapping)
+        assertTrue(result.locations().containsAll(mapping.values))
+        assertFalse(result.locations().any { it in mapping.keys })
+        val allRules = listOf(result.searches.single().rules) + (result.workspaces + result.openTabs!!).flatMap { listOf(it.primary, it.secondary) }.flatMap { it.tabs }.flatMap { listOf(it.rules) + it.navigation.budgets.keys.map { it.rules } }
+        allRules.filter { it.excludedLocations.isNotEmpty() }.forEach {
+            assertEquals(mapping.values.toList(), it.excludedLocations.map { it.path })
+            assertEquals(listOf(true, false), it.excludedLocations.map { it.folder })
+            assertEquals(SearchDate.THIS_MONTH, it.date)
+            assertEquals(SearchSize.OVER_1_GB, it.size)
+        }
+        assertEquals(exclusions, source.searches.single().rules.excludedLocations)
+    }
+
 }

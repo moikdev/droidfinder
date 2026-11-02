@@ -32,6 +32,9 @@ data class SearchRules(
     val tagMatch: TagMatch = TagMatch.ALL,
     val includeSubfolders: Boolean = true,
     val excludedFolderNames: Set<String> = emptySet(),
+    val excludedLocations: List<SearchExclusion> = emptyList(),
+    val date: SearchDate = SearchDate.ANY,
+    val size: SearchSize = SearchSize.ANY,
 ) {
     private val contentPattern by lazy { StreamingText(content) }
 
@@ -39,16 +42,38 @@ data class SearchRules(
         get() = if (tag.isBlank()) tags else tags + tag
 
     val scoped: Boolean
-        get() = !includeSubfolders || excludedFolderNames.isNotEmpty()
+        get() = !includeSubfolders || excludedFolderNames.isNotEmpty() || excludedLocations.isNotEmpty()
 
     val scopeDescription: String
-        get() =
-            (if (includeSubfolders) "Folder and subfolders" else "This folder only") +
-                if (excludedFolderNames.isEmpty()) ""
-                else
-                    " · ${excludedFolderNames.size} folder ${if (excludedFolderNames.size == 1) "name" else "names"} excluded"
+        get() = buildList {
+            add(if (includeSubfolders) "Folder and subfolders" else "This folder only")
+            if (excludedFolderNames.isNotEmpty()) add("${excludedFolderNames.size} folder ${if (excludedFolderNames.size == 1) "name" else "names"} excluded")
+            if (excludedLocations.isNotEmpty()) add("${excludedLocations.size} exact ${if (excludedLocations.size == 1) "location" else "locations"} excluded")
+        }.joinToString(" · ")
+
+    val choiceDescription: String
+        get() = buildList {
+            if (kind != "Any") add(if (kind == "Image") "Images" else kind)
+            if (date != SearchDate.ANY) add(date.title)
+            if (days > 0) add(if (days == 1) "Past 24 hours" else "Past $days days")
+            if (this@SearchRules.size != SearchSize.ANY) add(this@SearchRules.size.title)
+            if (minimumBytes > 0) add("At least $minimumBytes bytes")
+            if (maximumBytes > 0) add("At most $maximumBytes bytes")
+        }.joinToString(" · ")
+
+    val hasSizeFilter get() = minimumBytes > 0 || maximumBytes > 0 || size != SearchSize.ANY
+
+    fun remapLocations(path: (String) -> String): SearchRules =
+        copy(excludedLocations = excludedLocations.groupBy { path(it.path) }.map { (target, values) ->
+            SearchExclusion(target, values.any { it.folder })
+        })
 
     fun excludesFolder(entry: Entry): Boolean = entry.folder && entry.name in excludedFolderNames
+
+    fun remapRoutes(routes: List<Pair<String, String>>): SearchRules = remapLocations { path ->
+        if (path.startsWith("content://")) routes.firstOrNull { it.first == path }?.second ?: path
+        else remapPath(path, routes)
+    }
 
     fun remapTags(replacements: Map<String, String>): SearchRules =
         copy(
@@ -62,6 +87,8 @@ data class SearchRules(
                 kind != "Any" ||
                 filterTags.isNotEmpty() ||
                 days > 0 ||
+                date != SearchDate.ANY ||
+                size != SearchSize.ANY ||
                 minimumBytes > 0 ||
                 maximumBytes > 0 ||
                 content.isNotBlank() ||
@@ -75,43 +102,74 @@ data class SearchRules(
         read: ((Entry) -> java.io.InputStream)? = null,
         check: () -> Unit = {},
         contentIssue: (String) -> Unit = {},
-    ): Boolean {
+        calendar: SearchCalendar = SearchCalendar(now),
+    ): Boolean = evidence(entry, tags, now, read, check, contentIssue, calendar) != null
+
+    /** A null result rejects admission. Evidence is transient and never enters saved rules. */
+    fun evidence(
+        entry: Entry,
+        tags: Set<String>,
+        now: Long = System.currentTimeMillis(),
+        read: ((Entry) -> java.io.InputStream)? = null,
+        check: () -> Unit = {},
+        contentIssue: (String) -> Unit = {},
+        calendar: SearchCalendar = SearchCalendar(now),
+    ): SearchEvidence? {
         check()
-        if (excludesFolder(entry)) return false
-        if (name.isNotBlank() && !entry.name.contains(name, true)) return false
-        if (nameTerms.any { !entry.name.contains(it, true) }) return false
-        if (kind != "Any" && entry.kind != kind) return false
+        if (excludesFolder(entry)) return null
+        if (excludedLocations.any { it.path == entry.path ||
+                entry.path.startsWith("/") && it.path.startsWith("/") &&
+                    (organizationKey(entry.path) == organizationKey(it.path) ||
+                        it.folder && localSearchAncestry(entry.path, it.path) == SearchAncestry.INSIDE) }) return null
+        if (name.isNotBlank() && !entry.name.contains(name, true)) return null
+        if (nameTerms.any { !entry.name.contains(it, true) }) return null
+        if (kind != "Any" && entry.kind != kind) return null
         val selectedTags = filterTags
         if (selectedTags.isNotEmpty()) {
-            val matchesTags =
-                when (tagMatch) {
-                    TagMatch.ALL -> tags.containsAll(selectedTags)
-                    TagMatch.ANY -> selectedTags.any { it in tags }
-                    TagMatch.NONE -> selectedTags.none { it in tags }
-                }
-            if (!matchesTags) return false
+            val matchesTags = when (tagMatch) {
+                TagMatch.ALL -> tags.containsAll(selectedTags)
+                TagMatch.ANY -> selectedTags.any { it in tags }
+                TagMatch.NONE -> selectedTags.none { it in tags }
+            }
+            if (!matchesTags) return null
         }
-        if (days > 0 && entry.modified < now - days * 86_400_000L) return false
-        if (minimumBytes > 0 && (entry.folder || entry.size < minimumBytes)) return false
-        if (maximumBytes > 0 && (entry.folder || entry.size > maximumBytes)) return false
-        if (content.isNotBlank()) {
-            if (entry.folder || entry.kind != "Text document") return false
-            return try {
-                (read?.invoke(entry) ?: entry.file.inputStream())
-                    .bufferedReader(Charsets.UTF_8)
-                    .use { reader ->
-                        contentPattern.contains(reader, check) {
-                            contentIssue("Binary content in a text file wasn't searched")
-                        }
-                    }
+        if (days > 0 && entry.modified < calendar.now - days * 86_400_000L) return null
+        if (date.bounds(calendar)?.let { entry.modified !in it } == true) return null
+        if (hasSizeFilter && (entry.folder || !entry.sizeKnown)) return null
+        if (minimumBytes > 0 && entry.size < minimumBytes || maximumBytes > 0 && entry.size > maximumBytes) return null
+        if (size.minimum > 0 && entry.size < size.minimum || size.maximum > 0 && entry.size > size.maximum) return null
+        val snippet = if (content.isNotBlank()) {
+            if (entry.folder || entry.kind != "Text document") return null
+            try {
+                (read?.invoke(entry) ?: entry.file.inputStream()).bufferedReader(Charsets.UTF_8).use { reader ->
+                    contentPattern.find(reader, check) { contentIssue("Binary content in a text file wasn't searched") }
+                } ?: return null
             } catch (error: Exception) {
                 check()
                 if (error is kotlinx.coroutines.CancellationException) throw error
                 contentIssue(error.message ?: "Couldn't search this file's contents")
-                false
+                return null
             }
-        }
-        return true
+        } else null
+        val terms = (listOf(name) + nameTerms).filter(String::isNotBlank)
+        return SearchEvidence(
+            nameRanges = matchRanges(entry.name, terms),
+            reasons = buildList {
+                if (terms.isNotEmpty()) add("Name")
+                if (selectedTags.isNotEmpty()) {
+                    val names = (if (tagMatch == TagMatch.NONE) selectedTags else selectedTags.intersect(tags)).sorted()
+                    add((if (tagMatch == TagMatch.NONE) "Without tags: " else "Tags: ") +
+                        names.take(3).joinToString(", ") { it.take(60) } + if (names.size > 3) "…" else "")
+                }
+                if (kind != "Any") add("Kind: $kind")
+                if (date != SearchDate.ANY) add("Modified: ${date.title}")
+                if (days > 0) add("Modified: past $days ${if (days == 1) "day" else "days"}")
+                if (this@SearchRules.size != SearchSize.ANY) add("Size: ${this@SearchRules.size.title}")
+                if (minimumBytes > 0 || maximumBytes > 0) add("Size: ${entry.displaySize}")
+                if (snippet != null) add("Text contents")
+            },
+            snippet = snippet,
+        )
     }
 }
 

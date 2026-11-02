@@ -277,7 +277,7 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                                         },
                                     )
                                     .fillMaxWidth()
-                                    .height(LocalFinderDensity.current.rowHeight)
+                                    .heightIn(min = LocalFinderDensity.current.rowHeight)
                                     .padding(horizontal = 8.dp)
                                     .background(
                                         if (selected) SelectionSurface else CanvasBackground,
@@ -315,14 +315,16 @@ fun ListView(model: FinderModel, open: (Entry) -> Unit, context: (Entry) -> Unit
                                         ),
                                     )
                                 DraggableFileGlyph(model, item, 27.dp)
-                                Text(
-                                    model.displayName(item),
-                                    Modifier.weight(1f).padding(horizontal = 9.dp),
-                                    fontSize = 12.sp,
-                                    color = if (selected) SelectedInk else Ink,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                )
+                                Column(Modifier.weight(1f).padding(horizontal = 9.dp, vertical = 6.dp)) {
+                                    Text(
+                                        searchAnnotated(model.displayName(item), item.searchEvidence?.nameRanges.orEmpty()),
+                                        fontSize = 12.sp,
+                                        color = if (selected) SelectedInk else Ink,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                    )
+                                    SearchMatchDetails(item)
+                                }
                                 model.tags[item.organizationPath]?.let {
                                     Box(
                                         Modifier.padding(end = 10.dp)
@@ -385,7 +387,7 @@ fun ContentListView(model: FinderModel, open: (Entry) -> Unit) {
             items(entries, key = { it.path }) { item ->
                 Row(
                     Modifier.fillMaxWidth()
-                        .height(if (LocalFinderDensity.current.touch) 78.dp else 66.dp)
+                        .heightIn(min = if (LocalFinderDensity.current.touch) 78.dp else 66.dp)
                         .folderDropTarget(
                             model,
                             item.path.takeIf { item.folder },
@@ -404,7 +406,7 @@ fun ContentListView(model: FinderModel, open: (Entry) -> Unit) {
                     DraggableFileGlyph(model, item, 42.dp)
                     Column(Modifier.weight(1f).padding(horizontal = 14.dp)) {
                         Text(
-                            model.displayName(item),
+                            searchAnnotated(model.displayName(item), item.searchEvidence?.nameRanges.orEmpty()),
                             fontSize = 12.sp,
                             color = Ink,
                             maxLines = 1,
@@ -416,6 +418,7 @@ fun ContentListView(model: FinderModel, open: (Entry) -> Unit) {
                             fontSize = 10.sp,
                             color = Muted,
                         )
+                        SearchMatchDetails(item)
                     }
                     Text(
                         formatDate(item.modified),
@@ -564,7 +567,7 @@ fun IconView(model: FinderModel, open: (Entry) -> Unit) {
                                 )
                         }
                         Text(
-                            model.displayName(item),
+                            searchAnnotated(model.displayName(item), item.searchEvidence?.nameRanges.orEmpty()),
                             Modifier.fillMaxWidth().padding(top = 3.dp),
                             fontSize = if (LocalPhoneLayout.current) 13.sp else 11.sp,
                             color = Ink,
@@ -573,6 +576,7 @@ fun IconView(model: FinderModel, open: (Entry) -> Unit) {
                             textAlign = TextAlign.Center,
                             overflow = TextOverflow.Ellipsis,
                         )
+                        SearchMatchDetails(item, centered = true)
                         if (model.windowsLayout == 7)
                             Text(
                                 item.kind,
@@ -745,13 +749,15 @@ private fun FileColumn(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     DraggableFileGlyph(model, item, 24.dp)
-                    Text(
-                        model.displayName(item),
-                        Modifier.weight(1f).padding(horizontal = 6.dp),
-                        fontSize = 11.sp,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
+                    Column(Modifier.weight(1f).padding(horizontal = 6.dp, vertical = 5.dp)) {
+                        Text(
+                            searchAnnotated(model.displayName(item), item.searchEvidence?.nameRanges.orEmpty()),
+                            fontSize = 11.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                        SearchMatchDetails(item)
+                    }
                     if (item.folder)
                         Icon(Icons.Outlined.ChevronRight, null, Modifier.size(12.dp), tint = Muted)
                 }
@@ -787,7 +793,8 @@ fun GalleryView(model: FinderModel, open: (Entry) -> Unit) {
             HorizontalDivider(color = Border)
             LazyRow(
                 Modifier.fillMaxWidth()
-                    .height(128.dp)
+                    .height((if (model.entries.any { it.searchEvidence != null }) 150 else 128).dp +
+                        (32 * (LocalDensity.current.fontScale - 1).coerceAtLeast(0f)).dp)
                     .dragAutoScroll(stripState, horizontal = true)
                     .testTag("gallery-strip"),
                 state = stripState,
@@ -818,13 +825,15 @@ fun GalleryView(model: FinderModel, open: (Entry) -> Unit) {
                     ) {
                         DraggableFileGlyph(model, entry, 62.dp)
                         Text(
-                            entry.name,
+                            searchAnnotated(model.displayName(entry), entry.searchEvidence?.nameRanges.orEmpty()),
                             Modifier.padding(top = 4.dp),
                             fontSize = 9.sp,
+                            lineHeight = 12.sp,
                             maxLines = 2,
                             textAlign = TextAlign.Center,
                             overflow = TextOverflow.Ellipsis,
                         )
+                        SearchMatchDetails(entry, snippet = false, centered = true)
                     }
                 }
             }

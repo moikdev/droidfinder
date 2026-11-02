@@ -1,0 +1,7 @@
+Search results now highlight filename matches and explain name, tag, metadata and text-content matches, with short text snippets captured during the original read.
+
+Choose Today, This week, This month, Under 1 MB, Over 1 GB or Images in Search filters. Calendar choices refresh with your local date; older rolling-day searches and exact byte bounds are preserved.
+
+Exclude one file, or one folder and its descendants, while keeping same-named folders elsewhere. Pick a folder or exclude your selection, review the list and apply. Exact exclusions survive saved searches and reviewed setup restore.
+
+Keep Findroid installed while updating to preserve Workspace and settings. Android 11 or newer. Development-signed preview.

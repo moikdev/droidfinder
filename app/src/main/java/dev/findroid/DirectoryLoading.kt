@@ -146,6 +146,11 @@ internal interface ListingSource {
     fun searchable(entry: Entry): Boolean = true
 
     fun traversable(entry: Entry): Boolean
+
+    fun searchIdentity(path: String): String = organizationKey(path)
+
+    fun searchAncestry(path: String, ancestor: String, control: ListingControl): SearchAncestry =
+        localSearchAncestry(path, ancestor)
 }
 
 internal data class ListingRequest(
@@ -159,6 +164,7 @@ internal data class ListingRequest(
     val budget: ListingBudget = ListingBudget(),
     val recent: Boolean = false,
     val explicitPaths: List<String>? = null,
+    val calendar: SearchCalendar = SearchCalendar(),
 )
 
 internal class DirectoryLoader(
@@ -181,6 +187,12 @@ internal class DirectoryLoader(
         var scanLimit = false
         var lastPublished = clock()
         var first = true
+        val exclusions = SearchExclusions(request.rules.excludedLocations, source::searchIdentity) { path, ancestor ->
+            control.check()
+            source.searchAncestry(path, ancestor, control)
+        }
+        val admissionRules = request.rules.copy(excludedLocations = emptyList())
+        val unverified = mutableSetOf<String>()
         fun issue(path: String, reason: String) {
             issueCount++
             if (issues.size < 20) issues += ListingIssue(path, reason.take(240))
@@ -216,7 +228,16 @@ internal class DirectoryLoader(
                 lastPublished = clock()
             }
         }
-        suspend fun accept(entry: Entry): Boolean {
+        fun excluded(path: String, parent: String? = null): Boolean = when (exclusions.check(path, parent)) {
+            SearchAncestry.INSIDE -> true
+            SearchAncestry.OUTSIDE -> false
+            SearchAncestry.UNKNOWN -> {
+                if (unverified.add(parent ?: path)) issue(parent ?: path,
+                    "Exact exclusions couldn't be verified for this location. Its items were skipped; reconnect storage or remove the exclusion.")
+                true
+            }
+        }
+        suspend fun accept(entry: Entry, parent: String? = null): Boolean {
             control.check()
             currentCoroutineContext().ensureActive()
             if (scanned >= request.budget.scanned) {
@@ -227,7 +248,7 @@ internal class DirectoryLoader(
             if (
                 (!request.hidden && entry.name.startsWith('.')) ||
                     isWorkingFileName(entry.name) ||
-                    request.rules.excludesFolder(entry)
+                    request.rules.excludesFolder(entry) || excluded(entry.path, parent)
             ) {
                 update()
                 return true
@@ -239,7 +260,7 @@ internal class DirectoryLoader(
             if (
                 !entry.folder &&
                     !entry.sizeKnown &&
-                    (request.rules.minimumBytes > 0 || request.rules.maximumBytes > 0)
+                    request.rules.hasSizeFilter
             ) {
                 issue(
                     entry.path,
@@ -249,17 +270,16 @@ internal class DirectoryLoader(
                 return true
             }
             if (request.rules.content.isNotBlank()) update()
-            val eligible = !request.recent || !entry.folder
-            if (
-                eligible &&
-                    request.rules.matches(
-                        entry,
-                        request.tags[entry.organizationPath].orEmpty(),
-                        read = { source.input(it, control) },
-                        check = control::check,
-                        contentIssue = { issue(entry.path, it) },
-                    )
-            ) {
+            val evidence = if (!request.recent || !entry.folder) admissionRules.evidence(
+                entry,
+                request.tags[entry.organizationPath].orEmpty(),
+                now = request.calendar.now,
+                read = { source.input(it, control) },
+                check = control::check,
+                contentIssue = { issue(entry.path, it) },
+                calendar = request.calendar,
+            ) else null
+            if (evidence != null) {
                 if (
                     !matches.containsKey(entry.path) &&
                         !request.recent &&
@@ -268,7 +288,7 @@ internal class DirectoryLoader(
                     resultLimit = true
                     return false
                 }
-                matches[entry.path] = entry.copy(style = request.styles[entry.path])
+                matches[entry.path] = entry.copy(style = request.styles[entry.path], searchEvidence = evidence.takeIf { it.explained })
                 if (request.recent && matches.size > 240) {
                     val keep =
                         matches.values
@@ -294,7 +314,7 @@ internal class DirectoryLoader(
                         issue(path, error.message ?: "Couldn't read this item")
                         continue
                     }
-                if (!accept(entry)) break
+                if (!accept(entry, entry.parentPath)) break
             }
         } else {
             val pending = ArrayDeque(request.roots.distinct())
@@ -303,19 +323,20 @@ internal class DirectoryLoader(
                 control.check()
                 currentCoroutineContext().ensureActive()
                 val folder = pending.removeFirst()
-                if (!visited.add(folder)) continue
+                if (!visited.add(folder) || excluded(folder)) continue
                 folders++
                 val before = scanned
                 try {
                     val reply =
                         source.children(folder, control) { entry ->
-                            val proceed = accept(entry)
+                            val proceed = accept(entry, folder)
                             if (
                                 proceed &&
                                     request.recursive &&
                                     request.rules.includeSubfolders &&
                                     entry.folder &&
                                     !request.rules.excludesFolder(entry) &&
+                                    !excluded(entry.path, folder) &&
                                     (request.hidden || !entry.name.startsWith('.')) &&
                                     !isWorkingFileName(entry.name) &&
                                     source.traversable(entry)

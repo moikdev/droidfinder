@@ -244,6 +244,43 @@ class DocumentAccess(
     }
         .getOrDefault(false)
 
+    /** Tree grants may use different URIs for the same opaque document ID. */
+    internal fun searchIdentity(path: String): String {
+        if (!isDocumentPath(path)) return organizationKey(path)
+        return runCatching {
+            val uri = Uri.parse(path)
+            val id = runCatching { DocumentsContract.getDocumentId(uri) }
+                .getOrElse { DocumentsContract.getTreeDocumentId(uri) }
+            // Length framing avoids collisions even when an ID contains punctuation.
+            "document:${uri.authority?.length}:${uri.authority}:${id.length}:$id"
+        }.getOrDefault(path)
+    }
+
+    internal fun searchAncestry(path: String, ancestor: String, control: ListingControl): SearchAncestry {
+        control.check()
+        if (!isDocumentPath(path) || !isDocumentPath(ancestor)) return localSearchAncestry(path, ancestor)
+        val child = Uri.parse(path)
+        val parent = Uri.parse(ancestor)
+        if (child.authority != parent.authority) return SearchAncestry.OUTSIDE
+        val target = searchIdentity(ancestor)
+        var cursor: String? = path
+        val visited = mutableSetOf<String>()
+        while (cursor != null && visited.size < 128 && visited.add(searchIdentity(cursor))) {
+            control.check()
+            if (searchIdentity(cursor) == target) return SearchAncestry.INSIDE
+            cursor = this.parent(cursor)
+        }
+        return try {
+            val inside = DocumentsContract.isChildDocument(resolver, parent, child)
+            control.check()
+            if (inside) SearchAncestry.INSIDE else SearchAncestry.OUTSIDE
+        } catch (error: Exception) {
+            control.check()
+            if (error is kotlinx.coroutines.CancellationException) throw error
+            SearchAncestry.UNKNOWN
+        }
+    }
+
     fun title(path: String) =
         titles[path] ?: locations.firstOrNull { it.uri == path }?.name ?: "Connected folder"
 

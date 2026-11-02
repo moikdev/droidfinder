@@ -472,7 +472,7 @@ fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean =
 fun Metadata(entry: Entry, model: FinderModel, modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(
-            entry.name,
+            searchAnnotated(entry.name, entry.searchEvidence?.nameRanges.orEmpty()),
             fontWeight = FontWeight.SemiBold,
             fontSize = 14.sp,
             color = Ink,
@@ -485,6 +485,7 @@ fun Metadata(entry: Entry, model: FinderModel, modifier: Modifier = Modifier) {
             fontSize = 12.sp,
             modifier = Modifier.padding(top = 5.dp, bottom = 14.dp),
         )
+        SearchMatchDetails(entry, Modifier.padding(bottom = 12.dp), compact = false)
         MetaLine("Modified", formatDate(entry.modified))
         MetaLine(
             "Location",

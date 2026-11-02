@@ -61,17 +61,18 @@ internal data class SetupSnapshot(
         addAll(sidebar.paths)
         addAll(organization.tags.assignments.keys)
         organization.collections.forEach { addAll(it.paths) }
-        searches.forEach { add(it.root) }
+        searches.forEach { add(it.root); addAll(it.rules.excludedLocations.map { rule -> rule.path }) }
         addAll(folderViews.keys)
         addAll(folderStyles.keys)
         (workspaces + listOfNotNull(openTabs)).forEach { workspace ->
             (workspace.primary.tabs + workspace.secondary.tabs).forEach { tab ->
                 addAll(tab.history)
+                addAll(tab.rules.excludedLocations.map { it.path })
                 with(tab.navigation) {
                     addAll(selected); addAll(expanded)
                     lead?.let(::add); anchor?.let(::add)
                     positions.forEach { (key, value) -> add(key.location); value.path?.let(::add) }
-                    budgets.keys.forEach { add(it.location); it.root?.let(::add) }
+                    budgets.keys.forEach { add(it.location); it.root?.let(::add); addAll(it.rules.excludedLocations.map { rule -> rule.path }) }
                 }
             }
         }
@@ -80,7 +81,7 @@ internal data class SetupSnapshot(
     /** Exact reference replacement also works with opaque document IDs; no URI prefix guessing. */
     fun mapLocations(paths: Map<String, String>, tags: Map<String, String> = emptyMap()): SetupSnapshot {
         fun path(v: String) = paths[v] ?: v
-        fun rules(v: SearchRules) = v.remapTags(tags)
+        fun rules(v: SearchRules) = v.remapTags(tags).remapLocations(::path)
         fun tab(t: FinderTab): FinderTab {
             val n = t.navigation
             return t.copy(history = t.history.map(::path), rules = rules(t.rules), navigation = n.copy(

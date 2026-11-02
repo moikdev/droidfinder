@@ -23,7 +23,7 @@ data class ListingScope(
         return copy(
             location = remapPath(location, routes),
             root = root?.let { remapPath(it, routes) },
-            rules = rules.remapTags(tags),
+            rules = rules.remapTags(tags).remapRoutes(routes),
         )
     }
 }
@@ -75,7 +75,7 @@ data class FinderTab(
                 .associate { it.first.removePrefix("@tag:") to it.second.removePrefix("@tag:") }
         return copy(
             history = history.map { remapPath(it, routes) },
-            rules = rules.remapTags(tags),
+            rules = rules.remapTags(tags).remapRoutes(routes),
             navigation = navigation.remap(routes),
         )
     }
@@ -97,24 +97,41 @@ object NavigationJson {
             .put("tagMatch", r.tagMatch.name)
             .put("includeSubfolders", r.includeSubfolders)
             .put("excludedFolderNames", JSONArray(r.excludedFolderNames.sorted()))
+            .apply {
+                // Omit default additions so earlier version-1 setup backups remain canonical.
+                if (r.excludedLocations.isNotEmpty()) put("excludedLocations", JSONArray(r.excludedLocations.map {
+                    JSONObject().put("path", it.path).put("folder", it.folder)
+                }))
+                if (r.date != SearchDate.ANY) put("date", r.date.name)
+                if (r.size != SearchSize.ANY) put("size", r.size.name)
+            }
 
     fun rules(r: JSONObject?): SearchRules =
         if (r == null) SearchRules()
         else
             SearchRules(
-                r.optString("name"),
-                r.optString("kind", "Any"),
-                r.optString("tag"),
-                r.optInt("days"),
-                r.optLong("min"),
-                r.optLong("max"),
-                r.optString("content"),
-                strings(r.optJSONArray("terms"), 100),
-                strings(r.optJSONArray("tags"), Int.MAX_VALUE).toSet(),
-                runCatching { TagMatch.valueOf(r.optString("tagMatch", "ALL")) }
-                    .getOrDefault(TagMatch.ALL),
-                r.optBoolean("includeSubfolders", true),
-                strings(r.optJSONArray("excludedFolderNames"), Int.MAX_VALUE).toSet(),
+                name = r.optString("name"),
+                kind = r.optString("kind", "Any"),
+                tag = r.optString("tag"),
+                days = r.optInt("days"),
+                minimumBytes = r.optLong("min"),
+                maximumBytes = r.optLong("max"),
+                content = r.optString("content"),
+                nameTerms = strings(r.optJSONArray("terms"), 100),
+                tags = strings(r.optJSONArray("tags"), Int.MAX_VALUE).toSet(),
+                tagMatch = runCatching { TagMatch.valueOf(r.optString("tagMatch", "ALL")) }.getOrDefault(TagMatch.ALL),
+                includeSubfolders = r.optBoolean("includeSubfolders", true),
+                excludedFolderNames = strings(r.optJSONArray("excludedFolderNames"), Int.MAX_VALUE).toSet(),
+                excludedLocations = if (!r.has("excludedLocations")) emptyList() else r.getJSONArray("excludedLocations").let { values ->
+                    require(values.length() <= 100) { "Keep at most 100 exact search exclusions." }
+                    List(values.length()) { index ->
+                        val value = values.getJSONObject(index)
+                        require(value.get("path") is String && value.get("folder") is Boolean) { "Invalid search exclusion." }
+                        SearchExclusion(value.getString("path"), value.getBoolean("folder"))
+                    }
+                },
+                date = if (!r.has("date")) SearchDate.ANY else SearchDate.valueOf(r.getString("date")),
+                size = if (!r.has("size")) SearchSize.ANY else SearchSize.valueOf(r.getString("size")),
             )
 
     private fun strings(a: JSONArray?, max: Int): List<String> =

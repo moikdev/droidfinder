@@ -232,13 +232,28 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
         mutableStateOf(initial.copy(tag = "", tags = initial.filterTags))
     }
     var minimum by remember {
-        mutableStateOf(if (rules.minimumBytes > 0) (rules.minimumBytes / 1024).toString() else "")
+        mutableStateOf(searchKilobytes(rules.minimumBytes))
     }
     var maximum by remember {
-        mutableStateOf(if (rules.maximumBytes > 0) (rules.maximumBytes / 1024).toString() else "")
+        mutableStateOf(searchKilobytes(rules.maximumBytes))
     }
     var excludedNames by remember {
         mutableStateOf(rules.excludedFolderNames.sorted().joinToString("\n"))
+    }
+    var choosingExclusion by remember { mutableStateOf(false) }
+    val calendar = remember { SearchCalendar() }
+    val selected = model.selectedEntries
+    val minimumBytes = searchBytes(minimum)
+    val maximumBytes = searchBytes(maximum)
+    val invalidRange = minimumBytes != null && maximumBytes != null && maximumBytes > 0 && minimumBytes > maximumBytes
+    if (choosingExclusion) {
+        DestinationDialog(model, move = false, titleOverride = "Choose a folder to exclude", confirmLabel = "Exclude this folder",
+            requireWritable = false,
+            onDestination = { path ->
+                rules = rules.copy(excludedLocations = (rules.excludedLocations + SearchExclusion(path)).distinctBy { it.path })
+                choosingExclusion = false
+            }, dismiss = { choosingExclusion = false })
+        return
     }
     AlertDialog(
         onDismissRequest = dismiss,
@@ -319,7 +334,8 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
                             FilterChip(
                                 selected = rules.kind == kind,
                                 onClick = { rules = rules.copy(kind = kind) },
-                                label = { Text(kind, fontSize = 11.sp) },
+                                label = { Text(if (kind == "Image") "Images" else kind, fontSize = 11.sp) },
+                                modifier = Modifier.heightIn(min = 48.dp).testTag("search-kind-$kind"),
                             )
                         }
                 }
@@ -333,21 +349,28 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
                     Modifier.horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.spacedBy(5.dp),
                 ) {
-                    listOf(
-                            0 to "Any time",
-                            1 to "Today",
-                            7 to "7 days",
-                            30 to "30 days",
-                            365 to "Year",
+                    SearchDate.entries.forEach { date ->
+                        FilterChip(
+                            selected = rules.date == date && rules.days == 0,
+                            onClick = { rules = rules.copy(date = date, days = 0) },
+                            label = { Text(date.title, fontSize = 11.sp) },
+                            modifier = Modifier.heightIn(min = 48.dp).testTag("search-date-${date.name}"),
                         )
-                        .forEach { (days, label) ->
-                            FilterChip(
-                                selected = rules.days == days,
-                                onClick = { rules = rules.copy(days = days) },
-                                label = { Text(label, fontSize = 11.sp) },
-                            )
-                        }
+                    }
                 }
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                    listOf(1 to "Past 24 hours", 7 to "Past 7 days", 30 to "Past 30 days", 365 to "Past year").forEach { (days, label) ->
+                        FilterChip(
+                            selected = rules.date == SearchDate.ANY && rules.days == days,
+                            onClick = { rules = rules.copy(days = days, date = SearchDate.ANY) },
+                            label = { Text(label, fontSize = 11.sp) },
+                            modifier = Modifier.heightIn(min = 48.dp).testTag("search-days-$days"),
+                        )
+                    }
+                }
+                Text("Calendar choices follow your local date and first day of the week. They update when you refresh.", fontSize = 11.sp, color = Muted)
+                if (rules.date != SearchDate.ANY) Text(searchCalendarDescription(rules.date, calendar), fontSize = 11.sp, color = Ink)
+                if (rules.days > 0) Text("Current rolling window: past ${rules.days} ${if (rules.days == 1) "day (24 hours)" else "days"}.", fontSize = 11.sp, color = Ink)
                 Text(
                     "Tags · ${rules.tags.size} selected",
                     Modifier.padding(top = 12.dp),
@@ -403,25 +426,41 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     OutlinedTextField(
                         minimum,
-                        { minimum = it },
+                        { minimum = it; rules = rules.copy(size = SearchSize.ANY) },
                         label = { Text("Minimum KB", fontSize = 11.sp) },
                         singleLine = true,
-                        modifier = Modifier.weight(1f),
+                        isError = minimumBytes == null || invalidRange,
+                        supportingText = if (minimumBytes == null) ({ Text("Enter a nonnegative size in whole bytes.") }) else null,
+                        modifier = Modifier.weight(1f).testTag("search-minimum-kb"),
                     )
                     OutlinedTextField(
                         maximum,
-                        { maximum = it },
+                        { maximum = it; rules = rules.copy(size = SearchSize.ANY) },
                         label = { Text("Maximum KB", fontSize = 11.sp) },
                         singleLine = true,
-                        modifier = Modifier.weight(1f),
+                        isError = maximumBytes == null || invalidRange,
+                        supportingText = if (maximumBytes == null) ({ Text("Enter a nonnegative size in whole bytes.") }) else null,
+                        modifier = Modifier.weight(1f).testTag("search-maximum-kb"),
                     )
                 }
+                if (invalidRange) Text("Minimum must not exceed maximum.", color = MaterialTheme.colorScheme.error, fontSize = 12.sp)
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                    SearchSize.entries.forEach { size ->
+                        FilterChip(
+                            selected = rules.size == size && (size != SearchSize.ANY || minimum.isBlank() && maximum.isBlank()),
+                            onClick = { minimum = ""; maximum = ""; rules = rules.copy(size = size, minimumBytes = 0, maximumBytes = 0) },
+                            label = { Text(size.title, fontSize = 11.sp) },
+                            modifier = Modifier.heightIn(min = 48.dp).testTag("search-size-${size.name}"),
+                        )
+                    }
+                }
+                Text("1 KB = 1,024 bytes. Presets replace custom limits; imported combined limits must all match.", color = Muted, fontSize = 11.sp)
                 OutlinedTextField(
                     rules.content,
                     { rules = rules.copy(content = it) },
                     label = { Text("Text contents contain") },
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp).testTag("search-content"),
                 )
                 Text(
                     "Text search reads supported UTF-8 text files. All criteria must match.",
@@ -429,21 +468,34 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
                     fontSize = 10.sp,
                     color = Muted,
                 )
+                Text("Exact exclusions · ${rules.excludedLocations.size}/100", Modifier.padding(top = 14.dp), fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
+                Text("Exclude a file, or a folder and everything inside it. Folders with the same name elsewhere stay searchable. Exact exclusions also apply to the search root and to collections and tags.", color = Muted, fontSize = 11.sp)
+                TextButton(onClick = { choosingExclusion = true }, enabled = rules.excludedLocations.size < 100,
+                    modifier = Modifier.heightIn(min = 48.dp).testTag("search-exclude-folder")) { Text("Exclude a folder…") }
+                if (selected.isNotEmpty()) TextButton(
+                    onClick = { rules = rules.copy(excludedLocations = (rules.excludedLocations + selected.map { SearchExclusion(it.path, it.folder) }).distinctBy { it.path }) },
+                    enabled = (rules.excludedLocations.map { it.path } + selected.map { it.path }).distinct().size <= 100,
+                    modifier = Modifier.heightIn(min = 48.dp).testTag("search-exclude-selection"),
+                ) { Text("Exclude selection (${selected.size})") }
+                rules.excludedLocations.forEach { exclusion ->
+                    Column(Modifier.fillMaxWidth().padding(top = 6.dp)) {
+                        Text((if (exclusion.folder) "Folder: " else "File: ") + model.displayPath(exclusion.path), color = Ink, fontSize = 12.sp)
+                        TextButton(onClick = { rules = rules.copy(excludedLocations = rules.excludedLocations - exclusion) },
+                            modifier = Modifier.heightIn(min = 48.dp).testTag("search-remove-exclusion-${exclusion.path}")) { Text("Remove exclusion") }
+                    }
+                }
             }
         },
         confirmButton = {
             TextButton(
+                enabled = minimumBytes != null && maximumBytes != null && !invalidRange,
                 onClick = {
                     model.updateSearchRules(
                         rules.copy(
                             excludedFolderNames =
                                 excludedNames.lines().filter(String::isNotBlank).toSet(),
-                            minimumBytes =
-                                (minimum.toLongOrNull() ?: 0).coerceIn(0, Long.MAX_VALUE / 1024) *
-                                    1024,
-                            maximumBytes =
-                                (maximum.toLongOrNull() ?: 0).coerceIn(0, Long.MAX_VALUE / 1024) *
-                                    1024,
+                            minimumBytes = requireNotNull(minimumBytes),
+                            maximumBytes = requireNotNull(maximumBytes),
                         ),
                     )
                     dismiss()
