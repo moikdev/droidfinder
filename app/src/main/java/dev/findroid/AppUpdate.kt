@@ -58,7 +58,12 @@ internal data class AppUpdate(
 
 internal fun updateAssetUrl(url: String, repository: String, filename: String): Boolean = runCatching {
     val uri = URI(url)
-    val prefix = "/$repository/releases/download/"
+    // The public repository was renamed after 0.29 shipped. Its published
+    // manifests and cached downloads can still use the original GitHub address.
+    val repositories = if (repository == "moikdev/findroid")
+        listOf(repository, "moikdev/droidfinder") else listOf(repository)
+    val prefix = repositories.map { "/$it/releases/download/" }
+        .firstOrNull { uri.rawPath?.startsWith(it) == true } ?: return@runCatching false
     uri.scheme == "https" && uri.host == "github.com" && uri.rawUserInfo == null &&
         uri.port == -1 && uri.rawQuery == null && uri.rawFragment == null &&
         uri.rawPath.startsWith(prefix) && uri.rawPath.removePrefix(prefix).split('/').let {

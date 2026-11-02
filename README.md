@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/droidfinder/releases/tag/v0.29.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.30.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with the sidebar, file list, simple toolbar and preview panel](docs/screenshots/findroid-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.29.0 release](https://github.com/moikdev/droidfinder/releases/tag/v0.29.0-preview) and download **`Findroid-0.29.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.30.0 release](https://github.com/moikdev/findroid/releases/tag/v0.30.0-preview) and download **`Findroid-0.30.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -37,6 +37,18 @@ On a touchscreen, tap a file to open it and hold to start selecting. With a mous
 - Audio and video have playback controls, speed adjustment, and subtitle support where the media supports it.
 
 Select a file for the side preview, or use **Quick Look** for a closer view. With a keyboard, select a file and press **Space**.
+
+### Drop files into another app
+
+Open Findroid beside another app in Android’s split screen. **Hold a file icon**, drag it across, and release it over the other app’s file-drop area. With a mouse, drag the icon directly.
+
+For several files, hold a file’s **name** to start selecting, tap the other files, then hold **Drag** in the selection toolbar. Holding one of the selected file icons also carries the selection.
+
+Other apps receive copies; your originals stay in place. The receiver gets temporary read access to the files you drop. Use **Share** for destinations that do not accept Android file drops. [Drag-and-drop guide](docs/DRAGGING.md).
+
+![Two selected files copied from Findroid into a separate Android receiving app](docs/screenshots/external-drag-tablet.png)
+
+*Actual Android 11 tablet capture with synthetic files and a separate QA receiving app.*
 
 ### Put the source and destination side by side
 
@@ -82,6 +94,8 @@ Natural sorting keeps `Photo 2` before `Photo 10`. Tabs remember where you were.
 </table>
 
 ## Updates from inside the app
+
+**Coming from 0.29?** Install the 0.30 APK over it once. The repository was renamed to `moikdev/findroid`, and 0.30 corrects the updater's repository address.
 
 After installing this preview, open **More → App updates** to check for future versions. Optional automatic checks run at most once a day when the app opens or resumes. Downloads begin when you choose them.
 
@@ -136,4 +150,4 @@ The preview is optimized and signed with your local development key. The release
 
 Browse the Kotlin implementation in [`app/src/main/java/dev/findroid`](app/src/main/java/dev/findroid), JVM tests in [`app/src/test`](app/src/test), and Android workflow tests in [`app/src/androidTest`](app/src/androidTest). Feature guides and real screenshots live in [`docs`](docs). Hosted checks are manual-only.
 
-Found a problem? [Open an issue](https://github.com/moikdev/droidfinder/issues) with your Android version, device/window size, storage type, and steps to reproduce. Screenshots help; leave out private file contents.
+Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) with your Android version, device/window size, storage type, and steps to reproduce. Screenshots help; leave out private file contents.

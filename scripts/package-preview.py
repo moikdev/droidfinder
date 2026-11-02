@@ -139,7 +139,7 @@ def main():
         "packageName": "dev.findroid", "versionCode": int(preview_info.get(ANDROID + "versionCode")),
         "versionName": version, "apkName": artifacts[0]["name"], "bytes": artifacts[0]["bytes"],
         "sha256": artifacts[0]["sha256"],
-        "downloadUrl": f"https://github.com/moikdev/droidfinder/releases/download/v{version}/{artifacts[0]['name']}",
+        "downloadUrl": f"https://github.com/moikdev/findroid/releases/download/v{version}/{artifacts[0]['name']}",
         "notes": args.notes.read_text()[:4000] if args.notes else "Improvements and fixes for Findroid.",
     }
     (destination / "findroid-update.json").write_text(json.dumps(update, indent=2) + "\n")

@@ -86,8 +86,10 @@ internal fun Modifier.fileGestures(
                 if (double) currentOpen(currentEntry) else mouse(control, shift)
             },
             hold = { isMouse ->
-                model.activatePane()
-                if (isMouse) mouse(false, false) else model.select(currentEntry, multiple = true)
+                if (model.windowState.iconDragGesture != "${model.paneId}:${currentEntry.path}") {
+                    model.activatePane()
+                    if (isMouse) mouse(false, false) else model.select(currentEntry, multiple = true)
+                }
             },
             context = { model.requestContext(currentEntry, it) },
             middle =

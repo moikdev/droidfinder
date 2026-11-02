@@ -84,11 +84,12 @@ class DragWorkflowTest {
         mouse: Boolean = false,
         copy: Boolean = false,
         entry: File = note,
+        touchIcon: Boolean = false,
     ): NativeDrag {
         compose.runOnIdle { model.select(model.entries.first { it.path == entry.path }) }
         compose.waitForIdle()
         val start =
-            if (mouse) {
+            if (mouse || touchIcon) {
                 // The icon owns mouse drag recognition, the row owns selection/context gestures.
                 compose
                     .onNodeWithTag("drag-icon-${entry.path}", useUnmergedTree = true)
@@ -97,7 +98,7 @@ class DragWorkflowTest {
                     .center
             } else
                 compose
-                    .onNodeWithContentDescription("Hold to drag selected files into a folder")
+                    .onNodeWithContentDescription("Hold to drag selected files")
                     .fetchSemanticsNode()
                     .boundsInWindow
                     .center
@@ -112,6 +113,21 @@ class DragWorkflowTest {
                 native = it
                 it.start()
             }
+    }
+
+    @Test
+    fun holdingFileIconStartsTouchDragAndPreservesUndo() {
+        val drag = start(touchIcon = true)
+        drag.move(point("Destination"))
+        compose.waitUntil(10_000) { model.location == target.path }
+        val browser = compose.onNodeWithTag("file-browser").fetchSemanticsNode().boundsInWindow
+        drag.move(Offset(browser.center.x, browser.bottom - 100f))
+        drag.drop()
+        compose.waitUntil(15_000) { File(target, note.name).exists() && model.busy == null }
+        assertFalse(note.exists())
+        assertEquals("original drag payload", File(target, note.name).readText())
+        compose.runOnIdle { model.undo() }
+        compose.waitUntil(15_000) { note.exists() && model.busy == null }
     }
 
     @Test

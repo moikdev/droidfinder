@@ -388,12 +388,14 @@ internal fun DragFeedback(controller: FinderDragController, modifier: Modifier =
         }
     val count = payload?.paths?.size
     val title =
-        if (zone == null) "Drag to a folder"
+        if (zone == null && payload?.externalFiles == true) "Drag to a folder or another app"
+        else if (zone == null) "Drag to a folder"
         else
             "$action${count?.let { " $it item${if (it == 1) "" else "s"}" }.orEmpty()} to ${zone.model.title(zone.folder)}"
     val detail =
         controller.error
             ?: when {
+                zone == null && payload?.externalFiles == true -> "Other apps receive a copy. Hold over folders or tabs to open them."
                 zone == null -> "Hold over a folder or tab to open it"
                 !controller.checked -> "Checking destination…"
                 controller.scrolling -> "Scrolling · move away from the edge to stop"

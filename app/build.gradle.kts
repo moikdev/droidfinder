@@ -10,9 +10,9 @@ android {
         applicationId = "dev.findroid"
         minSdk = 30
         targetSdk = 36
-        versionCode = 29
-        versionName = "0.29.0"
-        buildConfigField("String", "UPDATE_REPOSITORY", "\"moikdev/droidfinder\"")
+        versionCode = 30
+        versionName = "0.30.0"
+        buildConfigField("String", "UPDATE_REPOSITORY", "\"moikdev/findroid\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {

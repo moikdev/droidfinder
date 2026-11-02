@@ -50,7 +50,7 @@ Goal: implement the full improvement roadmap requested after 0.4.0. This file tr
 ## 6. Storage and integration
 - [x] Clear volume/provider status, space/capabilities, reconnect and expired-grant flows (0.18.0). Physical USB/SD and third-party provider matrices remain open.
 - [ ] Direct SMB/SFTP/WebDAV, saved connections, secure credentials and offline handling.
-- [ ] Save-to-Findroid share destination, Android document provider and cross-app drag/multi-window. Independent Android windows with shared transfers/history are implemented in 0.8.0; Workspace DocumentsProvider and reviewed Save-to-Findroid shares are implemented in 0.19.0; external cross-app dragging and the device/provider matrix remain open.
+- [ ] Save-to-Findroid share destination, Android document provider and cross-app drag/multi-window. Independent Android windows with shared transfers/history are implemented in 0.8.0; Workspace DocumentsProvider and reviewed Save-to-Findroid shares are implemented in 0.19.0; external file dragging from touch/pen icons, the labeled Drag control and mouse is implemented in 0.30.0, with separate-app API 30/36 checks. Broader physical-device, third-party receiver and provider coverage remains open.
 - [x] Honor Android protected directories; no claim of unrestricted private-app access (0.18.0).
 
 ## 7. Analysis and organization

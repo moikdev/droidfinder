@@ -1,4 +1,4 @@
-# Dragging and precise resizing — 0.11.0
+# Dragging files
 
 The tablet uses one stable native drag target and live, clipped folder/viewport bounds. Lazy rows are eligible only while present in their viewport’s visible-item list; attached but prefetched rows cannot supply drop targets. Pointer movement updates the destination immediately. Folders revealed by scrolling or hover navigation can receive the same drag without restarting it.
 
@@ -6,9 +6,42 @@ The tablet uses one stable native drag target and live, clipped folder/viewport 
 
 Actual optimized Android captures with synthetic QA files: [Workspace](screenshots/dragging-workspace.png) · [Hold to open](screenshots/dragging-hover.png) · [Opened folder](screenshots/dragging-opened.png) · [Cancel restores](screenshots/dragging-restored.png) · [Dark](screenshots/dragging-dark.png) · [Portrait](screenshots/dragging-portrait.png) · [Fitted column](screenshots/dragging-fit-before.png) · [After manual resize](screenshots/dragging-fit-after.png).
 
+## Drag files into another app
+
+![Two files received by a separate Android app while the originals stay selected](screenshots/external-drag-tablet.png)
+
+Version **0.30.0** adds accessible touch initiation for Android global file drags. Put Findroid and a receiving app beside each other in Android split screen, or use the device’s windowing controls.
+
+- **One file:** hold its icon, then drag it across to the receiving app’s drop area.
+- **Several files:** hold a file’s name to select it, tap more files, then hold **Drag** in the tablet selection toolbar. You can also hold an already selected file icon.
+- **Mouse:** press and drag a file icon. Dragging a selected icon carries the selected files.
+- **Discover the gesture:** tapping **Drag** shows a short instruction.
+
+The external destination receives copies. Findroid keeps the originals, including when the internal drag mode is Move. Android grants the receiver temporary read access to the exact content URIs in the drop. Findroid does not grant write, persistable, or directory-prefix access. Connected document-provider file URIs are passed through with their existing metadata; local files use FileProvider content URIs. All selected MIME types are advertised, so a mixed image/document selection is recognized correctly.
+
+The receiving app controls whether and where it accepts file drops. **Share** remains available for other destinations. Folder or mixed file/folder selections retain internal folder dragging; Share packages folders as ZIPs when sending them to another app.
+
+## Cross-app acceptance
+
+The separate `interop-client` QA app has its own Android UID and a real native drop target. `ExternalDragWorkflowTest` uses system split screen and native pointer injection, not fabricated drag events. It covers touch icons, the labeled selection control, holding an already selected icon, mouse input and connected-provider files. It checks copied bytes, names and types; source preservation; read denial before and after the temporary grant; write denial; and denial of access to an unselected sibling. Ordinary local drag and pointer-input regressions remain separate.
+
+To run the checks on a dedicated tablet emulator with JDK 17:
+
+```sh
+./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :interop-client:assembleDebug
+adb -s emulator-5582 install -r interop-client/build/outputs/apk/debug/interop-client-debug.apk
+python3 scripts/check-device.py --serial emulator-5582 --install \
+  --classes dev.findroid.ExternalDragWorkflowTest \
+  --output captures/external-drag/native.txt
+```
+
+For the optimized APK, `scripts/check-external-drag.py --serial <dedicated-tablet> --apk <preview.apk> --output <evidence-directory> --icon` seeds synthetic files using the same-key debug build, installs the preview, injects native touchscreen events and checks the receiver's report. It reinstalls debug briefly after the drop to compare original file bytes, then restores the exact preview. Omit `--icon` to hold the labeled Drag control.
+
+The QA receiver is a separate application and is not bundled in Findroid. Final release results and actual screenshots are recorded in [VALIDATION.md](../VALIDATION.md).
+
 ## Behavior
 
-- Mouse: drag a file icon. Touch: select files, then hold the selection bar's drag grip.
+- Mouse: drag a file icon. Touch: hold a file icon, or select files and hold the labeled Drag control.
 - Start with Ctrl to copy, the default or Shift to move, or Alt / Ctrl+Shift to create `.finderlink` shortcuts. The chosen mode and source paths remain fixed for that drag.
 - A compact status panel identifies the action, item count and destination. Blue outlines show a valid folder; a red outline and explanation identify an invalid destination. Storage and provider checks run off the UI thread and run again before dispatching the operation.
 - Hold over a writable folder, sidebar location, breadcrumb or inactive tab for 800 ms to open it. A small progress ring shows the wait. The browser background is drop-only and never opens another folder automatically.
@@ -19,7 +52,7 @@ Actual optimized Android captures with synthetic QA files: [Workspace](screensho
 
 Resize separators preserve fractional dp movement within each gesture and read current widths/ratios for each update. Slow one-pixel movements at tablet density accumulate instead of being discarded. The first manual drag after fitted/adaptive sizing starts from the displayed width instead of jumping to an old stored width. Sidebar, pane split, inspector, browsing columns and detail-column separators share the precision behavior and horizontal-resize cursor.
 
-## Local validation
+## Earlier validation (0.11.0)
 
 Local JVM checks passed **97/97**. Android lint completed with **0 errors / 65 warnings**. Debug, optimized development-signed preview and unsigned release variants built locally.
 

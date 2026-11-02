@@ -78,7 +78,7 @@ fun RefinedToolbar(
         val availableWidth = maxWidth / androidx.compose.ui.platform.LocalDensity.current.fontScale
         val veryNarrow = availableWidth < 600.dp
         val selectionActions = availableWidth >= 800.dp
-        val showPreview = availableWidth >= 960.dp
+        val showPreview = availableWidth >= 1060.dp
         val showNewFolder = availableWidth >= 700.dp
         Row(
             Modifier.fillMaxWidth()
@@ -252,6 +252,7 @@ fun RefinedToolbar(
                         ToolbarAction("Delete", { action("delete") },
                             label = "Delete permanently", enabled = model.busy == null)
                     } else if (!model.isTrash) {
+                        DragSelectionHandle(model)
                         ToolbarAction("Copy", { action("copy") })
                         if (selectionActions) {
                             ToolbarAction("Cut", { action("cut") },

@@ -1,5 +1,22 @@
 # Android preview verification
 
+## Findroid 0.30.0 — external file dragging
+
+Validated **2026-11-02**. The touch entry point missing from the simplified tablet toolbar is restored as a labeled **Drag** control. Holding a file icon also initiates a native Android global drag; mouse initiation remains direct. Holding a selected icon preserves the visible selection and transfers its frozen file set. Mixed file selections advertise all MIME types. Cross-app drops grant temporary read access and keep the originals. Folder/mixed-folder selections retain internal dragging; Share supports ZIP export for external destinations.
+
+- **308 JVM tests** passed with zero failures, errors or skips. Debug/test, optimized preview, unsigned release and the separate interop QA app built successfully. Android lint completed with **zero errors, 142 warnings and 11 hints**.
+- Final focused native batches pass **15/15 on API 36 and 15/15 on API 30**: five real cross-app drops, four payload/control checks and six updater checks on each version. Cross-app cases cover touch icons, the labeled Drag control, a selected icon carrying several files, mouse dragging and connected-provider files.
+- Separate broader drag/input runs pass **34 checks with 4 phone-only skips on API 36**, and **29 checks with 4 phone-only skips on API 30**. These cover internal moves/copies, spring loading, cancellation, Undo and ordinary touch/mouse selection. They ran before the final unknown-tool fallback and updater-address adjustment; focused final batches and exact optimized-APK checks cover those adjustments. This is targeted validation across runs, not a clean full Android-suite claim.
+- A different-UID receiving application copies actual URI contents in split screen. Tests compare names, byte counts and SHA-256; assert no write access, no access before the drop, no access to an unselected sibling, no access after permission release, and no cross-process exposure of local drag state.
+- The exact optimized preview was exercised with native touchscreen events on **Android 11/API 30 and Android 16/API 36** at 1920 × 1200, density 240. The API 30 run holds a selected file icon; API 36 holds Drag. Both copy a PNG and text file, preserve two-file selection and verify the original bytes after a same-key debug reinstall. The exact preview is then restored. [Actual optimized screenshot](docs/screenshots/external-drag-tablet.png).
+
+The repository was renamed from `moikdev/droidfinder` to **`moikdev/findroid`** after 0.29 shipped. That installed version rejects the renamed feed's asset URLs, so updating from 0.29 requires installing the 0.30 APK once over the app. Version 0.30 reads the current repository and accepts only the known legacy repository address in older published manifests/cached downloads. A new regression checks that unrelated repositories remain rejected.
+
+Test-driver corrections during development included Android 11 cold split-screen launch flags, waiting for a committed source frame on Android 16, and host UI automation that focuses each window and distinguishes image/text accessibility nodes. Earlier failing runs are superseded by the final named batches above. The host script reports native input as touchscreen; some Android input tools report an unknown pointer tool, which now follows touch hold recognition. Physical pen/eraser hardware, physical tablets, and specific third-party receiving/cloud apps remain unverified.
+
+Reproduction: [dragging guide](docs/DRAGGING.md), `ExternalDragWorkflowTest`, the separate `interop-client` receiver, and `scripts/check-external-drag.py`. Release assets include checksums, build information, the OTA manifest and a validation archive. GitHub-hosted checks remain manual-only; all checks here ran locally.
+
+
 ## Findroid 0.29.0 public release
 
 Published **2026-11-02**: [source and README](https://github.com/moikdev/droidfinder), [release and APKs](https://github.com/moikdev/droidfinder/releases/tag/v0.29.0-preview). Source and OTA releases share the public `moikdev/droidfinder` repository. The release tag points to source commit `20efcb39cecf15888096de74a970479e1a2da81c`; build information records a clean source tree.

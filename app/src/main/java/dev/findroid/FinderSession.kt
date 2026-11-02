@@ -172,6 +172,8 @@ data class TransferSubmission(
 class FinderWindowState(app: Application, val id: String = "main") {
     internal val fileClicks = FileClickSequence()
     internal var nativeMousePressTime = Long.MIN_VALUE
+    // The icon owns a held pointer; its parent row must not toggle that selection.
+    internal var iconDragGesture: String? = null
     internal val prefs =
         app.getSharedPreferences(if (id == "main") "finder" else "finder-window-$id", 0)
     internal val panes = mutableListOf<FinderModel>()

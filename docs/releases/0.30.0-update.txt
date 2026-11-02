@@ -1,0 +1,8 @@
+Findroid 0.30.0 preview
+
+• Drag files into another Android app in split screen.
+• Hold a file icon with touch or pen; drag it directly with a mouse.
+• Select several files and hold the labeled Drag control, or hold a selected icon.
+• Mixed file types and connected-folder files use temporary read-only access.
+
+Other apps receive copies. Your originals stay in Findroid. The receiving app must support file drops. Install over Findroid to keep your files and settings.

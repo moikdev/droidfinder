@@ -49,6 +49,17 @@ class AppUpdateTest {
         }
     }
 
+    @Test fun renamedRepositoryAcceptsOnlyItsKnownLegacyReleaseAssets() {
+        val u = update()
+        val canonical = "moikdev/findroid"
+        assertEquals(u, AppUpdate.parse(u.json(), canonical))
+        assertTrue(updateAssetUrl(u.downloadUrl.replace(repository, canonical), canonical, u.apkName))
+        for (other in listOf("moikdev/droidfinder-other", "another/droidfinder", "another/findroid")) {
+            assertFalse(updateAssetUrl(u.downloadUrl.replace(repository, other), canonical, u.apkName))
+        }
+        assertFalse(updateAssetUrl(u.downloadUrl, "another/repository", u.apkName))
+    }
+
     @Test fun redirectsNeverAllowCleartextLocalHostsCredentialsOrUnrelatedSites() {
         assertTrue(updateNetworkUrl("https://release-assets.githubusercontent.com/signed/path?token=download"))
         for (url in listOf("http://github.com/file", "https://localhost/file", "https://127.0.0.1/file",
