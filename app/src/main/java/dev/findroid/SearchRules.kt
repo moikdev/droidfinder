@@ -35,18 +35,21 @@ data class SearchRules(
     val excludedLocations: List<SearchExclusion> = emptyList(),
     val date: SearchDate = SearchDate.ANY,
     val size: SearchSize = SearchSize.ANY,
+    val locations: List<String> = emptyList(),
 ) {
+    init { checkedSearchLocations(locations) }
     private val contentPattern by lazy { StreamingText(content) }
 
     val filterTags: Set<String>
         get() = if (tag.isBlank()) tags else tags + tag
 
     val scoped: Boolean
-        get() = !includeSubfolders || excludedFolderNames.isNotEmpty() || excludedLocations.isNotEmpty()
+        get() = locations.isNotEmpty() || !includeSubfolders || excludedFolderNames.isNotEmpty() || excludedLocations.isNotEmpty()
 
     val scopeDescription: String
         get() = buildList {
-            add(if (includeSubfolders) "Folder and subfolders" else "This folder only")
+            if (locations.isNotEmpty()) add("${locations.size} chosen ${if (locations.size == 1) "folder" else "folders"}")
+            add(if (includeSubfolders) "Folder and subfolders" else if (locations.size <= 1) "This folder only" else "Chosen folders only")
             if (excludedFolderNames.isNotEmpty()) add("${excludedFolderNames.size} folder ${if (excludedFolderNames.size == 1) "name" else "names"} excluded")
             if (excludedLocations.isNotEmpty()) add("${excludedLocations.size} exact ${if (excludedLocations.size == 1) "location" else "locations"} excluded")
         }.joinToString(" · ")
@@ -64,9 +67,12 @@ data class SearchRules(
     val hasSizeFilter get() = minimumBytes > 0 || maximumBytes > 0 || size != SearchSize.ANY
 
     fun remapLocations(path: (String) -> String): SearchRules =
-        copy(excludedLocations = excludedLocations.groupBy { path(it.path) }.map { (target, values) ->
-            SearchExclusion(target, values.any { it.folder })
-        })
+        copy(
+            locations = locations.map(path).distinct(),
+            excludedLocations = excludedLocations.groupBy { path(it.path) }.map { (target, values) ->
+                SearchExclusion(target, values.any { it.folder })
+            },
+        )
 
     fun excludesFolder(entry: Entry): Boolean = entry.folder && entry.name in excludedFolderNames
 

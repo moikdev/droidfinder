@@ -27,12 +27,13 @@ internal fun recentSearchRootSupported(root: String): Boolean {
 
 internal fun SearchRules.historyCopy(): SearchRules = copy(
     nameTerms = nameTerms.toList(), tags = tags.toSet(), excludedFolderNames = excludedFolderNames.toSet(),
-    excludedLocations = excludedLocations.toList(),
+    excludedLocations = excludedLocations.toList(), locations = checkedSearchLocations(locations),
 )
 
 internal fun RecentSearch.checked(): RecentSearch = apply {
     require(id.isNotBlank() && id.length <= 128 && id.none(Char::isISOControl)) { "Invalid recent search identity." }
     require(recentSearchRootSupported(root) && usedAt >= 0) { "Invalid recent search location or time." }
+    checkedSearchLocations(rules.locations)
     require(rules.active) { "An empty search doesn't need a history entry." }
     require(rules.days >= 0 && rules.minimumBytes >= 0 && rules.maximumBytes >= 0 &&
         (rules.minimumBytes == 0L || rules.maximumBytes == 0L || rules.minimumBytes <= rules.maximumBytes)) { "Invalid recent search bounds." }
@@ -70,13 +71,14 @@ internal val RecentSearch.summary: String get() = buildList {
 }.joinToString(" · ")
 
 internal fun recentSearchMatches(search: RecentSearch, query: String, includeRoot: Boolean = true): Boolean {
-    val fields = search.title + " " + search.summary + if (includeRoot) " " + search.root else ""
+    val criteria = if (includeRoot) search else search.copy(rules = search.rules.copy(locations = emptyList()))
+    val fields = criteria.title + " " + criteria.summary + if (includeRoot) " " + search.root + " " + search.rules.locations.joinToString(" ") else ""
     return query.trim().split(Regex("\\s+")).filter(String::isNotBlank).all { fields.contains(it, ignoreCase = true) }
 }
 
 internal fun recentSearchSuggestions(searches: List<RecentSearch>, query: String): List<RecentSearch> =
     if (query.isBlank()) emptyList() else searches.filter { recentSearchMatches(it, query, includeRoot = false) }
-        .distinctBy { it.rules }.take(3)
+        .distinctBy { it.rules.copy(locations = emptyList()) }.take(3)
 
 internal fun remapRecentSearches(searches: List<RecentSearch>, routes: List<Pair<String, String>>): List<RecentSearch> {
     val tags = routes.filter { it.first.startsWith("@tag:") && it.second.startsWith("@tag:") }

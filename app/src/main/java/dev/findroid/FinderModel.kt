@@ -587,11 +587,14 @@ constructor(
             else -> false
         }
         if (!stillSaved()) return "That recent search was removed. Choose another search."
+        val reuseRules = item.rules.historyCopy().let { if (here) it.copy(locations = emptyList()) else it }
         val available = if (target.startsWith("@")) libraryAvailable() else withContext(Dispatchers.IO) {
-            try { allowedPath(target) && documents.read(target).folder }
-            catch (error: Exception) {
-                if (error is kotlinx.coroutines.CancellationException) throw error
-                false
+            reuseRules.locations.ifEmpty { listOf(target) }.any { root ->
+                try { allowedPath(root) && documents.read(root).folder }
+                catch (error: Exception) {
+                    if (error is kotlinx.coroutines.CancellationException) throw error
+                    false
+                }
             }
         }
         if (this !in session.panes || tabs[activeTab].id != tabId ||
@@ -604,7 +607,7 @@ constructor(
                 else "The original location isn't available. Reconnect storage, or choose Search here."
         rememberCurrentSearch()
         if (location != target) navigate(target)
-        updateSearchRules(item.rules.historyCopy())
+        updateSearchRules(reuseRules)
         return null
     }
 
@@ -1254,7 +1257,7 @@ constructor(
                 loading -> "${entries.size} shown · scanning…"
                 selected.isNotEmpty() -> "${selected.size} of ${entries.size} selected"
                 effectiveSearchRules.active || currentSmartFolder != null ->
-                    "${entries.size} matches"
+                    "${entries.size} ${if (entries.size == 1) "match" else "matches"}"
                 else -> "${entries.size} item${if (entries.size == 1) "" else "s"}"
             } + if (!loading && listingProgress.incomplete) " · incomplete" else ""
 
@@ -1375,7 +1378,7 @@ constructor(
         .getOrDefault(emptyList())
 
     fun saveSmartFolder(name: String) {
-        val folder = folderPath ?: currentSmartFolder?.root ?: return
+        val folder = effectiveSearchRules.locations.firstOrNull() ?: folderPath ?: currentSmartFolder?.root ?: return
         if (name.isBlank()) return
         val smart =
             SmartFolder(
@@ -1416,11 +1419,22 @@ constructor(
             .forEach { it.navigate(workspace.absolutePath) }
     }
 
+    internal val canChooseSearchLocations get() = folderPath != null || currentSmartFolder != null
+
+    internal fun chooseSearchLocations(locations: List<String>) {
+        check(canChooseSearchLocations) { "Open a folder before choosing search locations." }
+        val chosen = checkedSearchLocations(locations)
+        require(chosen.isNotEmpty()) { "Choose at least one search folder." }
+        val rules = effectiveSearchRules.historyCopy().copy(locations = chosen)
+        if (currentSmartFolder == null && location != chosen.first()) navigate(chosen.first())
+        updateSearchRules(rules)
+    }
+
     fun updateSearchRules(rules: SearchRules) {
         val smart = currentSmartFolder
         if (smart != null) {
             smartFolders = smartFolders.map {
-                if (it.id == smart.id) it.copy(rules = rules) else it
+                if (it.id == smart.id) it.copy(root = rules.locations.firstOrNull() ?: it.root, rules = rules) else it
             }
             persistSmartFolders()
             query = ""
@@ -2129,6 +2143,10 @@ constructor(
             }
     }
 
+    private fun searchesStorageTree(grant: String): Boolean =
+        (listOfNotNull(location, currentSmartFolder?.root) + effectiveSearchRules.locations)
+            .any { isDocumentPath(it) && documents.sameTree(grant, it) }
+
     fun connectLocation(uri: Uri, persist: Boolean = true, replacing: String? = null) {
         val original = replacing?.let { old -> connectedLocations.firstOrNull { it.uri == old } }
         if (original != null && !documents.sameTree(original.grant, uri.toString())) {
@@ -2158,15 +2176,10 @@ constructor(
                 .onSuccess {
                     connectedLocations = documents.locations
                     storage.refresh(hasAccess)
-                    if (original == null) navigate(it.uri)
+                    val affected = session.panes.filter { pane -> pane.searchesStorageTree(original?.grant ?: uri.toString()) }
+                    if (original == null && affected.isEmpty()) navigate(it.uri)
                     else {
-                        session.panes.forEach { pane ->
-                            if (
-                                isDocumentPath(pane.location) &&
-                                    documents.sameTree(original.grant, pane.location)
-                            )
-                                pane.refresh()
-                        }
+                        affected.forEach { pane -> pane.refresh() }
                         message = "Folder permission restored"
                     }
                 }
@@ -2184,7 +2197,7 @@ constructor(
         connectedLocations = documents.locations
         storage.refresh(hasAccess)
         session.panes.forEach { pane ->
-            if (isDocumentPath(pane.location) && documents.sameTree(root.grant, pane.location))
+            if (pane.searchesStorageTree(root.grant))
                 pane.refresh()
         }
     }
@@ -3022,8 +3035,8 @@ constructor(
             if (debounce) delay(220)
             val result = runCatching {
                 withContext(Dispatchers.IO) {
-                    val info =
-                        if (!path.startsWith("@")) {
+                    var info =
+                        if (!path.startsWith("@") && rules.locations.isEmpty()) {
                             check(allowedPath(path)) {
                                 "Storage access is needed to open this folder."
                             }
@@ -3046,6 +3059,7 @@ constructor(
                         }
                     val roots =
                         when {
+                            rules.locations.isNotEmpty() -> rules.locations
                             smart != null -> {
                                 check(allowedPath(smart.root)) {
                                     "Reconnect the Smart Folder's location."
@@ -3059,6 +3073,7 @@ constructor(
                             else -> listOf(path)
                         }
                     val trashRequest = path == "@trash"
+                    val browseAnchor = path
                     val source =
                         object : ListingSource {
                             override suspend fun children(
@@ -3068,6 +3083,11 @@ constructor(
                             ): DirectoryReply {
                                 check(allowedPath(path)) {
                                     "Storage access is needed to read this folder."
+                                }
+                                if (rules.locations.isNotEmpty() && path in roots) {
+                                    val entry = documents.read(path, control)
+                                    check(entry.folder) { "This search location is no longer a folder." }
+                                    if (path == browseAnchor) info = entry
                                 }
                                 return documents.visitChildren(path, control, visit)
                             }
@@ -3185,68 +3205,64 @@ constructor(
                     }
                 }
             if (generation != listingGeneration) return@launch
-            loading = false
-            observer?.stopWatching()
-            providerObserver?.let {
-                getApplication<Application>().contentResolver.unregisterContentObserver(it)
+            val watched = rules.locations.ifEmpty { listOf(smart?.root ?: path) }
+            watchListingRoots(watched, generation, control, rules.locations.isNotEmpty() || search.isEmpty())
+            if (generation == listingGeneration) loading = false
+        }
+    }
+
+    private suspend fun watchListingRoots(roots: List<String>, generation: Long, control: ListingControl, watchLocal: Boolean) {
+        var local: FileObserver? = null
+        var provider: android.database.ContentObserver? = null
+        var installed = false
+        val resolver = getApplication<Application>().contentResolver
+        try {
+            withContext(Dispatchers.IO) {
+                control.check()
+                val folders = roots.distinct().take(SEARCH_LOCATION_LIMIT)
+                val documentRoots = folders.filter(::isDocumentPath)
+                if (documentRoots.isNotEmpty()) {
+                    provider = object : android.database.ContentObserver(android.os.Handler(android.os.Looper.getMainLooper())) {
+                        override fun onChange(selfChange: Boolean) {
+                            if (generation == listingGeneration && busy == null) refresh(debounce = true)
+                        }
+                    }
+                    documentRoots.forEach { root ->
+                        control.check()
+                        runCatching { resolver.registerContentObserver(documents.notificationUri(root), true, provider!!) }
+                    }
+                }
+                val localFolders = if (watchLocal) folders.filterNot { it.startsWith("@") || isDocumentPath(it) }
+                    .map(::File).filter { it.isDirectory && allowed(it) } else emptyList()
+                if (localFolders.isNotEmpty()) {
+                    val mask = FileObserver.CREATE or FileObserver.DELETE or FileObserver.MOVED_FROM or
+                        FileObserver.MOVED_TO or FileObserver.CLOSE_WRITE or FileObserver.DELETE_SELF or FileObserver.MOVE_SELF
+                    local = object : FileObserver(localFolders, mask) {
+                        override fun onEvent(event: Int, path: String?) {
+                            if (event and mask == 0) return
+                            viewModelScope.launch {
+                                if (generation == listingGeneration && busy == null) refresh(debounce = true)
+                            }
+                        }
+                    }.also { it.startWatching() }
+                }
+                control.check()
             }
-            providerObserver = null
-            if (isDocumentPath(path))
-                runCatching {
-                    providerObserver =
-                        object :
-                                android.database.ContentObserver(
-                                    android.os.Handler(android.os.Looper.getMainLooper()),
-                                ) {
-                                override fun onChange(selfChange: Boolean) {
-                                    if (generation == listingGeneration && busy == null)
-                                        refresh(debounce = true)
-                                }
-                            }
-                            .also {
-                                getApplication<Application>()
-                                    .contentResolver
-                                    .registerContentObserver(
-                                        documents.notificationUri(path),
-                                        true,
-                                        it,
-                                    )
-                            }
-                }
-            directory
-                ?.takeIf { it.isDirectory && allowed(it) }
-                ?.let { folder ->
-                    observer =
-                        object :
-                                FileObserver(
-                                    folder,
-                                    CREATE or DELETE or MOVED_FROM or MOVED_TO or CLOSE_WRITE,
-                                ) {
-                                override fun onEvent(event: Int, path: String?) {
-                                    // Android can deliver IN_IGNORED when an old watch is stopped,
-                                    // even though it is outside the requested mask.
-                                    if (
-                                        event and
-                                            (CREATE or
-                                                DELETE or
-                                                MOVED_FROM or
-                                                MOVED_TO or
-                                                CLOSE_WRITE) == 0
-                                    )
-                                        return
-                                    viewModelScope.launch {
-                                        if (
-                                            generation == listingGeneration &&
-                                                directory?.path == folder.path &&
-                                                busy == null &&
-                                                query.isEmpty()
-                                        )
-                                            refresh(debounce = true)
-                                    }
-                                }
-                            }
-                            .also { it.startWatching() }
-                }
+            if (generation == listingGeneration) {
+                stopListingObservers()
+                observer = local
+                providerObserver = provider
+                installed = true
+            }
+        } catch (error: Exception) {
+            if (error is kotlinx.coroutines.CancellationException) throw error
+            // Watching is best effort. A provider or removed directory must not
+            // prevent available results from finishing; Refresh is always usable.
+        } finally {
+            if (!installed) {
+                local?.stopWatching()
+                provider?.let { runCatching { resolver.unregisterContentObserver(it) } }
+            }
         }
     }
 

@@ -137,6 +137,7 @@ private fun checkSetupLocation(path: String) {
 }
 
 private fun checkSetupRules(rules: SearchRules) {
+    checkedSearchLocations(rules.locations)
     require(rules.name.length <= 8192 && rules.content.length <= 8192 && rules.nameTerms.size <= 100 && rules.tags.size <= 256 && rules.excludedFolderNames.size <= 1000 && rules.excludedLocations.size <= 100) { "Saved search rules are too large." }
     require(rules.days >= 0 && rules.minimumBytes >= 0 && rules.maximumBytes >= 0)
     require(rules.excludedLocations.map { it.path }.distinct().size == rules.excludedLocations.size) { "Repeated search exclusion." }

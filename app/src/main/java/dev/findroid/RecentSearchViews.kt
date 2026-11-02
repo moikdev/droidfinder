@@ -121,7 +121,7 @@ internal fun SearchQueryField(
                 DropdownMenuItem(
                     text = { Column(Modifier.widthIn(max = 440.dp)) {
                         Text(search.title, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                        Text(search.summary, fontSize = 12.sp, color = Muted, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                        Text(search.copy(rules = search.rules.copy(locations = emptyList())).summary, fontSize = 12.sp, color = Muted, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     } },
                     onClick = { choose(search) },
                     modifier = Modifier.testTag("recent-search-suggestion-${search.id}")
@@ -198,6 +198,7 @@ internal fun RecentSearchesDialog(model: FinderModel, action: (String) -> Unit, 
                         Text(search.summary, fontSize = 13.sp, maxLines = if (search.id in expanded) Int.MAX_VALUE else 2, overflow = TextOverflow.Ellipsis)
                         if (search.id in expanded) {
                             Text("Original location: ${recentRootLabel(model, search.root)}", fontSize = 13.sp)
+                            search.rules.locations.forEach { root -> Text("Search folder: ${recentRootLabel(model, root)}", fontSize = 13.sp) }
                             if (search.rules.excludedFolderNames.isNotEmpty())
                                 Text("Excluded folder names: ${search.rules.excludedFolderNames.sorted().joinToString(", ")}", fontSize = 13.sp)
                             search.rules.excludedLocations.forEach { exclusion -> Text("Excluded ${if (exclusion.folder) "folder" else "file"}: ${recentRootLabel(model, exclusion.path)}", fontSize = 13.sp) }

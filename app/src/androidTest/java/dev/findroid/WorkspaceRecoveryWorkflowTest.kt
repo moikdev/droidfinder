@@ -270,4 +270,35 @@ class WorkspaceRecoveryWorkflowTest {
         untouched()
     }
 
+    @Test fun repairingASecondarySearchRootKeepsTheWorkingAnchorAndOtherPane() {
+        val rules = SearchRules(name = "Notes", locations = listOf(working.path, missing.path))
+        compose.runOnIdle { seed(saved.copy(primary = pane(working.path).copy(tabs = listOf(FinderTab(listOf(working.path), search = "Notes", rules = rules.copy(name = "")))))) }
+        reviewed(); apply(save = false)
+        compose.waitUntil(15_000) { !model.loading && !model.secondaryPane.loading }
+        assertEquals(working.path, model.location)
+        assertEquals(listOf(working.path, replacement.path), model.effectiveSearchRules.locations)
+        assertEquals(setOf("Notes.md"), model.entries.map { it.name }.toSet())
+        assertEquals(working.path, model.secondaryPane.location)
+        assertTrue(model.secondaryPane.effectiveSearchRules.locations.isEmpty())
+        assertEquals(rules.locations, model.savedWorkspaces.first { it.id == saved.id }.primary.tabs.single().rules.locations)
+        untouched()
+    }
+
+    @Test fun aSmartFoldersSecondaryRootRepairCreatesAnIndependentRestoredTab() {
+        val rules = SearchRules(name = "Notes", locations = listOf(working.path, missing.path))
+        val smart = SmartFolder(java.util.UUID.randomUUID().toString(), "Multi-root notes", working.path, rules)
+        compose.runOnIdle {
+            model.session.smartFolders.value = model.smartFolders + smart
+            seed(saved.copy(primary = pane("@smart:${smart.id}")))
+        }
+        reviewed(); apply(save = false)
+        compose.waitUntil(15_000) { !model.loading }
+        assertEquals(working.path, model.location)
+        assertNull(model.currentSmartFolder)
+        assertEquals(listOf(working.path, replacement.path), model.effectiveSearchRules.locations)
+        assertEquals(setOf("Notes.md"), model.entries.map { it.name }.toSet())
+        assertEquals(smart, model.smartFolders.first { it.id == smart.id })
+        untouched()
+    }
+
 }

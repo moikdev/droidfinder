@@ -84,11 +84,11 @@ internal class WorkspaceRecoveryController(private val model: FinderModel, priva
                 if (failure is CancellationException) throw failure
                 failure.message ?: "This folder is unavailable. Reconnect storage or choose a replacement."
             }
-            value.openDestinations().map { destination ->
+            value.openDestinations(searches.mapValues { it.value.rules }).map { destination ->
                 token.check()
                 val search = searches[destination.path]
                 val problem = when {
-                    search != null -> folderProblem(search.root)?.let { "Saved search folder ${search.root}: $it" }
+                    search != null -> folderProblem(search.rules.locations.firstOrNull() ?: search.root)?.let { "Saved search folder ${search.root}: $it" }
                     destination.path.startsWith("@") -> if (destination.path in known) null else "This tag, collection or saved search is no longer available."
                     else -> folderProblem(destination.path)
                 }

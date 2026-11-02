@@ -21,6 +21,10 @@ import kotlinx.coroutines.delay
 internal fun ListingStatus(model: FinderModel) {
     val progress = model.listingProgress
     val rules = model.effectiveSearchRules
+    val count = model.entries.size
+    val results = "$count ${if (count == 1) "result" else "results"}"
+    val items = "$count ${if (count == 1) "item" else "items"}"
+    val matches = "$count ${if (count == 1) "match" else "matches"}"
     val scoped =
         rules.scoped &&
             (model.folderPath != null ||
@@ -67,17 +71,17 @@ internal fun ListingStatus(model: FinderModel) {
                         model.loading && progress.matches < model.entries.size ->
                             "${model.entries.size} shown · refreshing"
                         model.loading ->
-                            "${model.entries.size} ${if (model.effectiveSearchRules.active || model.currentSmartFolder != null) "matches" else "items"} so far"
-                        progress.stopped -> "Stopped · ${model.entries.size} results kept"
-                        progress.resultLimit -> "Showing ${model.entries.size} results"
+                            "${if (model.effectiveSearchRules.active || model.currentSmartFolder != null) matches else items} so far"
+                        progress.stopped -> "Stopped · $results kept"
+                        progress.resultLimit -> "Showing $results"
                         progress.scanLimit ->
                             "Scan limit reached · ${progress.scanned} items scanned"
                         progress.providerPending -> "Provider is still loading results"
                         progress.issueCount > 0 -> "Some items couldn't be scanned"
                         progress.providerInfo.isNotEmpty() -> "Storage information"
-                        scoped -> "Search scope · ${model.entries.size} results"
-                        rules.choiceDescription.isNotBlank() -> "Search · ${model.entries.size} results"
-                        else -> "Ready · ${model.entries.size} items"
+                        scoped -> "Search scope · $results"
+                        rules.choiceDescription.isNotBlank() -> "Search · $results"
+                        else -> "Ready · $items"
                     }
                 Text(
                     title,
@@ -149,6 +153,8 @@ internal fun ListingStatus(model: FinderModel) {
 
 @Composable
 internal fun ListingDetails(model: FinderModel) {
+    var choosing by remember { mutableStateOf(false) }
+    if (choosing) { SearchLocationsDialog(model) { choosing = false }; return }
     if (!model.listingDetailsRequested) return
     WorkspaceUtility(
         "Result details",
@@ -181,6 +187,30 @@ internal fun ListingDetails(model: FinderModel) {
                 fontSize = 12.sp,
                 lineHeight = 18.sp,
             )
+            if (model.effectiveSearchRules.locations.isNotEmpty()) {
+                Text("Search locations", color = Ink, fontSize = 14.sp)
+                progress.roots.forEach { root ->
+                    Surface(color = AppBackground, shape = RoundedCornerShape(7.dp), modifier = Modifier.fillMaxWidth().testTag("search-root-${root.path}")) {
+                        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(model.displayPath(root.path), color = Ink, fontSize = 13.sp)
+                            if (isDocumentPath(root.path)) Text(root.path, color = Muted, fontSize = 11.sp)
+                            val state = when {
+                                root.state == ListingRootState.COMPLETE -> "Complete"
+                                root.state == ListingRootState.UNAVAILABLE -> "Unavailable"
+                                root.state == ListingRootState.EXCLUDED -> "Excluded by this search"
+                                root.providerPending -> "Provider is still loading"
+                                root.state == ListingRootState.INCOMPLETE -> "Incomplete"
+                                root.state == ListingRootState.WAITING -> "Not scanned"
+                                model.loading -> "Scanning…"
+                                else -> "Incomplete"
+                            }
+                            Text(state, color = if (root.state == ListingRootState.UNAVAILABLE) MaterialTheme.colorScheme.error else Muted, fontSize = 13.sp)
+                            root.reason?.let { Text(it, color = Muted, fontSize = 12.sp) }
+                        }
+                    }
+                }
+                TextButton({ choosing = true; model.listingDetailsRequested = false }, Modifier.testTag("edit-search-locations")) { Text("Search locations…") }
+            }
             progress.providerInfo.forEach { Text(it, color = Muted, fontSize = 12.sp) }
             model.effectiveSearchRules.choiceDescription.takeIf { it.isNotBlank() }?.let {
                 Text(it, color = Ink, fontSize = 12.sp)

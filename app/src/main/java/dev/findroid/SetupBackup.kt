@@ -61,18 +61,19 @@ internal data class SetupSnapshot(
         addAll(sidebar.paths)
         addAll(organization.tags.assignments.keys)
         organization.collections.forEach { addAll(it.paths) }
-        searches.forEach { add(it.root); addAll(it.rules.excludedLocations.map { rule -> rule.path }) }
+        searches.forEach { add(it.root); addAll(it.rules.locations); addAll(it.rules.excludedLocations.map { rule -> rule.path }) }
         addAll(folderViews.keys)
         addAll(folderStyles.keys)
         (workspaces + listOfNotNull(openTabs)).forEach { workspace ->
             (workspace.primary.tabs + workspace.secondary.tabs).forEach { tab ->
                 addAll(tab.history)
+                addAll(tab.rules.locations)
                 addAll(tab.rules.excludedLocations.map { it.path })
                 with(tab.navigation) {
                     addAll(selected); addAll(expanded)
                     lead?.let(::add); anchor?.let(::add)
                     positions.forEach { (key, value) -> add(key.location); value.path?.let(::add) }
-                    budgets.keys.forEach { add(it.location); it.root?.let(::add); addAll(it.rules.excludedLocations.map { rule -> rule.path }) }
+                    budgets.keys.forEach { add(it.location); it.root?.let(::add); addAll(it.rules.locations); addAll(it.rules.excludedLocations.map { rule -> rule.path }) }
                 }
             }
         }

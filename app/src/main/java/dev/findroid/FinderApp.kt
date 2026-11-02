@@ -315,6 +315,7 @@ fun FinderApp(
                     "about" -> dialog = "about"
                     "filters" -> dialog = "filters"
                     "recentSearches" -> { model.rememberCurrentSearch(); dialog = "recentSearches" }
+                    "searchLocations" -> { model.rememberCurrentSearch(); dialog = "searchLocations" }
                     "saveSearch" -> dialog = "saveSearch"
                     "renameSmart" -> dialog = "renameSmart"
                     "settings" -> dialog = "settings"
@@ -812,6 +813,7 @@ fun FinderApp(
                             }
                         },
                     )
+                "searchLocations" -> SearchLocationsDialog(model) { dialog = null }
                 "filters" -> SearchFiltersDialog(model) { dialog = null }
                 "recentSearches" -> RecentSearchesDialog(model, action) { dialog = null }
                 "launcher", "quickJump" -> ExplorerLauncherDialog(model, dialog == "quickJump", action) { dialog = null }
@@ -1620,6 +1622,7 @@ internal fun ActionMenu(
         }
         MenuAction("Search filters…", Icons.Outlined.FilterAlt) { action("filters") }
         MenuAction("Recent searches…", Icons.Outlined.History) { action("recentSearches") }
+        MenuAction("Search locations…", Icons.Outlined.FolderOpen) { action("searchLocations") }
         MenuAction(
             "Save search as Smart Folder…",
             Icons.Outlined.SavedSearch,

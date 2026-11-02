@@ -211,4 +211,17 @@ class SetupBackupTest {
         assertEquals(exclusions, source.searches.single().rules.excludedLocations)
     }
 
+    @Test fun chosenSearchRootsAreInventoriedAndExactlyMappedInAllSetupContainers() {
+        val roots = listOf("/old/Project", "content://cloud/tree/base/document/opaque-9")
+        val rules = SearchRules(name = "Report", locations = roots)
+        val tab = FinderTab(listOf(roots.first()), rules = rules, navigation = TabNavigation(budgets = mapOf(ListingScope(roots.first(), rules) to ListingBudget())))
+        val layout = workspace(path = roots.first()).copy(primary = pane(roots.first()).copy(tabs = listOf(tab)))
+        val source = empty().copy(searches = listOf(SmartFolder(id(), "Reports", roots.first(), rules)), workspaces = listOf(layout), openTabs = layout.copy(id = "open"))
+        assertTrue(source.locations().containsAll(roots))
+        val changed = source.mapLocations(mapOf(roots[1] to "/new/Other"))
+        val all = listOf(changed.searches.single().rules) + (changed.workspaces + changed.openTabs!!).flatMap { it.primary.tabs }.flatMap { listOf(it.rules) + it.navigation.budgets.keys.map { it.rules } }
+        assertTrue(all.all { it.locations == listOf(roots.first(), "/new/Other") })
+        assertEquals(roots, source.searches.single().rules.locations)
+    }
+
 }

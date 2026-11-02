@@ -56,7 +56,7 @@ internal object RecentSearchJson {
     // Navigation rules accept legacy input. History preserves unknown/damaged criteria.
     private fun decodeRules(value: JSONObject): SearchRules {
         val required = setOf("name", "kind", "tag", "days", "min", "max", "content", "terms", "tags", "tagMatch", "includeSubfolders", "excludedFolderNames")
-        value.checkKeys(required, setOf("excludedLocations", "date", "size"))
+        value.checkKeys(required, setOf("excludedLocations", "date", "size", "locations"))
         for (key in listOf("name", "kind", "tag", "content", "tagMatch")) require(value.get(key) is String)
         for (key in listOf("days", "min", "max")) require(value.get(key) is Int || value.get(key) is Long)
         require(value.getLong("days") in 0..Int.MAX_VALUE.toLong() && value.get("includeSubfolders") is Boolean)
@@ -80,6 +80,7 @@ internal object RecentSearchJson {
             content = value.getString("content"), nameTerms = strings("terms", 100), tags = strings("tags", 256).toSet(),
             tagMatch = TagMatch.valueOf(value.getString("tagMatch")), includeSubfolders = value.getBoolean("includeSubfolders"),
             excludedFolderNames = strings("excludedFolderNames", 100).toSet(), excludedLocations = exclusions,
+            locations = if (value.has("locations")) checkedSearchLocations(strings("locations", SEARCH_LOCATION_LIMIT)) else emptyList(),
             date = if (value.has("date")) SearchDate.valueOf(value.getString("date")) else SearchDate.ANY,
             size = if (value.has("size")) SearchSize.valueOf(value.getString("size")) else SearchSize.ANY,
         )

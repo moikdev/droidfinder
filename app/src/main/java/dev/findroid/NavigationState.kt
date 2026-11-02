@@ -102,6 +102,7 @@ object NavigationJson {
                 if (r.excludedLocations.isNotEmpty()) put("excludedLocations", JSONArray(r.excludedLocations.map {
                     JSONObject().put("path", it.path).put("folder", it.folder)
                 }))
+                if (r.locations.isNotEmpty()) put("locations", JSONArray(checkedSearchLocations(r.locations)))
                 if (r.date != SearchDate.ANY) put("date", r.date.name)
                 if (r.size != SearchSize.ANY) put("size", r.size.name)
             }
@@ -129,6 +130,13 @@ object NavigationJson {
                         require(value.get("path") is String && value.get("folder") is Boolean) { "Invalid search exclusion." }
                         SearchExclusion(value.getString("path"), value.getBoolean("folder"))
                     }
+                },
+                locations = if (!r.has("locations")) emptyList() else r.getJSONArray("locations").let { values ->
+                    require(values.length() <= SEARCH_LOCATION_LIMIT) { "Too many search locations." }
+                    checkedSearchLocations(List(values.length()) { index ->
+                        require(values.get(index) is String) { "Invalid search location." }
+                        values.getString(index)
+                    })
                 },
                 date = if (!r.has("date")) SearchDate.ANY else SearchDate.valueOf(r.getString("date")),
                 size = if (!r.has("size")) SearchSize.ANY else SearchSize.valueOf(r.getString("size")),

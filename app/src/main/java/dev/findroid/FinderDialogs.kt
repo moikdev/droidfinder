@@ -265,7 +265,7 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
                     Modifier.horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.spacedBy(5.dp),
                 ) {
-                    listOf(false to "This folder only", true to "Include subfolders").forEach {
+                    listOf(false to if (rules.locations.size > 1) "Chosen folders only" else "This folder only", true to "Include subfolders").forEach {
                         (recursive, label) ->
                         FilterChip(
                             selected = rules.includeSubfolders == recursive,
@@ -285,7 +285,7 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
                     maxLines = 4,
                 )
                 Text(
-                    "One exact, case-sensitive name per line. Matching folders and their contents are skipped; the search root is always scanned. Depth applies to folder scans; collections and tags check saved items individually.",
+                    "One exact, case-sensitive name per line. Matching folders and their contents are skipped; each search root is always scanned. Depth applies to folder scans; collections and tags check saved items individually.",
                     Modifier.padding(top = 6.dp),
                     fontSize = 11.sp,
                     color = Muted,

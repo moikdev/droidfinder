@@ -113,6 +113,17 @@ data class ListingBudget(val results: Int = 20_000, val scanned: Int = 50_000) {
         ListingBudget((results * 2).coerceAtMost(50_000), (scanned * 2).coerceAtMost(2_000_000))
 }
 
+internal enum class ListingRootState { WAITING, SCANNING, COMPLETE, UNAVAILABLE, INCOMPLETE, EXCLUDED }
+
+/** Live scan state only. It never enters tabs, history or setup backups. */
+internal data class ListingRootProgress(
+    val path: String,
+    val state: ListingRootState = ListingRootState.WAITING,
+    val issueCount: Int = 0,
+    val providerPending: Boolean = false,
+    val reason: String? = null,
+)
+
 internal data class ListingProgress(
     val scanned: Int = 0,
     val folders: Int = 0,
@@ -124,6 +135,7 @@ internal data class ListingProgress(
     val resultLimit: Boolean = false,
     val scanLimit: Boolean = false,
     val stopped: Boolean = false,
+    val roots: List<ListingRootProgress> = emptyList(),
 ) {
     val incomplete
         get() = issueCount > 0 || providerPending || resultLimit || scanLimit || stopped
@@ -176,6 +188,28 @@ internal class DirectoryLoader(
         control: ListingControl,
         publish: suspend (ListingBatch) -> Unit,
     ): ListingBatch {
+        class Root(val path: String) {
+            var queued = 1
+            var active = false
+            var started = false
+            var available = false
+            var failed = false
+            var pending = false
+            var excluded = false
+            var limited = false
+            var issues = 0
+            var reason: String? = null
+            fun progress() = ListingRootProgress(path, when {
+                excluded && issues == 0 -> ListingRootState.EXCLUDED
+                failed && !available && !pending -> ListingRootState.UNAVAILABLE
+                active || queued > 0 -> if (started) ListingRootState.SCANNING else ListingRootState.WAITING
+                issues > 0 || pending || limited -> ListingRootState.INCOMPLETE
+                else -> ListingRootState.COMPLETE
+            }, issues, pending, reason)
+        }
+        val roots = if (request.explicitPaths == null)
+            request.roots.distinct().map(::Root) else emptyList()
+        var currentRoot: Root? = null
         val matches = LinkedHashMap<String, Entry>()
         val issues = ArrayList<ListingIssue>()
         val notices = linkedSetOf<String>()
@@ -192,9 +226,10 @@ internal class DirectoryLoader(
             source.searchAncestry(path, ancestor, control)
         }
         val admissionRules = request.rules.copy(excludedLocations = emptyList())
-        val unverified = mutableSetOf<String>()
+        val unverified = mutableSetOf<Pair<String?, String>>()
         fun issue(path: String, reason: String) {
             issueCount++
+            currentRoot?.let { root -> root.issues++; if (root.reason == null) root.reason = reason.take(240) }
             if (issues.size < 20) issues += ListingIssue(path, reason.take(240))
         }
         fun snapshot(): ListingBatch {
@@ -213,6 +248,7 @@ internal class DirectoryLoader(
                     notices.toList(),
                     resultLimit,
                     scanLimit,
+                    roots = roots.map { it.progress() },
                 ),
             )
         }
@@ -222,7 +258,10 @@ internal class DirectoryLoader(
             val now = clock()
             if (force || first && scanned >= 64 || now - lastPublished >= 120) {
                 publish(snapshot())
-                first = false
+                // Root-status and early timed updates must not consume the
+                // first complete chunk. Publish 64 admitted checks even if an
+                // earlier update was sent before a provider stalls on item 65.
+                if (scanned >= 64) first = false
                 // Sorting and main-thread publication can exceed the interval in large folders.
                 // Start the next interval after that work, avoiding a full sort for every entry.
                 lastPublished = clock()
@@ -232,7 +271,7 @@ internal class DirectoryLoader(
             SearchAncestry.INSIDE -> true
             SearchAncestry.OUTSIDE -> false
             SearchAncestry.UNKNOWN -> {
-                if (unverified.add(parent ?: path)) issue(parent ?: path,
+                if (unverified.add(currentRoot?.path to (parent ?: path))) issue(parent ?: path,
                     "Exact exclusions couldn't be verified for this location. Its items were skipped; reconnect storage or remove the exclusion.")
                 true
             }
@@ -269,6 +308,13 @@ internal class DirectoryLoader(
                 update()
                 return true
             }
+            val identity = source.searchIdentity(entry.path)
+            // Repeated traversal still consumes the shared scan budget, while a
+            // matched document is admitted and read for content only once.
+            if (identity in matches) {
+                update()
+                return true
+            }
             if (request.rules.content.isNotBlank()) update()
             val evidence = if (!request.recent || !entry.folder) admissionRules.evidence(
                 entry,
@@ -281,20 +327,20 @@ internal class DirectoryLoader(
             ) else null
             if (evidence != null) {
                 if (
-                    !matches.containsKey(entry.path) &&
+                    !matches.containsKey(identity) &&
                         !request.recent &&
                         matches.size >= request.budget.results
                 ) {
                     resultLimit = true
                     return false
                 }
-                matches[entry.path] = entry.copy(style = request.styles[entry.path], searchEvidence = evidence.takeIf { it.explained })
+                matches[identity] = entry.copy(style = request.styles[entry.path], searchEvidence = evidence.takeIf { it.explained })
                 if (request.recent && matches.size > 240) {
                     val keep =
                         matches.values
                             .sortedByDescending { it.modified }
                             .take(200)
-                            .map { it.path }
+                            .map { source.searchIdentity(it.path) }
                             .toSet()
                     matches.keys.retainAll(keep)
                 }
@@ -317,46 +363,63 @@ internal class DirectoryLoader(
                 if (!accept(entry, entry.parentPath)) break
             }
         } else {
-            val pending = ArrayDeque(request.roots.distinct())
-            val visited = mutableSetOf<String>()
+            data class Task(val root: Int, val folder: String)
+            val pending = ArrayDeque(roots.indices.map { Task(it, roots[it].path) })
+            val scheduled = roots.map { mutableSetOf(source.searchIdentity(it.path)) }
+            // Make every recursive root visible before any provider operation.
+            if (request.recursive) update(force = true)
             while (pending.isNotEmpty() && !resultLimit && !scanLimit) {
                 control.check()
                 currentCoroutineContext().ensureActive()
-                val folder = pending.removeFirst()
-                if (!visited.add(folder) || excluded(folder)) continue
+                val task = pending.removeFirst()
+                val root = roots[task.root]
+                currentRoot = root
+                root.queued--
+                val folder = task.folder
+                val rootFolder = folder == root.path
+                if (excluded(folder)) {
+                    if (rootFolder) root.excluded = true
+                    update()
+                    continue
+                }
+                root.started = true
+                root.active = true
                 folders++
+                if (request.recursive && rootFolder) update(force = true)
                 val before = scanned
                 try {
-                    val reply =
-                        source.children(folder, control) { entry ->
-                            val proceed = accept(entry, folder)
-                            if (
-                                proceed &&
-                                    request.recursive &&
-                                    request.rules.includeSubfolders &&
-                                    entry.folder &&
-                                    !request.rules.excludesFolder(entry) &&
-                                    !excluded(entry.path, folder) &&
-                                    (request.hidden || !entry.name.startsWith('.')) &&
-                                    !isWorkingFileName(entry.name) &&
-                                    source.traversable(entry)
-                            )
-                                pending.addLast(entry.path)
-                            proceed
+                    val reply = source.children(folder, control) { entry ->
+                        val proceed = accept(entry, folder)
+                        if (proceed && request.recursive && request.rules.includeSubfolders &&
+                            entry.folder && !request.rules.excludesFolder(entry) &&
+                            !excluded(entry.path, folder) && (request.hidden || !entry.name.startsWith('.')) &&
+                            !isWorkingFileName(entry.name) && source.traversable(entry) &&
+                            scheduled[task.root].add(source.searchIdentity(entry.path))) {
+                            pending.addLast(Task(task.root, entry.path))
+                            root.queued++
                         }
-                    if (reply.loading) providerPending = true
+                        proceed
+                    }
+                    if (rootFolder) {
+                        root.available = scanned > before || (reply.error.isNullOrBlank() && !reply.loading)
+                        root.failed = !reply.error.isNullOrBlank()
+                    }
+                    if (reply.loading) { providerPending = true; root.pending = true }
                     reply.error?.takeIf { it.isNotBlank() }?.let { issue(folder, it) }
-                    reply.info
-                        ?.takeIf { it.isNotBlank() }
-                        ?.let { if (notices.size < 5) notices.add(it.take(240)) }
+                    reply.info?.takeIf { it.isNotBlank() }?.let { if (notices.size < 5) notices.add(it.take(240)) }
                 } catch (error: Exception) {
                     control.check()
                     if (error is CancellationException) throw error
-                    if (!request.recursive && scanned == 0 && before == 0) throw error
+                    if (!request.recursive && roots.size == 1 && scanned == 0 && before == 0) throw error
+                    if (rootFolder) { root.failed = true; root.available = scanned > before }
                     issue(folder, error.message ?: "Couldn't read this folder")
+                } finally {
+                    root.active = false
+                    if (resultLimit || scanLimit) root.limited = true
                 }
                 update()
             }
+            currentRoot = null
         }
         control.check()
         currentCoroutineContext().ensureActive()
