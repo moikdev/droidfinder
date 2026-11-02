@@ -105,10 +105,10 @@ fun FinderWorkspace(
                                                     event.changes.forEach { it.consume() }
                                                 }
                                             }
-                                            // File handlers observe button-down at Initial before
-                                            // keyboard focus returns to the browser at Main.
+                                            // Finish the click before restoring browser focus. Dismissing
+                                            // the IME on down can move a button before up (Android 11).
                                             val main = awaitPointerEvent(PointerEventPass.Main)
-                                            if (main.type == PointerEventType.Press) focusFiles()
+                                            if (main.type == PointerEventType.Release) focusFiles()
                                         }
                                     }
                                 },
@@ -202,6 +202,8 @@ private fun BoxWithConstraintsScope.PaneFiles(
                     .folderDropTarget(model, model.folderPath, spring = false),
             ) {
                 Column(Modifier.fillMaxSize()) {
+                    if (model.gestureHintVisible && model.paneActive) FileGestureHint(model)
+                    if (model.selected.isNotEmpty()) SelectionScopeStrip(model)
                     ListingStatus(model)
                     Box(Modifier.weight(1f).fillMaxWidth()) {
                         when {
@@ -240,42 +242,29 @@ private fun BoxWithConstraintsScope.PaneFiles(
                                         !model.hasAccess
                                 )
                                     WelcomeState(onGrantAccess, onNew)
-                                else
+                                else {
+                                    val searching = model.query.isNotEmpty() || model.effectiveSearchRules.active || model.currentSmartFolder != null
+                                    val filtered = !searching && !model.showHidden && model.listingProgress.scanned > 0 && !model.isTrash && !model.location.startsWith("@")
                                     EmptyState(
-                                        if (
-                                            (model.query.isNotEmpty() ||
-                                                model.effectiveSearchRules.active ||
-                                                model.currentSmartFolder != null)
-                                        )
-                                            Icons.Outlined.SearchOff
-                                        else if (model.isTrash) Icons.Outlined.DeleteOutline
-                                        else Icons.Outlined.FolderOpen,
-                                        if (
-                                            (model.query.isNotEmpty() ||
-                                                model.effectiveSearchRules.active ||
-                                                model.currentSmartFolder != null)
-                                        )
-                                            "No matching files"
-                                        else if (model.isTrash) "Trash is empty"
-                                        else "This folder is empty",
-                                        if (
-                                            (model.query.isNotEmpty() ||
-                                                model.effectiveSearchRules.active ||
-                                                model.currentSmartFolder != null)
-                                        )
-                                            "Try another name or adjust the search criteria."
-                                        else if (model.isTrash)
-                                            "Items you move to Trash will appear here."
+                                        if (searching) Icons.Outlined.SearchOff else if (model.isTrash) Icons.Outlined.DeleteOutline else Icons.Outlined.FolderOpen,
+                                        if (searching) "No matching files" else if (model.isTrash) "Trash is empty" else if (filtered) "No visible files" else "This folder is empty",
+                                        if (searching) "Try another name, adjust the criteria, or return to the unfiltered folder."
+                                        else if (model.isTrash) "Items you move to Trash will appear here."
+                                        else if (filtered) "Hidden files or internal working files were excluded from this view."
                                         else "Create a folder or paste files to get started.",
-                                        if (
-                                            model.canCreate &&
-                                                model.busy == null &&
-                                                model.query.isEmpty()
-                                        )
-                                            "New folder"
-                                        else null,
-                                        onNew,
+                                        when {
+                                            searching -> "Clear search"
+                                            filtered -> "Show hidden files"
+                                            model.canCreate && model.busy == null -> "New folder"
+                                            else -> null
+                                        },
+                                        when {
+                                            searching -> model::clearBrowsingSearch
+                                            filtered -> model::toggleHidden
+                                            else -> onNew
+                                        },
                                     )
+                                }
                             }
                             model.mode == ViewMode.ICONS -> IconView(model, open)
                             model.mode == ViewMode.LIST && model.windowsLayout == 8 ->

@@ -57,6 +57,7 @@ internal data class FinderDrag(
     val paths: List<String>,
     val mode: FinderDragMode,
     val externalFiles: Boolean = false,
+    val favoriteId: String? = null,
 )
 
 internal fun Context.activity(): Activity? =
@@ -218,6 +219,36 @@ fun Modifier.folderDropTarget(
 internal fun Modifier.favoritesDropTarget(model: FinderModel): Modifier =
     logicalDropTarget(model, "@favorites", false, null, DropAction.FAVORITE, null)
 
+internal fun Modifier.favoriteInsertionTarget(model: FinderModel, before: String?, group: String?): Modifier =
+    logicalDropTarget(model, "@favorite-insert:${before.orEmpty()}:${group.orEmpty()}", false, null,
+        DropAction.FAVORITE, null, before, group, true)
+
+/** Sidebar drags carry a shortcut ID, never a request to move the original folder. */
+internal fun Modifier.favoriteDragSource(model: FinderModel, shortcut: FavoriteShortcut): Modifier = composed {
+    dragAndDropSource(block = {
+        awaitEachGesture {
+            val down = awaitFirstDown(requireUnconsumed = false)
+            val key = "favorite:${shortcut.id}"
+            model.windowState.iconDragGesture = key
+            try {
+                fun lift() = startTransfer(DragAndDropTransferData(
+                    ClipData.newPlainText("Findroid favorite", shortcut.path),
+                    localState = FinderDrag(model, listOf(shortcut.path), FinderDragMode.MOVE, favoriteId = shortcut.id),
+                ))
+                if (down.type == PointerType.Mouse && currentEvent.buttons.isPrimaryPressed) {
+                    awaitTouchSlopOrCancellation(down.id) { change, _ -> change.consume(); lift() }
+                } else if (down.type != PointerType.Mouse && awaitLongPressOrCancellation(down.id) != null) {
+                    currentEvent.changes.forEach { it.consume() }
+                    lift()
+                }
+                while (currentEvent.changes.any { it.pressed }) awaitPointerEvent()
+            } finally {
+                if (model.windowState.iconDragGesture == key) model.windowState.iconDragGesture = null
+            }
+        }
+    })
+}
+
 private fun Modifier.logicalDropTarget(
     model: FinderModel,
     folder: String,
@@ -225,12 +256,15 @@ private fun Modifier.logicalDropTarget(
     tabId: String?,
     action: DropAction,
     visible: (() -> Boolean)?,
+    before: String? = null,
+    group: String? = null,
+    insertion: Boolean = false,
 ): Modifier = composed {
     val controller = LocalFinderDrag.current ?: return@composed this
     val currentVisible by rememberUpdatedState(visible)
     val zone =
-        remember(controller, model, folder, spring, tabId, action) {
-            DropZone(model, folder, spring, tabId, action) { currentVisible?.invoke() != false }
+        remember(controller, model, folder, spring, tabId, action, before, group, insertion) {
+            DropZone(model, folder, spring, tabId, action, before, group, insertion) { currentVisible?.invoke() != false }
         }
     DisposableEffect(zone) {
         controller.zones.add(zone)
@@ -244,6 +278,11 @@ private fun Modifier.logicalDropTarget(
                 val color =
                     if (controller.error == null) Blue
                     else androidx.compose.ui.graphics.Color(0xFFC95454)
+                if (insertion) {
+                    drawLine(color, androidx.compose.ui.geometry.Offset(0f, size.height / 2),
+                        androidx.compose.ui.geometry.Offset(size.width, size.height / 2), strokeWidth = 3.dp.toPx())
+                    return@drawWithContent
+                }
                 drawRoundRect(
                     color.copy(alpha = .10f),
                     cornerRadius = androidx.compose.ui.geometry.CornerRadius(5.dp.toPx()),

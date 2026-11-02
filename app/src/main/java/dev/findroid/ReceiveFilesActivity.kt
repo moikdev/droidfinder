@@ -503,7 +503,7 @@ private fun IncomingDestination(
         if (explorer.hasAccess) add(explorer.deviceRoot.path to "This device")
         explorer.volumes.forEach { add(it.path to it.name) }
         explorer.connectedLocations.forEach { add(it.uri to it.name) }
-        explorer.favorites.forEach { add(it to explorer.title(it)) }
+        explorer.favorites.forEach { add(it to explorer.favoriteTitle(it)) }
     }
         .distinctBy { it.first }
     LazyColumn(modifier.fillMaxWidth().padding(14.dp).testTag("incoming-destination-folders")) {

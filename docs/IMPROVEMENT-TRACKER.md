@@ -1,0 +1,89 @@
+# Authorized improvement tracker
+
+All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on November 2, 2026. Work ships in verified increments. Existing foundational features are described in [ROADMAP.md](ROADMAP.md). An unchecked item is still open; emulator evidence never substitutes for physical or third-party acceptance.
+
+| # | Improvement | State and remaining acceptance |
+|---|---|---|
+| 1 | Explain gestures once, where they happen | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 2 | Keep primary actions predictable | Open. Implementation and focused acceptance pending. |
+| 3 | Explain unavailable commands | Partial in 0.32.0: unavailable launcher actions explain selection, write access or busy state. Broader per-menu explanations remain open. |
+| 4 | Show the full destination before long moves | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 5 | Improve multi-selection clarity | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 6 | Make Undo easier to reach | Open. Implementation and focused acceptance pending. |
+| 7 | Use task-specific empty states | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 8 | Add a searchable action launcher | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 9 | Separate simple and advanced preferences | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 10 | Reorder favorites by dragging | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 11 | Add a menu on each favorite | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 12 | Hide and reorder built-in locations | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 13 | Add collapsible favorite groups | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 14 | Mark unavailable favorites | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 15 | Make identical favorite names distinct | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 16 | Offer quick folder navigation | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
+| 17 | Improve trackpad and stylus polish | Open. Needs physical trackpad/stylus and palm-interaction acceptance. |
+| 18 | Extend workspace recovery | Open. Implementation and focused acceptance pending. |
+| 19 | Add an optional local index | Open. Implementation and focused acceptance pending. |
+| 20 | Highlight matches in results | Open. Implementation and focused acceptance pending. |
+| 21 | Add saved search history and suggestions | Open. Implementation and focused acceptance pending. |
+| 22 | Choose search roots explicitly | Open. Implementation and focused acceptance pending. |
+| 23 | Extend exclusions to exact paths | Open. Implementation and focused acceptance pending. |
+| 24 | Offer natural date and size presets | Open. Implementation and focused acceptance pending. |
+| 25 | Support nested search rules | Open. Implementation and focused acceptance pending. |
+| 26 | Show index freshness and partial results | Open. Implementation and focused acceptance pending. |
+| 27 | Measure very large folders | Open. Needs representative large libraries and recorded performance. |
+| 28 | Add SMB connections | Open. Implementation and focused acceptance pending. |
+| 29 | Add SFTP connections | Open. Implementation and focused acceptance pending. |
+| 30 | Add WebDAV connections | Open. Implementation and focused acceptance pending. |
+| 31 | Pin selected network folders for offline use | Open. Implementation and focused acceptance pending. |
+| 32 | Strengthen removable-drive workflows | Open. Needs physical USB/SD media and removal tests. |
+| 33 | Extend reconnect to cloud-account sign-in | Open. Implementation and focused acceptance pending. |
+| 34 | Bring capabilities into action explanations | Open. Implementation and focused acceptance pending. |
+| 35 | Expand cross-app drag acceptance | Open. Needs actual third-party receiving apps. |
+| 36 | Broaden Android picker testing | Open. Needs physical devices and actual third-party editing apps. |
+| 37 | Run independent transfers concurrently | Open. Implementation and focused acceptance pending. |
+| 38 | Strengthen background transfers | Open. Implementation and focused acceptance pending. |
+| 39 | Improve throughput and time estimates | Open. Implementation and focused acceptance pending. |
+| 40 | Offer optional verification for important copies | Open. Implementation and focused acceptance pending. |
+| 41 | Support durable partial-copy resume where safe | Open. Implementation and focused acceptance pending. |
+| 42 | Make Undo survive restarts | Open. Implementation and focused acceptance pending. |
+| 43 | Add reviewed folder synchronization | Open. Implementation and focused acceptance pending. |
+| 44 | Add a recovery inbox | Open. Implementation and focused acceptance pending. |
+| 45 | Explain low-space plans in detail | Open. Implementation and focused acceptance pending. |
+| 46 | Select text directly on PDF pages | Open. Implementation and focused acceptance pending. |
+| 47 | Add optional OCR | Open. Implementation and focused acceptance pending. |
+| 48 | Preview office documents | Open. Implementation and focused acceptance pending. |
+| 49 | Compare files visually | Open. Implementation and focused acceptance pending. |
+| 50 | Add a dedicated image review workflow | Open. Implementation and focused acceptance pending. |
+| 51 | Review and edit photo metadata | Open. Implementation and focused acceptance pending. |
+| 52 | Support encrypted ZIP archives | Open. Implementation and focused acceptance pending. |
+| 53 | Add selected additional archive formats | Open. Implementation and focused acceptance pending. |
+| 54 | Validate huge and malformed previews | Open. Needs large synthetic fixture measurements and malformed-file matrix. |
+| 55 | Export and restore the whole setup | Open. Implementation and focused acceptance pending. |
+| 56 | Make saved references portable | Open. Implementation and focused acceptance pending. |
+| 57 | Add reviewed organization rules | Open. Implementation and focused acceptance pending. |
+| 58 | Extend reusable operation presets | Open. Implementation and focused acceptance pending. |
+| 59 | Offer workspace-specific sidebar sets | Open. Implementation and focused acceptance pending. |
+| 60 | Add new-file templates | Open. Implementation and focused acceptance pending. |
+| 61 | Make metadata backup more discoverable | Open. Implementation and focused acceptance pending. |
+| 62 | Add per-location privacy controls | Open. Implementation and focused acceptance pending. |
+| 63 | Consider an optional encrypted vault later | Open. Design recovery, locking and interoperability before implementation. |
+| 64 | Complete a TalkBack workflow audit | Open. Needs an actual screen-reader workflow audit. |
+| 65 | Test large text and display scaling | Partial: optimized sidebar captures at font scale 1.6 on both APIs. Largest text/display scaling and complete-flow acceptance remain open. |
+| 66 | Add contrast and motion preferences | Open. Implementation and focused acceptance pending. |
+| 67 | Make shortcuts configurable | Open. Implementation and focused acceptance pending. |
+| 68 | Add localization and RTL support | Open. Initial language selection and native review remain open. |
+| 69 | Benchmark startup and everyday browsing | Open. Needs real-tablet battery and performance measurements. |
+| 70 | Make optimized-build UI checks repeatable | Partial: repeatable optimized migration/reorder/restart, menu and enlarged-text capture script. Portrait/split/dark comparisons remain open. |
+| 71 | Expand the failure matrix | Open. Needs physical-media cases as well as local fault fixtures. |
+| 72 | Finish release infrastructure | Open. Hosted Actions stays manual-only; long-term signing/recovery needs owner-controlled key custody. |
+
+13 items are implemented in the 0.32.0 increment; 59 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
+
+## Verification per increment
+
+- Preserve installed preferences, references and file contents through migration and upgrades.
+- Run relevant JVM, Android-native, optimized-build and lint checks locally.
+- Inspect actual Android screenshots for every UI update.
+- Publish source, signed preview, update manifest, checksums and precise evidence to the public repository.
+- Keep credentials, signing keys and private document contents out of public artifacts.
+- Record physical hardware, provider-account and hosted-service requirements as open until verified.

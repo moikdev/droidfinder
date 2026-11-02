@@ -323,6 +323,9 @@ fun FinderApp(
                     "moveOtherPane" -> model.transferToOtherPane(true)
                     "comparePanes" -> dialog = "comparePanes"
                     "shortcuts" -> dialog = "shortcuts"
+                    "launcher" -> dialog = "launcher"
+                    "quickJump" -> dialog = "quickJump"
+                    "hidden" -> model.toggleHidden()
                     "updates" -> onUpdates()
                     "newWindow" -> onNewWindow(model.location)
                 }
@@ -486,6 +489,7 @@ fun FinderApp(
                                         searchActive = true
                                     }
                                     "path" -> focusAddress()
+                                    "launcher", "quickJump" -> action(shortcut.action)
                                     "newWindow" -> onNewWindow(model.location)
                                     "closeWindow" -> onCloseWindow()
                                     "newTab" -> model.newTab(atEnd = true)
@@ -785,7 +789,7 @@ fun FinderApp(
                 "folderViews" -> FolderViewsManagerDialog(model) { dialog = null }
                 "tabs" -> TabOverviewDialog(model) { dialog = null }
                 "workspaces" -> SavedWorkspacesDialog(model) { dialog = null }
-                "shortcuts" -> ShortcutGuideDialog { dialog = null }
+                "shortcuts" -> ShortcutGuideDialog(model) { dialog = null }
                 "comparePanes" ->
                     FolderComparisonDialog(
                         if (model.panesReversed) model.secondaryPane else model.primaryPane,
@@ -822,6 +826,7 @@ fun FinderApp(
                         },
                     )
                 "filters" -> SearchFiltersDialog(model) { dialog = null }
+                "launcher", "quickJump" -> ExplorerLauncherDialog(model, dialog == "quickJump", action) { dialog = null }
                 "settings" -> PreferencesDialog(model, onUpdates = {
                     dialog = null
                     onUpdates()
@@ -1145,47 +1150,7 @@ private fun FinderSidebar(
                 .verticalScroll(sidebarScroll)
                 .padding(horizontal = 10.dp),
         ) {
-            FavoritesDropArea(model)
-            SidebarItem("Recents", Icons.Outlined.Schedule, model.location == "@recent") {
-                navigate("@recent")
-            }
-            SidebarItem(
-                "Workspace",
-                Icons.Outlined.Workspaces,
-                model.location == model.workspace.absolutePath,
-                modifier = Modifier.folderDropTarget(model, model.workspace.absolutePath),
-            ) {
-                navigate(model.workspace.absolutePath)
-            }
-            listOf(
-                    "Documents" to Icons.Outlined.Description,
-                    "Download" to Icons.Outlined.Download,
-                    "Pictures" to Icons.Outlined.Image,
-                    "Movies" to Icons.Outlined.Movie,
-                    "Music" to Icons.Outlined.MusicNote,
-                )
-                .forEach { (name, icon) ->
-                    val folder = File(model.deviceRoot, name)
-                    SidebarItem(
-                        if (name == "Download") "Downloads" else name,
-                        icon,
-                        model.location == folder.absolutePath,
-                        enabled = model.hasAccess,
-                        modifier = Modifier.folderDropTarget(model, folder.absolutePath),
-                    ) {
-                        if (model.hasAccess) navigate(folder.absolutePath) else onGrantAccess()
-                    }
-                }
-            model.favorites.forEach { path ->
-                SidebarItem(
-                    model.title(path),
-                    Icons.Outlined.Folder,
-                    model.location == path,
-                    modifier = Modifier.testTag("favorite-$path").folderDropTarget(model, path),
-                ) {
-                    navigate(path)
-                }
-            }
+            FavoritesSidebar(model, navigate, onGrantAccess)
             Spacer(Modifier.height(8.dp))
             SidebarHeading("Locations")
             SidebarItem(
@@ -1321,12 +1286,11 @@ private fun FinderSidebar(
 }
 
 @Composable
-private fun FavoritesDropArea(model: FinderModel) {
+internal fun FavoritesDropArea(model: FinderModel) {
     val controller = LocalFinderDrag.current
     val hovering = controller?.hovered?.action == DropAction.FAVORITE
     val error = controller?.error.takeIf { hovering }
     Column(Modifier.fillMaxWidth().testTag("favorites-drop-target").favoritesDropTarget(model)) {
-        SidebarHeading("Favorites")
         Column(
             Modifier.fillMaxWidth()
                 .heightIn(min = 48.dp)
@@ -1365,7 +1329,7 @@ private fun SidebarHeading(text: String) {
 }
 
 @Composable
-private fun SidebarItem(
+internal fun SidebarItem(
     text: String,
     icon: ImageVector?,
     active: Boolean,
@@ -1378,7 +1342,7 @@ private fun SidebarItem(
     Row(
         modifier
             .fillMaxWidth()
-            .height(LocalFinderDensity.current.rowHeight)
+            .heightIn(min = LocalFinderDensity.current.rowHeight)
             .clip(RoundedCornerShape(6.dp))
             .background(if (active) SelectionSurface else Color.Transparent)
             .clickable(onClick = onClick)
@@ -1733,6 +1697,8 @@ internal fun ActionMenu(
         }
         MenuAction("Storage locations…", Icons.Outlined.Storage) { action("storage") }
         MenuAction("Trash & cache…", Icons.Outlined.CleaningServices) { action("housekeeping") }
+        MenuAction("Find an action or folder…", Icons.Outlined.Search) { action("launcher") }
+        MenuAction("Jump to folder…", Icons.Outlined.FolderOpen) { action("quickJump") }
         MenuAction("Preferences…", Icons.Outlined.Tune) { action("settings") }
         MenuAction("Connect provider folder…", Icons.Outlined.CloudQueue) {
             action("connectFolder")

@@ -59,6 +59,8 @@ class FinderSession(
 
     val sidebarVisible = mutableStateOf(prefs.getBoolean("sidebarVisible", true))
 
+    val gestureHintVisible = mutableStateOf(!prefs.getBoolean("gestureHintDismissed", false))
+
     val tagsVisible = mutableStateOf(prefs.getBoolean("tagsVisible", true))
 
     val savedWorkspaces = mutableStateOf(workspaceStore.load())
@@ -121,7 +123,21 @@ class FinderSession(
 
     var transferControl = TransferControl()
 
-    val favorites = mutableStateOf(prefs.getStringSet("favorites", emptySet())!!.toSet())
+    private val sidebarLoad = runCatching {
+        prefs.getString(SidebarJson.KEY, null)?.let(SidebarJson::decode)
+            ?: SidebarLayout.migrate(prefs.getStringSet("favorites", emptySet()).orEmpty())
+    }
+    val sidebar = mutableStateOf(sidebarLoad.getOrDefault(SidebarLayout()))
+    val sidebarError = mutableStateOf(sidebarLoad.exceptionOrNull()?.message)
+
+    internal fun saveSidebar(value: SidebarLayout): Boolean {
+        check(sidebarError.value == null) { "Sidebar setup could not be read. Its original data has been kept." }
+        val encoded = SidebarJson.encode(value)
+        check(prefs.edit().putString(SidebarJson.KEY, encoded)
+            .putStringSet("favorites", value.paths).commit()) { "Couldn't save sidebar changes." }
+        sidebar.value = value
+        return true
+    }
 
     val tagStore = TagStore(File(app.filesDir, "tags.properties")).also { it.migrate(loadTags()) }
 

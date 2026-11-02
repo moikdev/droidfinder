@@ -42,6 +42,8 @@ fun explorerShortcut(
                     key == Key.E && shift -> command("navigationTree")
                     key == Key.F || key == Key.E -> command("search")
                     key == Key.L -> command("path")
+                    key == Key.K && !shift -> command("quickJump")
+                    key == Key.P && shift -> command("launcher")
                     key == Key.T -> command(if (shift) "reopenTab" else "newTab")
                     key == Key.N -> command(if (shift) "new" else "newWindow")
                     key == Key.W || key == Key.F4 -> command("closeTab")
@@ -146,6 +148,8 @@ fun explorerShortcut(
                 setOf(
                     "search",
                     "path",
+                    "quickJump",
+                    "launcher",
                     "newTab",
                     "newWindow",
                     "closeTab",

@@ -81,3 +81,9 @@ Tests use the dedicated API 36 tablet emulator at 1920 × 1200, density 240. Git
 Optimized native QA confirmed cross-pane feedback, folder hover opening with remembered view changes, cancellation restoring the original Icons view and selection, Content/Columns dragging, and dark/portrait layouts. Landscape size, Light appearance and Comfortable density were restored. Screenshots use the optimized APK and synthetic QA files.
 
 The final fitted-date resize was also checked on the optimized APK: a 45 px separator drag widened the displayed column from about 125 to 145 dp, rather than jumping to the old stored width. Both dedicated resize scenarios passed locally.
+
+## Reorder and manage shortcuts
+
+In 0.32.0, hold a **sidebar favorite's folder icon** and drag to the insertion line to reorder the shortcut. Its Options menu also offers **Move up** and **Move down**. This gesture never moves the original folder. Use the file browser's folder icon when you intend to move the folder itself.
+
+Insertion lines can also pin browser folders at a chosen place or inside a group. The regular favorite row remains a transfer destination for browser files; sidebar shortcut drags are rejected there with an explanation. Unavailable shortcuts can still be rearranged. Order, labels, groups, collapse state and built-in visibility are persisted. See [Sidebar and navigation](SIDEBAR-AND-NAVIGATION.md).

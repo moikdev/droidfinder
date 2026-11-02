@@ -1054,18 +1054,21 @@ fun EmptyState(
     button: String? = null,
     onAction: () -> Unit = {},
 ) {
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+    val roomy = maxHeight >= 300.dp
     Column(
-        Modifier.fillMaxSize().padding(35.dp),
+        Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).heightIn(min = maxHeight)
+            .padding(horizontal = if (roomy) 35.dp else 20.dp, vertical = if (roomy) 35.dp else 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Icon(icon, null, Modifier.size(48.dp), tint = Color(0xFFB0C0D4))
+        if (roomy) Icon(icon, null, Modifier.size(48.dp), tint = Color(0xFFB0C0D4))
         Text(
             title,
             fontSize = 20.sp,
             fontWeight = FontWeight.Medium,
             color = Ink,
-            modifier = Modifier.padding(top = 19.dp),
+            modifier = Modifier.padding(top = if (roomy) 19.dp else 0.dp),
             textAlign = TextAlign.Center,
         )
         Text(
@@ -1079,11 +1082,12 @@ fun EmptyState(
         if (button != null)
             OutlinedButton(
                 onClick = onAction,
-                Modifier.padding(top = 23.dp),
+                Modifier.padding(top = if (roomy) 23.dp else 12.dp),
                 shape = RoundedCornerShape(7.dp),
             ) {
                 Text(button, fontSize = 12.sp)
             }
+    }
     }
 }
 

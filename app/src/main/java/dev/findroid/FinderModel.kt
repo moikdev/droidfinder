@@ -1063,8 +1063,64 @@ constructor(
             session.transferControl = value
         }
 
-    var favorites by session.favorites
-        private set
+    val gestureHintVisible: Boolean get() = session.gestureHintVisible.value
+    internal fun showGestureHint(show: Boolean) {
+        prefs.edit().putBoolean("gestureHintDismissed", !show).apply()
+        session.gestureHintVisible.value = show
+    }
+
+    internal fun clearBrowsingSearch() {
+        val smart = currentSmartFolder
+        if (smart != null) navigate(smart.root)
+        else updateSearchRules(SearchRules())
+    }
+
+    val favorites: Set<String> get() = session.sidebar.value.paths
+    val sidebar: SidebarLayout get() = session.sidebar.value
+    val sidebarError: String? get() = session.sidebarError.value
+
+    internal fun editSidebar(change: (SidebarLayout) -> SidebarLayout): Boolean =
+        runCatching { session.saveSidebar(change(sidebar).checked()) }.getOrElse {
+            message = it.message ?: "Couldn't save sidebar changes."
+            false
+        }
+
+    fun favoriteTitle(path: String): String =
+        sidebar.favorites.firstOrNull { it.path == path }?.label ?: title(path)
+
+    internal fun labelFavorite(id: String, label: String) = editSidebar { layout ->
+        val clean = label.trim().takeIf { it.isNotEmpty() }?.let { libraryName(it, 80) }
+        check(layout.favorites.any { it.id == id }) { "This shortcut was removed." }
+        layout.copy(favorites = layout.favorites.map { if (it.id == id) it.copy(label = clean) else it })
+    }
+
+    internal fun removeFavorite(id: String) = editSidebar { layout ->
+        layout.copy(favorites = layout.favorites.filterNot { it.id == id })
+    }
+
+    internal fun placeFavorite(id: String, before: String?, group: String?) =
+        editSidebar { it.place(listOf(id), before, group) }
+
+    internal fun addFavoriteGroup(name: String) = editSidebar {
+        it.copy(groups = it.groups + FavoriteGroup(java.util.UUID.randomUUID().toString(), libraryName(name)))
+    }
+
+    internal fun updateFavoriteGroup(id: String, name: String? = null, toggle: Boolean = false) = editSidebar {
+        it.copy(groups = it.groups.map { group -> if (group.id != id) group else group.copy(
+            name = name?.let { text -> libraryName(text) } ?: group.name,
+            collapsed = if (toggle) !group.collapsed else group.collapsed,
+        ) })
+    }
+
+    internal fun removeFavoriteGroup(id: String) = editSidebar {
+        it.copy(groups = it.groups.filterNot { group -> group.id == id },
+            favorites = it.favorites.map { item -> if (item.group == id) item.copy(group = null) else item })
+    }
+
+    internal fun repairFavorite(id: String, path: String) = editSidebar {
+        check(it.favorites.none { item -> item.id != id && item.path == path }) { "That folder is already in Favorites." }
+        it.copy(favorites = it.favorites.map { item -> if (item.id == id) item.copy(path = path) else item })
+    }
 
     private val tagStore
         get() = session.tagStore
@@ -2254,29 +2310,40 @@ constructor(
         entries = sorted(entries)
     }
 
+    internal fun revealFavorite(path: String) {
+        viewModelScope.launch {
+            val parent = withContext(Dispatchers.IO) { documents.parent(path)?.takeIf(::allowedPath) }
+            if (parent == null) { message = "The original folder's parent is unavailable."; return@launch }
+            navigate(parent)
+            listingJob?.join()
+            if (location == parent) selectPaths(setOf(path))
+        }
+    }
+
     fun favorite(file: File) = favoritePath(file.absolutePath)
 
     fun favoritePath(path: String) {
-        favorites = favorites.toMutableSet().also { if (!it.add(path)) it.remove(path) }
-        prefs.edit().putStringSet("favorites", favorites).apply()
+        val existing = sidebar.favorites.firstOrNull { it.path == path }
+        if (existing != null) removeFavorite(existing.id)
+        else editSidebar { it.copy(favorites = it.favorites + FavoriteShortcut(java.util.UUID.randomUUID().toString(), path)) }
     }
 
     /** Called after drop validation; adding an existing favorite never removes it. */
-    internal fun addFavoritePaths(paths: List<String>) {
+    internal fun addFavoritePaths(paths: List<String>, before: String? = null, group: String? = null) {
         val identity = OrganizationIdentity()
         val builtIn = listOf(workspace.path) +
             listOf("Documents", "Download", "Pictures", "Movies", "Music").map { File(deviceRoot, it).path }
         val known = (favorites + builtIn).mapTo(mutableSetOf(), identity::key)
-        val added = paths.filter { known.add(identity.key(it)) }
+        val added = paths.filter { known.add(identity.key(it)) }.map {
+            FavoriteShortcut(java.util.UUID.randomUUID().toString(), it, group = group)
+        }
         if (added.isEmpty()) {
             message = "Already in Favorites"
             return
         }
-        favorites = favorites + added
-        prefs.edit().putStringSet("favorites", favorites).apply()
-        message =
-            if (added.size == 1) "Added ${title(added.single())} to Favorites"
-            else "Added ${added.size} folders to Favorites"
+        if (editSidebar { it.copy(favorites = it.favorites + added).place(added.map { item -> item.id }, before, group) })
+            message = if (added.size == 1) "Added ${title(added.single().path)} to Favorites"
+                else "Added ${added.size} folders to Favorites"
     }
 
     internal fun syncLibrary() {
@@ -2691,8 +2758,7 @@ constructor(
         styleStore.relocate(names)
         folderStyles = styleStore.styles
         fun update(path: String): String = remapPath(path, names)
-        favorites = favorites.map(::update).toSet()
-        prefs.edit().putStringSet("favorites", favorites).apply()
+        editSidebar { it.remap(names) }
         smartFolders = smartFolders.map { it.copy(root = update(it.root)) }
         persistSmartFolders()
         folderViews.relocate(names)

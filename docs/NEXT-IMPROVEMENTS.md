@@ -1,6 +1,6 @@
 # What to improve next
 
-Recommendations after the 0.31.0 Favorites drag update, reviewed against the current app on November 2, 2026. These are proposals, not a claim that the work has shipped. The implementation checklist remains in [ROADMAP.md](ROADMAP.md).
+Recommendations after the 0.31.0 Favorites drag update, reviewed against the current app on November 2, 2026. The user authorized implementing all 72 items on November 2, 2026. This is the scope list, not a claim that every item has shipped. Progress and external validation requirements are recorded in [IMPROVEMENT-TRACKER.md](IMPROVEMENT-TRACKER.md); the broader implementation checklist remains in [ROADMAP.md](ROADMAP.md).
 
 Findroid already has tabs, two panes, four views, Quick Look, tags, Smart Folders, batch rename, transfer recovery, ZIP browsing, storage analysis, Android sharing, and in-app updates. The next passes should make those tools easier to discover and dependable in everyday tablet use before expanding the main toolbar.
 

@@ -1,0 +1,5 @@
+Make Favorites your own: drag shortcuts to an insertion line, rename their labels, use per-row menus, create collapsible groups, and hide/reorder built-in locations. Missing folders have reconnect and repair actions; duplicate names show their paths. Existing favorites migrate without losing their references.
+
+Find actions and folders with More → Find an action or folder (Ctrl+Shift+P), or Jump to folder (Ctrl+K). Add replayable gesture tips, pane-specific selection scope, useful empty-view actions, full destination feedback, and separate Browsing/Advanced preferences.
+
+This is a verified increment of the authorized 72-item roadmap. Broader backup, indexing, networking, recovery and physical-device acceptance remain open. Android 11+; optimized development-signed preview. Install over the existing app to retain files and settings.

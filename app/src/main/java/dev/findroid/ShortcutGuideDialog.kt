@@ -64,11 +64,13 @@ val explorerShortcutHelp =
         ShortcutHelp("Finder extras", "Space", "Peek / Quick Look"),
         ShortcutHelp("Finder extras", "Meta+1–4 / Meta+D", "Finder views / duplicate"),
         ShortcutHelp("Finder extras", "Ctrl+\\", "Toggle dual panes"),
+        ShortcutHelp("Navigation", "Ctrl+K", "Jump to a folder, favorite or recent destination"),
+        ShortcutHelp("Commands", "Ctrl+Shift+P", "Find an action or folder"),
         ShortcutHelp("Help", "F1", "This shortcut guide"),
     )
 
 @Composable
-fun ShortcutGuideDialog(dismiss: () -> Unit) {
+fun ShortcutGuideDialog(model: FinderModel? = null, dismiss: () -> Unit) {
     var query by remember { mutableStateOf("") }
     val shown = explorerShortcutHelp.filter {
         query.isBlank() || (it.group + it.keys + it.action).contains(query, true)
@@ -102,6 +104,7 @@ fun ShortcutGuideDialog(dismiss: () -> Unit) {
                         fontSize = 12.sp,
                         color = Muted,
                     )
+                    if (model != null) TextButton(onClick = { model.showGestureHint(true) }) { Text("Show file gesture tips again") }
                     OutlinedTextField(
                         query,
                         { query = it },

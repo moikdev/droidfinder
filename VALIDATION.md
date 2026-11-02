@@ -1,5 +1,20 @@
 # Android preview verification
 
+## Findroid 0.32.0 — sidebar management and clearer navigation
+
+Local checks on November 2, 2026:
+
+- **317 JVM tests pass**, with no failures, errors or skips. New checks cover deterministic legacy migration, order/label/group round trips, stale insertion rejection, relocation, damaged/future schemas, command matching and keyboard bindings.
+- **79/79 native cases pass on each dedicated API 30 and API 36 tablet emulator**, with no skips: sidebar management (12), browsing clarity (10), Favorites pinning (11), internal drag (13), outgoing drag (4), cross-app drag (5), updater (6), workspace/input (9), and advanced previews/input (9).
+- **Optimized APK acceptance passes on both APIs.** Install actual 0.31 over a seeded legacy setup, upgrade to 0.32, reorder a favorite with native touch input, restart, and verify saved order, every fixture's original bytes, and an unrelated sentinel preference. Compact density keeps all migration targets visible for this host gesture; the native suite also covers comfortable density. Label/group/missing-folder menus are captured in comfortable density, with additional font-scale-1.6 screenshots. The original setup is restored without uninstalling or clearing app data.
+- **Debug, optimized preview and unsigned release builds pass.** Lint reports **0 errors, 143 warnings and 11 hints**. The preview retains the previous signing certificate; unsigned release and preview package/version contracts are checked during packaging.
+
+The device checks exposed launcher focus timing and a short-window empty-state layout that could hide its action behind the keyboard. The fixes are covered by the native command-launcher and clear-search tests. Android 11's interop fixture also left an empty legacy split root at a class boundary: that initial batch was recorded as incomplete, the tablet was reset to full screen, and the final 79-case run puts cross-app cases last. The final reports require a completed instrumentation runner, not only a successful adb exit code.
+
+Repeatable optimized acceptance: `scripts/check-sidebar.py --serial <tablet> --apk <preview.apk> --previous-apk <0.31-preview.apk> --output <evidence-directory>`. It uses synthetic folders and temporarily backs up/restores setup preferences. The host script correctly quotes Android shell paths and resolves insertion gaps from visual label centers rather than Android's expanded semantic touch bounds. UI XML, PNGs and verification JSON accompany its result. `scripts/package-sidebar-validation.py` whitelists the evidence for publication and excludes signing keys, credentials and private document contents.
+
+This increment implements proposals **1, 4, 5, 7, 8, 9 and 10–16**. Proposal 3's command explanations have begun in the launcher; broader menu explanations remain open. The remaining work and external acceptance are tracked in [IMPROVEMENT-TRACKER.md](docs/IMPROVEMENT-TRACKER.md). Physical trackpad/stylus, TalkBack, removable drives, maximum text/display settings and third-party provider matrices are not implied by emulator success. Actions remains manual-only; checks run locally.
+
 ## Findroid 0.31.0 — drag folders into Favorites
 
 Validated **2026-11-02** on dedicated Android 11/API 30 and Android 16/API 36 tablets at 1920 × 1200, density 240. The Favorites heading and its labeled **Drag folders here** area now save folder references through the existing native drag controller. File transfers onto existing sidebar folder rows keep their previous copy/move behavior.

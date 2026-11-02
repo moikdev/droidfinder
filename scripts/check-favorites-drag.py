@@ -97,6 +97,11 @@ def main():
             for item in list(favorites):
                 if item.text == prior:
                     favorites.remove(item)
+        layout = prefs.find("./string[@name='sidebarLayoutV1']")
+        if layout is not None:
+            saved = json.loads(layout.text)
+            saved['favorites'] = [item for item in saved['favorites'] if item['path'] != prior]
+            layout.text = json.dumps(saved)
         call('shell', 'run-as dev.findroid sh -c ' + shlex.quote('cat > shared_prefs/finder.xml'),
              data=ET.tostring(prefs, encoding='utf-8', xml_declaration=True))
     shell('run-as', 'dev.findroid', 'mkdir', '-p', 'files/' + folder + '/Design project',

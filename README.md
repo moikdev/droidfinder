@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.31.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.32.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with the sidebar, file list, simple toolbar and preview panel](docs/screenshots/findroid-tablet.png)
 
@@ -14,14 +14,14 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.31.0 release](https://github.com/moikdev/findroid/releases/tag/v0.31.0-preview) and download **`Findroid-0.31.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.32.0 release](https://github.com/moikdev/findroid/releases/tag/v0.32.0-preview) and download **`Findroid-0.32.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
    - **Connect device storage** grants access to shared device storage through Android’s all-files permission.
    - **Connect folder…** lets you authorize a particular folder, USB/SD location, or an installed cloud document provider.
 
-On a touchscreen, tap a file to open it and hold to start selecting. With a mouse, click to select and double-click to open.
+On a touchscreen, tap a file's name to open it, hold its name to start selecting, and hold its icon to drag. With a mouse, click to select, double-click to open, and drag the icon directly.
 
 **Already using an older DroidFinder build?** Findroid uses a new app ID from version 0.26, so it installs separately from versions 0.24 and earlier. Copy any files you need out of the old app’s private Workspace before removing it.
 
@@ -59,6 +59,22 @@ The folder stays in its original location. Findroid saves a shortcut in the side
 ![A folder being added to Favorites, with a named drop area and clear release feedback](docs/screenshots/favorites-drag-tablet.png)
 
 *Actual optimized Android tablet capture with synthetic project folders.*
+
+### Make Favorites work your way
+
+**Hold a favorite's folder icon and drag it to the insertion line** to change its order. Its **…** menu can rename just the sidebar label, reveal the original, open it in another pane, move it into a group, or remove the shortcut. Your folders stay where they are.
+
+Choose **Edit** beside Favorites to hide unused built-in locations or create collapsible groups. Missing folders show an explicit unavailable state with reconnect and repair actions. Duplicate names show their paths. Labels, groups and order survive restarting the app.
+
+![An ordered Favorites sidebar with custom labels, a Work group and an unavailable folder](docs/screenshots/sidebar-management-tablet.png)
+
+*Actual optimized Android tablet capture with synthetic folders. [Sidebar and navigation guide](docs/SIDEBAR-AND-NAVIGATION.md).*
+
+### Find the action you need
+
+Open **More → Find an action or folder…**, or press **Ctrl+Shift+P**. Type “rename,” “show hidden files,” or “preferences.” Commands explain when they are unavailable.
+
+Use **Ctrl+K** or **More → Jump to folder…** for favorites, recent tab destinations, current folder children, breadcrumbs and authorized paths. Choose with the arrow keys and Enter. These controls stay inside named menus, keeping the main toolbar simple.
 
 ### Put the source and destination side by side
 

@@ -49,6 +49,7 @@ fun DestinationDialog(
     titleOverride: String? = null,
     confirmLabel: String? = null,
     onDestination: ((String) -> Unit)? = null,
+    requireWritable: Boolean = true,
     dismiss: () -> Unit,
 ) {
     val paths = remember { model.selectedEntries.map { it.path } }
@@ -59,7 +60,7 @@ fun DestinationDialog(
     val control = remember(requested) { ListingControl() }
     DisposableEffect(control) { onDispose { control.cancel() } }
     val status by
-        produceState(DestinationStatus(requested), requested) {
+        produceState(DestinationStatus(requested), requested, requireWritable) {
             value = DestinationStatus(requested)
             value =
                 withContext(Dispatchers.IO) {
@@ -72,8 +73,8 @@ fun DestinationDialog(
                         DestinationStatus(
                             requested,
                             false,
-                            entry.writable,
-                            if (entry.writable) null
+                            entry.writable || !requireWritable,
+                            if (entry.writable || !requireWritable) null
                             else "This location is read only. Choose another destination.",
                         )
                     } catch (e: Exception) {
@@ -151,7 +152,7 @@ fun DestinationDialog(
                             )
                         }
                     model.favorites.forEach { path ->
-                        AssistChip(onClick = { folder = path }, label = { Text(model.title(path)) })
+                        AssistChip(onClick = { folder = path }, label = { Text(model.favoriteTitle(path)) })
                     }
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -162,7 +163,7 @@ fun DestinationDialog(
                         enabled = model.parentPath(folder) != null,
                     )
                     Text(
-                        model.title(folder),
+                        model.displayPath(folder),
                         Modifier.weight(1f).semanticsLabel("Destination folder $folder"),
                         fontSize = 12.sp,
                         color = Muted,
@@ -469,6 +470,10 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
 
 @Composable
 fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: () -> Unit) {
+    var advanced by rememberSaveable { mutableStateOf(false) }
+    var sidebarEditor by remember { mutableStateOf(false) }
+    var archiveEditor by remember { mutableStateOf(false) }
+    val limitsStore = remember { ZipLimitsStore(model.getApplication<android.app.Application>()) }
     AlertDialog(
         onDismissRequest = dismiss,
         title = { Text("Finder preferences") },
@@ -480,6 +485,42 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
             ) {
                 TextButton(onUpdates) { Text("App updates · ${BuildConfig.VERSION_NAME}") }
                 HorizontalDivider(Modifier.padding(vertical = 12.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(!advanced, { advanced = false }, label = { Text("Browsing") })
+                    FilterChip(advanced, { advanced = true }, label = { Text("Advanced") })
+                }
+                if (advanced) {
+                    Text("Transfers and recovery", fontWeight = FontWeight.SemiBold)
+                    Text("These choices affect conflict handling, archive resource limits and retained working data.", fontSize = 12.sp, color = Muted)
+                Text("File conflicts", fontWeight = FontWeight.SemiBold)
+                ConflictPolicy.entries
+                    .filter { it != ConflictPolicy.REPLACE }
+                    .forEach { policy ->
+                        Row(
+                            Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable {
+                                model.changeConflictPolicy(policy)
+                            },
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            RadioButton(
+                                model.conflictPolicy == policy,
+                                { model.changeConflictPolicy(policy) },
+                            )
+                            Text(policy.title, fontSize = 12.sp)
+                        }
+                    }
+                TextButton(
+                    onClick = {
+                        model.housekeeping.open()
+                        dismiss()
+                    },
+                ) {
+                    Text("Trash & cache…")
+                }
+                    TextButton(onClick = { archiveEditor = true }) { Text("Archive safety limits…") }
+                    TextButton(onClick = { model.storageRequested = true; dismiss() }) { Text("Storage capabilities and reconnect…") }
+                    TextButton(onClick = { model.showGestureHint(true) }) { Text("Replay file gesture tips") }
+                } else {
                 Text("Interface density", fontWeight = FontWeight.SemiBold)
                 if (LocalPhoneLayout.current)
                     Text(
@@ -507,32 +548,7 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
                     }
                 }
                 HorizontalDivider(Modifier.padding(vertical = 12.dp))
-                Text("File conflicts", fontWeight = FontWeight.SemiBold)
-                ConflictPolicy.entries
-                    .filter { it != ConflictPolicy.REPLACE }
-                    .forEach { policy ->
-                        Row(
-                            Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable {
-                                model.changeConflictPolicy(policy)
-                            },
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            RadioButton(
-                                model.conflictPolicy == policy,
-                                { model.changeConflictPolicy(policy) },
-                            )
-                            Text(policy.title, fontSize = 12.sp)
-                        }
-                    }
                 Text("Views", fontWeight = FontWeight.SemiBold)
-                TextButton(
-                    onClick = {
-                        model.housekeeping.open()
-                        dismiss()
-                    },
-                ) {
-                    Text("Trash & cache…")
-                }
                 Text(
                     if (model.folderRemembered) "Changes apply to this remembered folder"
                     else "Changes update defaults for this pane",
@@ -600,6 +616,7 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
                 PreferenceSwitch("Show sidebar tags", model.tagsVisible, model::toggleTagSidebar)
                 HorizontalDivider(Modifier.padding(vertical = 14.dp))
                 Text("Favorite folders", fontWeight = FontWeight.SemiBold)
+                TextButton(onClick = { sidebarEditor = true }) { Text("Edit sidebar locations and groups…") }
                 if (model.favorites.isEmpty())
                     Text(
                         "Add a folder from its Actions menu.",
@@ -609,7 +626,7 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
                     )
                 model.favorites.forEach { path ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(model.title(path), Modifier.weight(1f), fontSize = 12.sp)
+                        Text(model.favoriteTitle(path), Modifier.weight(1f), fontSize = 12.sp)
                         IconButton(onClick = { model.favoritePath(path) }) {
                             Icon(
                                 Icons.Outlined.Close,
@@ -657,10 +674,15 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
                         }
                     }
                 }
+                }
             }
         },
         confirmButton = { TextButton(onClick = dismiss) { Text("Done") } },
     )
+    if (sidebarEditor) SidebarEditorDialog(model) { sidebarEditor = false }
+    if (archiveEditor) ZipLimitsDialog(limitsStore.read(), { archiveEditor = false }) {
+        limitsStore.write(it); archiveEditor = false
+    }
 }
 
 @Composable

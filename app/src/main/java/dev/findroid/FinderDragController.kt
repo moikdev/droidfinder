@@ -40,6 +40,9 @@ internal class DropZone(
     val spring: Boolean,
     val tabId: String?,
     val action: DropAction = DropAction.TRANSFER,
+    val beforeFavorite: String? = null,
+    val favoriteGroup: String? = null,
+    val insertion: Boolean = false,
     val visible: () -> Boolean,
 ) {
     var coordinates: LayoutCoordinates? = null
@@ -180,6 +183,13 @@ internal class FinderDragController(private val scope: CoroutineScope) {
                     check(payload != null && payload.paths.isNotEmpty()) {
                         "Drag folders from Findroid to add them to Favorites"
                     }
+                    if (payload.favoriteId != null) {
+                        check(payload.origin.session === model.session &&
+                            model.sidebar.favorites.any { it.id == payload.favoriteId }) {
+                            "This shortcut is no longer available."
+                        }
+                        return@runCatching
+                    }
                     for (path in payload.paths) {
                         ensureActive()
                         check(payload.origin.allowedPath(path) && model.allowedPath(path)) {
@@ -191,6 +201,7 @@ internal class FinderDragController(private val scope: CoroutineScope) {
                     }
                     return@runCatching
                 }
+                check(payload?.favoriteId == null) { "Drop between Favorites to change their order" }
                 check(model.allowedPath(zone.folder)) { "Storage access required" }
                 val parent = model.documents.read(zone.folder)
                 check(parent.folder && parent.writable) { "This folder is read only" }
@@ -299,7 +310,10 @@ internal class FinderDragController(private val scope: CoroutineScope) {
                     return@launch
                 }
                 if (zone.action == DropAction.FAVORITE && payload != null) {
-                    zone.model.addFavoritePaths(payload.paths)
+                    if (payload.favoriteId != null) {
+                        if (zone.model.placeFavorite(payload.favoriteId, zone.beforeFavorite, zone.favoriteGroup))
+                            zone.model.message = "Favorite order saved. Folders stay where they are."
+                    } else zone.model.addFavoritePaths(payload.paths, zone.beforeFavorite, zone.favoriteGroup)
                     // Pinning changes no location: restore every spring-loaded pane/tab.
                     pendingTrail.finish()
                     committed = true
@@ -414,7 +428,8 @@ internal fun DragFeedback(controller: FinderDragController, modifier: Modifier =
     val count = payload?.paths?.size
     val favorite = zone?.action == DropAction.FAVORITE
     val title =
-        if (favorite) "Add to Favorites"
+        if (favorite && payload?.favoriteId != null) "Reorder Favorites"
+        else if (favorite) "Add to Favorites"
         else if (zone == null && payload?.externalFiles == true) "Drag to a folder or another app"
         else if (zone == null) "Drag to a folder or Favorites"
         else
@@ -422,9 +437,11 @@ internal fun DragFeedback(controller: FinderDragController, modifier: Modifier =
     val detail =
         controller.error
             ?: when {
+                zone == null && payload?.favoriteId != null -> "Drop between Favorites to change their order"
                 zone == null && payload?.externalFiles == true -> "Other apps receive a copy. Hold over folders or tabs to open them."
                 zone == null -> "Drop on Favorites to save a folder shortcut"
                 !controller.checked -> if (favorite) "Checking folders…" else "Checking destination…"
+                favorite && payload?.favoriteId != null -> "Release at the line. Folders stay where they are."
                 favorite -> "Release to add shortcuts. Folders stay where they are."
                 controller.scrolling -> "Scrolling · move away from the edge to stop"
                 controller.progress > 0 -> "Hold to open"
@@ -468,6 +485,12 @@ internal fun DragFeedback(controller: FinderDragController, modifier: Modifier =
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
+                if (zone != null && !favorite) {
+                    val destination by produceState<String?>(null, zone.model, zone.folder) {
+                        value = withContext(Dispatchers.IO) { runCatching { zone.model.displayPath(zone.folder) }.getOrDefault(zone.folder) }
+                    }
+                    destination?.let { Text(it, color = Muted, fontSize = 11.sp, maxLines = 2, overflow = TextOverflow.Ellipsis) }
+                }
                 Text(
                     detail,
                     color = Muted,
