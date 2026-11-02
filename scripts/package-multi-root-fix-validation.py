@@ -16,7 +16,7 @@ RELEASE=ROOT/'captures/release/0.38.1'
 REQUIRED=('actual037Upgrade','installedOptimizedBytes','cancelPreservesScope','realFolderPicker','overlapDeduplicated',
           'literalExclusionsPreserved','unavailableFirstRootKeepsOtherResults','smartFolderScopeSurvivesRestart',
           'exactFullCriteriaPersisted','allRootsInHistory','noSavedResultBytes','originalFileBytes',
-          'favoritePreserved','unrelatedPreferencePreserved','restoredOriginalSetup')
+          'favoritePreserved','unrelatedPreferencePreserved','restoredOriginalSetup','customWindowTaskReplacement','customWindowIndependentTabsPreserved')
 DOCS=('README.md','VALIDATION.md','PARITY.md','docs/SEARCH-LOCATIONS.md','docs/RECENT-SEARCHES.md','docs/SEARCH-CRITERIA.md',
       'docs/SETUP-BACKUP.md','docs/IMPROVEMENT-TRACKER.md','docs/NEXT-IMPROVEMENTS.md','docs/APP-UPDATES.md',
       'docs/releases/0.38.1.md','docs/releases/0.38.1-update.txt')
@@ -89,6 +89,7 @@ def main():
         files += [PROOF/f'api{api}-native.json',PROOF/f'api{api}-native.txt',PROOF/f'api{api}-batches/contract.json']
         folder=PROOF/f'api{api}-optimized';opt=read(folder/'verification.json')
         assert opt['apkSha256']==expected and all(opt[key] for key in REQUIRED)
+        assert opt['customWindowIterations']==5
         assert {(r['widthDp'],float(r['fontScale'])) for r in opt['layouts']}=={(w,s) for w in (600,800,1280) for s in (1.0,1.6)}
         for row in opt['layouts']:
             assert all(row[k] for k in ('footerVisible','fullTouchBounds','addFolderReachable','detailsVisible'))
@@ -105,10 +106,11 @@ def main():
         assert roots[2]==roots[1]+'/Cache' and smart[0]['rules']['excludedLocations']==[{'path':roots[0]+'/Cache','folder':True}]
         history=read(folder/'synthetic-history.json');assert any(r['rules']==smart[0]['rules'] for r in history['searches'])
         files += [folder/name for name in ('verification.json','synthetic-smart-folders.json','synthetic-history.json')]+list(folder.glob('*.png'))+list(folder.glob('*.xml'))
-        ota=PROOF/f'api{api}-ota';report=read(ota/'verification.json')
-        assert report['fromVersionCode']==38 and report['toVersionCode']==40 and report['restoredApkSha256']==expected
-        assert all(report[k] for k in ('publicFeedDownloadAndAndroidInstall','installedApkMatchesPublicBytes','originalFileBytes','legacyFavoritePreserved','sentinelPreferencePreserved','updatedSidebarVisible','noRepeatOffer','restoredOriginalSetup'))
-        files += [ota/'verification.json']+list(ota.glob('*.png'))+list(ota.glob('*.xml'))
+        for suffix,from_code in (('ota',38),('withdrawn-ota',39)):
+            ota=PROOF/f'api{api}-{suffix}';report=read(ota/'verification.json')
+            assert report['fromVersionCode']==from_code and report['toVersionCode']==40 and report['restoredApkSha256']==expected
+            assert all(report[k] for k in ('publicFeedDownloadAndAndroidInstall','installedApkMatchesPublicBytes','originalFileBytes','legacyFavoritePreserved','sentinelPreferencePreserved','updatedSidebarVisible','noRepeatOffer','restoredOriginalSetup'))
+            files += [ota/'verification.json']+list(ota.glob('*.png'))+list(ota.glob('*.xml'))
     assert native_ids[0]==native_ids[1]
     public=read(PROOF/'public-downloads.json');assert public['public'] and public['sourceCommit']==info['source_commit']
     assert len(public['assets'])==5 and all(r['publicDownloadMatchesLocal'] and r['githubDigestMatches'] for r in public['assets'])

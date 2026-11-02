@@ -261,7 +261,23 @@ def main():
         report['layouts']=layouts
         stop();device.shell('wm','size',original_size);device.screen=(round(1280*density),round(800*density))
         device.shell('settings','put','system','font_scale','1.0')
+        # Exercise the same custom-window CLEAR_TASK sequence that rejected 0.38.
+        # Keep the process alive between replacements so outgoing/incoming owners overlap.
+        window_id='locations-window-'+str(time.time_ns())
+        for index in range(5):
+            device.shell('am','start','-W','-f','0x10008000','--windowingMode',1,
+                         '-n','dev.findroid/.MainActivity','--es','finderWindowId',window_id,
+                         '--es','finderLocation',target)
+            tree=browser('window-replacement-'+str(index+1),'Report here.txt')
+            assert not device.nodes(tree,'Report current.txt'),'The new window must show its own folder.'
+        device.capture('window-replacement')
+        report.update(customWindowTaskReplacement=True,customWindowIterations=5)
         prefs,tabs,smart=audit()
+        window_prefs=ET.fromstring(read('shared_prefs/finder-window-'+window_id+'-primary.xml'))
+        window_tabs=json.loads(window_prefs.find("./string[@name='tabs']").text)
+        assert window_tabs[0]['history'][-1]==target
+        assert not window_tabs[0]['rules'].get('locations')
+        report['customWindowIndependentTabsPreserved']=True
         expected=dict(rules,locations=[source,target,target+'/Cache'])
         assert len(smart)==1 and smart[0]['root']==source and smart[0]['rules']==expected,smart
         assert tabs[0]['history'][-1]=='@smart:'+smart[0]['id']

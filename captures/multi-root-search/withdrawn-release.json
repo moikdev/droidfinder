@@ -25,5 +25,7 @@
     "failed": 1,
     "report": "captures/multi-root-search/api30-window-regression-corrected-before-fix.json",
     "earlierFixtureCorrection": "The first test used the private cache outside the supported Workspace browse root and failed a location assertion before exercising replacement. It was corrected to a synthetic Workspace folder and readiness wait, then reproduced the real crash. Neither rejected run counts toward acceptance."
-  }
+  },
+  "publicOtaFileByteAcceptanceCompleted": false,
+  "publicOtaNoRepeatOfferAcceptanceCompleted": false
 }
