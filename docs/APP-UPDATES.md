@@ -28,6 +28,8 @@ JVM tests cover manifest bounds, source restrictions, credential/cleartext rejec
 Build and native results are recorded in [VALIDATION.md](../VALIDATION.md). Public manifest/APK downloads through the production source passed on both API 30 and API 36. The exact optimized preview shows [“You’re up to date”](screenshots/app-updates-030.png) against the published feed. The release also includes a validation archive with the artifact manifest, final test logs, installation-preservation evidence and live feed checks. No physical-device or third-party provider success is implied by emulator checks.
 
 
+The **0.31.0** release additionally passes a real **0.30 → 0.31** in-app download and Android installer confirmation on the API 30 tablet. File bytes, saved favorites, and a sentinel preference are retained, and the upgraded app reports [“You're up to date”](screenshots/app-updates-031.png). The production-source public APK download/package/version/signer check also passes on API 36. The validation archive includes these reports and actual updater screenshots.
+
 To run the opt-in public-feed acceptance check after installing the debug and test APKs on a dedicated emulator:
 
 ```sh
