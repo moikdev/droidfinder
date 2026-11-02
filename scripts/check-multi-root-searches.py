@@ -188,9 +188,10 @@ def main():
         device.click(name+'-confirm','Add folder')
         return device.wait(name+'-draft',lambda t: bool(device.nodes(t,'Search locations')) and bool(device.nodes(t,'Cancel')))
     def all_matches(name):
-        tree=browser(name,'Report current.txt')
-        for label in ('Report here.txt','Report nested.txt'): assert len(device.nodes(tree,label))==1,(name,label)
-        assert len(device.nodes(tree,'Report current.txt'))==1
+        expected=('Report current.txt','Report here.txt','Report nested.txt')
+        tree=device.wait(name,lambda t: device.ready(t,'Actions') and
+                         all(bool(device.nodes(t,label)) for label in expected))
+        for label in expected: assert len(device.nodes(tree,label))==1,(name,label)
         assert not device.nodes(tree,'Report cached.txt')
         return tree
     def details(name):
