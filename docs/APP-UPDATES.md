@@ -51,3 +51,12 @@ Repeat the installed-update workflow with `scripts/check-ota-upgrade.py`. It req
 The real **0.32 → 0.33** in-app public-feed download and Android installer upgrade passes on the dedicated API30 tablet. The installed APK matches the anonymously downloaded public bytes. The original synthetic file, Favorite and unrelated preference survive, and the updated app reports [up to date](screenshots/app-updates-033.png). The production-source API36 check passes 1/1 for the public package/version/signature and no repeat offer. Both tablets are restored to the exact public optimized APK.
 
 The [setup backup guide](SETUP-BACKUP.md) explains 0.33's explicit export and reviewed import. Setup backups exclude updater state and Android installation permissions. The release keeps 0.32's signing certificate; continue installing over the existing app. Physical/OEM installation acceptance remains open.
+
+
+## 0.34.1 public upgrade acceptance
+
+The real **0.33 → 0.34.1** in-app public-feed download and Android installer upgrade passes on the dedicated API30 tablet. **0.34 → 0.34.1** passes on API36, covering an installation of the withdrawn preview. Both install exact anonymously downloaded bytes, preserve the original synthetic file, Favorite and unrelated preference, and report [up to date](screenshots/app-updates-0341.png).
+
+0.34.0 was withdrawn after its public OTA run exposed a crash when replacing an Android task. 0.34.1 fixes the recovery-controller read after its primary pane closes. Before publication, each optimized API30/API36 run replaced the task three times with the same process alive. The separate API36 production-source check passes 1/1 and explicitly confirms code 35, name 0.34.1-preview and the exact public APK hash. Both tablets finish with their original app metadata/preferences, font scale 1.0 and the public optimized APK.
+
+The signing certificate is unchanged. Update over either installed version; keep the app installed to retain its private Workspace. See [workspace recovery](WORKSPACE-RECOVERY.md) for this increment's feature behavior. The [validation guide](../VALIDATION.md) separates these emulator results from physical/OEM acceptance.

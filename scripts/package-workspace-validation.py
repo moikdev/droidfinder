@@ -75,7 +75,17 @@ def main():
     }
     for relative, key in [('ota/verification.json', 'realPublic033To0341Ota'), ('public-downloads.json', 'anonymousPublicAssets'), ('ota-from-034/verification.json', 'realPublic034To0341Ota')]:
         path = PROOF / relative
-        if path.exists(): summary[key] = json.loads(path.read_text())
+        if path.exists():
+            result = json.loads(path.read_text())
+            if key.startswith('realPublic'):
+                assert result['toVersionCode'] == 35 and result['restoredApkSha256'] == expected
+                assert all(result.get(flag) is True for flag in ('publicFeedDownloadAndAndroidInstall',
+                    'installedApkMatchesPublicBytes', 'originalFileBytes', 'legacyFavoritePreserved',
+                    'sentinelPreferencePreserved', 'noRepeatOffer', 'restoredOriginalSetup'))
+            else:
+                assert result['sourceCommit'] == meta['source_commit'] and len(result['assets']) == 5
+                assert all(asset['publicDownloadMatchesLocal'] and asset['githubDigestMatches'] for asset in result['assets'])
+            summary[key] = result
     live = PROOF / 'api36-live-feed.json'
     if live.exists():
         result = json.loads(live.read_text())
@@ -111,7 +121,7 @@ def main():
     for name in ['workspace-recovery-tablet.png', 'workspace-recovery-review-tablet.png', 'workspace-recovery-large-text-tablet.png', 'app-updates-0341.png']:
         path = ROOT / 'docs/screenshots' / name
         if path.exists(): files.append(path)
-    for name in ['public-downloads.json', 'api36-live-feed.txt', 'api36-live-feed.json']:
+    for name in ['public-downloads.json', 'api36-live-feed.txt', 'api36-live-feed.json', 'restored-public-tablets.json']:
         path = PROOF / name
         if path.exists(): files.append(path)
     for case in ('ota', 'ota-from-034'):
