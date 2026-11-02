@@ -1,1 +1,1 @@
-<paths><files-path name="workspace" path="Workspace/"/><files-path name="trash" path="Trash/"/><cache-path name="previews" path="shared/"/><external-path name="storage" path="."/><root-path name="volumes" path="storage/"/></paths>
+<paths><files-path name="workspace" path="Workspace/"/><files-path name="trash" path="Trash/"/><cache-path name="previews" path="shared/"/><external-path name="storage" path="."/><root-path name="volumes" path="storage/"/><cache-path name="app-updates" path="updates/"/></paths>

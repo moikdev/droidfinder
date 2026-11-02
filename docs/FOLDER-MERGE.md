@@ -28,7 +28,7 @@ Completed transfer history and merge plans survive restart. Undo/Redo remains a 
 
 ## Verification
 
-Verified locally on 2026-10-31: **61 JVM tests and 69 Android tests passed together in the full release run**, with zero failures or skips. A file/folder type-conflict case and three tag-recovery cases bring verified Android coverage to 73 distinct tests. After the tag-recovery adjustment, all 27 affected merge/provider/conflict tests passed together. Lint completed with zero errors and 59 warnings. Optimized preview and unsigned release APKs built successfully. Checks use the dedicated `DroidFinder_Tablet_API_36` emulator; GitHub Actions is manual-only and no hosted runners were used.
+Verified locally on 2026-10-31: **61 JVM tests and 69 Android tests passed together in the full release run**, with zero failures or skips. A file/folder type-conflict case and three tag-recovery cases bring verified Android coverage to 73 distinct tests. After the tag-recovery adjustment, all 27 affected merge/provider/conflict tests passed together. Lint completed with zero errors and 59 warnings. Optimized preview and unsigned release APKs built successfully. Checks use the dedicated API 36 tablet emulator; GitHub Actions is manual-only and no hosted runners were used.
 
 Coverage added for normalized database migration/order/incremental updates/rollback/corruption preservation, framed tree hashes and blocked-stream cancellation, nested/empty merges, local/provider combinations, copy and complete/partial move Undo/Redo, source/destination edits, simulated partial provider removal, ancestor replacement rejection, cancellation and nested member retries through the native UI.
 

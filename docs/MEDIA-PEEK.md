@@ -27,8 +27,8 @@ Verification commands (local JDK 17 / SDK 36):
 ```sh
 ./gradlew testDebugUnitTest lintDebug assemblePreview assembleRelease assembleDebug assembleDebugAndroidTest
 adb -s emulator-5582 shell am instrument -w -r \
-  -e class 'dev.droidfinder.MediaPlaybackWorkflowTest,dev.droidfinder.PeekWorkflowTest,dev.droidfinder.AdvancedWorkflowTest#audioQuickLookPreparesAndPlays' \
-  dev.droidfinder.test/androidx.test.runner.AndroidJUnitRunner
+  -e class 'dev.findroid.MediaPlaybackWorkflowTest,dev.findroid.PeekWorkflowTest,dev.findroid.AdvancedWorkflowTest#audioQuickLookPreparesAndPlays' \
+  dev.findroid.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
 An initial missing-sidecar test exposed Media3’s nonfatal text-track failure behavior; the app now handles final sidecar load failures explicitly. The playback-restoration assertion was corrected to compare with the actual paused timestamp after playback advances. The combined run was clean. The final picker adjustment moves provider metadata/grant lookups off the UI thread and ignores stale results after switching files; that picker path is checked manually in the optimized build.

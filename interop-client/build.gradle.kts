@@ -1,9 +1,9 @@
 plugins { id("com.android.application") }
 android {
-    namespace = "dev.droidfinder.interop"
+    namespace = "dev.findroid.interop"
     compileSdk = 36
     defaultConfig {
-        applicationId = "dev.droidfinder.interop"
+        applicationId = "dev.findroid.interop"
         minSdk = 30
         targetSdk = 36
         versionCode = 1

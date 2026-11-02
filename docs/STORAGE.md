@@ -35,7 +35,7 @@ The first runs exposed harness assumptions about pre-existing Trash items/tabs a
 
 The real DocumentsUI check also passed for saved read-only permission and explicit revocation, with cold process restarts to remove temporary grants. Read-only browsing remained available and the New folder button was disabled. Revocation retained the tab and displayed the expired-access/reconnect states. The smaller detail-row layout was inspected with those real grant states. The optimized APK then cold-started with revoked access, reconnected the same original tree through DocumentsUI, restored saved read/write access and created the synthetic Restored-access folder in that provider location. The final optimized APK also passed cold-start, storage opening and remove-confirmation/cancel checks; landscape, dark, portrait and smaller-window layouts were inspected. Display overrides and light appearance were restored.
 
-The real-permission QA procedure uses only `Documents/DroidFinder-Storage-QA` on the dedicated emulator:
+The real-permission QA procedure uses only `Documents/Findroid-Storage-QA` on the dedicated emulator:
 
 1. Create the synthetic folder and a text file, then connect it through the real Android DocumentsUI picker.
 2. Run the opt-in helper `StorageGrantRecoveryTest#restrictExplicitSyntheticTreeToReadOnly` with instrumentation argument `storageQaReadOnly=true`. Cold-start the app and verify read-only browsing and disabled create actions.
@@ -43,3 +43,11 @@ The real-permission QA procedure uses only `Documents/DroidFinder-Storage-QA` on
 4. Reconnect the same folder using DocumentsUI, cold-start, and verify browsing and create support return without redirecting the tab.
 
 Run these helpers against the debug build: the AndroidTest APK is compiled for that variant and cannot instrument the R8-shrunk runtime dependencies in the optimized APK. Reinstalling the development-signed optimized preview preserves the synthetic connection/grants for its cold-start and picker checks. Both helpers skip unless explicitly opted in, and target only that exact synthetic tree. Do not run UIAutomator alongside instrumentation. No hosted GitHub runners are required.
+
+## Android 11 reconnect follow-up — 0.28.0
+
+Reconnect now supplies the connected root's document URI to `EXTRA_INITIAL_URI`; Android 11 ignores a bare tree URI there. The existing saved grant URI and provider/document identities are unchanged. The real-picker regression initially timed out at the storage root, then passed on the Android 11 tablet and both Android 16 layouts after this fix.
+
+An optional setup helper, `StorageGrantRecoveryTest#grantExplicitSyntheticTreeThroughSystemPicker` with instrumentation argument `storageQaGrant=true`, launches the existing reconnect path at exactly `Documents/Findroid-Storage-QA` and clicks the real system picker/confirmation controls. Create the synthetic directory first. This English-UI QA helper is disabled by default and does not inject a permission; it exists to make real grant acceptance repeatable on dedicated emulators where root-directory taps are unreliable. Continue with the read-only/revoke helpers and cold starts described above. Always wait for the returned activity to persist the grant before force-stopping the app.
+
+On API 30, read-only browsing kept the synthetic text file visible and disabled New folder. Revocation retained the tab and showed the expired-access and reconnect-needed states. The normal Storage locations → Reconnect folder flow reopened the exact original directory, restored saved access across a cold start, and created the synthetic `Restored-access` folder. Evidence is under `captures/audit-0.28.0/api30-real-*`; the initial failed/too-early attempts are preserved alongside the successful callback/cold-start records. The updated metadata/archive/storage native follow-up passed 15/15 cases.

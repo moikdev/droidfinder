@@ -1,170 +1,139 @@
-# DroidFinder
+# Findroid
 
-A native Android tablet file explorer inspired by macOS Finder. Kotlin, Jetpack Compose, real file operations, no account, no app-owned network connection. Cloud/network access runs through Android document providers you connect.
+**A Finder-inspired file explorer that makes room for your files on Android.**
 
-This is an independent implementation, not Apple source code or a macOS runtime. [Parity checklist and platform differences](PARITY.md).
+Browse folders, preview documents, organize a project, and move files between locations with tabs and two panes. Designed around the extra space on a tablet, with layouts for phones and support for a keyboard and mouse.
 
-![DroidFinder tablet preview](docs/screenshots/references-workspace.png)
+Native Android. Kotlin and Jetpack Compose. No account required.
 
-Actual Android screenshot with synthetic QA documents. [Saved locations](docs/screenshots/references-locations.png) · [Relink review](docs/screenshots/references-review.png) · [Repaired collection](docs/screenshots/references-relinked.png) · [Narrow review](docs/screenshots/references-window-review.png). [Collections](docs/screenshots/organization-collections.png) · [Reviewed tags](docs/screenshots/organization-tag-review.png) · [Organization export](docs/screenshots/organization-export.png). [Reviewed rename](docs/screenshots/rename-template.png) · [Recovery locations](docs/screenshots/rename-recovery.png) · [Compact rename](docs/screenshots/rename-window-preview.png). [Trash sizing](docs/screenshots/housekeeping-trash.png) · [Cache controls](docs/screenshots/housekeeping-categories.png) · [Cleanup review](docs/screenshots/housekeeping-review.png). [Storage analysis](docs/screenshots/analysis-overview.png) · [Duplicates](docs/screenshots/analysis-duplicates.png) · [Checksums](docs/screenshots/checksum-match.png). [Save shared files](docs/screenshots/android-incoming-review.png) · [Compact completion](docs/screenshots/android-incoming-saved.png) · [Android picker](docs/screenshots/android-workspace-picker.png). [Storage locations](docs/screenshots/storage-overview.png) · [Read-only permission](docs/screenshots/storage-readonly.png) · [Reconnect](docs/screenshots/storage-reconnect.png). [Image detail](docs/screenshots/image-detail.png) · [Photo information](docs/screenshots/image-information.png) · [Image navigator](docs/screenshots/image-rotated.png). [Archive browser](docs/screenshots/archive-root.png) · [Archive search](docs/screenshots/archive-search.png) · [Member Peek](docs/screenshots/archive-pdf.png). [Markdown](docs/screenshots/structured-markdown.png) · [CSV](docs/screenshots/structured-csv.png) · [JSON](docs/screenshots/structured-json.png) · [Code](docs/screenshots/structured-code.png). [Media controls](docs/screenshots/media-peek-controls.png) · [Speed](docs/screenshots/media-peek-speed.png) · [Subtitles](docs/screenshots/media-peek-subtitles.png). [PDF pages](docs/screenshots/pdf-peek-pages.png) · [PDF search](docs/screenshots/pdf-peek-search.png) · [Saved PDF pages](docs/screenshots/pdf-peek-bookmarks.png) · [Selectable text](docs/screenshots/pdf-peek-text.png). [Progressive loading](docs/screenshots/loading-progress.png) · [Stopped scan](docs/screenshots/loading-stopped.png) · [Compact result details](docs/screenshots/loading-details.png) · [Large catalog](docs/screenshots/loading-complete.png). [Drag feedback](docs/screenshots/dragging-cross-pane.png) · [Hover to open](docs/screenshots/dragging-hover.png) · [Opened folder](docs/screenshots/dragging-opened.png) · [Cancel restores](docs/screenshots/dragging-restored.png). [Folder settings](docs/screenshots/folder-views-settings.png) · [Columns](docs/screenshots/folder-views-columns.png) · [Saved folders](docs/screenshots/folder-views-manager.png). [Tab overview](docs/screenshots/navigation-overview.png) · [Saved layouts](docs/screenshots/navigation-workspaces.png). [File icons](docs/screenshots/file-icons.png) · [Keyboard guide](docs/screenshots/windows-shortcuts.png) · [Portrait](docs/screenshots/workspace-portrait.png) · [Compact window](docs/screenshots/workspace-window.png) · [Dark appearance](docs/screenshots/workspace-dark.png) · [PDF Peek](docs/screenshots/workspace-peek.png). Earlier captures: [Context menu](docs/screenshots/desktop-context.png) · [ZIP browser](docs/screenshots/desktop-archive.png) · [Compact transfer window](docs/screenshots/transfer-compact.png).
+**[Download the Android APK](https://github.com/moikdev/droidfinder/releases/tag/v0.29.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
-**0.24.0:** Canonical organization identity across local parent aliases, paged saved-location inspection, and reviewed relinking across collections/tags with atomic protected Undo. [Reference repair and limits](docs/REFERENCES.md).
+![Findroid on an Android tablet, with the sidebar, file list, simple toolbar and preview panel](docs/screenshots/findroid-tablet.png)
 
-**0.23.0:** Cross-folder collections, reviewed multi-file tag changes, a searchable tag library, guarded metadata history and scoped JSON export. [Organization workflows and limits](docs/ORGANIZATION.md).
+*Actual app screenshot with sample files. Android 11 or newer required. The current release is a development-signed preview.*
 
-**0.22.0:** Reviewed batch renaming with complete previews, safe regex, numbering/order/exclusions, filesystem/EXIF templates, saved presets, Unicode/case-only Undo and visible recovery. [Rename behavior and limits](docs/RENAMING.md).
+## Start here
 
-**0.21.0:** Compact Trash/cache size and age review, persisted Trash dates, protected preview caches, reviewed permanent cleanup, and thumbnail-memory controls. [Housekeeping behavior and limits](docs/HOUSEKEEPING.md).
+1. Open the [0.29.0 release](https://github.com/moikdev/droidfinder/releases/tag/v0.29.0-preview) and download **`Findroid-0.29.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
+3. Launch Findroid and choose where to work:
+   - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
+   - **Connect device storage** grants access to shared device storage through Android’s all-files permission.
+   - **Connect folder…** lets you authorize a particular folder, USB/SD location, or an installed cloud document provider.
 
-**0.20.0:** Compact storage analysis by type/folder, large/old/empty discovery, full-content duplicate checks including unknown provider sizes, reviewed recoverable cleanup, and checksum compare/sidecar saving. [Analysis and checksums](docs/ANALYSIS.md).
+On a touchscreen, tap a file to open it and hold to start selecting. With a mouse, click to select and double-click to open.
 
-**0.19.0:** Workspace in Android’s system file picker and a compact Save to DroidFinder share destination, with file review, destination browsing, keep-both copies, cancellation and targeted retry. [Android integration](docs/ANDROID-INTEGRATION.md).
+**Already using an older DroidFinder build?** Findroid uses a new app ID from version 0.26, so it installs separately from versions 0.24 and earlier. Copy any files you need out of the old app’s private Workspace before removing it.
 
-**0.18.0:** Compact storage status, reported capacity and folder capabilities, read-only grant handling, expired-permission recovery and same-folder reconnect without redirecting tabs. [Storage and recovery](docs/STORAGE.md).
+## The features I’d try first
 
-**0.17.0:** Original-pixel image Peek with bounded visible-region decoding, navigator, pointer/touch/keyboard zoom and pan, temporary rotation, EXIF information and explicit location reveal. [Image Peek](docs/IMAGE-PEEK.md).
+### Preview a file without losing your place
 
-**0.16.0:** Archive member Peek, recursive path search, selective extraction, size/CRC integrity checks and persisted resource limits. [Archive workflows](docs/ARCHIVES.md).
+**Peek / Quick Look** is one of the best reasons to use a file explorer with a large screen. Check a photo, read a PDF, inspect a spreadsheet, or play a clip while keeping the surrounding folder close at hand.
 
-**0.15.0:** Native Markdown reading, quoted CSV/TSV tables, strict JSON formatting, code/text previews, Find, encoding recovery, bounded loading/cancellation and large-text clipboard streams. [Structured Peek](docs/STRUCTURED-PEEK.md).
+- Images have zoom, pan, temporary rotation, and photo information.
+- PDFs have thumbnails, contents, search, bookmarks, and a saved reading position.
+- Markdown, CSV, JSON, code, and plain text have dedicated previews.
+- Audio and video have playback controls, speed adjustment, and subtitle support where the media supports it.
 
-**0.14.0:** Compact media controls, 0.5×–2× speed, saved playback position, embedded/external subtitles, and paused restoration after backgrounding or activity recreation. [Media Peek workflows](docs/MEDIA-PEEK.md).
+Select a file for the side preview, or use **Quick Look** for a closer view. With a keyboard, select a file and press **Space**.
 
-**0.13.0:** PDF thumbnails, chapter navigation, saved page bookmarks/reading position, document text search with highlights, selectable reading text, and cancellable provider previews. [PDF Peek workflows](docs/PDF-PEEK.md).
+### Put the source and destination side by side
 
-**0.12.0:** Progressive folder/search results, Stop/Restart, explicit incomplete-result details, higher per-tab scan limits, and streaming text search beyond the former 1 MiB cutoff. [Loading and search](docs/LOADING.md).
+Two panes make a simple job feel simple: keep Downloads on one side and your project folder on the other, then copy or move selected files across. Each pane keeps its own tabs, location, search, and selection.
 
-**0.11.0:** Compact move/copy/shortcut feedback, spring-loaded folders and tabs, proportional edge scrolling, and precise one-pixel resizing. [Dragging and resizing](docs/DRAGGING.md).
+Save a named layout for a recurring task. Compare two folders when you need to see what differs, with optional file-content verification. [More about panes and layouts](docs/WORKSPACES.md).
 
-**0.10.0:** Remember views per folder across tabs, panes and windows, keep independent pane defaults, manage saved folder views, and customize detail columns with visibility controls, widths and native resizing. [Folder view workflows](docs/FOLDER-VIEWS.md).
+### See what will happen before changing lots of files
 
-**0.9.0:** Persistent per-tab selection/focus/expansion and scroll positions, protected pinned tabs, searchable tab overview with touch reorder, named two-pane layouts, and shared thumbnail caching. [Navigation and saved layouts](docs/NAVIGATION.md).
+The small details here matter. A filename collision offers **keep both, skip, rename, or replace**. Folder merges show conflicts. Batch rename lets you review the proposed names before applying numbering, text changes, or a saved preset.
 
-**0.8.0:** Adjacent Chrome-style new-tab buttons, recognizable file-type icons, Windows Explorer keyboard controls and independent windows. Dual panes share transfers and recovery, support cross-pane copy/move, and offer recursive folder comparison with optional content verification. [Workflows and verification](docs/WORKSPACES.md). Earlier: [0.7.0 compact transfers and density](docs/TRANSFER-PLANNING.md), [0.6.0 folder merging](docs/FOLDER-MERGE.md).
+Transfers have a queue with progress, pause, cancellation, and per-file results. Trash gives you a way back, and many operations support Undo during the current session. Interrupted transfers offer a review when you return to the app. [Transfers](docs/TRANSFER-CENTER.md) · [Batch rename](docs/RENAMING.md).
 
-[Compact transfer window](docs/screenshots/transfer-compact.png) · [Expanded details](docs/screenshots/transfer-details-compact.png) · [Conflict choices](docs/screenshots/file-conflict.png)
+### Organize a project without rearranging every folder
 
-[Full improvement roadmap](docs/ROADMAP.md) — delivery continues in verified increments; unchecked items remain in progress.
+Use **tags** to label files, **collections** to bring related files from different locations into one view, and **Smart Folders** to save searches that update when you open them.
 
-## Install or build
+For example, tag work documents “Project Atlas,” collect the files you need for a meeting, or save a search for large videos. Search can combine filename, kind, date, size, tags, and text content. [Tags and collections](docs/ORGANIZATION.md) · [Search options](docs/TAG-SEARCH.md).
 
-[Download the installable tablet preview](https://github.com/moikdev/droidfinder/releases/tag/v0.24.0-preview) · [Source repository](https://github.com/moikdev/droidfinder)
+### Make the folder fit the work
 
-The **preview APK** is optimized and development-signed for installation on your tablet. Release APKs are unsigned until you configure your own production signing credentials.
+Choose **Icons, List, Columns, or Gallery** from the view menu. Use a list for details, columns to follow a folder hierarchy, or a gallery to browse images. Resize the sidebar and preview, choose which detail columns appear, and remember a view for a particular folder.
 
-Requires Android 11+, JDK 17+, and Android SDK 36. The layout supports tablet landscape and portrait, plus compact tablet windows. A phone-specific layout is deferred.
+Natural sorting keeps `Photo 2` before `Photo 10`. Tabs remember where you were. The tablet toolbar keeps everyday actions visible with named controls for **Search**, **New folder**, and **More**.
+
+## More useful tools
+
+| When you need to… | Findroid can help with… |
+| --- | --- |
+| Look inside a ZIP | Browse and search it, preview supported members, and extract selected files. |
+| Free up space | Inspect folder sizes, find large or old files, and review duplicate-file results before cleanup. |
+| Check a download | Generate checksums, compare an expected hash, and write checksum sidecar files. |
+| Save something from another app | Use Android’s share sheet and **Save to Findroid**, with destination review and retry. |
+| Work with a keyboard | Navigate files, manage tabs, copy/paste, rename, and open the searchable **F1** shortcut guide. |
+| Return to a familiar setup | Restore tabs, favorites, folder views, and named two-pane layouts. |
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/findroid-selection.png" alt="Selected files with named copy, cut, rename and more actions on a tablet"></td>
+<td width="50%"><img src="docs/screenshots/structured-markdown.png" alt="A Markdown document displayed in Findroid’s built-in preview"></td>
+</tr>
+<tr><td>Named actions when files are selected.</td><td>Built-in document previews.</td></tr>
+</table>
+
+## Updates from inside the app
+
+After installing this preview, open **More → App updates** to check for future versions. Optional automatic checks run at most once a day when the app opens or resumes. Downloads begin when you choose them.
+
+Findroid verifies the downloaded APK’s size, SHA-256, app identity, version, Android compatibility, and signing certificate before asking Android to install it. Android may first ask you to allow Findroid as an installation source.
+
+**Install updates over the existing app.** Uninstalling first removes its private data. Future update APKs must keep the same signing key. [How updates work](docs/APP-UPDATES.md).
+
+## Your files and Android storage
+
+Findroid does not require an account or upload your files. Update checks use HTTPS to read this repository’s release information and download an APK when requested. Cloud providers you connect handle their own accounts and network access.
+
+Workspace, Trash, tags, and saved layouts live in the app’s private storage. **Uninstalling Findroid or clearing its data deletes those items.** Keep important files in shared storage or another backed-up location.
+
+Android’s permissions still apply. A connected provider may be read-only or lack an operation; physical USB/SD devices and third-party cloud providers need device-specific testing. Read errors, incomplete searches, and transfer failures are reported in the app.
+
+## What to expect from this preview
+
+Findroid is an independent Android app inspired by Finder. It is not an Apple product and does not run macOS code. Android sharing and document providers cover portable workflows; AirDrop, iCloud login, macOS extensions, and direct SMB/NFS/SFTP clients are outside the current implementation.
+
+The preview uses a development signing key. Production signing and wider physical-device acceptance remain open. Undo is session-based, and a killed transfer requires review rather than automatic replay. Use copies when trying unfamiliar bulk operations.
+
+[Supported features and platform differences](PARITY.md) · [Verification and remaining coverage](VALIDATION.md) · [Roadmap](docs/ROADMAP.md)
+
+## Build and contribute
+
+You need **JDK 17**, **Android SDK 36**, and an Android 11+ device or emulator. Open the project in Android Studio, or build the installable preview from a terminal:
 
 ```sh
-./gradlew assemblePreview
+./gradlew :app:assemblePreview
 adb install -r app/build/outputs/apk/preview/app-preview.apk
 ```
 
-On first launch, either use the private **Workspace**, choose **Connect tablet storage** to grant Android all-files access, or choose **Connect folder…** to authorize a folder through an installed document provider. Local folders and provider locations use the same views and actions. The app never creates sample files in your storage.
-
-## Finder workflows
-
-| Area | Implementation |
-| --- | --- |
-| Browsing | Sidebar, favorites, shared storage, SD/USB volumes, provider locations, pinned/reorderable tabs with independent history/search and restored selection/viewport, searchable tab overview, named layouts, reopen closed tab, back/forward/up, clickable path bar, Go to Folder, reveal enclosing folder, independent dual panes with active-pane command routing |
-| Views | Remembered folder layouts, configurable detail-column visibility/widths and resizing, icons with adjustable size, sortable list with folder disclosure/expansion, browsing columns, gallery/filmstrip, resizable columns/preview/sidebar, adaptive toolbar, Comfortable/Compact density |
-| Selection/input | Tap/double-tap, touch multiple selection, Ctrl/Meta-click, Shift ranges, keyboard navigation, type-to-select, mouse context actions, rectangle selection, native dragging with action/destination feedback, spring-loaded folder/tab navigation and viewport edge scrolling |
-| Organizing | Create folder/text file, New Folder with Selection, destination picker, rename, reviewed batch rename (regex, numbering, case, metadata templates and presets), duplicate, copy/cut/paste, copy/move to other pane, folder comparison with optional content verification |
-| Undo/Redo | Session history for create/copy/move/rename, batch rename, grouping, Trash/restore, archives, shortcuts, tag/collection edits and organization exports; content fingerprints stop Undo from removing later edits |
-| Tags/appearance | Reviewed Keep/Add/Remove tag edits across a frozen selection, searchable tag library with usage counts and reviewed deletion, cross-folder collections with missing-location review, scoped metadata JSON export, multiple named tags per item, custom tag colors/names, tag editing/deletion/filtering, custom folder color/symbol, persistent favorites, per-folder views and pane defaults |
-| Search | Progressive cancellable results with explicit limits/errors, streaming UTF-8 content matching, recursive names, kind/date/size/tag/text-content criteria, saved live Smart Folders, Recents, hidden files, groups by kind/date/tag/size |
-| Peek / Quick Look | Images with EXIF orientation, original-pixel region decoding, navigator, zoom/pan/temporary rotation and photo metadata, PDF thumbnails/contents/bookmarks, saved reading position, page navigation/zoom, document text search and selectable reading text, audio/video playback, speed, saved position and subtitle controls, Markdown/CSV/JSON/code/text previews, folder counts/size and Get Info |
-| File integration | Workspace DocumentsProvider, incoming Save to DroidFinder shares with staged keep-both copies and retry, Android default apps/Open With, temporary read grants for sharing, full-path copy, inert `.finderlink` shortcuts |
-| Analysis/checksums | Folder/type size totals, large/old/empty-file filters, SHA-256 duplicate checks with known/unknown provider sizes, explicit partial results and limits, reviewed recoverable cleanup; SHA-256/SHA-512/SHA-1/MD5 generation, expected-hash comparison and staged checksum sidecars with Undo |
-| Archives/Trash | Named ZIP creation with compression levels, read-only archive browsing/search, member Peek, selective extraction, size/CRC checks and configurable resource limits; recoverable Trash and restore, Undo, explicit confirmation for permanent deletion/emptying |
-| Transfers | Persistent copy/move queue, pause/resume/cancel, notification controls, per-file results/retry, reorder, foreground service, browsing during transfers, metadata estimates, capacity preflight, phase progress/ETA and explicit interruption review |
-| Conflicts | Compare incoming/existing items; keep both, skip, rename or replace with recoverable Undo/Redo; folder merging, nested member retries and apply-to-remaining choices |
-| Persistence | Named two-pane layouts, per-tab selection/focus/expansion and scoped viewport positions, tabs/current locations, view/sort/group settings, sizes, preview/hidden/extension preferences, theme, favorites, tags, Smart Folders, provider grants, folder appearance, Trash recovery metadata |
-
-Mouse users can drag file icons. On touch, select items and hold the drag grip in the selection bar, then drop onto a folder, breadcrumb, sidebar location, or tab. Hold Ctrl when starting a drag to copy, Shift to move, or Alt / Ctrl+Shift to create an app shortcut. Hold over a valid folder or inactive tab to open it; cancellation restores temporary navigation. Hold near a viewport edge to scroll. [Interaction details](docs/DRAGGING.md). Files can also be dragged out to compatible Android apps; content-URI drops from other apps can be imported into writable folders.
-
-## Keyboard
-
-Press **F1** or choose **Keyboard shortcuts…** in Actions for the searchable guide. Ctrl follows Windows Explorer conventions; Meta preserves Finder view and duplicate aliases. Android controls system-wide Windows-key commands and window placement.
-
-| Shortcut | Action |
-| --- | --- |
-| Alt D / Ctrl L / F4 | Edit the address bar |
-| Ctrl E / Ctrl F / F3; F5 / Ctrl R | Search; refresh |
-| Ctrl N; Alt F4 | New independent window; close this window |
-| Ctrl T / W / Shift T | New tab; close tab (or last window); reopen closed tab |
-| Ctrl Tab / Ctrl Shift Tab; Ctrl Page Up/Down | Next/previous tab |
-| Ctrl 1–8 / Ctrl 9 | Numbered tab / last tab |
-| Ctrl Shift 1–4 | Extra large, large, medium and small icons |
-| Ctrl Shift 5 / 6 / 7 / 8 / 9 | Names list, details, tiles, content, gallery |
-| Ctrl Num +; Ctrl wheel | Fit list columns to contents; zoom icons |
-| Ctrl Shift E; Num + / − / * | Reveal folder tree; expand/collapse/expand subtree |
-| Ctrl \; F6 / Shift F6 | Toggle dual panes; cycle browser/address/search focus areas |
-| Ctrl Shift N; F2 | New folder; rename/batch rename |
-| Ctrl A / C / X / V | Select all / copy / cut / paste |
-| Ctrl Insert / Shift Insert; Ctrl Shift C | Copy / paste; copy full path |
-| Delete / Ctrl D; Shift Delete | Trash; permanent-delete confirmation |
-| Ctrl Z / Ctrl Y / Ctrl Shift Z | Undo / redo |
-| Alt Enter; Alt P / Alt Shift P | Properties; preview / details inspector |
-| Alt Left/Right/Up; Backspace | Back / forward / parent; back |
-| Arrows / Shift arrows; Home/End / Page Up/Down | Navigate / extend selection; first/last / page |
-| Ctrl arrows; Ctrl Space; Ctrl Shift arrows | Move focus; toggle focused item; add a selection range |
-| Shift F10 / Menu; F10 | File/background context menu; Actions |
-| Space; Enter; Escape | Peek; open; dismiss or clear selection |
-| F11 | Immersive full screen |
-| Meta 1–4; Meta D | Finder icons/list/columns/gallery; duplicate |
-| Ctrl period; Ctrl Alt S | Hidden files; sidebar |
-
-Normal text-field editing shortcuts remain available while editing. Toolbar actions, menus, and preferences provide touch equivalents. The [workspace and input notes](docs/WORKSPACES.md) record Android equivalents and remaining coverage.
-
-## Storage, privacy, and recovery
-
-- Android all-files access is optional and user-controlled. Other apps' private directories remain protected. [Android storage access](https://developer.android.com/training/data-storage/manage-all-files). Play Store distribution requires the corresponding file-manager permission review.
-- Provider permissions are scoped to folders you authorize and retained through Android's persistable grants. Read-only items remain readable/copyable; writes, moves, rename and deletion follow provider capabilities. Providers may require their own account or network access.
-- **Uninstalling DroidFinder or clearing its data deletes Workspace, Trash, tags, favorites, Smart Folders and folder appearance.** Restore important files to shared/provider storage first. Trash and provider previews consume internal storage, including when the original lived on USB/SD/cloud storage.
-- Transfers can ask about conflicts, keep both, skip or replace with recovery. Folder merges preserve existing destination folders, verify content before source cleanup, and record recoverable per-member results. Copies without an explicit replacement and restores choose unused names. Hidden staging items are exposed under their final names only after successful copying. Sources are removed only after destination copies complete. No silent overwrites. Providers must support the create/rename/delete operations needed for staged transfers.
-- Undo/Redo is a 50-command session history; it does not survive a process restart. Changed-file checks protect later edits. Permanent deletion is intentionally not undoable and clears history. Batch failures preserve completed work; a mid-operation storage disconnect may require reviewing the affected folders.
-- Transfers use an Android `dataSync` foreground service and an application-owned model, so closing/recreating the activity does not cancel a copy. Android can still force-stop/kill an app or enforce service limits. On the next launch an interruption journal offers a destination review. Completed items are kept; incomplete `.droidfinder-*` staging items may remain after process death. Transfers are not blindly replayed after a crash. [Foreground services](https://developer.android.com/develop/background-work/services/fgs/service-types).
-- Symlinks are not copied/compressed. Trash deletion and folder-size traversal do not follow symlinks. App shortcuts are inspectable data files, not executable links or macOS aliases.
-- ZIP extraction rejects unsafe paths/collisions, checks size/CRC before publication, and cleans staging on ordinary failures/cancellation. Standard limits are 10,000 entries / 2 GiB total / 512 MiB per file; persisted settings can adjust them. [Archive bounds and verification](docs/ARCHIVES.md).
-- Search examines up to 50,000 entries per root, lists at most 5,000 results, and reports limited/inaccessible results. Recents shows up to 200 newest modified files across accessible roots. Text-content search reads the first 1 MiB of supported text files; it is an on-demand search, not Spotlight's system index.
-- Provider image/document previews cache up to 128 MiB per file; Peek audio/video uses the authorized content URI directly. Larger/unsupported files can open in another app. Cloud providers choose supported formats, offline behavior, naming and timestamp semantics. Real third-party accounts and physical USB/SD hardware still require device testing.
-- Tags, shortcuts, favorites and folder appearance are app metadata. App-initiated moves/copies/renames update stored paths. Edits made outside DroidFinder can invalidate path-based metadata and shortcuts. They are not macOS extended attributes.
-
-## Verification
+Run the local checks:
 
 ```sh
 ./scripts/check.sh
+```
+
+For native UI tests, use a dedicated emulator or test device; the tests create and modify test files:
+
+```sh
 ANDROID_SERIAL=emulator-5582 ./scripts/check.sh --device
 ```
 
-Use a dedicated emulator/device for instrumentation, so other apps' tests cannot take focus. The test suite covers filesystem collisions, nested/cancelled transfers, Undo/Redo and edited-file protection, batch rename, malicious archives, tags/shortcuts, actual tablet UI workflows, a debug-only document provider, PDF/audio Quick Look, and transfer lifecycle behavior. The fixture provider is excluded from preview/release builds.
-
-GitHub Actions is manual-only while hosted runner quota is unavailable. Pushes and pull requests do not start runners. Builds, unit tests, lint and tablet instrumentation run on this PC using the scripts above; the Linux box can be used separately if needed. The manual workflow remains available for a future explicit run and uploads reports plus the unsigned APK. Local verification is recorded in [VALIDATION.md](VALIDATION.md). The installable preview is development-signed; production distribution requires your signing key.
-
-To produce validated preview artifacts and SHA-256 checksums with Python 3.9+:
+To prepare release APKs, checksums, and the OTA manifest:
 
 ```sh
-./scripts/package-preview.py
-# Optional: run UI tests on a dedicated device after the build
-ANDROID_SERIAL=emulator-5582 ./scripts/package-preview.py --device
+python3 scripts/package-preview.py --notes path/to/release-notes.md
 ```
 
-The script validates preview/release version agreement, verifies the development signature, rejects debuggable APKs and debug fixture providers, and writes artifacts plus build metadata under `captures/release/`. It does not publish or create production signing keys.
+The preview is optimized and signed with your local development key. The release variant is unsigned until you configure signing. A locally built APK with a different key cannot update an installed published preview.
 
-## Code map
+Browse the Kotlin implementation in [`app/src/main/java/dev/findroid`](app/src/main/java/dev/findroid), JVM tests in [`app/src/test`](app/src/test), and Android workflow tests in [`app/src/androidTest`](app/src/androidTest). Feature guides and real screenshots live in [`docs`](docs). Hosted checks are manual-only.
 
-- `FileEngine`, `ZipArchive`, `FileHistory`, `BatchRename`, `TransferControl`: safe local operations, session command history, name planning, cancellation/progress.
-- `DocumentAccess`: document-provider capabilities, grants, cross-storage IO, previews and recoverable provider Trash.
-- `TransferWorker`, `MergePlanner`, `TransferEstimate`, `SqliteTransferStore`: serialized jobs, safe folder merging, durable member plans and legacy migration.
-- `FinderSession`, `FinderModel`, `FinderApplication`, `TransferService`: shared operation state, independent pane navigation, app lifetime, queue/notification and recovery.
-- `FolderViews`, `FolderViewDialog`: atomic shared folder profiles, pane-default isolation, view settings and profile management.
-- `NavigationState`, `SavedWorkspaces`, `WorkspaceDialogs`: bounded tab restoration, atomic named layouts and tab overview.
-- `FinderWorkspace`, `FolderComparison`, `FolderComparisonDialog`: resizable/adaptive panes and bounded, cancellable folder comparison.
-- `TagStore`, `FolderStyleStore`, `SearchRules`: persistent metadata, shortcuts, Smart Folder criteria and grouping.
-- `FinderApp`, `FinderViews`, `FinderDialogs`, `DesktopMenus`, `DesktopTabs`, `ArchiveDialogs`, `ViewModeSelector`, `TransferStrip`, `FinderDragDrop`, `MarqueeSelection`: tablet UI and pointer/keyboard workflows.
-- `ExplorerShortcuts`, `ShortcutGuideDialog`, `KeyboardScrolling`, `NavigationTree`: Windows controls, help, focus scrolling and folder disclosure.
-- `ThumbnailRepository`: shared 24 MiB image cache, deduplicated decoding and consumer-aware cancellation.
-- `FileType`, `FileVisuals`, `QuickLookMedia`, `MediaQuickLook`, `MediaPlayback`: file graphics, MIME classification, previews, image zoom and shared media controls/history.
-- `ImageQuickLook`, `ImageSource`, `ImageGeometry`: bounded image decoding, source-pixel transforms, navigator and EXIF metadata. `DocumentPreviewInput`: cancellation-aware provider descriptor reads.
-- `StructuredQuickLook`, `StructuredTextViews`, `StructuredText`, `MarkdownDocument`, `PreviewClipboard`: streamed/decoded text, native structured readers, bounded parsers and large-text clipboard snapshots.
-- `MainActivity`: Android storage authorization, opening and sharing.
+Found a problem? [Open an issue](https://github.com/moikdev/droidfinder/issues) with your Android version, device/window size, storage type, and steps to reproduce. Screenshots help; leave out private file contents.

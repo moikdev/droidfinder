@@ -1,4 +1,4 @@
-name: Android checks
+name: Findroid Android checks
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: android-${{ github.ref }}
+  group: findroid-android-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
-          name: android-reports-and-unsigned-apk
+          name: findroid-reports-and-unsigned-apk
           path: |
             app/build/reports/
             app/build/outputs/apk/release/*.apk

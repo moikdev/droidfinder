@@ -4,14 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "dev.droidfinder"
+    namespace = "dev.findroid"
     compileSdk = 36
     defaultConfig {
-        applicationId = "dev.droidfinder"
+        applicationId = "dev.findroid"
         minSdk = 30
         targetSdk = 36
-        versionCode = 24
-        versionName = "0.24.0"
+        versionCode = 29
+        versionName = "0.29.0"
+        buildConfigField("String", "UPDATE_REPOSITORY", "\"moikdev/droidfinder\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
@@ -42,6 +43,11 @@ android {
 }
 
 dependencies {
+    constraints {
+        implementation("com.google.guava:guava:33.7.2-android") {
+            because("CVE-2026-102554: bound allocations during Guava deserialization")
+        }
+    }
     implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.compose.ui:ui:1.8.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.8.3")
@@ -50,6 +56,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.6")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
+    implementation("org.apache.commons:commons-compress:1.28.0")
     implementation("org.commonmark:commonmark:0.30.0")
     implementation("org.commonmark:commonmark-ext-gfm-tables:0.30.0")
     implementation("org.commonmark:commonmark-ext-gfm-strikethrough:0.30.0")
@@ -72,4 +79,24 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.8.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.8.3")
+}
+
+// APK fixtures use this checkout's debug certificate; none enter a shipping variant.
+val updateFixtureDirectory = layout.buildDirectory.dir("generated/update-fixtures")
+val generateUpdateFixtures by tasks.registering(Exec::class) {
+    dependsOn("validateSigningDebug")
+    val debugKey = android.signingConfigs.getByName("debug").storeFile!!
+    inputs.file(rootProject.file("scripts/build-update-fixtures.py"))
+    inputs.file(debugKey)
+    inputs.property("versionCode", android.defaultConfig.versionCode!!)
+    outputs.dir(updateFixtureDirectory)
+    commandLine("python3", rootProject.file("scripts/build-update-fixtures.py"),
+        "--sdk", androidComponents.sdkComponents.sdkDirectory.get().asFile, "--output", updateFixtureDirectory.get().asFile,
+        "--keystore", debugKey, "--java-home", System.getProperty("java.home"),
+        "--version-code", android.defaultConfig.versionCode!! + 1)
+}
+android.sourceSets.getByName("androidTest").assets.directories.add(updateFixtureDirectory.get().dir("assets").asFile.absolutePath)
+tasks.configureEach {
+    if (name in setOf("mergeDebugAndroidTestAssets", "generateDebugAndroidTestLintModel", "lintAnalyzeDebugAndroidTest"))
+        dependsOn(generateUpdateFixtures)
 }

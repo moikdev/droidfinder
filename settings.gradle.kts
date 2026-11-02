@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DroidFinder"
+rootProject.name = "Findroid"
 
 include(":app")
 

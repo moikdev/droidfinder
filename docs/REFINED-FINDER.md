@@ -36,4 +36,4 @@ Peek owns keyboard handling in its dialog window, including when a native video 
 
 Screenshots: [landscape](screenshots/refined-landscape.png), [portrait](screenshots/refined-portrait.png), [compact](screenshots/refined-compact.png), [dark](screenshots/refined-dark.png), [PDF Peek](screenshots/peek-pdf.png), [photo Peek](screenshots/peek-photo.png).
 
-[Download the development-signed preview APK](https://github.com/moikdev/droidfinder/releases/tag/v0.3.0-preview). Production signing, third-party providers, physical storage hardware, codec support, and macOS-only platform differences retain the boundaries documented in [PARITY.md](../PARITY.md).
+[Download the development-signed preview APK](https://github.com/moikdev/findroid/releases/tag/v0.3.0-preview). Production signing, third-party providers, physical storage hardware, codec support, and macOS-only platform differences retain the boundaries documented in [PARITY.md](../PARITY.md).

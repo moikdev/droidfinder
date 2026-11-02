@@ -51,11 +51,11 @@ The repeated context-menu test initially read native window focus from the test 
 
 The added JVM tests cover ZIP naming/collisions, duplicate basenames, compression levels, timestamp restoration, implicit folders, corrupt/unsafe paths and empty ZIPs. Added Android tests exercise actual secondary/middle mouse buttons, tab dragging and shortcuts, selection preservation, named compression and archive browsing/extraction, independent/persisted tab search/history, provider parent-cache merging, and browsing/copying during a gated provider move.
 
-Tests use the dedicated API 36 `DroidFinder_Tablet_API_36` emulator on port 5582. Test documents and media are synthetic. The debug provider is excluded from preview/release builds. Real USB/SD devices, third-party provider accounts and codec support still require device testing. Hosted GitHub Actions runners remain blocked by the account's billing/spending-limit issue; no hosted CI success is claimed.
+Tests use the dedicated API 36 tablet emulator on port 5582. Test documents and media are synthetic. The debug provider is excluded from preview/release builds. Real USB/SD devices, third-party provider accounts and codec support still require device testing. Hosted GitHub Actions runners remain blocked by the account's billing/spending-limit issue; no hosted CI success is claimed.
 
 Native visual checks used the optimized development-signed APK: 1280 × 800 dp landscape, 800 × 1280 dp portrait and a 640 × 800 dp compact window, plus light/dark appearance, file actions, compression and archive contents. The final preview installed over the previous development build, cold-launched successfully and produced no AndroidRuntime errors during these checks. Display overrides were restored.
 
-[Download 0.4.0-preview](https://github.com/moikdev/droidfinder/releases/tag/v0.4.0-preview). Release assets include the installable preview, unsigned release APK and SHA256SUMS.
+[Download 0.4.0-preview](https://github.com/moikdev/findroid/releases/tag/v0.4.0-preview). Release assets include the installable preview, unsigned release APK and SHA256SUMS.
 
 ## Boundaries
 

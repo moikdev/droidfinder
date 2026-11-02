@@ -1,0 +1,8 @@
+Findroid 0.29.0 preview
+
+• A simpler tablet toolbar with named actions and one view menu.
+• In-app updates with optional daily checks, download progress and retry.
+• Phone layouts, natural filename sorting and multi-tag search.
+• Improved transfer recovery, archive handling and Android 11 compatibility.
+
+Android confirms installation. Install over the existing Findroid app to keep its files and settings. Older DroidFinder builds before 0.26 use a different app ID.

@@ -22,7 +22,7 @@ Folder changes clear stale rows and mark loading immediately, including during d
 
 ## Folder comparison
 
-With a real folder open in each pane, choose **Compare folders…**. It compares the physical left and right pane folders, including hidden files, while excluding DroidFinder's in-progress staging names. Matching names and sizes are **Contents not checked**, never automatically identical. Enable **Verify file contents** to read hashes. The results distinguish missing items, type/size/content differences, verified identical contents and inaccessible items.
+With a real folder open in each pane, choose **Compare folders…**. It compares the physical left and right pane folders, including hidden files, while excluding Findroid's in-progress staging names. Matching names and sizes are **Contents not checked**, never automatically identical. Enable **Verify file contents** to read hashes. The results distinguish missing items, type/size/content differences, verified identical contents and inaccessible items.
 
 Comparison is read-only and cancellable. It stops at a bounded 20,000-entry metadata budget across both sides and 64 levels, reports incomplete results, rejects ambiguous duplicate provider names and does not follow symbolic links. Ordinary changes during hashing become unavailable results. Files can change after comparison; it is a point-in-time check rather than a locked filesystem snapshot.
 

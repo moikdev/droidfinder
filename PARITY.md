@@ -1,8 +1,8 @@
 # Finder parity worklist
 
-Latest pass: [Saved locations and reference repair, 0.24.0](docs/REFERENCES.md). Earlier: [Collections and reviewed tags, 0.23.0](docs/ORGANIZATION.md). Earlier: [Reviewed rename, 0.22.0](docs/RENAMING.md). Earlier: [Housekeeping, 0.21.0](docs/HOUSEKEEPING.md). Earlier: [Storage analysis and checksums, 0.20.0](docs/ANALYSIS.md). Earlier: [Android picker and incoming shares, 0.19.0](docs/ANDROID-INTEGRATION.md). Earlier: [Storage and recovery, 0.18.0](docs/STORAGE.md). Earlier: [Image Peek, 0.17.0](docs/IMAGE-PEEK.md). Earlier: [Archive browser, 0.16.0](docs/ARCHIVES.md). Earlier: [Structured Peek, 0.15.0](docs/STRUCTURED-PEEK.md). Earlier: [Media Peek, 0.14.0](docs/MEDIA-PEEK.md). Earlier: [PDF Peek, 0.13.0](docs/PDF-PEEK.md). Earlier: [Progressive folders and search, 0.12.0](docs/LOADING.md). Earlier: [Dragging, spring loading and precise resizing, 0.11.0](docs/DRAGGING.md). Earlier: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
+Latest local pass: [Safety and compatibility audit, 0.28.0](docs/PRODUCTION-AUDIT.md). Earlier: [Natural filename sorting, 0.27.0](docs/NATURAL-SORTING.md). Latest published pass: [Saved locations and reference repair, 0.24.0](docs/REFERENCES.md). Earlier: [Collections and reviewed tags, 0.23.0](docs/ORGANIZATION.md). Earlier: [Reviewed rename, 0.22.0](docs/RENAMING.md). Earlier: [Housekeeping, 0.21.0](docs/HOUSEKEEPING.md). Earlier: [Storage analysis and checksums, 0.20.0](docs/ANALYSIS.md). Earlier: [Android picker and incoming shares, 0.19.0](docs/ANDROID-INTEGRATION.md). Earlier: [Storage and recovery, 0.18.0](docs/STORAGE.md). Earlier: [Image Peek, 0.17.0](docs/IMAGE-PEEK.md). Earlier: [Archive browser, 0.16.0](docs/ARCHIVES.md). Earlier: [Structured Peek, 0.15.0](docs/STRUCTURED-PEEK.md). Earlier: [Media Peek, 0.14.0](docs/MEDIA-PEEK.md). Earlier: [PDF Peek, 0.13.0](docs/PDF-PEEK.md). Earlier: [Progressive folders and search, 0.12.0](docs/LOADING.md). Earlier: [Dragging, spring loading and precise resizing, 0.11.0](docs/DRAGGING.md). Earlier: [Folder views and detail columns, 0.10.0](docs/FOLDER-VIEWS.md). Earlier: [Navigation, saved layouts and shared thumbnails, 0.9.0](docs/NAVIGATION.md). Earlier: [Workspaces, tabs, icons and desktop input, 0.8.0](docs/WORKSPACES.md). Earlier: [Compact transfers, planning and tablet density, 0.7.0](docs/TRANSFER-PLANNING.md). Earlier: [Folder merging and member recovery, 0.6.0](docs/FOLDER-MERGE.md). Earlier: [Transfer and conflict foundation, 0.5.0](docs/TRANSFER-CENTER.md). The [full improvement roadmap](docs/ROADMAP.md) remains in progress. Earlier: [Desktop workflows, 0.4.0](docs/DESKTOP-WORKFLOWS.md), [Refined Finder and Peek, 0.3.0](docs/REFINED-FINDER.md).
 
-The target is Finder's general file-explorer workflows on Android tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
+The target is Finder's general file-explorer workflows on Android phones and tablets. This is an independent app, not a macOS runtime. Each implementation pass must build, exercise the affected workflows, and update this file before the work is considered complete.
 
 Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-help/organize-files-in-folders-mh26885/mac), [batch rename](https://support.apple.com/guide/mac-help/rename-files-folders-and-disks-mchlp1144/mac), [tags](https://support.apple.com/guide/mac-help/tag-files-and-folders-mchlp15236/mac), and [Smart Folders](https://support.apple.com/guide/mac-help/create-or-change-a-smart-folder-mchlp2804/mac).
 
@@ -32,7 +32,7 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Favorites/sidebar management, aliases as portable app shortcuts, folder appearance.
 - [x] Preference controls, folder information, display/extension options, dark theme.
 - [x] Expanded safety and workflow tests, tablet landscape/portrait/small-window checks.
-- [x] GitHub source, build instructions, [installable preview release](https://github.com/moikdev/droidfinder/releases/tag/v0.4.0-preview) and final verification.
+- [x] GitHub source, build instructions, [installable preview release](https://github.com/moikdev/findroid/releases/tag/v0.4.0-preview) and final verification.
 
 ## Desktop workflow pass
 
@@ -104,7 +104,7 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 
 ## Verification
 
-See [the current verification record](docs/STORAGE.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated `DroidFinder_Tablet_API_36` emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
+See [the current verification record](VALIDATION.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated API 36 tablet emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.
 
 ## Platform equivalents and boundaries
 
@@ -139,7 +139,7 @@ Image codec/device/performance coverage remains open in the roadmap; see the sup
 ## Android integration pass
 
 - [x] Workspace document provider with Android URI grants, saved IDs, browsing/search, reads/writes and file operations.
-- [x] Save-to-DroidFinder share destination with reviewed names/selection, local/provider destinations, staged keep-both publication, cancellation, partial retry and session Undo.
+- [x] Save-to-Findroid share destination with reviewed names/selection, local/provider destinations, staged keep-both publication, cancellation, partial retry and session Undo.
 - [x] Compact completion, recreation without automatic replay, and an opt-out for new Workspace provider requests.
 - [ ] External cross-app drag/drop and physical device/third-party provider matrices.
 
@@ -181,7 +181,7 @@ See [supported behavior, limits and validation](docs/RENAMING.md). Other organiz
 - [x] Frozen review across recreation, source/assignment rechecks, guarded session history and scoped metadata-only JSON export through local/provider destinations.
 - [x] Catalog migration, atomic bounded writes, corruption preservation and visible metadata-follow failure after published file operations.
 
-See [supported behavior, bounds and validation](docs/ORGANIZATION.md). Import/rebinding, broader backup/restore, multi-tag Boolean search, persistent indexing/history and physical-device validation remain open roadmap work.
+See [supported behavior, bounds and validation](docs/ORGANIZATION.md). Multi-tag Boolean search is added in the unreleased increment below. Broader import/backup/restore, persistent indexing/history and physical-device validation remain open roadmap work.
 
 ## Saved location identity and repair pass
 
@@ -192,3 +192,41 @@ See [supported behavior, bounds and validation](docs/ORGANIZATION.md). Import/re
 - [x] Authorized replacement browsing, full relink review, optional tag merging, exact-reference updates across collections and protected atomic session Undo/Redo.
 
 See [identity semantics, provider scope and validation](docs/REFERENCES.md). Opaque child IDs are reviewed individually; no storage grant or file payload is inferred from a reference.
+
+## Search criteria increment (unreleased)
+
+- [x] All/Any/None matching across multiple exact tag names, combined with existing name/kind/date/size/content criteria.
+- [x] Drafted criteria with Apply/Cancel, explicit no-filter state and selectable tags missing from the current catalog.
+- [x] Shared rule serialization for Smart Folders, tabs, scan budgets and saved layouts; legacy single-tag rules remain readable.
+- [x] Tag rename and Undo/Redo remapping, with live filtered membership refreshed after tag changes.
+- [x] This-folder-only or recursive search, with exact folder-name exclusions pruned before traversal for local and connected storage.
+- [x] Visible restricted-scope summary and exclusion details; legacy saved searches retain recursive behavior.
+
+See [semantics, validation and remaining search scope](docs/TAG-SEARCH.md). Nested Boolean expressions, path-specific/per-root exclusions, a root-selection editor, persistent indexing, suggestions/history and indexed document snippets remain open.
+
+## Phone and input increment (0.25.0, local preview)
+
+- [x] Phone portrait/landscape controls, scrollable Locations sheet, readable list rows and reachable file/clipboard actions.
+- [x] Per-gesture touch/stylus tap to open, mouse click to select and double-click to open across browser views, providers and archive entries.
+- [x] Explicit touch multi-selection, mouse modifiers, right/middle buttons, native drag compatibility and non-activating scroll gestures.
+- [x] Phone columns/gallery, compact tabs, recreation, bounded previews, archive extraction controls and short-window adaptation.
+- [x] Phone incoming-share review, scrollable destination browsing and reachable save/result actions.
+- [x] Shared tablet/phone operation engine and preserved larger-window density/layout preferences.
+
+See [behavior, validation and captures](docs/PHONES-AND-INPUT.md). Physical phone, TalkBack, keyboard/trackpad, USB/SD and third-party provider matrices remain open. This local preview does not complete the whole backlog.
+
+## Natural sorting increment (0.27.0, local preview)
+
+- [x] Shared number-aware filename comparison across browser views, folder/search listings, archive paths and folder pickers.
+- [x] Unicode decimal digits, arbitrary-length numeric runs, leading-zero behavior and deterministic case/path ties.
+- [x] Independent folder placement, correct reverse order and natural tie-breaks for date/size/kind sorting.
+- [x] Large-folder batching interval measured after sorting/publication to avoid a full re-sort for each newly scanned entry.
+- [x] Reused comparison for reviewed Natural name rename order; existing alphabetical rename order remains available.
+
+See [behavior, validation and captures](docs/NATURAL-SORTING.md). This establishes stable locale-independent filename ordering; language-specific macOS collation and the remaining roadmap remain separate work.
+
+## Safety and compatibility audit (0.28.0, local preview)
+
+The [production audit](docs/PRODUCTION-AUDIT.md) fixes symlink-following deletion, collision/rename recovery, incomplete provider mutations and streams, changing source trees, damaged Trash recovery records, self-containing ZIP creation, Android 11 ZIP64 reads, and compact PDF navigation/zoom. It adds dependency scanning and compiled privacy/provider/license package checks.
+
+Validation now covers 301 passing JVM tests, with subsequent focused native runs of 15/15 on API 30 and 10/10 on each API 36 layout. ZIP metadata limits run before reader allocations, including actual-count and extra-field checks. Android 11 reconnect now supplies a document URI; real grant, read-only, revoke, cold-start and same-folder recovery checks pass. Earlier combined broad/focused results remain 315 passing cases on each tablet and 48 in the phone preview run. Initial failures and corrected harnesses are recorded in the audit; no new full native-suite run is claimed. Production signing, physical/provider and accessibility acceptance, and dependable hosted CI remain open.

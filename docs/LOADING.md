@@ -2,6 +2,8 @@
 
 Folders and recursive searches publish sorted batches while scanning. Available files can be selected, opened and scrolled before the scan finishes. Storage reads, content matching and sorting run off the UI thread. A compact status row appears after 250 ms for longer scans; fast folders keep the normal browser layout.
 
+The local 0.27.0 increment adds [natural filename sorting and a batching correction](NATURAL-SORTING.md). The interval between updates starts after sorting/publication finishes, preventing expensive batches from triggering another full sort for every subsequent entry.
+
 ![Compact result-limit controls](screenshots/loading-limit.png)
 
 Actual optimized tablet captures: [Details](screenshots/loading-details.png) · [All 20,050 files](screenshots/loading-complete.png) · [Cold restoration](screenshots/loading-restored.png) · [Dark](screenshots/loading-dark.png) · [Portrait](screenshots/loading-portrait.png). Controlled debug-provider native captures: [While loading](screenshots/loading-progress.png) · [Stopped, selection retained](screenshots/loading-stopped.png) · [Unreadable subfolder](screenshots/loading-incomplete.png). All documents are synthetic QA data.
