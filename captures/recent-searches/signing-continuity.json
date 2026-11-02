@@ -1,0 +1,15 @@
+{
+  "sameSigningCertificate": true,
+  "versions": [
+    {
+      "version": "0.36.0",
+      "certificateSha256": "e7bee2db540fcbb0633d82870b2c4e3d14ecc0c18474b1a7c73d47eb0bf92c08",
+      "apkSha256": "92fdfdd8f145d5d68ee6e8714b0892a57146667c3e4f66e6a409a193885e90f5"
+    },
+    {
+      "version": "0.37.0",
+      "certificateSha256": "e7bee2db540fcbb0633d82870b2c4e3d14ecc0c18474b1a7c73d47eb0bf92c08",
+      "apkSha256": "03c01c299a6a8ac2a19015e32d71aa1cf3f1f7d20d439626a7b7305520a89803"
+    }
+  ]
+}
