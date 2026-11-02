@@ -76,6 +76,11 @@ def main():
             for item in value: ET.SubElement(node, 'string').text = item
         else: node.set('value', str(value).lower())
     def seed():
+        # Public captures use synthetic/default organization only. Exact original files
+        # remain in the in-memory snapshot and are restored in finally.
+        for name in FILES:
+            for suffix in ('', '.bak', '.new'):
+                device.shell('run-as','dev.findroid','rm','-f','files/'+name+suffix)
         prefs = ET.fromstring(saved['shared_prefs/finder.xml'])
         # All of these rules existed in 0.35. Calendar/size enums and exact exclusions are
         # chosen through the new UI after upgrading, rather than invented in old metadata.
@@ -115,6 +120,52 @@ def main():
     def filters(name):
         menu(name,'Search filters…')
         return device.wait(name+'-criteria',lambda tree: device.ready(tree,'Apply filters') and bool(device.nodes(tree,'Search criteria')))
+    def choose_view(name,mode):
+        tree=browser(name+'-before')
+        device.tap(device.one(tree,'Change view'))
+        label=mode+' view'
+        tree=device.wait(name+'-menu',lambda tree: any(node.get('content-desc')==label for node in tree.iter('node')))
+        # Compose exposes a labeled semantics node and its child text. Target the
+        # one menu semantics node rather than treating both as distinct choices.
+        choices=[node for node in tree.iter('node') if node.get('content-desc')==label]
+        assert len(choices)==1, (label,len(choices))
+        device.tap(choices[0])
+    def criteria_scroll_to(name,label):
+        # Use the form bounds and keep the named control away from clipped edges.
+        # Accessibility may expose a label even when only a few pixels are visible.
+        for direction in (1,-1):
+            previous=None
+            for _ in range(20):
+                tree=device.dump(name)
+                panes=[node for node in tree.iter('node') if node.get('class')=='android.widget.ScrollView' and node.get('package')=='dev.findroid' and node.get('scrollable')=='true']
+                assert len(panes)==1, [node.attrib for node in panes]
+                pane=panes[0]; l,t,r,b=device.bounds(pane)
+                parents={child:parent for parent in pane.iter() for child in parent}
+                candidates=device.nodes(pane,label)
+                control=None
+                if len(candidates)==1:
+                    node=candidates[0]; control=node
+                    while control.get('clickable')!='true' and control in parents:
+                        control=parents[control]
+                    nl,nt,nr,nb=device.bounds(node)
+                    cl,ct,cr,cb=device.bounds(control)
+                    if t+round(50*density)<=nt<nb<=b-round(50*density) and cb-ct>=round(40*density):
+                        return tree
+                signature=tuple((node.get('text'),node.get('content-desc'),node.get('bounds')) for node in pane.iter('node'))
+                if signature==previous:
+                    # The last control can sit at the form's end. Accept its full
+                    # touch target there, while rejecting a clipped date chip.
+                    if control is not None and t<=ct<cb<=b and cb-ct>=round(40*density):
+                        return tree
+                    break
+                previous=signature
+                move=direction
+                if control is not None:
+                    move=1 if (nt+nb)//2>(t+b)//2 else -1
+                x=r-max(4,round(6*density))
+                start,end=(.78,.48) if move==1 else (.22,.52)
+                device.shell('input','swipe',x,round(t+(b-t)*start),x,round(t+(b-t)*end),450)
+        raise AssertionError('Could not fully reveal the criteria control '+label)
     def close_search():
         tree = device.dump('close-search-if-open')
         if device.nodes(tree,'Close search'): device.tap(device.one(tree,'Close search'))
@@ -142,12 +193,13 @@ def main():
         report.update(actual035Upgrade=True,installedOptimizedBytes=True)
         # The old rolling day and non-multiple byte bound remain intact on opening the editor.
         filters('upgraded-filters')
-        device.tap(device.one(device.scroll_to('legacy-size','1.0009765625'),'1.0009765625'))
-        device.shell('input','keyevent','BACK')  # Dismiss only the input method focused above.
-        device.wait('criteria-after-ime',lambda tree: bool(device.nodes(tree,'Search criteria')))
-        device.tap(device.one(device.scroll_to('calendar-section','Calendar choices follow your local date and first day of the week. They update when you refresh.'),'This week'))
+        legacy=criteria_scroll_to('legacy-day','Past 24 hours')
+        parents={child:parent for parent in legacy.iter() for child in parent}
+        assert parents[device.one(legacy,'Past 24 hours')].get('checked')=='true'
+        assert_inside(criteria_scroll_to('legacy-size','1.0009765625'),'1.0009765625')
+        device.tap(device.one(criteria_scroll_to('calendar-section','This week'),'This week'))
         device.capture('calendar-criteria-tablet')
-        device.tap(device.one(device.scroll_to('exact-section','Exclude a folder…'),'Exclude a folder…'))
+        device.tap(device.one(criteria_scroll_to('exact-section','Exclude a folder…'),'Exclude a folder…'))
         tree = device.wait('exclusion-picker',lambda tree: bool(device.nodes(tree,'Choose a folder to exclude')) and bool(device.nodes(tree,'Cache')))
         device.tap(device.scoped(tree,'Choose a folder to exclude','Cache'))
         device.wait('excluded-folder-chosen',lambda tree: device.ready(tree,'Exclude this folder') and not device.nodes(tree,'Cache'))
@@ -159,14 +211,10 @@ def main():
         device.capture('exact-exclusion-results-tablet')
         close_search()
         for mode in ('Icons','List','Columns','Gallery'):
-            tree = browser('before-view-'+mode.lower())
-            selector = [node for node in tree.iter('node') if node.get('content-desc','').endswith(' view') and node.get('clickable')=='true']
-            assert len(selector)==1, [('selector',node.attrib) for node in selector]
-            device.tap(selector[0]); device.click('choose-'+mode.lower(),mode+' view')
+            choose_view('choose-'+mode.lower(),mode)
             browser('view-'+mode.lower()); device.capture('matches-'+mode.lower())
         # Return to a list for useful enlarged-text result screenshots.
-        tree=browser('before-list'); selector=[node for node in tree.iter('node') if node.get('content-desc','').endswith(' view') and node.get('clickable')=='true']
-        device.tap(selector[0]); device.click('choose-list-again','List view')
+        choose_view('choose-list-again','List')
         menu('save-search','Save search as Smart Folder…')
         device.wait('save-search-name',lambda tree: device.ready(tree,'Save') and bool(device.nodes(tree,'Save Smart Folder')))
         device.click('save-search-confirm','Save'); browser('smart-folder-results')
@@ -182,10 +230,10 @@ def main():
                 key=f'layout-{width}-{str(scale).replace(".","_")}'
                 assert_inside(tree,'Actions'); device.capture(key+'-results')
                 filters(key+'-filters')
-                tree=device.scroll_to(key+'-calendar','Modified')
+                tree=criteria_scroll_to(key+'-calendar','This week')
                 assert_inside(tree,'Apply filters'); assert_inside(tree,'Cancel')
                 device.capture(key+'-criteria')
-                tree=device.scroll_to(key+'-excluded','Remove exclusion')
+                tree=criteria_scroll_to(key+'-excluded','Remove exclusion')
                 assert_inside(tree,'Remove exclusion'); assert_inside(tree,'Apply filters')
                 device.capture(key+'-exclusion')
                 device.click(key+'-cancel','Cancel')
@@ -207,8 +255,8 @@ def main():
         install(args.apk); launch(); browser('before-natural-size')
         filters('natural-size')
         note='1 KB = 1,024 bytes. Presets replace custom limits; imported combined limits must all match.'
-        device.tap(device.one(device.scroll_to('size-choice',note),'Over 1 GB'))
-        device.tap(device.one(device.scroll_to('type-choice','Kind'),'Images'))
+        device.tap(device.one(criteria_scroll_to('size-choice','Over 1 GB'),'Over 1 GB'))
+        device.tap(device.one(criteria_scroll_to('type-choice','Images'),'Images'))
         device.click('apply-natural-size','Apply filters')
         device.wait('natural-empty',lambda tree: device.ready(tree,'Actions') and not device.nodes(tree,'Report current.txt') and not device.nodes(tree,'Apply filters'))
         device.capture('natural-size-and-type')

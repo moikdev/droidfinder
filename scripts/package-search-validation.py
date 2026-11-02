@@ -8,6 +8,8 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
+import struct
 import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
@@ -65,7 +67,7 @@ def main():
     native_cases=[]
     for api in (30,36):
         path=EVIDENCE/f'api{api}-native.json'; report=load(path); accepted(report)
-        assert report['passed']>=240 and len(report['isolatedBatches'])==27,report['passed']
+        assert report['passed']==251 and len(report['isolatedBatches'])==27,report['passed']
         assert report['apkSha256']==report['installedApkSha256']=={k:v for k,v in native_hashes.items() if '/preview/' not in k and '/release/' not in k}
         ids={(case['class'],case['test']) for case in report['cases']}
         assert len(ids)==report['passed']; native_cases.append(ids)
@@ -76,9 +78,31 @@ def main():
             accepted(load(ROOT/batch['report']))
         folder=EVIDENCE/f'api{api}-optimized'; result=load(folder/'verification.json')
         assert result['apkSha256']==expected and all(result[key] for key in REQUIRED)
+        # Validate retained UI evidence as well as the acceptance report's flags.
+        legacy=ET.parse(folder/'legacy-day.xml').getroot()
+        parents={child:parent for parent in legacy.iter() for child in parent}
+        chips=[node for node in legacy.iter('node') if node.get('text')=='Past 24 hours']
+        assert len(chips)==1 and parents[chips[0]].get('checked')=='true'
+        assert any(node.get('text')=='1.0009765625' for node in ET.parse(folder/'legacy-size.xml').getroot().iter('node'))
         layouts=result['tabletLayouts']
         assert {(r['widthDp'],r['fontScale']) for r in layouts}=={(w,s) for w in (600,800,1280) for s in (1.0,1.6)}
         assert all(all(row[k] for k in ('resultReasonsReachable','calendarCriteriaReachable','exactExclusionControlsReachable')) for row in layouts)
+        for row in layouts:
+            key=f'layout-{row["widthDp"]}-{str(row["fontScale"]).replace(".","_")}'
+            results=ET.parse(folder/(key+'-results-capture.xml')).getroot()
+            assert any('Matched:' in node.get('text','') for node in results.iter('node')),key
+            calendar=ET.parse(folder/(key+'-criteria-capture.xml')).getroot()
+            parents={child:parent for parent in calendar.iter() for child in parent}
+            week=[node for node in calendar.iter('node') if node.get('text')=='This week']
+            assert len(week)==1 and parents[week[0]].get('checked')=='true',key
+            width,height=struct.unpack('>II',(folder/(key+'-criteria.png')).read_bytes()[16:24])
+            density=width/row['widthDp']
+            bounds=list(map(int,re.findall(r'\d+',parents[week[0]].get('bounds',''))))
+            assert len(bounds)==4 and bounds[3]-bounds[1]>=round(40*density),('clipped calendar control',key,bounds)
+
+            exclusions=ET.parse(folder/(key+'-exclusion-capture.xml')).getroot()
+            assert any(node.get('text')=='Remove exclusion' for node in exclusions.iter('node')),key
+
         files += [folder/'verification.json']+list(folder.glob('*.png'))+list(folder.glob('*.xml'))
         ota=EVIDENCE/f'api{api}-ota'; result=load(ota/'verification.json')
         assert result['fromVersionCode']==36 and result['toVersionCode']==37 and result['restoredApkSha256']==expected
@@ -91,19 +115,23 @@ def main():
     assert all(row['publicDownloadMatchesLocal'] and row['githubDigestMatches'] for row in public['assets'])
     live=load(EVIDENCE/'api36-live-feed.json'); accepted(live)
     assert live['downloadedVersionCode']==37 and live['downloadedVersionName']=='0.36.0-preview' and live['downloadedApkSha256']==expected
+    signing=load(EVIDENCE/'signing-continuity.json')
+    assert signing['sameSigningCertificate'] and len({row['certificateSha256'] for row in signing['versions']})==1
+    assert signing['versions'][-1]['apkSha256']==expected
     restored=load(EVIDENCE/'restored-public-tablets.json')
     assert {row['serial'] for row in restored}=={'emulator-5582','emulator-5602'}
     assert all(row['privateOriginalMetadataAndPreferencesRestored'] and row['installedPublicApkSha256']==expected and float(row['fontScale'])==1.0 for row in restored)
-    files += [EVIDENCE/name for name in ('native-source-hashes.json','native-classes.txt','public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','final-checks.txt','release-build.txt')]
+    files += [EVIDENCE/name for name in ('native-source-hashes.json','native-classes.txt','public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','final-checks.txt','release-build.txt','rejected-host-java-build.txt','verify-public.py','restore-public-tablets.py','run-live-feed.py','verify-validation.py','signing-continuity.json','api30-optimized-rejected-view-selector-console.txt','api30-optimized-rejected-duplicate-view-label-console.txt','api30-optimized-rejected-screen-scroll-console.txt')]
     # Earlier failed attempts remain labeled as rejected diagnostics. No private full bugreports.
     for name in ('api30-focused-first','api36-focused-first','api30-focused-second','api36-focused-second'):
         files += [EVIDENCE/(name+ext) for ext in ('.txt','.json')]
+    files += list(EVIDENCE.glob('api*-optimized-rejected-*-console.txt'))
     for api in (30,36):
         rejected=EVIDENCE/f'api{api}-batches-before-loading-selector'
         files += list(rejected.glob('*.json'))+list(rejected.glob('*.txt'))
     files += [ROOT/'captures/workspace-recovery/native-environment.py']
     for image,source in [('search-matches-tablet','search-matches-tablet'),('search-criteria-tablet','calendar-criteria-tablet'),
-                         ('search-exclusions-tablet','exact-exclusion-criteria-tablet'),('search-large-text-tablet','layout-600-1_6-criteria')]:
+                         ('search-exclusions-tablet','layout-1280-1_0-exclusion'),('search-large-text-tablet','layout-600-1_6-criteria')]:
         assert sha(ROOT/'docs/screenshots'/(image+'.png'))==sha(EVIDENCE/'api36-optimized'/(source+'.png'))
     assert sha(ROOT/'docs/screenshots/app-updates-036.png')==sha(EVIDENCE/'api30-ota/up-to-date.png')
     files=sorted(set(files))

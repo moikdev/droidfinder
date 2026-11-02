@@ -67,3 +67,9 @@ The signing certificate is unchanged. Update over either installed version; keep
 The real **0.34.1 → 0.35** public-feed download and Android installer upgrade passes on both dedicated API30/API36 tablets. Each installs the exact anonymously downloaded APK, preserves the synthetic original file, legacy Favorite and unrelated preference, and reports [up to date](screenshots/app-updates-035.png). Reopening the updater replaces the task without the old lifecycle crash.
 
 The separate production-source API36 check passes 1/1 for code 36, name 0.35.0-preview, the exact public APK digest, package/signature and no repeat offer. Both tablets finish with their original metadata/preferences, font scale 1.0 and the exact public optimized APK. The signing certificate is unchanged. Physical/OEM acceptance remains separate. See [the command and Undo guide](COMMANDS-AND-UNDO.md) and [validation](../VALIDATION.md).
+
+## 0.36.0 public upgrade acceptance
+
+The real **0.35 → 0.36** public-feed download and Android installer upgrade passes on both dedicated API30/API36 tablets. Each installs the exact anonymously downloaded APK, preserves the synthetic original file, legacy Favorite and unrelated preference, and reports [up to date](screenshots/app-updates-036.png).
+
+The separate production-source API36 check passes 1/1 for code 37, name 0.36.0-preview, the exact public APK digest, package/signature and no repeat offer. Both tablets finish with their original metadata/preferences, font scale 1.0 and the exact public optimized APK. The signing certificate is unchanged from 0.35. See [search criteria](SEARCH-CRITERIA.md) and [validation](../VALIDATION.md). Physical/OEM acceptance remains separate.

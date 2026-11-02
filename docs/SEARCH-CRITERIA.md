@@ -10,6 +10,8 @@ Compact cells can shorten the explanation. Select a result and open its preview/
 
 Content search reads supported UTF-8 text files. It captures the snippet during that read; showing an explanation does not reopen the document. Snippets remain in the current listing's memory and are omitted from saved tabs, Smart Folders, workspaces and setup exports. The content query itself remains part of the saved criteria, as before.
 
+![Filename and plain-text content matches with highlighted terms and readable reasons](screenshots/search-matches-tablet.png)
+
 ## Choose dates, sizes and kinds
 
 - **Today**, **This week** and **This month** use your local calendar. The editor shows the dates and time zone. This week follows your locale's first day of the week. Refresh reevaluates a saved calendar choice.
@@ -19,6 +21,8 @@ Content search reads supported UTF-8 text files. It captures the snippet during 
 - Minimum and Maximum KB accept lossless decimal values. A saved bound of 1,025 bytes opens as `1.0009765625` KB. Invalid, fractional-byte or reversed bounds must be corrected before Apply becomes available.
 
 A size preset replaces the custom size limits. Editing a custom size clears the preset. If an imported search contains both, they intersect: all its bounds must match. Files with an unknown size are skipped under a size filter, and Result details explains the incomplete check.
+
+![Calendar choices and lossless custom byte values in Search criteria](screenshots/search-criteria-tablet.png)
 
 ## Exclude one location
 
@@ -33,6 +37,8 @@ A selected file excludes itself. A selected folder excludes itself and the files
 **Exclude folder names** keeps its earlier behavior: an exact, case-sensitive name excludes every matching folder encountered below the root. That name rule always scans the chosen root itself. It is separate from exact locations.
 
 Connected document providers use their document identities and actual ancestry checks. Findroid does not guess ancestry from a document ID's spelling. When a provider cannot verify an exact exclusion, the affected branch is skipped and the results are marked incomplete. Result details explains the issue; reconnect storage or remove the exclusion and refresh.
+
+![An exact Cache folder exclusion with its full location and a Remove exclusion action](screenshots/search-exclusions-tablet.png)
 
 ## Keep searches portable
 

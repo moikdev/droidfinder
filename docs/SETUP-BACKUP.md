@@ -20,7 +20,7 @@ The backup includes:
 | --- | --- |
 | Favorites | Shortcut order, labels, groups, collapse state, and built-in location visibility/order. |
 | Tags and collections | Tag names/colors, assignments, and collection references. |
-| Smart Folders | Names, roots, and saved search rules, including tag and subfolder scope. |
+| Smart Folders | Names, roots, and saved search rules, including tags, subfolder scope, calendar/size choices and exact file/folder exclusions. |
 | Workspaces | Named pane layouts and their tabs, history, searches, selection, and scroll anchors. |
 | Open tabs | The current window's tabs and pane layout, offered as a named workspace during import. |
 | Folder appearance | Remembered folder views, colors, and symbols. |
@@ -28,6 +28,8 @@ The backup includes:
 | Preferences | Density, extensions, theme, sidebar width/visibility, tag visibility, gesture-tip state, conflict default, and ZIP resource limits. |
 
 File contents, Android access grants, provider sign-ins, notification/file-picker permissions, transfer jobs, Undo/Redo history, Trash, caches, and updater state remain on the original installation. Findroid's Android automatic backup exclusion remains enabled; this feature is an explicit user-created export.
+
+Exact search exclusions enter the reference review and follow explicit root mappings. Match snippets remain in the current listing and are omitted from the backup.
 
 The JSON can reveal folder names, file paths, tag names, and saved search text. Choose a suitable place to keep it.
 

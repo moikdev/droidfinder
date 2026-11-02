@@ -1,5 +1,22 @@
 # Android preview verification
 
+## Findroid 0.36.0 — search explanations and exact location criteria
+
+Local verification on November 3, 2026:
+
+- **404 JVM tests pass**, with no failures, errors or skips. Debug, native-test, optimized preview and unsigned release builds pass. Lint has **0 errors, 147 warnings and 11 hints**.
+- **251 native cases pass on each API30 and API36 tablet**, with no failures or skips. Each uses **27 isolated fresh-process batches**, restores original metadata/preferences between batches, and checks installed application/test APK hashes against the final recorded builds. The same case set passes on both APIs; four phone-only input cases remain outside the tablet suite.
+- Search acceptance covers original-string Unicode highlighting, reasons in all four views and details, bounded snippets without a second content read, absent persisted snippets, actual exact-folder choice, same-named siblings, provider tree aliases and unknown ancestry, strict sparse-file gigabyte boundaries, local calendar refresh, invalid expert size bounds and saved-rule/setup remapping.
+- Rejected attempts remain labeled as diagnostics: provider-fixture grant setup, scroll targeting in chip rows, gallery reason clipping, provider probe accounting, a setup-codec assertion, and an older loading drag-handle selector. The app's gallery strip was corrected; fixture/selector issues were corrected without removing their substantive assertions. A separate run under the host default Java failed a preexisting ZIP comment fixture; the final **JDK 17** run passes all 404 tests. Optimized-script attempts with outdated/duplicate view labels, adjacent-label assumptions, screen-relative portrait scrolling, and partly visible control captures are retained separately from accepted evidence.
+
+The preview is **8,324,271 bytes**, SHA-256 `92fdfdd8f145d5d68ee6e8714b0892a57146667c3e4f66e6a409a193885e90f5`. Clean application source is `58e094c0be44e7628c7d6c78e4a6d4a81149043e`. Both the 0.35 and 0.36 signatures verify with the unchanged development certificate `e7bee2db540fcbb0633d82870b2c4e3d14ecc0c18474b1a7c73d47eb0bf92c08`. See the [search criteria guide](docs/SEARCH-CRITERIA.md).
+
+**Optimized acceptance passes on both APIs** for the exact shipping APK: an actual **0.35 → 0.36** upgrade, retained rolling-day and 1,025-byte bounds, the real exact-folder picker, same-named sibling preservation, match evidence in all four views, Smart Folder restart, and natural Image/Over 1 GB serialization. All six **600/800/1280 dp × font-scale 1.0/1.6** layouts pass per API. Retained UI XML verifies full date-control height and selected state; actual Android screenshots were inspected, including [enlarged criteria](docs/screenshots/search-large-text-tablet.png). The synthetic original file bytes, Favorite and unrelated preference survive, snippets stay out of saved criteria, and each run restores the exact original metadata/preferences and device settings. [Result highlights](docs/screenshots/search-matches-tablet.png) · [Exact exclusions](docs/screenshots/search-exclusions-tablet.png).
+
+Published [0.36.0-preview](https://github.com/moikdev/findroid/releases/tag/v0.36.0-preview) from the clean application source above. Anonymous downloads of all five release artifacts match the local bytes and GitHub digests. A real **0.35 → 0.36** public-feed download and Android installation passes on both tablets: exact public APK bytes, the original synthetic file, legacy Favorite and unrelated preference are preserved, and the updated app reports [up to date](docs/screenshots/app-updates-036.png). The separate API36 production-source check passes **1/1**, confirming code **37**, name **0.36.0-preview**, the exact APK hash, package/signature and no repeat offer.
+
+Both tablets finish with their exact original metadata/preferences, font scale 1.0 and the public optimized APK. The allowlisted validation archive excludes private setup snapshots, original document payloads, full bugreports, signing keys and credentials. Its source/evidence snapshots and file hashes are recorded before publication, then the public download is checked independently. This completes proposals **20, 23 and 24**: **23 of 72 improvements are implemented, 49 remain open or partial**. Physical tablets, TalkBack, trackpad/stylus, removable media and actual third-party providers remain separate acceptance. GitHub Actions remains manual-only.
+
 ## Findroid 0.35.0 — clear tablet commands and guarded Recent actions
 
 Local verification on November 2–3, 2026:

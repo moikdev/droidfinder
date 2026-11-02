@@ -53,7 +53,25 @@ def main():
     relative = 'Workspace/OTA sidebar proof ' + stamp
     full = '/data/user/0/dev.findroid/files/' + relative
     original_bytes = b'Original file bytes survive this real OTA installation.\n'
-    original_prefs = None
+    original_setup = None
+    metadata = ('tags.properties','workspaces.json','folder-views.json','folder-styles.properties',
+                'rename-presets.properties','setup-previous.json','document-parents.properties')
+    def snapshot():
+        paths=shell('run-as','dev.findroid','find','shared_prefs','-maxdepth',1,'-type','f').decode().splitlines()
+        paths += ['files/'+name+suffix for name in metadata for suffix in ('','.bak','.new')]
+        result={}
+        for path in paths:
+            value=subprocess.run([adb,'-s',args.serial,'exec-out','run-as','dev.findroid','cat',path],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
+            result[path]=value.stdout if value.returncode==0 else None
+        return result
+    def restore():
+        paths=shell('run-as','dev.findroid','find','shared_prefs','-maxdepth',1,'-type','f').decode().splitlines()
+        for path in set(paths)-set(original_setup): shell('run-as','dev.findroid','rm','-f',path)
+        for path,data in original_setup.items():
+            if data is None: shell('run-as','dev.findroid','rm','-f',path)
+            else: write(path,data)
+        assert snapshot()==original_setup, 'Original setup restoration must be exact'
+
     def launch():
         shell('am', 'start', '-W', '-f', '0x10008000', '--windowingMode', 1, '-n', 'dev.findroid/.MainActivity',
             '--es', 'finderWindowId', 'ota-sidebar-' + stamp, '--es', 'finderLocation', full)
@@ -62,10 +80,22 @@ def main():
         root = wait('more', lambda t: bool(nodes(t, 'App updates'))); tap(one(root, 'App updates'))
     try:
         stop(); call('install', '-r', debug)
-        original_prefs = read('shared_prefs/finder.xml')
-        prefs = ET.fromstring(original_prefs)
+        assert subprocess.run([adb,'-s',args.serial,'shell','run-as','dev.findroid','test','!','-e','files/.setup-transaction'],stdout=subprocess.PIPE,stderr=subprocess.PIPE).returncode==0
+        original_setup = snapshot()
+        # Public evidence shows a synthetic location and the default tag catalog only.
+        for name in metadata:
+            for suffix in ('','.bak','.new'): shell('run-as','dev.findroid','rm','-f','files/'+name+suffix)
+        write('shared_prefs/locations.xml',b'<?xml version="1.0" encoding="utf-8"?><map><string name="roots">[]</string></map>')
+        prefs = ET.fromstring(original_setup['shared_prefs/finder.xml'])
         for item in list(prefs):
-            if item.get('name') in ('favorites', 'sidebarLayoutV1', 'otaAcceptanceSentinel'): prefs.remove(item)
+            if item.get('name') in ('favorites', 'sidebarLayoutV1', 'otaAcceptanceSentinel','smartFolders','tagsVisible','sidebarVisible','dark','tabs','closedTabs','activeTab','dualPane','activePane','panesReversed','view'): prefs.remove(item)
+        ET.SubElement(prefs,'string',name='smartFolders').text='[]'
+        ET.SubElement(prefs,'string',name='closedTabs').text='[]'
+        ET.SubElement(prefs,'string',name='tabs').text=json.dumps([{'id':'ota-baseline','history':[full],'index':0,'query':'','rules':{}}])
+        ET.SubElement(prefs,'int',name='activeTab',value='0')
+        ET.SubElement(prefs,'string',name='activePane').text='primary'
+        ET.SubElement(prefs,'string',name='view').text='LIST'
+        for name,value in [('tagsVisible','false'),('sidebarVisible','true'),('dark','false'),('dualPane','false'),('panesReversed','false')]: ET.SubElement(prefs,'boolean',name=name,value=value)
         saved = ET.SubElement(prefs, 'set', name='favorites'); ET.SubElement(saved, 'string').text = full
         ET.SubElement(prefs, 'string', name='otaAcceptanceSentinel').text = stamp
         write('shared_prefs/finder.xml', ET.tostring(prefs, encoding='utf-8', xml_declaration=True))
@@ -107,8 +137,8 @@ def main():
             'restoredApkSha256': hashlib.sha256(args.to_apk.read_bytes()).hexdigest()}
     finally:
         stop()
-        if original_prefs is not None:
-            call('install', '-r', debug); write('shared_prefs/finder.xml', original_prefs)
+        if original_setup is not None:
+            call('install', '-r', debug); restore()
             shell('run-as', 'dev.findroid', 'rm', '-rf', 'files/' + relative)
         call('install', '-r', args.to_apk)
     report['restoredOriginalSetup'] = True
