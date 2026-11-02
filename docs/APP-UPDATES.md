@@ -39,3 +39,9 @@ adb -s emulator-5582 shell am instrument -w -r \
 ```
 
 This downloads the actual public release through the production source, checks its bytes/package/version/signing certificate and confirms that its version is not offered again. It does not install an equal-version APK. Installer acceptance is covered separately by the native installer and permission-flow checks.
+
+## 0.32.0 public upgrade acceptance
+
+A real 0.31 → 0.32 public-feed download and Android installation passes on the dedicated API30 tablet emulator. Installed APK bytes match the public release; the original synthetic file, legacy favorite and sentinel preference survive. The new version reports up to date. The API36 production-source check validates the public package/version/signature and rejects a repeat offer. Both devices are restored to the exact public optimized APK. This is emulator acceptance; the broader physical/OEM update matrix remains open.
+
+Repeat the installed-update workflow with `scripts/check-ota-upgrade.py`. It requires the older signed APK, anonymously downloaded target APK, expected version code and a dedicated tablet serial; it backs up/restores the original setup and uses its own synthetic data. Actual result: [0.32.0 updater](screenshots/app-updates-032.png).
