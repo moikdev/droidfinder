@@ -15,7 +15,7 @@ The 0.29.0 preview adds an in-app updater at **More → App updates**, also link
 
 Source code, installable APKs, `findroid-update.json`, checksums and release notes are published together in **`moikdev/droidfinder`**. The updater reads that repository’s public releases, including previews, and checks up to five recent release manifests for the highest newer version code. No separate feed repository or GitHub token is needed.
 
-The initial public updater build is **0.29.0-preview**. Installing it enables future updates from this repository. An older pre-0.26 DroidFinder APK has a different app ID and installs separately; its private Workspace must be copied out before uninstalling it.
+The initial public updater build is [**0.29.0-preview**](https://github.com/moikdev/droidfinder/releases/tag/v0.29.0-preview). Installing it enables future updates from this repository. An older pre-0.26 DroidFinder APK has a different app ID and installs separately; its private Workspace must be copied out before uninstalling it.
 
 Run `scripts/package-preview.py --notes <release-notes-file>` with JDK 17 to build and validate the preview and unsigned release. The script writes the signed installable APK, unsigned release, SHA256SUMS, BUILDINFO.json and `findroid-update.json` under `captures/release/<version>/`. The manifest contains the exact APK digest/size and its release asset URL. Publish the signed preview and manifest together under the matching `v<version>-preview` tag in `moikdev/droidfinder`. The unsigned release cannot be installed directly.
 
@@ -25,7 +25,7 @@ Keep the signing key stable and backed up privately. These development previews 
 
 JVM tests cover manifest bounds, source restrictions, credential/cleartext rejection, path traversal and tampered/truncated/oversized downloads. Native tests use APK fixtures generated with the current checkout's debug key; the fixture private key and APKs stay in ignored build outputs and never enter a shipping build. Native checks cover package/version/certificate/Android compatibility, cancellation/retry, cached-download verification and recovery, update controls, feed errors and Android's installer handoff.
 
-Build and native results are recorded in `VALIDATION.md`. The release also includes a validation archive with the artifact manifest, final test logs, installation-preservation evidence and live feed checks. No physical-device or third-party provider success is implied by emulator checks.
+Build and native results are recorded in [VALIDATION.md](../VALIDATION.md). Public manifest/APK downloads through the production source passed on both API 30 and API 36. The exact optimized preview shows [“You’re up to date”](screenshots/app-updates-tablet.png) against the published feed. The release also includes a validation archive with the artifact manifest, final test logs, installation-preservation evidence and live feed checks. No physical-device or third-party provider success is implied by emulator checks.
 
 
 To run the opt-in public-feed acceptance check after installing the debug and test APKs on a dedicated emulator:

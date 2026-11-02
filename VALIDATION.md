@@ -1,5 +1,18 @@
 # Android preview verification
 
+## Findroid 0.29.0 public release
+
+Published **2026-11-02**: [source and README](https://github.com/moikdev/droidfinder), [release and APKs](https://github.com/moikdev/droidfinder/releases/tag/v0.29.0-preview). Source and OTA releases share the public `moikdev/droidfinder` repository. The release tag points to source commit `20efcb39cecf15888096de74a970479e1a2da81c`; build information records a clean source tree.
+
+The final configuration passes **307 JVM tests**, **8/8 focused native API 36 checks**, **6/6 native API 30 updater checks**, and optimized builds/lint with zero errors. The exact preview completed the Android 11 install-source permission and system-installer flow using a signed next-version fixture, preserving a test file and a shared preference.
+
+After publication, **1/1 live native check passed on each of API 30 and API 36**. Both used the production update source to fetch the public release manifest and APK, verify bytes/package/version/signing certificate, and check that the same version is not offered again. An anonymous host download also matched the local APK, update manifest and GitHub asset digest. The optimized preview’s actual update dialog reports **“You're up to date.”** [Screenshot](docs/screenshots/app-updates-tablet.png).
+
+Published preview: **8,062,131 bytes**, SHA-256 `f026884edbf0a497d291ec1a6dfd502cebcc2076d36a3327c5f38c8365049fb0`. The release includes the unsigned APK, OTA manifest, APK checksums, build information and a validation archive containing test logs, JVM XML, lint XML, live publication checks and installation-preservation evidence. This verifies a public download plus local upgrade acceptance; it does not claim a newer public version was installed over this same initial version.
+
+Earlier records below describe the artifacts and publication state at the time of each local run.
+
+
 ## Findroid 0.28.0
 
 A local production-readiness audit on **2026-11-02** fixed link-following deletion, local collision/rollback failures, incomplete provider listings/streams, source-tree changes, archive self-inclusion, damaged Trash-index startup, Android 11 ZIP64 reads, and unreachable/clipped phone PDF controls. It also pins patched Guava, bundles the archive dependency notices, and makes backup/transfer exclusions explicit. See the [full audit and limits](docs/PRODUCTION-AUDIT.md).
