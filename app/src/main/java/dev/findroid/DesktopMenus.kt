@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.window.*
 
@@ -147,17 +148,21 @@ fun ContextItem(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     enabled: Boolean = true,
     shortcut: String? = null,
+    unavailableReason: String? = null,
     onClick: () -> Unit,
 ) {
     DropdownMenuItem(
         text = {
+            Column {
             Text(
                 text,
                 fontSize = 12.sp,
                 maxLines = 1,
                 overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
-                color = if (enabled) Ink else Muted.copy(alpha = .5f),
+                color = if (enabled && unavailableReason == null) Ink else Muted.copy(alpha = .75f),
             )
+            unavailableReason?.let { Text(it, color = Muted, fontSize = 11.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }
+            }
         },
         leadingIcon = {
             Icon(
@@ -170,9 +175,15 @@ fun ContextItem(
         trailingIcon = shortcut?.let { { Text(it, color = Muted, fontSize = 10.sp) } },
         onClick = onClick,
         enabled = enabled,
-        modifier = Modifier.height(LocalFinderDensity.current.rowHeight),
+        modifier = Modifier.heightIn(min = LocalFinderDensity.current.rowHeight).semantics { unavailableReason?.let { stateDescription = "Unavailable: $it. Activate to see options." } },
         contentPadding = PaddingValues(horizontal = 13.dp),
     )
+}
+
+@Composable
+private fun FileCommandItem(model: FinderModel, command: String, text: String,
+    icon: androidx.compose.ui.graphics.vector.ImageVector, shortcut: String? = null, onClick: () -> Unit) {
+    ContextItem(text, icon, shortcut = shortcut, unavailableReason = model.commandProblem(command)?.reason, onClick = onClick)
 }
 
 @Composable
@@ -206,7 +217,6 @@ fun FileContextMenu(
     action: (String) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val idle = model.busy == null
     var section by remember(request) { mutableStateOf("") }
     fun run(command: String) {
         onDismiss()
@@ -254,29 +264,9 @@ fun FileContextMenu(
         } else {
             val items = model.selectedEntries
             if (request.background) {
-                ContextItem(
-                    "New folder",
-                    Icons.Outlined.CreateNewFolder,
-                    model.canCreate,
-                    "Ctrl Shift N",
-                ) {
-                    run("new")
-                }
-                ContextItem(
-                    "New text file…",
-                    Icons.AutoMirrored.Outlined.NoteAdd,
-                    model.canCreate,
-                ) {
-                    run("newText")
-                }
-                ContextItem(
-                    "Paste",
-                    Icons.Outlined.ContentPaste,
-                    model.clipboard != null && model.canCreate,
-                    "Ctrl V",
-                ) {
-                    run("paste")
-                }
+                FileCommandItem(model, "new", "New folder", Icons.Outlined.CreateNewFolder, "Ctrl Shift N") { run("new") }
+                FileCommandItem(model, "newText", "New text file…", Icons.AutoMirrored.Outlined.NoteAdd) { run("newText") }
+                FileCommandItem(model, "paste", "Paste", Icons.Outlined.ContentPaste, "Ctrl V") { run("paste") }
                 HorizontalDivider(color = Border)
                 ContextItem(
                     "Select all",
@@ -316,11 +306,9 @@ fun FileContextMenu(
                     onDismiss()
                 }
             } else if (model.isTrash) {
-                ContextItem("Restore", Icons.Outlined.Restore, idle) { run("restore") }
-                ContextItem("Get info", Icons.Outlined.Info) { run("info") }
-                ContextItem("Delete permanently…", Icons.Outlined.DeleteForever, idle) {
-                    run("delete")
-                }
+                FileCommandItem(model, "restore", "Restore", Icons.Outlined.Restore) { run("restore") }
+                FileCommandItem(model, "info", "Get info", Icons.Outlined.Info) { run("info") }
+                FileCommandItem(model, "delete", "Delete permanently…", Icons.Outlined.DeleteForever) { run("delete") }
             } else {
                 val one = items.singleOrNull()
                 if (one != null) {
@@ -348,106 +336,44 @@ fun FileContextMenu(
                         ) {
                             run("favorite")
                         }
-                        ContextItem("Customize folder…", Icons.Outlined.Palette) {
+                        FileCommandItem(model, "appearance", "Customize folder…", Icons.Outlined.Palette) {
                             run("appearance")
                         }
                     }
                 }
-                ContextItem("Get info", Icons.Outlined.Info, shortcut = "Ctrl I") { run("info") }
+                FileCommandItem(model, "info", "Get info", Icons.Outlined.Info, shortcut = "Ctrl I") { run("info") }
                 HorizontalDivider(color = Border)
-                ContextItem("Copy", Icons.Outlined.ContentCopy, shortcut = "Ctrl C") { run("copy") }
-                ContextItem(
-                    "Cut",
-                    Icons.Outlined.ContentCut,
-                    items.all { it.canDelete },
-                    "Ctrl X",
-                ) {
-                    run("cut")
-                }
+                FileCommandItem(model, "copy", "Copy", Icons.Outlined.ContentCopy, shortcut = "Ctrl C") { run("copy") }
+                FileCommandItem(model, "cut", "Cut", Icons.Outlined.ContentCut, "Ctrl X") { run("cut") }
                 if (one?.folder == true)
-                    ContextItem(
-                        "Paste into folder",
-                        Icons.Outlined.ContentPaste,
-                        model.clipboard != null && one.writable,
-                    ) {
-                        model.paste(one.path)
-                        onDismiss()
-                    }
-                ContextItem(
-                    if (items.size > 1) "Rename ${items.size} items…" else "Rename…",
-                    Icons.Outlined.DriveFileRenameOutline,
-                    items.all { it.canRename } && idle,
-                    "F2",
-                ) {
-                    run("rename")
-                }
-                ContextItem(
-                    "Duplicate",
-                    Icons.Outlined.FileCopy,
-                    enabled = idle,
-                    shortcut = "Meta D",
-                ) {
-                    run("duplicate")
-                }
-                ContextItem("Copy to…", Icons.Outlined.FolderCopy) { run("copyTo") }
-                ContextItem(
-                    "Move to…",
-                    Icons.AutoMirrored.Outlined.DriveFileMove,
-                    items.all { it.canDelete },
-                ) {
-                    run("moveTo")
-                }
+                    FileCommandItem(model, "pasteInto", "Paste into folder", Icons.Outlined.ContentPaste) { run("pasteInto") }
+                FileCommandItem(model, "rename", if (items.size > 1) "Rename ${items.size} items…" else "Rename…", Icons.Outlined.DriveFileRenameOutline, "F2") { run("rename") }
+                FileCommandItem(model, "duplicate", "Duplicate", Icons.Outlined.FileCopy, shortcut = "Meta D") { run("duplicate") }
+                FileCommandItem(model, "copyTo", "Copy to…", Icons.Outlined.FolderCopy) { run("copyTo") }
+                FileCommandItem(model, "moveTo", "Move to…", Icons.AutoMirrored.Outlined.DriveFileMove) { run("moveTo") }
                 HorizontalDivider(color = Border)
-                ContextItem("Compress to ZIP…", Icons.Outlined.FolderZip, idle) { run("compress") }
+                FileCommandItem(model, "compress", "Compress to ZIP…", Icons.Outlined.FolderZip) { run("compress") }
                 if (one?.extension == "zip") {
-                    ContextItem(
-                        "Extract here",
-                        Icons.Outlined.Unarchive,
-                        model.canCreate && idle && !model.effectiveSearchRules.active,
-                    ) {
-                        run("extract")
-                    }
-                    ContextItem("Extract to…", Icons.Outlined.DriveFolderUpload, idle) {
-                        run("extractTo")
-                    }
+                    FileCommandItem(model, "extractHere", "Extract here", Icons.Outlined.Unarchive) { run("extractHere") }
+                    FileCommandItem(model, "extractTo", "Extract to…", Icons.Outlined.DriveFolderUpload) { run("extractTo") }
                 }
-                ContextItem("Tags…", Icons.AutoMirrored.Outlined.Label, idle) { run("tags") }
-                ContextItem("Collections…", Icons.Outlined.CollectionsBookmark, idle) {
+                FileCommandItem(model, "tags", "Tags…", Icons.AutoMirrored.Outlined.Label) { run("tags") }
+                FileCommandItem(model, "collections", "Collections…", Icons.Outlined.CollectionsBookmark) {
                     run("collections")
                 }
                 if (one != null)
-                    ContextItem("Copy full path", Icons.Outlined.Link) { run("copyPath") }
-                ContextItem("Share…", Icons.Outlined.IosShare) { run("share") }
-                ContextItem(
-                    "Move to Trash",
-                    Icons.Outlined.DeleteOutline,
-                    items.all { it.canDelete } && idle,
-                    "Delete",
-                ) {
-                    run("trash")
-                }
+                    FileCommandItem(model, "copyPath", "Copy full path", Icons.Outlined.Link) { run("copyPath") }
+                FileCommandItem(model, "share", "Share…", Icons.Outlined.IosShare) { run("share") }
+                FileCommandItem(model, "trash", "Move to Trash", Icons.Outlined.DeleteOutline, "Delete") { run("trash") }
             }
+            ContextItem("Recent actions…", Icons.Outlined.History) { run("recentActions") }
             if (model.undoLabel != null || model.redoLabel != null) {
                 HorizontalDivider(color = Border)
                 model.undoLabel?.let {
-                    ContextItem(
-                        "Undo $it",
-                        Icons.AutoMirrored.Outlined.Undo,
-                        enabled = idle,
-                        shortcut = "Ctrl Z",
-                    ) {
-                        run("undo")
-                    }
+                    FileCommandItem(model, "undo", "Undo $it", Icons.AutoMirrored.Outlined.Undo, shortcut = "Ctrl Z") { run("undo") }
                 }
                 model.redoLabel?.let {
-                    ContextItem(
-                        "Redo $it",
-                        Icons.AutoMirrored.Outlined.Redo,
-                        enabled = idle,
-                        shortcut = "Ctrl Shift Z",
-                    ) {
-                        run("redo")
-                    }
+                    FileCommandItem(model, "redo", "Redo $it", Icons.AutoMirrored.Outlined.Redo, shortcut = "Ctrl Shift Z") { run("redo") }
                 }
             }
         }

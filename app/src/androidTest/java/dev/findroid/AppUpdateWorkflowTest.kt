@@ -48,8 +48,11 @@ class AppUpdateWorkflowTest {
 
     private fun controller(source: UpdateSource, directory: File): AppUpdateController {
         val job = SupervisorJob().also { jobs += it }
+        // Initialization can finish before the constructor returns. Seed the fixture policy
+        // first so an automatic check cannot race the test's explicit manual check.
+        app.getSharedPreferences(preferenceName, 0).edit().putBoolean("automatic", false).commit()
         return AppUpdateController(app, source, directory = directory, preferences = preferenceName,
-            scope = CoroutineScope(job + Dispatchers.Main.immediate)).also { it.changeAutomatic(false) }
+            scope = CoroutineScope(job + Dispatchers.Main.immediate))
     }
 
     private fun source(apk: File, update: AppUpdate = metadata(apk)) = object : UpdateSource {

@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
@@ -25,6 +27,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -103,7 +106,10 @@ internal fun OrganizationDialog(model: FinderModel) {
                     }
                 }
                 HorizontalDivider(color = Border)
-                TextButton(onClick = { state.close(); model.setup.open() }, enabled = idle) { Text("Back up or restore all setup…") }
+                // Keep the primary organization content reachable above a tablet IME.
+                // The setup link returns when the keyboard closes or the window grows.
+                if (config.screenHeightDp >= 480)
+                    TextButton(onClick = { state.close(); model.setup.open() }, enabled = idle) { Text("Back up or restore all setup…") }
                 Row(
                     Modifier.fillMaxWidth()
                         .background(AppBackground)
@@ -310,6 +316,8 @@ private fun LibraryFind(
     change: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val focus = LocalFocusManager.current
+    val keyboard = LocalSoftwareKeyboardController.current
     OutlinedTextField(
         value,
         { change(it.take(128)) },
@@ -317,6 +325,8 @@ private fun LibraryFind(
         placeholder = { Text(label, fontSize = 13.sp) },
         leadingIcon = { Icon(Icons.Outlined.Search, null, Modifier.size(18.dp), tint = Muted) },
         modifier = modifier.fillMaxWidth().semanticsLabel(label).testTag("library-search-$label"),
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+        keyboardActions = KeyboardActions(onDone = { focus.clearFocus(); keyboard?.hide() }),
     )
 }
 
@@ -573,21 +583,10 @@ private fun TagCatalog(
                 Text("New tag", Modifier.padding(start = 6.dp))
             }
         }
-        TextButton(
-            onClick = { model.organization.locations.open() },
-            enabled = model.busy == null,
-        ) {
-            Icon(Icons.Outlined.Link, null, Modifier.size(17.dp))
-            Text("Saved locations…", Modifier.padding(start = 7.dp), fontSize = 12.sp)
-        }
-        Text(
-            "${model.tagDefinitions.size} tags · ${model.tagAssignments.size} tagged locations",
-            Modifier.padding(vertical = 10.dp),
-            color = Muted,
-            fontSize = 12.sp,
-        )
+        // Keep a results viewport when the tablet's software keyboard reduces dialog height.
+        // Auxiliary catalog controls scroll with the results instead of consuming that viewport.
         LazyColumn(Modifier.weight(1f)) {
-            items(catalog, key = { it.name }) { tag ->
+            items(catalog, key = { "tag:${it.name}" }) { tag ->
                 Row(
                     Modifier.fillMaxWidth().heightIn(min = 58.dp),
                     verticalAlignment = Alignment.CenterVertically,
@@ -633,6 +632,21 @@ private fun TagCatalog(
                     }
                 }
                 HorizontalDivider(color = Border, thickness = .5.dp)
+            }
+            item(key = "catalog-details") {
+                TextButton(
+                    onClick = { model.organization.locations.open() },
+                    enabled = model.busy == null,
+                ) {
+                    Icon(Icons.Outlined.Link, null, Modifier.size(17.dp))
+                    Text("Saved locations…", Modifier.padding(start = 7.dp), fontSize = 12.sp)
+                }
+                Text(
+                    "${model.tagDefinitions.size} tags · ${model.tagAssignments.size} tagged locations",
+                    Modifier.padding(vertical = 10.dp),
+                    color = Muted,
+                    fontSize = 12.sp,
+                )
             }
             if (catalog.isEmpty())
                 item {
@@ -693,7 +707,7 @@ private fun SelectionTagChoices(model: FinderModel, modifier: Modifier) {
             color = Muted,
         )
         LazyColumn(Modifier.weight(1f)) {
-            items(catalog, key = { it.name }) { tag ->
+            items(catalog, key = { "tag:${it.name}" }) { tag ->
                 val change = state.changes[tag.name] ?: TagChange.KEEP
                 val count = state.included.count { tag.name in state.before(it.key) }
                 val all = state.included.isNotEmpty() && count == state.included.size

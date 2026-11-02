@@ -41,8 +41,14 @@ class FileConflictWorkflowTest {
     }
 
     private fun loaded() {
-        compose.waitUntil(15_000) {
-            model.busy == null && !model.loading && model.activeTransferId == null
+        try {
+            compose.waitUntil(15_000) {
+                model.busy == null && !model.loading && model.activeTransferId == null
+            }
+        } catch (error: Throwable) {
+            throw AssertionError("Transfer did not finish: busy=${model.busy}, loading=${model.loading}, " +
+                "active=${model.activeTransferId}, conflict=${model.fileConflict}, message=${model.message}, " +
+                "jobs=${model.transferJobs.takeLast(3)}; ${compose.onAllNodes(isRoot()).onLast().printToString()}", error)
         }
     }
 
@@ -53,6 +59,24 @@ class FileConflictWorkflowTest {
 
     private fun choose(label: String) {
         compose.onNodeWithText(label).performScrollTo().performClick()
+    }
+
+    private fun renameIncoming(value: String) {
+        compose.onNode(hasSetTextAction()).performTextReplacement(value)
+        compose.onNode(hasSetTextAction()).performImeAction()
+        // The native IME closes asynchronously; wait before tapping a moving dialog control.
+        compose.waitUntil(5_000) {
+            var hidden = false
+            androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().runOnMainSync {
+                hidden = android.view.inspector.WindowInspector.getGlobalWindowViews().none {
+                    androidx.core.view.ViewCompat.getRootWindowInsets(it)
+                        ?.isVisible(androidx.core.view.WindowInsetsCompat.Type.ime()) == true
+                }
+            }
+            hidden
+        }
+        compose.waitForIdle()
+        choose("Use new name")
     }
 
     @After
@@ -115,9 +139,14 @@ class FileConflictWorkflowTest {
         }
         conflict()
         choose("Rename incoming…")
-        compose.onNode(hasSetTextAction()).performTextReplacement("Renamed.txt")
-        choose("Use new name")
-        compose.waitUntil(10_000) { model.fileConflict?.source?.name == "B.txt" }
+        renameIncoming("Renamed.txt")
+        try {
+            compose.waitUntil(10_000) { model.fileConflict?.source?.name == "B.txt" }
+        } catch (error: Throwable) {
+            throw AssertionError("Rename did not advance: conflict=${model.fileConflict}, " +
+                "busy=${model.busy}, message=${model.message}, jobs=${model.transferJobs.takeLast(1)}; " +
+                compose.onAllNodes(isRoot()).onLast().printToString(), error)
+        }
         compose.onNodeWithText("Apply this choice to remaining conflicts").performClick()
         choose("Skip this item")
         loaded()
@@ -179,8 +208,7 @@ class FileConflictWorkflowTest {
         compose.waitUntil(10_000) { model.fileConflict?.source?.name == "Same.txt" }
         compose.onNodeWithText("Merge folders").assertDoesNotExist()
         choose("Rename incoming…")
-        compose.onNode(hasSetTextAction()).performTextReplacement("Blocked.txt")
-        choose("Use new name")
+        renameIncoming("Blocked.txt")
         loaded()
         val job = model.transferJobs.first { it.id == id }
         assertEquals(TransferState.FAILED, job.state)

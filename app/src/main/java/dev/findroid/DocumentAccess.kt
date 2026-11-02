@@ -961,6 +961,7 @@ class DocumentAccess(
         var stash: File? = null
         var stashStamp: String? = null
         return FileStep.Callback(
+            description = "${entry.name}\n$path",
             check = { undo ->
                 if (undo)
                     check(digest(current) == stamp) {
@@ -999,6 +1000,7 @@ class DocumentAccess(
         val afterParent = parent(after)!!
         val stamp = digest(after)
         return FileStep.Callback(
+            description = "${before.name} → ${afterEntry.name}\n${before.path} → $after",
             check = { undo ->
                 check(digest(current) == stamp) {
                     "The item changed; Undo/Redo stopped to protect it."
@@ -1028,6 +1030,7 @@ class DocumentAccess(
         val stamp = digest(after)
         val parent = before.parentPath!!
         return FileStep.Callback(
+            description = "${before.name} → $afterName\n${before.path}",
             check = { undo ->
                 check(digest(current) == stamp) { "The item changed after renaming." }
                 val name = if (undo) before.name else afterName
@@ -1141,6 +1144,7 @@ class DocumentAccess(
             checkedStamps?.let { values -> pairs.map { values.getValue(it.first) } }
                 ?: current.map(::digest)
         return FileStep.Callback(
+            description = before.take(3).joinToString("\n") { "${it.name} · ${it.path}" },
             check = { undo ->
                 current.forEachIndexed { index, path ->
                     check(digest(path) == stamps[index]) { "An item changed after renaming." }
@@ -1183,6 +1187,7 @@ class DocumentAccess(
         var restoredStamp: String? = null
         val parent = before.parentPath!!
         return FileStep.Callback(
+            description = "${before.name}\n${before.path}",
             check = { undo ->
                 if (undo) {
                     check(fingerprint(stash) == stamp) { "The recovery copy changed." }

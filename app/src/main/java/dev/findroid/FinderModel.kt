@@ -1062,6 +1062,9 @@ constructor(
     var redoLabel by session.redoLabel
         private set
 
+    internal val recentActions get() = session.recentActions.value
+    internal val historyFailure get() = session.historyFailure.value
+
     val canUndoTrash
         get() = undoLabel == "Move to Trash"
 
@@ -3164,6 +3167,8 @@ constructor(
     private fun syncHistory() {
         undoLabel = history.undoLabel
         redoLabel = history.redoLabel
+        session.recentActions.value = history.recentActions()
+        session.historyFailure.value = history.lastFailure
     }
 
     private suspend fun rememberOperation(label: String, steps: List<FileStep>) {

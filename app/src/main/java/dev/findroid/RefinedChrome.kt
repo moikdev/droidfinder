@@ -1,4 +1,4 @@
-@file:OptIn(androidx.compose.ui.ExperimentalComposeUiApi::class)
+@file:OptIn(androidx.compose.ui.ExperimentalComposeUiApi::class, androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 
 package dev.findroid
 
@@ -22,15 +22,17 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-/** A single, stationary toolbar: selection replaces commands, never adds a row. */
+/** Primary commands keep their names and order; file selection has its own scoped controls. */
 @Composable
 fun RefinedToolbar(
     model: FinderModel,
@@ -73,219 +75,186 @@ fun RefinedToolbar(
         )
         return
     }
-    val selection = model.selectedEntries
     BoxWithConstraints(Modifier.fillMaxWidth()) {
         val availableWidth = maxWidth / androidx.compose.ui.platform.LocalDensity.current.fontScale
         val veryNarrow = availableWidth < 600.dp
-        val selectionActions = availableWidth >= 800.dp
-        val showPreview = availableWidth >= 1060.dp
-        val showNewFolder = availableWidth >= 700.dp
-        Row(
-            Modifier.fillMaxWidth()
-                .heightIn(min = 60.dp)
-                .background(AppBackground)
-                .padding(horizontal = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            ToolButton(
-                Icons.AutoMirrored.Outlined.ArrowBack,
-                "Back",
-                { model.back() },
-                enabled = model.tabs[model.activeTab].index > 0,
-            )
-            if (!veryNarrow)
+        val navigationExpanded = availableWidth >= 800.dp
+        val separateActions = availableWidth < 580.dp
+        Column(Modifier.fillMaxWidth().background(AppBackground).testTag("tablet-toolbar")) {
+            Row(
+                Modifier.fillMaxWidth().heightIn(min = 60.dp).padding(horizontal = 12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
                 ToolButton(
-                    Icons.AutoMirrored.Outlined.ArrowForward,
-                    "Forward",
-                    model::forward,
-                    enabled =
-                        model.tabs[model.activeTab].index <
-                            model.tabs[model.activeTab].history.lastIndex,
+                    Icons.AutoMirrored.Outlined.ArrowBack,
+                    "Back",
+                    { model.back() },
+                    enabled = model.tabs[model.activeTab].index > 0,
                 )
-            if (selectionActions)
-                ToolButton(
-                    Icons.Outlined.ArrowUpward,
-                    "Enclosing folder",
-                    model::up,
-                    enabled = model.parentPath() != null,
-                )
-            if (addressActive) {
-                var placed by remember { mutableStateOf(false) }
-                LaunchedEffect(placed, focusRequest) { if (placed) addressFocus.requestFocus() }
-                BasicTextField(
-                    value = addressValue,
-                    onValueChange = onAddressChange,
-                    singleLine = true,
-                    modifier =
-                        Modifier.weight(1f)
-                            .padding(horizontal = 8.dp)
-                            .height(36.dp)
-                            .semantics { contentDescription = "Address bar" }
-                            .focusRequester(addressFocus)
-                            .onGloballyPositioned { placed = true }
-                            .onFocusChanged { onAddressFocused(it.isFocused) }
-                            // Hardware Enter must commit before an IME edits the selected path.
-                            .onPreInterceptKeyBeforeSoftKeyboard {
-                                if (it.key == Key.Enter || it.key == Key.NumPadEnter) {
-                                    if (it.type == KeyEventType.KeyDown) onAddressCommit()
-                                    true
-                                } else false
-                            }
-                            .onPreviewKeyEvent {
-                                if (
-                                    it.type == androidx.compose.ui.input.key.KeyEventType.KeyDown &&
-                                        (it.key == Key.Enter || it.key == Key.NumPadEnter)
-                                ) {
-                                    onAddressCommit()
-                                    true
-                                } else false
-                            },
-                    textStyle = TextStyle(color = Ink, fontSize = 12.sp),
-                    cursorBrush = SolidColor(Blue),
-                    keyboardOptions =
-                        androidx.compose.foundation.text.KeyboardOptions(
-                            keyboardType = androidx.compose.ui.text.input.KeyboardType.Uri,
-                            autoCorrectEnabled = false,
-                            imeAction = androidx.compose.ui.text.input.ImeAction.Go,
-                        ),
-                    keyboardActions =
-                        androidx.compose.foundation.text.KeyboardActions(
-                            onGo = { onAddressCommit() },
-                        ),
-                    decorationBox = { inner ->
-                        Row(
-                            Modifier.fillMaxSize()
-                                .background(CanvasBackground, RoundedCornerShape(7.dp))
-                                .border(1.dp, Blue, RoundedCornerShape(7.dp))
-                                .padding(start = 10.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Icon(
-                                Icons.Outlined.FolderOpen,
-                                null,
-                                Modifier.size(16.dp),
-                                tint = Muted,
-                            )
-                            Box(
-                                Modifier.weight(1f).padding(horizontal = 8.dp),
-                            ) {
-                                inner()
-                            }
-                            ToolButton(
-                                Icons.Outlined.Close,
-                                "Close address bar",
-                                onAddressClose,
-                                compact = true,
-                            )
-                        }
-                    },
-                )
-            } else if (searchActive) {
-                var placed by remember { mutableStateOf(false) }
-                LaunchedEffect(placed, focusRequest) { if (placed) searchFocus.requestFocus() }
-                BasicTextField(
-                    value = model.query,
-                    onValueChange = model::updateQuery,
-                    modifier =
-                        Modifier.weight(1f)
-                            .padding(horizontal = 8.dp)
-                            .height(36.dp)
-                            .focusRequester(searchFocus)
-                            .onGloballyPositioned { placed = true }
-                            .onFocusChanged { onSearchFocused(it.isFocused) },
-                    textStyle = TextStyle(color = Ink, fontSize = 13.sp, letterSpacing = 0.sp),
-                    cursorBrush = SolidColor(Blue),
-                    singleLine = true,
-                    decorationBox = { inner ->
-                        Row(
-                            Modifier.fillMaxSize()
-                                .clip(RoundedCornerShape(7.dp))
-                                .background(CanvasBackground)
-                                .border(1.dp, Border, RoundedCornerShape(7.dp))
-                                .padding(start = 10.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Icon(Icons.Outlined.Search, null, Modifier.size(16.dp), tint = Muted)
-                            Box(Modifier.weight(1f).padding(horizontal = 8.dp)) {
-                                if (model.query.isEmpty())
-                                    Text("Search this location", fontSize = 12.sp, color = Muted)
-                                inner()
-                            }
-                            ToolButton(
-                                Icons.Outlined.Close,
-                                "Close search",
-                                onCloseSearch,
-                                compact = true,
-                            )
-                        }
-                    },
-                )
-                ToolButton(
-                    Icons.Outlined.FilterAlt,
-                    "Search filters",
-                    { action("filters") },
-                    active = model.effectiveSearchRules.active,
-                )
-            } else {
-                Column(Modifier.weight(1f).padding(start = 8.dp, end = 12.dp)) {
-                    Text(
-                        model.title(),
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Ink,
-                        letterSpacing = (-.35).sp,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    if (selection.isNotEmpty())
-                        Text("${selection.size} selected", color = Muted, fontSize = 10.sp)
-                }
-                if (selection.isNotEmpty()) {
+                if (!veryNarrow)
                     ToolButton(
-                        Icons.Outlined.Close,
-                        "Clear selection",
-                        model::clearSelection,
-                        compact = true,
+                        Icons.AutoMirrored.Outlined.ArrowForward,
+                        "Forward",
+                        model::forward,
+                        enabled =
+                            model.tabs[model.activeTab].index <
+                                model.tabs[model.activeTab].history.lastIndex,
                     )
-                    if (model.isTrash && selectionActions) {
-                        ToolbarAction("Restore", { action("restore") }, enabled = model.busy == null)
-                        ToolbarAction("Delete", { action("delete") },
-                            label = "Delete permanently", enabled = model.busy == null)
-                    } else if (!model.isTrash) {
-                        DragSelectionHandle(model)
-                        ToolbarAction("Copy", { action("copy") })
-                        if (selectionActions) {
-                            ToolbarAction("Cut", { action("cut") },
-                                enabled = selection.all { it.canDelete })
-                            ToolbarAction("Rename", { action("rename") },
-                                enabled = selection.all { it.canRename } && model.busy == null)
-                            ToolbarAction("Trash", { action("trash") },
-                                label = "Move to Trash",
-                                enabled = selection.all { it.canDelete } && model.busy == null)
-                        }
-                        if (showPreview && selection.singleOrNull()?.folder == false)
-                            ToolbarAction("Preview", { action("quicklook") },
-                                label = "Peek selected file")
-                    }
+                if (navigationExpanded)
+                    ToolButton(
+                        Icons.Outlined.ArrowUpward,
+                        "Enclosing folder",
+                        model::up,
+                        enabled = model.parentPath() != null,
+                    )
+                if (addressActive) {
+                    var placed by remember { mutableStateOf(false) }
+                    LaunchedEffect(placed, focusRequest) { if (placed) addressFocus.requestFocus() }
+                    BasicTextField(
+                        value = addressValue,
+                        onValueChange = onAddressChange,
+                        singleLine = true,
+                        modifier =
+                            Modifier.weight(1f)
+                                .padding(horizontal = 8.dp)
+                                .height(36.dp)
+                                .semantics { contentDescription = "Address bar" }
+                                .focusRequester(addressFocus)
+                                .onGloballyPositioned { placed = true }
+                                .onFocusChanged { onAddressFocused(it.isFocused) }
+                                // Hardware Enter must commit before an IME edits the selected path.
+                                .onPreInterceptKeyBeforeSoftKeyboard {
+                                    if (it.key == Key.Enter || it.key == Key.NumPadEnter) {
+                                        if (it.type == KeyEventType.KeyDown) onAddressCommit()
+                                        true
+                                    } else false
+                                }
+                                .onPreviewKeyEvent {
+                                    if (
+                                        it.type == androidx.compose.ui.input.key.KeyEventType.KeyDown &&
+                                            (it.key == Key.Enter || it.key == Key.NumPadEnter)
+                                    ) {
+                                        onAddressCommit()
+                                        true
+                                    } else false
+                                },
+                        textStyle = TextStyle(color = Ink, fontSize = 12.sp),
+                        cursorBrush = SolidColor(Blue),
+                        keyboardOptions =
+                            androidx.compose.foundation.text.KeyboardOptions(
+                                keyboardType = androidx.compose.ui.text.input.KeyboardType.Uri,
+                                autoCorrectEnabled = false,
+                                imeAction = androidx.compose.ui.text.input.ImeAction.Go,
+                            ),
+                        keyboardActions =
+                            androidx.compose.foundation.text.KeyboardActions(
+                                onGo = { onAddressCommit() },
+                            ),
+                        decorationBox = { inner ->
+                            Row(
+                                Modifier.fillMaxSize()
+                                    .background(CanvasBackground, RoundedCornerShape(7.dp))
+                                    .border(1.dp, Blue, RoundedCornerShape(7.dp))
+                                    .padding(start = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Icon(
+                                    Icons.Outlined.FolderOpen,
+                                    null,
+                                    Modifier.size(16.dp),
+                                    tint = Muted,
+                                )
+                                Box(
+                                    Modifier.weight(1f).padding(horizontal = 8.dp),
+                                ) {
+                                    inner()
+                                }
+                                ToolButton(
+                                    Icons.Outlined.Close,
+                                    "Close address bar",
+                                    onAddressClose,
+                                    compact = true,
+                                )
+                            }
+                        },
+                    )
+                } else if (searchActive) {
+                    var placed by remember { mutableStateOf(false) }
+                    LaunchedEffect(placed, focusRequest) { if (placed) searchFocus.requestFocus() }
+                    BasicTextField(
+                        value = model.query,
+                        onValueChange = model::updateQuery,
+                        modifier =
+                            Modifier.weight(1f)
+                                .padding(horizontal = 8.dp)
+                                .height(36.dp)
+                                .focusRequester(searchFocus)
+                                .onGloballyPositioned { placed = true }
+                                .onFocusChanged { onSearchFocused(it.isFocused) },
+                        textStyle = TextStyle(color = Ink, fontSize = 13.sp, letterSpacing = 0.sp),
+                        cursorBrush = SolidColor(Blue),
+                        singleLine = true,
+                        decorationBox = { inner ->
+                            Row(
+                                Modifier.fillMaxSize()
+                                    .clip(RoundedCornerShape(7.dp))
+                                    .background(CanvasBackground)
+                                    .border(1.dp, Border, RoundedCornerShape(7.dp))
+                                    .padding(start = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Icon(Icons.Outlined.Search, null, Modifier.size(16.dp), tint = Muted)
+                                Box(Modifier.weight(1f).padding(horizontal = 8.dp)) {
+                                    if (model.query.isEmpty())
+                                        Text("Search this location", fontSize = 12.sp, color = Muted)
+                                    inner()
+                                }
+                                ToolButton(
+                                    Icons.Outlined.Close,
+                                    "Close search",
+                                    onCloseSearch,
+                                    compact = true,
+                                )
+                            }
+                        },
+                    )
+                    ToolButton(
+                        Icons.Outlined.FilterAlt,
+                        "Search filters",
+                        { action("filters") },
+                        active = model.effectiveSearchRules.active,
+                    )
                 } else {
-                    ViewModeSelector(model)
-                    Spacer(Modifier.width(8.dp))
-                    if (model.clipboard != null && !veryNarrow)
-                        ToolbarAction("Paste", model::paste,
-                            label = "Paste ${model.clipboard!!.files.size} items",
-                            enabled = model.canCreate)
-                    ToolbarAction("Search", onSearch, icon = Icons.Outlined.Search)
-                    if (showNewFolder && model.canCreate)
-                        ToolbarAction("New folder", { action("new") }, enabled = model.busy == null)
+                    Text(model.title(), Modifier.weight(1f).padding(start = 8.dp, end = 12.dp),
+                        fontSize = 17.sp, fontWeight = FontWeight.Medium, color = Ink,
+                        letterSpacing = (-.35).sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
+                if (!addressActive && !searchActive) ViewModeSelector(model)
+                if (!separateActions) TabletPrimaryActions(model, action, searchActive, onSearch, onCloseSearch, menuExpanded, onMenuChange)
             }
-            Box {
-                ToolbarAction("More", { onMenuChange(true) }, label = "Actions", dropdown = true)
-                ActionMenu(menuExpanded, { onMenuChange(false) }, model, action)
+            if (separateActions) FlowRow(Modifier.fillMaxWidth().padding(start = 12.dp, end = 12.dp, bottom = 4.dp),
+                horizontalArrangement = Arrangement.End) {
+                TabletPrimaryActions(model, action, searchActive, onSearch, onCloseSearch, menuExpanded, onMenuChange)
             }
         }
     }
     HorizontalDivider(color = Border, thickness = .5.dp)
+}
+
+@Composable
+private fun TabletPrimaryActions(
+    model: FinderModel, action: (String) -> Unit, searchActive: Boolean,
+    onSearch: () -> Unit, onCloseSearch: () -> Unit,
+    menuExpanded: Boolean, onMenuChange: (Boolean) -> Unit,
+) {
+    ToolbarAction("Search", if (searchActive) onCloseSearch else onSearch, active = searchActive,
+        modifier = Modifier.testTag("primary-search"))
+    ToolbarAction("New folder", { action("new") }, unavailableReason = model.commandProblem("new")?.reason,
+        modifier = Modifier.testTag("primary-new-folder"))
+    Box(Modifier.testTag("primary-more")) {
+        ToolbarAction("More", { onMenuChange(true) }, label = "Actions")
+        ActionMenu(menuExpanded, { onMenuChange(false) }, model, action)
+    }
 }
 
 /** Named commands stay understandable without hovering or memorizing symbols. */
@@ -297,17 +266,20 @@ internal fun ToolbarAction(
     enabled: Boolean = true,
     dropdown: Boolean = false,
     icon: ImageVector? = null,
+    active: Boolean = false,
+    unavailableReason: String? = null,
     modifier: Modifier = Modifier,
 ) {
     TextButton(
         onClick = onClick,
         enabled = enabled,
         modifier = modifier.heightIn(min = if (LocalFinderDensity.current.touch) 48.dp else 38.dp)
-            .semantics { contentDescription = label },
+            .semantics { contentDescription = label; unavailableReason?.let { stateDescription = "Unavailable: $it" } },
         shape = RoundedCornerShape(7.dp),
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
         colors = ButtonDefaults.textButtonColors(
-            contentColor = Ink,
+            contentColor = if (unavailableReason != null) Muted else if (active) SelectedInk else Ink,
+            containerColor = if (active) SelectionSurface else androidx.compose.ui.graphics.Color.Transparent,
         ),
     ) {
         if (icon != null) {

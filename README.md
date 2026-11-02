@@ -8,9 +8,11 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 **[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.34.1-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
-![Findroid on an Android tablet, with the sidebar, file list, simple toolbar and preview panel](docs/screenshots/findroid-tablet.png)
+![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
 *Actual app screenshot with sample files. Android 11 or newer required. The current release is a development-signed preview.*
+
+The named command controls and Recent actions shown here are in the **0.35.0 candidate**. Downloads remain on verified 0.34.1 while final upgrade checks run.
 
 ## Start here
 
@@ -42,7 +44,7 @@ Select a file for the side preview, or use **Quick Look** for a closer view. Wit
 
 Open Findroid beside another app in Android’s split screen. **Hold a file icon**, drag it across, and release it over the other app’s file-drop area. With a mouse, drag the icon directly.
 
-For several files, hold a file’s **name** to start selecting, tap the other files, then hold **Drag** in the selection toolbar. Holding one of the selected file icons also carries the selection.
+For several files, hold a file’s **name** to start selecting, tap the other files, then hold **Drag** beside the selected count. Holding one of the selected file icons also carries the selection.
 
 Other apps receive copies; your originals stay in place. The receiver gets temporary read access to the files you drop. Use **Share** for destinations that do not accept Android file drops. [Drag-and-drop guide](docs/DRAGGING.md).
 
@@ -95,6 +97,16 @@ Findroid saves a private recovery copy before restoring and checks for interrupt
 Open **More → Find an action or folder…**, or press **Ctrl+Shift+P**. Type “rename,” “show hidden files,” or “preferences.” Commands explain when they are unavailable.
 
 Use **Ctrl+K** or **More → Jump to folder…** for favorites, recent tab destinations, current folder children, breadcrumbs and authorized paths. Choose with the arrow keys and Enter. These controls stay inside named menus, keeping the main toolbar simple.
+
+### Keep commands clear, and reach Undo in one place
+
+**Search, New folder, and More** keep the same names and order while you browse or select files. Selection has its own count, location and **Selection actions** beside the file list. Tap an unavailable command for its reason and a useful next step, such as copying a read-only file or reconnecting storage.
+
+Open **More → Recent actions…** to see eligible operations and use **Undo** or **Redo**. Findroid checks the affected files first. If you edited a file afterward, recovery stops and explains why, keeping those later edits intact.
+
+Recent actions is shared across panes and app windows, keeps up to 50 actions, and lasts for the current app process. It resets after the process ends. [Commands and Undo guide](docs/COMMANDS-AND-UNDO.md).
+
+![Recent actions explains why Undo stopped after a folder received a later edit](docs/screenshots/recent-actions-tablet.png)
 
 ### Put the source and destination side by side
 

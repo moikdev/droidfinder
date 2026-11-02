@@ -119,6 +119,8 @@ class FinderSession(
     val undoLabel = mutableStateOf<String?>(null)
 
     val redoLabel = mutableStateOf<String?>(null)
+    internal val recentActions = mutableStateOf<List<RecentFileAction>>(emptyList())
+    internal val historyFailure = mutableStateOf<String?>(null)
 
     val transferProgress = mutableStateOf(TransferProgress())
 

@@ -45,22 +45,21 @@ internal data class LauncherChoice(
 private fun launcherCommands(model: FinderModel): List<LauncherChoice> {
     val selected = model.actionEntries
     val busy = model.busy?.let { "Wait for $it to finish." }
-    val writable = busy ?: if (!model.canCreate) "This location is read only or is a virtual view. Choose a writable folder." else null
     val selection = if (selected.isEmpty()) "Select a file or folder first." else null
-    val mutable = busy ?: selection ?: if (model.isTrash || selected.any { !it.writable }) "The selection is read only. Check Storage locations for access and reconnect options." else null
     fun command(id: String, title: String, detail: String, reason: String? = null, keywords: String = "") =
-        LauncherChoice("action-$id", title, detail, command = id, reason = reason, keywords = keywords)
+        LauncherChoice("action-$id", title, detail, command = id, reason = model.commandProblem(id)?.reason ?: reason, keywords = keywords)
     return listOf(
-        command("new", "New folder", "Create in the current folder", writable, "create directory"),
-        command("newText", "New text file", "Create a note in the current folder", writable, "note document"),
-        command("rename", "Rename selection", "Review before changing file names", mutable, "batch name"),
-        command("copyTo", "Copy to folder…", "Choose the full destination", busy ?: selection, "transfer duplicate"),
-        command("moveTo", "Move to folder…", "Choose the full destination", mutable, "transfer cut"),
+        command("new", "New folder", "Create in the current folder", keywords = "create directory"),
+        command("newText", "New text file", "Create a note in the current folder", keywords = "note document"),
+        command("rename", "Rename selection", "Review before changing file names", keywords = "batch name"),
+        command("copyTo", "Copy to folder…", "Choose the full destination", keywords = "transfer duplicate"),
+        command("moveTo", "Move to folder…", "Choose the full destination", keywords = "transfer cut"),
         command("info", "Get file information", "Review the selected files", selection, "properties size metadata"),
         command("hidden", if (model.showHidden) "Hide hidden files" else "Show hidden files", "Change the current view", keywords = "dot files visibility"),
         command("filters", "Search filters…", "Names, types, dates, sizes and tags", keywords = "find criteria"),
         command("tags", "Tags…", "Organize files with named tags", keywords = "labels colors"),
         command("collections", "Collections…", "Manage cross-folder references", keywords = "library organization"),
+        command("recentActions", "Recent actions…", "Undo, Redo and reasons recovery stopped in this session", keywords = "undo redo history recover changed files"),
         command("transfers", "Transfers and recovery…", "Review recent jobs and interrupted operations", keywords = "queue history retry"),
         command("undo", "Undo ${model.undoLabel ?: "recent action"}", "Recovery checks protect files changed later", if (model.undoLabel == null) "There is no eligible action to undo in this session." else busy),
         command("dualPane", if (model.dualPane) "Close second pane" else "Open second pane", "Compare folders side by side", keywords = "split two panels"),
@@ -80,6 +79,7 @@ internal fun ExplorerLauncherDialog(model: FinderModel, foldersOnly: Boolean, ac
     var selected by remember { mutableIntStateOf(0) }
     var opening by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
+    var recovery by remember { mutableStateOf<CommandRecovery?>(null) }
     val focus = remember { FocusRequester() }
     var fieldPlaced by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -126,7 +126,12 @@ internal fun ExplorerLauncherDialog(model: FinderModel, foldersOnly: Boolean, ac
     val shown = (listOfNotNull(exact) + choices.filter { it.matches(query) }).take(100)
     fun choose(item: LauncherChoice) {
         if (opening) return
-        if (item.reason != null) { error = item.reason; return }
+        val problem = item.command?.let { model.commandProblem(it) }
+        if (problem != null || item.reason != null) {
+            error = problem?.reason ?: item.reason
+            recovery = problem?.recovery
+            return
+        }
         if (item.command != null) { dismiss(); action(item.command); return }
         val path = item.path ?: return
         opening = true; error = null
@@ -161,7 +166,7 @@ internal fun ExplorerLauncherDialog(model: FinderModel, foldersOnly: Boolean, ac
                 }, shape = RoundedCornerShape(14.dp), color = CanvasBackground, shadowElevation = 16.dp) {
                 Column(Modifier.padding(20.dp)) {
                     Text(if (onlyFolders) "Jump to folder" else "Find an action or folder", color = Ink, fontSize = 19.sp, fontWeight = FontWeight.Medium)
-                    OutlinedTextField(query, { query = it; error = null }, singleLine = true,
+                    OutlinedTextField(query, { query = it; error = null; recovery = null }, singleLine = true,
                         label = { Text(if (onlyFolders) "Search locations or enter a folder path" else "Search actions and folders") },
                         modifier = Modifier.fillMaxWidth().padding(top = 12.dp).focusRequester(focus).onGloballyPositioned { fieldPlaced = true }.testTag("launcher-query"))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -170,6 +175,7 @@ internal fun ExplorerLauncherDialog(model: FinderModel, foldersOnly: Boolean, ac
                     }
                     Text("↑ ↓ to choose · Enter to open · Esc to close", color = Muted, fontSize = 11.sp)
                     error?.let { Text(it, Modifier.padding(vertical = 8.dp).testTag("launcher-error"), color = MaterialTheme.colorScheme.error, fontSize = 13.sp) }
+                    recovery?.let { next -> TextButton({ dismiss(); action(next.command) }, Modifier.testTag("launcher-recovery")) { Text(next.label) } }
                     if (opening) LinearProgressIndicator(Modifier.fillMaxWidth())
                     if (shown.isEmpty()) Text("No matches. Try another name, or enter a full folder path.", Modifier.padding(vertical = 24.dp), color = Muted)
                     LazyColumn(Modifier.heightIn(max = listHeight).padding(top = 8.dp), state = list) {

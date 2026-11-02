@@ -125,7 +125,7 @@ class OrganizationWorkflowTest {
     private fun capture(name: String) {
         compose.waitForIdle()
         val directory =
-            File(compose.activity.getExternalFilesDir(null), "organization-qa").apply { mkdirs() }
+            File(compose.activity.filesDir, "organization-qa").apply { mkdirs() }
         val bitmap = InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot()
         File(directory, "$name.png").outputStream().use {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
@@ -427,7 +427,7 @@ class OrganizationWorkflowTest {
         }
         assertEquals(2, model.collections.first { it.id == collection.id }.paths.size)
         compose.onNodeWithText("Unavailable (1)").performClick()
-        compose.onNodeWithText("First note.txt").assertExists()
+        compose.onNode(hasText("First note.txt") and hasAnyAncestor(hasTestTag("organization-library"))).assertExists()
         compose.onNodeWithText("Second note.txt").assertDoesNotExist()
         capture("unavailable")
         compose.runOnIdle {
@@ -628,7 +628,21 @@ class OrganizationWorkflowTest {
         settled()
         assertTrue(model.tagDefinitions.any { it.name == "Client review" && it.color == "Green" })
         compose.onNodeWithText("Find tags").performTextInput("Client review")
+        compose.onNodeWithContentDescription("Edit tag Client review").performScrollTo().assertIsDisplayed()
+        capture("tag-keyboard-results")
+        compose.onNodeWithTag("library-search-Find tags").performImeAction()
+        capture("tag-before-edit")
         compose.onNodeWithContentDescription("Edit tag Client review").performClick()
+        try {
+            compose.waitUntil(5_000) {
+                compose.onAllNodesWithText("Tag name").fetchSemanticsNodes().isNotEmpty()
+            }
+        } catch (error: Throwable) {
+            capture("tag-editor-missing")
+            throw AssertionError("Tag editor did not open: ready=${state.catalogReady}, " +
+                "busy=${model.busy}, applying=${state.applying}, error=${state.error}; " +
+                compose.onAllNodes(isRoot()).onLast().printToString(), error)
+        }
         compose.onNodeWithText("Tag name").performTextReplacement("Client archive")
         compose.onNodeWithContentDescription("Purple library color").performClick()
         compose.onNodeWithText("Save tag").performClick()

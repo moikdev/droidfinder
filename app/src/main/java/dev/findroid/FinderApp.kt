@@ -30,6 +30,8 @@ import androidx.compose.ui.input.pointer.*
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -126,6 +128,7 @@ fun FinderApp(
                 ),
         ) {
             var dialog by remember { mutableStateOf<String?>(null) }
+            var commandExplanation by remember { mutableStateOf<CommandExplanation?>(null) }
             var quickLook by workspaceModel.windowState.peekEntry
             var quickLookCandidates by workspaceModel.windowState.peekCandidates
             var peekMultipleSelection by workspaceModel.windowState.peekMultipleSelection
@@ -245,8 +248,15 @@ fun FinderApp(
                 )
                     rootFocus.requestFocus()
             }
-            val action: (String) -> Unit = { command ->
+            val action: (String) -> Unit = commandAction@{ command ->
                 menu = false
+                model.commandProblem(command)?.let { problem ->
+                    commandExplanation = CommandExplanation(commandTitle(command), problem,
+                        (if (model.selected.isEmpty()) "Location: " else "${model.selected.size} selected · ") +
+                            if (model.folderPath == null) model.title() else model.displayPath(model.location))
+                    dialog = "commandUnavailable"
+                    return@commandAction
+                }
                 when (command) {
                     "open" -> model.focused?.let(open)
                     "external" -> model.focused?.let(onOpenWith)
@@ -268,6 +278,7 @@ fun FinderApp(
                     "copy" -> model.copySelection(false)
                     "cut" -> model.copySelection(true)
                     "paste" -> model.paste()
+                    "pasteInto" -> model.actionEntries.singleOrNull()?.takeIf { it.folder }?.let { model.paste(it.path) }
                     "duplicate" -> model.duplicate()
                     "trash" -> model.trash()
                     "restore" -> model.restore()
@@ -279,6 +290,7 @@ fun FinderApp(
                     "extractTo" -> dialog = "extractTo"
                     "newText" -> dialog = "newText"
                     "folderInfo" -> dialog = "folderInfo"
+                    "extractHere" -> model.extract()
                     "extract" -> if (!model.canCreate) dialog = "extractTo" else model.extract()
                     "share" -> onShare(selected)
                     "info" -> {
@@ -294,6 +306,7 @@ fun FinderApp(
                         model.focused?.takeIf { it.folder }?.let { model.favoritePath(it.path) }
                     "tab" -> model.focused?.takeIf { it.folder }?.let { model.newTab(it.path) }
                     "transfers" -> dialog = "transfers"
+                    "recentActions" -> dialog = "recentActions"
                     "tabs" -> dialog = "tabs"
                     "workspaces" -> dialog = "workspaces"
                     "setup" -> model.setup.open()
@@ -454,23 +467,7 @@ fun FinderApp(
                                         )
                             )
                                 true
-                            else if (
-                                model.busy != null &&
-                                    shortcut.action in
-                                        setOf(
-                                            "new",
-                                            "rename",
-                                            "trash",
-                                            "delete",
-                                            "empty",
-                                            "undo",
-                                            "redo",
-                                            "duplicate",
-                                        )
-                            ) {
-                                model.message = "Another file operation is in progress."
-                                true
-                            } else {
+                            else {
                                 fun focusAddress() {
                                     keyboardFocusRequest++
                                     val path = model.folderPath ?: model.workspace.path
@@ -516,9 +513,7 @@ fun FinderApp(
                                     "refresh" -> model.refresh()
                                     "selectAll" -> model.selectAll()
                                     "clearSelection" -> model.clearSelection()
-                                    "copy" -> model.copySelection(false)
-                                    "cut" -> if (!model.isTrash) model.copySelection(true)
-                                    "paste" -> if (!model.isTrash) model.paste()
+                                    "copy", "cut", "paste" -> action(shortcut.action)
                                     "toggleFocused" -> model.toggleFocusedSelection()
                                     "moveSelection" ->
                                         if (shortcut.focusOnly)
@@ -599,15 +594,8 @@ fun FinderApp(
                                         }
                                         rootFocus.requestFocus()
                                     }
-                                    "trash" ->
-                                        if (model.isTrash) {
-                                            if (selected.isNotEmpty()) dialog = "delete"
-                                        } else model.trash()
-                                    "delete" -> if (selected.isNotEmpty()) dialog = "delete"
-                                    "rename" ->
-                                        if (selected.isNotEmpty() && !model.isTrash)
-                                            action("rename")
-                                    "new" -> if (model.canCreate) action("new")
+                                    "trash" -> action(if (model.isTrash) "delete" else "trash")
+                                    "delete", "rename", "new" -> action(shortcut.action)
                                     "hidden" -> model.toggleHidden()
                                     else -> action(shortcut.action)
                                 }
@@ -752,6 +740,12 @@ fun FinderApp(
                 }
             }
             when (dialog) {
+                "recentActions" -> RecentActionsDialog(model, action) { dialog = null }
+                "commandUnavailable" -> commandExplanation?.let { value ->
+                    CommandExplanationDialog(value, recover = { command ->
+                        commandExplanation = null; dialog = null; action(command)
+                    }, dismiss = { commandExplanation = null; dialog = null })
+                }
                 "phoneView" -> PhoneViewDialog(model) { dialog = null }
                 "phoneNew" ->
                     AlertDialog(
@@ -759,20 +753,8 @@ fun FinderApp(
                         title = { Text("New") },
                         text = {
                             Column {
-                                MenuAction(
-                                    "New folder",
-                                    Icons.Outlined.CreateNewFolder,
-                                    model.canCreate && model.busy == null,
-                                ) {
-                                    dialog = "new"
-                                }
-                                MenuAction(
-                                    "New text file",
-                                    Icons.Outlined.NoteAdd,
-                                    model.canCreate && model.busy == null,
-                                ) {
-                                    dialog = "newText"
-                                }
+                                CommandMenuAction(model, "new", "New folder", Icons.Outlined.CreateNewFolder) { action("new") }
+                                CommandMenuAction(model, "newText", "New text file", Icons.Outlined.NoteAdd) { action("newText") }
                                 MenuAction("New tab", Icons.Outlined.Tab) {
                                     model.newTab(atEnd = true)
                                     dialog = null
@@ -1431,12 +1413,14 @@ internal fun ActionMenu(
     DropdownMenu(expanded, onDismiss) {
         val entries = model.selectedEntries
         val idle = model.busy == null
+        MenuSection("App and workspaces")
         MenuAction("App updates", Icons.Outlined.SystemUpdateAlt) { action("updates") }
         MenuAction("New window", Icons.AutoMirrored.Outlined.OpenInNew) { action("newWindow") }
         MenuAction("Tab overview", Icons.Outlined.Tab) { action("tabs") }
         MenuAction("Folder view settings…", Icons.Outlined.Tune) { action("viewSettings") }
         MenuAction("Workspaces…", Icons.Outlined.DashboardCustomize) { action("workspaces") }
         MenuAction("Keyboard shortcuts", Icons.Outlined.Keyboard) { action("shortcuts") }
+        MenuSection("Panes and transfers")
         MenuAction("Transfers", Icons.Outlined.SyncAlt) { action("transfers") }
         MenuAction(
             if (model.dualPane) "Hide dual panes" else "Show dual panes",
@@ -1456,33 +1440,19 @@ internal fun ActionMenu(
             ) {
                 action("comparePanes")
             }
-            MenuAction(
-                "Copy to other pane",
-                Icons.Outlined.ContentCopy,
-                entries.isNotEmpty() && !model.isTrash && model.otherPane.canCreate,
-            ) {
-                action("copyOtherPane")
-            }
-            MenuAction(
-                "Move to other pane",
-                Icons.AutoMirrored.Outlined.DriveFileMove,
-                entries.isNotEmpty() &&
-                    entries.all { it.canDelete } &&
-                    !model.isTrash &&
-                    model.otherPane.canCreate,
-            ) {
-                action("moveOtherPane")
-            }
+            CommandMenuAction(model, "copyOtherPane", "Copy to other pane", Icons.Outlined.ContentCopy) { action("copyOtherPane") }
+            CommandMenuAction(model, "moveOtherPane", "Move to other pane", Icons.AutoMirrored.Outlined.DriveFileMove) { action("moveOtherPane") }
         }
+        MenuSection("Recent actions")
+        MenuAction("Recent actions…", Icons.Outlined.History) { action("recentActions") }
         if (model.undoLabel != null)
-            MenuAction("Undo ${model.undoLabel}", Icons.AutoMirrored.Outlined.Undo, idle) {
-                action("undo")
-            }
+            CommandMenuAction(model, "undo", "Undo ${model.undoLabel}", Icons.AutoMirrored.Outlined.Undo) { action("undo") }
         if (model.redoLabel != null)
-            MenuAction("Redo ${model.redoLabel}", Icons.AutoMirrored.Outlined.Redo, idle) {
-                action("redo")
-            }
+            CommandMenuAction(model, "redo", "Redo ${model.redoLabel}", Icons.AutoMirrored.Outlined.Redo) { action("redo") }
         HorizontalDivider()
+        MenuSection("Navigation and view")
+        MenuAction("Jump to folder…", Icons.Outlined.FolderOpen) { action("quickJump") }
+        MenuAction("Find an action or folder…", Icons.Outlined.Search) { action("launcher") }
         MenuAction(
             "Back",
             Icons.AutoMirrored.Outlined.ArrowBack,
@@ -1516,21 +1486,12 @@ internal fun ActionMenu(
             model.reopenTab()
             onDismiss()
         }
-        MenuAction("New folder", Icons.Outlined.CreateNewFolder, model.canCreate && idle) {
-            action("new")
-        }
-        MenuAction("New text file…", Icons.AutoMirrored.Outlined.NoteAdd, model.canCreate && idle) {
-            action("newText")
-        }
+        MenuSection("Files")
+        CommandMenuAction(model, "new", "New folder", Icons.Outlined.CreateNewFolder) { action("new") }
+        CommandMenuAction(model, "newText", "New text file…", Icons.AutoMirrored.Outlined.NoteAdd) { action("newText") }
         if (entries.isEmpty()) {
 
-            MenuAction(
-                "Paste",
-                Icons.Outlined.ContentPaste,
-                model.clipboard != null && model.canCreate,
-            ) {
-                action("paste")
-            }
+            CommandMenuAction(model, "paste", "Paste", Icons.Outlined.ContentPaste) { action("paste") }
             MenuAction("Select all", Icons.Outlined.SelectAll, model.entries.isNotEmpty()) {
                 model.selectAll()
                 onDismiss()
@@ -1547,13 +1508,11 @@ internal fun ActionMenu(
                 action("path")
             }
         } else if (model.isTrash) {
-            MenuAction("Restore", Icons.Outlined.Restore, idle) { action("restore") }
-            MenuAction("Copy", Icons.Outlined.ContentCopy) { action("copy") }
-            MenuAction("Delete permanently…", Icons.Outlined.DeleteForever, idle) {
-                action("delete")
-            }
+            CommandMenuAction(model, "restore", "Restore", Icons.Outlined.Restore) { action("restore") }
+            CommandMenuAction(model, "copy", "Copy", Icons.Outlined.ContentCopy) { action("copy") }
+            CommandMenuAction(model, "delete", "Delete permanently…", Icons.Outlined.DeleteForever) { action("delete") }
         } else {
-            if (entries.size > 1) MenuAction("Get info", Icons.Outlined.Info) { action("info") }
+            if (entries.size > 1) CommandMenuAction(model, "info", "Get info", Icons.Outlined.Info) { action("info") }
             if (entries.size == 1) {
                 MenuAction(
                     if (entries.first().folder) "Open folder" else "Quick Look",
@@ -1569,7 +1528,7 @@ internal fun ActionMenu(
                     MenuAction("Checksums…", Icons.Outlined.Fingerprint) { action("checksums") }
                 if (entries.first().folder)
                     MenuAction("Open in new tab", Icons.Outlined.Tab) { action("tab") }
-                MenuAction("Get info", Icons.Outlined.Info) { action("info") }
+                CommandMenuAction(model, "info", "Get info", Icons.Outlined.Info) { action("info") }
 
                 if (entries.first().folder)
                     MenuAction(
@@ -1580,54 +1539,30 @@ internal fun ActionMenu(
                         action("favorite")
                     }
                 if (entries.first().folder)
-                    MenuAction("Customize folder…", Icons.Outlined.Palette, idle) {
+                    CommandMenuAction(model, "appearance", "Customize folder…", Icons.Outlined.Palette) {
                         action("appearance")
                     }
-                MenuAction("Make shortcut", Icons.AutoMirrored.Outlined.Shortcut, idle) {
-                    action("shortcut")
-                }
+                CommandMenuAction(model, "shortcut", "Make shortcut", Icons.AutoMirrored.Outlined.Shortcut) { action("shortcut") }
             }
             HorizontalDivider()
-            MenuAction(
-                if (entries.size == 1) "Rename…" else "Rename ${entries.size} items…",
-                Icons.Outlined.DriveFileRenameOutline,
-                entries.all { it.canRename } && idle,
-            ) {
-                action("rename")
-            }
-            MenuAction(
-                "New folder with selection…",
-                Icons.Outlined.CreateNewFolder,
-                model.canCreate && idle,
-            ) {
-                action("groupSelection")
-            }
+            CommandMenuAction(model, "rename", if (entries.size == 1) "Rename…" else "Rename ${entries.size} items…", Icons.Outlined.DriveFileRenameOutline) { action("rename") }
+            CommandMenuAction(model, "groupSelection", "New folder with selection…", Icons.Outlined.CreateNewFolder) { action("groupSelection") }
             MenuAction("Show in enclosing folder", Icons.Outlined.FolderOpen, entries.size == 1) {
                 action("reveal")
             }
-            MenuAction("Copy to…", Icons.Outlined.ContentCopy) { action("copyTo") }
-            MenuAction("Move to…", Icons.AutoMirrored.Outlined.DriveFileMove) { action("moveTo") }
-            MenuAction("Copy", Icons.Outlined.ContentCopy) { action("copy") }
-            MenuAction("Cut", Icons.Outlined.ContentCut, entries.all { it.canDelete }) {
-                action("cut")
-            }
-            MenuAction("Rename with rules…", Icons.Outlined.DriveFileRenameOutline, idle) {
-                action("batchRename")
-            }
-            MenuAction("Duplicate", Icons.Outlined.FileCopy, idle) { action("duplicate") }
-            MenuAction("Compress", Icons.Outlined.FolderZip, idle) { action("compress") }
+            CommandMenuAction(model, "copyTo", "Copy to…", Icons.Outlined.ContentCopy) { action("copyTo") }
+            CommandMenuAction(model, "moveTo", "Move to…", Icons.AutoMirrored.Outlined.DriveFileMove) { action("moveTo") }
+            CommandMenuAction(model, "copy", "Copy", Icons.Outlined.ContentCopy) { action("copy") }
+            CommandMenuAction(model, "cut", "Cut", Icons.Outlined.ContentCut) { action("cut") }
+            CommandMenuAction(model, "batchRename", "Rename with rules…", Icons.Outlined.DriveFileRenameOutline) { action("batchRename") }
+            CommandMenuAction(model, "duplicate", "Duplicate", Icons.Outlined.FileCopy) { action("duplicate") }
+            CommandMenuAction(model, "compress", "Compress", Icons.Outlined.FolderZip) { action("compress") }
             if (entries.size == 1 && entries.first().extension == "zip")
-                MenuAction("Extract archive", Icons.Outlined.Unarchive, idle) { action("extract") }
-            MenuAction("Share…", Icons.Outlined.IosShare) { action("share") }
+                CommandMenuAction(model, "extract", "Extract archive", Icons.Outlined.Unarchive) { action("extract") }
+            CommandMenuAction(model, "share", "Share…", Icons.Outlined.IosShare) { action("share") }
             if (entries.size == 1)
-                MenuAction("Copy full path", Icons.Outlined.Link) { action("copyPath") }
-            MenuAction(
-                "Move to Trash",
-                Icons.Outlined.DeleteOutline,
-                entries.all { it.canDelete } && idle,
-            ) {
-                action("trash")
-            }
+                CommandMenuAction(model, "copyPath", "Copy full path", Icons.Outlined.Link) { action("copyPath") }
+            CommandMenuAction(model, "trash", "Move to Trash", Icons.Outlined.DeleteOutline) { action("trash") }
             HorizontalDivider()
             Text(
                 "TAGS",
@@ -1675,8 +1610,9 @@ internal fun ActionMenu(
                 }
             }
         }
-        MenuAction("Tags…", Icons.AutoMirrored.Outlined.Label, idle) { action("tags") }
-        MenuAction("Collections…", Icons.Outlined.CollectionsBookmark, idle) {
+        MenuSection("Organize and search")
+        CommandMenuAction(model, "tags", "Tags…", Icons.AutoMirrored.Outlined.Label) { action("tags") }
+        CommandMenuAction(model, "collections", "Collections…", Icons.Outlined.CollectionsBookmark) {
             action("collections")
         }
         MenuAction("Search filters…", Icons.Outlined.FilterAlt) { action("filters") }
@@ -1691,6 +1627,7 @@ internal fun ActionMenu(
             MenuAction("Rename Smart Folder…", Icons.Outlined.DriveFileRenameOutline) {
                 action("renameSmart")
             }
+        MenuSection("Storage and preferences")
         MenuAction(
             "Analyze storage…",
             Icons.Outlined.DataUsage,
@@ -1700,8 +1637,6 @@ internal fun ActionMenu(
         }
         MenuAction("Storage locations…", Icons.Outlined.Storage) { action("storage") }
         MenuAction("Trash & cache…", Icons.Outlined.CleaningServices) { action("housekeeping") }
-        MenuAction("Find an action or folder…", Icons.Outlined.Search) { action("launcher") }
-        MenuAction("Jump to folder…", Icons.Outlined.FolderOpen) { action("quickJump") }
         MenuAction("Preferences…", Icons.Outlined.Tune) { action("settings") }
         MenuAction("Connect provider folder…", Icons.Outlined.CloudQueue) {
             action("connectFolder")
@@ -1718,16 +1653,34 @@ internal fun ActionMenu(
 }
 
 @Composable
+private fun MenuSection(title: String) {
+    Text(title, Modifier.padding(start = 14.dp, end = 14.dp, top = 12.dp, bottom = 6.dp),
+        color = Muted, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
+}
+
+@Composable
 private fun MenuAction(
     text: String,
     icon: ImageVector,
     enabled: Boolean = true,
+    unavailableReason: String? = null,
     onClick: () -> Unit,
 ) {
     DropdownMenuItem(
-        text = { Text(text, fontSize = 12.sp) },
+        text = {
+            Column {
+                Text(text, fontSize = 12.sp, color = if (unavailableReason != null) Muted else Ink)
+                unavailableReason?.let { Text(it, fontSize = 11.sp, color = Muted, maxLines = 2, overflow = TextOverflow.Ellipsis) }
+            }
+        },
         leadingIcon = { Icon(icon, null, Modifier.size(17.dp)) },
         enabled = enabled,
         onClick = onClick,
+        modifier = Modifier.semantics { unavailableReason?.let { stateDescription = "Unavailable: $it. Activate to see options." } },
     )
+}
+
+@Composable
+private fun CommandMenuAction(model: FinderModel, command: String, text: String, icon: ImageVector, onClick: () -> Unit) {
+    MenuAction(text, icon, unavailableReason = model.commandProblem(command)?.reason, onClick = onClick)
 }

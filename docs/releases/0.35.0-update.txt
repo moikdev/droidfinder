@@ -1,0 +1,7 @@
+Clearer tablet controls: Search, New folder and More keep their names and order through selection, search and address editing. File selection has its own count, location and Selection actions beside each pane. Narrow layouts and enlarged text keep the named commands reachable.
+
+Unavailable file commands explain why and offer a useful next step: copy read-only items, reconnect storage, view transfers, show the destination pane, or choose a real folder. Keyboard commands and the action launcher use the same checks. Queued transfer choices remain available during another transfer.
+
+Open More → Recent actions for Undo and Redo, affected names/locations, completion state and the reason recovery stopped. Later edits remain protected. History is shared across panes/windows, limited to 50 actions and kept only for the current app process; it resets after the process ends.
+
+Android 11+; optimized development-signed preview. Install over the existing app to retain files and settings.

@@ -5,11 +5,11 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | # | Improvement | State and remaining acceptance |
 |---|---|---|
 | 1 | Explain gestures once, where they happen | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
-| 2 | Keep primary actions predictable | Open. Implementation and focused acceptance pending. |
-| 3 | Explain unavailable commands | Partial in 0.32.0: unavailable launcher actions explain selection, write access or busy state. Broader per-menu explanations remain open. |
+| 2 | Keep primary actions predictable | In progress: stable named tablet actions and selection-scoped controls. |
+| 3 | Explain unavailable commands | In progress: shared command policy, interactive menu explanations and relevant recovery actions. |
 | 4 | Show the full destination before long moves | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
 | 5 | Improve multi-selection clarity | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
-| 6 | Make Undo easier to reach | Open. Implementation and focused acceptance pending. |
+| 6 | Make Undo easier to reach | In progress: named recent-action surface with guarded Undo/Redo and failure explanations. |
 | 7 | Use task-specific empty states | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
 | 8 | Add a searchable action launcher | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
 | 9 | Separate simple and advanced preferences | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |

@@ -60,6 +60,16 @@ class FinderWorkflowTest {
         compose.waitForIdle()
     }
 
+    private fun selectionCommand(label: String) {
+        compose.onNodeWithTag("selection-actions-primary").performClick()
+        compose.onNodeWithText(label).performScrollTo().performClick()
+    }
+
+    private fun moreCommand(label: String) {
+        compose.onNodeWithContentDescription("Actions").performClick()
+        compose.onNodeWithText(label).performScrollTo().performClick()
+    }
+
     @Test
     fun createRenameCopyTrashRestoreWorkflow() {
         compose.onNodeWithContentDescription("New folder").performClick()
@@ -71,7 +81,7 @@ class FinderWorkflowTest {
         compose.onNodeWithText("Notes.md").performMouseInput { click() }
         compose.waitUntil(5_000) { compose.activity.model.focused?.name == "Notes.md" }
         compose.runOnIdle { assertEquals("Notes.md", compose.activity.model.focused?.name) }
-        compose.onNodeWithContentDescription("Rename").performClick()
+        selectionCommand("Rename…")
         compose.onNode(hasSetTextAction()).performTextReplacement("Renamed.md")
         compose.onNode(hasText("Rename") and hasAnyAncestor(isDialog()), useUnmergedTree = true)
             .performClick()
@@ -86,7 +96,7 @@ class FinderWorkflowTest {
             compose.activity.model.navigate(File(fixture, "Destination").absolutePath)
         }
         loaded()
-        compose.onNodeWithContentDescription("Paste 1 items").performClick()
+        moreCommand("Paste")
         val copied = File(fixture, "Destination/Renamed.md")
         compose.waitUntil(10_000) { copied.exists() }
         loaded()
@@ -96,7 +106,7 @@ class FinderWorkflowTest {
             .onNode(hasText("Renamed.md") and hasAnyAncestor(hasTestTag("file-browser")))
             .performMouseInput { click() }
         compose.waitUntil(5_000) { compose.activity.model.focused?.name == "Renamed.md" }
-        compose.onNodeWithContentDescription("Move to Trash").performClick()
+        selectionCommand("Move to Trash")
         compose.waitUntil(10_000) { !copied.exists() }
         loaded()
         compose.runOnIdle { compose.activity.model.navigate("@trash") }
@@ -110,7 +120,7 @@ class FinderWorkflowTest {
             model.select(restoreEntry)
         }
         compose.waitUntil(5_000) { model.focused?.path == restoreEntry.path }
-        compose.onNodeWithText("Restore", useUnmergedTree = true).performClick()
+        selectionCommand("Restore")
         compose.waitUntil(10_000) { copied.exists() }
         loaded()
         assertEquals("# Tablet notes\nA real text preview.", copied.readText())
@@ -199,7 +209,7 @@ class FinderWorkflowTest {
         val file = File(fixture, "Notes.md")
         compose.onNodeWithText("Notes.md").performMouseInput { click() }
         compose.waitUntil(5_000) { compose.activity.model.focused?.name == "Notes.md" }
-        compose.onNodeWithContentDescription("Move to Trash").performClick()
+        selectionCommand("Move to Trash")
         compose.waitUntil(10_000) { !file.exists() && compose.activity.model.canUndoTrash }
         compose.waitUntil(5_000) {
             compose.onAllNodesWithText("Undo").fetchSemanticsNodes().isNotEmpty()
@@ -235,7 +245,7 @@ class FinderWorkflowTest {
     @Test
     fun batchRenameDialogPreviewsAndUndoRedoRestoresNames() {
         compose.runOnIdle { compose.activity.model.selectAll() }
-        compose.onNodeWithContentDescription("Rename").performClick()
+        selectionCommand("Rename 2 items…")
         compose.onNodeWithContentDescription("Rename method").performClick()
         compose.onNodeWithText("Name and index").performClick()
         compose

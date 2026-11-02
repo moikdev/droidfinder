@@ -61,11 +61,13 @@ class HistoryFailure(val changes: List<Pair<String, String>>, cause: Exception) 
     )
 
 sealed interface FileStep {
+    val description: String? get() = null
     fun validate(undo: Boolean)
 
     fun apply(engine: FileEngine, undo: Boolean): List<Pair<String, String>>
 
     class Callback(
+        override val description: String? = null,
         private val check: (Boolean) -> Unit,
         private val perform: (Boolean) -> List<Pair<String, String>>,
     ) : FileStep {
@@ -75,6 +77,7 @@ sealed interface FileStep {
     }
 
     class Created(private val file: File) : FileStep {
+        override val description = file.absolutePath
         private val stamp = fingerprint(file)
         private var stash: File? = null
 
@@ -97,6 +100,7 @@ sealed interface FileStep {
     }
 
     class Moved(private val before: File, private val after: File) : FileStep {
+        override val description = "${before.absolutePath} → ${after.absolutePath}"
         private val stamp = fingerprint(after)
 
         override fun validate(undo: Boolean) {
@@ -113,6 +117,7 @@ sealed interface FileStep {
     }
 
     class Trashed(private val original: File, private var item: File) : FileStep {
+        override val description = original.absolutePath
         private val stamp = fingerprint(item)
 
         override fun validate(undo: Boolean) {
@@ -127,6 +132,7 @@ sealed interface FileStep {
     }
 
     class Restored(private val restored: File) : FileStep {
+        override val description = restored.absolutePath
         private val stamp = fingerprint(restored)
         private var item: File? = null
 
@@ -150,6 +156,8 @@ sealed interface FileStep {
 
     class Renamed(private val pairs: List<Pair<File, File>>, checkedStamps: List<String>? = null) :
         FileStep {
+        override val description = pairs.take(3).joinToString("\n") { "${it.first.absolutePath} → ${it.second.absolutePath}" } +
+            if (pairs.size > 3) "\n…and ${pairs.size - 3} more" else ""
         private val stamps = checkedStamps ?: pairs.map { fingerprint(it.second) }
 
         init {
@@ -184,6 +192,7 @@ sealed interface FileStep {
     }
 
     class Grouped(private val folder: File, private val pairs: List<Pair<File, File>>) : FileStep {
+        override val description = folder.absolutePath
         private val stamp = fingerprint(folder)
         private val stamps = pairs.map { fingerprint(it.second) }
         private var emptyFolder: File? = null
@@ -213,13 +222,23 @@ sealed interface FileStep {
     }
 }
 
-class FileHistory(private val engine: FileEngine) {
-    data class Command(
+internal enum class RecentActionState(val title: String) {
+    COMPLETED("Completed"), UNDONE("Undone"), PARTLY_UNDONE("Partly undone"), PARTLY_REDONE("Partly redone"),
+}
+internal data class RecentFileAction(val id: Long, val label: String, val detail: String,
+    val recordedAt: Long, val state: RecentActionState, val nextUndo: Boolean, val nextRedo: Boolean)
+
+class FileHistory(private val engine: FileEngine, private val clock: () -> Long = System::currentTimeMillis) {
+    private data class Command(
+        val id: Long, val recordedAt: Long, val detail: String,
         val label: String,
         val steps: List<FileStep>,
         val applied: BooleanArray = BooleanArray(steps.size) { true },
     )
 
+    private var nextId = 1L
+    internal var lastFailure: String? = null
+        private set
     private val undo = ArrayDeque<Command>()
     private val redo = ArrayDeque<Command>()
     val undoLabel
@@ -230,14 +249,34 @@ class FileHistory(private val engine: FileEngine) {
 
     fun record(label: String, steps: List<FileStep>) {
         if (steps.isEmpty()) return
-        undo.addLast(Command(label, steps))
+        val details = steps.mapNotNull { it.description }.distinct()
+        val detail = details.take(3).joinToString("\n") + if (details.size > 3) "\n…and ${details.size - 3} more" else ""
+        undo.addLast(Command(nextId++, clock(), detail, label, steps))
+        lastFailure = null
         while (undo.size > 50) undo.removeFirst()
         redo.clear()
     }
 
     fun clear() {
+        lastFailure = null
         undo.clear()
         redo.clear()
+    }
+
+    /** Immutable display values never expose recovery objects or mutable step state. */
+    internal fun recentActions(): List<RecentFileAction> {
+        fun view(command: Command, onUndoStack: Boolean): RecentFileAction {
+            val partial = command.applied.any { it } && command.applied.any { !it }
+            val state = when {
+                partial && onUndoStack -> RecentActionState.PARTLY_UNDONE
+                partial -> RecentActionState.PARTLY_REDONE
+                onUndoStack -> RecentActionState.COMPLETED
+                else -> RecentActionState.UNDONE
+            }
+            return RecentFileAction(command.id, command.label, command.detail, command.recordedAt, state,
+                onUndoStack && command === undo.lastOrNull(), !onUndoStack && command === redo.lastOrNull())
+        }
+        return (undo.map { view(it, true) } + redo.map { view(it, false) }).sortedByDescending { it.id }
     }
 
     fun undo(): List<Pair<String, String>> = execute(true)
@@ -248,27 +287,33 @@ class FileHistory(private val engine: FileEngine) {
         val source = if (backward) undo else redo
         val target = if (backward) redo else undo
         val command = source.lastOrNull() ?: return emptyList()
-        val indices =
-            (if (backward) command.steps.indices.reversed() else command.steps.indices).filter {
-                command.applied[it] == backward
-            }
-        // Preflight every affected item before changing anything.
-        indices.forEach { command.steps[it].validate(backward) }
-        val changes = mutableListOf<Pair<String, String>>()
         try {
-            indices.forEach { index ->
-                changes += command.steps[index].apply(engine, backward)
-                command.applied[index] = !backward
+            val indices =
+                (if (backward) command.steps.indices.reversed() else command.steps.indices).filter {
+                    command.applied[it] == backward
+                }
+            // Preflight every affected item before changing anything.
+            indices.forEach { command.steps[it].validate(backward) }
+            val changes = mutableListOf<Pair<String, String>>()
+            try {
+                indices.forEach { index ->
+                    changes += command.steps[index].apply(engine, backward)
+                    command.applied[index] = !backward
+                }
+            } catch (error: Exception) {
+                if (error is RenameRecoveryException) {
+                    changes += error.changes
+                    clear()
+                }
+                throw HistoryFailure(changes, error)
             }
+            source.removeLast()
+            target.addLast(command)
+            lastFailure = null
+            return changes
         } catch (error: Exception) {
-            if (error is RenameRecoveryException) {
-                changes += error.changes
-                clear()
-            }
-            throw HistoryFailure(changes, error)
+            lastFailure = error.message ?: "This action could not safely continue."
+            throw error
         }
-        source.removeLast()
-        target.addLast(command)
-        return changes
     }
 }

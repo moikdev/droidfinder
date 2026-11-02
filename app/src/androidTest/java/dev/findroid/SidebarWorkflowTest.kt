@@ -149,7 +149,27 @@ class SidebarWorkflowTest {
     @Test fun createMoveCollapseAndRemoveGroupKeepsAllReferences() {
         compose.onNodeWithTag("edit-sidebar").performClick()
         compose.onNodeWithTag("favorite-group-name").performScrollTo().performTextInput("Work")
-        compose.onNodeWithText("Create group").performScrollTo().performClick()
+        // Let the keyboard close before scrolling to a control near the dialog's footer.
+        compose.runOnIdle {
+            val input = compose.activity.getSystemService(android.content.Context.INPUT_METHOD_SERVICE)
+                as android.view.inputmethod.InputMethodManager
+            android.view.inspector.WindowInspector.getGlobalWindowViews().forEach {
+                input.hideSoftInputFromWindow(it.windowToken, 0)
+            }
+        }
+        compose.waitForIdle()
+        compose.waitUntil(5_000) {
+            var hidden = false
+            InstrumentationRegistry.getInstrumentation().runOnMainSync {
+                hidden = android.view.inspector.WindowInspector.getGlobalWindowViews().none {
+                    androidx.core.view.ViewCompat.getRootWindowInsets(it)
+                        ?.isVisible(androidx.core.view.WindowInsetsCompat.Type.ime()) == true
+                }
+            }
+            hidden
+        }
+        compose.onNodeWithText("Create group").performScrollTo().assertIsEnabled().performClick()
+        compose.waitUntil(5_000) { model.sidebar.groups.size == 1 }
         compose.onNodeWithText("Done").performClick()
         val group = model.sidebar.groups.single()
         options("alpha")

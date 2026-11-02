@@ -56,6 +56,7 @@ fun replacementStep(
     var newRecovery: File? = null
     var newRecoveryStamp: String? = null
     return FileStep.Callback(
+        description = "${source.name}\n${source.path} → $published",
         check = { undo ->
             if (undo) {
                 check(documents.digest(newLive) == newLiveStamp) {

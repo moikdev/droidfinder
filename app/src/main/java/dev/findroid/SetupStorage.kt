@@ -107,6 +107,7 @@ internal class SetupStorage(private val app: Application) {
         session.folderStyles.value = session.styleStore.styles
         session.history.clear()
         session.undoLabel.value = null; session.redoLabel.value = null
+        session.recentActions.value = emptyList(); session.historyFailure.value = null
         val p = value.preferences
         session.density.value = p.density; session.showExtensions.value = p.extensions; session.darkTheme.value = p.dark
         session.sidebarWidth.value = p.sidebarWidth; session.sidebarVisible.value = p.sidebarVisible; session.tagsVisible.value = p.tagsVisible

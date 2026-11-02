@@ -22,16 +22,33 @@ internal fun FileGestureHint(model: FinderModel) {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun SelectionScopeStrip(model: FinderModel) {
     val pane = if (!model.dualPane) "" else if ((model.paneId == "primary") != model.panesReversed) "Left pane · " else "Right pane · "
-    Row(Modifier.fillMaxWidth().background(SelectionSurface).padding(start = 12.dp, end = 4.dp)
-        .testTag("selection-scope-${model.paneId}")
-        .semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite }, verticalAlignment = Alignment.CenterVertically) {
-        Column(Modifier.weight(1f).padding(vertical = 6.dp)) {
-            Text("$pane${model.selected.size} selected", color = SelectedInk, fontSize = 13.sp)
-            Text(model.displayPath(model.location), color = Muted, fontSize = 11.sp, maxLines = 2, overflow = TextOverflow.Ellipsis)
+    BoxWithConstraints(Modifier.fillMaxWidth().background(SelectionSurface)) {
+        val wide = maxWidth / androidx.compose.ui.platform.LocalDensity.current.fontScale >= 380.dp
+        Column {
+            Row(Modifier.fillMaxWidth().padding(start = 12.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f).padding(vertical = 6.dp)
+                    .testTag("selection-scope-${model.paneId}")
+                    .semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite }) {
+                    Text("$pane${model.selected.size} selected", color = SelectedInk, fontSize = 13.sp)
+                    Text(model.displayPath(model.location), color = Muted, fontSize = 11.sp, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                }
+                TextButton(onClick = model::clearSelection, modifier = Modifier.semantics { contentDescription = "Clear selection in ${pane.ifBlank { "this folder" }}" }) { Text("Clear") }
+            }
+            FlowRow(Modifier.fillMaxWidth().padding(start = 4.dp, end = 4.dp, bottom = 4.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                if (model.paneActive && !model.isTrash && model.actionEntries.isNotEmpty()) {
+                    DragSelectionHandle(model)
+                    if (wide) ToolbarAction("Copy", { model.copySelection(false) })
+                }
+                ToolbarAction("Selection actions", {
+                    model.activatePane()
+                    model.selectedEntries.firstOrNull()?.let { model.requestContext(it) }
+                        ?: run { model.message = "The selected items are unavailable. Refresh this location and select them again." }
+                }, modifier = Modifier.testTag("selection-actions-${model.paneId}"))
+            }
         }
-        TextButton(onClick = model::clearSelection, modifier = Modifier.semantics { contentDescription = "Clear selection in ${pane.ifBlank { "this folder" }}" }) { Text("Clear") }
     }
 }

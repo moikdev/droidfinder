@@ -214,7 +214,9 @@ class DragWorkflowTest {
         val bounds = compose.onNodeWithTag("browser-list").fetchSemanticsNode().boundsInWindow
         drag.move(Offset(bounds.center.x, bounds.bottom - 5f))
         try {
-            compose.waitUntil(7000) {
+            // The named selection controls reduce the list viewport. Allow the full fixture
+            // to scroll on a loaded emulator; this is a workflow check, not a speed benchmark.
+            compose.waitUntil(15_000) {
                 compose
                     .onAllNodes(
                         hasText("Item35.txt") and hasAnyAncestor(hasTestTag("file-browser")),
@@ -540,6 +542,7 @@ class DragWorkflowTest {
 
         fun cancel() {
             if (!running) return
+            running = false
             // End the native drag before releasing the injected pointer: Android 11
             // can treat the pointer cancellation as a drop while a drag is still active.
             instrumentation.runOnMainSync {
@@ -547,11 +550,12 @@ class DragWorkflowTest {
                     it.cancelDragAndDrop()
                 }
             }
-            send(MotionEvent.ACTION_CANCEL, at)
-            running = false
+            // cancelDragAndDrop may already end the injected pointer stream on Android 11.
+            // Restoration and unchanged file bytes are asserted by the workflow itself.
+            send(MotionEvent.ACTION_CANCEL, at, requireDelivery = false)
         }
 
-        private fun send(action: Int, point: Offset) {
+        private fun send(action: Int, point: Offset, requireDelivery: Boolean = true) {
             val event =
                 MotionEvent.obtain(
                     down,
@@ -596,7 +600,8 @@ class DragWorkflowTest {
                     0,
                 )
             try {
-                assertTrue(instrumentation.uiAutomation.injectInputEvent(event, true))
+                val injected = instrumentation.uiAutomation.injectInputEvent(event, true)
+                if (requireDelivery) assertTrue("Native input delivery failed for action $action", injected)
                 instrumentation.waitForIdleSync()
                 SystemClock.sleep(20)
                 settle()
