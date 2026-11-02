@@ -45,3 +45,9 @@ This downloads the actual public release through the production source, checks i
 A real 0.31 → 0.32 public-feed download and Android installation passes on the dedicated API30 tablet emulator. Installed APK bytes match the public release; the original synthetic file, legacy favorite and sentinel preference survive. The new version reports up to date. The API36 production-source check validates the public package/version/signature and rejects a repeat offer. Both devices are restored to the exact public optimized APK. This is emulator acceptance; the broader physical/OEM update matrix remains open.
 
 Repeat the installed-update workflow with `scripts/check-ota-upgrade.py`. It requires the older signed APK, anonymously downloaded target APK, expected version code and a dedicated tablet serial; it backs up/restores the original setup and uses its own synthetic data. Actual result: [0.32.0 updater](screenshots/app-updates-032.png).
+
+## 0.33.0 public upgrade acceptance
+
+The real **0.32 → 0.33** in-app public-feed download and Android installer upgrade passes on the dedicated API30 tablet. The installed APK matches the anonymously downloaded public bytes. The original synthetic file, Favorite and unrelated preference survive, and the updated app reports [up to date](screenshots/app-updates-033.png). The production-source API36 check passes 1/1 for the public package/version/signature and no repeat offer. Both tablets are restored to the exact public optimized APK.
+
+The [setup backup guide](SETUP-BACKUP.md) explains 0.33's explicit export and reviewed import. Setup backups exclude updater state and Android installation permissions. The release keeps 0.32's signing certificate; continue installing over the existing app. Physical/OEM installation acceptance remains open.
