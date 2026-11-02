@@ -17,6 +17,8 @@ Published [0.36.0-preview](https://github.com/moikdev/findroid/releases/tag/v0.3
 
 Both tablets finish with their exact original metadata/preferences, font scale 1.0 and the public optimized APK. The allowlisted validation archive excludes private setup snapshots, original document payloads, full bugreports, signing keys and credentials. Its source/evidence snapshots and file hashes are recorded before publication, then the public download is checked independently. This completes proposals **20, 23 and 24**: **23 of 72 improvements are implemented, 49 remain open or partial**. Physical tablets, TalkBack, trackpad/stylus, removable media and actual third-party providers remain separate acceptance. GitHub Actions remains manual-only.
 
+The [frozen public validation archive](https://github.com/moikdev/findroid/releases/download/v0.36.0-preview/Findroid-0.36.0-validation.zip) was anonymously downloaded and checked on November 3, 2026. Its **794 allowlisted entries** total **11,402,477 bytes**, SHA-256 `7f3d1cf997bb056f3474ddeb34dd92fdf2e6d530ef5471e01dc48dc8059184ac`; GitHub's digest and every archived manifest entry match. Application source is `58e094c0be44e7628c7d6c78e4a6d4a81149043e`, and the archived acceptance-document snapshot is `20f0f4fa9b60327e045a192399e885c4d6394576`. Later results use another archive; this published package is not regenerated.
+
 ## Findroid 0.35.0 — clear tablet commands and guarded Recent actions
 
 Local verification on November 2–3, 2026:
