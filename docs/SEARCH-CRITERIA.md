@@ -1,6 +1,6 @@
 # Search that explains its results
 
-Open **More → Search filters…**, or open Search and use its filter control. Criteria apply together: a file must pass every active criterion. You can save them as a Smart Folder from More.
+Open **More → Search filters…**, or open Search and use its filter control. Criteria apply together: a file must pass every active criterion. You can save them as a Smart Folder from More. To reuse a query without naming a Smart Folder, open **More → Recent searches…** or choose a suggestion while typing. [Recent-search guide](RECENT-SEARCHES.md).
 
 ## See why a file matched
 

@@ -53,7 +53,7 @@ class AndroidDevice:
 
     @staticmethod
     def bounds(node):
-        return list(map(int, re.findall(r'\d+', node.get('bounds', ''))))
+        return list(map(int, re.findall(r'-?\d+', node.get('bounds', ''))))
 
     def nodes(self, tree, label):
         return [n for n in tree.iter('node') if (n.get('text') == label or n.get('content-desc') == label)

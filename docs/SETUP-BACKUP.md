@@ -27,7 +27,7 @@ The backup includes:
 | Rename presets | Reusable rename recipes and ordering choices. |
 | Preferences | Density, extensions, theme, sidebar width/visibility, tag visibility, gesture-tip state, conflict default, and ZIP resource limits. |
 
-File contents, Android access grants, provider sign-ins, notification/file-picker permissions, transfer jobs, Undo/Redo history, Trash, caches, and updater state remain on the original installation. Findroid's Android automatic backup exclusion remains enabled; this feature is an explicit user-created export.
+File contents, Android access grants, provider sign-ins, notification/file-picker permissions, transfer jobs, Undo/Redo history, recent-search history and its recording preference, Trash, caches, and updater state remain on the original installation. Findroid's Android automatic backup exclusion remains enabled; this feature is an explicit user-created export.
 
 Exact search exclusions enter the reference review and follow explicit root mappings. Match snippets remain in the current listing and are omitted from the backup.
 

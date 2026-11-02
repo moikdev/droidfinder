@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.36.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.37.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.36.0 release](https://github.com/moikdev/findroid/releases/tag/v0.36.0-preview) and download **`Findroid-0.36.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.37.0 release](https://github.com/moikdev/findroid/releases/tag/v0.37.0-preview) and download **`Findroid-0.37.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -113,6 +113,17 @@ Matching words are highlighted in filenames. A short explanation tells you wheth
 Use **More → Search filters…** for **This week**, **Over 1 GB**, or **Images**. Exclude one folder such as `Project A/Cache` while keeping `Project B/Cache` searchable. Save the criteria as a Smart Folder to reuse them. Calendar choices follow your local date; snippets stay in the current listing and are omitted from saved setup data. [Search guide](docs/SEARCH-CRITERIA.md).
 
 ![Search results highlight filename and content matches and explain the active criteria](docs/screenshots/search-matches-tablet.png)
+
+### Run a search again
+
+Start typing to bring up recent queries with their full filters. Tap a suggestion, or use **↓ / ↑** and **Enter**. Findroid saves finished searches, so each keystroke does not become another history entry.
+
+Open **More → Recent searches…** to review up to 20. **Search here** reuses the query and filters in the current project; **Search original location** returns to where you used them before. **Show filters** lets you inspect the date, size, tags, text and exclusions first. Reusing rules from a Smart Folder keeps that saved folder independent.
+
+This is useful when you repeat the same filters across projects without wanting a permanent Smart Folder for every query. You can pause recording, remove an entry, or clear history in the same window. History stays on this tablet and out of setup backups. [Recent-search guide](docs/RECENT-SEARCHES.md).
+
+![Recent searches with complete filters, original locations, and named Search here and Search original location actions](docs/screenshots/recent-searches-tablet.png)
+
 
 *Actual optimized Android tablet capture with sample text files.*
 
@@ -220,4 +231,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, and search explanations have shipped in verified increments. Work continues on search history, storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, and recent-search history have shipped in verified increments. **24 of 72 are implemented; 48 remain open or partial.** Work continues on choosing several search roots, indexing, storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).

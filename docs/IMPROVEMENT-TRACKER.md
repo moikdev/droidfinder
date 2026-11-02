@@ -24,7 +24,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 18 | Extend workspace recovery | Implemented in 0.34.1: reviewed per-destination repairs, Open once, durable saved repairs and Smart Folder-root recovery. 360 JVM checks, 133 native cases per API30/API36 tablet, optimized 0.33 upgrade, real folder choice, restart, repeated task replacement and enlarged-text acceptance. See [validation](../VALIDATION.md). |
 | 19 | Add an optional local index | Open. Implementation and focused acceptance pending. |
 | 20 | Highlight matches in results | Implemented in 0.36.0; 404 JVM checks, 251 native cases per API30/API36 tablet in 27 fresh-process batches, optimized 0.35 upgrade/four-view/saved-rule/layout acceptance, and real public OTA on both. See [search criteria](SEARCH-CRITERIA.md) and [validation](../VALIDATION.md). |
-| 21 | Add saved search history and suggestions | Open. Implementation and focused acceptance pending. |
+| 21 | Add saved search history and suggestions | Implemented in 0.37.0; 422 JVM checks, 279 native cases per API30/API36 tablet in 29 fresh-process batches, optimized 0.36 upgrade/history/suggestion/Smart Folder/restart/layout acceptance, and real public OTA on both. See [recent searches](RECENT-SEARCHES.md) and [validation](../VALIDATION.md). |
 | 22 | Choose search roots explicitly | Open. Implementation and focused acceptance pending. |
 | 23 | Extend exclusions to exact paths | Implemented in 0.36.0; 404 JVM checks, 251 native cases per API30/API36 tablet in 27 fresh-process batches, optimized 0.35 upgrade/four-view/saved-rule/layout acceptance, and real public OTA on both. See [search criteria](SEARCH-CRITERIA.md) and [validation](../VALIDATION.md). |
 | 24 | Offer natural date and size presets | Implemented in 0.36.0; 404 JVM checks, 251 native cases per API30/API36 tablet in 27 fresh-process batches, optimized 0.35 upgrade/four-view/saved-rule/layout acceptance, and real public OTA on both. See [search criteria](SEARCH-CRITERIA.md) and [validation](../VALIDATION.md). |
@@ -68,16 +68,16 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 62 | Add per-location privacy controls | Open. Implementation and focused acceptance pending. |
 | 63 | Consider an optional encrypted vault later | Open. Design recovery, locking and interoperability before implementation. |
 | 64 | Complete a TalkBack workflow audit | Open. Needs an actual screen-reader workflow audit. |
-| 65 | Test large text and display scaling | Partial: optimized sidebar/setup-flow captures and search criteria/results/exclusions at font scale 1.6 on both APIs; search acceptance covers 600/800/1280 dp at 1.0/1.6. Largest text/display scaling and complete-flow acceptance remain open. |
+| 65 | Test large text and display scaling | Partial: optimized sidebar/setup-flow captures and search criteria/results/exclusions at font scale 1.6 on both APIs; search and recent-history acceptance cover 600/800/1280 dp at 1.0/1.6. Largest text/display scaling and complete-flow acceptance remain open. |
 | 66 | Add contrast and motion preferences | Open. Implementation and focused acceptance pending. |
 | 67 | Make shortcuts configurable | Open. Implementation and focused acceptance pending. |
 | 68 | Add localization and RTL support | Open. Initial language selection and native review remain open. |
 | 69 | Benchmark startup and everyday browsing | Open. Needs real-tablet battery and performance measurements. |
-| 70 | Make optimized-build UI checks repeatable | Partial: repeatable optimized migration/reorder/restart, menu, setup export/import/recovery, saved-workspace repair, search upgrade/four-view/exclusion/saved-rule checks, and enlarged-text capture scripts. Portrait/split/dark comparisons remain open. |
+| 70 | Make optimized-build UI checks repeatable | Partial: repeatable optimized migration/reorder/restart, menu, setup export/import/recovery, saved-workspace repair, search upgrade/four-view/exclusion/saved-rule checks, recent-history/suggestion/Smart Folder/pause/clear/restart checks, and enlarged-text capture scripts. Portrait/split/dark comparisons remain open. |
 | 71 | Expand the failure matrix | Partial: setup transaction write faults/process-death boundaries, changed grants, stale reviews and corrupt recovery are covered in 0.33. Workspace publication faults, disk changes, future catalogs and window closure are covered in 0.34.1. Physical-media removal, full storage and the broader provider matrix remain open. |
 | 72 | Finish release infrastructure | Open. Hosted Actions stays manual-only; long-term signing/recovery needs owner-controlled key custody. |
 
-23 items are implemented across the 0.32.0–0.36.0 increments; 49 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
+24 items are implemented across the 0.32.0–0.37.0 increments; 48 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
 
 ## Verification per increment
 

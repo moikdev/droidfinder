@@ -35,7 +35,7 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def accepted(report):
     assert report['success'] and report['failed']==report['skipped']==0 and report['runnerCompleted'] and report['runnerSucceeded']
 def text(tree): return '\n'.join(node.get('text','') for node in tree.iter('node'))
-def bounds(node): return list(map(int,re.findall(r'\d+',node.get('bounds',''))))
+def bounds(node): return list(map(int,re.findall(r'-?\d+',node.get('bounds',''))))
 def png_size(path): return struct.unpack('>II',path.read_bytes()[16:24])
 def visible_control(tree,label,width,height,min_height):
     parents={child:parent for parent in tree.iter() for child in parent}
