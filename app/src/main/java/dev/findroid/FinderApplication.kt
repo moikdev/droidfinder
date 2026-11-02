@@ -3,9 +3,26 @@ package dev.findroid
 import android.app.Application
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
 
 /** Keeps the explorer and its active transfer alive when the Activity is recreated or closed. */
 class FinderApplication : Application(), ViewModelStoreOwner {
+    internal var setupRecoveryError by mutableStateOf<String?>(null)
+        private set
+
+    override fun onCreate() {
+        super.onCreate()
+        recoverSetup()
+    }
+
+    internal fun recoverSetup() {
+        setupRecoveryError = runCatching { SetupStorage(this).transaction.recover() }.exceptionOrNull()?.let {
+            "An interrupted setup restore needs recovery before browsing can continue. The recovery copy has been kept. ${it.message}"
+        }
+    }
+
     internal val updates by lazy { AppUpdateController(this) }
     internal val localEngine by lazy { FileEngine(filesDir) }
     internal val workspaceDocuments by lazy { WorkspaceDocuments(this) }

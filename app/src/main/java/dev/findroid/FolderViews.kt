@@ -298,6 +298,15 @@ class FolderViews(private val store: FolderViewPersistence) : AutoCloseable {
                 "Some copied folders use pane defaults because the 2,000-folder limit was reached."
     }
 
+    internal fun acceptSetup(values: Map<String, FolderView>) {
+        check(!saving) { "Wait for folder settings to finish saving." }
+        this.values = values
+        relocationHistory.clear()
+        revision++
+        error = null
+        notice = null
+    }
+
     fun retry() {
         if (!protectedFile) requestSave()
     }

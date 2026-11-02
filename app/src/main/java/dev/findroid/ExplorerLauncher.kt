@@ -66,6 +66,7 @@ private fun launcherCommands(model: FinderModel): List<LauncherChoice> {
         command("dualPane", if (model.dualPane) "Close second pane" else "Open second pane", "Compare folders side by side", keywords = "split two panels"),
         command("workspaces", "Saved workspaces…", "Save or restore your tablet layout", keywords = "tabs session"),
         command("storage", "Storage locations…", "Review permissions, capacity and reconnect options", keywords = "grant provider usb drive unavailable"),
+        command("setup", "Back up or restore setup…", "Review Favorites, tags, workspaces and root mappings", keywords = "backup import export migrate metadata preferences"),
         command("settings", "Preferences…", "Browsing, sidebar and advanced choices", keywords = "settings density theme appearance"),
         command("shortcuts", "Keyboard shortcuts…", "Search the active keyboard guide", keywords = "help controls"),
     )

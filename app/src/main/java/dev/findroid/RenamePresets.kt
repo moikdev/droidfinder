@@ -122,6 +122,14 @@ internal class RenamePresetStore(private val file: File) {
         write(current.filterNot { it.id == id })
     }
 
+    internal fun replace(values: List<RenamePreset>) {
+        require(values.size <= 32) { "Keep at most 32 rename presets." }
+        values.forEach { validatePresetName(it.name); it.recipe.validateShape(); UUID.fromString(it.id) }
+        require(values.map { it.id }.distinct().size == values.size)
+        require(values.map { it.name.lowercase(java.util.Locale.ROOT) }.distinct().size == values.size)
+        write(values)
+    }
+
     private fun write(values: List<RenamePreset>) {
         val p = Properties()
         p["version"] = "1"

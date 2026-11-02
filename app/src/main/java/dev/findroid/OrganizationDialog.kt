@@ -103,6 +103,7 @@ internal fun OrganizationDialog(model: FinderModel) {
                     }
                 }
                 HorizontalDivider(color = Border)
+                TextButton(onClick = { state.close(); model.setup.open() }, enabled = idle) { Text("Back up or restore all setup…") }
                 Row(
                     Modifier.fillMaxWidth()
                         .background(AppBackground)

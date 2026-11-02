@@ -204,7 +204,7 @@ constructor(
     val workspaceError
         get() = session.workspaceError.value
 
-    private fun snapshotPane(): PaneSnapshot {
+    internal fun snapshotPane(): PaneSnapshot {
         flushNavigationState()
         return PaneSnapshot(
             tabs,
@@ -363,6 +363,10 @@ constructor(
 
     fun openWorkspace(id: String) {
         val saved = savedWorkspaces.firstOrNull { it.id == id } ?: return
+        restoreWorkspaceSnapshot(saved)
+    }
+
+    internal fun restoreWorkspaceSnapshot(saved: SavedWorkspace) {
         primaryPane.restorePane(saved.primary)
         secondaryPane.restorePane(saved.secondary)
         windowState.dualPane.value = saved.dual
@@ -1997,6 +2001,16 @@ constructor(
     private val batchRenameState = lazy { RenameController(this, viewModelScope) }
     internal val batchRename
         get() = batchRenameState.value
+
+    private val setupState = lazy { SetupController(this, viewModelScope) }
+    internal val setup get() = setupState.value
+
+    internal fun setupRestored() {
+        syncLibrary()
+        val valid = !location.startsWith("@") || location in setOf("@recent", "@trash") ||
+            tagDefinitions.any { location == "@tag:${it.name}" } || collections.any { location == "@collection:${it.id}" } || smartFolders.any { location == "@smart:${it.id}" }
+        if (valid) refresh() else navigate(workspace.path)
+    }
 
     private val organizationState = lazy { OrganizationController(this, viewModelScope) }
     internal val organization

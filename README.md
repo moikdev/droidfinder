@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.32.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.33.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with the sidebar, file list, simple toolbar and preview panel](docs/screenshots/findroid-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.32.0 release](https://github.com/moikdev/findroid/releases/tag/v0.32.0-preview) and download **`Findroid-0.32.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.33.0 release](https://github.com/moikdev/findroid/releases/tag/v0.33.0-preview) and download **`Findroid-0.33.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -69,6 +69,18 @@ Choose **Edit** beside Favorites to hide unused built-in locations or create col
 ![An ordered Favorites sidebar with custom labels, a Work group and an unavailable folder](docs/screenshots/sidebar-management-tablet.png)
 
 *Actual optimized Android tablet capture with synthetic folders. [Sidebar and navigation guide](docs/SIDEBAR-AND-NAVIGATION.md).*
+
+### Take your setup to another tablet
+
+Open **Preferences → Back up or restore setup…** to save Favorites, tags, collections, Smart Folders, workspaces, open tabs, folder appearance, rename presets, and browsing preferences in one JSON file.
+
+Restore only the sections you want. **Merge** keeps your existing setup and combines the incoming references. If storage paths changed, choose a replacement root and review what can be found before applying. Open tabs arrive as a **Restored open tabs** workspace, ready to open when you choose.
+
+Findroid saves a private recovery copy before restoring and checks for interrupted restores at startup. The backup contains names, paths, and settings; keep it private. Copy your actual files separately and reconnect storage access on the new tablet. [Setup backup and restore guide](docs/SETUP-BACKUP.md).
+
+![Setup backup and restore with readable actions and a clear explanation of what is included](docs/screenshots/setup-backup-tablet.png)
+
+*Actual optimized Android tablet capture with synthetic project data.*
 
 ### Find the action you need
 
@@ -180,4 +192,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. The recommended next pass is favorite ordering and management, followed by setup backup and faster folder navigation. These are proposals; shipped work is tracked in [the roadmap](docs/ROADMAP.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, and setup backup have shipped in verified increments. Work continues on missing-location recovery, clearer actions, search, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).

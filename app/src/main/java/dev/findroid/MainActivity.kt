@@ -180,6 +180,16 @@ class MainActivity : ComponentActivity() {
             navigationBarStyle = SystemBarStyle.light(0xFFF5F6F8.toInt(), 0xFFF5F6F8.toInt()),
         )
         setContent {
+            val finderApplication = application as FinderApplication
+            if (finderApplication.setupRecoveryError != null) {
+                SetupRecoveryScreen(finderApplication.setupRecoveryError!!) {
+                    lifecycleScope.launch {
+                        kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { finderApplication.recoverSetup() }
+                    }
+                }
+                return@setContent
+            }
+
             DisposableEffect(model.darkTheme) {
                 val controller =
                     androidx.core.view.WindowCompat.getInsetsController(window, window.decorView)

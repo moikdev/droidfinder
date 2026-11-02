@@ -58,14 +58,15 @@ The [prioritized next-improvements list](NEXT-IMPROVEMENTS.md) contains 72 concr
 ## 7. Analysis and organization
 - [x] Space analysis by folder/category, large/old/duplicate/empty-file discovery with review before cleanup (0.20.0). Logical-size snapshots, full-content duplicate checks, provider unknown sizes, limits/partial states and recoverable review/Undo are implemented; persistent indexing, cross-root duplicate scopes and device performance matrices remain separate open work.
 - [x] Trash/cache size and retention, checksum generation/verification. Checksums shipped in 0.20.0; persisted Trash dates, reviewed age policies, bounded inventories, native preview leases and reviewed idle-cache cleanup are implemented in 0.21.0. Retention requires confirmation and does not silently delete expired items.
-- [x] Rich batch rename/templates/metadata, virtual collections and improved tag editing/search/export. Reviewed rename/templates/presets shipped in 0.22.0. Cross-folder reference collections, searchable tag management, reviewed mixed-tag changes, guarded session history and scoped metadata JSON export ship in 0.23.0; see ORGANIZATION.md for path identity and export limits. Reference rebinding shipped in 0.24.0; multi-tag search is in the unreleased increment above. Persistent indexing and broader backup/restore remain separate work.
+- [x] Rich batch rename/templates/metadata, virtual collections and improved tag editing/search/export. Reviewed rename/templates/presets shipped in 0.22.0. Cross-folder reference collections, searchable tag management, reviewed mixed-tag changes, guarded session history and scoped metadata JSON export ship in 0.23.0; see ORGANIZATION.md for path identity and export limits. Reference rebinding shipped in 0.24.0; multi-tag search is in the unreleased increment above. Whole-setup backup/restore with selective sections, reviewed root mapping and metadata rollback ships in 0.33.0; persistent indexing remains open.
 - [x] Canonical organization-location identity across local parent aliases, reference rebinding and provider-controlled identity changes (0.24.0). Paged saved-location review, explicit authorized replacement selection, exact-reference/tag merge review and atomic protected Undo are implemented. Final symlinks remain distinct entries; opaque provider IDs and external moves require explicit review rather than guessed descendant mappings. See REFERENCES.md.
 - [ ] Reusable operation presets and previewable organization rules. Rename presets with explicit update/delete and protected persistence are implemented in 0.22.0; broader operation presets and organization rules remain open.
 
 ## 8. Recovery, privacy and accessibility
 - [x] Transactional transfer database, legacy migration, merge member outcomes and corruption preservation (0.6.0).
 - [ ] Safely reconstructable persistent Undo and expanded partial-failure recovery.
-- [ ] Settings/favorites/tags/workspace backup and restore; per-location preview/index/cache controls.
+- [x] Settings/favorites/tags/workspace backup and reviewed restore with explicit root mapping, selected-section Merge/Replace and startup recovery (0.33.0). See [SETUP-BACKUP.md](SETUP-BACKUP.md).
+- [ ] Per-location preview/index/cache controls.
 - [ ] Optional encrypted vault with explicit recovery, opt-in diagnostics without document disclosure.
 - [ ] Configurable shortcuts, TalkBack, large text, RTL and localization.
 

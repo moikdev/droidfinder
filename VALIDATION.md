@@ -1,5 +1,30 @@
 # Android preview verification
 
+## Findroid 0.33.0 — setup backup, reviewed restore and portable references
+
+Local checks on November 2, 2026:
+
+- **347 JVM tests pass**, with no failures, errors or skips. New tests cover section boundaries, deterministic merges and repeated imports, Unicode library identity, navigation/reference remapping, strict JSON, stale reviews, every journal write failure, process-death boundaries, corrupt recovery and preservation of original bytes. Already-missing unrelated tab history does not create a new blocking restore warning.
+- **105/105 native cases pass on each dedicated API30 and API36 tablet emulator**, with no skips: setup codec (10), setup workflow (16), and the previous 79 sidebar, browsing, Favorites/internal/outgoing/cross-app drag, updater, workspace and preview/input cases. Provider fixtures exercise actual returned IDs, read-only roots, duplicate names, loading state, grant loss after review and unrecorded opaque IDs. These fixtures are debug-only.
+- **The optimized 0.33 preview passes on both APIs.** The host script installs actual 0.32 over a controlled baseline, upgrades in place, verifies installed APK bytes, exports through Android's CreateDocument dialog, and imports a synthetic portable backup through OpenDocument. Native touch chooses a replacement root, applies the reviewed Merge, and confirms restart persistence. Original file bytes, the existing Favorite and an unrelated sentinel preference survive. The private previous-setup copy is valid.
+- **Shipping recovery checks pass on both APIs.** With the app stopped, the script seeds a prepared journal and a partial metadata write. Launching the optimized APK restores the exact journaled setup before browsing. A deliberately damaged recovery record blocks browsing, preserves metadata and offers Retry. These are controlled metadata boundaries; they do not imply physical full-storage/provider-failure acceptance.
+- **Actual optimized screenshots were inspected on both APIs**, including font scale 1.6 with the Create backup and Close actions reachable. See [setup](docs/screenshots/setup-backup-tablet.png), [review](docs/screenshots/setup-restore-review-tablet.png), and [enlarged text](docs/screenshots/setup-backup-large-text-tablet.png). The scripts restore the exact original metadata, preferences and font scale without clearing app data, remove only their synthetic fixture roots, and leave the optimized APK installed.
+- **Debug, native-test, optimized preview and unsigned release builds pass.** Lint reports **0 errors, 143 warnings and 11 hints**, unchanged from 0.32. The optimized preview is **8,242,351 bytes**, SHA-256 `810aaa89e1d84c9a838f76313c96337c89eb29610a35f69ed442776c5dc277e8`.
+
+The first expanded regression bundle exposed an overbroad warning for pre-existing missing tab history; the final runs above include the scoped-reference fix. An earlier API30 drag edge-scroll failure passed in the complete final 105-case run. Initial optimized host runs also exposed stale picker-drawer selection and API30's generic shell taps being ignored by document file tiles. The host now waits for the roots drawer, targets its actual Downloads row, and supplies explicit native finger events on API30 through a transient shell helper. The same shipping APK passes the completed flows; these host corrections do not bypass the picker.
+
+Repeatable optimized acceptance:
+
+```sh
+python3 scripts/check-setup.py --serial <dedicated-tablet> \
+  --apk <0.33-preview.apk> --previous-apk <0.32-preview.apk> \
+  --fixture <synthetic-portable-demo.json> --output <evidence-directory>
+```
+
+The validation archive includes the controlled portable fixture, final native reports, JVM/lint results, the repeatable host script and inspected UI captures. `scripts/package-setup-validation.py` uses an explicit whitelist; private original setup snapshots, exported personal setup JSON, signing keys and document bytes are excluded. Public-download and OTA acceptance will be recorded after publication.
+
+This increment implements proposals **55, 56 and 61**, bringing the implemented total to **16 of 72**. Proposal 18's ordinary saved-workspace recovery remains separate from setup import. Physical tablets, TalkBack, USB/SD removal, the largest text/display scales and actual third-party providers remain open in [the tracker](docs/IMPROVEMENT-TRACKER.md). GitHub Actions remains manual-only.
+
 ## Findroid 0.32.0 — sidebar management and clearer navigation
 
 Local checks on November 2, 2026:

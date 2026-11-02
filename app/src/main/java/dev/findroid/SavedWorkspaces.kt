@@ -60,12 +60,34 @@ class SavedWorkspaceStore(file: File) : WorkspacePersistence {
     override fun load(): List<SavedWorkspace> = runCatching {
         if (!atomic.baseFile.exists() && !File(atomic.baseFile.path + ".bak").exists())
             return emptyList()
-        val root = JSONObject(atomic.openRead().bufferedReader().use { it.readText() })
+        WorkspaceJson.decode(atomic.openRead().bufferedReader().use { it.readText() })
+    }.getOrElse {
+        error = it.message ?: "Saved workspaces could not be read. The original file was preserved."
+        emptyList()
+    }
+
+    override fun write(values: List<SavedWorkspace>) {
+        check(error == null) { error!! }
+        val stream = atomic.startWrite()
+        try {
+            stream.write(WorkspaceJson.encode(values).toByteArray())
+            atomic.finishWrite(stream)
+        } catch (e: Exception) {
+            atomic.failWrite(stream)
+            throw e
+        }
+    }
+}
+
+/** Shared with reviewed setup backups; the on-disk workspace format stays version 1. */
+internal object WorkspaceJson {
+    fun decode(text: String): List<SavedWorkspace> {
+        val root = JSONObject(text)
         check(root.optInt("version") == 1) {
             "Saved workspace format is unavailable. The original file was preserved."
         }
         val a = root.getJSONArray("workspaces")
-        (0 until minOf(a.length(), 24))
+        return (0 until minOf(a.length(), 24))
             .map { i ->
                 val v = a.getJSONObject(i)
                 SavedWorkspace(
@@ -83,16 +105,9 @@ class SavedWorkspaceStore(file: File) : WorkspacePersistence {
             }
             .distinctBy { it.id }
     }
-        .getOrElse {
-            error =
-                it.message ?: "Saved workspaces could not be read. The original file was preserved."
-            emptyList()
-        }
 
-    override fun write(values: List<SavedWorkspace>) {
-        check(error == null) { error!! }
-        val bytes =
-            JSONObject()
+    fun encode(values: List<SavedWorkspace>): String {
+        return JSONObject()
                 .put("version", 1)
                 .put(
                     "workspaces",
@@ -111,15 +126,6 @@ class SavedWorkspaceStore(file: File) : WorkspacePersistence {
                     ),
                 )
                 .toString()
-                .toByteArray()
-        val stream = atomic.startWrite()
-        try {
-            stream.write(bytes)
-            atomic.finishWrite(stream)
-        } catch (e: Exception) {
-            atomic.failWrite(stream)
-            throw e
-        }
     }
 
     private fun pane(p: PaneSnapshot) =

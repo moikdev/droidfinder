@@ -484,6 +484,7 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
                     .verticalScroll(rememberScrollState()),
             ) {
                 TextButton(onUpdates) { Text("App updates · ${BuildConfig.VERSION_NAME}") }
+                TextButton(onClick = { model.setup.open(); dismiss() }) { Text("Back up or restore setup…") }
                 HorizontalDivider(Modifier.padding(vertical = 12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     FilterChip(!advanced, { advanced = false }, label = { Text("Browsing") })

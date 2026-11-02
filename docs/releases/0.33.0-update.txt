@@ -1,0 +1,5 @@
+Back up your setup from Preferences or Organize. Save Favorites, tags, collections, Smart Folders, workspaces, open tabs, folder appearance, rename presets, and browsing/archive preferences together.
+
+Restore selected sections with Merge or Replace, choose replacement storage roots, and review unavailable references before applying. Existing Favorite labels and order remain in Merge. Open tabs become a separate Restored open tabs workspace. Provider mapping uses actual document IDs, including read-only destinations.
+
+A private previous-setup copy and startup rollback protect interrupted metadata restores. Backups contain names, paths, and settings; keep them private. Copy actual files and reconnect Android storage permissions separately. Android 11+; optimized development-signed preview. Install over the existing app to retain files and settings.

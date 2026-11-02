@@ -58,26 +58,26 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 52 | Support encrypted ZIP archives | Open. Implementation and focused acceptance pending. |
 | 53 | Add selected additional archive formats | Open. Implementation and focused acceptance pending. |
 | 54 | Validate huge and malformed previews | Open. Needs large synthetic fixture measurements and malformed-file matrix. |
-| 55 | Export and restore the whole setup | Open. Implementation and focused acceptance pending. |
-| 56 | Make saved references portable | Open. Implementation and focused acceptance pending. |
+| 55 | Export and restore the whole setup | Implemented in 0.33.0; 347 JVM checks, 105 native cases per API30/API36 tablet, optimized real-picker export/import, reviewed mapping, restart and recovery acceptance. See [setup backup](SETUP-BACKUP.md) and [validation](../VALIDATION.md). |
+| 56 | Make saved references portable | Implemented in 0.33.0; 347 JVM checks, 105 native cases per API30/API36 tablet, optimized real-picker export/import, reviewed mapping, restart and recovery acceptance. See [setup backup](SETUP-BACKUP.md) and [validation](../VALIDATION.md). |
 | 57 | Add reviewed organization rules | Open. Implementation and focused acceptance pending. |
 | 58 | Extend reusable operation presets | Open. Implementation and focused acceptance pending. |
 | 59 | Offer workspace-specific sidebar sets | Open. Implementation and focused acceptance pending. |
 | 60 | Add new-file templates | Open. Implementation and focused acceptance pending. |
-| 61 | Make metadata backup more discoverable | Open. Implementation and focused acceptance pending. |
+| 61 | Make metadata backup more discoverable | Implemented in 0.33.0; 347 JVM checks, 105 native cases per API30/API36 tablet, optimized real-picker export/import, reviewed mapping, restart and recovery acceptance. See [setup backup](SETUP-BACKUP.md) and [validation](../VALIDATION.md). |
 | 62 | Add per-location privacy controls | Open. Implementation and focused acceptance pending. |
 | 63 | Consider an optional encrypted vault later | Open. Design recovery, locking and interoperability before implementation. |
 | 64 | Complete a TalkBack workflow audit | Open. Needs an actual screen-reader workflow audit. |
-| 65 | Test large text and display scaling | Partial: optimized sidebar captures at font scale 1.6 on both APIs. Largest text/display scaling and complete-flow acceptance remain open. |
+| 65 | Test large text and display scaling | Partial: optimized sidebar and setup-flow captures at font scale 1.6 on both APIs. Largest text/display scaling and complete-flow acceptance remain open. |
 | 66 | Add contrast and motion preferences | Open. Implementation and focused acceptance pending. |
 | 67 | Make shortcuts configurable | Open. Implementation and focused acceptance pending. |
 | 68 | Add localization and RTL support | Open. Initial language selection and native review remain open. |
 | 69 | Benchmark startup and everyday browsing | Open. Needs real-tablet battery and performance measurements. |
-| 70 | Make optimized-build UI checks repeatable | Partial: repeatable optimized migration/reorder/restart, menu and enlarged-text capture script. Portrait/split/dark comparisons remain open. |
-| 71 | Expand the failure matrix | Open. Needs physical-media cases as well as local fault fixtures. |
+| 70 | Make optimized-build UI checks repeatable | Partial: repeatable optimized migration/reorder/restart, menu, setup export/import/recovery and enlarged-text capture scripts. Portrait/split/dark comparisons remain open. |
+| 71 | Expand the failure matrix | Partial: setup transaction write faults/process-death boundaries, changed grants, stale reviews and corrupt recovery are covered in 0.33. Physical-media removal, full storage and the broader provider matrix remain open. |
 | 72 | Finish release infrastructure | Open. Hosted Actions stays manual-only; long-term signing/recovery needs owner-controlled key custody. |
 
-13 items are implemented in the 0.32.0 increment; 59 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
+16 items are implemented across the 0.32.0 and 0.33.0 increments; 56 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
 
 ## Verification per increment
 

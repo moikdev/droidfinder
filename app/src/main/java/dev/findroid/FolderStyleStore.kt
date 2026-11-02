@@ -20,6 +20,13 @@ class FolderStyleStore(private val file: File) {
         else emptyMap()
         private set
 
+    internal fun acceptSetup(values: Map<String, FolderStyle>) { styles = values }
+
+    internal fun replace(values: Map<String, FolderStyle>) {
+        styles = values
+        save()
+    }
+
     private fun save() {
         Properties()
             .apply {

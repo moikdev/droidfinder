@@ -42,6 +42,60 @@ internal fun libraryPath(value: String): Boolean =
         '\u0000' !in value &&
         (value.startsWith("/") || value.startsWith("content://"))
 
+internal fun validateOrganizationSnapshot(value: OrganizationSnapshot) {
+    require(value.tags.definitions.size <= 256) { "A library supports up to 256 tags." }
+    require(
+        value.tags.definitions
+            .map { renameCaselessKey(libraryName(it.name)) }
+            .distinct()
+            .size == value.tags.definitions.size,
+    ) {
+        "Tag names must be unique."
+    }
+    value.tags.definitions.forEach {
+        require(defaultTags.any { color -> color.color == it.color }) { "Choose a tag color." }
+    }
+    val names = value.tags.definitions.map { it.name }.toSet()
+    require(value.tags.assignments.size <= 100_000) {
+        "A library supports up to 100,000 tagged locations."
+    }
+    value.tags.assignments.forEach { (path, tags) ->
+        require(libraryPath(path)) { "Invalid tagged location." }
+        require(tags.all { it in names }) { "An assignment refers to an unknown tag." }
+    }
+    require(value.collections.size <= 128) { "A library supports up to 128 collections." }
+    require(value.collections.map { it.id }.distinct().size == value.collections.size) {
+        "Collection IDs must be unique."
+    }
+    require(
+        value.collections.map { renameCaselessKey(libraryName(it.name, 64)) }.distinct().size ==
+            value.collections.size,
+    ) {
+        "Collection names must be unique."
+    }
+    val characters =
+        value.tags.assignments.entries.sumOf { (path, tags) ->
+            path.length.toLong() + tags.sumOf { it.length.toLong() }
+        } + value.collections.sumOf { c -> c.paths.sumOf { it.length.toLong() } }
+    require(characters <= 16L * 1024 * 1024) { "This library would exceed 16 MiB." }
+    require(value.collections.sumOf { it.paths.size } <= 100_000) {
+        "A library supports up to 100,000 collection references."
+    }
+    value.collections.forEach { collection ->
+        require(collection.id.matches(Regex("[a-zA-Z0-9-]{1,64}"))) { "Invalid collection ID." }
+        require(
+            collection.paths.size <= 10_000 &&
+                collection.paths.distinct().size == collection.paths.size,
+        ) {
+            "A collection supports up to 10,000 distinct locations."
+        }
+        require(collection.paths.all(::libraryPath)) { "Invalid collection location." }
+        require(defaultTags.any { it.color == collection.color }) {
+            "Choose a collection color."
+        }
+    }
+}
+
 /** Shared tag/collection metadata. Publish to disk before exposing a new immutable snapshot. */
 class TagStore(private val file: File) {
     companion object {
@@ -78,6 +132,11 @@ class TagStore(private val file: File) {
             collections.map { it.copy(paths = it.paths.toList()) },
         )
 
+    internal fun acceptSetup(value: OrganizationSnapshot) {
+        validateOrganizationSnapshot(value)
+        accept(normalizedOrganization(value))
+    }
+
     private fun accept(value: OrganizationSnapshot) {
         definitions = value.tags.definitions.sortedBy { it.name.lowercase(java.util.Locale.ROOT) }
         assignments =
@@ -102,59 +161,6 @@ class TagStore(private val file: File) {
         return snapshot()
     }
 
-    private fun validate(value: OrganizationSnapshot) {
-        require(value.tags.definitions.size <= 256) { "A library supports up to 256 tags." }
-        require(
-            value.tags.definitions
-                .map { renameCaselessKey(libraryName(it.name)) }
-                .distinct()
-                .size == value.tags.definitions.size,
-        ) {
-            "Tag names must be unique."
-        }
-        value.tags.definitions.forEach {
-            require(defaultTags.any { color -> color.color == it.color }) { "Choose a tag color." }
-        }
-        val names = value.tags.definitions.map { it.name }.toSet()
-        require(value.tags.assignments.size <= 100_000) {
-            "A library supports up to 100,000 tagged locations."
-        }
-        value.tags.assignments.forEach { (path, tags) ->
-            require(libraryPath(path)) { "Invalid tagged location." }
-            require(tags.all { it in names }) { "An assignment refers to an unknown tag." }
-        }
-        require(value.collections.size <= 128) { "A library supports up to 128 collections." }
-        require(value.collections.map { it.id }.distinct().size == value.collections.size) {
-            "Collection IDs must be unique."
-        }
-        require(
-            value.collections.map { renameCaselessKey(libraryName(it.name, 64)) }.distinct().size ==
-                value.collections.size,
-        ) {
-            "Collection names must be unique."
-        }
-        val characters =
-            value.tags.assignments.entries.sumOf { (path, tags) ->
-                path.length.toLong() + tags.sumOf { it.length.toLong() }
-            } + value.collections.sumOf { c -> c.paths.sumOf { it.length.toLong() } }
-        require(characters <= 16L * 1024 * 1024) { "This library would exceed 16 MiB." }
-        require(value.collections.sumOf { it.paths.size } <= 100_000) {
-            "A library supports up to 100,000 collection references."
-        }
-        value.collections.forEach { collection ->
-            require(collection.id.matches(Regex("[a-zA-Z0-9-]{1,64}"))) { "Invalid collection ID." }
-            require(
-                collection.paths.size <= 10_000 &&
-                    collection.paths.distinct().size == collection.paths.size,
-            ) {
-                "A collection supports up to 10,000 distinct locations."
-            }
-            require(collection.paths.all(::libraryPath)) { "Invalid collection location." }
-            require(defaultTags.any { it.color == collection.color }) {
-                "Choose a collection color."
-            }
-        }
-    }
 
     private fun read(): OrganizationSnapshot {
         if (!file.exists())
@@ -239,13 +245,13 @@ class TagStore(private val file: File) {
             "Unrecognized library fields; the original file was kept."
         }
         return normalizedOrganization(
-                OrganizationSnapshot(TagSnapshot(tags, values), groups).also(::validate),
+                OrganizationSnapshot(TagSnapshot(tags, values), groups).also(::validateOrganizationSnapshot),
             )
-            .also(::validate)
+            .also(::validateOrganizationSnapshot)
     }
 
     private fun publish(value: OrganizationSnapshot) {
-        validate(value)
+        validateOrganizationSnapshot(value)
         val properties =
             Properties().apply {
                 setProperty("catalog", "2")

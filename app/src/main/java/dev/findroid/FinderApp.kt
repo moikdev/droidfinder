@@ -141,6 +141,7 @@ fun FinderApp(
             if (model.housekeeping.visible) HousekeepingDialog(model)
             if (model.batchRename.visible) ReviewedRenameDialog(model, onOpenWith)
             if (model.organization.visible) OrganizationDialog(model)
+            if (model.setup.visible) SetupDialog(model)
             LaunchedEffect(model.storageRequested) {
                 if (model.storageRequested) {
                     dialog = "storage"
@@ -294,6 +295,7 @@ fun FinderApp(
                     "transfers" -> dialog = "transfers"
                     "tabs" -> dialog = "tabs"
                     "workspaces" -> dialog = "workspaces"
+                    "setup" -> model.setup.open()
                     "viewSettings" -> dialog = "viewSettings"
                     "folderViews" -> dialog = "folderViews"
                     "about" -> dialog = "about"
