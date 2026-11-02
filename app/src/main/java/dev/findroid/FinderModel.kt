@@ -2261,6 +2261,24 @@ constructor(
         prefs.edit().putStringSet("favorites", favorites).apply()
     }
 
+    /** Called after drop validation; adding an existing favorite never removes it. */
+    internal fun addFavoritePaths(paths: List<String>) {
+        val identity = OrganizationIdentity()
+        val builtIn = listOf(workspace.path) +
+            listOf("Documents", "Download", "Pictures", "Movies", "Music").map { File(deviceRoot, it).path }
+        val known = (favorites + builtIn).mapTo(mutableSetOf(), identity::key)
+        val added = paths.filter { known.add(identity.key(it)) }
+        if (added.isEmpty()) {
+            message = "Already in Favorites"
+            return
+        }
+        favorites = favorites + added
+        prefs.edit().putStringSet("favorites", favorites).apply()
+        message =
+            if (added.size == 1) "Added ${title(added.single())} to Favorites"
+            else "Added ${added.size} folders to Favorites"
+    }
+
     internal fun syncLibrary() {
         collections = tagStore.collections
         libraryError = tagStore.error

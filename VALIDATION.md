@@ -1,5 +1,20 @@
 # Android preview verification
 
+## Findroid 0.31.0 — drag folders into Favorites
+
+Validated **2026-11-02** on dedicated Android 11/API 30 and Android 16/API 36 tablets at 1920 × 1200, density 240. The Favorites heading and its labeled **Drag folders here** area now save folder references through the existing native drag controller. File transfers onto existing sidebar folder rows keep their previous copy/move behavior.
+
+- **308 JVM tests** pass, with zero failures, errors or skips. Debug, native-test, optimized preview and unsigned release builds succeed. Android lint reports **zero errors, 143 warnings and 11 hints**.
+- Final focused native batches pass **39/39 on API 30 and 39/39 on API 36**, with no skips. Each includes 11 Favorites checks, 13 existing drag/resize workflows, four outgoing payload/control checks, five real cross-app drops, and six updater checks. These are focused suites, not the complete Android instrumentation suite.
+- Favorites checks cover native touch icons, mouse/Ctrl and multi-folder payloads, the named Drag control, duplicate and parent-alias handling, cancellation, pinning after spring navigation, read-only connected folders, disappearing sources, and transfer/Undo through an existing favorite. A model-level check also protects built-in locations against duplicate saved shortcuts.
+- The **exact optimized APK** is exercised through native touchscreen events on both tablets without preselecting the folder. Host acceptance restarts the app process, opens the persisted favorite, and verifies original file bytes plus exactly one saved reference after a same-key debug reinstall. It then restores the exact optimized preview. No uninstall or data clearing is used.
+- The installable preview is **8,078,511 bytes**, SHA-256 `978427aba98eab699bcf6423756b59629a89a7ef6f80f2bee0e4973752e6d587`. Build information and checksums accompany the release. Actual optimized screenshots: [during the drag](docs/screenshots/favorites-drag-tablet.png) and [after restarting](docs/screenshots/favorites-sidebar-tablet.png).
+
+Repeatable host acceptance: `scripts/check-favorites-drag.py --serial <dedicated-tablet> --apk <preview.apk> --output <evidence-directory>`. The output includes UI XML, actual screenshots and a verification JSON. Reusing its output directory removes only the previous synthetic favorite recorded by that run; other favorites and file contents are retained. An early native cancellation assertion was corrected to wait for Android's drag-ended callback, which can follow Compose idleness on API 36.
+
+Evidence is retained in `captures/favorites-drag/` and packaged in the release validation archive. Folder drags from another process are not offered as permanent favorites; connected locations must already be authorized in Findroid. Favorite ordering, labels, groups, and per-row management are proposed follow-up work. Physical tablets, USB/SD devices, and third-party provider/receiver compatibility are not implied by these emulator results. GitHub Actions remains manual-only.
+
+
 ## Findroid 0.30.0 — external file dragging
 
 Validated **2026-11-02**. The touch entry point missing from the simplified tablet toolbar is restored as a labeled **Drag** control. Holding a file icon also initiates a native Android global drag; mouse initiation remains direct. Holding a selected icon preserves the visible selection and transfers its frozen file set. Mixed file selections advertise all MIME types. Cross-app drops grant temporary read access and keep the originals. Folder/mixed-folder selections retain internal dragging; Share supports ZIP export for external destinations.

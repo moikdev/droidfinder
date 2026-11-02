@@ -1,0 +1,10 @@
+Findroid 0.31.0 preview
+
+• Drag folders onto “Drag folders here” under Favorites to save sidebar shortcuts.
+• Hold a folder icon with touch or pen; drag it directly with a mouse.
+• Select several folders and hold Drag to add them together.
+• Favorites survive restarting the app. Original folders stay where they are.
+• Dropping an existing favorite again keeps it; read-only connected folders are supported.
+• File-only and mixed selections are rejected with clear feedback.
+
+Dropping onto an existing favorite folder still moves/copies into that folder. Use the named area under the heading to add shortcuts.

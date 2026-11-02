@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.30.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.31.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with the sidebar, file list, simple toolbar and preview panel](docs/screenshots/findroid-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.30.0 release](https://github.com/moikdev/findroid/releases/tag/v0.30.0-preview) and download **`Findroid-0.30.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.31.0 release](https://github.com/moikdev/findroid/releases/tag/v0.31.0-preview) and download **`Findroid-0.31.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -49,6 +49,16 @@ Other apps receive copies; your originals stay in place. The receiver gets tempo
 ![Two selected files copied from Findroid into a separate Android receiving app](docs/screenshots/external-drag-tablet.png)
 
 *Actual Android 11 tablet capture with synthetic files and a separate QA receiving app.*
+
+### Keep a folder in Favorites
+
+Hold a **folder icon**, drag it to **Drag folders here** under Favorites, and release when the sidebar says **Release to add**. With a mouse, drag the icon directly. You can also select several folders and hold **Drag** to pin them together.
+
+The folder stays in its original location. Findroid saves a shortcut in the sidebar, remembers it after restart, and keeps an existing favorite when you drop it again. Dropping files onto an existing favorite folder still copies or moves them into that folder. [Favorites and dragging](docs/DRAGGING.md#pin-folders-in-favorites).
+
+![A folder being added to Favorites, with a named drop area and clear release feedback](docs/screenshots/favorites-drag-tablet.png)
+
+*Actual optimized Android tablet capture with synthetic project folders.*
 
 ### Put the source and destination side by side
 
@@ -95,7 +105,7 @@ Natural sorting keeps `Photo 2` before `Photo 10`. Tabs remember where you were.
 
 ## Updates from inside the app
 
-**Coming from 0.29?** Install the 0.30 APK over it once. The repository was renamed to `moikdev/findroid`, and 0.30 corrects the updater's repository address.
+**Coming from 0.29?** Install the current preview APK over it once. The repository was renamed to `moikdev/findroid`, and 0.30 corrects the updater's repository address.
 
 After installing this preview, open **More → App updates** to check for future versions. Optional automatic checks run at most once a day when the app opens or resumes. Downloads begin when you choose them.
 
@@ -151,3 +161,7 @@ The preview is optimized and signed with your local development key. The release
 Browse the Kotlin implementation in [`app/src/main/java/dev/findroid`](app/src/main/java/dev/findroid), JVM tests in [`app/src/test`](app/src/test), and Android workflow tests in [`app/src/androidTest`](app/src/androidTest). Feature guides and real screenshots live in [`docs`](docs). Hosted checks are manual-only.
 
 Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) with your Android version, device/window size, storage type, and steps to reproduce. Screenshots help; leave out private file contents.
+
+## What should improve next?
+
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. The recommended next pass is favorite ordering and management, followed by setup backup and faster folder navigation. These are proposals; shipped work is tracked in [the roadmap](docs/ROADMAP.md).

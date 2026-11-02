@@ -1145,7 +1145,7 @@ private fun FinderSidebar(
                 .verticalScroll(sidebarScroll)
                 .padding(horizontal = 10.dp),
         ) {
-            SidebarHeading("Favorites")
+            FavoritesDropArea(model)
             SidebarItem("Recents", Icons.Outlined.Schedule, model.location == "@recent") {
                 navigate("@recent")
             }
@@ -1181,7 +1181,7 @@ private fun FinderSidebar(
                     model.title(path),
                     Icons.Outlined.Folder,
                     model.location == path,
-                    modifier = Modifier.folderDropTarget(model, path),
+                    modifier = Modifier.testTag("favorite-$path").folderDropTarget(model, path),
                 ) {
                     navigate(path)
                 }
@@ -1317,6 +1317,38 @@ private fun FinderSidebar(
                     Text("${formatSize(free)} available", fontSize = 9.sp, color = Muted)
                 }
             }
+    }
+}
+
+@Composable
+private fun FavoritesDropArea(model: FinderModel) {
+    val controller = LocalFinderDrag.current
+    val hovering = controller?.hovered?.action == DropAction.FAVORITE
+    val error = controller?.error.takeIf { hovering }
+    Column(Modifier.fillMaxWidth().testTag("favorites-drop-target").favoritesDropTarget(model)) {
+        SidebarHeading("Favorites")
+        Column(
+            Modifier.fillMaxWidth()
+                .heightIn(min = 48.dp)
+                .padding(bottom = 6.dp)
+                .border(1.dp, if (hovering) Color.Transparent else Border, RoundedCornerShape(6.dp))
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text(
+                if (error != null) "Can't add here" else if (hovering) "Release to add" else "Drag folders here",
+                fontSize = 12.sp,
+                lineHeight = 16.sp,
+                color = if (error != null) MaterialTheme.colorScheme.error else if (hovering) Blue else Ink,
+            )
+            Text(
+                if (error != null) "Use an available folder"
+                else if (hovering) "Folders stay where they are" else "Keep a shortcut in Favorites",
+                fontSize = 10.sp,
+                lineHeight = 13.sp,
+                color = Muted,
+            )
+        }
     }
 }
 

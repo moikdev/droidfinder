@@ -32,11 +32,14 @@ import kotlinx.coroutines.*
 
 internal data class SpringNavigationState(val tabs: List<FinderTab>, val active: Int)
 
+internal enum class DropAction { TRANSFER, FAVORITE }
+
 internal class DropZone(
     val model: FinderModel,
     val folder: String,
     val spring: Boolean,
     val tabId: String?,
+    val action: DropAction = DropAction.TRANSFER,
     val visible: () -> Boolean,
 ) {
     var coordinates: LayoutCoordinates? = null
@@ -173,6 +176,21 @@ internal class FinderDragController(private val scope: CoroutineScope) {
         withContext(Dispatchers.IO) {
             runCatching {
                 val model = zone.model
+                if (zone.action == DropAction.FAVORITE) {
+                    check(payload != null && payload.paths.isNotEmpty()) {
+                        "Drag folders from Findroid to add them to Favorites"
+                    }
+                    for (path in payload.paths) {
+                        ensureActive()
+                        check(payload.origin.allowedPath(path) && model.allowedPath(path)) {
+                            "This folder is no longer available. Check storage access."
+                        }
+                        check(model.documents.read(path).folder) {
+                            "Only folders can be added to Favorites"
+                        }
+                    }
+                    return@runCatching
+                }
                 check(model.allowedPath(zone.folder)) { "Storage access required" }
                 val parent = model.documents.read(zone.folder)
                 check(parent.folder && parent.writable) { "This folder is read only" }
@@ -278,6 +296,13 @@ internal class FinderDragController(private val scope: CoroutineScope) {
                     zone.model.message =
                         result.exceptionOrNull()?.message ?: "Can't drop files here"
                     pendingTrail.finish()
+                    return@launch
+                }
+                if (zone.action == DropAction.FAVORITE && payload != null) {
+                    zone.model.addFavoritePaths(payload.paths)
+                    // Pinning changes no location: restore every spring-loaded pane/tab.
+                    pendingTrail.finish()
+                    committed = true
                     return@launch
                 }
                 if (payload != null) {
@@ -387,17 +412,20 @@ internal fun DragFeedback(controller: FinderDragController, modifier: Modifier =
             else -> "Copy"
         }
     val count = payload?.paths?.size
+    val favorite = zone?.action == DropAction.FAVORITE
     val title =
-        if (zone == null && payload?.externalFiles == true) "Drag to a folder or another app"
-        else if (zone == null) "Drag to a folder"
+        if (favorite) "Add to Favorites"
+        else if (zone == null && payload?.externalFiles == true) "Drag to a folder or another app"
+        else if (zone == null) "Drag to a folder or Favorites"
         else
             "$action${count?.let { " $it item${if (it == 1) "" else "s"}" }.orEmpty()} to ${zone.model.title(zone.folder)}"
     val detail =
         controller.error
             ?: when {
                 zone == null && payload?.externalFiles == true -> "Other apps receive a copy. Hold over folders or tabs to open them."
-                zone == null -> "Hold over a folder or tab to open it"
-                !controller.checked -> "Checking destination…"
+                zone == null -> "Drop on Favorites to save a folder shortcut"
+                !controller.checked -> if (favorite) "Checking folders…" else "Checking destination…"
+                favorite -> "Release to add shortcuts. Folders stay where they are."
                 controller.scrolling -> "Scrolling · move away from the edge to stop"
                 controller.progress > 0 -> "Hold to open"
                 else -> "Release to $action".lowercase().replaceFirstChar(Char::uppercase)
@@ -423,6 +451,7 @@ internal fun DragFeedback(controller: FinderDragController, modifier: Modifier =
             else
                 Icon(
                     if (controller.error != null) Icons.Outlined.Block
+                    else if (favorite) Icons.Outlined.StarBorder
                     else if (payload?.mode == FinderDragMode.SHORTCUT) Icons.Outlined.Link
                     else if (payload?.mode == FinderDragMode.MOVE)
                         Icons.AutoMirrored.Outlined.DriveFileMove

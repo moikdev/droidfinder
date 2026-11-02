@@ -210,13 +210,27 @@ fun Modifier.folderDropTarget(
     spring: Boolean = true,
     tabId: String? = null,
     visible: (() -> Boolean)? = null,
+): Modifier =
+    if (folder == null || folder.startsWith("@")) this
+    else logicalDropTarget(model, folder, spring, tabId, DropAction.TRANSFER, visible)
+
+/** A pin target, distinct from the sidebar's existing folder transfer destinations. */
+internal fun Modifier.favoritesDropTarget(model: FinderModel): Modifier =
+    logicalDropTarget(model, "@favorites", false, null, DropAction.FAVORITE, null)
+
+private fun Modifier.logicalDropTarget(
+    model: FinderModel,
+    folder: String,
+    spring: Boolean,
+    tabId: String?,
+    action: DropAction,
+    visible: (() -> Boolean)?,
 ): Modifier = composed {
-    if (folder == null || folder.startsWith("@")) return@composed this
     val controller = LocalFinderDrag.current ?: return@composed this
     val currentVisible by rememberUpdatedState(visible)
     val zone =
-        remember(controller, model, folder, spring, tabId) {
-            DropZone(model, folder, spring, tabId) { currentVisible?.invoke() != false }
+        remember(controller, model, folder, spring, tabId, action) {
+            DropZone(model, folder, spring, tabId, action) { currentVisible?.invoke() != false }
         }
     DisposableEffect(zone) {
         controller.zones.add(zone)

@@ -2,6 +2,8 @@
 
 Goal: implement the full improvement roadmap requested after 0.4.0. This file tracks delivery; an unchecked item is not implemented. Phone layouts and per-gesture touch/mouse behavior are now part of the requested scope. A release is a verified increment, not completion of the whole roadmap.
 
+The [prioritized next-improvements list](NEXT-IMPROVEMENTS.md) contains 72 concrete proposals reviewed after the 0.31.0 Favorites drag update. Sidebar pinning is implemented in 0.31.0; favorite ordering, custom labels, grouping and per-row management remain follow-up work.
+
 ## 1. Interface and input
 - [x] Regular-phone layout and per-gesture touch/stylus versus mouse activation (local 0.25.0 preview). Native device/accessibility/provider matrices remain open.
 - [x] Consistent read-only commands during transfers across toolbar, menus and keyboard (0.5.0).

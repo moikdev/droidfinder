@@ -39,6 +39,22 @@ For the optimized APK, `scripts/check-external-drag.py --serial <dedicated-table
 
 The QA receiver is a separate application and is not bundled in Findroid. Final release results and actual screenshots are recorded in [VALIDATION.md](../VALIDATION.md).
 
+## Pin folders in Favorites
+
+Added in **0.31.0**. Hold a folder icon with touch or pen, or drag it with a mouse, then drop on **Drag folders here** under the sidebar's **Favorites** heading. The entire heading and hint area is a pinning target. Select several folders and hold **Drag** to add them together.
+
+- The target outlines in blue and says **Release to add**. The status panel says **Add to Favorites** and explains that the folders stay where they are.
+- Pinning saves references in the existing favorites preferences. It performs no file transfer, creates no `.finderlink` file, and survives process restart.
+- Dropping an existing favorite again is idempotent, including the built-in locations. Parent-path aliases are compared using the app's organization identity, so they do not create another shortcut for the same entry.
+- Read-only connected-provider folders can be pinned because saving a reference does not require write permission. They remain subject to Android's storage grants.
+- File-only and mixed file/folder selections are rejected together. Availability and folder type are checked off the UI thread and checked again before adding anything.
+- Cancelling saves nothing. Pinning restores temporary spring navigation instead of keeping an unrelated folder opened during the drag.
+- Existing sidebar folder rows remain **transfer destinations**: drop files onto a favorite row to move/copy into that folder. Use the named area under the heading to add a shortcut.
+
+![Pinning a folder with the native drag gesture](screenshots/favorites-drag-tablet.png)
+
+Native touch/mouse, multi-folder selection, duplicate/alias, cancellation, read-only-provider, disappearing-source, and existing-favorite transfer/Undo scenarios are covered by `FavoritesDragWorkflowTest`. `scripts/check-favorites-drag.py` drives the optimized APK, restarts the application, opens the saved shortcut, and compares original file bytes after a same-key debug reinstall. Results are in [VALIDATION.md](../VALIDATION.md).
+
 ## Behavior
 
 - Mouse: drag a file icon. Touch: hold a file icon, or select files and hold the labeled Drag control.
