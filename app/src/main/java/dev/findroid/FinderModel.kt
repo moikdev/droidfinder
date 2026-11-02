@@ -547,6 +547,63 @@ constructor(
     var searchRules by mutableStateOf(tabs[activeTab].rules)
         private set
 
+    private var searchHistoryDraft: Long? = null
+    internal val recentSearchHistory get() = session.recentSearches
+    internal fun recentSearchRoot(): String? = (currentSmartFolder?.root ?: location).takeIf(::recentSearchRootSupported)
+    internal fun discardSearchDraft() { searchHistoryDraft = null }
+    internal fun finishAndClearSearchQuery() {
+        rememberCurrentSearch()
+        updateQuery("")
+        discardSearchDraft()
+    }
+    internal fun rememberCurrentSearch() {
+        val epoch = searchHistoryDraft ?: return
+        searchHistoryDraft = null
+        if (epoch != recentSearchHistory.generation) return
+        recentSearchRoot()?.let { recentSearchHistory.remember(it, effectiveSearchRules) }
+    }
+    private fun editedSearch() {
+        searchHistoryDraft = if (effectiveSearchRules.active) recentSearchHistory.generation else null
+    }
+
+    /** Reuse is cancellable, validates access off the UI thread, and never edits a Smart Folder. */
+    internal suspend fun reuseRecentSearch(item: RecentSearch, here: Boolean): String? {
+        val generation = recentSearchHistory.generation
+        val tabId = tabs[activeTab].id
+        val activePaneBefore = windowState.activePane.value to dualPane
+        val before = location to effectiveSearchRules
+        val target = (if (here) recentSearchRoot() else item.root)
+            ?: return "Open a folder or library before choosing Search here."
+        fun stillSaved() = recentSearchHistory.state.searches.any { it.id == item.id && it.root == item.root && it.rules == item.rules }
+        fun libraryAvailable() = when {
+            target == "@recent" || target == "@trash" -> true
+            target.startsWith("@tag:") -> tagDefinitions.any { target == "@tag:${it.name}" }
+            target.startsWith("@collection:") -> collections.any { target == "@collection:${it.id}" }
+            else -> false
+        }
+        if (!stillSaved()) return "That recent search was removed. Choose another search."
+        val available = if (target.startsWith("@")) libraryAvailable() else withContext(Dispatchers.IO) {
+            try { allowedPath(target) && documents.read(target).folder }
+            catch (error: Exception) {
+                if (error is kotlinx.coroutines.CancellationException) throw error
+                false
+            }
+        }
+        if (this !in session.panes || tabs[activeTab].id != tabId ||
+            (windowState.activePane.value to dualPane) != activePaneBefore || (location to effectiveSearchRules) != before)
+            return "The current tab or search changed. Choose the recent search again."
+        if (generation != recentSearchHistory.generation || !stillSaved())
+            return "Recent searches changed. Choose the search again."
+        if (!available || target.startsWith("@") && !libraryAvailable())
+            return if (here) "This location isn't available. Reconnect storage or open another folder."
+                else "The original location isn't available. Reconnect storage, or choose Search here."
+        rememberCurrentSearch()
+        if (location != target) navigate(target)
+        updateSearchRules(item.rules.historyCopy())
+        return null
+    }
+
+
     var smartFolders by session.smartFolders
         private set
 
@@ -1369,6 +1426,8 @@ constructor(
             searchRules = rules.copy(name = "")
             query = rules.name
         }
+        editedSearch()
+        rememberCurrentSearch()
         clearSelection()
         persistTabs()
         refresh(debounce = true)
@@ -1602,6 +1661,7 @@ constructor(
     }
 
     internal fun flushNavigationState() {
+        rememberCurrentSearch()
         navigationSaveJob?.cancel()
         persistTabs()
     }
@@ -1665,6 +1725,7 @@ constructor(
     }
 
     private fun restoreTabState() {
+        discardSearchDraft()
         val tab = tabs[activeTab]
         applyLocationView()
         query = tab.search
@@ -1756,6 +1817,7 @@ constructor(
     }
 
     fun navigate(path: String) {
+        rememberCurrentSearch()
         if (path == location) {
             updateQuery("")
             return
@@ -1784,6 +1846,7 @@ constructor(
 
     fun back(): Boolean {
         if (tabs[activeTab].index <= 0) return false
+        rememberCurrentSearch()
         saveTabState()
         val tab = tabs[activeTab]
         tabs =
@@ -1807,6 +1870,7 @@ constructor(
 
     fun forward() {
         if (tabs[activeTab].index >= tabs[activeTab].history.lastIndex) return
+        rememberCurrentSearch()
         saveTabState()
         val tab = tabs[activeTab]
         tabs =
@@ -1837,6 +1901,7 @@ constructor(
             return
         }
         saveTabState()
+        if (activate) rememberCurrentSearch()
         val insertion = if (atEnd) tabs.size else maxOf(activeTab + 1, tabs.count { it.pinned })
         tabs = tabs.toMutableList().also { it.add(insertion, FinderTab(listOf(path))) }
         if (activate) {
@@ -1848,6 +1913,7 @@ constructor(
 
     fun switchTab(index: Int) {
         if (index !in tabs.indices || index == activeTab) return
+        rememberCurrentSearch()
         saveTabState()
         activeTab = index
         restoreTabState()
@@ -1860,6 +1926,7 @@ constructor(
 
     fun duplicateTab(index: Int) {
         if (index !in tabs.indices) return
+        rememberCurrentSearch()
         saveTabState()
         if (tabs.size >= 64) {
             message = "This pane already has 64 tabs."
@@ -1903,6 +1970,7 @@ constructor(
             message = "Unpin this tab before closing it."
             return
         }
+        if (index == activeTab) rememberCurrentSearch()
         saveTabState()
         val active = tabs[activeTab].id
         closedTabs = (closedTabs + tabs[index]).takeLast(20)
@@ -1919,6 +1987,7 @@ constructor(
 
     fun closeOtherTabs(index: Int) {
         if (index !in tabs.indices) return
+        rememberCurrentSearch()
         saveTabState()
         val kept = tabs[index]
         closedTabs =
@@ -1936,6 +2005,7 @@ constructor(
             return
         }
         saveTabState()
+        rememberCurrentSearch()
         val tab = closedTabs.last()
         closedTabs = closedTabs.dropLast(1)
         val insertion =
@@ -2293,7 +2363,9 @@ constructor(
 
     fun updateQuery(value: String) {
         saveTabState()
+        val changed = query != value
         query = value
+        if (changed) editedSearch()
         clearSelection()
         persistTabs()
         refresh(debounce = true)
@@ -2779,6 +2851,7 @@ constructor(
                 pane.searchRules = pane.searchRules.remapTags(replacements)
             }
         }
+        recentSearchHistory.remap(names)
         relocateOrganization(names)
         syncTags()
         styleStore.relocate(names)
@@ -4662,6 +4735,7 @@ constructor(
     }
 
     override fun onCleared() {
+        rememberCurrentSearch()
         if (analysisState.isInitialized()) analysis.close()
         if (checksumState.isInitialized()) checksums.close()
         if (housekeepingState.isInitialized()) housekeeping.close()

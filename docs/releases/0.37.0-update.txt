@@ -1,0 +1,9 @@
+Recent searches and suggestions
+
+Open More → Recent searches to review up to 20 finished queries and their full filters. Search here, search the original location, or inspect exact exclusions before reusing them. Smart Folder rules stay independent.
+
+While typing, choose one of up to three matching recent searches with touch or arrow keys and Enter. Choosing a suggestion replaces the typed prefix without saving the prefix as another search.
+
+Pause recording, remove an entry, or clear history. These controls persist across restarts and are shared across panes and windows. History stores criteria and references, never result entries or content snippets, and stays out of setup backups.
+
+Unavailable locations leave the current tab unchanged. Slow providers cannot overwrite a newer query, tab or active pane. Tablet dialogs scroll at enlarged text sizes.

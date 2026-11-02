@@ -181,19 +181,15 @@ fun RefinedToolbar(
                 } else if (searchActive) {
                     var placed by remember { mutableStateOf(false) }
                     LaunchedEffect(placed, focusRequest) { if (placed) searchFocus.requestFocus() }
-                    BasicTextField(
-                        value = model.query,
-                        onValueChange = model::updateQuery,
-                        modifier =
-                            Modifier.weight(1f)
-                                .padding(horizontal = 8.dp)
-                                .height(36.dp)
-                                .focusRequester(searchFocus)
-                                .onGloballyPositioned { placed = true }
-                                .onFocusChanged { onSearchFocused(it.isFocused) },
+                    SearchQueryField(
+                        model = model,
+                        modifier = Modifier.weight(1f).padding(horizontal = 8.dp),
+                        fieldModifier = Modifier.fillMaxWidth().height(36.dp)
+                            .focusRequester(searchFocus)
+                            .onGloballyPositioned { placed = true },
                         textStyle = TextStyle(color = Ink, fontSize = 13.sp, letterSpacing = 0.sp),
-                        cursorBrush = SolidColor(Blue),
-                        singleLine = true,
+                        onFocused = onSearchFocused,
+                        action = action,
                         decorationBox = { inner ->
                             Row(
                                 Modifier.fillMaxSize()

@@ -314,6 +314,7 @@ fun FinderApp(
                     "folderViews" -> dialog = "folderViews"
                     "about" -> dialog = "about"
                     "filters" -> dialog = "filters"
+                    "recentSearches" -> { model.rememberCurrentSearch(); dialog = "recentSearches" }
                     "saveSearch" -> dialog = "saveSearch"
                     "renameSmart" -> dialog = "renameSmart"
                     "settings" -> dialog = "settings"
@@ -586,7 +587,7 @@ fun FinderApp(
                                     "cancel" -> {
                                         if (addressActive) addressActive = false
                                         else if (searchFocused) {
-                                            model.updateQuery("")
+                                            model.finishAndClearSearchQuery()
                                             searchActive = false
                                         } else {
                                             model.clearSelection()
@@ -647,7 +648,7 @@ fun FinderApp(
                             focusRequest = keyboardFocusRequest,
                             onSearchFocused = { searchFocused = it },
                             onCloseSearch = {
-                                model.updateQuery("")
+                                model.finishAndClearSearchQuery()
                                 searchActive = false
                                 rootFocus.requestFocus()
                             },
@@ -811,6 +812,7 @@ fun FinderApp(
                         },
                     )
                 "filters" -> SearchFiltersDialog(model) { dialog = null }
+                "recentSearches" -> RecentSearchesDialog(model, action) { dialog = null }
                 "launcher", "quickJump" -> ExplorerLauncherDialog(model, dialog == "quickJump", action) { dialog = null }
                 "settings" -> PreferencesDialog(model, onUpdates = {
                     dialog = null
@@ -1616,6 +1618,7 @@ internal fun ActionMenu(
             action("collections")
         }
         MenuAction("Search filters…", Icons.Outlined.FilterAlt) { action("filters") }
+        MenuAction("Recent searches…", Icons.Outlined.History) { action("recentSearches") }
         MenuAction(
             "Save search as Smart Folder…",
             Icons.Outlined.SavedSearch,

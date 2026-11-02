@@ -45,6 +45,8 @@ class FinderSession(
 
     val smartFolders = mutableStateOf(loadSmartFolders())
 
+    internal val recentSearches = RecentSearchHistory(PreferencesRecentSearchPersistence(prefs))
+
     val density =
         mutableStateOf(
             runCatching { FinderDensity.valueOf(prefs.getString("density", "COMFORTABLE")!!) }

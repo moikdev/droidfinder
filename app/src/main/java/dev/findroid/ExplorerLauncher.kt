@@ -57,6 +57,7 @@ private fun launcherCommands(model: FinderModel): List<LauncherChoice> {
         command("info", "Get file information", "Review the selected files", selection, "properties size metadata"),
         command("hidden", if (model.showHidden) "Hide hidden files" else "Show hidden files", "Change the current view", keywords = "dot files visibility"),
         command("filters", "Search filters…", "Names, types, dates, sizes and tags", keywords = "find criteria"),
+        command("recentSearches", "Recent searches…", "Reuse queries and filters, pause recording or clear history", keywords = "find suggestions history recent query"),
         command("tags", "Tags…", "Organize files with named tags", keywords = "labels colors"),
         command("collections", "Collections…", "Manage cross-folder references", keywords = "library organization"),
         command("recentActions", "Recent actions…", "Undo, Redo and reasons recovery stopped in this session", keywords = "undo redo history recover changed files"),

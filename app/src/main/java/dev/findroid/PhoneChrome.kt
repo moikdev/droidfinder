@@ -138,13 +138,15 @@ internal fun PhoneToolbar(
                     decorationBox = decoration,
                 )
             else
-                BasicTextField(
-                    model.query,
-                    model::updateQuery,
-                    field,
-                    singleLine = true,
+                SearchQueryField(
+                    model = model,
+                    modifier = Modifier.weight(1f),
+                    fieldModifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)
+                        .focusRequester(searchFocus)
+                        .onGloballyPositioned { placed = true },
                     textStyle = TextStyle(color = Ink, fontSize = 15.sp),
-                    cursorBrush = SolidColor(Blue),
+                    onFocused = onSearchFocused,
+                    action = action,
                     decorationBox = decoration,
                 )
             if (!addressActive)
