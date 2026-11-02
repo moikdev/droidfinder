@@ -21,7 +21,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 15 | Make identical favorite names distinct | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
 | 16 | Offer quick folder navigation | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
 | 17 | Improve trackpad and stylus polish | Open. Needs physical trackpad/stylus and palm-interaction acceptance. |
-| 18 | Extend workspace recovery | Implemented in 0.34.0: reviewed per-destination repairs, Open once, durable saved repairs and Smart Folder-root recovery. 360 JVM checks, 132 native cases per API30/API36 tablet, optimized 0.33 upgrade, real folder choice, restart and enlarged-text acceptance. See [validation](../VALIDATION.md). |
+| 18 | Extend workspace recovery | Implemented in 0.34.1: reviewed per-destination repairs, Open once, durable saved repairs and Smart Folder-root recovery. 360 JVM checks, 133 native cases per API30/API36 tablet, optimized 0.33 upgrade, real folder choice, restart, repeated task replacement and enlarged-text acceptance. See [validation](../VALIDATION.md). |
 | 19 | Add an optional local index | Open. Implementation and focused acceptance pending. |
 | 20 | Highlight matches in results | Open. Implementation and focused acceptance pending. |
 | 21 | Add saved search history and suggestions | Open. Implementation and focused acceptance pending. |
@@ -74,10 +74,10 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 68 | Add localization and RTL support | Open. Initial language selection and native review remain open. |
 | 69 | Benchmark startup and everyday browsing | Open. Needs real-tablet battery and performance measurements. |
 | 70 | Make optimized-build UI checks repeatable | Partial: repeatable optimized migration/reorder/restart, menu, setup export/import/recovery, saved-workspace repair and enlarged-text capture scripts. Portrait/split/dark comparisons remain open. |
-| 71 | Expand the failure matrix | Partial: setup transaction write faults/process-death boundaries, changed grants, stale reviews and corrupt recovery are covered in 0.33. Workspace publication faults, disk changes, future catalogs and window closure are covered in 0.34. Physical-media removal, full storage and the broader provider matrix remain open. |
+| 71 | Expand the failure matrix | Partial: setup transaction write faults/process-death boundaries, changed grants, stale reviews and corrupt recovery are covered in 0.33. Workspace publication faults, disk changes, future catalogs and window closure are covered in 0.34.1. Physical-media removal, full storage and the broader provider matrix remain open. |
 | 72 | Finish release infrastructure | Open. Hosted Actions stays manual-only; long-term signing/recovery needs owner-controlled key custody. |
 
-17 items are implemented across the 0.32.0–0.34.0 increments; 55 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
+17 items are implemented across the 0.32.0–0.34.1 increments; 55 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
 
 ## Verification per increment
 

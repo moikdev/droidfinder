@@ -1,6 +1,23 @@
 # Android preview verification
 
+## Findroid 0.34.1 — saved-workspace recovery with safe task replacement
+
+Verified locally on November 2, 2026:
+
+- **360 JVM tests pass**, with no failures, errors or skips. Debug, native-test, optimized preview and unsigned release builds pass. Lint has **0 errors, 143 warnings and 11 hints**.
+- **133/133 native cases pass on each API30 and API36 tablet emulator**, with no skips, in 621.6 and 983.2 seconds respectively. This repeats the complete 0.34 recovery/setup/sidebar/browsing/drag/updater/workspace/input bundle and adds the closed-primary regression. A live secondary shares the primary controller; clearing the window removes both panes while the outgoing primary's controller remains readable.
+- **Optimized 0.33 → 0.34.1 upgrade and recovery acceptance pass on both APIs.** Native finger input opens the real Workspaces row and replacement picker. Open once preserves the saved catalog byte-for-byte. Reviewed saved repairs survive restart and reopen, changing only the missing destination while preserving the working tab, another saved layout, pins, queries, rules, pane settings, original synthetic bytes and an unrelated preference.
+- **Repeated Android task replacement passes on both optimized builds.** Each host run replaces the task three times without force-stopping the app, checks the restored layout each time and confirms the same process stays alive. This reproduces the boundary missed by 0.34's local checks and found during its public OTA run.
+- **Actual optimized screenshots were inspected on both APIs**, including font scale 1.6 with all review/footer controls reachable. See [missing location](docs/screenshots/workspace-recovery-tablet.png), [repair review](docs/screenshots/workspace-recovery-review-tablet.png) and [enlarged text](docs/screenshots/workspace-recovery-large-text-tablet.png). Exact original metadata/preferences and text scale are restored; only synthetic fixture roots are removed.
+- The preview is **8,275,119 bytes**, SHA-256 `cf26f6deff01179cd216ad75f18179dc445a6d888fc81ae2cf6bb29fc82d8527`. The signing certificate remains the same as 0.33, allowing an in-place update from 0.33 or the withdrawn 0.34.
+
+The fix reads the closing primary model's own recovery controller instead of looking it up in the live pane registry. Atomic workspace publication and its window-closure guard are unchanged. Use `scripts/check-workspace-recovery.py` with the 0.34.1 preview and 0.33 previous APK to repeat optimized acceptance; `scripts/package-workspace-validation.py` checks the final 133-case reports and the additional process-preservation check before including evidence. The original 0.34 archive remains frozen, and its failed post-install boundary is recorded below.
+
+Public downloads and OTA upgrades from 0.33 and 0.34 will be recorded after patch publication. The final validation archive excludes private setup snapshots, original document payloads, signing keys and credentials. This completes proposal **18**; **17 of 72 are implemented, 55 remain open or partial**. Physical tablets, TalkBack, USB/SD removal and actual third-party providers remain open. GitHub Actions remains manual-only.
+
 ## Findroid 0.34.0 — recover saved workspace destinations
+
+**Withdrawn during public OTA acceptance.** The API30 download and Android install succeeded, but replacing the task afterward crashed while the outgoing Compose frame looked up an already-closed primary pane. 0.34.0 was removed from the public feed. Its passing local checks below preceded that discovery; 0.34.1 adds the lifecycle fix and expanded acceptance.
 
 Local checks on November 2, 2026:
 
@@ -21,7 +38,7 @@ python3 scripts/check-workspace-recovery.py --serial <dedicated-tablet> \
   --output <evidence-directory>
 ```
 
-`docs/fixtures/workspace-recovery.json` contains two controlled synthetic layouts. `scripts/package-workspace-validation.py` uses an explicit whitelist for the fixture, final JVM/native/lint reports, host scripts and inspected captures. Private original setup snapshots, document payloads, signing keys and credentials are excluded. The signing certificate remains `e7bee2db540fcbb0633d82870b2c4e3d14ecc0c18474b1a7c73d47eb0bf92c08`, matching 0.33. Public download and OTA acceptance are recorded after publication.
+`docs/fixtures/workspace-recovery.json` contains two controlled synthetic layouts. `scripts/package-workspace-validation.py` uses an explicit whitelist for the fixture, final JVM/native/lint reports, host scripts and inspected captures. Private original setup snapshots, document payloads, signing keys and credentials are excluded. The signing certificate remains `e7bee2db540fcbb0633d82870b2c4e3d14ecc0c18474b1a7c73d47eb0bf92c08`, matching 0.33. The five immutable public assets matched anonymous downloads and the API36 live-feed case passed, but the final API30 post-install check exposed the crash described above; final public OTA acceptance did not pass for 0.34.0.
 
 This increment implements proposal **18**, bringing the implemented total to **17 of 72**; **55 remain open or partial** in [the tracker](docs/IMPROVEMENT-TRACKER.md). Physical tablets, TalkBack, USB/SD removal and actual third-party providers remain open. GitHub Actions remains manual-only.
 

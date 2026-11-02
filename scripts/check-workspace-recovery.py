@@ -149,6 +149,12 @@ def main():
         device.click('save-repairs','Save repairs and open'); opened('restored-layout'); device.capture('restored-layout')
         stop(); launch(); opened('restart'); device.capture('persisted-layout')
         workspaces(); opened('reopen-saved-layout')
+        process = device.shell('pidof', 'dev.findroid').decode().strip()
+        assert process
+        for attempt in range(3):
+            launch(); opened('replaced-activity-' + str(attempt))
+            assert device.shell('pidof', 'dev.findroid').decode().strip() == process, 'Task replacement restarted the app process'
+        report['repeatedTaskReplacementKeepsProcessAndRecoveryController'] = True
         report.update(realFolderPicker=True,reviewedRepair=True,restartPersistence=True,reopeningRepairedLayoutNeedsNoRecovery=True)
         install(debug)
         actual = json.loads(read('files/workspaces.json'))

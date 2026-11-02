@@ -1,6 +1,6 @@
 # Open a saved layout when storage has changed
 
-Findroid 0.34 checks the folders used by a saved workspace before opening it. An available layout opens immediately. If a destination is missing, Findroid shows which tabs use it and lets you reconnect storage or choose replacement folders.
+Findroid 0.34.1 checks the folders used by a saved workspace before opening it. An available layout opens immediately. If a destination is missing, Findroid shows which tabs use it and lets you reconnect storage or choose replacement folders.
 
 Use **More → Workspaces…** and open a named layout. The recovery flow stays inside Workspaces and adds no permanent toolbar controls.
 
@@ -32,7 +32,7 @@ For an existing Smart Folder, Findroid also checks its search root. If that root
 
 ## Rechecking and saving
 
-The choices and review survive Activity recreation. The final action rechecks original and replacement availability, the saved workspace, and relevant Smart Folder definitions. A changed grant, reconnected destination, edited layout or changed search requires a fresh review.
+The choices and review survive Activity recreation. The 0.34.1 update also fixes a crash when Android closes and reopens a task. The final action rechecks original and replacement availability, the saved workspace, and relevant Smart Folder definitions. A changed grant, reconnected destination, edited layout or changed search requires a fresh review.
 
 Saving waits for file operations and other workspace writes to finish. The shared workspace writer publishes the repaired catalog through its existing AtomicFile store before opening the layout. Other workspace mutations are blocked during that publication. If saving fails, the previous in-memory layout is retained and **Open once** remains available. A catalog changed on disk or using a future format is preserved instead of being overwritten by a stale review.
 
@@ -44,7 +44,7 @@ This is separate from [setup backup and restore](SETUP-BACKUP.md), which imports
 
 ```sh
 python3 scripts/check-workspace-recovery.py \
-  --serial <dedicated-tablet> --apk <0.34-preview.apk> \
+  --serial <dedicated-tablet> --apk <0.34.1-preview.apk> \
   --previous-apk <0.33-preview.apk> --output <evidence-directory>
 ```
 

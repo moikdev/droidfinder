@@ -1,6 +1,6 @@
 # Saved locations and reference repair — 0.24.0
 
-Saved workspaces now have their own [reviewed destination-recovery flow](WORKSPACE-RECOVERY.md) in 0.34.0. It repairs only unavailable current tab destinations in the selected layout, with Open once and Save repairs and open. The broader Saved locations/reference tools below remain available for Favorites, tags, collections and other references.
+Saved workspaces now have their own [reviewed destination-recovery flow](WORKSPACE-RECOVERY.md) in 0.34.1. It repairs only unavailable current tab destinations in the selected layout, with Open once and Save repairs and open. The broader Saved locations/reference tools below remain available for Favorites, tags, collections and other references.
 
 Open **Actions → Tags… → Tag library → Saved locations…** to inspect the locations used by tags and collections. Collection member details also expose **Locate replacement…**. The native utility windows keep their actions in a fixed footer and adapt to tablet window width. Phone-specific layouts remain deferred.
 

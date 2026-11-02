@@ -32,7 +32,7 @@ The [prioritized next-improvements list](NEXT-IMPROVEMENTS.md) contains 72 concr
 - [x] Per-tab scroll/focus/expansion restoration, pinned tabs, active-tab reveal and tab overview (0.9.0).
 - [x] Touch tab reorder, named workspaces and per-folder view/sort/group/column preferences (0.9.0–0.10.0), including pane defaults, folder profile management and detail-column resizing.
 
-- [x] Saved-layout availability checks and reviewed per-destination repairs, Open once, durable repair publication, offline Smart Folder root replacement and preservation of working tabs/pane settings (0.34.0). See [WORKSPACE-RECOVERY.md](WORKSPACE-RECOVERY.md).
+- [x] Saved-layout availability checks and reviewed per-destination repairs, Open once, durable repair publication, offline Smart Folder root replacement and preservation of working tabs/pane settings (0.34.1). See [WORKSPACE-RECOVERY.md](WORKSPACE-RECOVERY.md).
 
 ## 4. Performance and search
 - [x] Shared natural filename sorting, Unicode decimal digits, stable name/path tie-breaks across views/searches/archives/destination browsers, and a large-folder batch throttling correction (local 0.27.0 preview); see NATURAL-SORTING.md.

@@ -119,6 +119,16 @@ class WorkspaceRecoveryPersistenceTest {
         assertEquals(listOf(saved), model.savedWorkspaces)
         assertTrue(model.workspaceRecovery.visible)
     }
+    @Test fun aClosedPrimaryKeepsItsControllerReadableForOutgoingComposition() = exercise { model, _, _, _, owner ->
+        val controller = model.workspaceRecovery
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        instrumentation.runOnMainSync {
+            assertSame(controller, model.secondaryPane.workspaceRecovery)
+            owner.clear()
+            assertTrue(model.windowState.panes.isEmpty())
+            assertSame(controller, model.workspaceRecovery)
+        }
+    }
     @Test fun closingTheWindowDuringPublicationFinishesSavingWithoutRecreatingItsPanes() = exercise { model, disk, _, replacement, owner ->
         disk.entered = CountDownLatch(1); disk.release = CountDownLatch(1)
         val instrumentation = InstrumentationRegistry.getInstrumentation()

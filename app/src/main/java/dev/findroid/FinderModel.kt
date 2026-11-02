@@ -368,7 +368,10 @@ constructor(
     fun openWorkspace(id: String) = workspaceRecovery.open(id)
 
     private val workspaceRecoveryState = lazy { WorkspaceRecoveryController(this, viewModelScope) }
-    internal val workspaceRecovery get() = primaryPane.workspaceRecoveryState.value
+    // A closing primary pane can still be read by its outgoing Compose frame after
+    // deregistration. Its controller belongs to this model, not the live pane list.
+    internal val workspaceRecovery get() =
+        if (paneId == "primary") workspaceRecoveryState.value else primaryPane.workspaceRecoveryState.value
 
     internal fun restoreWorkspaceSnapshot(saved: SavedWorkspace) {
         primaryPane.restorePane(saved.primary)

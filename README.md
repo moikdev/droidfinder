@@ -6,9 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.33.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
-
-*0.34.0 was withdrawn after the public OTA check found a crash when Android replaces an activity. Use 0.33.0 while the 0.34.1 lifecycle fix completes verification. Saved-workspace recovery below is part of that upcoming patch.*
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.34.1-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with the sidebar, file list, simple toolbar and preview panel](docs/screenshots/findroid-tablet.png)
 
@@ -16,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.33.0 release](https://github.com/moikdev/findroid/releases/tag/v0.33.0-preview) and download **`Findroid-0.33.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.34.1 release](https://github.com/moikdev/findroid/releases/tag/v0.34.1-preview) and download **`Findroid-0.34.1-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.

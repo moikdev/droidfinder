@@ -1,0 +1,7 @@
+Fixes the activity-replacement crash found during 0.34.0 OTA acceptance. Reopening a task keeps the outgoing recovery controller readable while the screen closes.
+
+Open saved workspaces with changed or disconnected storage. Review the affected pane/tab destinations, reconnect storage or choose replacement folders, and keep working tabs intact.
+
+Choose Open once to leave the saved layout unchanged, or Save repairs and open to update only that workspace. Pinning, queries, pane sizes, view settings and active-pane choices survive. Unrelated missing back-history entries do not block opening.
+
+Offline Smart Folder roots can be repaired for the saved tab while retaining their filters and the tab's extra query; the shared Smart Folder stays unchanged. Read-only replacement folders work. Availability, edited layouts/searches and the on-disk catalog are rechecked before saving. Android 11+; optimized development-signed preview. Install over the existing app to retain files and settings.
