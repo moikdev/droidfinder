@@ -18,11 +18,11 @@ The list keeps up to 20 searches, most recently used first. Repeating the same q
 
 The search field offers up to three matching recent searches. A suggestion restores the complete query and filters in the current location. The prefix you typed to find that suggestion is discarded.
 
-Tap a suggestion, or use **↓ / ↑** to highlight one and press **Enter**. Pressing Enter without highlighting a suggestion finishes the literal query you typed. Choose **Recent searches…** in the popup to review the full list.
+Tap a suggestion, or use **↓ / ↑** to highlight one and press **Enter**. Pressing Enter without highlighting a suggestion finishes the literal query you typed. Choose **Recent searches…** in the popup to review the full list. Finishing a query or choosing a suggestion returns keyboard focus to the file list, so **F4** can open the address bar immediately.
 
 ## Choose where to search
 
-Each history entry offers two named actions:
+Use **Filter recent searches** to find a query by its name, filters, or original location. Each history entry offers these named actions:
 
 | Action | Result |
 |---|---|

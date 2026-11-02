@@ -17,7 +17,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT/'captures/recent-searches'
 RELEASE = ROOT/'captures/release/0.37.0'
-REQUIRED = ('actual036Upgrade','explicitRestoredQuerySubmit','installedOptimizedBytes','inlineTouchSuggestion','fullRulesSearchHere',
+REQUIRED = ('actual036Upgrade','keyboardFocusAfterSubmit','keyboardFocusAfterSuggestion','explicitRestoredQuerySubmit','installedOptimizedBytes','inlineTouchSuggestion','fullRulesSearchHere',
             'literalExclusionsPreserved','originalLocationReuse','unavailableOriginalPreservesTab',
             'smartFolderCopyIndependent','exactFullCriteriaPersisted','noTypedPrefixPollution','noSavedResultBytes','historySurvivesRestart',
             'pauseAndClearSurviveRestart','unrelatedPreferencePreserved','favoritePreserved','originalFileBytes','restoredOriginalSetup')
@@ -82,7 +82,7 @@ def main():
     native_ids=[]
     for api in (30,36):
         path=EVIDENCE/f'api{api}-native.json'; native=load(path); accepted(native)
-        assert native['passed']==277 and len(native['isolatedBatches'])==29
+        assert native['passed']==279 and len(native['isolatedBatches'])==29
         assert native['apkSha256']==native['installedApkSha256']==debug_hashes
         identities={(row['class'],row['test']) for row in native['cases']}
         assert len(identities)==native['passed']; native_ids.append(identities); files.append(path)
@@ -90,6 +90,10 @@ def main():
             for key,hash_key in (('report','reportSha256'),('log','logSha256')):
                 path=ROOT/batch[key]; assert sha(path)==batch[hash_key]; files.append(path)
             accepted(load(ROOT/batch['report']))
+        focus=load(EVIDENCE/f'api{api}-shortcut-focus-after-fix.json'); accepted(focus)
+        assert focus['passed']==2 and focus['apkSha256']==focus['installedApkSha256']==debug_hashes
+        assert {case['test'] for case in focus['cases']}=={'choosingSuggestionRestoresExplorerKeyboardFocus','submittingQueryRestoresExplorerKeyboardFocus'}
+        files += [EVIDENCE/f'api{api}-shortcut-focus-after-fix.json',EVIDENCE/f'api{api}-shortcut-focus-after-fix.txt']
         folder=EVIDENCE/f'api{api}-optimized'; report=load(folder/'verification.json')
         assert report['apkSha256']==expected and all(report[key] for key in REQUIRED)
         initial=ET.parse(folder/'initial-empty.xml').getroot()
@@ -109,14 +113,23 @@ def main():
         layouts=report['layouts']
         assert {(row['widthDp'],float(row['fontScale'])) for row in layouts}=={(w,s) for w in (600,800,1280) for s in (1.0,1.6)}
         for row in layouts:
-            assert all(row[key] for key in ('footerVisible','fullOriginalButtonVisible','rememberToggleReachable'))
+            assert all(row[key] for key in ('footerVisible','fullOriginalButtonVisible','rememberToggleReachable','originalRootFiltered'))
             key=f'{row["widthDp"]}dp-font{row["fontScale"]}'
             width,height=png_size(folder/(key+'-history.png')); density=width/row['widthDp']
+            filtered=ET.parse(folder/(key+'-filtered-history.xml')).getroot()
+            assert any(n.get('class')=='android.widget.EditText' and n.get('text')=='Writing project' for n in filtered.iter('node'))
+            assert any(n.get('text','').startswith('Writing project · ') for n in filtered.iter('node'))
+            assert not any(n.get('text','').startswith('Research project · ') for n in filtered.iter('node'))
             tree=ET.parse(folder/(key+'-history-capture.xml')).getroot()
             for label in ('Close','Clear history','Search original location'):
-                assert visible_control(tree,label,width,height,32*density),(api,key,label)
+                assert visible_control(tree,label,width,height,48*density),(api,key,label)
             controls=ET.parse(folder/(key+'-controls-capture.xml')).getroot()
-            assert visible_control(controls,'Remember searches',width,height,32*density),(api,key)
+            assert visible_control(controls,'Remember searches',width,height,48*density),(api,key)
+        # Inspect the actual nonfocused popup, independently of the workflow receipt.
+        width,height=png_size(folder/'recent-search-suggestions.png')
+        popup=ET.parse(folder/'recent-search-suggestions-capture.xml').getroot()
+        assert popup.tag=='displays'
+        assert visible_control(popup,'Search here: Report',width,height,48*density),(api,'suggestion bounds')
         final=ET.parse(folder/'paused-after-restart.xml').getroot()
         assert 'No recent searches' in text(final) and 'Recording is paused.' in text(final)
         files += [folder/name for name in ('verification.json','synthetic-history.json','synthetic-smart-folders.json')]+list(folder.glob('*.png'))+list(folder.glob('*.xml'))
@@ -140,7 +153,12 @@ def main():
     files += [ROOT/'captures/workspace-recovery/native-environment.py']
     files += [EVIDENCE/name for name in ('native-source-hashes.json','native-classes.txt','public-downloads.json','api36-live-feed.json',
         'api36-live-feed.txt','restored-public-tablets.json','final-debug-checks.txt','release-build.txt','signing-continuity.json','rejected-attempts.json',
-        'verify-public.py','restore-public-tablets.py','run-live-feed.py','verify-validation.py')]
+        'verify-public.py','restore-public-tablets.py','run-live-feed.py','verify-validation.py','write-release-body.py','finalize-docs.py')]
+    # Retain rejected candidate failures separately from the accepted build's counts.
+    files += [EVIDENCE/name for name in ('rejected-native/api30-organization-first.json','rejected-native/api30-organization-first.txt',
+        'api30-organization-diagnostic.json','api30-organization-diagnostic.txt',
+        'rejected-native/api30-input-first.json','rejected-native/api30-input-first.txt',
+        'rejected-native/api36-shortcut-focus-before-fix.json','rejected-native/api36-shortcut-focus-before-fix.txt')]
     for name,source in [('recent-searches-tablet','recent-searches-tablet'),('recent-search-suggestions','recent-search-suggestions'),
                         ('recent-search-unavailable','recent-search-unavailable'),('recent-search-large-text','600dp-font1.6-history')]:
         assert sha(ROOT/'docs/screenshots'/(name+'.png'))==sha(EVIDENCE/'api36-optimized'/(source+'.png'))
@@ -151,14 +169,14 @@ def main():
         assert path.suffix not in ('.apk','.jks','.keystore','.bin')
         assert 'native-original' not in path.parts and 'bugreport' not in path.name
     manifest={'applicationSourceCommit':info['source_commit'],'evidenceCommit':evidence_commit,'previewApkSha256':expected,
-              'jvmCases':422,'nativeCasesPerApi':277,'isolatedBatchesPerApi':29,
+              'jvmCases':422,'nativeCasesPerApi':279,'isolatedBatchesPerApi':29,
               'files':[{'path':str(path.relative_to(ROOT)),'sha256':sha(path),'bytes':path.stat().st_size} for path in files]}
     args.output.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(args.output,'x',zipfile.ZIP_DEFLATED) as archive:
         archive.writestr('EVIDENCE.json',json.dumps(manifest,indent=2)+'\n')
         for path in files: archive.write(path,path.relative_to(ROOT))
     result={'archive':args.output.name,'bytes':args.output.stat().st_size,'sha256':sha(args.output),'entries':len(files)+1,
-            'applicationSourceCommit':info['source_commit'],'evidenceCommit':evidence_commit,'jvmCases':422,'nativeCasesPerApi':277,'isolatedBatchesPerApi':29}
+            'applicationSourceCommit':info['source_commit'],'evidenceCommit':evidence_commit,'jvmCases':422,'nativeCasesPerApi':279,'isolatedBatchesPerApi':29}
     (EVIDENCE/'validation-package.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
 

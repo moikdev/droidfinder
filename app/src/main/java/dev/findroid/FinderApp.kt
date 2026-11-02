@@ -647,6 +647,7 @@ fun FinderApp(
                             searchFocus = searchFocus,
                             focusRequest = keyboardFocusRequest,
                             onSearchFocused = { searchFocused = it },
+                            onSearchFinished = { rootFocus.requestFocus() },
                             onCloseSearch = {
                                 model.finishAndClearSearchQuery()
                                 searchActive = false

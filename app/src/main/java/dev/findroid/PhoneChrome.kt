@@ -48,6 +48,7 @@ internal fun PhoneToolbar(
     searchFocus: FocusRequester,
     focusRequest: Int,
     onSearchFocused: (Boolean) -> Unit,
+    onSearchFinished: () -> Unit,
     onCloseSearch: () -> Unit,
     menuExpanded: Boolean,
     onMenuChange: (Boolean) -> Unit,
@@ -146,6 +147,7 @@ internal fun PhoneToolbar(
                         .onGloballyPositioned { placed = true },
                     textStyle = TextStyle(color = Ink, fontSize = 15.sp),
                     onFocused = onSearchFocused,
+                    onFinished = onSearchFinished,
                     action = action,
                     decorationBox = decoration,
                 )

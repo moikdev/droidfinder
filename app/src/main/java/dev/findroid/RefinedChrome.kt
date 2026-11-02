@@ -49,6 +49,7 @@ fun RefinedToolbar(
     searchFocus: FocusRequester,
     focusRequest: Int,
     onSearchFocused: (Boolean) -> Unit,
+    onSearchFinished: () -> Unit,
     onCloseSearch: () -> Unit,
     menuExpanded: Boolean,
     onMenuChange: (Boolean) -> Unit,
@@ -69,6 +70,7 @@ fun RefinedToolbar(
             searchFocus,
             focusRequest,
             onSearchFocused,
+            onSearchFinished,
             onCloseSearch,
             menuExpanded,
             onMenuChange,
@@ -189,6 +191,7 @@ fun RefinedToolbar(
                             .onGloballyPositioned { placed = true },
                         textStyle = TextStyle(color = Ink, fontSize = 13.sp, letterSpacing = 0.sp),
                         onFocused = onSearchFocused,
+                        onFinished = onSearchFinished,
                         action = action,
                         decorationBox = { inner ->
                             Row(

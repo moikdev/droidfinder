@@ -42,6 +42,7 @@ internal fun SearchQueryField(
     fieldModifier: Modifier,
     textStyle: TextStyle,
     onFocused: (Boolean) -> Unit,
+    onFinished: () -> Unit,
     action: (String) -> Unit,
     decorationBox: @Composable (@Composable () -> Unit) -> Unit,
 ) {
@@ -64,19 +65,22 @@ internal fun SearchQueryField(
     var selected by remember(model.query, suggestions.map { it.id }) { mutableIntStateOf(-1) }
     val expanded = focused && windowFocused && !applying && model.query.isNotBlank() && dismissedQuery != model.query && suggestions.isNotEmpty()
     DisposableEffect(model) { onDispose { model.rememberCurrentSearch() } }
+    fun finishInput() {
+        focus.clearFocus()
+        keyboard?.hide()
+        onFinished()
+    }
     fun submit() {
         model.submitSearchQuery()
         dismissedQuery = model.query
-        focus.clearFocus()
-        keyboard?.hide()
+        finishInput()
     }
     fun choose(search: RecentSearch) {
         // Choosing a completed suggestion replaces the typed prefix; don't save the prefix.
         model.discardSearchDraft()
         dismissedQuery = model.query
         applying = true
-        focus.clearFocus()
-        keyboard?.hide()
+        finishInput()
         scope.launch {
             try { model.reuseRecentSearch(search, here = true)?.let { model.message = it } }
             finally { applying = false }

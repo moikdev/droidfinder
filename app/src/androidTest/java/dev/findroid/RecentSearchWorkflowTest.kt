@@ -81,6 +81,16 @@ class RecentSearchWorkflowTest {
             compose.onNodeWithContentDescription("Search").performClick()
     }
     private fun field() = compose.onNodeWithContentDescription("Search files")
+    private fun addressShortcutAfterSearch() {
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        val now = android.os.SystemClock.uptimeMillis()
+        for (action in listOf(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.ACTION_UP))
+            instrumentation.sendKeySync(android.view.KeyEvent(now, android.os.SystemClock.uptimeMillis(), action,
+                android.view.KeyEvent.KEYCODE_F4, 0))
+        instrumentation.waitForIdleSync()
+        compose.waitUntil(5_000) { compose.onAllNodesWithContentDescription("Address bar").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithContentDescription("Address bar").assertIsFocused()
+    }
     private fun historyClick(tag: String) {
         compose.onNodeWithTag("recent-searches-list").performScrollToNode(hasTestTag(tag))
         compose.onNodeWithTag(tag).assertIsDisplayed().performClick()
@@ -190,6 +200,17 @@ class RecentSearchWorkflowTest {
             assertEquals(listOf("Report"), history.state.searches.map { it.rules.name })
             assertEquals(source.path, model.location)
         }
+    }
+    @Test fun choosingSuggestionRestoresExplorerKeyboardFocus() {
+        val item = remember()
+        openSearch(); field().performTextInput("Rep")
+        compose.onNodeWithTag("recent-search-suggestion-${item.id}").performClick(); loaded()
+        addressShortcutAfterSearch()
+    }
+    @Test fun submittingQueryRestoresExplorerKeyboardFocus() {
+        openSearch(); field().performTextInput("Report")
+        field().performImeAction(); loaded()
+        addressShortcutAfterSearch()
     }
     @Test fun arrowKeysAndEnterChooseTheHighlightedSuggestionWithoutPrefixPollution() {
         val older = remember(rules = SearchRules(name = "Report 2026", kind = "Text document"))

@@ -27,7 +27,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     assert args.serial in {'emulator-5602', 'emulator-5582'}, 'Use an assigned acceptance tablet.'
-    device = AndroidDevice(args.serial, args.output)
+    device = AndroidDevice(args.serial, args.output, all_windows=True)
     debug = ROOT/'app/build/outputs/apk/debug/app-debug.apk'
     demo = '/storage/emulated/0/Download/Findroid history demo ' + str(time.time_ns())[-10:]
     source, target = demo+'/Writing project', demo+'/Research project'
@@ -138,14 +138,25 @@ def main():
             for _ in range(24):
                 tree=device.dump(name); surface=dialog(tree)
                 panes=[n for n in surface.iter('node') if n.get('scrollable')=='true']
-                assert len(panes)==1,[n.attrib for n in panes]
-                pane=panes[0]; parents={child:parent for parent in pane.iter() for child in parent}
+                if not panes:
+                    # LazyColumn has no scroll action when every row fits. Find the
+                    # same content viewport without extending bounds into the footer.
+                    ancestors={child:parent for parent in surface.iter() for child in parent}
+                    pane=device.one(surface,'Filter recent searches')
+                    while not device.nodes(pane,'Remember searches'):
+                        assert pane in ancestors; pane=ancestors[pane]
+                    assert not device.nodes(pane,'Close') and not device.nodes(pane,'Clear history')
+                else:
+                    assert len(panes)==1,[n.attrib for n in panes]
+                    pane=panes[0]
+                parents={child:parent for parent in pane.iter() for child in parent}
                 scope=pane
                 if root:
                     subtitles=[n for n in pane.iter('node') if n.get('text','').startswith(root+' · ')]
                     if len(subtitles)==1:
-                        scope=subtitles[0]
-                        while not device.nodes(scope,label) and scope in parents: scope=parents[scope]
+                        scope=parents[subtitles[0]]
+                        # Never climb into the list and borrow another search's button.
+                        assert scope is not pane
                     else: scope=ET.Element('missing')
                 matches=device.nodes(scope,label)
                 if label=='Remember searches': matches=[n for n in matches if n.get('content-desc')==label and n.get('checkable')=='true']
@@ -154,7 +165,7 @@ def main():
                     while control.get('clickable')!='true' and control in parents: control=parents[control]
                     if within(control,pane): return tree,control
                 signature=tuple((n.get('text'),n.get('content-desc'),n.get('bounds')) for n in pane.iter('node'))
-                if signature==previous: break
+                if signature==previous or pane.get('scrollable')!='true': break
                 previous=signature
                 l,t,r,b=device.bounds(pane); x=(l+r)//2
                 start,end=(.8,.3) if direction==1 else (.3,.8)
@@ -166,10 +177,22 @@ def main():
         tree=device.dump(name); device.tap(device.one(dialog(tree),'Close'))
     def replace_field(name,description,text):
         tree=device.wait(name,lambda t: bool(device.nodes(t,description)))
-        node=device.one(tree,description); old=node.get('text','')
+        def editable(tree):
+            parents={child:parent for parent in tree.iter() for child in parent}
+            node=device.one(tree,description)
+            # BasicTextField may expose its description on a decoration child.
+            while node.get('class')!='android.widget.EditText':
+                assert node in parents; node=parents[node]
+            return node
+        node=editable(tree); old=node.get('text','')
         device.tap(node)
-        device.shell('input','keyevent',123,*([67]*len(old)))
+        device.wait(name+'-focused',lambda t: editable(t).get('focused')=='true')
+        # Clear both sides of the caret. A tap can move it while Android is still
+        # delivering the focus/cursor update, making an immediate End unreliable.
+        if old: device.shell('input','keyevent',*([67]*len(old)),*([112]*len(old)))
+        device.wait(name+'-empty',lambda t: editable(t).get('text','')=='')
         if text: device.shell('input','text',text.replace(' ','%s'))
+        device.wait(name+'-replaced',lambda t: editable(t).get('text','')==text)
     def go(name,path):
         device.shell('input','keyevent',134)  # Existing F4 address shortcut.
         replace_field(name+'-address','Address bar',path)
@@ -201,6 +224,10 @@ def main():
         device.shell('input','keyevent',133)  # Explicit Enter on an unchanged restored query.
         device.wait('restored-query-field',lambda t: bool(device.nodes(t,'Search files')))
         device.shell('input','keyevent',66)
+        device.shell('input','keyevent',134)
+        device.wait('shortcut-after-submit',lambda t: bool(device.nodes(t,'Address bar')))
+        device.click('close-submit-address','Close address bar')
+        report['keyboardFocusAfterSubmit']=True
         recent('explicit-restored-submit')
         device.wait('restored-query-recorded',lambda t: any(n.get('text','').startswith('Writing project · ') for n in t.iter('node')))
         close_history('close-explicit-submit'); report['explicitRestoredQuerySubmit']=True
@@ -212,8 +239,11 @@ def main():
         device.shell('input','keyevent',133); replace_field('type-prefix','Search files','Rep')
         device.wait('inline-suggestions',lambda t: bool(device.nodes(t,'Search here: Report')))
         device.capture('recent-search-suggestions')
-        device.click('choose-suggestion','Search here: Report'); browser('reused-suggestion','Report current.txt')
-        go('new-target',target); recent('history-here')
+        device.click('choose-suggestion','Search here: Report')
+        device.wait('suggestion-restored-query',lambda t: any(n.get('class')=='android.widget.EditText' and n.get('text')=='Report' for n in t.iter('node')))
+        browser('reused-suggestion','Report current.txt')
+        go('new-target',target); report['keyboardFocusAfterSuggestion']=True
+        recent('history-here')
         click_history('reuse-here','Search here','Writing project'); browser('searched-here','Report here.txt')
         device.wait('exact-exclusion-retained',lambda t: bool(device.nodes(t,'Report nested.txt')))
         report.update(inlineTouchSuggestion=True,fullRulesSearchHere=True,literalExclusionsPreserved=True)
@@ -234,16 +264,27 @@ def main():
                 stop(); device.shell('wm','size',f'{round(width*density)}x{round(800*density)}')
                 device.screen=(round(width*density),round(800*density))
                 device.shell('settings','put','system','font_scale',scale); launch(); browser(key+'-browser')
-                tree=recent(key+'-history')
+                recent(key+'-history')
+                replace_field(key+'-filter','Filter recent searches','Writing project')
+                tree=device.dump(key+'-filter-keyboard')
+                if any(w.get('type')=='TYPE_INPUT_METHOD' for w in tree.iter('window')):
+                    device.shell('input','keyevent',4)
+                tree=device.wait(key+'-filtered-history',lambda t: bool(device.nodes(t,'Recent searches'))
+                    and not any(w.get('type')=='TYPE_INPUT_METHOD' for w in t.iter('window'))
+                    and any(n.get('text','').startswith('Writing project · ') for n in t.iter('node'))
+                    and not any(n.get('text','').startswith('Research project · ') for n in t.iter('node')))
+                surface=dialog(tree); parents={child:parent for parent in surface.iter() for child in parent}
                 for label in ('Close','Clear history'):
-                    node=device.one(dialog(tree),label); l,t,r,b=device.bounds(node)
+                    node=device.one(surface,label)
+                    while node.get('clickable')!='true' and node in parents: node=parents[node]
+                    l,t,r,b=device.bounds(node)
                     assert 0<=l<r<=device.screen[0] and 0<=t<b<=device.screen[1] and b-t>=32*density
-                click_history(key+'-expand','Show filters','Writing project')
-                history_control(key+'-original','Search original location','Writing project')
+                click_history(key+'-expand','Show filters')
+                history_control(key+'-original','Search original location')
                 device.capture(key+'-history')
                 history_control(key+'-remember','Remember searches'); device.capture(key+'-controls')
                 close_history(key+'-close')
-                layouts.append({'widthDp':width,'fontScale':scale,'footerVisible':True,'fullOriginalButtonVisible':True,'rememberToggleReachable':True})
+                layouts.append({'widthDp':width,'fontScale':scale,'footerVisible':True,'fullOriginalButtonVisible':True,'rememberToggleReachable':True,'originalRootFiltered':True})
         report['layouts']=layouts
         stop(); device.shell('wm','size',original_size); device.shell('settings','put','system','font_scale','1.0')
         device.screen=tuple(map(int,re.findall(r'(\d+)x(\d+)',device.shell('wm','size').decode())[-1]))

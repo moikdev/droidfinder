@@ -13,8 +13,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class AndroidDevice:
-    def __init__(self, serial, output):
+    def __init__(self, serial, output, *, all_windows=False):
         self.serial = serial
+        self.all_windows = all_windows
         self.output = Path(output)
         self.output.mkdir(parents=True, exist_ok=True)
         self.sdk = Path(os.environ.get('ANDROID_SDK_ROOT') or os.environ.get('ANDROID_HOME') or Path.home() / 'Library/Android/sdk')
@@ -67,10 +68,26 @@ class AndroidDevice:
         return any(n.get('enabled') == 'true' for n in self.nodes(tree, label))
 
     def dump(self, name):
-        self.shell('uiautomator', 'dump', self.xml)
+        self.shell('uiautomator', 'dump', *(['--windows'] if self.all_windows else []), self.xml)
         data = self.call('exec-out', 'cat', self.xml)
         (self.output / (name + '.xml')).write_bytes(data)
-        return ET.fromstring(data)
+        tree = ET.fromstring(data)
+        if self.all_windows:
+            assert tree.tag == 'displays', 'The platform did not provide an all-window dump.'
+            # A child window can be emitted both at display level and below its
+            # parent. Retain one hierarchy per actual accessibility window ID.
+            seen = set()
+            def unique_windows(parent):
+                for child in list(parent):
+                    if child.tag == 'window' and child.get('id') is not None:
+                        key = child.get('id')
+                        if key in seen:
+                            parent.remove(child)
+                            continue
+                        seen.add(key)
+                    unique_windows(child)
+            unique_windows(tree)
+        return tree
 
     def wait(self, name, predicate, seconds=45):
         deadline = time.monotonic() + seconds
