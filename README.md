@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.33.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.34.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with the sidebar, file list, simple toolbar and preview panel](docs/screenshots/findroid-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.33.0 release](https://github.com/moikdev/findroid/releases/tag/v0.33.0-preview) and download **`Findroid-0.33.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.34.0 release](https://github.com/moikdev/findroid/releases/tag/v0.34.0-preview) and download **`Findroid-0.34.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -69,6 +69,14 @@ Choose **Edit** beside Favorites to hide unused built-in locations or create col
 ![An ordered Favorites sidebar with custom labels, a Work group and an unavailable folder](docs/screenshots/sidebar-management-tablet.png)
 
 *Actual optimized Android tablet capture with synthetic folders. [Sidebar and navigation guide](docs/SIDEBAR-AND-NAVIGATION.md).*
+
+### Reopen a project after storage changes
+
+A saved two-pane workspace can outlive a disconnected drive or a moved folder. Findroid checks its tab destinations before opening and names the tabs that need attention. Reconnect the storage or choose a replacement, then review the changes.
+
+**Open once** tries the repaired layout without changing its saved copy. **Save repairs and open** remembers the new locations in that workspace. Working tabs, pane layout, pinned tabs and search filters stay in place. [Workspace recovery guide](docs/WORKSPACE-RECOVERY.md).
+
+![Reviewing a replacement folder for one tab while keeping the rest of a saved workspace intact](docs/screenshots/workspace-recovery-review-tablet.png)
 
 ### Take your setup to another tablet
 
@@ -192,4 +200,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, and setup backup have shipped in verified increments. Work continues on missing-location recovery, clearer actions, search, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, and saved-workspace recovery have shipped in verified increments. Work continues on clearer actions, search, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).

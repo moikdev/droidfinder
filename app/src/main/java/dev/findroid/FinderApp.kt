@@ -142,6 +142,7 @@ fun FinderApp(
             if (model.batchRename.visible) ReviewedRenameDialog(model, onOpenWith)
             if (model.organization.visible) OrganizationDialog(model)
             if (model.setup.visible) SetupDialog(model)
+            if (workspaceModel.workspaceRecovery.visible) WorkspaceRecoveryDialog(workspaceModel, onConnectFolder)
             LaunchedEffect(model.storageRequested) {
                 if (model.storageRequested) {
                     dialog = "storage"

@@ -1,0 +1,279 @@
+{
+  "version": 1,
+  "workspaces": [
+    {
+      "id": "unaffected-layout",
+      "name": "Unchanged layout",
+      "primary": {
+        "tabs": [
+          {
+            "id": "unaffected-layout-primary-1",
+            "history": [
+              "/storage/FINDROID-QA-LAYOUT/Working project"
+            ],
+            "index": 0,
+            "query": "",
+            "rules": {
+              "name": "",
+              "kind": "Any",
+              "tag": "",
+              "days": 0,
+              "min": 0,
+              "max": 0,
+              "content": "",
+              "terms": [],
+              "tags": [],
+              "tagMatch": "ALL",
+              "includeSubfolders": true,
+              "excludedFolderNames": []
+            },
+            "pinned": false,
+            "navigation": {
+              "selected": [],
+              "expanded": [],
+              "multiple": false,
+              "budgets": [],
+              "positions": []
+            }
+          }
+        ],
+        "active": 0,
+        "mode": "LIST",
+        "layout": 0,
+        "sort": "NAME",
+        "ascending": true,
+        "group": "NONE",
+        "hidden": false,
+        "foldersFirst": true,
+        "preview": false,
+        "details": false,
+        "icons": 120,
+        "column": 240,
+        "inspector": 280,
+        "columns": {
+          "date": true,
+          "size": true,
+          "kind": true,
+          "dateWidth": 150,
+          "sizeWidth": 75,
+          "kindWidth": 110,
+          "adaptive": true
+        },
+        "fit": false
+      },
+      "secondary": {
+        "tabs": [
+          {
+            "id": "unaffected-layout-secondary-1",
+            "history": [
+              "/storage/FINDROID-QA-LAYOUT/Working project"
+            ],
+            "index": 0,
+            "query": "",
+            "rules": {
+              "name": "",
+              "kind": "Any",
+              "tag": "",
+              "days": 0,
+              "min": 0,
+              "max": 0,
+              "content": "",
+              "terms": [],
+              "tags": [],
+              "tagMatch": "ALL",
+              "includeSubfolders": true,
+              "excludedFolderNames": []
+            },
+            "pinned": false,
+            "navigation": {
+              "selected": [],
+              "expanded": [],
+              "multiple": false,
+              "budgets": [],
+              "positions": []
+            }
+          }
+        ],
+        "active": 0,
+        "mode": "LIST",
+        "layout": 0,
+        "sort": "NAME",
+        "ascending": true,
+        "group": "NONE",
+        "hidden": false,
+        "foldersFirst": true,
+        "preview": false,
+        "details": false,
+        "icons": 120,
+        "column": 240,
+        "inspector": 280,
+        "columns": {
+          "date": true,
+          "size": true,
+          "kind": true,
+          "dateWidth": 150,
+          "sizeWidth": 75,
+          "kindWidth": 110,
+          "adaptive": true
+        },
+        "fit": false
+      },
+      "dual": true,
+      "reversed": true,
+      "ratio": 0.6,
+      "activePane": "secondary"
+    },
+    {
+      "id": "layout-recovery",
+      "name": "Writing layout",
+      "primary": {
+        "tabs": [
+          {
+            "id": "layout-recovery-primary-1",
+            "history": [
+              "/storage/FINDROID-QA-LAYOUT/Working project"
+            ],
+            "index": 0,
+            "query": "",
+            "rules": {
+              "name": "",
+              "kind": "Any",
+              "tag": "",
+              "days": 0,
+              "min": 0,
+              "max": 0,
+              "content": "",
+              "terms": [],
+              "tags": [],
+              "tagMatch": "ALL",
+              "includeSubfolders": true,
+              "excludedFolderNames": []
+            },
+            "pinned": false,
+            "navigation": {
+              "selected": [],
+              "expanded": [],
+              "multiple": false,
+              "budgets": [],
+              "positions": []
+            }
+          },
+          {
+            "id": "layout-recovery-primary-2",
+            "history": [
+              "/storage/FINDROID-QA-LAYOUT/Old offline project"
+            ],
+            "index": 0,
+            "query": "",
+            "rules": {
+              "name": "",
+              "kind": "Any",
+              "tag": "",
+              "days": 0,
+              "min": 0,
+              "max": 0,
+              "content": "",
+              "terms": [],
+              "tags": [],
+              "tagMatch": "ALL",
+              "includeSubfolders": true,
+              "excludedFolderNames": []
+            },
+            "pinned": false,
+            "navigation": {
+              "selected": [],
+              "expanded": [],
+              "multiple": false,
+              "budgets": [],
+              "positions": []
+            }
+          }
+        ],
+        "active": 1,
+        "mode": "LIST",
+        "layout": 0,
+        "sort": "NAME",
+        "ascending": true,
+        "group": "NONE",
+        "hidden": false,
+        "foldersFirst": true,
+        "preview": false,
+        "details": false,
+        "icons": 120,
+        "column": 240,
+        "inspector": 280,
+        "columns": {
+          "date": true,
+          "size": true,
+          "kind": true,
+          "dateWidth": 150,
+          "sizeWidth": 75,
+          "kindWidth": 110,
+          "adaptive": true
+        },
+        "fit": false
+      },
+      "secondary": {
+        "tabs": [
+          {
+            "id": "layout-recovery-secondary-1",
+            "history": [
+              "/storage/FINDROID-QA-LAYOUT/Working project"
+            ],
+            "index": 0,
+            "query": "",
+            "rules": {
+              "name": "",
+              "kind": "Any",
+              "tag": "",
+              "days": 0,
+              "min": 0,
+              "max": 0,
+              "content": "",
+              "terms": [],
+              "tags": [],
+              "tagMatch": "ALL",
+              "includeSubfolders": true,
+              "excludedFolderNames": []
+            },
+            "pinned": false,
+            "navigation": {
+              "selected": [],
+              "expanded": [],
+              "multiple": false,
+              "budgets": [],
+              "positions": []
+            }
+          }
+        ],
+        "active": 0,
+        "mode": "LIST",
+        "layout": 0,
+        "sort": "NAME",
+        "ascending": true,
+        "group": "NONE",
+        "hidden": false,
+        "foldersFirst": true,
+        "preview": false,
+        "details": false,
+        "icons": 120,
+        "column": 240,
+        "inspector": 280,
+        "columns": {
+          "date": true,
+          "size": true,
+          "kind": true,
+          "dateWidth": 150,
+          "sizeWidth": 75,
+          "kindWidth": 110,
+          "adaptive": true
+        },
+        "fit": false
+      },
+      "dual": true,
+      "reversed": true,
+      "ratio": 0.6,
+      "activePane": "secondary"
+    }
+  ]
+}

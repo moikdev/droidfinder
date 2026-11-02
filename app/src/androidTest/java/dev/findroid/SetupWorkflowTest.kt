@@ -297,7 +297,7 @@ class SetupWorkflowTest {
         load(); review(); apply()
         assertEquals(current, model.location)
         compose.onNodeWithText("Open restored tabs workspace").performScrollTo().performClick()
-        compose.waitUntil(15_000) { !model.loading && !model.secondaryPane.loading }
+        compose.waitUntil(15_000) { !model.workspaceRecovery.working && !model.loading && !model.secondaryPane.loading }
         assertEquals(File(target, "Projects").path, model.location)
         assertTrue(model.dualPane)
         assertEquals(File(target, "Reference").path, model.secondaryPane.location)

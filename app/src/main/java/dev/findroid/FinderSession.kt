@@ -68,6 +68,7 @@ class FinderSession(
     val folderViews = FolderViews(folderViewPersistence)
     val workspaceMutex = Mutex()
     val workspaceWrites = androidx.compose.runtime.mutableIntStateOf(0)
+    val workspaceRepairing = mutableStateOf(false)
 
     val styleStore = FolderStyleStore(File(app.filesDir, "folder-styles.properties"))
 

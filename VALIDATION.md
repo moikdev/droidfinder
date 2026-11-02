@@ -1,5 +1,30 @@
 # Android preview verification
 
+## Findroid 0.34.0 — recover saved workspace destinations
+
+Local checks on November 2, 2026:
+
+- **360 JVM tests pass**, with no failures, errors or skips. The 13 new cases cover exact destination grouping and repair boundaries, working-tab history preservation, hidden panes, pinned queries/rules, Smart Folder filters and pane layout.
+- **132/132 native cases pass on each dedicated API30 and API36 tablet emulator**, with no skips. This includes 14 workspace-recovery workflows, five publication/failure cases, the existing workspace-save failure and navigation checks, plus setup, sidebar, browsing, internal/Favorites/outgoing/cross-app drag, updater and preview/input regression coverage. The final runs took 447.8 seconds on API30 and 673.3 seconds on API36.
+- **The optimized 0.34 preview passes on both APIs after an actual 0.33 upgrade.** Installed APK bytes match the tested build. Native touch opens the actual Workspaces row and replacement-folder picker. Open once leaves the saved catalog byte-for-byte unchanged; reviewed saved repairs survive restart and reopen without another recovery dialog. Only the missing destination changes; the working tab, other saved layout, pins, query, rules, pane layout, original synthetic file bytes and unrelated preference remain intact.
+- **Failure and provider-fixture boundaries pass.** Changed grants, read-only actual folder IDs, edited saved searches/layouts, write failures, concurrent workspace changes, external disk changes, future catalogs and window closure during publication are covered. These are controlled local/debug-provider cases; physical drive removal and actual third-party providers remain separate acceptance.
+- **Actual optimized Android screenshots were inspected on both APIs**, including font scale 1.6 with review and footer controls reachable. See [missing location](docs/screenshots/workspace-recovery-tablet.png), [review](docs/screenshots/workspace-recovery-review-tablet.png) and [enlarged text](docs/screenshots/workspace-recovery-large-text-tablet.png). Both host checks restore exact original metadata, preferences and text scale, remove only their synthetic fixture roots, and leave the optimized APK installed.
+- **Debug, native-test, optimized preview and unsigned release builds pass.** Lint reports **0 errors, 143 warnings and 11 hints**, unchanged from 0.33. The optimized preview is **8,275,119 bytes**, SHA-256 `b18a0090d906a9bbad22abc823f50f29515f5eaa49e49b20338b4dc52df06b7b`.
+
+The first focused API36 run exposed two test-selector problems: a broad substring assertion and a duplicate folder label behind the picker. Final selectors target the intended node; both complete runs above use the final source, including Smart Folder-root/filter recovery.
+
+Repeatable optimized acceptance:
+
+```sh
+python3 scripts/check-workspace-recovery.py --serial <dedicated-tablet> \
+  --apk <0.34-preview.apk> --previous-apk <0.33-preview.apk> \
+  --output <evidence-directory>
+```
+
+`docs/fixtures/workspace-recovery.json` contains two controlled synthetic layouts. `scripts/package-workspace-validation.py` uses an explicit whitelist for the fixture, final JVM/native/lint reports, host scripts and inspected captures. Private original setup snapshots, document payloads, signing keys and credentials are excluded. The signing certificate remains `e7bee2db540fcbb0633d82870b2c4e3d14ecc0c18474b1a7c73d47eb0bf92c08`, matching 0.33. Public download and OTA acceptance are recorded after publication.
+
+This increment implements proposal **18**, bringing the implemented total to **17 of 72**; **55 remain open or partial** in [the tracker](docs/IMPROVEMENT-TRACKER.md). Physical tablets, TalkBack, USB/SD removal and actual third-party providers remain open. GitHub Actions remains manual-only.
+
 ## Findroid 0.33.0 — setup backup, reviewed restore and portable references
 
 Local checks on November 2, 2026:

@@ -284,6 +284,7 @@ constructor(
     }
 
     fun saveWorkspace(name: String, replaceId: String? = null): Boolean {
+        if (session.workspaceRepairing.value) { message = "Wait for the workspace repairs to finish saving."; return false }
         val title = name.trim()
         if (workspaceError != null) {
             message = workspaceError
@@ -333,6 +334,7 @@ constructor(
     }
 
     fun renameWorkspace(id: String, name: String): Boolean {
+        if (session.workspaceRepairing.value) { message = "Wait for the workspace repairs to finish saving."; return false }
         if (workspaceError != null) {
             message = workspaceError
             return false
@@ -350,21 +352,23 @@ constructor(
     }
 
     fun retryWorkspaceSave() {
+        if (session.workspaceRepairing.value) { message = "Wait for the workspace repairs to finish saving."; return }
         if (session.workspaceStore.error != null) return
         session.workspaceError.value = null
         persistWorkspaces("Workspaces saved")
     }
 
     fun removeWorkspace(id: String) {
+        if (session.workspaceRepairing.value) { message = "Wait for the workspace repairs to finish saving."; return }
         if (workspaceError != null) return
         session.savedWorkspaces.value = savedWorkspaces.filterNot { it.id == id }
         persistWorkspaces()
     }
 
-    fun openWorkspace(id: String) {
-        val saved = savedWorkspaces.firstOrNull { it.id == id } ?: return
-        restoreWorkspaceSnapshot(saved)
-    }
+    fun openWorkspace(id: String) = workspaceRecovery.open(id)
+
+    private val workspaceRecoveryState = lazy { WorkspaceRecoveryController(this, viewModelScope) }
+    internal val workspaceRecovery get() = primaryPane.workspaceRecoveryState.value
 
     internal fun restoreWorkspaceSnapshot(saved: SavedWorkspace) {
         primaryPane.restorePane(saved.primary)

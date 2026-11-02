@@ -328,7 +328,7 @@ class NavigationWorkflowTest {
             model.changePaneRatio(.5f)
             model.openWorkspace(saved.id)
         }
-        compose.waitUntil(10_000) { !model.loading && !model.secondaryPane.loading }
+        compose.waitUntil(10_000) { !model.workspaceRecovery.working && !model.loading && !model.secondaryPane.loading }
         assertEquals(saved.primary.tabs.last().location, model.location)
         assertEquals(target.path, model.secondaryPane.location)
         assertEquals(ViewMode.COLUMNS, model.mode)
@@ -408,7 +408,7 @@ class NavigationWorkflowTest {
                 assertNotNull(model.busy)
             }
             gate.countDown()
-            compose.waitUntil(15_000) { model.busy == null && !model.loading }
+            compose.waitUntil(15_000) { model.busy == null && !model.workspaceRecovery.working && !model.loading }
             assertEquals(256 * 1024, File(target, "Gate.bin").length().toInt())
             assertFalse(File(base, "Gate.bin").exists())
             assertEquals(1, model.selected.size)
