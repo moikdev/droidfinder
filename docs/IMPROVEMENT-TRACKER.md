@@ -5,11 +5,11 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | # | Improvement | State and remaining acceptance |
 |---|---|---|
 | 1 | Explain gestures once, where they happen | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
-| 2 | Keep primary actions predictable | In progress: stable named tablet actions and selection-scoped controls. |
-| 3 | Explain unavailable commands | In progress: shared command policy, interactive menu explanations and relevant recovery actions. |
+| 2 | Keep primary actions predictable | Implemented in 0.35.0; 384 JVM checks, 214 native cases per API30/API36 tablet, optimized upgrade/layout acceptance and real public OTA on both. See [Commands and Undo](COMMANDS-AND-UNDO.md) and [validation](../VALIDATION.md). |
+| 3 | Explain unavailable commands | Implemented in 0.35.0; 384 JVM checks, 214 native cases per API30/API36 tablet, optimized upgrade/layout acceptance and real public OTA on both. See [Commands and Undo](COMMANDS-AND-UNDO.md) and [validation](../VALIDATION.md). |
 | 4 | Show the full destination before long moves | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
 | 5 | Improve multi-selection clarity | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
-| 6 | Make Undo easier to reach | In progress: named recent-action surface with guarded Undo/Redo and failure explanations. |
+| 6 | Make Undo easier to reach | Implemented in 0.35.0; 384 JVM checks, 214 native cases per API30/API36 tablet, optimized upgrade/layout acceptance and real public OTA on both. See [Commands and Undo](COMMANDS-AND-UNDO.md) and [validation](../VALIDATION.md). |
 | 7 | Use task-specific empty states | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
 | 8 | Add a searchable action launcher | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
 | 9 | Separate simple and advanced preferences | Implemented in 0.32.0; 317 JVM checks, 79 native cases per API30/API36 tablet, optimized migration/reorder/restart acceptance. See [validation](../VALIDATION.md). |
@@ -77,7 +77,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 71 | Expand the failure matrix | Partial: setup transaction write faults/process-death boundaries, changed grants, stale reviews and corrupt recovery are covered in 0.33. Workspace publication faults, disk changes, future catalogs and window closure are covered in 0.34.1. Physical-media removal, full storage and the broader provider matrix remain open. |
 | 72 | Finish release infrastructure | Open. Hosted Actions stays manual-only; long-term signing/recovery needs owner-controlled key custody. |
 
-17 items are implemented across the 0.32.0–0.34.1 increments; 55 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
+20 items are implemented across the 0.32.0–0.35.0 increments; 52 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
 
 ## Verification per increment
 

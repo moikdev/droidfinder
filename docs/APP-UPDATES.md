@@ -60,3 +60,10 @@ The real **0.33 → 0.34.1** in-app public-feed download and Android installer u
 0.34.0 was withdrawn after its public OTA run exposed a crash when replacing an Android task. 0.34.1 fixes the recovery-controller read after its primary pane closes. Before publication, each optimized API30/API36 run replaced the task three times with the same process alive. The separate API36 production-source check passes 1/1 and explicitly confirms code 35, name 0.34.1-preview and the exact public APK hash. Both tablets finish with their original app metadata/preferences, font scale 1.0 and the public optimized APK.
 
 The signing certificate is unchanged. Update over either installed version; keep the app installed to retain its private Workspace. See [workspace recovery](WORKSPACE-RECOVERY.md) for this increment's feature behavior. The [validation guide](../VALIDATION.md) separates these emulator results from physical/OEM acceptance.
+
+
+## 0.35.0 public upgrade acceptance
+
+The real **0.34.1 → 0.35** public-feed download and Android installer upgrade passes on both dedicated API30/API36 tablets. Each installs the exact anonymously downloaded APK, preserves the synthetic original file, legacy Favorite and unrelated preference, and reports [up to date](screenshots/app-updates-035.png). Reopening the updater replaces the task without the old lifecycle crash.
+
+The separate production-source API36 check passes 1/1 for code 36, name 0.35.0-preview, the exact public APK digest, package/signature and no repeat offer. Both tablets finish with their original metadata/preferences, font scale 1.0 and the exact public optimized APK. The signing certificate is unchanged. Physical/OEM acceptance remains separate. See [the command and Undo guide](COMMANDS-AND-UNDO.md) and [validation](../VALIDATION.md).

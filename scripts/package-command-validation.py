@@ -41,7 +41,7 @@ SOURCES = ('app/src/main/java/dev/findroid/CommandAvailability.kt',
            'app/src/androidTest/java/dev/findroid/CommandClarityWorkflowTest.kt',
            'scripts/check-command-clarity.py', 'scripts/check-device.py', 'scripts/check-ota-upgrade.py',
            'scripts/package-command-validation.py', 'scripts/check-device-batches.py', 'scripts/android/acceptance.py', 'scripts/android/NativeTap.java',
-           'docs/COMMANDS-AND-UNDO.md', 'docs/IMPROVEMENT-TRACKER.md', 'docs/releases/0.35.0.md',
+           'docs/COMMANDS-AND-UNDO.md', 'docs/APP-UPDATES.md', 'docs/screenshots/app-updates-035.png', 'docs/IMPROVEMENT-TRACKER.md', 'docs/releases/0.35.0.md',
            'docs/releases/0.35.0-update.txt', 'README.md', 'VALIDATION.md', 'PARITY.md',
            'docs/screenshots/commands-tablet.png', 'docs/screenshots/recent-actions-tablet.png',
            'docs/screenshots/command-explanation-tablet.png')
@@ -196,6 +196,7 @@ def main():
     for source, image in [('tablet-primary','commands-tablet'),('recent-guarded','recent-actions-tablet'),
                           ('unavailable-command','command-explanation-tablet')]:
         assert (ROOT/'docs/screenshots'/(image+'.png')).read_bytes() == (EVIDENCE/'api36-optimized'/(source+'.png')).read_bytes()
+    assert (ROOT/'docs/screenshots/app-updates-035.png').read_bytes()==(EVIDENCE/'api30-ota/up-to-date.png').read_bytes()
     files = sorted(set(files))
     for path in files: assert path.is_file(), path
     args.output.parent.mkdir(parents=True,exist_ok=True)
