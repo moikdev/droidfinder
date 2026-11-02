@@ -75,6 +75,13 @@ def main():
     lint=ROOT/'app/build/reports/lint-results-debug.xml'
     assert not any(issue.get('severity') in ('Error','Fatal') for issue in ET.parse(lint).getroot())
     files.append(lint)
+    # Native tests may be strengthened after the application build. Require every
+    # application source byte to remain identical to the clean APK source commit.
+    for path in (ROOT/'app/src/main').rglob('*'):
+        if path.is_file():
+            tracked=str(path.relative_to(ROOT))
+            data=subprocess.check_output(['git','show',info['source_commit']+':'+tracked],cwd=ROOT)
+            assert hashlib.sha256(data).hexdigest()==sha(path),tracked
     source_hashes=load(EVIDENCE/'native-source-hashes.json')
     for path,digest in source_hashes.items(): assert sha(ROOT/path)==digest,path
     assert source_hashes['app/build/outputs/apk/preview/app-preview.apk']==expected
@@ -159,6 +166,19 @@ def main():
         'api30-organization-diagnostic.json','api30-organization-diagnostic.txt',
         'rejected-native/api30-input-first.json','rejected-native/api30-input-first.txt',
         'rejected-native/api36-shortcut-focus-before-fix.json','rejected-native/api36-shortcut-focus-before-fix.txt')]
+    rejected=load(EVIDENCE/'rejected-native/api30-history-filter-first.json')
+    assert not rejected['success'] and rejected['passed']==19 and rejected['failed']==1
+    files += [EVIDENCE/'rejected-native/api30-history-filter-first.json',EVIDENCE/'rejected-native/api30-history-filter-first.txt']
+    second=load(EVIDENCE/'rejected-native/api30-history-filter-second.json')
+    assert not second['success'] and second['passed']==19 and second['failed']==1
+    files += [EVIDENCE/'rejected-native/api30-history-filter-second.json',EVIDENCE/'rejected-native/api30-history-filter-second.txt']
+    for attempt in range(1,4):
+        report=load(EVIDENCE/f'api30-history-filter-diagnostic-{attempt}.json'); accepted(report)
+        assert report['passed']==1 and report['apkSha256']==report['installedApkSha256']
+        assert report['apkSha256']['app/build/outputs/apk/debug/app-debug.apk']==debug_hashes['app/build/outputs/apk/debug/app-debug.apk']
+        assert report['apkSha256']['app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk']=='277ab45c961e5d29f8e49165760708bae69edcc86b44ff166305a05ed8cd3ab8'
+        assert report['cases'][0]['test']=='historyDialogSupportsFilteringPausingRemovingAndClearing'
+        files += [EVIDENCE/f'api30-history-filter-diagnostic-{attempt}.json',EVIDENCE/f'api30-history-filter-diagnostic-{attempt}.txt']
     for name,source in [('recent-searches-tablet','recent-searches-tablet'),('recent-search-suggestions','recent-search-suggestions'),
                         ('recent-search-unavailable','recent-search-unavailable'),('recent-search-large-text','600dp-font1.6-history')]:
         assert sha(ROOT/'docs/screenshots'/(name+'.png'))==sha(EVIDENCE/'api36-optimized'/(source+'.png'))

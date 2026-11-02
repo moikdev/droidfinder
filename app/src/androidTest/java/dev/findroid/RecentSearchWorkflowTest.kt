@@ -367,7 +367,9 @@ class RecentSearchWorkflowTest {
     @Test fun historyDialogSupportsFilteringPausingRemovingAndClearing() {
         val report = remember(); remember(rules = SearchRules(name = "Notes")); recent()
         compose.onNodeWithTag("recent-search-filter").performTextInput("Report")
-        compose.onNodeWithTag("recent-search-${report.id}").assertExists()
+        // The IME can move a LazyColumn item outside the merged visible tree.
+        compose.onNodeWithTag("recent-searches-list").performScrollToNode(hasTestTag("recent-search-${report.id}"))
+        compose.onNodeWithTag("recent-search-${report.id}").assertIsDisplayed()
         compose.onNode(hasText("Notes") and hasAnyAncestor(hasTestTag("recent-searches"))).assertDoesNotExist()
         historyClick("remember-recent-searches")
         compose.runOnIdle { assertFalse(history.state.enabled) }
