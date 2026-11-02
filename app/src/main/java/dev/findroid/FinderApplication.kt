@@ -47,6 +47,22 @@ class FinderApplication : Application(), ViewModelStoreOwner {
         get() = mainModel.value
 
     private val windowStores = mutableMapOf<String, ViewModelStore>()
+    private val windowOwners = mutableMapOf<String, MutableSet<Any>>()
+
+    internal fun retainWindow(id: String, owner: Any) {
+        if (id != "main") windowOwners.getOrPut(id) { mutableSetOf() }.add(owner)
+    }
+
+    internal fun releaseWindow(id: String, owner: Any, finishing: Boolean) {
+        if (id == "main") return
+        val owners = windowOwners[id] ?: return
+        if (!owners.remove(owner)) return
+        if (owners.isEmpty()) {
+            windowOwners.remove(id)
+            // A configuration change retains the store for its replacement Activity.
+            if (finishing) releaseWindow(id)
+        }
+    }
 
     internal fun windowModel(id: String, initialPath: String?): FinderModel {
         if (id == "main") return model
@@ -83,7 +99,7 @@ class FinderApplication : Application(), ViewModelStoreOwner {
     }
 
     internal fun releaseWindow(id: String) {
-        if (id == "main") return
+        if (id == "main" || windowOwners[id]?.isNotEmpty() == true) return
         windowStores.remove(id)?.clear()
         deleteSharedPreferences("finder-window-$id")
         deleteSharedPreferences("finder-window-$id-primary")

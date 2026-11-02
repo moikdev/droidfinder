@@ -1,6 +1,6 @@
 # Search across chosen folders
 
-Development increment for 0.38. The published preview remains 0.37 while native and optimized-build acceptance runs.
+Development increment for 0.38.1. The published preview remains 0.37. The first 0.38 candidate was withdrawn after public OTA acceptance exposed a secondary-window teardown crash; the replacement adds lifecycle ownership and regression checks before publication.
 
 Open **More → Search locations…**, or find “Search locations” in the action launcher. Choose up to ten folders from Workspace, tablet storage, connected providers, tabs, or Favorites. Read-only folders can be included.
 

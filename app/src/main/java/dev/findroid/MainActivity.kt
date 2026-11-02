@@ -19,6 +19,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 
 class MainActivity : ComponentActivity() {
+    private val windowOwner = Any()
+    private var retainedWindowId: String? = null
     internal val finderWindowId: String
         get() =
             intent.getStringExtra("finderWindowId")?.takeIf {
@@ -42,8 +44,18 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
+        // Android can create the replacement Activity before destroying this one.
+        // Remove the outgoing UI before its last owner clears the pane store.
+        val content = findViewById<android.view.ViewGroup>(android.R.id.content)
+        for (index in 0 until (content?.childCount ?: 0)) {
+            (content?.getChildAt(index) as? androidx.compose.ui.platform.ComposeView)
+                ?.disposeComposition()
+        }
         super.onDestroy()
-        if (isFinishing) (application as FinderApplication).releaseWindow(finderWindowId)
+        retainedWindowId?.let { id ->
+            (application as FinderApplication).releaseWindow(id, windowOwner, isFinishing)
+        }
+        retainedWindowId = null
     }
 
     private val updates: AppUpdateController
@@ -173,6 +185,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        retainedWindowId = finderWindowId
+        (application as FinderApplication).retainWindow(finderWindowId, windowOwner)
         folderRequestPaneId = savedInstanceState?.getString("folderRequestPane")
         folderReconnectRoot = savedInstanceState?.getString("folderReconnectRoot")
         enableEdgeToEdge(

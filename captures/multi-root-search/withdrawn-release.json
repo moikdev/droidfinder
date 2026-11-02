@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "61f1d377daae05b2bb9bcca9ca3b1ceb19d592b7",
+  "releaseWithdrawn": true,
+  "reason": "Repeated CLEAR_TASK replacement of the same non-main window ID crashed after real public OTA installation on both APIs; outgoing composition accessed a primary pane after its window store was cleared. Final OTA acceptance did not pass.",
+  "acceptedNativeCasesPerApiBeforeFailure": 304,
+  "acceptedNativeBatchesPerApiBeforeFailure": 31,
+  "acceptedJvmCasesBeforeFailure": 451,
+  "optimizedLayoutsPerApiBeforeFailure": 6,
+  "releaseArtifactsUnchanged": {
+    "Findroid-0.38.0-preview.apk": "04dc6a7640dd0d9f3cb271a83faa5da44c288902da483d923a563fa0a3e69fde",
+    "findroid-update.json": "9fad037ed4e461f56daff68288568d7e1ec257b759f8d450910809593424ea87",
+    "Findroid-0.38.0-unsigned.apk": "670c9733d46a4026a4eecf2c122816c0191df066b00424bfa5c24a45197f6f31",
+    "SHA256SUMS": "f59eb653f7c10821c09ece5c6600a5b02e13f8467e707b25cef597f1518e91fe",
+    "BUILDINFO.json": "60d606708357b20bb357b7a98e5d5ac803e309b61ee067e72607c30de42e7067"
+  },
+  "replacementVersion": "0.38.1-preview",
+  "replacementVersionCode": 40,
+  "privateOriginalSetupRestoredByBothFailedOtaRuns": true,
+  "regressionReproducer": {
+    "test": "dev.findroid.WindowLifecycleWorkflowTest#replacingTheSameCustomWindowTaskKeepsAWorkingDisplayedPane",
+    "appApkSha256": "6dfbba4f8eb897c39dd15c031bbd926bf490de9e2626886f44cbf00fe2b39479",
+    "testApkSha256": "0758cac08fbc2f79aaa5d6d440a18df9775137d87bf7d61725a756decdba124d",
+    "correctedFixtureReproducesSameCrash": true,
+    "runnerCompleted": false,
+    "failed": 1,
+    "report": "captures/multi-root-search/api30-window-regression-corrected-before-fix.json",
+    "earlierFixtureCorrection": "The first test used the private cache outside the supported Workspace browse root and failed a location assertion before exercising replacement. It was corrected to a synthetic Workspace folder and readiness wait, then reproduced the real crash. Neither rejected run counts toward acceptance."
+  }
+}

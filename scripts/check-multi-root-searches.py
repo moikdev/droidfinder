@@ -24,6 +24,7 @@ def main():
     parser.add_argument('--serial', required=True)
     parser.add_argument('--apk', type=Path, required=True)
     parser.add_argument('--previous-apk', type=Path, required=True)
+    parser.add_argument('--expected-version-code', type=int, required=True)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     assert args.serial in {'emulator-5602', 'emulator-5582'}, 'Use an assigned acceptance tablet.'
@@ -214,7 +215,7 @@ def main():
         install(args.previous_apk,True); launch(); browser('before-upgrade','Report current.txt')
         assert version()==38,'Expected frozen public 0.37.'
         install(args.apk); launch(); browser('after-upgrade','Report current.txt')
-        assert version()==39
+        assert version()==args.expected_version_code
         installed=device.shell('pm','path','dev.findroid').decode().strip().splitlines()[0].removeprefix('package:')
         assert hashlib.sha256(device.call('exec-out','cat',installed)).hexdigest()==report['apkSha256']
         report.update(actual037Upgrade=True,installedOptimizedBytes=True)
