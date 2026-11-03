@@ -1,6 +1,6 @@
 # Understand available file actions
 
-Development draft for 0.41.0. This increment is not yet a published release. The public preview remains 0.40.0 while device and release acceptance continues.
+Available in 0.41.0.
 
 Select files or a folder, then choose **More → Available actions…**. With no selection, the window describes the current folder. The command is also in file and background context menus and the searchable action launcher. Each pane uses its own folder and selection.
 
@@ -29,16 +29,20 @@ A provider folder's flags describe that folder. They cannot authorize actions on
 
 Each action counts every selected item as reported available, unavailable, not reported, or not applicable. It displays up to three named examples, prioritizing unavailable items, and includes their location. The counts cover the complete selection. Looking at the explanation does not change the selection.
 
+![Four selected provider documents with different rename capabilities](screenshots/storage-actions-mixed.png)
+
+*Dialog crop from the native test build on the Android 16 emulator, using four synthetic provider documents. Rename has two reported available, one unavailable and one not reported. The preceding card is partly above the scroll viewport.*
+
 ## Understand provider Trash
 
 Findroid saves a local recovery copy, then asks the provider to delete the original. It checks read access and local free space during that operation. It does not use a provider's own Trash. Restoring copies the data back and may create new document addresses. Documents that do not advertise deletion support cannot be moved through this workflow.
 
 An item already in Findroid's Trash must be restored before editing or renaming. Its action details explain this rather than offering another move to Trash.
 
-## Validation status
+## Validation
 
-The initial 513 JVM checks pass. Real resolver/cursor and browser UI tests cover independent flags, omitted/malformed flags, controlled cached read-only grants, mixed selections, explicit refresh, lost access, named recovery actions and a provider that would block if contacted. Final native regression, optimized public-upgrade/layout checks, real Android grant/revoke behavior, public OTA installation and independent artifact verification remain release gates. Controlled cached-grant tests are separate from actual system-picker permission acceptance.
+513 JVM tests and 368 native cases per API 30/API 36 tablet pass in 40 fresh-process batches, with zero failures/errors/skips. The exact optimized previous-public upgrade, six actual window/font combinations per API, real system-picker read/write/read-only/revoked permissions, unchanged unrelated grants and actual public OTA installation pass on both tablets. Actual screenshots are inspected. [Detailed validation](../VALIDATION.md).
 
 Physical/OEM, TalkBack and arbitrary third-party provider behavior remain separate acceptance work. No new permanent toolbar icons are added.
 
-Android's capability definitions: [Document columns and flags](https://developer.android.com/reference/android/provider/DocumentsContract.Document), [typed cursor values](https://developer.android.com/reference/android/database/Cursor#getType(int)), and [persisted URI permissions](https://developer.android.com/training/data-storage/shared/documents-files#persist-permissions).
+Android's definitions: [Document columns and flags](https://developer.android.com/reference/android/provider/DocumentsContract.Document), [typed cursor values](https://developer.android.com/reference/android/database/Cursor#getType(int)), and [persisted URI permissions](https://developer.android.com/training/data-storage/shared/documents-files#persist-permissions).

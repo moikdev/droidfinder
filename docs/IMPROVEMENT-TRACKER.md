@@ -37,7 +37,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 31 | Pin selected network folders for offline use | Open. Implementation and focused acceptance pending. |
 | 32 | Strengthen removable-drive workflows | Open. Needs physical USB/SD media and removal tests. |
 | 33 | Extend reconnect to cloud-account sign-in | Open. Implementation and focused acceptance pending. |
-| 34 | Bring capabilities into action explanations | Open. Implementation and focused acceptance pending. |
+| 34 | Bring capabilities into action explanations | Local/native/optimized and real public OTA checks pass for 0.41.0. Independent validation-archive verification is pending; not yet included in the completed count. |
 | 35 | Expand cross-app drag acceptance | Open. Needs actual third-party receiving apps. |
 | 36 | Broaden Android picker testing | Open. Needs physical devices and actual third-party editing apps. |
 | 37 | Run independent transfers concurrently | Open. Implementation and focused acceptance pending. |

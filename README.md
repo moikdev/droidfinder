@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.40.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.41.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.40.0 release](https://github.com/moikdev/findroid/releases/tag/v0.40.0-preview) and download **`Findroid-0.40.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.41.0 release](https://github.com/moikdev/findroid/releases/tag/v0.41.0-preview) and download **`Findroid-0.41.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -155,6 +155,16 @@ The management window shows storage use and lets you refresh, pause, restart or 
 ![Optional local search snapshots with named Refresh, Remove and cache controls](docs/screenshots/local-search-index-tablet.png)
 
 *Actual optimized Android tablet capture with synthetic project folders.*
+
+### Understand why an action is unavailable
+
+Select items, then choose **More → Available actions…**. With no selection, it describes the current folder. See which actions were reported available, which are unavailable, and which information a provider did not report. Mixed selections have exact counts and up to three named examples.
+
+Opening the window uses cached information. **Refresh access info** explicitly reloads permissions and folder information in the background. A connected folder does not promise the same capabilities for all its children. Provider Trash is explained as a local recovery copy before deleting the original, with no claim to use the provider's own Trash. [Available actions guide](docs/STORAGE-ACTIONS.md).
+
+![Readable file action explanations for the current folder](docs/screenshots/storage-actions-tablet.png)
+
+*Actual optimized Android tablet capture with a synthetic project folder.*
 
 ### Put the source and destination side by side
 
