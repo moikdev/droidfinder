@@ -1,0 +1,114 @@
+{
+  "success": true,
+  "passed": 20,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "typingDoesNotRecordKeystrokesAndImeSubmitStoresOnlyTheFinishedQuery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "choosingSuggestionRestoresExplorerKeyboardFocus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "changingActivePaneWhileProviderValidationRunsPreventsLateNavigation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "arrowKeysAndEnterChooseTheHighlightedSuggestionWithoutPrefixPollution",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "submittingQueryRestoresExplorerKeyboardFocus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "clearAndPausePreventStaleDraftsInAnotherPaneFromResurrectingHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "unavailableOriginalDoesNotChangeTheTabAndOffersSearchHere",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "leavingAnEditedFieldRecordsOnceAndTheNamedMenuOpensHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "searchHereKeepsExactExclusionsAndOriginalLocationRestoresTheRoot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "touchSuggestionReusesFullCriteriaWithoutRecordingTheTypedPrefix",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "historyDialogSupportsFilteringPausingRemovingAndClearing",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "focusLeavingTheSearchFieldFinishesItsDraftBeforeAnotherDialog",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "lateProviderValidationCannotOverwriteANewerQueryOrBlockTheUi",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "explicitlySubmittingARestoredOrClearedQueryStartsANewHistoryIntent",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "historyIsSharedAcrossWindowsAndPersistsCriteriaWithoutContentEvidence",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "clearingHistoryWhileProviderValidationRunsCancelsTheReuse",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "navigationAndActivityStopFinishDraftsWithoutRecordingRestoredQueriesAgain",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "enterWithoutAnArrowSelectionFinishesTheLiteralQuery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "smartFolderReuseCreatesAnIndependentPlainSearchAtItsRealRoot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "cancelledProviderValidationLeavesCurrentLocationAndRulesIntact",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 140.3,
+  "timedOut": false
+}

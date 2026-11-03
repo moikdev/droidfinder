@@ -1,0 +1,31 @@
+{
+  "accepted": false,
+  "applicationApkSha256": "032909671bb2e1fd2ed7ea6d85bdc7a9174e1d48e1f3c935341ca2426eb20843",
+  "nativeTestApkSha256": "43d0991d38b826f756a22267aef1440328aae0e2e396159d791060cafbb0feac",
+  "reports": [
+    {
+      "path": "api30-focused-before-per-file-checkpoints.json",
+      "sha256": "bcd8b5eb060d7e4ffeb02e2ddac7685f21a147ed7dc35d24e2c3af49c18cdad6"
+    },
+    {
+      "path": "api30-focused-before-per-file-checkpoints.txt",
+      "sha256": "49960d44ba851bf8c7b10dae9923457e6f3feff32f5229a11c79b8009b8d0bf1"
+    },
+    {
+      "path": "api30-focused-before-per-file-checkpoints-host.txt",
+      "sha256": "da10341979aa64be1d193b5f9a6885a5b0d49ecc3bf3aa0452fd2a7a4a98002c"
+    },
+    {
+      "path": "api36-focused-before-per-file-checkpoints.json",
+      "sha256": "6e40abfc13d525b0899ca71d6f5a054d3b60c7ded232beb601c9bf5c25e4c6ce"
+    },
+    {
+      "path": "api36-focused-before-per-file-checkpoints.txt",
+      "sha256": "6b6160fa9b95519652a47b98ddf0fb4531374670b081ff67f74c20eabf59fdb0"
+    },
+    {
+      "path": "api36-focused-before-per-file-checkpoints-host.txt",
+      "sha256": "318144b90734cb1af11c308a2de7db189345427b16ea118f7e7e47529e5be4c3"
+    }
+  ]
+}

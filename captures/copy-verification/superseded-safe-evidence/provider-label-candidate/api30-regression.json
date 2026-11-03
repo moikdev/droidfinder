@@ -1,0 +1,2534 @@
+{
+  "success": true,
+  "passed": 425,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.TransferProgressWorkflowTest",
+      "test": "providerWaitExplainsTheDelayAndARecoveredCopyShowsRecentRate",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferProgressWorkflowTest",
+      "test": "cancellingAWaitingProviderKeepsOriginalsAndStopsTheSampler",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferPlanningWorkflowTest",
+      "test": "knownProviderCopyShowsPhaseProgressEtaAndDurableTotalsWithPauseControls",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferLifecycleTest",
+      "test": "cancellationClosesABlockedProviderStream",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferLifecycleTest",
+      "test": "cancelledProviderCopyRemovesStagingAndKeepsOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferLifecycleTest",
+      "test": "transferContinuesAfterActivityCloses",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferQueueWorkflowTest",
+      "test": "pausedCopyKeepsUiResponsiveAndQueuedJobsCanReorderCancelAndRun",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferQueueWorkflowTest",
+      "test": "retryOnlyRetriesFailedItemsAndCompletedHistorySurvivesReload",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "replacingAProviderAncestorCannotRemoveTheSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "emptyMoveMergePreservesExistingDestinationAndHasExplicitPlan",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "sourceEditsDuringCopyPreventMoveCleanup",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "localToProviderMoveMergeCanUndoAndRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "providerToLocalMoveMergeCanUndoAndRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "partialProviderMoveMergeTagsFollowMemberRecoveryAndUndoRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "partialProviderRemovalKeepsRecoveryAndBlocksDestructiveUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "providerMoveMergeTagsFollowSourceRecoveryAndUndoRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "copyMergesNestedFoldersAndNewSubtreesWithRecoverableReplacement",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "moveMergeCanReplaceFileFolderTypeConflictsAndUndoRedoBoth",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "providerToProviderMoveMergeCanUndoAndRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "destinationEditsBeforeCleanupKeepSourceAndProtectBothCopies",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "replacingALocalAncestorCannotRemoveTheSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "localMoveMergeCanUndoAndRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "skippedMoveMembersStayAtSourceWhileCopiedMembersCanUndoAndRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "localMoveMergeTagsFollowSourceRecoveryAndUndoRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderMergeTest",
+      "test": "cancellationKeepsSourcesAndRetriesOnlyUnpublishedPlannedUnits",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "corruptDatabaseIsPreservedInsteadOfAutomaticallyDeleted",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "failedTransactionRollsBackMetadataAndInvalidatesTheSnapshotCache",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "verificationRowFailureRollsBackTheWholeCheckpoint",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "malformedLegacyJournalDoesNotCommitTheMigrationMarker",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "incrementalCheckpointsKeepUnchangedSourcesMembersAndChildRows",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "roundTripsVerificationChoiceAndIndividualResultsWithoutRewritingUnchangedRows",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "migratesLegacyOnceAndRetainsTheOriginalFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "upgradesVersionTwoWithoutInventingVerificationForOldCopies",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "importsVerifiedLegacyRecordsWithoutChangingTheLegacyBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "upgradesVersionOneWithoutChangingJobsAndRoundTripsNullableEstimates",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "limitsKeepSelectionAndBlockOversizedPreviewAndExtraction",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "integrityCheckDistinguishesValidCorruptAndZip64",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "archiveSearchOwnsSpaceAndMouseContextActionsWork",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "memberPeekSupportsMarkdownCsvPdfImagesVideoAndSpaceClose",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "providerArchiveSelectedMembersPublishAndUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "searchSelectionExtractionAndUndoPreserveArchiveAndFolders",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentCapabilitiesTest",
+      "test": "explicitNullCapabilityValueRemainsUnknown",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentCapabilitiesTest",
+      "test": "cachedReadOnlyGrantOverridesTheProvidersMutationFlags",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentCapabilitiesTest",
+      "test": "removeFromParentFlagDoesNotAuthorizeDeletingTheOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentCapabilitiesTest",
+      "test": "malformedAndOutOfRangeCapabilitiesCannotBecomeZeroOrWrappedFlags",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentCapabilitiesTest",
+      "test": "omittedCapabilityColumnIsUnknownForDirectAndChildQueries",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentCapabilitiesTest",
+      "test": "individualFlagsRemainIndependentForActualDocuments",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentCapabilitiesTest",
+      "test": "cachedCapabilityExplanationDoesNotQueryTheProviderAgain",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentCapabilitiesTest",
+      "test": "explicitZeroIsKnownUnsupportedAndDoesNotInheritRootFlags",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StorageCapabilitiesWorkflowTest",
+      "test": "anExplicitRefreshReportsRevokedAccessAndKeepsTheDialogUsable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StorageCapabilitiesWorkflowTest",
+      "test": "mixedSelectionReportsExactCountsAndBoundsItsNamedExamples",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StorageCapabilitiesWorkflowTest",
+      "test": "currentRootDetailsDoNotPromiseTheSameCapabilitiesForItsChildren",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StorageCapabilitiesWorkflowTest",
+      "test": "contextMenuAndActionLauncherReachTheSameNamedDetails",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StorageCapabilitiesWorkflowTest",
+      "test": "blockedRenameUsesTheSelectedDocumentsOwnReasonAndCopyRecovery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StorageCapabilitiesWorkflowTest",
+      "test": "openingAndClosingCachedDetailsNeverContactsABlockedProvider",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StorageCapabilitiesWorkflowTest",
+      "test": "unknownFlagsHaveTheirOwnExplanationAndRefreshUpdatesOnlyCurrentFacts",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "futureCorruptAndUnknownCatalogDataArePreservedUntilExplicitCacheDeletion",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "removingThenReaddingTheSamePathRejectsLateWritesFromItsPreviousIdentity",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "closeWaitsForWorkerCleanupBeforeClosingItsStore",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "cancellationAtPublicationBoundaryRollsBackTheNewGeneration",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "descriptorValidationSupportsPrivateAndSharedLocalFilesAndRejectsSymlinkEscapes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "sharedRowBudgetIncludesPreviousGenerationsAndRetainsThemWhenCapped",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "leasesPinTheirOwnGenerationAndRemovalInvalidatesThem",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "aDifferentProcessOwnerRecoversAnInterruptedBuildAndRetainsTheSnapshot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "invalidCountAndDuplicateRowsCannotPublishAnIncompleteSnapshot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "controllerProviderOnlyHintsDoNotMarkEveryLocalRootStale",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "changeHintsRespectPathBoundariesAndExactStorageBytesIncludeSidecars",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "folderReplacementAndChangesDuringBuildAreNeverReportedAsAFreshOriginalSnapshot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "readingSourceAvailabilityNeverCreatesOrRegistersACache",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "deletingWithASuspendedCursorCannotDamageANewCacheAtTheSamePath",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "completeGenerationsSurviveFailedPausedAndCappedRefreshes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "literalUnicodeWildcardAndNestedCoverageNeverBroadenTheChosenAnchor",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "cacheDeletionInvalidatesOldTokensWithoutRecreatingTheDatabaseOrTouchingDocuments",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexStoreTest",
+      "test": "controllerPauseIsNotAnErrorAndRapidPauseCannotStrandTheActiveWorker",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchSourceCodecTest",
+      "test": "legacySourcesRemainLiveAndExplicitIndexedSourcesRoundTripEveryContainer",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchSourceCodecTest",
+      "test": "portableSavedSourceContainsNoCacheCatalogGenerationsRowsOrFreshnessState",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchSourceCodecTest",
+      "test": "presentButUnknownOrWrongTypeSourcesAreRejectedByRulesHistoryTabsAndSetup",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexWorkflowTest",
+      "test": "manualRefreshUpdatesCandidatesAndRemovingTheIndexKeepsFilesAndSavedRules",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexWorkflowTest",
+      "test": "choosingIndexedSourceDoesNotRegisterOrScanAndLiveActionPreservesOtherCriteria",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexWorkflowTest",
+      "test": "independentTabsRestoreTheirOwnSourceAndSmartFoldersNeverRegisterMissingRoots",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexWorkflowTest",
+      "test": "managementKeepsTheSearchDraftAndOnlyTheConfirmedLocalFolderOptsIn",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexWorkflowTest",
+      "test": "deleteCacheExplainsItsScopeAndCancelKeepsSnapshotsAndDocuments",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexWorkflowTest",
+      "test": "sixHundredDpLargeTextKeepsSourcePickerAndManagementActionsReachable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "boundedDecodingRejectsExcessiveDepthTotalNodesAndUtf8Text",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "recentHistoryRejectsRepeatedKeysAndExcessiveRawJsonDepthBeforeAndroidParsing",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "everyDecoderRejectsPresentButDamagedGroupsInsteadOfTreatingThemAsAbsent",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "allNodeTypesRoundTripThroughRulesTabsAndScanBudgets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "setupCarriesGroupsThroughEveryContainerAndReviewedTagRemapping",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "unreadableSmartFoldersCannotBeOverwrittenBySavingAnotherSearch",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "strictRecentHistoryRoundTripsGroupsAndPreservesUnknownTreesUntilExplicitClear",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "legacyRulesOmitGroupsAndKeepTheirExactBehavior",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "strictGroupCodecRejectsUnknownFieldsTypesAndInvalidLeaves",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NestedSearchWorkflowTest",
+      "test": "chosenProviderRootsRespectGroupsExclusionsUnknownSizesAndOneContentRead",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NestedSearchWorkflowTest",
+      "test": "smartFolderAndHistoryStayIndependentAcrossRestartAndTagRename",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NestedSearchWorkflowTest",
+      "test": "calendarAndExactSizeConditionsWithNoneCanBeEditedAndRemoved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NestedSearchWorkflowTest",
+      "test": "actualEditorBuildsNestedKindAndTagAlternativesAndAppliesOnlyAtParent",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NestedSearchWorkflowTest",
+      "test": "staleTabAndRuleChangesBlockGroupAndParentApplyOrClear",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NestedSearchWorkflowTest",
+      "test": "emptyGroupsAndConditionCancellationKeepTheCompleteParentDraft",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NestedSearchWorkflowTest",
+      "test": "nestedTagAssignmentRefreshesMembershipWithoutManualRefresh",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootCodecTest",
+      "test": "malformedAndUnboundedChosenRootArraysAreRejectedRatherThanTruncated",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootCodecTest",
+      "test": "tabsAndScanBudgetsPreserveEveryChosenRootAndRule",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootCodecTest",
+      "test": "setupCannotOmitAChosenRootFromItsReviewedReferenceInventory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootCodecTest",
+      "test": "recentHistoryRetainsTheScopeAndRejectsMalformedScopeWithoutLosingCriteria",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootCodecTest",
+      "test": "setupBackupCarriesChosenReferencesAcrossAllSavedContainers",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootCodecTest",
+      "test": "navigationOmitsDefaultScopeAndReadsEarlierRulesUnchanged",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "aFailedProviderRetainsLocalResultsAndHasItsOwnStatus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "tenUnavailableReferencesStayVisibleAndThePickerEnforcesTheLimit",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "aSecondaryLocalRootObserverRefreshesTheCombinedSearch",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "aTypingSuggestionExplainsAndUsesTheCurrentFolderRatherThanItsSavedRoots",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "anUnavailableFirstAnchorDoesNotPreventTheOtherRootsFromLoading",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "actualReadOnlyFolderPickerKeepsTheDraftUntilSearchAndCancelPreservesScope",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "historySearchHereClearsChosenRootsAndOriginalRestoresAvailableRootsDespiteMissingAnchor",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "aSecondaryProviderNotificationRefreshesTheCombinedSearch",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "disconnectAndSameTreeReconnectRefreshASecondaryProviderWithoutNavigatingAway",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "independentAndOverlappingRootsReturnEachDocumentOnce",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "membershipViewsExplainHowToOpenAFolderBeforeChoosingOrdinaryRoots",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "stoppingABlockedProviderKeepsPartialResultsAndDoesNotClaimLaterRootsWereScanned",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "bothPanesKeepTheirOwnScopesWhenASecondaryProviderDisconnectsAndReconnects",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "pendingProviderIsReportedSeparatelyFromCompletedLocalRoots",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "resultDetailsCanEditChosenRootsAndAnEmptyDraftCannotBeApplied",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "tabRecreationRetainsFullRulesAndNormalNavigationClearsTheChosenOverride",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.MultiRootSearchWorkflowTest",
+      "test": "smartFolderKeepsItsFirstRootConsistentAndHistoryReuseLeavesSavedRulesIndependent",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "typingDoesNotRecordKeystrokesAndImeSubmitStoresOnlyTheFinishedQuery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "choosingSuggestionRestoresExplorerKeyboardFocus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "changingActivePaneWhileProviderValidationRunsPreventsLateNavigation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "arrowKeysAndEnterChooseTheHighlightedSuggestionWithoutPrefixPollution",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "submittingQueryRestoresExplorerKeyboardFocus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "clearAndPausePreventStaleDraftsInAnotherPaneFromResurrectingHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "unavailableOriginalDoesNotChangeTheTabAndOffersSearchHere",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "leavingAnEditedFieldRecordsOnceAndTheNamedMenuOpensHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "searchHereKeepsExactExclusionsAndOriginalLocationRestoresTheRoot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "touchSuggestionReusesFullCriteriaWithoutRecordingTheTypedPrefix",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "historyDialogSupportsFilteringPausingRemovingAndClearing",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "focusLeavingTheSearchFieldFinishesItsDraftBeforeAnotherDialog",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "lateProviderValidationCannotOverwriteANewerQueryOrBlockTheUi",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "explicitlySubmittingARestoredOrClearedQueryStartsANewHistoryIntent",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "historyIsSharedAcrossWindowsAndPersistsCriteriaWithoutContentEvidence",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "clearingHistoryWhileProviderValidationRunsCancelsTheReuse",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "navigationAndActivityStopFinishDraftsWithoutRecordingRestoredQueriesAgain",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "enterWithoutAnArrowSelectionFinishesTheLiteralQuery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "smartFolderReuseCreatesAnIndependentPlainSearchAtItsRealRoot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchWorkflowTest",
+      "test": "cancelledProviderValidationLeavesCurrentLocationAndRulesIntact",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "malformedFlagCanBeExplicitlyRepairedWithoutEnablingRecording",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "allCriteriaRoundTripExactlyWithoutEntriesOrSnippets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "utf8BudgetEvictsOldestSearchesAndRejectsOneOversizedEntry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "futureOrUnknownFieldsAndCoercedTypesCannotSilentlyChangeRules",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "corruptAndFuturePreferencesKeepTheirExactBytesUntilClear",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "durablePauseClearAndRemovalSurviveNewStoreInstances",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "duplicatesInvalidRootsBoundsAndUnboundedListsAreRejected",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "setupPreferenceAllowlistCannotExportOrRestoreSearchHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "actualFolderPickerAddsAnExactRootExclusionWithoutChangingNameExclusions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "providerUnknownAncestryReportsSkippedResultsBeforeOpeningContents",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "exactSelectionExclusionIsADraftThenPersistsAndCanBeRemoved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "providerScanKeepsSiblingCachesUsesOneReadAndNormalizesTreeAliases",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "naturalChoicesAndExpertByteValuesUseTheActualEditorAndSurviveRestart",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "literalMatchReasonsAndHighlightsAppearInAllFourViewsWithoutPersistingSnippets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "realSparseFileProvesStrictGigabyteBoundaryAndRefreshReevaluatesCalendarChoices",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchScopeWorkflowTest",
+      "test": "scopeDraftApplyCancelAndClearUseTheActualCriteriaEditor",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchScopeWorkflowTest",
+      "test": "tabsPersistScopeImmediatelyAndKeepTheirIndependentResults",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchScopeWorkflowTest",
+      "test": "smartFolderScopeSurvivesFreshSessionsAndRefreshesOtherPanes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchScopeWorkflowTest",
+      "test": "providerScopeSkipsExcludedOrUnrequestedFoldersWithoutOfflineWarnings",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "everyModeLoadsFromPersistedSmartFoldersInAFreshSession",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "tagChangesRefreshMembershipWithoutManuallyReloading",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "criteriaAreDraftedUntilApplyAndSurviveActivityRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "providerSearchUsesTheSameBooleanTagRules",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "legacyAndUnavailableSelectionsStayVisibleUntilExplicitlyCleared",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "editingSharedSmartRulesRefreshesTheOtherPane",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "savedSmartFolderPersistsItsModeAndFollowsTagRenameUndoRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "allAnyAndNoneSearchRecursivelyWithoutIncludingFolders",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "navigationAndNewQueryIgnoreAnOlderBlockedScan",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "selectingAPartialResultPreventsALateJumpToAnOlderViewport",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "higherLimitsSurviveHistoryAndSerializedTabRestoration",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "moreThanFiveThousandLocalEntriesAreAvailable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "fullTextReadsBeyondOneMiBAndReportsUnreadableText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "finishingAScanDoesNotMoveRowsUnderAnActiveNativeDrag",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "scrollingPartialResultsCancelsDeferredSavedAnchorRestoration",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "providerPendingAndOfflineSubfoldersAreVisibleAndCanRecover",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "stopClosesABlockedTextStreamAndAnIncompleteEmptySearchIsNotNoMatches",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LoadingWorkflowTest",
+      "test": "batchesAreUsableAndStopRetainsResultsWithoutLatePublication",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "editedFileStopsUndoAndShowsThePersistentReasonWithoutOverwritingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "disconnectedFolderCreationExplainsStorageRecoveryAndPreservesItsScope",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "selectionActionsActivateTheirPaneAndLeaveOnlyOneNamedDragHandle",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyProviderRenameExplainsAndOffersACopyDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsUndoAndRedoShowTheAffectedFolderWithoutLosingOriginals",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyCreationAndKeyboardRenameUseTheSameRecoveryPolicy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsExplainsAnEmptySessionThroughTheNamedMenu",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "anActiveProviderTransferExplainsRenameButStillAllowsQueuedCopyChoices",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyProviderMoveOffersCopyWithoutChangingTheOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsAreSharedAcrossPanesWindowsAndActivityRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "providerHistoryShowsTheActualNameAndGuardsLaterEdits",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "launcherKeepsTheReasonAndOffersTheSameCopyRecovery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "primaryNamesOrderAndBoundsStayFixedAcrossSelectionViewsSearchAndAddress",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "virtualFolderCreationExplainsScopeAndCanChooseARealDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "narrowLargeTextKeepsPrimaryActionsAndRecoveryControlsReachable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "emptyClipboardExplanationDoesNotChangeFilesOrSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "listEdgesScrollNewTargetsIntoViewAndStopInTheCenter",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "holdingFileIconStartsTouchDragAndPreservesUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "touchSpringFolderDropUsesOriginalPayloadAndCanUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "cancellingSpringFolderRestoresHistorySelectionAndView",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "explicitNavigationIsNotRewoundByAnOlderSpringSnapshot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "ctrlMouseDragCopiesAndDefaultMouseDragMoves",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "selfDropIsRejectedWithoutNavigationOrQueuedWork",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "fittedColumnResizeStartsAtTheDisplayedWidth",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "singlePixelColumnMotionAccumulatesAcrossInputEvents",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "gridAndGalleryEdgesRevealOffscreenEntries",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "crossPaneDropRestoresAnUnusedSpringLoadedOriginPane",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "hoveringTabSwitchesAndCancellationReturnsToOriginalTab",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DragWorkflowTest",
+      "test": "aFolderRevealedByEdgeScrollingAcceptsTheSameDrag",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "cancellationDoesNotAddFavorites",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "builtInFavoritesDoNotGetDuplicateSavedShortcuts",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "fileDropIsRejectedInsteadOfCreatingOrMovingAnything",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "readOnlyConnectedFolderCanBePinnedAndOpened",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "mousePinsMultipleFoldersAndRestoresSpringLoadedLocation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "touchPinsFolderWithoutMovingItAndDuplicateDropKeepsItSaved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "parentAliasDoesNotCreateADuplicateFavorite",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "mixedSelectionIsRejectedAsAWhole",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "namedDragHandlePinsSeveralFolders",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "disappearingFolderIsRevalidatedBeforeCommit",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FavoritesDragWorkflowTest",
+      "test": "droppingAFileOntoAnExistingFavoriteStillMovesAndUndoes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OutgoingDragTest",
+      "test": "connectedDocumentUriAndItsMimeArePreserved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OutgoingDragTest",
+      "test": "mixedFolderSelectionKeepsLocalDragWithoutLeakingPathsToOtherApps",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OutgoingDragTest",
+      "test": "filesHaveContentUrisAndReadOnlyGlobalGrants",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OutgoingDragTest",
+      "test": "tabletSelectionExposesLabeledDragControlAndInstructions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "missingVirtualDestinationsCanBeReplacedWithoutChangingTheLibrary",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "reviewSurvivesActivityRecreationAndActivePaneChanges",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "anAvailableLayoutOpensWithoutARecoveryConfirmation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "aSavedSearchWithAnUnavailableRootKeepsItsFiltersOnTheReplacementFolder",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "realFolderPickerReviewsAndSavesOnlyTheMissingDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "reconnectingAnOriginalDestinationKeepsItAndDropsItsReplacementChoice",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "aSmartFoldersSecondaryRootRepairCreatesAnIndependentRestoredTab",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "closingACheckOrReviewKeepsCurrentPanesAndSavedLayout",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "readOnlyProviderRootsAreValidReplacementDestinations",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "grantLossAfterReviewRequiresAFreshAvailabilityReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "unrelatedMissingBackHistoryDoesNotBlockAWorkingTab",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "aChangedSavedWorkspaceInvalidatesAnOlderReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "keepingAMissingLocationRequiresAnExplicitChoice",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "openOnceRepairsTheSessionAndKeepsTheSavedLayoutByteForByte",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "aChangedSmartFolderInvalidatesAReviewBeforeAnyRepairIsSaved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "repairingASecondarySearchRootKeepsTheWorkingAnchorAndOtherPane",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryPersistenceTest",
+      "test": "failedPublicationKeepsTheOriginalLibraryAndStillAllowsOpenOnce",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryPersistenceTest",
+      "test": "aPendingRepairBlocksOtherWorkspaceEditsUntilAtomicPublicationFinishes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryPersistenceTest",
+      "test": "closingTheWindowDuringPublicationFinishesSavingWithoutRecreatingItsPanes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryPersistenceTest",
+      "test": "aFutureWorkspaceCatalogIsPreservedAndCannotBeReplacedByRepairs",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryPersistenceTest",
+      "test": "anExternallyChangedLibraryIsKeptWhenReviewIsStale",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryPersistenceTest",
+      "test": "aClosedPrimaryKeepsItsControllerReadableForOutgoingComposition",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceSaveFailureTest",
+      "test": "failedSaveIsReportedAndRetryWritesThePreservedLayout",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationWorkflowTest",
+      "test": "openingASavedWorkspaceCannotRetargetOrCancelARunningTransfer",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationWorkflowTest",
+      "test": "iconGalleryAndColumnViewportsAreIndependentPerTab",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationWorkflowTest",
+      "test": "pinsPersistBulkCloseKeepsThemAndOverviewSupportsTouchReorder",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationWorkflowTest",
+      "test": "selectionExpansionAndViewportSurviveAViewModelReload",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationWorkflowTest",
+      "test": "switchingTabsRestoresSelectionIndependentFocusAndTheActualListViewport",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationWorkflowTest",
+      "test": "namedWorkspacesRestoreBothPanesAndSettingsAndSupportRenameUpdateRemove",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationWorkflowTest",
+      "test": "movedClosedTabsAndSavedLayoutsFollowMoveAndUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "traversalAndInventedLocalRelativeRootsAreRejected",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "fullSetupRoundTripRetainsOrderingRulesTabsAndPreferences",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "backupCarriesNoStorageGrantsCredentialsUserFilesOrTransferJournal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "futureFormatAndUnknownFieldsAreRejectedWithoutDowngrading",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "malformedAndFutureSearchOptionsCannotSilentlyChangeImportedCatalogs",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "permissiveNavigationDecoderCannotSilentlyNormalizeAnImportedBackup",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "missingAndRepeatedReferenceInventoryCannotDropMetadataSilently",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "stringCoercionsFractionalIntegersAndOutOfRangePreferencesAreRejected",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "overCapacityWorkspacesCannotBeTruncatedToAnApparentlySuccessfulRestore",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "providerReferencesCanKeepTheirOpaqueOriginalIdsAndUnknownRelativePath",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "semanticSearchRulesRoundTripWithoutStoringSnippetsAndLegacyRulesStayCanonical",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupCodecTest",
+      "test": "repeatedTagAssignmentsAndCollectionItemsAreRejected",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "providerLoadingResultsAreNeverTreatedAsCompleteMappings",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "anOpaqueReferenceWithoutRelativeNamesIsKeptForRepair",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "malformedAndFutureBackupsLeaveTheWholeSetupIntact",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "reviewedMergeRemapsAllSectionsAndKeepsOriginalFilesAndCurrentPreferences",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "overviewExplainsSetupScopeAndExportsAReadablePortableBackup",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "aStaleSetupReviewRefusesToOverwriteAChangedPreference",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "replacePreferencesHasAReviewAndSurvivesARereadFromDisk",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "reviewedSetupRemapsExactSearchExclusionsInSmartFoldersAndWorkspaceBudgets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "closingAnUnappliedReviewDoesNotPersistAnyImportedMetadata",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "grantLossAfterReviewRequiresAFreshAvailabilityReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "previousSetupCanBeReviewedAndRestoredWithoutGuessingRoots",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "missingReferencesRequireAnExplicitKeepChoiceBeforeRestore",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "replacementFolderPickerAcceptsTheActualTouchChoice",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "ambiguousProviderNamesStayUnmappedForIndividualRepair",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "readOnlyProviderMappingUsesExistingDocumentIdsAndNeedsNoWriteGrant",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "restoredTabsOpenOnlyWhenRequestedAfterTheRestore",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "choosingOnlySidebarDoesNotChangeTagsWorkspacesPresetsOrTheme",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "mouseCanAppendShortcutWithNativeInsertionLine",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "builtinVisibilityOrderingAndRestoreKeepCustomShortcuts",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "cancellationLeavesOrderAndFilesIntact",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "moveCommandsProvideAccessibleReorderAlternative",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "revealAndNewPaneUseOriginalPathAndSharedOrder",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "createMoveCollapseAndRemoveGroupKeepsAllReferences",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "duplicateNamesShowBothParentPaths",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "shortcutDragToFolderIsRejectedWithoutMovingOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "labelMenuChangesOnlyShortcutAndDestinationLabels",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "missingFavoriteCanBeReorderedWithoutReadingItsStorage",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "unavailableShortcutOpensRecoveryInsteadOfAnEmptyFolder",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "aFastRefreshRechecksAFavoriteAfterItsOriginalFolderReturns",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SidebarWorkflowTest",
+      "test": "touchReorderPersistsAndNeverMovesFolderBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "quickFolderSearchSupportsKeyboardAndShowsFullDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "filteredEmptyFolderOffersShowHiddenAndThenRevealsFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "searchableCommandRunsWithoutToolbarIcons",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "exactPathCanFindFolderOutsideListedFavorites",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "unavailableActionExplainsItsReasonAndKeepsLauncherOpen",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "selectedScopeSurvivesViewChangesAndKeepsPaneIdentity",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "gestureTipsCanBeDismissedAndReplayedFromHelp",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "noSearchMatchesCanClearFiltersWithoutCreatingAnything",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "staleDestinationExplainsReconnectWithoutNavigatingAway",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "browsingPreferencesKeepExpertOptionsInAdvanced",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AppUpdateWorkflowTest",
+      "test": "cancelledDownloadsRemovePartialFilesAndAllowRetry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AppUpdateWorkflowTest",
+      "test": "tamperedCachedUpdateNeverReachesTheInstaller",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AppUpdateWorkflowTest",
+      "test": "unavailableFeedLeavesFilesUsableAndManualChecksCanRetry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AppUpdateWorkflowTest",
+      "test": "automaticChecksRespectTheDailyLimitAndCanBeDisabled",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AppUpdateWorkflowTest",
+      "test": "verifiedDownloadSurvivesControllerRecreationAndOffersInstall",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AppUpdateWorkflowTest",
+      "test": "anotherAppAnotherSignerOldVersionsAndUnsupportedAndroidAreRejected",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "keyboardClipboardAndSharedUndoFollowTheActivePane",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "twoPaneWindowProtectsFilenameSpaceAndDividerResizesWithinMinimums",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "queuedCrossPaneCopyKeepsOriginalDestinationAndSourceSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "rightClickInPassivePaneActivatesItAcrossAllViews",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "informationalFeedbackDoesNotBlockPassiveGalleryContextMenus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "moveAndUndoRemapTheOtherPanesNavigationAndMetadata",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "narrowWorkspaceSwitchesPanesAndKeepsResizeSwapAndNavigation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "comparisonDistinguishesUnverifiedAndEqualContentsAndUsesNormalCopyQueue",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "panesShareOperationsButNavigateSearchAndSelectIndependently",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "typeToSelectAndAppShortcutsResolveTargets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "shiftSelectionCanGrowAndShrink",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "customTagRenameCanBeUndoneAndRedone",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "pdfQuickLookNavigatesAllPages",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "iconViewSupportsMouseContextActions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "expandedListCanRenameAChildAndUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "audioQuickLookPreparesAndPlays",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "mouseRectangleSelectsFilesFromEmptySpace",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "sharingAFolderCreatesReadableZipWithoutChangingOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "longPressEnablesMultipleSelectionAndTagging",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "trashFeedbackActionStillRestoresTheOriginalFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "smartFolderRefreshesAsMatchingFilesAreAdded",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "snackbarUndoRestoresTrashedFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "tabsKeepIndependentHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "allViewsRenderAndQuickLookShowsText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "keyboardSelectAllAndSearch",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "searchIncludesNestedFiles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "newFolderWithSelectionCanBeUndone",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "batchRenameDialogPreviewsAndUndoRedoRestoresNames",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "createRenameCopyTrashRestoreWorkflow",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileConflictWorkflowTest",
+      "test": "changedDestinationIsNotReplacedAfterThePromptWasShown",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileConflictWorkflowTest",
+      "test": "replaceCopyCanUndoRedoAndProtectLaterEdits",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileConflictWorkflowTest",
+      "test": "mergeDialogAndRetryKeepNestedDestinationsAndCompletedMembers",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileConflictWorkflowTest",
+      "test": "replaceMoveCanUndoRedoAndProtectLaterEdits",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileConflictWorkflowTest",
+      "test": "descendantDestinationIsRejectedBeforeAnyConflictOrReplacement",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileConflictWorkflowTest",
+      "test": "renameAndSkipRemainingKeepOriginalsAndPersistResults",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ProviderWorkflowTest",
+      "test": "importCompletionRunsExactlyOnceForLocalAndProviderSuccessAndFailure",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ProviderWorkflowTest",
+      "test": "providerTrashAndRestorePreserveOriginalLocation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ProviderWorkflowTest",
+      "test": "readOnlyProviderIsBrowsableAndCopyable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ProviderWorkflowTest",
+      "test": "providerLocalTransfersUndoAndRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ProviderWorkflowTest",
+      "test": "providerQuickLookAndCreateRename",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "changedSourceAndNewDestinationAreRecheckedBeforeAnyRename",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "providerCaseAndUnicodeNamesRetainActualContentAndUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "aKnownLocalEpochDateIsNotTreatedAsMissingMetadata",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "savedPresetDialogAndRecreationRetainRulesWithoutStartingRenames",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "completePreviewReachesPastTenRowsAndKeyboardFilterKeepsItsScope",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "frozenSelectionNaturalOrderNumberingExclusionAndUndoWork",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "mixedProviderAndLocalRenamePreservesTagsAndUndoRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "photoMetadataIsExplicitAndMissingTokensNeverInventDates",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "skippingUndoPreparationIsExplicitAndClearsStaleHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "rowOrderMenuFilterAndExclusionDoNotChangeHiddenRenameScope",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "providerFailedRollbackPreservesArrivalAndRemapsRecoveryTags",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "localCaseOnlyAndCanonicalUnicodeNamesRoundTripExactlyOnAndroid",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RenameWorkflowTest",
+      "test": "stoppedProviderUndoPreparationClosesBlockedStreamBeforeWriterResumes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "corruptedLibraryBlocksMetadataWritesWithoutBlockingFileRecovery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "providerFolderRenameRemapsDescendantsAndReadOnlyItemsCanReceiveTags",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "noSelectionExportUsesReviewedJsonKeepsCollisionsAndSurvivesRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "protectedTagUndoRefusesAnUnrelatedLaterMetadataEdit",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "fullPreviewReachesPastTenRowsAndExclusionChangesOnlyReviewedItems",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "closingOrganizationRestoresExplorerKeyboardFocus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "stoppedProviderReviewDoesNotWriteMetadataOrLoseTheCatalog",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "providerExportFailureCleansStagingAndAllowsTargetedRetry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "nativeTagAndCollectionEditorsSaveRenameAndDeleteWithUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "removingReferencesAndDeletingCollectionsAreUndoableAndKeepOriginalFiles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "destinationPickerKeepsReadOnlyLocationVisibleUntilAnotherRootIsChosen",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "staleTagDeletionConfirmationCannotEraseNewAssignments",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "changedSourcesAndSelectedAssignmentsAreRejectedButUnrelatedTagsArePreserved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "unavailableReferencesStayInTheLibraryAndCanBeRemovedWithoutFileDeletion",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "frozenReviewAndDraftSurviveRecreationWithoutWritingTags",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "mixedAssignmentsAreReviewedAndFilteredRowsRemainInTheApplyScope",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "collectionsBrowseAcrossRootsIncludingReadOnlyProviderItemsAndOpenInNewWindows",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "localRenamesAndUndoRedoMoveReferencesWhileCopiesDoNotJoinTheCollection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "scrollingAndCancelledTouchDoNotOpenFiles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "clickingFileGlyphsUsesTheSameRulesAsFileNames",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "touchAfterMouseSelectionStillOpensAndLongPressEntersSelectionMode",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "fileActionsDoNotAccidentallyOpenTheFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "mouseSelectionInChildColumnsDoesNotNavigateOrLoseTheSelectedEntry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "mouseSingleClickSelectsAndDoubleClickOpensInEveryView",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "archiveEntriesHonorTouchAndMouseActivationAndKeepExtractionReachable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "mouseSourceWithFingerToolIsTreatedAsACursorNotATouchTap",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "providerFoldersUseTheSamePerGestureActivation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "oneTouchOpensFoldersInEveryView",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "controlAndShiftMouseSelectionNeverActivateAFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.InputWorkflowTest",
+      "test": "oneTouchOpensFilesThroughAndroidInEveryView",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "scopeRoundTripsInTabsAndBudgetsAndLegacyDefaultsToRecursive",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "legacyAndCurrentTabsRoundTripWithoutLosingFocusOrPositions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "multiTagRulesRoundTripWithEveryModeAndLegacySingleTag",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "malformedTabDoesNotDiscardOtherTabsAndOffsetsAreBounded",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "savedLayoutsUseAtomicStorageAndPreserveAnUnrecognizedFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WindowLifecycleWorkflowTest",
+      "test": "realActivityRecreationPreservesItsPaneUntilTheFinalClose",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WindowLifecycleWorkflowTest",
+      "test": "aConfigurationReplacementRetainsTheStoreAndIgnoresAnObsoleteOwner",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WindowLifecycleWorkflowTest",
+      "test": "anOverlappingActivityOwnerPreventsPrematureStoreAndPreferenceRelease",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WindowLifecycleWorkflowTest",
+      "test": "replacingTheSameCustomWindowTaskKeepsAWorkingDisplayedPane",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.LocalIndexBenchmarkTest",
+      "test": "metadataSnapshotMatchesLiveResultsAndRecordsGrowthMemoryAndCancellation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "failedVerificationRestoresAReviewedReplacement",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "cancellationDuringRealProviderReadbackKeepsTheSourceAndRecordsIncomplete",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "retryRetainsVerificationAndDoesNotRecopyCompletedItems",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "namedPasteReviewQueuesVerifiedWorkAndShowsDurableResults",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "ordinaryCopiesKeepTheirExistingBehaviorWithoutOptionalStagingReadback",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "skippedConflictsAreNotClaimedAsVerified",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "unknownProviderSizeStillVerifiesActualStreamBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "namedDuplicateReviewRetainsOriginalAndCreatesVerifiedSibling",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "knownProviderSourceVerifiesALocalCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "unreadableProviderReadbackIsReportedAndNeverPublished",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "namedPasteReviewDoesNoWorkUntilConfirmedAndCanBeCancelled",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "localSourceIsReadBackFromTheRealProviderBeforePublication",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "sameLengthProviderCorruptionFailsAndCleansUnpublishedCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "mergingFoldersVerifiesNewMembersAndKeepsExistingFiles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "pauseAndResumeKeepVerificationBytesSeparateFromCopiedBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CopyVerificationWorkflowTest",
+      "test": "recursiveProviderCopiesSaveAResultForEveryLeaf",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "mouseIconCopiesWithoutMovingTheSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "connectedProviderFileCanBeDroppedIntoAnotherApp",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "touchHandleCopiesMixedTypesToAnotherApp",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "touchIconCopiesOneFileToAnotherApp",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "touchSelectedIconCopiesEntireSelection",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 1373.0,
+  "wallSecondsThisInvocation": 1626.0,
+  "timedOut": false,
+  "isolatedBatches": [
+    {
+      "selector": "dev.findroid.TransferProgressWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/01-TransferProgressWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/01-TransferProgressWorkflowTest.txt",
+      "reportSha256": "b8bc93f78458a2dd16c57a1f5e51baa32afcc90c0ef9e9c0477039ac287b1c8f",
+      "logSha256": "8370d075e26f078841850ce294c0d34563b1f965a96e12559fcdbcb31109b459",
+      "passed": 2
+    },
+    {
+      "selector": "dev.findroid.TransferPlanningWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/02-TransferPlanningWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/02-TransferPlanningWorkflowTest.txt",
+      "reportSha256": "24f6e4dccf1047d46b60a189829ed66ad854ca5f235ee37cf159fd2447d7c455",
+      "logSha256": "9210e7b94050cb0bdaa308833fc7d9e69df9677f924a455fee5c0ce8bd09662e",
+      "passed": 1
+    },
+    {
+      "selector": "dev.findroid.TransferLifecycleTest",
+      "report": "captures/copy-verification/api30-regression-batches/03-TransferLifecycleTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/03-TransferLifecycleTest.txt",
+      "reportSha256": "61dbc6e51be8cc7ff95ade8e972ae05ddde8492f9aa6ef13fe6a8373d07ea80a",
+      "logSha256": "9573638e0759f76f6a7dfbadd7c1c94820bca47fe8c75e4545bf02a4a23c8240",
+      "passed": 3
+    },
+    {
+      "selector": "dev.findroid.TransferQueueWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/04-TransferQueueWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/04-TransferQueueWorkflowTest.txt",
+      "reportSha256": "ca427c55bae32aa736a33ac1177d1cc5d436635f51685df7034b438c2d56857c",
+      "logSha256": "a06ad29bb582e94cbdccf62e1c2d47428fc3130e69b077c3f850261a0d4873a7",
+      "passed": 2
+    },
+    {
+      "selector": "dev.findroid.FolderMergeTest",
+      "report": "captures/copy-verification/api30-regression-batches/05-FolderMergeTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/05-FolderMergeTest.txt",
+      "reportSha256": "cf92009eb503bd16c05a0a97595329b5daabd97aa411cef8d1d6b22662e9214a",
+      "logSha256": "078d26fcbb1581c5e74555c2dbce99a45052aa24c4e15d74986afe59e756d69b",
+      "passed": 17
+    },
+    {
+      "selector": "dev.findroid.SqliteTransferStoreTest",
+      "report": "captures/copy-verification/api30-regression-batches/06-SqliteTransferStoreTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/06-SqliteTransferStoreTest.txt",
+      "reportSha256": "e13d46ef215f50daa49c427d9b32a1480f916e7478321482b0e1fbefbfc5fe20",
+      "logSha256": "5114bbcdd0ed7d6edc659bfbc7b00aae2a2a28c78546a464d99458b8351933a3",
+      "passed": 10
+    },
+    {
+      "selector": "dev.findroid.ArchiveWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/07-ArchiveWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/07-ArchiveWorkflowTest.txt",
+      "reportSha256": "dc70f081ffc8c4c4128483aa61ccd7a84afdffadb8c2efa3255d7ff7cc4db7ec",
+      "logSha256": "c32b98cb0b5a3ccbfb346565e1843d6301d3c43ac1a0cf27f2fd20ba30965df1",
+      "passed": 6
+    },
+    {
+      "selector": "dev.findroid.DocumentCapabilitiesTest",
+      "report": "captures/copy-verification/api30-regression-batches/08-DocumentCapabilitiesTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/08-DocumentCapabilitiesTest.txt",
+      "reportSha256": "dcf02846456385909e94be64631527cc6dc6916e68465cc7c5828f9f2775c2ca",
+      "logSha256": "c51476ae3aac93997d0f03bf7fe814350119f00afe5f02538185f5635cc89a20",
+      "passed": 8
+    },
+    {
+      "selector": "dev.findroid.StorageCapabilitiesWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/09-StorageCapabilitiesWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/09-StorageCapabilitiesWorkflowTest.txt",
+      "reportSha256": "e0d2ede03e9262efd5646562d38a6bff9c0484936d5b2d26ebb9c6a659424ba7",
+      "logSha256": "e09b8b6ebdfba9c0c9bb91ef85d28159f27e9a21cfefdef9d385675393a5a33f",
+      "passed": 7
+    },
+    {
+      "selector": "dev.findroid.LocalIndexStoreTest",
+      "report": "captures/copy-verification/api30-regression-batches/10-LocalIndexStoreTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/10-LocalIndexStoreTest.txt",
+      "reportSha256": "c229e1870a6cbf70a60c5c09e405b74c0f1ac2d428c4882db1f6059e2facc697",
+      "logSha256": "21d0419248588879c7100f618bcaba4619d949caf58c0c73198d97f9649bbdc7",
+      "passed": 18
+    },
+    {
+      "selector": "dev.findroid.SearchSourceCodecTest",
+      "report": "captures/copy-verification/api30-regression-batches/11-SearchSourceCodecTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/11-SearchSourceCodecTest.txt",
+      "reportSha256": "c26ef06eb44ec34cbca21674ebcb743f62bdc1bd59c22055dda51bd5514beb69",
+      "logSha256": "610b66e0dcba86bd2d7af69b22e4a5e46883d0124551762f95efe41e834d8693",
+      "passed": 3
+    },
+    {
+      "selector": "dev.findroid.LocalIndexWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/12-LocalIndexWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/12-LocalIndexWorkflowTest.txt",
+      "reportSha256": "670e7dcc1c6d311f3a6b9fbed77c4d0537e2feeec76e48b9c98c6ef6a85d5465",
+      "logSha256": "670f8581c1c473fba7a77be4581fac8afb876b68a65d90e7453217f5ce77412f",
+      "passed": 6
+    },
+    {
+      "selector": "dev.findroid.SearchRuleGroupCodecTest",
+      "report": "captures/copy-verification/api30-regression-batches/13-SearchRuleGroupCodecTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/13-SearchRuleGroupCodecTest.txt",
+      "reportSha256": "1cbf5accf018d1b073ad1df9d8b07dd8648da4ec60866e3fa77336da1db98d1b",
+      "logSha256": "673448d760fd6ca2e95d1b2cd26a3c873560bfd211035e2230a3341da8266700",
+      "passed": 9
+    },
+    {
+      "selector": "dev.findroid.NestedSearchWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/14-NestedSearchWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/14-NestedSearchWorkflowTest.txt",
+      "reportSha256": "6d11b1eddfdadfff038037a4137bfb5eab26cfca718b29d55bd3509d1034e212",
+      "logSha256": "ae8cbd65610aab5a52c7f06ffc1c61757134e4e39089b869daa6695e2101a9a2",
+      "passed": 7
+    },
+    {
+      "selector": "dev.findroid.MultiRootCodecTest",
+      "report": "captures/copy-verification/api30-regression-batches/15-MultiRootCodecTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/15-MultiRootCodecTest.txt",
+      "reportSha256": "05a800fc1f80b07233715fed717e281f0c8bff98ce86f992b3466bddd567ea64",
+      "logSha256": "53b66318c0d19bcc34ddb286b477ed2e5debff254f8695fb1f9f90b209c42509",
+      "passed": 6
+    },
+    {
+      "selector": "dev.findroid.MultiRootSearchWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/16-MultiRootSearchWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/16-MultiRootSearchWorkflowTest.txt",
+      "reportSha256": "31ad12ba3941605acad2761fb0b47e458fbdbaeeaeece52b6712100c28d08d20",
+      "logSha256": "ddbac8ad8d252d7b12c78fed7d425e6fc627fb664377ee44c19fcd64cd7eaced",
+      "passed": 17
+    },
+    {
+      "selector": "dev.findroid.RecentSearchWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/17-RecentSearchWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/17-RecentSearchWorkflowTest.txt",
+      "reportSha256": "c80546d24b4a8097301445fe77f482d35c309107c8c2b62dfda7ae4a308ca265",
+      "logSha256": "c39ff9983276a62a2e3045548684a13f775c8bdcf57f7f0004ad00d3d7fc390c",
+      "passed": 20
+    },
+    {
+      "selector": "dev.findroid.RecentSearchCodecTest",
+      "report": "captures/copy-verification/api30-regression-batches/18-RecentSearchCodecTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/18-RecentSearchCodecTest.txt",
+      "reportSha256": "14a8196311f020ce0e89f501e941e0cc26c259c3ff8ea7e342b3149dbc0c3341",
+      "logSha256": "9b7b0194dd7a82cab7bd2c0aeb30d5b0a8d413d8b56530aa90bb1ac81c37061a",
+      "passed": 8
+    },
+    {
+      "selector": "dev.findroid.SearchExperienceWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/19-SearchExperienceWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/19-SearchExperienceWorkflowTest.txt",
+      "reportSha256": "466d2f14529d3b214a4c012de7382b5c15f1f81a2aa8d88539bb43874d08c478",
+      "logSha256": "1c5a04b34ecbc1e30a802d084cec31deb3ac11ba1d5a5e120bb91b46737ff34a",
+      "passed": 7
+    },
+    {
+      "selector": "dev.findroid.SearchScopeWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/20-SearchScopeWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/20-SearchScopeWorkflowTest.txt",
+      "reportSha256": "4e8800b8fbbe954e5f98db8d9a718319bdeadf6ff52dbe132b6c0955d4ab60d5",
+      "logSha256": "47fdfee36f5ed0d37a9bb244fd6f014a1857bc870664bc08b5a3071bebaea5a7",
+      "passed": 4
+    },
+    {
+      "selector": "dev.findroid.TagSearchWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/21-TagSearchWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/21-TagSearchWorkflowTest.txt",
+      "reportSha256": "cab4754c978b54f43b5e9c7db680dccc4b9b57e39c356ff216c7e31746a07382",
+      "logSha256": "88b008fd836f0558178856e0093f26931c8de79d6905509c2ec9e75b073dc592",
+      "passed": 8
+    },
+    {
+      "selector": "dev.findroid.LoadingWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/22-LoadingWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/22-LoadingWorkflowTest.txt",
+      "reportSha256": "2684811220116079e29dc6ace8618689755238278ece9ee2e4dcbd70f19f093a",
+      "logSha256": "761a6e635093ec1447e4993525ea2184d11706368abc78dc682cfaaf8953ebec",
+      "passed": 10
+    },
+    {
+      "selector": "dev.findroid.CommandClarityWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/23-CommandClarityWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/23-CommandClarityWorkflowTest.txt",
+      "reportSha256": "3e53d782aa67d626d5176e0d0ae4f9c01563d8a3bffb00f5685a7a6e01553bdd",
+      "logSha256": "8f58be0159853a4b183815e5bc7be3bb50bffabace553ce1251767eba2c474d8",
+      "passed": 16
+    },
+    {
+      "selector": "dev.findroid.DragWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/24-DragWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/24-DragWorkflowTest.txt",
+      "reportSha256": "01eb3b03e82a5e538dfaac22f63d256f237b34646e519ea07f033cf9e19d6137",
+      "logSha256": "f1df8d9ff087ef92899d8b608b53019ddc756aa9b42cfa2e237d8d892e83bbe5",
+      "passed": 13
+    },
+    {
+      "selector": "dev.findroid.FavoritesDragWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/25-FavoritesDragWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/25-FavoritesDragWorkflowTest.txt",
+      "reportSha256": "31dca04123dd2e722b621720b422188bf8a00f014a09a09e03cd50c74ddaa395",
+      "logSha256": "76620d3c76ad5083945b764f3d337b333f185eedaa640af2cecb94ee30786e85",
+      "passed": 11
+    },
+    {
+      "selector": "dev.findroid.OutgoingDragTest",
+      "report": "captures/copy-verification/api30-regression-batches/26-OutgoingDragTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/26-OutgoingDragTest.txt",
+      "reportSha256": "6496ad0f62aacc350278606b1f9ac7ef35cf2476fb4365449a42090623adf236",
+      "logSha256": "4635dae25e8f4de7a5a675d4d717a03072261ba5199d3f2eddc4501cb1bc3e23",
+      "passed": 4
+    },
+    {
+      "selector": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/27-WorkspaceRecoveryWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/27-WorkspaceRecoveryWorkflowTest.txt",
+      "reportSha256": "fa9218c37fbdd885f6e8608ffa2a55ed6b0127a1b447b92f3656a9255b4b76ac",
+      "logSha256": "ea42d15738c3bb525d0b6e2a8ef5d2440b266399991d333b4ef0413a8c7f43eb",
+      "passed": 16
+    },
+    {
+      "selector": "dev.findroid.WorkspaceRecoveryPersistenceTest",
+      "report": "captures/copy-verification/api30-regression-batches/28-WorkspaceRecoveryPersistenceTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/28-WorkspaceRecoveryPersistenceTest.txt",
+      "reportSha256": "587595ee1872b83712329d2c7c5924aa379904c72f83d4de3ea8763f5974371f",
+      "logSha256": "3a7c6260aa47649ce84d477ca78ab04b043aeaaa2a9463f135ed423b4e58d309",
+      "passed": 6
+    },
+    {
+      "selector": "dev.findroid.WorkspaceSaveFailureTest",
+      "report": "captures/copy-verification/api30-regression-batches/29-WorkspaceSaveFailureTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/29-WorkspaceSaveFailureTest.txt",
+      "reportSha256": "e36feb3d753c6a79e07c9ae553f56e687dfee895f5e6c689390225f4e4e0fa2e",
+      "logSha256": "cddbf7505de5f15a10b1baff78d4ecc32df578e37612e46caae5aa2bb386a020",
+      "passed": 1
+    },
+    {
+      "selector": "dev.findroid.NavigationWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/30-NavigationWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/30-NavigationWorkflowTest.txt",
+      "reportSha256": "22035061f7612ef4ef7149384221d8c7e9a9fc83cc7703d7f20cf407a5b2af3b",
+      "logSha256": "94b7d715cd6a9e1c76239c709d3e39e8bce661b5d5557a8fcd21ae0a38998a53",
+      "passed": 7
+    },
+    {
+      "selector": "dev.findroid.SetupCodecTest",
+      "report": "captures/copy-verification/api30-regression-batches/31-SetupCodecTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/31-SetupCodecTest.txt",
+      "reportSha256": "33b62a6470b3eb95805c77602bab5bbb84d7fe771fbf6eb24879d0e710fe47e5",
+      "logSha256": "ad4e2cc6c020ac82e153d58ced40b96b4784c424563805be376c7e272441db5a",
+      "passed": 12
+    },
+    {
+      "selector": "dev.findroid.SetupWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/32-SetupWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/32-SetupWorkflowTest.txt",
+      "reportSha256": "bc23de1fc16667d219bccb43d351cfe035be496a5b6396addcc891bfe6ba4ff1",
+      "logSha256": "be73b736fd6d1daa1e942143bd15d0d5da2599896cfcf887337b9d68fe2eb9eb",
+      "passed": 17
+    },
+    {
+      "selector": "dev.findroid.SidebarWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/33-SidebarWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/33-SidebarWorkflowTest.txt",
+      "reportSha256": "29021d19824211c001013aafa0f6c3f7c92b1a6573813b2de1ced77b76c73a12",
+      "logSha256": "56d2ad64236193a0ae64d7555705053658b55b1e59c902c21518ebfcb56e5a01",
+      "passed": 13
+    },
+    {
+      "selector": "dev.findroid.BrowsingClarityWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/34-BrowsingClarityWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/34-BrowsingClarityWorkflowTest.txt",
+      "reportSha256": "a9ca9317a9235a8a66b2d96f49ef9b23e09aa2aed0813386ff0cd4b891b78031",
+      "logSha256": "34b7abaa5ddbac03bee8e263603ec8ba3e80bef3d4f8e9f2ccf4edd0a60ddf69",
+      "passed": 10
+    },
+    {
+      "selector": "dev.findroid.AppUpdateWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/35-AppUpdateWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/35-AppUpdateWorkflowTest.txt",
+      "reportSha256": "609a444aea26ab881f316c382e99fd5f673d715f7c4064511ff5861447bef7cf",
+      "logSha256": "07f19680993fc31972a2dff9443528b9221b7d6be192171c9fc68a488bf087e6",
+      "passed": 6
+    },
+    {
+      "selector": "dev.findroid.WorkspaceWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/36-WorkspaceWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/36-WorkspaceWorkflowTest.txt",
+      "reportSha256": "c2912e22abe9b009b4414cc6c4b79b94207c212f8b6f81f1f97a5d92e700e36d",
+      "logSha256": "30b626733e72d04f889d4ca785f6d2c13306b92bec527ee15fc9084394e0c1a0",
+      "passed": 9
+    },
+    {
+      "selector": "dev.findroid.AdvancedWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/37-AdvancedWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/37-AdvancedWorkflowTest.txt",
+      "reportSha256": "753e65a4216c03a537dda2ad31ce0f7926f9c2d7f69e7cce3afae57def604ca4",
+      "logSha256": "feb212c8dc70a84bd47f7164995740be84d04e282998afbe246b340dae42fc5c",
+      "passed": 9
+    },
+    {
+      "selector": "dev.findroid.FinderWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/38-FinderWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/38-FinderWorkflowTest.txt",
+      "reportSha256": "f97d25e9aaecc3efac4005cfe85a88ffc76f3f997bd652f50727d82b569cb2f9",
+      "logSha256": "374c2af1165b7fb9e5802e4ce6c52b15f54772e825de70b0c0488c4b051ae5dc",
+      "passed": 11
+    },
+    {
+      "selector": "dev.findroid.FileConflictWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/39-FileConflictWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/39-FileConflictWorkflowTest.txt",
+      "reportSha256": "fa53af53426f35ddcdaadd4a1954e1137d20b6de287a92bb0f795f2f5262cd02",
+      "logSha256": "7a67f95ddaf070f881c32aa2def64477035c5c83b4e10c7e030f2c9418129d0c",
+      "passed": 6
+    },
+    {
+      "selector": "dev.findroid.ProviderWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/40-ProviderWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/40-ProviderWorkflowTest.txt",
+      "reportSha256": "cf361a36a5d4b7f1f79a60b21f9459f1e0deaacbe33955a72b67db62588271ca",
+      "logSha256": "74c1bab0b1f090534df778ade65cd3bf7c0c50a136626075548bbfc99bdf8e2e",
+      "passed": 5
+    },
+    {
+      "selector": "dev.findroid.RenameWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/41-RenameWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/41-RenameWorkflowTest.txt",
+      "reportSha256": "d91a660fa06d869f3b5d0a9709960812ce2faf2b20a7323abb26b62955eadb3c",
+      "logSha256": "11670c2030c1c28f38581f86d5f43bceb842db3705b2967e938c3ddd37e3d9d3",
+      "passed": 13
+    },
+    {
+      "selector": "dev.findroid.OrganizationWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/42-OrganizationWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/42-OrganizationWorkflowTest.txt",
+      "reportSha256": "c455635a44cb3c1bb57cc70c267ed0cd77c3c1841a206dc48f4a6f66e4eccee4",
+      "logSha256": "42eaae1f43642e7441ab25af0b378e4374d2b1c7ed99c9089b8a530674949f1b",
+      "passed": 18
+    },
+    {
+      "selector": "dev.findroid.InputWorkflowTest#oneTouchOpensFoldersInEveryView,dev.findroid.InputWorkflowTest#oneTouchOpensFilesThroughAndroidInEveryView,dev.findroid.InputWorkflowTest#mouseSingleClickSelectsAndDoubleClickOpensInEveryView,dev.findroid.InputWorkflowTest#touchAfterMouseSelectionStillOpensAndLongPressEntersSelectionMode,dev.findroid.InputWorkflowTest#scrollingAndCancelledTouchDoNotOpenFiles,dev.findroid.InputWorkflowTest#fileActionsDoNotAccidentallyOpenTheFile,dev.findroid.InputWorkflowTest#controlAndShiftMouseSelectionNeverActivateAFile,dev.findroid.InputWorkflowTest#mouseSourceWithFingerToolIsTreatedAsACursorNotATouchTap,dev.findroid.InputWorkflowTest#providerFoldersUseTheSamePerGestureActivation,dev.findroid.InputWorkflowTest#clickingFileGlyphsUsesTheSameRulesAsFileNames,dev.findroid.InputWorkflowTest#mouseSelectionInChildColumnsDoesNotNavigateOrLoseTheSelectedEntry,dev.findroid.InputWorkflowTest#archiveEntriesHonorTouchAndMouseActivationAndKeepExtractionReachable",
+      "report": "captures/copy-verification/api30-regression-batches/43-InputWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/43-InputWorkflowTest.txt",
+      "reportSha256": "d7d2bb8597aaa7cb8bba85502313dcdf4e78b8129767f1f19a10fedaf0ae8bce",
+      "logSha256": "d9758750dbfc8d9d7cf0cccfe3f476e7be4a9d842fe8a2a974af8784b2e56d87",
+      "passed": 12
+    },
+    {
+      "selector": "dev.findroid.NavigationCodecTest",
+      "report": "captures/copy-verification/api30-regression-batches/44-NavigationCodecTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/44-NavigationCodecTest.txt",
+      "reportSha256": "22a72123bfdb859457c9e84f620682e4bf8b15fc840c8e9f1c18a249f114d9cc",
+      "logSha256": "0a5c063f6e97178a3a7dbfe67369760804b9349a77d410ba29ffc3b81befde58",
+      "passed": 5
+    },
+    {
+      "selector": "dev.findroid.WindowLifecycleWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/45-WindowLifecycleWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/45-WindowLifecycleWorkflowTest.txt",
+      "reportSha256": "5a7869f0521994cb6641adacf05893681bc1ddf41b6477190be5a7d36cd9dae6",
+      "logSha256": "635e36b02cc395ef091227e5f4e1dd28d9b84936248808ae5b308cb29af66c8f",
+      "passed": 4
+    },
+    {
+      "selector": "dev.findroid.LocalIndexBenchmarkTest",
+      "report": "captures/copy-verification/api30-regression-batches/46-LocalIndexBenchmarkTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/46-LocalIndexBenchmarkTest.txt",
+      "reportSha256": "a89fd31f84f692a5bc2260eb7e1571901a47153268db5a8bf532270d205e290c",
+      "logSha256": "274341ae7318d784ef92521b2a4914e174b325759c102abaa2fbe8566aa18d37",
+      "passed": 1
+    },
+    {
+      "selector": "dev.findroid.CopyVerificationWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/47-CopyVerificationWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/47-CopyVerificationWorkflowTest.txt",
+      "reportSha256": "2ec91a53b7ff5c016f6b6a0edb7c7274108f1632fa8278dba0f2417965e1c74d",
+      "logSha256": "0518b0cd14ebd8d903aae469dc7e80216e55c55f749c9b32a7fad307549f69af",
+      "passed": 16
+    },
+    {
+      "selector": "dev.findroid.ExternalDragWorkflowTest",
+      "report": "captures/copy-verification/api30-regression-batches/48-ExternalDragWorkflowTest.json",
+      "log": "captures/copy-verification/api30-regression-batches/48-ExternalDragWorkflowTest.txt",
+      "reportSha256": "81afa33f7f7c30c2c80c67d0427c1eefa768fc6e1c5a586c7f9a2f16410a4420",
+      "logSha256": "f626782f348eb3fa307af3c4cdda20343c99df67f5213c5f905aec2e31730a73",
+      "passed": 5
+    }
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "bb56a766abaea1452ff6785709b09e7e5e6a10599539677bb57929d5faf63d84",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "e173d2f353e1380ae780ea5965e9517ae96e21e762041a5e48531c27be54fb28"
+  },
+  "installedApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "bb56a766abaea1452ff6785709b09e7e5e6a10599539677bb57929d5faf63d84",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "e173d2f353e1380ae780ea5965e9517ae96e21e762041a5e48531c27be54fb28"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "api30-ota/available.png",
+      "sha256": "4e1406c47281610d4ef8e8dd483bf11cbbff45db8bf8f894b47762cdfa2792a9"
+    },
+    {
+      "path": "api30-ota/installer-complete.png",
+      "sha256": "eb2c31f6e7dad211e4f1f7134505ca3fea6a93e0f65dda88d1e9596f206cfa50"
+    },
+    {
+      "path": "api30-ota/installer.png",
+      "sha256": "4e384d15b8bf8d3ff65eb1d0e7c3e1523417404bb21629ab5504469387793ff5"
+    },
+    {
+      "path": "api30-ota/ready.png",
+      "sha256": "2158e6c19e1f6e53af9e909223618cd72d5c697336bbd851515c05924bc7a931"
+    },
+    {
+      "path": "api30-ota/up-to-date.png",
+      "sha256": "9f838fa09d84fb6da3312c0cc139df3591295b2bdcad6d721a30b0daad0b9304"
+    },
+    {
+      "path": "api30-ota/upgraded-sidebar.png",
+      "sha256": "cd0b8f28777fdf117c04a5577ac7ba6491819f4acb2c8c73a7469f4545b277be"
+    },
+    {
+      "path": "api36-ota/available.png",
+      "sha256": "712dfb47722893ec9cf769807a17f54490dd54ee1ba08821a3a24f581cbdf979"
+    },
+    {
+      "path": "api36-ota/installer-complete.png",
+      "sha256": "b76538e7ca3a77945c9934c702f4d8bda65baeb423d1855775156981fc727321"
+    },
+    {
+      "path": "api36-ota/installer.png",
+      "sha256": "a5ddeda211af96f2b95727669858f780dddcca7a75e469f006edb8b0174feb6f"
+    },
+    {
+      "path": "api36-ota/ready.png",
+      "sha256": "b296c8ed7e4a24666b38539dd1ff5e474fdd13489fda06ff060eb679bf7e3e3c"
+    },
+    {
+      "path": "api36-ota/up-to-date.png",
+      "sha256": "d614316974260a28467b3877f62a2e9e29f4850536a83540bba6c60d2a0834c9"
+    },
+    {
+      "path": "api36-ota/upgraded-sidebar.png",
+      "sha256": "c876d46805e6d359fe242e5b19c7ae506702801ae9967a27eaf38e6b85df62d0"
+    }
+  ],
+  "review": "All twelve actual public OTA screenshots inspected in contact sheets. Version 0.42 offers 0.43 with named download/install controls; Android confirms installation; the upgraded sidebar retains the synthetic Favorite/document and App updates shows installed0.43 with no repeat offer. Backgrounds contain only synthetic sample paths or the unconfigured emulator launcher."
+}

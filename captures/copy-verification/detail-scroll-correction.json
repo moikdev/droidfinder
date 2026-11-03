@@ -1,0 +1,10 @@
+{
+  "reason": "Actual known-details screenshot stopped above the per-file status. The old predicate accepted text outside the visible scroll viewport.",
+  "applicationAndNativeApksUnchanged": true,
+  "allCheckerAstOutsideResultDetailsIdentical": true,
+  "oldCheckerSha256": "62eca7c55575ed0c4973b4c6169b355109f0852a2745f5051c44a96dbf2b5e64",
+  "revisedCheckerSha256": "6d13f2d01a283f2ef93492443c05f1e2d6f46039041484f4b41703155b346e52",
+  "unchangedCoreAstSha256": "98c75a977b7691873ece2d004a3166ae0a227a627e52ddbd5fde1e7791c3cb2a",
+  "oldOptimizedRunsExcludedFromFinalAcceptance": true,
+  "independentGuardRejectsActualOldKnownDetailsCapture": true
+}

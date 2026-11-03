@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 45,
+  "versionName": "0.43.0-preview",
+  "apkName": "Findroid-0.43.0-preview.apk",
+  "bytes": 8586415,
+  "sha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.43.0-preview/Findroid-0.43.0-preview.apk",
+  "notes": "Verify important copies before making them available. Choose Paste and verify\u2026, Duplicate and verify\u2026, or Paste into folder and verify\u2026, review the sources and destination, then choose Copy and verify.\n\nFindroid compares each source file's SHA-256 and actual byte count with a fresh read of the unfinished destination. Nested folders and files with unknown sizes are supported. Mismatched or unreadable copies fail safely, keep the source, and clean up unpublished work when possible. Failed reviewed replacements restore the previous destination.\n\nTransfers keeps per-file verification results through pause, cancellation and retry. Verification reads do not inflate the copied-byte total, and transfer titles avoid internal provider IDs.\n\nVerification takes extra destination reads and supports copies with up to 10,000 file results per transfer. A provider must allow reading its newly written files. Checks describe the bytes read at that time.\n"
+}

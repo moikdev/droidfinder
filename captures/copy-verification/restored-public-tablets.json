@@ -1,0 +1,20 @@
+[
+  {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9",
+    "fontScale": "1.0"
+  },
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9",
+    "fontScale": "1.0"
+  }
+]

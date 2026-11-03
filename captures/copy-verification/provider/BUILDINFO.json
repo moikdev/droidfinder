@@ -1,0 +1,13 @@
+{
+  "package": "dev.findroid.transferqa",
+  "apk": "captures/copy-verification/provider/Findroid-verification-test-provider.apk",
+  "bytes": 16787,
+  "sha256": "7c195967415eb9ad5a2d8a445968a3f2a70de2db23e913dbff618d396344e254",
+  "source": "scripts/android/VerificationDocumentsProvider.java",
+  "sourceSha256": "cec2cc8722f58686876626590a2a0e937e749b828d27f2fa1bc2098defe3d34e",
+  "syntheticBytesPerStream": 8388608,
+  "noNetworkPermission": true,
+  "syntheticSourcesReadOnly": true,
+  "writesOnlyOwnedDestination": true,
+  "separateFromShippingApk": true
+}

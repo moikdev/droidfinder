@@ -1,0 +1,10 @@
+{
+  "serial": "emulator-5582",
+  "waitingForCompleteNativeAcceptance": false,
+  "nativeCases": 426,
+  "nativeReportSha256": "5b42df826172cfb3348c5e123ca30cb0069740c2eae7ca2bdd0ab0cc4c7f38ca",
+  "ownedFullNativeScreenshotsRetainedPrivatelyAndRemoved": true,
+  "originalPrivateStateRestoredBeforeOptimizedAcceptance": true,
+  "optimizedCheckerSha256": "62eca7c55575ed0c4973b4c6169b355109f0852a2745f5051c44a96dbf2b5e64",
+  "optimizedAcceptancePassed": true
+}

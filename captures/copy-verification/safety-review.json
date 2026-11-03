@@ -1,0 +1,42 @@
+{
+  "reviewedSources": {
+    "app/src/main/java/dev/findroid/CopyVerification.kt": "ee8d264145418ea1a3eb6e1d3e7ff82dcabf2fa2092a46f63fbb1f2c4db162c6",
+    "app/src/main/java/dev/findroid/VerifiedCopyReviewDialog.kt": "c96f12c405cb001be6051368323377056d8df5c4e8a21ace84627d96f25b52cb",
+    "app/src/main/java/dev/findroid/FileEngine.kt": "bb34f3f8ce33fbba4b2da6cddd05f7a6f384509018b5d8325463e30a7048c542",
+    "app/src/main/java/dev/findroid/DocumentAccess.kt": "c2110dd39f8c474b2fde2bd3a28132685ae6308369060e6f6d651b1974ed79f6",
+    "app/src/main/java/dev/findroid/TransferWorker.kt": "8cf662fccec64f6ca777d4236a609035b382aa6466e93b8eec6fccee38f130a6",
+    "app/src/main/java/dev/findroid/TransferQueue.kt": "08bd3d4fd32308dacbaefaf66c55ce7abd66dc790e174c7f75efe6ab1938f7ee",
+    "app/src/main/java/dev/findroid/SqliteTransferStore.kt": "e97b95eb79b3b60e006b86ab33d83ff3e402f80e2d33ae6fab103f7f7c3a6e0a",
+    "app/src/main/java/dev/findroid/FinderModel.kt": "0da62fa52344d1852e8c997542157d99912c6dee17f1694a981549a56b75fb98",
+    "app/src/main/java/dev/findroid/FinderApp.kt": "9af047e04f654a2866c5a28e676e270ee43c1deb13aae03fcb37ea70080d88aa",
+    "app/src/main/java/dev/findroid/CommandAvailability.kt": "ea9bf931ea6995cf66152ab55e8686b47cd223cff71bd8b4e305623200cdd041",
+    "app/src/main/java/dev/findroid/DesktopMenus.kt": "3cab805a81a931e3f1015b7a0031a076187b30912dde25914a209ee722363079",
+    "app/src/main/java/dev/findroid/TransferCenterDialog.kt": "fceedaa85ee68247f92ddfe6630aa4ffd7f92a94f1ae1b972d1d8a7ac32b6ab2"
+  },
+  "strictPrimaryPaneGetterUnchanged": true,
+  "optionalVerificationAcceptsCopiesOnly": true,
+  "sha256AndActualByteCountBeforePublication": true,
+  "unpublishedPerFileResultsCheckpointed": true,
+  "publicationAttachesDestinationsOnlyAfterSuccess": true,
+  "noCheckpointCallbackAfterAtomicPublication": true,
+  "sourceMetadataRecheckedAfterReadback": true,
+  "readbackExcludedFromCopiedByteTotals": true,
+  "replacementRollbackRetained": true,
+  "cancellationCleansUnpublishedStagingWherePossible": true,
+  "verificationResultLimit": 10000,
+  "legacyRecordsDefaultToNotRequested": true,
+  "sqliteSchemaUpgradePaths": [
+    1,
+    2
+  ],
+  "newSqliteSchema": 3,
+  "reviewer": "Source inspection by the implementing agent; no independent human or physical-provider review claimed.",
+  "knownLimits": [
+    "Provider readback must be supported.",
+    "Readback describes the bytes checked at that time.",
+    "Physical, OEM and third-party provider acceptance remains separate."
+  ],
+  "providerTitlesUseCachedFriendlyNames": true,
+  "providerTitleFallbackDoesNotDecodeOpaqueIds": true,
+  "composeTitleAccessDoesNotQueryProvider": true
+}

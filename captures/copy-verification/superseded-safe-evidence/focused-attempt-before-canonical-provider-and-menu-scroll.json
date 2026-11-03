@@ -1,0 +1,31 @@
+{
+  "accepted": false,
+  "applicationApkSha256": "032909671bb2e1fd2ed7ea6d85bdc7a9174e1d48e1f3c935341ca2426eb20843",
+  "nativeTestApkSha256": "3a69a3c4439250553285f6be6884b2ade512b4a1bf577455f82350ce3ed0116e",
+  "reports": [
+    {
+      "path": "api30-focused-before-canonical-provider-and-menu-scroll.json",
+      "sha256": "b6a3e392ce81c0ae7287251330f3b23419b80a2cf8aeb4382ff08279fb8247a4"
+    },
+    {
+      "path": "api30-focused-before-canonical-provider-and-menu-scroll.txt",
+      "sha256": "a9abb7325e4bd4d7c00c22e57f088a18947b48040b59b8b36d7e5059bd51ff3e"
+    },
+    {
+      "path": "api30-focused-before-canonical-provider-and-menu-scroll-host.txt",
+      "sha256": "94fb3e38de715b726b3a9576bface90493f67fc57a25d6fa50669dd4737f6ea9"
+    },
+    {
+      "path": "api36-focused-before-canonical-provider-and-menu-scroll.json",
+      "sha256": "5e277c2f7b078f63e67cdb36cddb742d0207028ec615f3768ad18781fb427d7f"
+    },
+    {
+      "path": "api36-focused-before-canonical-provider-and-menu-scroll.txt",
+      "sha256": "8280a419a3ed60907ed5e25bc543e4dfaf139c3f9aa0388052ac535633f86a7e"
+    },
+    {
+      "path": "api36-focused-before-canonical-provider-and-menu-scroll-host.txt",
+      "sha256": "eac8f89a36b4053e9fb17b6db670bb9ab28285d032c50c2933b21f6acf89ab5c"
+    }
+  ]
+}

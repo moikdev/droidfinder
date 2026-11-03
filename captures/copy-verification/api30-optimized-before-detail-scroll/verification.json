@@ -1,0 +1,398 @@
+{
+  "serial": "emulator-5602",
+  "checkerSha256": "62eca7c55575ed0c4973b4c6169b355109f0852a2745f5051c44a96dbf2b5e64",
+  "helpersSha256": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+  "apkSha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9",
+  "previousApkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "providerApkSha256": "7c195967415eb9ad5a2d8a445968a3f2a70de2db23e913dbff618d396344e254",
+  "fromVersionCode": 44,
+  "toVersionCode": 45,
+  "separateOwnedProvider": true,
+  "syntheticBytesPerStream": 8388608,
+  "reviewOnlyRequested": false,
+  "privateEnvironmentRecoverySaved": true,
+  "directPreviousPublicUpgrade": true,
+  "legacyFavoritePreserved": true,
+  "priorProviderApkSha256": "d060ccf98021759ff77b88edf8daf113d53c198d4b7df7524e127e7e571c2376",
+  "priorProviderEntryCount": 3,
+  "systemPickerRecoveredMissingFolderAction": true,
+  "systemPickerPrivateNavigationNotRetained": true,
+  "actualSystemPickerConnection": true,
+  "reviewLayouts": [
+    {
+      "widthDp": 1280,
+      "fontScale": 1.0,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 1280,
+      "fontScale": 1.6,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.0,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.6,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.0,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.6,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    }
+  ],
+  "cancelledReviewStartsNoProviderReadOrCopy": true,
+  "completedProviderFriendlyTitles": [
+    {
+      "case": "known",
+      "title": "Transfer sample.bin"
+    },
+    {
+      "case": "unknown",
+      "title": "Unknown size.bin"
+    },
+    {
+      "case": "nested",
+      "title": "Nested originals"
+    },
+    {
+      "case": "readback",
+      "title": "Transfer sample.bin"
+    },
+    {
+      "case": "corrupt",
+      "title": "Transfer sample.bin"
+    },
+    {
+      "case": "unreadable",
+      "title": "Unknown size.bin"
+    },
+    {
+      "case": "cancel",
+      "title": "Transfer sample.bin"
+    },
+    {
+      "case": "replace",
+      "title": "Transfer sample.bin"
+    }
+  ],
+  "knownSizeCopy": {
+    "bytes": 8388608,
+    "sha256": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+    "matchesDeterministicSource": true
+  },
+  "unknownSizeCopy": {
+    "bytes": 8388608,
+    "sha256": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+    "matchesDeterministicSource": true
+  },
+  "nestedFolderCopy": [
+    {
+      "bytes": 1048576,
+      "sha256": "631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769",
+      "matchesDeterministicSource": true
+    },
+    {
+      "bytes": 2097152,
+      "sha256": "1e075c8d478ad21844e33e830a695ef03a4d2488b69ee275bd8947618bb1be1e",
+      "matchesDeterministicSource": true
+    }
+  ],
+  "emptyNestedFolderPreserved": true,
+  "pausedLayouts": [
+    {
+      "widthDp": 1280,
+      "fontScale": 1.0,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": true
+    },
+    {
+      "widthDp": 1280,
+      "fontScale": 1.6,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": true
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.0,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": true
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.6,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": true
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.0,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": true
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.6,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": true
+    }
+  ],
+  "providerDestinationCopy": {
+    "bytes": 8388608,
+    "sha256": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+    "matchesExpectedSyntheticBytes": true
+  },
+  "completedLayouts": [
+    {
+      "widthDp": 1280,
+      "fontScale": 1.0,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": false
+    },
+    {
+      "widthDp": 1280,
+      "fontScale": 1.6,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": false
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.0,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": false
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.6,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": false
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.0,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": false
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.6,
+      "namedControlsComplete48dp": true,
+      "verificationSummaryVisible": true,
+      "friendlySourceFilenameVisible": true,
+      "activeJobSurvivesConfiguration": false
+    }
+  ],
+  "realProviderReadback": true,
+  "verificationPauseResume": true,
+  "sameLengthCorruptionRejectsAndCleansUnpublishedCopy": true,
+  "unreadableDestinationRejectsAndCleansUnpublishedCopy": true,
+  "readbackCancellationKeepsSourceAndCleansStaging": true,
+  "failedReplacementRestoredOriginal": {
+    "bytes": 68,
+    "sha256": "c97034f0b153a6b68c137f3bb3725788d5143ccabf6cafb821c482176c73e888",
+    "matchesExpectedSyntheticBytes": true
+  },
+  "foregroundServiceStopsAfterEveryFinish": true,
+  "originalSyntheticDocumentBytes": true,
+  "sourceOriginalsReadOnly": true,
+  "journalReadAfterOptimizedUiWithDebugBuild": true,
+  "syntheticJournal": {
+    "schema": 3,
+    "jobs": [
+      {
+        "case": "known",
+        "state": "COMPLETED",
+        "copiedBytes": 8388608,
+        "processedItems": 1,
+        "verifyCopies": true,
+        "results": [
+          {
+            "status": "VERIFIED",
+            "destination": "/storage/emulated/0/Documents/Findroid verification demo 1793725887402575000/Copy destination/known/Transfer sample.bin",
+            "bytes": 8388608,
+            "expected": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+            "actual": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a"
+          }
+        ]
+      },
+      {
+        "case": "unknown",
+        "state": "COMPLETED",
+        "copiedBytes": 8388608,
+        "processedItems": 1,
+        "verifyCopies": true,
+        "results": [
+          {
+            "status": "VERIFIED",
+            "destination": "/storage/emulated/0/Documents/Findroid verification demo 1793725887402575000/Copy destination/unknown/Unknown size.bin",
+            "bytes": 8388608,
+            "expected": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+            "actual": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a"
+          }
+        ]
+      },
+      {
+        "case": "nested",
+        "state": "COMPLETED",
+        "copiedBytes": 3145728,
+        "processedItems": 5,
+        "verifyCopies": true,
+        "results": [
+          {
+            "status": "VERIFIED",
+            "destination": "/storage/emulated/0/Documents/Findroid verification demo 1793725887402575000/Copy destination/nested/Nested originals/One.bin",
+            "bytes": 1048576,
+            "expected": "631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769",
+            "actual": "631b84027d6b9e52b539c4e8373622d23032dfadc64d60af87339c9037e4f769"
+          },
+          {
+            "status": "VERIFIED",
+            "destination": "/storage/emulated/0/Documents/Findroid verification demo 1793725887402575000/Copy destination/nested/Nested originals/Sub/Two.bin",
+            "bytes": 2097152,
+            "expected": "1e075c8d478ad21844e33e830a695ef03a4d2488b69ee275bd8947618bb1be1e",
+            "actual": "1e075c8d478ad21844e33e830a695ef03a4d2488b69ee275bd8947618bb1be1e"
+          }
+        ]
+      },
+      {
+        "case": "readback",
+        "state": "COMPLETED",
+        "copiedBytes": 8388608,
+        "processedItems": 1,
+        "verifyCopies": true,
+        "results": [
+          {
+            "status": "VERIFIED",
+            "destination": "content://dev.findroid.transferqa.documents/tree/root/document/out%2Freadback%2FTransfer%20sample.bin",
+            "bytes": 8388608,
+            "expected": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+            "actual": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a"
+          }
+        ]
+      },
+      {
+        "case": "corrupt",
+        "state": "FAILED",
+        "copiedBytes": 8388608,
+        "processedItems": 1,
+        "verifyCopies": true,
+        "results": [
+          {
+            "status": "MISMATCH",
+            "destination": null,
+            "bytes": 8388608,
+            "expected": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+            "actual": "fb4e6ba57bda8c85c9ce0b667b2cc341e017646384094b3eccdb13ca9e6a7588"
+          }
+        ]
+      },
+      {
+        "case": "unreadable",
+        "state": "FAILED",
+        "copiedBytes": 8388608,
+        "processedItems": 1,
+        "verifyCopies": true,
+        "results": [
+          {
+            "status": "UNREADABLE",
+            "destination": null,
+            "bytes": 8388608,
+            "expected": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+            "actual": null
+          }
+        ]
+      },
+      {
+        "case": "cancel",
+        "state": "CANCELLED",
+        "copiedBytes": 8388608,
+        "processedItems": 1,
+        "verifyCopies": true,
+        "results": [
+          {
+            "status": "INCOMPLETE",
+            "destination": null,
+            "bytes": 8388608,
+            "expected": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+            "actual": null
+          }
+        ]
+      },
+      {
+        "case": "replace",
+        "state": "FAILED",
+        "copiedBytes": 8388676,
+        "processedItems": 3,
+        "verifyCopies": true,
+        "results": [
+          {
+            "status": "MISMATCH",
+            "destination": null,
+            "bytes": 8388608,
+            "expected": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+            "actual": "fb4e6ba57bda8c85c9ce0b667b2cc341e017646384094b3eccdb13ca9e6a7588"
+          }
+        ]
+      }
+    ],
+    "verificationDoesNotDoubleCountCopiedBytes": true,
+    "cancelledReviewsCreateNoJobs": true
+  },
+  "grantCleanupUsesFixedSyntheticUriBridge": true,
+  "unrelatedUriGrantsUnchanged": true,
+  "restoredOriginalUriGrants": true,
+  "sentinelPreferencePreserved": true,
+  "restoredOriginalManagedFiles": true,
+  "restoredOriginalFileAbsences": true,
+  "restoredManagedFileCount": 495,
+  "originalProviderApkAndAllManagedDataRestored": true,
+  "originalProviderEmptyDirectoriesAndAbsencesRestored": true,
+  "syntheticFixtureRemoved": true,
+  "restoredOriginalStorageAccess": true,
+  "restoredApkSha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9",
+  "cleanupErrors": [],
+  "success": true
+}

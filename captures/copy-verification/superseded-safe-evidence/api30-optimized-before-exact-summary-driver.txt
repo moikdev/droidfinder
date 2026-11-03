@@ -1,0 +1,44 @@
+Verified copy review layout review-1280dp-font1.0
+Verified copy review layout review-1280dp-font1.6
+Verified copy review layout review-800dp-font1.0
+Verified copy review layout review-800dp-font1.6
+Verified copy review layout review-600dp-font1.0
+Verified copy review layout review-600dp-font1.6
+Traceback (most recent call last):
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 603, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 511, in main
+    review('Transfer sample.bin',target,'readback');confirm('readback');marker(session,'readback')
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 259, in review
+    browse(DOCUMENT,case+'-source-browser')
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 243, in browse
+    return d.wait(name,lambda t:d.ready(t,'Actions for Transfer sample.bin') and d.ready(t,'Actions for Unknown size.bin'))
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 95, in wait
+    tree = self.dump(name)
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-local-search-index.py", line 37, in dump
+    return super().dump(name)
+           ~~~~~~~~~~~~^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 71, in dump
+    self.shell('uiautomator', 'dump', *(['--windows'] if self.all_windows else []), self.xml)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 37, in shell
+    return self.call('shell', shlex.join(map(str, parts)), **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 30, in call
+    result = subprocess.run([self.adb, '-s', self.serial, *map(str, parts)], input=data,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=180)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2153, in _communicate
+    ready = selector.select(timeout)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/selectors.py", line 398, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt

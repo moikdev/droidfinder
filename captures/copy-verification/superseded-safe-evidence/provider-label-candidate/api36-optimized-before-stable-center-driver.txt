@@ -1,0 +1,22 @@
+Verified copy review layout review-1280dp-font1.0
+Verified copy review layout review-1280dp-font1.6
+Verified copy review layout review-800dp-font1.0
+Verified copy review layout review-800dp-font1.6
+Verified copy review layout review-600dp-font1.0
+Verified copy review layout review-600dp-font1.6
+Traceback (most recent call last):
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 603, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 498, in main
+    review('Unknown size.bin',target,'unknown');confirm('unknown');finish('unknown',summary='1 verified and copied')
+                                                                   ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 301, in finish
+    center(case)
+    ~~~~~~^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 271, in center
+    return d.wait(name+'-center',lambda t:d.ready(t,'Close transfers'))
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 99, in wait
+    raise AssertionError('UI did not settle: ' + name)
+AssertionError: UI did not settle: unknown-center

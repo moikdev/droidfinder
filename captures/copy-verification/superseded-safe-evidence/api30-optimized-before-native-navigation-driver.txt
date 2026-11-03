@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 586, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 470, in main
+    review('Transfer sample.bin',target,'cancel-review');review_layouts()
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 246, in review
+    menu(case+'-paste','Paste and verify…')
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 177, in menu
+    raise AssertionError('Unreachable command '+label)
+AssertionError: Unreachable command Paste and verify…

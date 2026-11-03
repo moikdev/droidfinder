@@ -1,0 +1,11 @@
+emulator-5582: 17 passed, 0 skipped, 9 failed; runner complete: True
+dev.findroid.CopyVerificationWorkflowTest#failedVerificationRestoresAReviewedReplacement: java.lang.AssertionError: Important.bin expected:<FAILED> but was:<COMPLETED>
+dev.findroid.CopyVerificationWorkflowTest#cancellationDuringRealProviderReadbackKeepsTheSourceAndRecordsIncomplete: androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 15000 ms
+dev.findroid.CopyVerificationWorkflowTest#namedPasteReviewQueuesVerifiedWorkAndShowsDurableResults: java.lang.AssertionError: Failed: assertExists.
+dev.findroid.CopyVerificationWorkflowTest#namedDuplicateReviewRetainsOriginalAndCreatesVerifiedSibling: java.lang.AssertionError: Failed: assertExists.
+dev.findroid.CopyVerificationWorkflowTest#unreadableProviderReadbackIsReportedAndNeverPublished: java.lang.AssertionError: Important.bin expected:<FAILED> but was:<COMPLETED>
+dev.findroid.CopyVerificationWorkflowTest#namedPasteReviewDoesNoWorkUntilConfirmedAndCanBeCancelled: java.lang.AssertionError: Failed: assertExists.
+dev.findroid.CopyVerificationWorkflowTest#localSourceIsReadBackFromTheRealProviderBeforePublication: java.lang.AssertionError: expected:<1> but was:<0>
+dev.findroid.CopyVerificationWorkflowTest#sameLengthProviderCorruptionFailsAndCleansUnpublishedCopy: java.lang.AssertionError: Important.bin expected:<FAILED> but was:<COMPLETED>
+dev.findroid.CopyVerificationWorkflowTest#pauseAndResumeKeepVerificationBytesSeparateFromCopiedBytes: androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 15000 ms
+Log: /Users/LENOVO/.t3/projects/droidfinder/captures/copy-verification/api36-focused.txt

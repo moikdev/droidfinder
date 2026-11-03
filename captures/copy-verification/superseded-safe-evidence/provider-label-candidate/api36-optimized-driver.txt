@@ -1,0 +1,74 @@
+Verified copy review layout review-1280dp-font1.0
+Traceback (most recent call last):
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 488, in main
+    target=local_target('known');session='review_'+stamp;sessions.append(session);configure(session)
+                                                         ^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 367, in review_layouts
+    scroll_scope(key+'-'+label,scope,lambda s:any(predicate(n.get('text','')) and complete_text(s,n) for n in s.iter('node') if len(d.bounds(n))==4))
+     ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 336, in scroll_scope
+    for _ in range(18):
+             ^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-local-search-index.py", line 37, in dump
+    return super().dump(name)
+           ~~~~~~~~~~~~^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 71, in dump
+    self.shell('uiautomator', 'dump', *(['--windows'] if self.all_windows else []), self.xml)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 37, in shell
+    return self.call('shell', shlex.join(map(str, parts)), **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 30, in call
+    result = subprocess.run([self.adb, '-s', self.serial, *map(str, parts)], input=data,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=180)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/Users/LENOVO/Library/Android/sdk/platform-tools/adb', '-s', 'emulator-5582', 'shell', 'uiautomator dump --windows /sdcard/findroid-native-acceptance.xml']' timed out after 180 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 604, in <module>
+    (a.output/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
+                        ^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 581, in main
+    assert grants()==grants_before, 'Original persisted permissions must match';report['restoredOriginalUriGrants']=True
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 570, in cleanup
+    report['acceptanceFailure']=dict(type=type(error).__name__,message=str(error))
+            ^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 574, in originals
+    try:action();return True
+    ^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 89, in install
+    def install(apk,downgrade=False):
+        ^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-copy-verification.py", line 87, in stop
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 37, in shell
+    return self.call('shell', shlex.join(map(str, parts)), **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/android/acceptance.py", line 30, in call
+    result = subprocess.run([self.adb, '-s', self.serial, *map(str, parts)], input=data,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=180)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2153, in _communicate
+    ready = selector.select(timeout)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/selectors.py", line 398, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt

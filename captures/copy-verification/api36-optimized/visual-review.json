@@ -1,0 +1,150 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "name": "cancel-details.png",
+      "sha256": "bab553015545a287c5e04c5f781de4ca2f0dfa9e4054cd3606eabb9fbba82a00"
+    },
+    {
+      "name": "cancel-readback.png",
+      "sha256": "cfe6f8f054fd7edf9df1a220d334633f4f9190e24efa251903095ae5054ec05b"
+    },
+    {
+      "name": "cancel-result.png",
+      "sha256": "b189dc33b584906db17b42d593336c9826b7ea7d3d5e8e524eb94761436799f4"
+    },
+    {
+      "name": "completed-1280dp-font1.0.png",
+      "sha256": "562fa9a058cbb3c8b3b8b06fcb32bba163c2d7c1a65c4d43c14843b8f8483cf9"
+    },
+    {
+      "name": "completed-1280dp-font1.6.png",
+      "sha256": "f530df26218ef849c8411b70ebd6aa3e8741745e4396f7492dfa7e0788db2743"
+    },
+    {
+      "name": "completed-600dp-font1.0.png",
+      "sha256": "5909058fe922be0f729d2e5488c78333097ff1c9d2daf1a1bf4c815998f379ed"
+    },
+    {
+      "name": "completed-600dp-font1.6.png",
+      "sha256": "8cdcb898bc1c6274e7bd75544fadac61224b8f6fece4bd7eeadb4ce5e2573f68"
+    },
+    {
+      "name": "completed-800dp-font1.0.png",
+      "sha256": "628da4f05bfc36ca71d342361aab1daa195390b94e9cf70a8beb4db51c8c6785"
+    },
+    {
+      "name": "completed-800dp-font1.6.png",
+      "sha256": "e775636034487339afae0953ccc16eba8c76945037b2b330f5e3e25e51f9ad34"
+    },
+    {
+      "name": "corrupt-details.png",
+      "sha256": "aadd1cf766bd36724fcd1e858a42419db537a3fc72399ec13f806138d177f5c5"
+    },
+    {
+      "name": "corrupt-result.png",
+      "sha256": "f185c4ae8a65e4f0c7c54edbde085131a28a5359f29ae2667277eaf3d58fd318"
+    },
+    {
+      "name": "known-details.png",
+      "sha256": "23df32fd8328babcbf43cffc188d82bb063814c78166e617034b0d7f06e111b8"
+    },
+    {
+      "name": "known-result.png",
+      "sha256": "9d7804b0f8a977f035b3b389d27c35d42bdcf45239dbb98d850e41fe84a15fb9"
+    },
+    {
+      "name": "nested-result.png",
+      "sha256": "ce50f93ce8d5cbfc08fb54e121bbd599c3ed67580b1ccb4c9031a741518c4975"
+    },
+    {
+      "name": "paused-1280dp-font1.0.png",
+      "sha256": "867b9a36435ddedde4b5ba276e274c5a57e4de99d570339428871db2218fba51"
+    },
+    {
+      "name": "paused-1280dp-font1.6.png",
+      "sha256": "50cdc1544ae29745ede7fe838ec8143e87a7652a926627935b4bcd84591f2b74"
+    },
+    {
+      "name": "paused-600dp-font1.0.png",
+      "sha256": "387d5a6430a619997a512b016148833fddf214b440abb26ccd6ae06279903bc0"
+    },
+    {
+      "name": "paused-600dp-font1.6.png",
+      "sha256": "ad82cda378af682614b074d6a9ac3d44e1ac03c44799a07ae31c2c30319003e7"
+    },
+    {
+      "name": "paused-800dp-font1.0.png",
+      "sha256": "93da2b08621c4f758cc69ac9889157ad5e028446cbe981dcf3a378d067ffa810"
+    },
+    {
+      "name": "paused-800dp-font1.6.png",
+      "sha256": "52922bbba52136353c6e0de96d629a66dfda081e09647c3758711160bc052479"
+    },
+    {
+      "name": "previous-public.png",
+      "sha256": "686b3fca3760d3cdfbefef5bc5b0aea7a5cc7e52e0aec5f3f03573fa6ec55a9d"
+    },
+    {
+      "name": "readback-active.png",
+      "sha256": "d2e1d07bbb25a49ce36a9e143b9a377eaa2264197d92e7c0d58d63b878ab33c1"
+    },
+    {
+      "name": "readback-details.png",
+      "sha256": "6dd2118ef69a8c8f58a0cd432884ca196a86697aef08e0307f611e7481490f08"
+    },
+    {
+      "name": "readback-result.png",
+      "sha256": "95c9489a4fbc1bcd304a8a30120a69764becb108313feb2937f74a83d0fb219e"
+    },
+    {
+      "name": "replace-details.png",
+      "sha256": "64641409c2df3ccb0a6d5266012c21238e79064e051462740b19714b1ef5c01e"
+    },
+    {
+      "name": "replace-result.png",
+      "sha256": "717151cbebc998576440f0a497bc9ce22ef678846decc645b2d5118bec5a335d"
+    },
+    {
+      "name": "review-1280dp-font1.0.png",
+      "sha256": "43f4944342613e27f134fb0164530d88bffe5a0873791aae4ad0723e892f1391"
+    },
+    {
+      "name": "review-1280dp-font1.6.png",
+      "sha256": "31c0ecf70791aa824c4b435fb293c085178a07cd8016375b913118a2eb6a9ddc"
+    },
+    {
+      "name": "review-600dp-font1.0.png",
+      "sha256": "e432ce2bfdf001ca436c8e5ca4fc9d12de4bdd662e1a3a7dc6893440e0b089c9"
+    },
+    {
+      "name": "review-600dp-font1.6.png",
+      "sha256": "1ff4cae3fdde486b1d3817e0658addc11f16104e2d296e505e92acdee24e838a"
+    },
+    {
+      "name": "review-800dp-font1.0.png",
+      "sha256": "bf7f2a391293f6d49acb55c4380587416dcefecd2f16a14d5956ed804885f6c9"
+    },
+    {
+      "name": "review-800dp-font1.6.png",
+      "sha256": "2d0df0587437dd1c26eea5eea4f9c0f491e34b854d1f36789095dcf9726a3f49"
+    },
+    {
+      "name": "system-picker-fixture.png",
+      "sha256": "5556980f3ed412e24d919d9e6f6bd79efe843147a01c707621fad8e24c6091f8"
+    },
+    {
+      "name": "unknown-result.png",
+      "sha256": "6af963fc5b9bba8f4feba654a9af033420264854179def10560055a8c22f7f58"
+    },
+    {
+      "name": "unreadable-details.png",
+      "sha256": "3d859c1d1f566a392a6c1e6e461899e31952c39f4aafc95423893bd2fa7e5764"
+    },
+    {
+      "name": "unreadable-result.png",
+      "sha256": "305748f636cc79587130ce0b2d06a72eec316ebb4ea554fbaca0a2aab79829ed"
+    }
+  ],
+  "review": "All 36 actual optimized PNGs inspected in final contact sheets and original-resolution known-details. Review, paused and completed states retain readable controls at 600/800/1280dp and font1.0/1.6. Large-text review content scrolls; complete source/destination visibility has separate XML evidence. Per-file details show verified/copied, mismatch, unreadable or incomplete outcomes, with successful readback hashes inside the viewport. Failed/cancelled work does not claim a published copy. Browser backgrounds and picker contain only synthetic locations. History continues below the viewport."
+}

@@ -1,0 +1,7 @@
+{
+  "localAcceptancePassed": true,
+  "previewApkSha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9",
+  "jvmCases": 549,
+  "nativeCasesPerApi": 426,
+  "isolatedBatchesPerApi": 48
+}

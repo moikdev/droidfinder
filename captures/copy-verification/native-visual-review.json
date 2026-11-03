@@ -1,0 +1,27 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "api30/screenshots/results.png",
+      "sha256": "07e11c262de4450ff2e933eef7810aa29091dd846d0e13e4681c07c4da141ef1",
+      "actualScreenshotInspected": true
+    },
+    {
+      "path": "api30/screenshots/review.png",
+      "sha256": "8a90c4eb0006a2605324b2f5a5899219d51bcd8582e517fac01d25d1a1516e7e",
+      "actualScreenshotInspected": true
+    },
+    {
+      "path": "api36/screenshots/results.png",
+      "sha256": "4b9a8b506c98c8959c2667dbdab01d482bca65197c01f2f097c58232a3a1381f",
+      "actualScreenshotInspected": true
+    },
+    {
+      "path": "api36/screenshots/review.png",
+      "sha256": "87f0d6a5c748b103eef7af0d43545b032aa31d1eea557e5826c24f8e16978a3b",
+      "actualScreenshotInspected": true
+    }
+  ],
+  "review": "Reviewed source/destination copy review, extra-read explanation, limit, named footer choices and completed verification summary on both APIs.",
+  "cropLimit": "Transfer card crops stop at their inner composition bounds. They do not prove full right-edge Open folder control geometry; optimized full-window screenshots and retained XML must establish that separately."
+}

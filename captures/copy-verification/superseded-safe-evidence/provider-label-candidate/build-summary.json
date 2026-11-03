@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "app/build/outputs/apk/debug/app-debug.apk": {
+      "bytes": 96340693,
+      "sha256": "bb56a766abaea1452ff6785709b09e7e5e6a10599539677bb57929d5faf63d84"
+    },
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": {
+      "bytes": 6263581,
+      "sha256": "e173d2f353e1380ae780ea5965e9517ae96e21e762041a5e48531c27be54fb28"
+    },
+    "app/build/outputs/apk/preview/app-preview.apk": {
+      "bytes": 8586415,
+      "sha256": "0ba9ed18862044cc044dd2bd078eb7ecdbf434635232d476de81b140a6c8bdcb"
+    },
+    "app/build/outputs/apk/release/app-release-unsigned.apk": {
+      "bytes": 8578207,
+      "sha256": "22e5ac02b53170236eee38a8a7121b2a7366e8a7d889b9f05ac60d2971f21781"
+    }
+  },
+  "jvm": {
+    "tests": 549,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Fatal": 0,
+    "Warning": 146,
+    "Information": 0,
+    "Hint": 12
+  }
+}

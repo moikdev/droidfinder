@@ -1,0 +1,12 @@
+{
+  "exactCasePassed": true,
+  "completeBatchPassed": true,
+  "completeBatchCases": 20,
+  "productFixClaimed": false,
+  "rejectedRunsExcludedFromPassingTotals": true,
+  "unchangedNativeApkPair": {
+    "app/build/outputs/apk/debug/app-debug.apk": "19e660ae8b08d5dc482491ab87390ef3b3fb80e1a363d7b3e64c373fcad4cfa8",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "7f77fc79760826e54c94b8b9f2d94c9943c6ef6f69db9f75fdfb821f3c07d693"
+  },
+  "failure": "Filtered history row failed assertIsDisplayed after text entry and scroll."
+}

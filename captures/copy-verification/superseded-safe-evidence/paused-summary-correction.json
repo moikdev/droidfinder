@@ -1,0 +1,13 @@
+{
+  "actualRetainedPausedXmlExercised": true,
+  "perFileIncompleteResultAlreadySaved": true,
+  "oldEmptyResultsSummaryExpectationRejected": true,
+  "zeroVerifiedPrefixRetained": true,
+  "applicationAndNativeTestApksUnchanged": true,
+  "correctedCheckerSha256": "f41a8613e0aec38d8b972c90be0b3eeabd9826881a70ab6009990f7474c48443",
+  "correction": "Require the complete summary with zero published copies and one pending per-file verification result after actual readback has opened.",
+  "file": {
+    "path": "captures/copy-verification/api30-optimized-before-checkpoint-summary/paused-1280dp-font1.0.xml",
+    "sha256": "1f655d4937b08f916eb6a9feb84539b6bf335c883a4a97229c11d81fbb6f7ef7"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "actualOptimizedScreenshots": true,
+  "images": [
+    {
+      "documentPath": "docs/screenshots/copy-verification-review.png",
+      "capturePath": "captures/copy-verification/api30-optimized/review-1280dp-font1.0.png",
+      "sha256": "ba10a970c89236ce6e2f967afb38188fa530cfad8abebbe06c8bb8ed7fa01a12"
+    },
+    {
+      "documentPath": "docs/screenshots/copy-verification-readback.png",
+      "capturePath": "captures/copy-verification/api30-optimized/readback-active.png",
+      "sha256": "9536ca9b8901181573c5eade89e321de87948545ad816ad30467ba96768d2d05"
+    },
+    {
+      "documentPath": "docs/screenshots/copy-verification-results.png",
+      "capturePath": "captures/copy-verification/api30-optimized/known-details.png",
+      "sha256": "437672e4082bb9b04382a300d9173845f496d92adf310644dc44f2f5a8785401"
+    },
+    {
+      "documentPath": "docs/screenshots/copy-verification-failure.png",
+      "capturePath": "captures/copy-verification/api30-optimized/corrupt-details.png",
+      "sha256": "06a094cb00e5d0ec7a6f426721afd8d49412d65e755daf6ace33a95e2dbabf2b"
+    },
+    {
+      "documentPath": "docs/screenshots/app-updates-0430.png",
+      "capturePath": "captures/copy-verification/api30-ota/up-to-date.png",
+      "sha256": "9f838fa09d84fb6da3312c0cc139df3591295b2bdcad6d721a30b0daad0b9304"
+    }
+  ]
+}

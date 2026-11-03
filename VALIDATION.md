@@ -2,7 +2,7 @@
 
 ## Findroid 0.43.0 — verify important copies
 
-Local acceptance completed on November 4, 2026. Public OTA and immutable evidence acceptance are being completed; proposal 40 remains in progress.
+Local and real public OTA acceptance completed on November 4, 2026. Immutable evidence acceptance is being completed; proposal 40 remains in progress.
 
 - **549 JVM checks pass**, with zero failures/errors/skips. Debug, native-test, optimized preview and unsigned release builds pass. App lint: **0 errors / 146 warnings / 12 hints**.
 - **426 identical native cases pass per API30/API36 tablet**, in **48 fresh-process batches each**, using the frozen app/test APK pair. The 27 focused cases include 17 copy-verification workflows and 10 SQLite migration/store checks. Ordinary and verified transfers display a provider filename that differs from its document ID, with **Source item** when no friendly title is cached.
@@ -14,6 +14,8 @@ Local acceptance completed on November 4, 2026. Public OTA and immutable evidenc
 Rejected attempts remain excluded. Visual review found opaque provider IDs in transfer titles, which were corrected before the final app/test build. A later screenshot stopped above the per-file outcome; the checker now requires the text to be wholly inside the scroll viewport and rejects the retained old capture. Both APIs repeated optimized acceptance with unchanged APKs. API30 archive and recent-search failures passed as exact cases and then complete batches without app/test changes; no product fix is claimed for those retries. An unqualified root lint invocation also selected the unchanged interop fixture module and hit its existing WrongConstant error; the qualified app build passes.
 
 An earlier interrupted API36 run required a targeted emulator restart and private disk backup. All recorded original app/provider bytes were recovered. That interrupted controller had not persisted its original grant list or storage mode; its separate recovery receipt records this limitation. Final acceptance persists a private recovery baseline before mutation and verifies restoration against it. Emulator checks do not claim physical-device, screen-reader or third-party-provider acceptance.
+
+**Actual public 0.42 → 0.43 OTA passes on both tablets**, including public-feed download, Android installer completion, matching installed APK bytes, preservation of a synthetic original document/Favorite/preference and no repeat offer. All five initial public assets match anonymous downloads and GitHub digests. API36’s separate production-source download passes 1/1. All twelve OTA screenshots were inspected. Both tablets finish with exact original managed metadata, databases, caches and recorded absences, font1.0 and the public optimized APK. [Up-to-date capture](docs/screenshots/app-updates-0430.png).
 
 [Copy verification guide](docs/COPY-VERIFICATION.md) · [Release notes](docs/releases/0.43.0.md).
 

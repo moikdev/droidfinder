@@ -1,0 +1,19 @@
+{
+  "nativeApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "19e660ae8b08d5dc482491ab87390ef3b3fb80e1a363d7b3e64c373fcad4cfa8",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "7f77fc79760826e54c94b8b9f2d94c9943c6ef6f69db9f75fdfb821f3c07d693"
+  },
+  "source": "27-case focused native run with frozen app/test APK pair",
+  "files": [
+    {
+      "name": "review.png",
+      "sha256": "87f0d6a5c748b103eef7af0d43545b032aa31d1eea557e5826c24f8e16978a3b",
+      "bytes": 93198
+    },
+    {
+      "name": "results.png",
+      "sha256": "4b9a8b506c98c8959c2667dbdab01d482bca65197c01f2f097c58232a3a1381f",
+      "bytes": 16065
+    }
+  ]
+}

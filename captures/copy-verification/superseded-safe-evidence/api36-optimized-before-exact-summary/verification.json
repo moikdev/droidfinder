@@ -1,0 +1,33 @@
+{
+  "serial": "emulator-5582",
+  "checkerSha256": "98c52715221057102dca45ead5c38391f55d8672645e52c211339bdaa2e72eae",
+  "helpersSha256": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+  "apkSha256": "0ba9ed18862044cc044dd2bd078eb7ecdbf434635232d476de81b140a6c8bdcb",
+  "previousApkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "providerApkSha256": "7c195967415eb9ad5a2d8a445968a3f2a70de2db23e913dbff618d396344e254",
+  "fromVersionCode": 44,
+  "toVersionCode": 45,
+  "separateOwnedProvider": true,
+  "syntheticBytesPerStream": 8388608,
+  "directPreviousPublicUpgrade": true,
+  "legacyFavoritePreserved": true,
+  "priorProviderApkSha256": "d060ccf98021759ff77b88edf8daf113d53c198d4b7df7524e127e7e571c2376",
+  "priorProviderEntryCount": 3,
+  "systemPickerPrivateNavigationNotRetained": true,
+  "actualSystemPickerConnection": true,
+  "acceptanceFailure": {
+    "type": "KeyboardInterrupt",
+    "message": ""
+  },
+  "grantCleanupUsesFixedSyntheticUriBridge": true,
+  "restoredOriginalUriGrants": true,
+  "restoredOriginalManagedFiles": true,
+  "restoredOriginalFileAbsences": true,
+  "restoredManagedFileCount": 443,
+  "originalProviderApkAndAllManagedDataRestored": true,
+  "originalProviderEmptyDirectoriesAndAbsencesRestored": true,
+  "syntheticFixtureRemoved": true,
+  "restoredOriginalStorageAccess": true,
+  "restoredApkSha256": "0ba9ed18862044cc044dd2bd078eb7ecdbf434635232d476de81b140a6c8bdcb",
+  "cleanupErrors": []
+}

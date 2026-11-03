@@ -1,0 +1,83 @@
+{
+  "serial": "emulator-5582",
+  "checkerSha256": "f41a8613e0aec38d8b972c90be0b3eeabd9826881a70ab6009990f7474c48443",
+  "helpersSha256": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+  "apkSha256": "0ba9ed18862044cc044dd2bd078eb7ecdbf434635232d476de81b140a6c8bdcb",
+  "previousApkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "providerApkSha256": "7c195967415eb9ad5a2d8a445968a3f2a70de2db23e913dbff618d396344e254",
+  "fromVersionCode": 44,
+  "toVersionCode": 45,
+  "separateOwnedProvider": true,
+  "syntheticBytesPerStream": 8388608,
+  "directPreviousPublicUpgrade": true,
+  "legacyFavoritePreserved": true,
+  "priorProviderApkSha256": "d060ccf98021759ff77b88edf8daf113d53c198d4b7df7524e127e7e571c2376",
+  "priorProviderEntryCount": 3,
+  "systemPickerPrivateNavigationNotRetained": true,
+  "actualSystemPickerConnection": true,
+  "reviewLayouts": [
+    {
+      "widthDp": 1280,
+      "fontScale": 1.0,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 1280,
+      "fontScale": 1.6,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.0,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.6,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.0,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.6,
+      "sourceAndDestinationReachable": true,
+      "limitReachable": true,
+      "namedFooterControlsComplete48dp": true
+    }
+  ],
+  "cancelledReviewStartsNoProviderReadOrCopy": true,
+  "knownSizeCopy": {
+    "bytes": 8388608,
+    "sha256": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+    "matchesDeterministicSource": true
+  },
+  "acceptanceFailure": {
+    "type": "AssertionError",
+    "message": "UI did not settle: unknown-center"
+  },
+  "grantCleanupUsesFixedSyntheticUriBridge": true,
+  "restoredOriginalUriGrants": true,
+  "restoredOriginalManagedFiles": true,
+  "restoredOriginalFileAbsences": true,
+  "restoredManagedFileCount": 443,
+  "originalProviderApkAndAllManagedDataRestored": true,
+  "originalProviderEmptyDirectoriesAndAbsencesRestored": true,
+  "syntheticFixtureRemoved": true,
+  "restoredOriginalStorageAccess": true,
+  "restoredApkSha256": "0ba9ed18862044cc044dd2bd078eb7ecdbf434635232d476de81b140a6c8bdcb",
+  "cleanupErrors": []
+}

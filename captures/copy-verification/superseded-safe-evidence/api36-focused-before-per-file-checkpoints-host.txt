@@ -1,0 +1,4 @@
+emulator-5582: 24 passed, 0 skipped, 2 failed; runner complete: True
+dev.findroid.CopyVerificationWorkflowTest#cancellationDuringRealProviderReadbackKeepsTheSourceAndRecordsIncomplete: java.util.NoSuchElementException: List is empty.
+dev.findroid.CopyVerificationWorkflowTest#namedPasteReviewQueuesVerifiedWorkAndShowsDurableResults: java.lang.AssertionError: Failed: assertExists.
+Log: /Users/LENOVO/.t3/projects/droidfinder/captures/copy-verification/api36-focused.txt

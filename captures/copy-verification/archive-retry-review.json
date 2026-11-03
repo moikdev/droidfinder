@@ -1,0 +1,27 @@
+{
+  "firstFailure": "ZIP64 preview text not observed within 15 seconds.",
+  "secondFailure": "Archive extraction controls not observed within 10 seconds.",
+  "exactCasesPassedIndividually": true,
+  "completeArchiveBatchPassed": true,
+  "completeArchiveBatchCases": 6,
+  "productFixClaimed": false,
+  "rejectedRunsExcluded": true,
+  "unchangedBuildArtifacts": {
+    "app/build/outputs/apk/debug/app-debug.apk": {
+      "bytes": 87693981,
+      "sha256": "19e660ae8b08d5dc482491ab87390ef3b3fb80e1a363d7b3e64c373fcad4cfa8"
+    },
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": {
+      "bytes": 6267193,
+      "sha256": "7f77fc79760826e54c94b8b9f2d94c9943c6ef6f69db9f75fdfb821f3c07d693"
+    },
+    "app/build/outputs/apk/preview/app-preview.apk": {
+      "bytes": 8586415,
+      "sha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9"
+    },
+    "app/build/outputs/apk/release/app-release-unsigned.apk": {
+      "bytes": 8578207,
+      "sha256": "144faf72e8d810f214b4d06503f84b3e9d815642eeb9fca269479aee59324e8a"
+    }
+  }
+}

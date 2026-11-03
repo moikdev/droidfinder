@@ -1,0 +1,3 @@
+emulator-5602: 25 passed, 0 skipped, 1 failed; runner complete: True
+dev.findroid.CopyVerificationWorkflowTest#namedPasteReviewQueuesVerifiedWorkAndShowsDurableResults: java.lang.AssertionError: Failed: assertExists.
+Log: /Users/LENOVO/.t3/projects/droidfinder/captures/copy-verification/api30-focused.txt

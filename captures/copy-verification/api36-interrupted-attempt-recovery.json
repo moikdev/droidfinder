@@ -1,0 +1,23 @@
+{
+  "serial": "emulator-5582",
+  "interruptedAttemptExcludedFromAcceptance": true,
+  "privateEmulatorDiskCloneVerified": true,
+  "onlyOwnedSyntheticGrantReleased": true,
+  "unrelatedGrantsUnchangedAcrossRecovery": true,
+  "preAttemptGrantBaselineWasNotPersistedByInterruptedController": true,
+  "originalProviderApkAndAllManagedDataRestored": true,
+  "originalProviderEmptyDirectoriesAndAbsencesRestored": true,
+  "priorProviderEntryCount": 3,
+  "appStateRestoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  },
+  "onlyOwnedSyntheticDocumentDirectoryRemoved": true,
+  "originalDisplayAndFontRestored": true,
+  "storageAccessRetainedAsObserved": "allow",
+  "preAttemptStorageModeWasNotPersistedByInterruptedController": true,
+  "success": true
+}
