@@ -37,7 +37,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 31 | Pin selected network folders for offline use | Open. Implementation and focused acceptance pending. |
 | 32 | Strengthen removable-drive workflows | Open. Needs physical USB/SD media and removal tests. |
 | 33 | Extend reconnect to cloud-account sign-in | Open. Implementation and focused acceptance pending. |
-| 34 | Bring capabilities into action explanations | Local/native/optimized and real public OTA checks pass for 0.41.0. Independent validation-archive verification is pending; not yet included in the completed count. |
+| 34 | Bring capabilities into action explanations | Implemented in 0.41.0; 513 JVM checks, 368 native cases per API 30/API 36 tablet in 40 fresh-process batches, optimized upgrade/layout and real Android permission acceptance, real public OTA and independently verified immutable validation archive. See [storage action details](STORAGE-ACTIONS.md) and [validation](../VALIDATION.md). |
 | 35 | Expand cross-app drag acceptance | Open. Needs actual third-party receiving apps. |
 | 36 | Broaden Android picker testing | Open. Needs physical devices and actual third-party editing apps. |
 | 37 | Run independent transfers concurrently | Open. Implementation and focused acceptance pending. |
@@ -77,7 +77,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 71 | Expand the failure matrix | Partial: setup transaction write faults/process-death boundaries, changed grants, stale reviews and corrupt recovery are covered in 0.33. Workspace publication faults, disk changes, future catalogs and window closure are covered in 0.34.1. Physical-media removal, full storage and the broader provider matrix remain open. |
 | 72 | Finish release infrastructure | Open. Hosted Actions stays manual-only; long-term signing/recovery needs owner-controlled key custody. |
 
-28 items are implemented across the 0.32.0–0.40.0 increments; 44 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
+29 items are implemented across the 0.32.0–0.41.0 increments; 43 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
 
 ## Verification per increment
 
