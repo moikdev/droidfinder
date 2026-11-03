@@ -23,6 +23,7 @@ SCRIPTS=('scripts/check-persistent-undo.py','scripts/package-persistent-undo-val
          'captures/persistent-undo/private-native-state.py','captures/persistent-undo/native-reset.py','captures/persistent-undo/after-native.py',
          'captures/persistent-undo/check-public-privacy.py','captures/persistent-undo/check-snackbar-save-gate.py',
          'captures/persistent-undo/verify-public.py','captures/persistent-undo/restore-public-tablets.py',
+         'captures/persistent-undo/run-public-acceptance.py','captures/persistent-undo/check-system-font.py',
          'captures/persistent-undo/check-live-feed.py','captures/persistent-undo/run-final-acceptance.py','captures/persistent-undo/check-build-artifacts.py','captures/persistent-undo/derive-focused.py')
 OPT_REQUIRED=('success','operationsUseExactOptimizedApk','freshAndroidHierarchies','originalEnvironmentPersistedBeforeMutation',
     'directPreviousPublicUpgrade','actualOptimizedProcessDeath','restartStartsNoAction','copyRenameTrashSaved',
@@ -142,6 +143,17 @@ def local():
         assert {(r['widthDp'],r['heightDp'],r['fontScale'],r['dark']) for r in layouts}=={(w,h,s,d) for w,h in ((1280,800),(800,1280),(600,800)) for s in (1.0,1.5,2.0) for d in (False,True)}
         assert all(r['allNamedControlsReachable'] for r in layouts)
         check_layout_captures(opt_dir,layouts)
+        font_path=PROOF/(api+'-system-font.json');font=read(font_path)
+        assert font['serial']==serial and font['actualRasterGlyphsLarger'] and len(font['groups'])==6
+        assert {(g['widthDp'],g['heightDp'],g['theme']) for g in font['groups']}=={(w,h,t) for w,h in ((1280,800),(800,1280),(600,800)) for t in ('light','dark')}
+        assert font['checkerSha256']==sha(PROOF/'check-system-font.py')
+        for group in font['groups']:
+            samples=group['samples'];assert [r['fontScale'] for r in samples]==[1.0,1.5,2.0]
+            for row in samples:
+                assert sha(PROOF/row['image'])==row['sha256'] and sha(PROOF/row['captureXml'])==row['captureXmlSha256']
+            for metric in ('textWidth','textHeight','rasterGlyphWidth','rasterGlyphHeight'):
+                assert samples[0][metric]<samples[1][metric]<samples[2][metric] and samples[2][metric]/samples[0][metric]>=1.2
+        files.append(font_path)
         captures=list(opt_dir.glob('*.png'));assert captures;screens+=captures
         files += [path for path in opt_dir.iterdir() if path.is_file() and path.suffix in ('.png','.xml','.json')]
         for name in ('completed','reopened-no-action','undo-after-0','undo-after-1','undo-after-2',
