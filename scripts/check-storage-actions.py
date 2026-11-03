@@ -39,6 +39,7 @@ def main():
     p.add_argument('--apk', type=Path, required=True)
     p.add_argument('--previous-apk', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--permissions-only', action='store_true', help='Focused fixture diagnostic; excluded from full release acceptance')
     args = p.parse_args()
     assert args.serial in {'emulator-5602', 'emulator-5582'}
     assert not args.output.exists(), 'Use a fresh directory; retain rejected attempts.'
@@ -58,14 +59,19 @@ def main():
     report = dict(serial=args.serial, checkerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         helpersSha256=hashlib.sha256((ROOT/'scripts/check-local-search-index.py').read_bytes()).hexdigest(),
         apkSha256=hashlib.sha256(args.apk.read_bytes()).hexdigest(),
-        previousApkSha256=hashlib.sha256(args.previous_apk.read_bytes()).hexdigest(), fromVersionCode=42, toVersionCode=43)
+        previousApkSha256=hashlib.sha256(args.previous_apk.read_bytes()).hexdigest(), fromVersionCode=None if args.permissions_only else 42, toVersionCode=43,
+        acceptanceScope='focused permissions only' if args.permissions_only else 'full optimized acceptance',
+        grantBridgeApkSha256=hashlib.sha256(debug.read_bytes()).hexdigest(),
+        descriptionVisibility='strict interior scroll bounds with 2px inset')
     original_scale = d.shell('settings', 'get', 'system', 'font_scale').decode().strip()
     original_screen = d.screen
     match = re.search(r'Override size: (\d+x\d+)', d.shell('wm', 'size').decode())
     original_size = match.group(1) if match else 'reset'
     mode = re.search(r'MANAGE_EXTERNAL_STORAGE: (\w+)', d.shell('appops', 'get', 'dev.findroid', 'MANAGE_EXTERNAL_STORAGE').decode())
     original_access = mode.group(1) if mode else 'default'
+    report['originalStorageAccessMode']=original_access
     window = 'storage-actions-'+stamp
+    provider_window = window+'-provider'
 
     def stop(): d.shell('am', 'force-stop', 'dev.findroid')
     def install(apk, downgrade=False):
@@ -74,8 +80,10 @@ def main():
     def launch(location=demo, name=window):
         d.shell('am', 'start', '-W', '-f', '0x10008000', '--windowingMode', 1, '-n', 'dev.findroid/.MainActivity',
             '--es', 'finderWindowId', name, '--es', 'finderLocation', location)
-    def browser(name):
-        return d.wait(name, lambda t: d.ready(t, 'Actions'))
+    def browser(name, unavailable=False):
+        return d.wait(name, lambda t: d.ready(t, 'Actions') and (
+            bool(d.nodes(t, 'Folder access expired') or d.nodes(t, 'Location unavailable')) if unavailable
+            else bool(d.nodes(t, 'Original.txt'))))
     def version():
         return int(re.search(r'versionCode=(\d+)', d.shell('dumpsys', 'package', 'dev.findroid').decode()).group(1))
     def installed_hash():
@@ -163,8 +171,10 @@ def main():
                         parent=node; clipped=False
                         while parent in parents:
                             parent=parents[parent]
+                            # Accessibility bounds are already clipped to the viewport.
+                            # Touching an edge cannot prove the entire paragraph is visible.
                             if parent.get('scrollable')=='true':
-                                pl,pt,pr,pb=d.bounds(parent); clipped |= not (pl<=l<r<=pr and pt<=t<b<=pb)
+                                pl,pt,pr,pb=d.bounds(parent); clipped |= not (pl+2<=l<r<=pr-2 and pt+2<=t<b<=pb-2)
                         if not clipped:return tree
                 panes=[n for n in scope.iter('node') if n.get('scrollable')=='true']
                 assert len(panes)==1,(name,len(panes))
@@ -180,42 +190,68 @@ def main():
         assert 'OK (1 test)' in raw and 'FAILURES' not in raw, 'The opt-in synthetic grant bridge failed'
         return raw
     def grants():
-        raw=bridge('auditPersistedPermissionsForSyntheticAcceptance','storageQaAudit')
-        found=re.search(r'FINDROID_GRANT_AUDIT:([A-Za-z0-9+/=]+)',raw)
-        assert found,'No private in-memory permission audit was returned'
-        return json.loads(base64.b64decode(found.group(1)))
+        # Android redirects the test's println to System.out rather than am instrument's
+        # result stream. Read only these two tags, since this invocation, after our own
+        # unique marker. Never print/save the raw output or accept a stale audit.
+        marker='FINDROID_PRIVATE_GRANT_AUDIT_'+str(time.time_ns())
+        since=d.shell('date','+%m-%d %H:%M:%S').decode().strip()+'.000'
+        assert re.fullmatch(r'[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\.000',since)
+        d.shell('log','-t','FindroidGrantAudit','-p','i',marker)
+        bridge('auditPersistedPermissionsForSyntheticAcceptance','storageQaAudit')
+        for _ in range(10):
+            payload=d.shell('logcat','-d','-T',since,'-v','raw','-s','FindroidGrantAudit:I','System.out:I')
+            assert len(payload)<=1024*1024,'The selected-tag audit output exceeded its memory bound'
+            raw=payload.decode(errors='replace')
+            assert marker in raw,'The bounded private audit marker was not retained'
+            matches=re.findall(r'FINDROID_GRANT_AUDIT:([A-Za-z0-9+/=]+)',raw.rsplit(marker,1)[1])
+            if matches:
+                assert len(matches)==1,'The private audit must belong to this invocation only'
+                report['privateAuditTransport']='time-bounded selected-tag log, unique invocation marker, memory only'
+                return json.loads(base64.b64decode(matches[0],validate=True))
+            time.sleep(.1)
+        raise AssertionError('No private in-memory permission audit was returned')
     def only_qa_changed(current):
         assert {k:v for k,v in current.items() if k!=qa_tree} == grants_before, 'An unrelated persisted URI grant changed'
 
     try:
-        install(debug); saved=snapshot(); seed()
+        install(debug); saved=snapshot(); grants_before=grants(); seed()
         d.shell('appops','set','dev.findroid','MANAGE_EXTERNAL_STORAGE','allow')
-        install(args.previous_apk,True); assert version()==42
-        launch(); browser('previous-public'); d.capture('previous-public')
-        install(args.apk); assert version()==43 and installed_hash()==report['apkSha256']
-        launch(); browser('upgraded-browser')
-        d.wait('preserved-favorite',lambda t:d.ready(t,'Options for Permission project'))
-        tree=details('local-details'); footer(tree); d.capture('local-folder-actions')
-        find_text('local-trash-explanation','Move to Trash'); d.capture('local-trash-explanation'); d.click('local-done','Done')
-        report['directPreviousPublicUpgrade']=True
-        report['legacyFavoritePreserved']=True
-        layouts=[]
-        for width in (1280,800,600):
-            for scale in (1.0,1.6):
-                key=f'{width}dp-font{scale}'
-                stop(); pixels=round(width*density)
-                d.shell('wm','size',f'{pixels}x{round(800*density)}'); d.screen=(pixels,round(800*density))
-                d.shell('settings','put','system','font_scale',str(scale)); launch(); browser(key+'-browser')
-                tree=details(key+'-details'); footer(tree); d.capture(key+'-details')
-                for label in ('Read','Create items','Change contents','Rename','Delete','Move to Trash'):
-                    find_text(key+'-'+label,label)
-                d.capture(key+'-scrolled'); footer(d.dump(key+'-footer')); d.click(key+'-done','Done')
-                layouts.append(dict(widthDp=width,fontScale=scale,fullTouchBounds=True,allSixActionsReachable=True))
-                print('Verified layout '+key,flush=True)
-        report['layouts']=layouts
+        if not args.permissions_only:
+            install(args.previous_apk,True); assert version()==42
+            launch(); browser('previous-public'); d.capture('previous-public')
+            install(args.apk); assert version()==43 and installed_hash()==report['apkSha256']
+            launch(); browser('upgraded-browser')
+            d.wait('preserved-favorite',lambda t:d.ready(t,'Options for Permission project'))
+            tree=details('local-details'); footer(tree); d.capture('local-folder-actions')
+            find_text('local-trash-explanation','Move to Trash'); d.capture('local-trash-explanation'); d.click('local-done','Done')
+            report['directPreviousPublicUpgrade']=True
+            report['legacyFavoritePreserved']=True
+            layouts=[]
+            for width in (1280,800,600):
+                for scale in (1.0,1.6):
+                    key=f'{width}dp-font{scale}'
+                    stop(); pixels=round(width*density)
+                    d.shell('wm','size',f'{pixels}x{round(800*density)}'); d.screen=(pixels,round(800*density))
+                    d.shell('settings','put','system','font_scale',str(scale)); launch(); browser(key+'-browser')
+                    tree=details(key+'-details'); footer(tree); d.capture(key+'-details')
+                    reasons = {
+                        'Read': 'The local filesystem reported read access when this item was loaded.',
+                        'Create items': 'The local filesystem reported the access used for creating children in this folder when this item was loaded. The operation checks again before changes.',
+                        'Change contents': 'Create items describes adding children to this folder. Change contents applies to files.',
+                        'Rename': 'The local filesystem reported the access used for renaming this item when this item was loaded. The operation checks again before changes.',
+                        'Delete': 'The local filesystem reported the access used for deleting this item when this item was loaded. The operation checks again before changes.',
+                        'Move to Trash': 'Findroid moves this item to its Trash. The operation checks the source and recovery destination before changing files.',
+                    }
+                    for label, reason in reasons.items():
+                        find_text(key+'-'+label,label)
+                        find_text(key+'-'+label+'-reason',reason)
+                    d.capture(key+'-scrolled'); footer(d.dump(key+'-footer')); d.click(key+'-done','Done')
+                    layouts.append(dict(widthDp=width,fontScale=scale,fullTouchBounds=True,allSixActionsReachable=True,allSixActionDescriptionsReachable=True))
+                    print('Verified layout '+key,flush=True)
+            report['layouts']=layouts
         stop(); d.shell('wm','size',original_size);d.screen=original_screen;d.shell('settings','put','system','font_scale','1.0')
         install(debug)
-        grants_before=grants()
+        assert grants()==grants_before,'Persisted URI grants changed during setup or local upgrade/layout acceptance'
         from urllib.parse import quote, unquote
         qa_tree='content://com.android.externalstorage.documents/tree/'+quote('primary:'+relative,safe='')
         assert qa_tree not in grants_before,'The unique synthetic tree already has a grant'
@@ -226,26 +262,36 @@ def main():
         only_qa_changed(after);assert after[qa_tree]==[True,True]
         assert unquote(qa_tree).endswith('primary:'+relative)
         document=qa_tree+'/document/'+quote('primary:'+relative,safe='')
-        install(args.apk);launch(document);browser('provider-read-write')
-        tree=details('provider-actions');footer(tree);find_text('provider-create','Create items');d.capture('provider-read-write')
+        install(args.apk);launch(document,provider_window);browser('provider-read-write')
+        tree=details('provider-actions');footer(tree)
+        find_text('provider-read', 'Android reports saved read permission. The provider checks document access when it is opened.')
+        find_text('provider-create', 'The provider reports support for creating children in this folder and the loaded access information allows it. The operation checks again before changes.')
+        d.capture('provider-read-write');report['providerWindowRouteVerified']=True
         d.click('provider-done','Done')
-        # These bridge methods use platform APIs only and can target the same-signed optimized app.
-        bridge('restrictExplicitSyntheticTreeToReadOnly','storageQaReadOnly')
+        # Platform permission changes use the fixed debug bridge. Reinstall the exact
+        # optimized APK before each UI assertion; never instrument the optimized app.
+        install(debug);bridge('restrictExplicitSyntheticTreeToReadOnly','storageQaReadOnly')
         after=grants();only_qa_changed(after);assert after[qa_tree]==[True,False]
-        stop();launch(document);browser('provider-read-only-browser');tree=details('provider-read-only-details');footer(tree)
+        install(args.apk);launch(document,provider_window);browser('provider-read-only-browser');tree=details('provider-read-only-details');footer(tree)
         find_text('read-only-create',"Android's saved folder permission is read only. It does not allow creating children in this folder.")
         d.capture('provider-read-only');d.click('read-only-done','Done')
-        d.click('read-only-new','New folder')
+        tree=d.wait('read-only-new',lambda t:d.ready(t,'New folder'))
+        # The disabled-action surface exposes both a label and a described wrapper.
+        # Target its named wrapper once, rather than counting the label as a second control.
+        targets=[n for n in d.nodes(tree,'New folder') if n.get('content-desc')=='New folder']
+        assert len(targets)==1,'Expected one described New folder control'
+        d.tap(targets[0])
         d.wait('read-only-command',lambda t:bool(d.nodes(t,'New folder is unavailable')))
         d.capture('read-only-command');d.click('read-only-command-back','Back to files')
-        bridge('revokeExplicitSyntheticTreeOnly','storageQaRevoke')
+        install(debug);bridge('revokeExplicitSyntheticTreeOnly','storageQaRevoke')
         after=grants();only_qa_changed(after);assert qa_tree not in after
-        stop();launch(document);browser('provider-revoked-browser');details('provider-revoked-details')
+        install(args.apk);launch(document,provider_window);browser('provider-revoked-browser',unavailable=True);details('provider-revoked-details')
         find_text('revoked-read','Read')
         find_text('revoked-reason',"Choose this folder again to restore Android's permission.")
         find_text('revoked-status','Unavailable');d.capture('provider-revoked');d.click('revoked-done','Done')
         report.update(actualSystemPickerReadWriteGrant=True,actualReadOnlyGrant=True,actualGrantRevocation=True,
-            unrelatedUriGrantsUnchanged=True,readOnlyCreationExplainsRecovery=True)
+            unrelatedUriGrantsUnchanged=True,grantsAuditedBeforeSetup=True,readOnlyCreationExplainsRecovery=True,
+            grantChangesUseDebugBridgeOptimizedUiChecked=True)
         install(debug);stop();prefs=ET.fromstring(read_app_file(d,'shared_prefs/finder.xml'))
         assert prefs.find("./string[@name='storageActionsSentinel']").text==stamp
         assert all(d.call('shell','-T',shlex.join(['cat',demo+'/'+name]))==payload for name in ('Original.txt','Second.txt'))
@@ -255,11 +301,13 @@ def main():
             try:action();return True
             except Exception as error:cleanup_errors.append(dict(step=label,error=str(error)));return False
         def release_qa_grant():
-            if qa_tree is not None and grants_before is not None:
+            if grants_before is not None:
                 install(debug)
                 current=grants()
-                if qa_tree in current:bridge('revokeExplicitSyntheticTreeOnly','storageQaRevoke')
+                if qa_tree is not None and qa_tree in current:
+                    bridge('revokeExplicitSyntheticTreeOnly','storageQaRevoke')
                 assert grants()==grants_before,'Original persisted permissions were not restored'
+                report['restoredOriginalUriGrants']=True
         def originals():
             install(debug)
             if saved is not None:restore();report['restoredOriginalSetupAndCache']=True
@@ -269,7 +317,12 @@ def main():
         report['syntheticFixtureRemoved']=d.shell('test','!','-e',demo,check=False).returncode==0
         cleanup('restore size',lambda:d.shell('wm','size',original_size));d.screen=original_screen
         cleanup('restore font',lambda:d.shell('settings','put','system','font_scale',original_scale))
-        cleanup('restore storage access',lambda:d.shell('appops','set','dev.findroid','MANAGE_EXTERNAL_STORAGE',original_access))
+        def restore_storage_access():
+            d.shell('appops','set','dev.findroid','MANAGE_EXTERNAL_STORAGE',original_access)
+            current=re.search(r'MANAGE_EXTERNAL_STORAGE: (\w+)',d.shell('appops','get','dev.findroid','MANAGE_EXTERNAL_STORAGE').decode())
+            assert (current.group(1) if current else 'default')==original_access
+            report['restoredOriginalStorageAccess']=True
+        cleanup('restore storage access',restore_storage_access)
         cleanup('restore optimized APK',lambda:install(args.apk))
         report['restoredApkSha256']=installed_hash()
         cleanup('remove native input helper',d.close)
