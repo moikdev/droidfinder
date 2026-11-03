@@ -314,6 +314,7 @@ fun FinderApp(
                     "folderViews" -> dialog = "folderViews"
                     "about" -> dialog = "about"
                     "filters" -> dialog = "filters"
+                    "searchIndex" -> dialog = "searchIndex"
                     "recentSearches" -> { model.rememberCurrentSearch(); dialog = "recentSearches" }
                     "searchLocations" -> { model.rememberCurrentSearch(); dialog = "searchLocations" }
                     "saveSearch" -> dialog = "saveSearch"
@@ -815,6 +816,7 @@ fun FinderApp(
                     )
                 "searchLocations" -> SearchLocationsDialog(model) { dialog = null }
                 "filters" -> SearchFiltersDialog(model) { dialog = null }
+                "searchIndex" -> LocalIndexDialog(model) { dialog = null }
                 "recentSearches" -> RecentSearchesDialog(model, action) { dialog = null }
                 "launcher", "quickJump" -> ExplorerLauncherDialog(model, dialog == "quickJump", action) { dialog = null }
                 "settings" -> PreferencesDialog(model, onUpdates = {
@@ -1621,6 +1623,7 @@ internal fun ActionMenu(
             action("collections")
         }
         MenuAction("Search filters…", Icons.Outlined.FilterAlt) { action("filters") }
+        MenuAction("Search index…", Icons.Outlined.Storage) { action("searchIndex") }
         MenuAction("Recent searches…", Icons.Outlined.History) { action("recentSearches") }
         MenuAction("Search locations…", Icons.Outlined.FolderOpen) { action("searchLocations") }
         MenuAction(

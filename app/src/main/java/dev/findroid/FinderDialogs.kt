@@ -244,12 +244,14 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
     }
     var choosingExclusion by remember { mutableStateOf(false) }
     var choosingGroups by remember { mutableStateOf(false) }
+    var managingIndex by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
     fun contextValid() = original == Triple(model.tabs.getOrNull(model.activeTab)?.id, model.location, model.effectiveSearchRules)
     fun applyDraft(value: SearchRules) {
         if (!contextValid()) error = "The current tab or search changed. Close Search criteria and try again."
         else { model.updateSearchRules(value); dismiss() }
     }
+    if (managingIndex) { LocalIndexDialog(model) { managingIndex = false }; return }
     if (choosingGroups) {
         SearchRuleGroupsDialog(rules.ruleGroup, (model.tagNames + rules.referencedTags).distinct(), ::contextValid,
             apply = { rules = rules.copy(ruleGroup = it); choosingGroups = false }, dismiss = { choosingGroups = false })
@@ -273,6 +275,18 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
         "search-criteria", dismiss, width = 720.dp) { limit ->
             Column(Modifier.fillMaxWidth().weight(1f, fill = false).heightIn(max = limit).verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp, vertical = 12.dp).testTag("search-criteria-scroll")) {
+                Text("Search source", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    SearchSource.entries.forEach { source ->
+                        FilterChip(rules.source == source, { rules = rules.copy(source = source) }, label = { Text(source.title) },
+                            modifier = Modifier.heightIn(min = 48.dp).testTag("search-source-${source.name}"))
+                    }
+                }
+                Text(if (rules.source == SearchSource.LIVE) "Read folders when you search. No index is needed."
+                    else INDEX_FRESHNESS_EXPLANATION, color = Muted, fontSize = 12.sp)
+                TextButton({ managingIndex = true }, Modifier.heightIn(min = 48.dp).testTag("manage-search-index")) { Text("Manage index…") }
+                Text("Choosing Local index does not add folders or begin a refresh. Manage index controls which local folders are cached.", color = Muted, fontSize = 11.sp)
+                Spacer(Modifier.height(12.dp))
                 Text("Rule groups (optional)", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                 rules.ruleGroup?.let { Text(it.summary, fontSize = 13.sp, modifier = Modifier.testTag("search-rule-group-summary")) }
                 TextButton({ choosingGroups = true }, Modifier.heightIn(min = 48.dp).testTag("edit-search-rule-groups")) {
@@ -526,6 +540,8 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
     var advanced by rememberSaveable { mutableStateOf(false) }
     var sidebarEditor by remember { mutableStateOf(false) }
     var archiveEditor by remember { mutableStateOf(false) }
+    var managingIndex by remember { mutableStateOf(false) }
+    if (managingIndex) { LocalIndexDialog(model) { managingIndex = false }; return }
     val limitsStore = remember { ZipLimitsStore(model.getApplication<android.app.Application>()) }
     AlertDialog(
         onDismissRequest = dismiss,
@@ -571,6 +587,7 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
                 ) {
                     Text("Trash & cache…")
                 }
+                    TextButton(onClick = { managingIndex = true }, modifier = Modifier.heightIn(min = 48.dp)) { Text("Search index…") }
                     TextButton(onClick = { archiveEditor = true }) { Text("Archive safety limits…") }
                     TextButton(onClick = { model.storageRequested = true; dismiss() }) { Text("Storage capabilities and reconnect…") }
                     TextButton(onClick = { model.showGestureHint(true) }) { Text("Replay file gesture tips") }

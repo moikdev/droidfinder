@@ -1,0 +1,11 @@
+Optional local search snapshots
+
+Add only the local folders you choose in More → Search index. In Search criteria, choose Live folders or Local index; live search remains the default. Saved searches never register folders or start indexing.
+
+See snapshot dates, entry counts, current folder availability, observed-change hints and measured cache storage. Refresh manually, pause, restart, remove a folder or delete the cache. An interrupted or failed refresh keeps the previous complete snapshot.
+
+Matching cached candidates are checked again using current metadata, tags and text criteria. New, renamed or changed files may be missed until refresh. Result details explains uncovered folders and offers Use live folders.
+
+Source choices stay independent across tabs, Smart Folders, workspaces, recent searches and setup backups. Actual indexed roots and rows are excluded from backups. Deleting the index keeps documents and saved setup.
+
+Favorites now recheck availability after a fast folder refresh when a missing folder returns.

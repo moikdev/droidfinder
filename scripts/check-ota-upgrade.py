@@ -29,7 +29,15 @@ def main():
         return result.stdout
     def shell(*parts): return call('shell', shlex.join(map(str, parts)))
     def stop(): shell('am', 'force-stop', 'dev.findroid')
-    def read(path): return call('exec-out', 'run-as', 'dev.findroid', 'cat', path)
+    def read(path, optional=False):
+        script = ('if test -f '+shlex.quote(path)+'; then cat '+shlex.quote(path)+
+                  '; elif test -e '+shlex.quote(path)+'; then exit 42; else exit 44; fi')
+        result = subprocess.run([adb, '-s', args.serial, 'shell', '-T',
+            shlex.join(['run-as', 'dev.findroid', 'sh', '-c', script])], stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE, timeout=120)
+        if optional and result.returncode == 44: return None
+        assert result.returncode == 0, 'Could not read app-owned metadata: '+path
+        return result.stdout
     def write(path, data): call('shell', 'run-as dev.findroid sh -c ' + shlex.quote('cat > ' + shlex.quote(path)), data=data)
     def version(): return int(re.search(r'versionCode=(\d+)', shell('dumpsys', 'package', 'dev.findroid').decode()).group(1))
     def dump(name):
@@ -61,8 +69,7 @@ def main():
         paths += ['files/'+name+suffix for name in metadata for suffix in ('','.bak','.new')]
         result={}
         for path in paths:
-            value=subprocess.run([adb,'-s',args.serial,'exec-out','run-as','dev.findroid','cat',path],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
-            result[path]=value.stdout if value.returncode==0 else None
+            result[path]=read(path, optional=True)
         return result
     def restore():
         paths=shell('run-as','dev.findroid','find','shared_prefs','-maxdepth',1,'-type','f').decode().splitlines()

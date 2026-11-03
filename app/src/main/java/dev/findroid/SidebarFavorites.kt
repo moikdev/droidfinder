@@ -123,7 +123,7 @@ private fun FavoriteRow(model: FinderModel, shortcut: FavoriteShortcut, duplicat
     var repair by remember { mutableStateOf(false) }
     var unavailable by remember { mutableStateOf(false) }
     var recheck by remember { mutableIntStateOf(0) }
-    val control = remember(path, model.hasAccess, model.connectedLocations, model.loading, recheck) { ListingControl() }
+    val control = remember(path, model.hasAccess, model.connectedLocations, model.loading, model.listingRefreshRevision, recheck) { ListingControl() }
     DisposableEffect(control) { onDispose { control.cancel() } }
     val availability by produceState(FavoriteAvailability(), control) {
         value = FavoriteAvailability()

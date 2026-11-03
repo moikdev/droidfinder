@@ -37,6 +37,7 @@ data class SearchRules(
     val size: SearchSize = SearchSize.ANY,
     val locations: List<String> = emptyList(),
     val ruleGroup: SearchRuleGroup? = null,
+    val source: SearchSource = SearchSource.LIVE,
 ) {
     init { checkedSearchLocations(locations); ruleGroup?.let(::checkedRuleGroup) }
     private val contentPattern by lazy { StreamingText(content) }
@@ -60,6 +61,7 @@ data class SearchRules(
 
     val choiceDescription: String
         get() = buildList {
+            if (source == SearchSource.LOCAL_INDEX) add("Local index")
             if (kind != "Any") add(if (kind == "Image") "Images" else kind)
             if (date != SearchDate.ANY) add(date.title)
             if (days > 0) add(if (days == 1) "Past 24 hours" else "Past $days days")
@@ -105,6 +107,7 @@ data class SearchRules(
                 content.isNotBlank() ||
                 nameTerms.isNotEmpty() ||
                 ruleGroup != null ||
+                source != SearchSource.LIVE ||
                 scoped
 
     fun matches(

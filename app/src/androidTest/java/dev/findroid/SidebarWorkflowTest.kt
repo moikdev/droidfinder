@@ -2,6 +2,7 @@
 
 package dev.findroid
 
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
@@ -183,6 +184,21 @@ class SidebarWorkflowTest {
         assertTrue(model.sidebar.groups.isEmpty())
         assertTrue(model.sidebar.favorites.all { it.group == null })
         compose.onNodeWithTag("favorite-${alpha.path}").assertExists()
+        unchanged()
+    }
+
+    @Test fun aFastRefreshRechecksAFavoriteAfterItsOriginalFolderReturns() {
+        fun state() = compose.onNodeWithTag("favorite-${alpha.path}")
+            .fetchSemanticsNode().config.getOrElse(SemanticsProperties.StateDescription) { "" }
+        compose.waitUntil(5_000) { state() == "Folder shortcut" }
+        val offline = File(base, "Alpha offline")
+        assertTrue(alpha.renameTo(offline))
+        // Loading begins and ends in the same frame: observers still need a new revision.
+        compose.runOnIdle { model.refresh(); model.stopLoading() }
+        compose.waitUntil(5_000) { state() == "Unavailable" }
+        assertTrue(offline.renameTo(alpha))
+        compose.runOnIdle { model.refresh(); model.stopLoading() }
+        compose.waitUntil(5_000) { state() == "Folder shortcut" }
         unchanged()
     }
 

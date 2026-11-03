@@ -45,6 +45,19 @@ internal class ListingControl {
         }
     }
 
+    /** Keeps a lazy database cursor's cancellation signal registered through suspension. */
+    suspend fun <T> withSuspendingSignal(work: suspend (CancellationSignal) -> T): T {
+        val signal = CancellationSignal()
+        val action = { signal.cancel() }
+        add(action)
+        try {
+            check()
+            return work(signal)
+        } finally {
+            remove(action)
+        }
+    }
+
     fun stream(open: (CancellationSignal) -> InputStream): InputStream {
         val signal = CancellationSignal()
         val input = java.util.concurrent.atomic.AtomicReference<InputStream?>()
@@ -115,13 +128,14 @@ data class ListingBudget(val results: Int = 20_000, val scanned: Int = 50_000) {
 
 internal enum class ListingRootState { WAITING, SCANNING, COMPLETE, UNAVAILABLE, INCOMPLETE, EXCLUDED }
 
-/** Live scan state only. It never enters tabs, history or setup backups. */
+/** Transient scan state and snapshot freshness; never saved with a search. */
 internal data class ListingRootProgress(
     val path: String,
     val state: ListingRootState = ListingRootState.WAITING,
     val issueCount: Int = 0,
     val providerPending: Boolean = false,
     val reason: String? = null,
+    val index: IndexSearchSnapshot? = null,
 )
 
 internal data class ListingProgress(
@@ -136,6 +150,8 @@ internal data class ListingProgress(
     val scanLimit: Boolean = false,
     val stopped: Boolean = false,
     val roots: List<ListingRootProgress> = emptyList(),
+    val indexed: Boolean = false,
+    val indexRevalidated: Int = 0,
 ) {
     val incomplete
         get() = issueCount > 0 || providerPending || resultLimit || scanLimit || stopped
@@ -154,6 +170,13 @@ internal interface ListingSource {
     fun read(path: String, control: ListingControl): Entry
 
     fun input(entry: Entry, control: ListingControl): InputStream
+
+    fun indexedInput(entry: Entry, root: String, control: ListingControl): InputStream {
+        currentIndexedFile(entry.path, root)
+        val opened = input(entry, control)
+        try { currentIndexedFile(entry.path, root); return opened }
+        catch (failure: Exception) { opened.close(); throw failure }
+    }
 
     fun searchable(entry: Entry): Boolean = true
 
@@ -177,6 +200,7 @@ internal data class ListingRequest(
     val recent: Boolean = false,
     val explicitPaths: List<String>? = null,
     val calendar: SearchCalendar = SearchCalendar(),
+    val index: LocalIndexStore? = null,
 )
 
 internal class DirectoryLoader(
@@ -199,13 +223,14 @@ internal class DirectoryLoader(
             var limited = false
             var issues = 0
             var reason: String? = null
+            var index: IndexSearchSnapshot? = null
             fun progress() = ListingRootProgress(path, when {
                 excluded && issues == 0 -> ListingRootState.EXCLUDED
                 failed && !available && !pending -> ListingRootState.UNAVAILABLE
                 active || queued > 0 -> if (started) ListingRootState.SCANNING else ListingRootState.WAITING
                 issues > 0 || pending || limited -> ListingRootState.INCOMPLETE
                 else -> ListingRootState.COMPLETE
-            }, issues, pending, reason)
+            }, issues, pending, reason, index)
         }
         val roots = if (request.explicitPaths == null)
             request.roots.distinct().map(::Root) else emptyList()
@@ -214,6 +239,7 @@ internal class DirectoryLoader(
         val issues = ArrayList<ListingIssue>()
         val notices = linkedSetOf<String>()
         var scanned = 0
+        var indexRevalidated = 0
         var folders = 0
         var issueCount = 0
         var providerPending = false
@@ -249,6 +275,8 @@ internal class DirectoryLoader(
                     resultLimit,
                     scanLimit,
                     roots = roots.map { it.progress() },
+                    indexed = request.rules.source == SearchSource.LOCAL_INDEX,
+                    indexRevalidated = indexRevalidated,
                 ),
             )
         }
@@ -276,14 +304,17 @@ internal class DirectoryLoader(
                 true
             }
         }
-        suspend fun accept(entry: Entry, parent: String? = null): Boolean {
+        suspend fun accept(entry: Entry, parent: String? = null, countScanned: Boolean = true,
+            indexedRoot: String? = null, validate: () -> Unit = {}): Boolean {
             control.check()
             currentCoroutineContext().ensureActive()
-            if (scanned >= request.budget.scanned) {
-                scanLimit = true
-                return false
+            if (countScanned) {
+                if (scanned >= request.budget.scanned) {
+                    scanLimit = true
+                    return false
+                }
+                scanned++
             }
-            scanned++
             if (
                 (!request.hidden && entry.name.startsWith('.')) ||
                     isWorkingFileName(entry.name) ||
@@ -320,11 +351,12 @@ internal class DirectoryLoader(
                 entry,
                 request.tags[entry.organizationPath].orEmpty(),
                 now = request.calendar.now,
-                read = { source.input(it, control) },
+                read = { if (indexedRoot == null) source.input(it, control) else source.indexedInput(it, indexedRoot, control) },
                 check = control::check,
                 contentIssue = { issue(entry.path, it) },
                 calendar = request.calendar,
             ) else null
+            validate()
             if (evidence != null) {
                 if (
                     !matches.containsKey(identity) &&
@@ -348,7 +380,106 @@ internal class DirectoryLoader(
             update()
             return true
         }
-        if (request.explicitPaths != null) {
+        if (request.rules.source == SearchSource.LOCAL_INDEX) {
+            if (request.explicitPaths != null) {
+                issue(request.roots.firstOrNull().orEmpty(), "The local index supports folder searches. Use Live folders for collections, tags, or Trash.")
+            } else {
+                val checkedPaths = mutableSetOf<String>()
+                val cachedRules = admissionRules.copy(content = "")
+                update(force = true)
+                for (root in roots) {
+                    control.check()
+                    currentCoroutineContext().ensureActive()
+                    if (resultLimit || scanLimit) break
+                    currentRoot = root
+                    val matchesBeforeRoot = matches.keys.toSet()
+                    root.queued = 0
+                    root.started = true
+                    root.active = true
+                    try {
+                        if (excluded(root.path)) { root.excluded = true; continue }
+                        check(root.path.startsWith('/') && !isDocumentPath(root.path)) {
+                            "Document providers are not indexed. Use Live folders for this location."
+                        }
+                        val anchor = java.io.File(root.path).canonicalPath
+                        val lease = request.index?.acquire(anchor)
+                            ?: throw IllegalStateException("No complete index snapshot covers this folder. Open Search index to refresh it, or choose Live folders.")
+                        lease.use {
+                            fun checkOwner() {
+                                lease.check()
+                                lease.root.filesystemIdentity?.let { expected ->
+                                    if (runCatching { localIndexFileIdentity(lease.root.path) }.getOrNull() != expected)
+                                        throw IndexSourceChanged("The indexed folder was moved, replaced or became unavailable. Refresh its snapshot or choose Live folders.")
+                                }
+                            }
+                            fun checkPath(path: String) { checkOwner(); currentIndexedFile(path, lease.root.path) }
+                            checkOwner()
+                            val anchorEntry = source.read(root.path, control)
+                            check(anchorEntry.folder) { "This search location is no longer a folder." }
+                            currentIndexedFile(anchor, lease.root.path)
+                            root.available = true
+                            root.index = lease.root.searchSnapshot()
+                            folders++
+                            update(force = true)
+                            lease.visit(anchor, request.rules.includeSubfolders, control) { record ->
+                                control.check()
+                                currentCoroutineContext().ensureActive()
+                                if (scanned >= request.budget.scanned) { scanLimit = true; return@visit false }
+                                scanned++
+                                check(java.io.File(root.path).canonicalPath == anchor) { "The search folder changed location. Run the search again." }
+                                if (!indexedScopeAdmits(record, anchor, request.rules, request.hidden) || excluded(record.path, record.parent)) {
+                                    update(); return@visit true
+                                }
+                                val cached = record.entry()
+                                if (cachedRules.evidence(cached, request.tags[cached.organizationPath].orEmpty(),
+                                        now = request.calendar.now, check = control::check, calendar = request.calendar) == null) {
+                                    update(); return@visit true
+                                }
+                                val identity = source.searchIdentity(record.path)
+                                if (identity in checkedPaths) { update(); return@visit true }
+                                val current = try {
+                                    checkPath(record.path)
+                                    indexRevalidated++
+                                    source.read(record.path, control).also { entry ->
+                                        checkPath(record.path)
+                                        check(entry.path == record.path && entry.documentUri == null) { "This indexed item changed identity." }
+                                    }
+                                } catch (failure: Exception) {
+                                    control.check()
+                                    if (failure is CancellationException || failure is IndexSourceChanged) throw failure
+                                    issue(record.path, failure.message ?: "An indexed item changed. Refresh the index.")
+                                    update(); return@visit true
+                                }
+                                checkedPaths.add(identity)
+                                try {
+                                    accept(current, current.parentPath, countScanned = false, indexedRoot = lease.root.path) {
+                                        checkPath(record.path)
+                                    }
+                                } catch (failure: Exception) {
+                                    control.check()
+                                    if (failure is CancellationException || failure is IndexSourceChanged) throw failure
+                                    lease.check()
+                                    issue(record.path, failure.message ?: "An indexed item changed. Refresh the index.")
+                                    update(); true
+                                }
+                            }
+                            checkOwner()
+                        }
+                    } catch (failure: Exception) {
+                        control.check()
+                        if (failure is CancellationException) throw failure
+                        if (failure is IndexSourceChanged) matches.keys.retainAll(matchesBeforeRoot)
+                        root.failed = true
+                        issue(root.path, failure.message ?: "The index could not be searched. Choose Live folders or rebuild the cache.")
+                    } finally {
+                        root.active = false
+                        if (resultLimit || scanLimit) root.limited = true
+                        update(force = true)
+                    }
+                }
+                currentRoot = null
+            }
+        } else if (request.explicitPaths != null) {
             for (path in request.explicitPaths) {
                 control.check()
                 val entry =

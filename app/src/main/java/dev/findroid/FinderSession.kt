@@ -55,6 +55,8 @@ class FinderSession(
 
     internal val recentSearches = RecentSearchHistory(PreferencesRecentSearchPersistence(prefs))
 
+    internal val searchIndex by lazy { (app as? FinderApplication)?.searchIndex ?: LocalSearchIndex(app) }
+
     val density =
         mutableStateOf(
             runCatching { FinderDensity.valueOf(prefs.getString("density", "COMFORTABLE")!!) }

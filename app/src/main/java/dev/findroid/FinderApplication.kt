@@ -24,6 +24,7 @@ class FinderApplication : Application(), ViewModelStoreOwner {
     }
 
     internal val updates by lazy { AppUpdateController(this) }
+    internal val searchIndex by lazy { LocalSearchIndex(this) }
     internal val localEngine by lazy { FileEngine(filesDir) }
     internal val workspaceDocuments by lazy { WorkspaceDocuments(this) }
     private val mainModel = lazy {
@@ -35,6 +36,7 @@ class FinderApplication : Application(), ViewModelStoreOwner {
     }
 
     internal fun workspaceChanged(routes: List<Pair<String, String>> = emptyList()) {
+        searchIndex.noteChanged(listOf(java.io.File(filesDir, "Workspace").absolutePath))
         if (!mainModel.isInitialized()) return
         android.os.Handler(android.os.Looper.getMainLooper()).post {
             model.externalWorkspaceChanged(routes)

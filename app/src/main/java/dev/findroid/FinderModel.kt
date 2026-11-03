@@ -1239,6 +1239,8 @@ constructor(
     private var listingJob: Job? = null
     private var listingControl: ListingControl? = null
     private var listingGeneration = 0L
+    internal var listingRefreshRevision by mutableStateOf(0L)
+        private set
     private var listingIdentity: List<Any?>? = null
     private var listingBudget = ListingBudget()
     private var listingBudgetKey: ListingScope? = null
@@ -1354,6 +1356,11 @@ constructor(
         journalError?.let { message = it }
         restoreTabState()
         if (navigationTreeVisible) revealNavigationTree(false)
+        viewModelScope.launch {
+            session.searchIndex.changes.collect {
+                if (effectiveSearchRules.source == SearchSource.LOCAL_INDEX) refresh(debounce = true)
+            }
+        }
     }
 
     fun dismissRecovery() {
@@ -2973,6 +2980,7 @@ constructor(
     private fun sorted(items: List<Entry>) = items.sortedWith(entryComparator())
 
     fun refresh(debounce: Boolean = false) {
+        listingRefreshRevision++
         listingControl?.cancel()
         listingJob?.cancel()
         stopListingObservers()
@@ -3098,6 +3106,9 @@ constructor(
                             override fun input(entry: Entry, control: ListingControl) =
                                 documents.input(entry.path, control)
 
+                            override fun indexedInput(entry: Entry, root: String, control: ListingControl) =
+                                indexedLocalInput(entry, root, control)
+
                             override fun searchIdentity(path: String) = documents.searchIdentity(path)
 
                             override fun searchAncestry(path: String, ancestor: String, control: ListingControl) =
@@ -3124,6 +3135,7 @@ constructor(
                             budget,
                             path == "@recent",
                             explicit,
+                            index = if (rules.source == SearchSource.LOCAL_INDEX) session.searchIndex.store else null,
                         )
                     val batch =
                         DirectoryLoader(source).load(request, control) { update ->
@@ -3223,7 +3235,10 @@ constructor(
                         override fun onEvent(event: Int, path: String?) {
                             if (event and mask == 0) return
                             viewModelScope.launch {
-                                if (generation == listingGeneration && busy == null) refresh(debounce = true)
+                                if (generation == listingGeneration && busy == null) {
+                                    session.searchIndex.noteChanged(localFolders.map { it.path })
+                                    if (effectiveSearchRules.source != SearchSource.LOCAL_INDEX) refresh(debounce = true)
+                                }
                             }
                         }
                     }.also { it.startWatching() }
@@ -3354,6 +3369,7 @@ constructor(
                     )
                         clearSelection()
                     syncHistory()
+                    session.searchIndex.noteChanged()
                     session.panes.forEach { it.refresh() }
                 } catch (error: Exception) {
                     message = "Files were kept, but operation cleanup failed: ${error.message}"
