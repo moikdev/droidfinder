@@ -18,6 +18,8 @@ Working copies are saved and read back before they can pass the preparation gate
 
 The final read-only gate verifies the original folders, their contents and every prepared copy again. Later edits, occupied destination names and changes to working files invalidate the prepared plan.
 
+Draft transition checks also validate the exact membership, identities and hashes of relocated trees. A future apply worker must validate both the declared destination-tree change and the relocated contents. Directory timestamp changes are limited to the affected ancestors; an unrelated edit or newly arrived file cannot become a fresh baseline for later operations.
+
 ## Work still required
 
 - Apply prepared additions with native no-replace publication and recheck the remaining plan between operations.
