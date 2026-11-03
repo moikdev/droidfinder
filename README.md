@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.39.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.40.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.39.0 release](https://github.com/moikdev/findroid/releases/tag/v0.39.0-preview) and download **`Findroid-0.39.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.40.0 release](https://github.com/moikdev/findroid/releases/tag/v0.40.0-preview) and download **`Findroid-0.40.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -144,6 +144,18 @@ Recent searches keep the scope too. **Search original location** reuses the chos
 
 *Actual optimized Android tablet capture with sample text files.*
 
+### Search a chosen local library from a snapshot
+
+For a library you search repeatedly, open **More → Search index…** and add just the local folders you want. Findroid saves filenames, paths, types, sizes and dates on the tablet. It does not copy document contents or schedule background refreshes.
+
+In **Search criteria**, choose **Live folders** or **Local index**. Live folders remain the default. An indexed result shows its snapshot date in **Result details**, and matching files are checked again using their current information, tags and text filters.
+
+The management window shows storage use and lets you refresh, pause, restart or remove snapshots. A failed or interrupted refresh keeps the last complete generation. Newly created, renamed or changed files may be missed until you refresh; **Use live folders** is always available for a new folder scan. Deleting the index keeps your documents, Favorites, tags and saved searches. [Local search index guide](docs/LOCAL-SEARCH-INDEX.md).
+
+![Optional local search snapshots with named Refresh, Remove and cache controls](docs/screenshots/local-search-index-tablet.png)
+
+*Actual optimized Android tablet capture with synthetic project folders.*
+
 ### Put the source and destination side by side
 
 Two panes make a simple job feel simple: keep Downloads on one side and your project folder on the other, then copy or move selected files across. Each pane keeps its own tabs, location, search, and selection.
@@ -248,4 +260,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, and nested search rules have shipped in verified increments. **26 of 72 are implemented; 46 remain open or partial.** Work continues on indexing, storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, and nested search rules have shipped in verified increments. **26 of 72 are implemented; 46 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).

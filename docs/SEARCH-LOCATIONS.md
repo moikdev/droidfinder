@@ -31,7 +31,7 @@ Name, type, tags, date, size and content filters apply to every chosen folder. *
 
 Overlapping folders or different grants to the same document return one result per document. Traversal still consumes the shared scan budget, so overlapping roots can take more work. **Stop**, **Restart**, **Refresh** and **Load more** retain their existing bounded-search behavior.
 
-This is a live scan. Folder watches and provider notifications can refresh chosen roots, but do not form a recursive background index. Use Refresh after changes that a provider or nested folder does not announce.
+With Live folders, this is a new folder scan. Folder watches and provider notifications can refresh chosen roots, but do not form a recursive background index. Use Refresh after changes that a provider or nested folder does not announce. From 0.40.0, Search criteria also offers an [optional local metadata snapshot](LOCAL-SEARCH-INDEX.md). It requires explicitly indexed local folders and never silently falls back to scanning an uncovered provider or root.
 
 ## Save and reuse the scope
 

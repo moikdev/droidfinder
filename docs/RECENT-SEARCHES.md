@@ -55,3 +55,5 @@ From 0.38.1, history preserves every [chosen search folder](SEARCH-LOCATIONS.md)
 **Search here** and typing suggestions clear that saved location list and use the current folder or library with the copied filters. Suggestion summaries describe this current-folder action. Literal exclusions keep their original references. Reusing a Smart Folder search still creates independent rules.
 
 From 0.39.0, history also preserves [nested rule groups](SEARCH-RULE-GROUPS.md). Typing suggestions keep a bounded description of the filters applied here; full history shows the complete group. Draft edits do not alter an older entry.
+
+From 0.40.0, history also preserves the [Live folders or Local index source choice](LOCAL-SEARCH-INDEX.md). Restoring a search never registers index roots or starts a refresh. Index registrations and cache rows stay on the current installation.

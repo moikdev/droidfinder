@@ -1,6 +1,6 @@
 # Optional local search index
 
-Development draft for 0.40.0. Publication and final release acceptance are still pending. Live folders remain the default search source.
+Available in 0.40.0. Live folders remain the default search source.
 
 The local index saves a snapshot of filenames, paths, types, sizes and modification dates for folders you choose. Search reads saved entries and checks matching files again, which avoids repeating the full folder traversal. It does not guarantee a shorter complete search. It stores no document contents or tags, sends nothing to a server, and runs no scheduled background indexing.
 
@@ -37,15 +37,18 @@ Filesystem and database work run off the UI thread. Symbolic links, internal wor
 
 ## Measured library behavior
 
-A warm metadata-only debug-instrumentation fixture on each emulator contains 6,000 files in 200 folders, saves 6,200 entries, and returns 1,000 identical matches. First usable results and complete time are measured separately. Instrumentation and sampled process-memory checks add overhead. These measurements do not establish real-tablet startup, battery life or a general speedup.
+A warm metadata-only **debug instrumentation** fixture on each emulator contains **6,000 files in 200 folders**, saves **6,200 entries**, and returns **1,000 identical matches**. The first usable result and complete time are separate measurements; sampled process PSS is retained in the full JSON. These measurements include instrumentation/memory-sampling overhead and do not establish real-tablet startup, battery life or a general speedup.
 
 | API | Snapshot build | Cache bytes | Live first / complete | Indexed first / complete | Pause |
 |---|---:|---:|---:|---:|---:|
 | 30 | 3.53 s | 4,898,816 | 155.2 / 536.7 ms | 19.7 / 1295.8 ms | 0.93 ms |
 | 36 | 3.65 s | 4,943,872 | 209.2 / 1507.8 ms | 41.9 / 1908.3 ms | 9.04 ms |
 
-Both measured indexed runs produced initial matches sooner and completed later. Live folders remain the default. The broader large-library and physical-tablet performance proposals remain open.
 
-## Validation status
+A complete indexed search can be slower despite earlier initial matches. Choose the source that fits your work; Live folders remain the default. The larger physical-tablet/library performance proposal remains open.
 
-489 JVM tests and 353 native cases on each assigned API30/API36 emulator tablet pass, with 38 fresh-process batches per API and zero failures/errors/skips. Both representative synthetic measurements retain the previous snapshot after cancellation. Optimized previous-public upgrade, actual window/font layouts, 50,000-file process-death/recovery checks, public OTA and independent public-artifact verification remain release gates. Physical-tablet performance, battery life, removable media and arbitrary provider behavior are separate acceptance work.
+## Validation
+
+489 JVM tests and 353 native cases per API30/API36 tablet pass, with 38 fresh-process batches per API and zero failures/errors/skips. The exact optimized previous-public upgrade, six real window/font combinations per API, 50,000-file process-death/pause/remove/delete checks and actual public OTA installation pass on both tablets. Actual screenshots are inspected. [Detailed validation](../VALIDATION.md).
+
+The immutable validation archive is being finalized. Proposals 19 and 26 remain pending its independent public-artifact check.

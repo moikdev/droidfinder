@@ -1,5 +1,32 @@
 # Android preview verification
 
+## Findroid 0.40.0 — optional local search snapshots
+
+Verified on November 3, 2026:
+
+- **489 JVM tests pass**, with zero failures, errors or skips. Debug, native-test, optimized preview and unsigned release builds pass. Lint: **0 errors, 146 warnings, 12 hints**.
+- **353 native cases pass per API30/API36 tablet**, in **38 fresh-process batches** each, with identical case sets, zero failures/skips and the same fixed application/test APK pair. New checks cover generation staging, resource limits, explicit opt-in, source codecs, current-candidate revalidation, literal Unicode scope, overlap deduplication, root replacement, opened descriptors, corrupt/future-cache preservation, pause/process recovery, late workers and a suspended real SQLite cursor during deletion/recreation. Existing operation, provider, search, sidebar, setup, drag, input and updater coverage remains included.
+- **Optimized 0.39 → 0.40 acceptance passes on both APIs** for the exact shipping preview: actual local-folder choice, two roots and exclusions, no implicit opt-in, current metadata/content, removed/new paths, manual refresh, indexed Smart Folder/restart and five actual custom-window replacements with independent persisted sources. A real **50,000-file** refresh is interrupted by process death; resume/pause retains the prior generation, removal stops refresh work, and cache deletion keeps all synthetic documents without late recreation.
+- All six **600/800/1280 dp × font 1.0/1.6** window combinations pass per API, including complete **48dp controls**, scroll reachability and criteria-draft return in Search criteria, index management, the folder picker and result details. Actual screenshots are inspected. See [management](docs/screenshots/local-search-index-tablet.png), [results](docs/screenshots/local-search-index-results.png) and [large text](docs/screenshots/local-search-index-large-text.png).
+- Final harness checks use shell-v2 binary reads to distinguish genuine absence from read failures. Both actual optimized/OTA reader functions pass binary-byte, missing-file and denied-read checks. Earlier raw-exec attempts are rejected. Immutable original backup payloads remain unchanged; all real saved metadata bytes and the known missing metadata file are independently restored and verified on both tablets.
+- Superseded native/fixture attempts and any rejected checker attempts are retained separately and excluded from acceptance. The final source review correction checks root identity around current reads and at lease completion, discarding invalid owners' new results. The strict `primaryPane` getter is preserved.
+
+A warm metadata-only **debug instrumentation** fixture on each emulator contains **6,000 files in 200 folders**, saves **6,200 entries**, and returns **1,000 identical matches**. The first usable result and complete time are separate measurements; sampled process PSS is retained in the full JSON. These measurements include instrumentation/memory-sampling overhead and do not establish real-tablet startup, battery life or a general speedup.
+
+| API | Snapshot build | Cache bytes | Live first / complete | Indexed first / complete | Pause |
+|---|---:|---:|---:|---:|---:|
+| 30 | 3.53 s | 4,898,816 | 155.2 / 536.7 ms | 19.7 / 1295.8 ms | 0.93 ms |
+| 36 | 3.65 s | 4,943,872 | 209.2 / 1507.8 ms | 41.9 / 1908.3 ms | 9.04 ms |
+
+
+Indexing avoids repeating directory traversal but can take longer to finish checking all matches. New/renamed paths and newly matching old metadata require a refresh or live search; observed-change hints do not guarantee complete recursive freshness. This increment completes neither the broader large-library benchmark proposal nor physical-tablet performance acceptance.
+
+The preview is **8,520,879 bytes**, SHA-256 `bd47bd616d6f7de63c738ba84ad7c53c2a3da8a6597f9bb2c5846e0cae251c7b`. Development signing is unchanged. Published [0.40.0-preview](https://github.com/moikdev/findroid/releases/tag/v0.40.0-preview) from clean application/native source `783780aca7a3432fa52fde983b44c9be4646ca4f`. All five original public assets match anonymous downloads and GitHub digests. Real public-feed **0.39 → 0.40** download and Android installation pass on both assigned tablets; synthetic original bytes, Favorites and unrelated preferences survive, with no repeat offer. API36's separate production-source check passes **1/1**. [Actual updater capture](docs/screenshots/app-updates-0400.png).
+
+Both tablets finish with exact private original metadata/preferences, font scale 1.0 and the public optimized APK. Index registrations/rows remain excluded from setup backups. Private originals, database payloads, signing keys, credentials, private APK captures and full crash buffers are excluded from public evidence. GitHub Actions remains manual-only. Physical/OEM/provider, accessibility, removable media and actual third-party receiving-app acceptance remain separately tracked.
+
+The immutable validation archive is being finalized. Proposals 19 and 26 remain pending its independent public-artifact check.
+
 ## Findroid 0.39.0 — nested search rules
 
 Verified on November 3, 2026:
