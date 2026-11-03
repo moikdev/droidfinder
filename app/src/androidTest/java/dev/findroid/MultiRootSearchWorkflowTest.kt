@@ -139,7 +139,10 @@ class MultiRootSearchWorkflowTest {
         assertEquals(first.path, model.location); assertEquals(roots, model.effectiveSearchRules.locations)
         assertEquals(localNames + "Report Research.txt", names())
         assertEquals(ListingRootState.UNAVAILABLE, model.listingProgress.roots[1].state)
-        compose.runOnIdle { model.connectLocation(tree, false, replacing = providerRoot) }; loaded()
+        compose.runOnIdle { model.connectLocation(tree, false, replacing = providerRoot) }
+        compose.waitUntil(20_000) {
+            !model.loading && names() == combinedNames && !model.listingProgress.incomplete
+        }
         assertEquals(first.path, model.location); assertEquals(roots, model.effectiveSearchRules.locations)
         assertEquals(combinedNames, names()); assertFalse(model.listingProgress.incomplete)
     }

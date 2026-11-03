@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.RenameRecipesTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2026-11-03T11:47:20.432Z" hostname="MacBook-Pro-2.local" time="0.054">
+<testsuite name="dev.findroid.RenameRecipesTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2026-11-03T16:28:52.003Z" hostname="MacBook-Pro-2.local" time="0.053">
   <properties/>
   <testcase name="failedRollbackReturnsExactRecoveryRoutesWithoutOverwritingNewArrivals" classname="dev.findroid.RenameRecipesTest" time="0.005"/>
   <testcase name="filenameBoundsReservedNamesAndMalformedUnicodeAreExplicit" classname="dev.findroid.RenameRecipesTest" time="0.003"/>
-  <testcase name="anUnselectedHardLinkIsNotMistakenForACaseAlias" classname="dev.findroid.RenameRecipesTest" time="0.003"/>
-  <testcase name="recoveryAndFieldBoundsPreserveUnicodeAndUsualExtensions" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
+  <testcase name="anUnselectedHardLinkIsNotMistakenForACaseAlias" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
+  <testcase name="recoveryAndFieldBoundsPreserveUnicodeAndUsualExtensions" classname="dev.findroid.RenameRecipesTest" time="0.002"/>
   <testcase name="presetsRoundTripRulesWithoutSourcePathsAndRejectImplicitOverwrites" classname="dev.findroid.RenameRecipesTest" time="0.003"/>
   <testcase name="blankRulesAreNoopsAndPartsPreserveExtensionsAndDotfiles" classname="dev.findroid.RenameRecipesTest" time="0.01"/>
-  <testcase name="portableGreekSigmaAndExpandedCaseKeysMatchActualAliases" classname="dev.findroid.RenameRecipesTest" time="0.003"/>
-  <testcase name="invalidPresetCatalogsAndWritesPreserveTheOriginalBytes" classname="dev.findroid.RenameRecipesTest" time="0.002"/>
-  <testcase name="unchangedTargetsCannotBeOverwrittenAndCancellationRestoresStagedNames" classname="dev.findroid.RenameRecipesTest" time="0.003"/>
-  <testcase name="unicodeCaseAndNormalizationDoNotSplitCombiningMarksOrEmoji" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
-  <testcase name="sequencePaddingStepAndExclusionUseOnlyIncludedPositions" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
-  <testcase name="portableConflictsCoverCaseAndCanonicalUnicodeEquivalence" classname="dev.findroid.RenameRecipesTest" time="0.0"/>
-  <testcase name="sourceAndDestinationErrorsBlockTheWholeReviewedPlan" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
-  <testcase name="cancellationAndSelectionLimitsNeverReturnAPartialExecutablePlan" classname="dev.findroid.RenameRecipesTest" time="0.006"/>
-  <testcase name="epochAndPreEpochDatesAreValidWhenTheSourceReportsThem" classname="dev.findroid.RenameRecipesTest" time="0.002"/>
+  <testcase name="portableGreekSigmaAndExpandedCaseKeysMatchActualAliases" classname="dev.findroid.RenameRecipesTest" time="0.004"/>
+  <testcase name="invalidPresetCatalogsAndWritesPreserveTheOriginalBytes" classname="dev.findroid.RenameRecipesTest" time="0.004"/>
+  <testcase name="unchangedTargetsCannotBeOverwrittenAndCancellationRestoresStagedNames" classname="dev.findroid.RenameRecipesTest" time="0.002"/>
+  <testcase name="unicodeCaseAndNormalizationDoNotSplitCombiningMarksOrEmoji" classname="dev.findroid.RenameRecipesTest" time="0.002"/>
+  <testcase name="sequencePaddingStepAndExclusionUseOnlyIncludedPositions" classname="dev.findroid.RenameRecipesTest" time="0.0"/>
+  <testcase name="portableConflictsCoverCaseAndCanonicalUnicodeEquivalence" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
+  <testcase name="sourceAndDestinationErrorsBlockTheWholeReviewedPlan" classname="dev.findroid.RenameRecipesTest" time="0.0"/>
+  <testcase name="cancellationAndSelectionLimitsNeverReturnAPartialExecutablePlan" classname="dev.findroid.RenameRecipesTest" time="0.005"/>
+  <testcase name="epochAndPreEpochDatesAreValidWhenTheSourceReportsThem" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
   <testcase name="templatesHandleExtensionlessFilesFoldersAndExplicitUnknowns" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
   <testcase name="literalCaseMatchingAndRegexGroupsAreDistinct" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
   <testcase name="descendantsRemainBlockedUntilTheSelectedAncestorIsExcluded" classname="dev.findroid.RenameRecipesTest" time="0.0"/>
   <testcase name="unsupportedRegexFeaturesFailWithoutBlockingOrPublishingNames" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
-  <testcase name="templatesUseCapturedMetadataTimezoneAndSafeMetadataText" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
-  <testcase name="naturalNameOrderComparesLongNumbersWithoutIntegerOverflow" classname="dev.findroid.RenameRecipesTest" time="0.001"/>
+  <testcase name="templatesUseCapturedMetadataTimezoneAndSafeMetadataText" classname="dev.findroid.RenameRecipesTest" time="0.002"/>
+  <testcase name="naturalNameOrderComparesLongNumbersWithoutIntegerOverflow" classname="dev.findroid.RenameRecipesTest" time="0.0"/>
   <testcase name="caseOnlyAndUnicodeRenamesRoundTripThroughUndoAndRedo" classname="dev.findroid.RenameRecipesTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

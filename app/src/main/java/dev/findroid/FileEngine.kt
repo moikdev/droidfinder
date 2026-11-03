@@ -173,6 +173,7 @@ class FileEngine(
         control: TransferControl,
         traversal: TransferTraversal = TransferTraversal(),
         depth: Int = 0,
+        verification: CopyVerificationSession? = null,
     ) {
         traversal.visit(source.absolutePath, depth)
         control.item(source.name)
@@ -180,7 +181,7 @@ class FileEngine(
         if (source.isDirectory) {
             check(target.mkdir()) { "Couldn't create ${target.name}." }
             val children = source.listFiles() ?: throw IOException("Couldn't read ${source.name}.")
-            children.forEach { copyTree(it, File(target, it.name), control, traversal, depth + 1) }
+            children.forEach { copyTree(it, File(target, it.name), control, traversal, depth + 1, verification) }
             check(source.list()?.toSet() == children.map { it.name }.toSet()) {
                 "The source folder changed while copying. The source was kept."
             }
@@ -188,11 +189,20 @@ class FileEngine(
             check(source.isFile) { "${source.name} is no longer available." }
             val size = source.length()
             val modified = source.lastModified()
+            val digest = verification?.begin(source.absolutePath)
+            if (verification != null) control.phase("Copying", size, TransferStage.COPYING)
             val copied = source.inputStream().use { input ->
-                target.outputStream().use { output -> control.copy(input, output, size) }
+                target.outputStream().use { output ->
+                    control.copy(if (digest == null) input else java.security.DigestInputStream(input, digest), output, size)
+                }
             }
-            check(copied == size && source.length() == size && source.lastModified() == modified) {
+            fun unchanged() = copied == size && source.length() == size && source.lastModified() == modified
+            check(unchanged()) {
                 "The source changed or the copy was incomplete. The source was kept."
+            }
+            if (verification != null) {
+                verification.verify(source.absolutePath, copied, digest!!.digest(), control) { target.inputStream() }
+                check(unchanged()) { "The source changed while verifying the copy. The source was kept." }
             }
         }
         target.setLastModified(source.lastModified())
@@ -205,7 +215,9 @@ class FileEngine(
         control: TransferControl = TransferControl(),
         requestedName: String? = null,
         phaseTitle: String = if (move) "Moving" else "Copying",
+        verification: CopyVerificationSession? = null,
     ): File {
+        require(!move || verification == null) { "Optional readback verification is available for copies." }
         control.check()
         checkDestination(source, parent)
         require(
@@ -242,7 +254,7 @@ class FileEngine(
         // Hide incomplete copies and only expose the result after a successful copy.
         val staging = File(parent, ".findroid-${UUID.randomUUID()}")
         try {
-            copyTree(source, staging, control)
+            copyTree(source, staging, control, verification = verification)
             control.check()
             control.phase("Publishing copy", stage = TransferStage.FINISHING)
             control.storage(TransferIo.DESTINATION) { Files.move(staging.toPath(), target.toPath()) }
@@ -250,6 +262,10 @@ class FileEngine(
             staging.deleteTreeWithoutLinks()
             throw error
         }
+        verification?.published(verification.results.associate { result ->
+            result.source to if (result.source == source.absolutePath) target.absolutePath
+                else File(target, File(result.source).relativeTo(source.absoluteFile).path).absolutePath
+        })
         if (move && !source.deleteTreeWithoutLinks())
             throw TransferPublicationException(
                 target.absolutePath,

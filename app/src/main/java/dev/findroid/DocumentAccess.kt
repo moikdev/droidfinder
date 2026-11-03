@@ -284,8 +284,10 @@ class DocumentAccess(
         }
     }
 
-    fun title(path: String) =
-        titles[path] ?: locations.firstOrNull { it.uri == path }?.name ?: "Connected folder"
+    internal fun knownTitle(path: String): String? =
+        titles[path] ?: locations.firstOrNull { it.uri == path }?.name
+
+    fun title(path: String) = knownTitle(path) ?: "Connected folder"
 
     fun parent(path: String): String? =
         if (isDocumentPath(path)) parents.getProperty(path) else File(path).parent
@@ -749,7 +751,9 @@ class DocumentAccess(
         control: TransferControl = TransferControl(),
         requestedName: String? = null,
         phaseTitle: String = if (move) "Moving" else "Copying",
+        verification: CopyVerificationSession? = null,
     ): String {
+        require(!move || verification == null) { "Optional readback verification is available for copies." }
         lastCopyMappings = emptyList()
         control.phase("Checking files", stage = TransferStage.PREPARING)
         control.documentCall(if (isDocumentPath(source)) source else parent) {
@@ -757,7 +761,7 @@ class DocumentAccess(
         }
         if (!isDocumentPath(source) && !isDocumentPath(parent))
             return engine
-                .copy(File(source), File(parent), move, control, requestedName, phaseTitle)
+                .copy(File(source), File(parent), move, control, requestedName, phaseTitle, verification)
                 .absolutePath
         control.documentCall(if (isDocumentPath(source)) source else parent) { checkDestination(source, parent) }
         val entry = control.documentCall(source) { read(source) }
@@ -794,18 +798,29 @@ class DocumentAccess(
                     "The source folder changed while copying. The source was kept."
                 }
             } else {
+                val digest = verification?.begin(from.path)
+                if (verification != null) control.phase("Copying", from.size.takeIf { from.sizeKnown }, TransferStage.COPYING)
                 val copied = control.documentCall(from.path) { input(from.path) }.use { input ->
                     control.documentCall(to) { output(to) }.use { output ->
-                        control.copy(input, output, from.size.takeIf { from.sizeKnown },
-                            sourceIsProvider = from.documentUri != null,
+                        control.copy(if (digest == null) input else java.security.DigestInputStream(input, digest), output,
+                            from.size.takeIf { from.sizeKnown }, sourceIsProvider = from.documentUri != null,
                             destinationIsProvider = isDocumentPath(to))
                     }
                 }
-                val after = control.documentCall(from.path) { read(from.path) }
-                check((!from.sizeKnown || copied == from.size) &&
-                    (!from.sizeKnown || after.sizeKnown && after.size == from.size) &&
-                    after.folder == from.folder && after.modified == from.modified) {
+                fun unchanged(): Boolean {
+                    val after = control.documentCall(from.path) { read(from.path) }
+                    return (!from.sizeKnown || copied == from.size) &&
+                        (!from.sizeKnown || after.sizeKnown && after.size == from.size) &&
+                        after.folder == from.folder && after.modified == from.modified
+                }
+                check(unchanged()) {
                     "The source changed or the provider returned an incomplete file. The source was kept."
+                }
+                if (verification != null) {
+                    verification.verify(from.path, copied, digest!!.digest(), control, isDocumentPath(to)) {
+                        control.documentCall(to) { input(to) }
+                    }
+                    check(unchanged()) { "The source changed while verifying the copy. The source was kept." }
                 }
             }
         }
@@ -822,6 +837,7 @@ class DocumentAccess(
         lastCopyMappings = mappings.map {
             it.first to remapPath(it.second, listOf(staging to completed))
         }
+        verification?.published(lastCopyMappings.toMap())
         if (move)
             try {
                 control.phase("Removing original after copy", stage = TransferStage.FINISHING)

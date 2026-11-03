@@ -32,6 +32,20 @@ class SqliteTransferStoreTest {
             SQLiteDatabase.OPEN_READWRITE or SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING,
         )
 
+    private fun restoreOldSchema(name: String, version: Int) {
+        connection(name).use { db ->
+            db.execSQL("DROP TABLE copy_verifications")
+            if (version == 1) db.execSQL("DROP TABLE estimates")
+            val columns = "id,position,destination,move,state,bytes,items,current,created,started,finished,in_flight,policy"
+            db.execSQL("CREATE TABLE legacy_jobs (id TEXT PRIMARY KEY, position INTEGER NOT NULL, destination TEXT NOT NULL, move INTEGER NOT NULL, state TEXT NOT NULL, bytes INTEGER NOT NULL, items INTEGER NOT NULL, current TEXT NOT NULL, created INTEGER NOT NULL, started INTEGER NOT NULL, finished INTEGER NOT NULL, in_flight TEXT, policy TEXT NOT NULL)")
+            db.execSQL("INSERT INTO legacy_jobs ($columns) SELECT $columns FROM jobs")
+            db.execSQL("DROP TABLE jobs")
+            db.execSQL("ALTER TABLE legacy_jobs RENAME TO jobs")
+            db.execSQL("CREATE INDEX job_order ON jobs(position)")
+            db.version = version
+        }
+    }
+
     private fun count(db: SQLiteDatabase, table: String, where: String = "1"): Int =
         db.rawQuery("SELECT COUNT(*) FROM $table WHERE $where", null).use {
             it.moveToFirst()
@@ -207,10 +221,7 @@ class SqliteTransferStoreTest {
                 )
             store.save(listOf(job))
             store.close()
-            connection(name).use { db ->
-                db.execSQL("DROP TABLE estimates")
-                db.version = 1
-            }
+            restoreOldSchema(name, 1)
             SqliteTransferStore(context, name, legacy).use { upgraded ->
                 assertEquals(listOf(job), upgraded.load())
                 val estimated =
@@ -226,4 +237,61 @@ class SqliteTransferStoreTest {
                 connection(name).use { assertEquals(0, count(it, "estimates")) }
             }
         }
+    @Test fun upgradesVersionTwoWithoutInventingVerificationForOldCopies() = exercise { store, name, legacy ->
+        val old = TransferJob(paths = listOf("/old"), destination = "/out", move = false,
+            state = TransferState.COMPLETED, results = listOf(TransferItemResult("/old", "/out/old")),
+            estimate = TransferEstimate(3, 1, 0), availableAtStart = 500)
+        store.save(listOf(old)); store.close(); restoreOldSchema(name, 2)
+        SqliteTransferStore(context, name, legacy).use { upgraded ->
+            assertEquals(listOf(old), upgraded.load())
+            assertFalse(upgraded.load().single().verifyCopies)
+            assertEquals("Not requested", copyVerificationSummary(upgraded.load().single()))
+        }
+        connection(name).use { assertEquals(3, it.version) }
+    }
+
+    @Test fun roundTripsVerificationChoiceAndIndividualResultsWithoutRewritingUnchangedRows() = exercise { store, name, legacy ->
+        val digest = "a".repeat(64)
+        val result = CopyVerificationResult("/root", "/root/a.txt", CopyVerificationStatus.VERIFIED, "/out/a.txt", 3, digest, digest)
+        val job = TransferJob(paths = listOf("/root"), destination = "/out", move = false,
+            verifyCopies = true, verifications = listOf(result))
+        store.save(listOf(job))
+        connection(name).use { db ->
+            db.execSQL("CREATE TABLE verification_audit (writes INTEGER NOT NULL)")
+            db.execSQL("INSERT INTO verification_audit VALUES (0)")
+            db.execSQL("CREATE TRIGGER verification_writes AFTER UPDATE ON copy_verifications BEGIN UPDATE verification_audit SET writes=writes+1; END")
+            store.save(listOf(job.copy(bytes = 99, state = TransferState.RUNNING)))
+            db.rawQuery("SELECT writes FROM verification_audit", null).use { it.moveToFirst(); assertEquals(0, it.getInt(0)) }
+        }
+        store.close()
+        SqliteTransferStore(context, name, legacy).use { reopened ->
+            val loaded = reopened.load().single()
+            assertTrue(loaded.verifyCopies); assertEquals(listOf(result), loaded.verifications)
+            assertTrue(loaded.afterRestart().verifyCopies)
+            reopened.save(emptyList())
+        }
+        connection(name).use { assertEquals(0, count(it, "copy_verifications")) }
+    }
+
+    @Test fun verificationRowFailureRollsBackTheWholeCheckpoint() = exercise { store, name, _ ->
+        val job = TransferJob(paths = listOf("/root"), destination = "/out", move = false, verifyCopies = true)
+        store.save(listOf(job))
+        connection(name).use { db ->
+            db.execSQL("CREATE TRIGGER reject_verification BEFORE INSERT ON copy_verifications BEGIN SELECT RAISE(ABORT,'injected verification failure'); END")
+            val changed = job.copy(bytes = 3, verifications = listOf(CopyVerificationResult("/root", "/root/a.txt")))
+            assertTrue(runCatching { store.save(listOf(changed)) }.isFailure)
+            assertEquals(listOf(job), store.load()); assertEquals(0, count(db, "copy_verifications"))
+            db.execSQL("DROP TRIGGER reject_verification")
+            store.save(listOf(changed)); assertEquals(listOf(changed), store.load())
+        }
+    }
+
+    @Test fun importsVerifiedLegacyRecordsWithoutChangingTheLegacyBytes() = exercise { store, _, legacy ->
+        val job = TransferJob(paths = listOf("/root"), destination = "/out", move = false, verifyCopies = true,
+            verifications = listOf(CopyVerificationResult("/root", "/root/a.txt", CopyVerificationStatus.UNREADABLE,
+                bytes = 3, error = "Readback denied")))
+        TransferJournal(legacy).save(listOf(job)); val original = legacy.readBytes()
+        assertEquals(listOf(job), store.load()); assertArrayEquals(original, legacy.readBytes())
+    }
+
 }

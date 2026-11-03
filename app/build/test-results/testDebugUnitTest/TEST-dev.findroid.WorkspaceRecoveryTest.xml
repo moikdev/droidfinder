@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.WorkspaceRecoveryTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-03T11:47:21.065Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.WorkspaceRecoveryTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-03T16:28:52.651Z" hostname="MacBook-Pro-2.local" time="0.001">
   <properties/>
-  <testcase name="repairKeepsLayoutGeometryPinnedStateSearchAndTabIdentity" classname="dev.findroid.WorkspaceRecoveryTest" time="0.001"/>
+  <testcase name="repairKeepsLayoutGeometryPinnedStateSearchAndTabIdentity" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="sharedDestinationsAreReviewedOnceWithBothVisiblePaneUses" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="aWorkingTabWithTheMissingPathInItsHistoryRemainsExactlyUnchanged" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="currentTabDestinationsExcludeUnrelatedHistoryAndHiddenSecondaryPane" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
@@ -10,7 +10,7 @@
   <testcase name="workingSmartFolderTabsDoNotMaterializeOrChangeTheirFilters" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="repeatedMissingDestinationIsRepairedInBothPanes" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="aRepairedSmartFolderKeepsItsIntrinsicFilterAndTheTabsExtraQuery" classname="dev.findroid.WorkspaceRecoveryTest" time="0.001"/>
-  <testcase name="aHiddenSecondaryLayoutIsPreservedEvenWhenItSharesTheRepairedPath" classname="dev.findroid.WorkspaceRecoveryTest" time="0.001"/>
+  <testcase name="aHiddenSecondaryLayoutIsPreservedEvenWhenItSharesTheRepairedPath" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="aVirtualOrBlankDestinationCannotBePassedAsAReplacementFolder" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="opaqueProviderIdsAreReplacedExactlyWithoutSuffixGuessing" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="keepingUnavailableLocationsDoesNotChangeTheSavedLayout" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>

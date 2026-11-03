@@ -267,6 +267,8 @@ fun FileContextMenu(
                 FileCommandItem(model, "new", "New folder", Icons.Outlined.CreateNewFolder, "Ctrl Shift N") { run("new") }
                 FileCommandItem(model, "newText", "New text file…", Icons.AutoMirrored.Outlined.NoteAdd) { run("newText") }
                 FileCommandItem(model, "paste", "Paste", Icons.Outlined.ContentPaste, "Ctrl V") { run("paste") }
+                if (model.clipboard?.cut == false)
+                    FileCommandItem(model, "pasteVerified", "Paste and verify…", Icons.Outlined.ContentPaste) { run("pasteVerified") }
                 HorizontalDivider(color = Border)
                 ContextItem(
                     "Select all",
@@ -345,10 +347,14 @@ fun FileContextMenu(
                 HorizontalDivider(color = Border)
                 FileCommandItem(model, "copy", "Copy", Icons.Outlined.ContentCopy, shortcut = "Ctrl C") { run("copy") }
                 FileCommandItem(model, "cut", "Cut", Icons.Outlined.ContentCut, "Ctrl X") { run("cut") }
-                if (one?.folder == true)
+                if (one?.folder == true) {
                     FileCommandItem(model, "pasteInto", "Paste into folder", Icons.Outlined.ContentPaste) { run("pasteInto") }
+                    if (model.clipboard?.cut == false)
+                        FileCommandItem(model, "pasteIntoVerified", "Paste into folder and verify…", Icons.Outlined.ContentPaste) { run("pasteIntoVerified") }
+                }
                 FileCommandItem(model, "rename", if (items.size > 1) "Rename ${items.size} items…" else "Rename…", Icons.Outlined.DriveFileRenameOutline, "F2") { run("rename") }
                 FileCommandItem(model, "duplicate", "Duplicate", Icons.Outlined.FileCopy, shortcut = "Meta D") { run("duplicate") }
+                FileCommandItem(model, "duplicateVerified", "Duplicate and verify…", Icons.Outlined.FileCopy) { run("duplicateVerified") }
                 FileCommandItem(model, "copyTo", "Copy to…", Icons.Outlined.FolderCopy) { run("copyTo") }
                 FileCommandItem(model, "moveTo", "Move to…", Icons.AutoMirrored.Outlined.DriveFileMove) { run("moveTo") }
                 HorizontalDivider(color = Border)

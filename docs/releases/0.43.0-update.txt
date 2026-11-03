@@ -1,0 +1,7 @@
+Verify important copies before making them available. Choose Paste and verify…, Duplicate and verify…, or Paste into folder and verify…, review the sources and destination, then choose Copy and verify.
+
+Findroid compares each source file's SHA-256 and actual byte count with a fresh read of the unfinished destination. Nested folders and files with unknown sizes are supported. Mismatched or unreadable copies fail safely, keep the source, and clean up unpublished work when possible. Failed reviewed replacements restore the previous destination.
+
+Transfers keeps per-file verification results through pause, cancellation and retry. Verification reads do not inflate the copied-byte total, and transfer titles avoid internal provider IDs.
+
+Verification takes extra destination reads and supports copies with up to 10,000 file results per transfer. A provider must allow reading its newly written files. Checks describe the bytes read at that time.

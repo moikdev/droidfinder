@@ -44,6 +44,8 @@ data class TransferJob(
     val mergePlans: List<MergePlan> = emptyList(),
     val estimate: TransferEstimate? = null,
     val availableAtStart: Long? = null,
+    val verifyCopies: Boolean = false,
+    val verifications: List<CopyVerificationResult> = emptyList(),
 ) {
     val title
         get() =
@@ -126,6 +128,20 @@ class TransferJournal(private val file: File) : TransferStore {
                 finished = get("finished").toLong(),
                 inFlight = get("inFlight").ifBlank { null },
                 conflictPolicy = ConflictPolicy.valueOf(p.getProperty("$i.conflictPolicy", "ASK")),
+                verifyCopies = p.getProperty("$i.verifyCopies", "false").toBooleanStrict(),
+                verifications = (0 until p.getProperty("$i.verifications", "0").toInt().also {
+                    require(it in 0..MAX_COPY_VERIFICATION_RESULTS)
+                }).map { n ->
+                    CopyVerificationResult(
+                        root = get("verification.$n.root"), source = get("verification.$n.source"),
+                        status = CopyVerificationStatus.valueOf(get("verification.$n.status")),
+                        destination = get("verification.$n.destination").ifBlank { null },
+                        bytes = get("verification.$n.bytes").toLong(),
+                        expectedSha256 = get("verification.$n.expected").ifBlank { null },
+                        actualSha256 = get("verification.$n.actual").ifBlank { null },
+                        error = get("verification.$n.error").ifBlank { null },
+                    )
+                },
                 results =
                     (0 until count("results")).map { n ->
                         TransferItemResult(
@@ -135,7 +151,7 @@ class TransferJournal(private val file: File) : TransferStore {
                             p.getProperty("$i.result.$n.skipped", "false").toBooleanStrict(),
                         )
                     },
-            )
+            ).also(::validateCopyVerification)
         }
     }
 
@@ -152,6 +168,7 @@ class TransferJournal(private val file: File) : TransferStore {
 
     @Synchronized
     override fun save(jobs: List<TransferJob>) {
+        jobs.forEach(::validateCopyVerification)
         require(
             jobs.all {
                 it.mergePlans.isEmpty() && it.estimate == null && it.availableAtStart == null
@@ -180,6 +197,18 @@ class TransferJournal(private val file: File) : TransferStore {
             put("finished", job.finished)
             put("inFlight", job.inFlight)
             put("conflictPolicy", job.conflictPolicy.name)
+            put("verifyCopies", job.verifyCopies)
+            put("verifications", job.verifications.size)
+            job.verifications.forEachIndexed { n, result ->
+                put("verification.$n.root", result.root)
+                put("verification.$n.source", result.source)
+                put("verification.$n.status", result.status.name)
+                put("verification.$n.destination", result.destination)
+                put("verification.$n.bytes", result.bytes)
+                put("verification.$n.expected", result.expectedSha256)
+                put("verification.$n.actual", result.actualSha256)
+                put("verification.$n.error", result.error)
+            }
             put("paths", job.paths.size)
             job.paths.forEachIndexed { n, path -> put("path.$n", path) }
             put("results", job.results.size)

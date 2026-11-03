@@ -27,10 +27,12 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         val childQueries = java.util.concurrent.ConcurrentHashMap<String, java.util.concurrent.atomic.AtomicInteger>()
         @Volatile var transferGate: java.util.concurrent.CountDownLatch? = null
         @Volatile var gateOpened: java.util.concurrent.CountDownLatch? = null
+        @Volatile var beforeRead: ((File) -> Unit)? = null
         @Volatile var beforeDelete: ((String) -> Unit)? = null
         @Volatile var beforeRename: ((String, String) -> Unit)? = null
         @Volatile var listingDirectory: String? = null
         @Volatile var listingTitle: String? = null
+        @Volatile var displayNameOverrides: Map<String, String> = emptyMap()
         @Volatile var streamCancellation: java.util.concurrent.CountDownLatch? = null
         @Volatile var listingGate: java.util.concurrent.CountDownLatch? = null
         @Volatile var listingGateOpened: java.util.concurrent.CountDownLatch? = null
@@ -125,7 +127,8 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                     Document.COLUMN_DISPLAY_NAME ->
                         if (file.canonicalPath == listingDirectory && listingTitle != null)
                             listingTitle
-                        else if (file == root) "Findroid test storage" else file.name
+                        else displayNameOverrides[file.canonicalPath]
+                            ?: if (file == root) "Findroid test storage" else file.name
                     Document.COLUMN_MIME_TYPE ->
                         if (file.isDirectory) Document.MIME_TYPE_DIR
                         else
@@ -230,7 +233,10 @@ class FixtureDocumentsProvider : DocumentsProvider() {
     ): ParcelFileDescriptor {
         signal?.throwIfCanceled()
         val file = file(documentId)
-        if (mode == "r") contentReads.getOrPut(file.canonicalPath) { java.util.concurrent.atomic.AtomicInteger(0) }.incrementAndGet()
+        if (mode == "r") {
+            contentReads.getOrPut(file.canonicalPath) { java.util.concurrent.atomic.AtomicInteger(0) }.incrementAndGet()
+            beforeRead?.invoke(file)
+        }
         if (mode.contains('w') && readOnly(file)) throw FileNotFoundException("Read only fixture")
         readByteLimits[file.canonicalPath]?.takeIf { mode == "r" }?.let { limit ->
             val pipe = ParcelFileDescriptor.createPipe()
@@ -244,9 +250,8 @@ class FixtureDocumentsProvider : DocumentsProvider() {
             return pipe[0]
         }
         if (
-            file.name in
-                listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt", "Gate.pdf", "Gate.jpg") &&
-                mode == "r"
+            (file.name in listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt", "Gate.pdf", "Gate.jpg") ||
+                readDelayMillis.containsKey(file.canonicalPath)) && mode == "r"
         ) {
             val pipe = ParcelFileDescriptor.createPipe()
             signal?.setOnCancelListener {

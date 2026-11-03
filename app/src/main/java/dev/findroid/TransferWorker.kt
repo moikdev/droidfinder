@@ -4,6 +4,9 @@ import java.io.File
 import java.nio.file.Files
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Job
 
 /** One serialized job; all durable checkpoints run on the model's dispatcher. */
 class TransferWorker(
@@ -40,6 +43,9 @@ class TransferWorker(
     suspend fun run() {
         control.phase("Checking files", stage = TransferStage.PREPARING)
         val estimate = io { documents.estimate(job.paths, control) }
+        if (job.verifyCopies) check(estimate.files <= MAX_COPY_VERIFICATION_RESULTS) {
+            "Verification supports up to $MAX_COPY_VERIFICATION_RESULTS file results per transfer. Split this selection into smaller copies."
+        }
         val available = io { documents.availableSpace(job.destination) }
         save { it.copy(estimate = estimate, availableAtStart = available) }
         for (path in job.paths) {
@@ -96,6 +102,36 @@ class TransferWorker(
         move: Boolean,
         mergeAllowed: Boolean,
     ): TransferItemResult {
+        val ownerContext = currentCoroutineContext().minusKey(Job)
+        val verification = if (job.verifyCopies)
+            CopyVerificationSession(path, MAX_COPY_VERIFICATION_RESULTS - current().verifications.size) { records ->
+                // Synchronous file APIs invoke this only on Dispatchers.IO. Wait for the model's
+                // single-writer checkpoint before continuing an unpublished file.
+                runBlocking { withContext(ownerContext) { saveVerification(records) } }
+            }
+        else null
+        try {
+            return performTransferOne(path, parent, move, mergeAllowed, verification)
+        } finally {
+            saveVerification(verification?.results.orEmpty())
+        }
+    }
+
+    private suspend fun saveVerification(records: List<CopyVerificationResult>) {
+        if (records.isEmpty()) return
+        save { latest ->
+            val keys = records.map { it.root to it.source }.toSet()
+            latest.copy(verifications = latest.verifications.filterNot { (it.root to it.source) in keys } + records)
+        }
+    }
+
+    private suspend fun performTransferOne(
+        path: String,
+        parent: String,
+        move: Boolean,
+        mergeAllowed: Boolean,
+        verification: CopyVerificationSession?,
+    ): TransferItemResult {
         val before = io {
             documents.validateTransfer(path, parent, move)
             documents.read(path)
@@ -112,7 +148,10 @@ class TransferWorker(
                     control.cancel()
                     io { control.check() }
                 }
-                ConflictAction.SKIP -> return TransferItemResult(path, skipped = true)
+                ConflictAction.SKIP -> {
+                    io { verification?.skipped(path) }
+                    return TransferItemResult(path, skipped = true)
+                }
                 ConflictAction.RENAME -> desiredName = validateFilename(answer.name.orEmpty())
                 ConflictAction.MERGE -> {
                     check(mergeAllowed && before.folder && existing.folder) {
@@ -151,7 +190,7 @@ class TransferWorker(
         }
         val published =
             try {
-                io { documents.copy(path, parent, move, control, desiredName) }
+                io { documents.copy(path, parent, move, control, desiredName, verification = verification) }
             } catch (error: Exception) {
                 if (replaced != null && error !is TransferPublicationException) {
                     val restored = io { documents.restore(replaced.second) }

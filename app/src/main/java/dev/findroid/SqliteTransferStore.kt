@@ -29,7 +29,7 @@ class SqliteTransferStore(
                     this.context,
                     name,
                     null,
-                    2,
+                    3,
                     DatabaseErrorHandler {
                         // Android's default handler deletes corrupt databases. Preserve them for
                         // explicit recovery.
@@ -46,7 +46,7 @@ class SqliteTransferStore(
                 override fun onCreate(db: SQLiteDatabase) {
                     db.execSQL("CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)")
                     db.execSQL(
-                        "CREATE TABLE jobs (id TEXT PRIMARY KEY, position INTEGER NOT NULL, destination TEXT NOT NULL, move INTEGER NOT NULL, state TEXT NOT NULL, bytes INTEGER NOT NULL, items INTEGER NOT NULL, current TEXT NOT NULL, created INTEGER NOT NULL, started INTEGER NOT NULL, finished INTEGER NOT NULL, in_flight TEXT, policy TEXT NOT NULL)",
+                        "CREATE TABLE jobs (id TEXT PRIMARY KEY, position INTEGER NOT NULL, destination TEXT NOT NULL, move INTEGER NOT NULL, state TEXT NOT NULL, bytes INTEGER NOT NULL, items INTEGER NOT NULL, current TEXT NOT NULL, created INTEGER NOT NULL, started INTEGER NOT NULL, finished INTEGER NOT NULL, in_flight TEXT, policy TEXT NOT NULL, verify_copies INTEGER NOT NULL DEFAULT 0)",
                     )
                     db.execSQL(
                         "CREATE TABLE sources (job_id TEXT NOT NULL REFERENCES jobs(id) ON DELETE CASCADE, position INTEGER NOT NULL, path TEXT NOT NULL, PRIMARY KEY(job_id,position))",
@@ -62,16 +62,25 @@ class SqliteTransferStore(
                     )
                     db.execSQL("CREATE INDEX job_order ON jobs(position)")
                     createEstimates(db)
+                    createVerifications(db)
                 }
 
                 override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-                    check(oldVersion == 1 && newVersion == 2) {
+                    check(oldVersion in 1..2 && newVersion == 3) {
                         "Unsupported transfer database upgrade: $oldVersion to $newVersion. Database kept."
                     }
-                    createEstimates(db)
+                    if (oldVersion < 2) createEstimates(db)
+                    db.execSQL("ALTER TABLE jobs ADD COLUMN verify_copies INTEGER NOT NULL DEFAULT 0")
+                    createVerifications(db)
                 }
             }
             .apply { setWriteAheadLoggingEnabled(true) }
+
+    private fun createVerifications(db: SQLiteDatabase) {
+        db.execSQL(
+            "CREATE TABLE copy_verifications (job_id TEXT NOT NULL REFERENCES jobs(id) ON DELETE CASCADE, root TEXT NOT NULL, source TEXT NOT NULL, position INTEGER NOT NULL, status TEXT NOT NULL, destination TEXT, bytes INTEGER NOT NULL, expected TEXT, actual TEXT, error TEXT, PRIMARY KEY(job_id,root,source))",
+        )
+    }
 
     private fun createEstimates(db: SQLiteDatabase) {
         db.execSQL(
@@ -93,6 +102,7 @@ class SqliteTransferStore(
     private fun validate(jobs: List<TransferJob>) {
         require(jobs.map { it.id }.distinct().size == jobs.size) { "Duplicate transfer ids." }
         jobs.forEach { job ->
+            validateCopyVerification(job)
             require(job.paths.isNotEmpty() && job.paths.distinct().size == job.paths.size) {
                 "Invalid transfer sources."
             }
@@ -209,6 +219,7 @@ class SqliteTransferStore(
             "finished" to job.finished,
             "in_flight" to job.inFlight,
             "policy" to job.conflictPolicy.name,
+            "verify_copies" to job.verifyCopies,
         )
 
     private fun write(db: SQLiteDatabase, jobs: List<TransferJob>, before: List<TransferJob>) {
@@ -282,6 +293,23 @@ class SqliteTransferStore(
                             "job_id=? AND source=?",
                             arrayOf(job.id, result.source),
                         )
+                }
+            }
+            if (previous == null || previous.verifications !== job.verifications) {
+                val prior = previous?.verifications.orEmpty().associateBy { it.root to it.source }
+                val keys = job.verifications.map { it.root to it.source }.toSet()
+                prior.keys.filter { it !in keys }.forEach { (root, source) ->
+                    db.delete("copy_verifications", "job_id=? AND root=? AND source=?", arrayOf(job.id, root, source))
+                }
+                job.verifications.forEachIndexed { index, result ->
+                    if (prior[result.root to result.source] != result ||
+                        previous?.verifications?.getOrNull(index)?.let { it.root to it.source } != (result.root to result.source)) {
+                        upsert(db, "copy_verifications", values(
+                            "job_id" to job.id, "root" to result.root, "source" to result.source, "position" to index,
+                            "status" to result.status.name, "destination" to result.destination, "bytes" to result.bytes,
+                            "expected" to result.expectedSha256, "actual" to result.actualSha256, "error" to result.error,
+                        ), "job_id=? AND root=? AND source=?", arrayOf(job.id, result.root, result.source))
+                    }
                 }
             }
             if (previous == null || previous.mergePlans !== job.mergePlans) {
@@ -414,6 +442,15 @@ class SqliteTransferStore(
                 finished = row.long("finished"),
                 inFlight = row.optional("in_flight"),
                 conflictPolicy = ConflictPolicy.valueOf(row.string("policy")),
+                verifyCopies = row.int("verify_copies") == 1,
+                verifications = query(db, "copy_verifications", "job_id=?", arrayOf(id)) {
+                    CopyVerificationResult(
+                        root = it.string("root"), source = it.string("source"),
+                        status = CopyVerificationStatus.valueOf(it.string("status")),
+                        destination = it.optional("destination"), bytes = it.long("bytes"),
+                        expectedSha256 = it.optional("expected"), actualSha256 = it.optional("actual"), error = it.optional("error"),
+                    )
+                },
                 paths = query(db, "sources", "job_id=?", arrayOf(id)) { it.string("path") },
                 results =
                     query(db, "results", "job_id=?", arrayOf(id)) {

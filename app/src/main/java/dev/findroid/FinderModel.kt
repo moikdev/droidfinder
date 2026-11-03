@@ -4110,6 +4110,39 @@ constructor(
         }
     }
 
+    internal var verifiedCopyReview by mutableStateOf<VerifiedCopyRequest?>(null)
+        private set
+
+    internal fun reviewVerifiedPaste(parent: String? = folderPath) {
+        val clip = clipboard ?: return
+        if (parent == null) return
+        if (clip.cut) {
+            message = "Copy the items first to request optional verification."
+            return
+        }
+        verifiedCopyReview = VerifiedCopyRequest(clip.paths.distinct(), parent, conflictPolicy)
+    }
+
+    internal fun reviewVerifiedDuplicate() {
+        val items = actionEntries
+        if (items.isEmpty()) return
+        val parents = items.map { it.parentPath }.distinct()
+        val parent = parents.singleOrNull()
+        if (parent == null) {
+            message = "Select items from one folder, or copy and paste them into a chosen destination."
+            return
+        }
+        verifiedCopyReview = VerifiedCopyRequest(items.map { it.path }.distinct(), parent, ConflictPolicy.KEEP_BOTH)
+    }
+
+    internal fun dismissVerifiedCopy() { verifiedCopyReview = null }
+
+    internal fun confirmVerifiedCopy() {
+        val request = verifiedCopyReview ?: return
+        verifiedCopyReview = null
+        transferPaths(request.paths, request.destination, false, policy = request.policy, verifyCopies = true)
+    }
+
     fun paste(parent: String? = folderPath) {
         val clip = clipboard ?: return
         if (parent == null) return
@@ -4167,8 +4200,13 @@ constructor(
         move: Boolean,
         clearClipboard: Boolean = false,
         policy: ConflictPolicy = conflictPolicy,
+        verifyCopies: Boolean = false,
     ) {
         if (paths.isEmpty()) return
+        if (move && verifyCopies) {
+            message = "Optional verification is available for copies. Copy the selected files first."
+            return
+        }
         if (journalError != null) {
             message = journalError
             return
@@ -4179,6 +4217,7 @@ constructor(
                 destination = parent,
                 move = move,
                 conflictPolicy = policy,
+                verifyCopies = verifyCopies,
             )
         transferSubmissions[job.id] =
             TransferSubmission(
@@ -4346,6 +4385,7 @@ constructor(
                     parent,
                     job.move,
                     policy = ConflictPolicy.KEEP_BOTH,
+                    verifyCopies = job.verifyCopies,
                 )
             }
     }

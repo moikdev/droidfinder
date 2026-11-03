@@ -1,5 +1,22 @@
 # Android preview verification
 
+## Findroid 0.43.0 — verify important copies
+
+Local acceptance completed on November 4, 2026. Public OTA and immutable evidence acceptance are being completed; proposal 40 remains in progress.
+
+- **549 JVM checks pass**, with zero failures/errors/skips. Debug, native-test, optimized preview and unsigned release builds pass. App lint: **0 errors / 146 warnings / 12 hints**.
+- **426 identical native cases pass per API30/API36 tablet**, in **48 fresh-process batches each**, using the frozen app/test APK pair. The 27 focused cases include 17 copy-verification workflows and 10 SQLite migration/store checks. Ordinary and verified transfers display a provider filename that differs from its document ID, with **Source item** when no friendly title is cached.
+- The exact optimized preview passes **0.42/code44 → 0.43/code45** upgrades on both APIs. A real system picker connects a separate deterministic provider. Eight journal cases cover known and unknown-size 8 MiB copies, a nested 3 MiB folder with an empty subfolder, gated readback and pause/resume, same-length corruption, unreadable destination, cancellation during verification, and failed reviewed replacement with the prior destination restored. Failed or cancelled copies keep their sources and remove unpublished staging. Readback bytes do not inflate copied totals.
+- **18 layouts per API** cover review, paused and completed states at **600/800/1280dp × font1.0/1.6**. All **72 actual optimized PNGs** were inspected. The independent packager recomputes complete 48dp control bounds, reachable source/destination text and per-file status/hash visibility from retained XML. [Review](docs/screenshots/copy-verification-review.png) · [Readback](docs/screenshots/copy-verification-readback.png) · [Per-file hashes](docs/screenshots/copy-verification-results.png) · [Rejected corruption](docs/screenshots/copy-verification-failure.png).
+- Final acceptance restores **495 original managed files/API30 and 443/API36**, their recorded absences, prior provider APK/data, storage mode and its persisted pre-run URI-permission baseline, with no cleanup errors. Only owned synthetic documents and controls are removed. Private backups and full native browser screenshots are excluded from publication.
+- Preview: **8,586,415 bytes**, SHA-256 `1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9`. Code45, Android11+, with the same development signing certificate as public0.42.
+
+Rejected attempts remain excluded. Visual review found opaque provider IDs in transfer titles, which were corrected before the final app/test build. A later screenshot stopped above the per-file outcome; the checker now requires the text to be wholly inside the scroll viewport and rejects the retained old capture. Both APIs repeated optimized acceptance with unchanged APKs. API30 archive and recent-search failures passed as exact cases and then complete batches without app/test changes; no product fix is claimed for those retries. An unqualified root lint invocation also selected the unchanged interop fixture module and hit its existing WrongConstant error; the qualified app build passes.
+
+An earlier interrupted API36 run required a targeted emulator restart and private disk backup. All recorded original app/provider bytes were recovered. That interrupted controller had not persisted its original grant list or storage mode; its separate recovery receipt records this limitation. Final acceptance persists a private recovery baseline before mutation and verifies restoration against it. Emulator checks do not claim physical-device, screen-reader or third-party-provider acceptance.
+
+[Copy verification guide](docs/COPY-VERIFICATION.md) · [Release notes](docs/releases/0.43.0.md).
+
 ## Findroid 0.42.0 — clearer transfer progress
 
 Local and public OTA acceptance completed on November 3, 2026:

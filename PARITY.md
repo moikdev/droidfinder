@@ -56,6 +56,7 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Folder merge plans, nested conflicts, local/provider recovery and complete/partial move Undo/Redo.
 - [x] Transactional SQLite migration/checkpoints, per-member retry destinations and explicit ambiguity review.
 - [x] Cancellation-aware merge verification and source/destination content checks before cleanup.
+- [x] Reviewed optional SHA-256 copy verification, actual-byte readback and durable per-file outcomes, including nested and unknown-size sources. Failed unpublished work is cleaned up where possible; reviewed replacement rollback keeps the prior destination. See [copy verification](docs/COPY-VERIFICATION.md) for limits and current acceptance.
 
 ## Tablet controls and planning pass
 

@@ -184,7 +184,8 @@ fun TransferCenterDialog(
             title = { Text("Retry remaining items?") },
             text = {
                 Text(
-                    "Review the destination first. ${job.retryTargets.size} unfinished items can be retried in their original destination folders. Published, skipped, and ambiguous in-flight items are excluded. Retrying keeps both copies. Review partial moves and Trash before continuing.",
+                    "Review the destination first. ${job.retryTargets.size} unfinished items can be retried in their original destination folders. Published, skipped, and ambiguous in-flight items are excluded. Retrying keeps both copies. Review partial moves and Trash before continuing." +
+                        if (job.verifyCopies) " SHA-256 readback verification will be repeated." else "",
                 )
             },
             confirmButton = {
@@ -211,6 +212,7 @@ private fun TransferJobCard(
 ) {
     var expanded by remember(job.id) { mutableStateOf(false) }
     var visibleMembers by remember(job.id) { mutableIntStateOf(50) }
+    var visibleVerifications by remember(job.id) { mutableIntStateOf(20) }
     val active = job.id == model.activeTransferId
     val progress = model.transferProgress
     val paused = job.state == TransferState.PAUSED
@@ -218,12 +220,13 @@ private fun TransferJobCard(
     val destination =
         model.displayPath(job.destination).substringAfterLast(" / ").substringAfterLast('/')
     val singleName =
-        job.paths.singleOrNull()?.let {
-            android.net.Uri.decode(it.substringAfterLast('/')).substringAfterLast('/')
+        job.paths.singleOrNull()?.let { path ->
+            if (isDocumentPath(path)) model.documents.knownTitle(path) ?: "Source item"
+            else model.title(path)
         }
     val title =
         if (active && progress.current.isNotEmpty()) progress.current else singleName ?: job.title
-    Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 14.dp)) {
+    Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 14.dp).testTag("transfer-job-${job.id}")) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Box(
                 Modifier.size(34.dp)
@@ -320,6 +323,9 @@ private fun TransferJobCard(
                 color = Muted,
             )
         }
+        if (job.verifyCopies)
+            Text("Copy verification · ${copyVerificationSummary(job)}", Modifier.fillMaxWidth().padding(top = 8.dp),
+                fontSize = 12.sp, color = Ink)
         if (job.state == TransferState.INTERRUPTED)
             Text(
                 "Review the destination before retrying.",
@@ -409,6 +415,28 @@ private fun TransferJobCard(
                     "Results",
                     "${job.successful.size} completed · ${job.results.count { it.skipped }} skipped · ${job.results.count { it.error != null }} need attention",
                 )
+            }
+            TransferDetail("Verification", copyVerificationSummary(job))
+            if (job.verifications.isNotEmpty()) {
+                Text("Verification results", Modifier.padding(top = 12.dp), color = Ink, fontWeight = FontWeight.Medium)
+                job.verifications.take(visibleVerifications).forEach { result ->
+                    Column(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text(model.displayPath(result.source), color = Ink, fontSize = 12.sp)
+                        Text(when {
+                            result.status == CopyVerificationStatus.VERIFIED && result.destination == null -> "Verified, but this copy was not published"
+                            result.status == CopyVerificationStatus.VERIFIED -> "Verified and copied · ${formatSize(result.bytes)}"
+                            result.status == CopyVerificationStatus.SKIPPED -> "Skipped · original kept"
+                            else -> result.status.title + " · original kept"
+                        }, color = Muted, fontSize = 12.sp)
+                        result.error?.let { Text(it, color = Muted, fontSize = 12.sp) }
+                        result.expectedSha256?.let { Text("Source SHA-256: $it", color = Muted, fontSize = 11.sp) }
+                        result.actualSha256?.let { Text("Copy SHA-256: $it", color = Muted, fontSize = 11.sp) }
+                    }
+                }
+                if (job.verifications.size > visibleVerifications)
+                    TextButton(onClick = { visibleVerifications += 20 }, modifier = Modifier.heightIn(min = 48.dp)) {
+                        Text("Show more verification results ($visibleVerifications of ${job.verifications.size})")
+                    }
             }
             job.paths.forEach { source ->
                 val result = job.results.lastOrNull { it.source == source }

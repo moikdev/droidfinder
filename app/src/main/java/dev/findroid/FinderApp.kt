@@ -145,6 +145,7 @@ fun FinderApp(
             if (model.batchRename.visible) ReviewedRenameDialog(model, onOpenWith)
             if (model.organization.visible) OrganizationDialog(model)
             if (model.setup.visible) SetupDialog(model)
+            model.verifiedCopyReview?.let { VerifiedCopyReviewDialog(model, it) }
             if (workspaceModel.workspaceRecovery.visible) WorkspaceRecoveryDialog(workspaceModel, onConnectFolder)
             LaunchedEffect(model.storageRequested) {
                 if (model.storageRequested) {
@@ -237,11 +238,12 @@ fun FinderApp(
             LaunchedEffect(quickLook) {
                 if (quickLook == null && !searchActive && !addressActive) rootFocus.requestFocus()
             }
-            LaunchedEffect(dialog, cursorMenu, model.organization.visible) {
+            LaunchedEffect(dialog, cursorMenu, model.organization.visible, model.verifiedCopyReview) {
                 if (
                     dialog == null &&
                         cursorMenu == null &&
                         !model.organization.visible &&
+                        model.verifiedCopyReview == null &&
                         quickLook == null &&
                         !searchActive &&
                         !addressActive
@@ -278,6 +280,9 @@ fun FinderApp(
                     "copy" -> model.copySelection(false)
                     "cut" -> model.copySelection(true)
                     "paste" -> model.paste()
+                    "pasteVerified" -> model.reviewVerifiedPaste()
+                    "pasteIntoVerified" -> model.actionEntries.singleOrNull()?.takeIf { it.folder }?.let { model.reviewVerifiedPaste(it.path) }
+                    "duplicateVerified" -> model.reviewVerifiedDuplicate()
                     "pasteInto" -> model.actionEntries.singleOrNull()?.takeIf { it.folder }?.let { model.paste(it.path) }
                     "duplicate" -> model.duplicate()
                     "trash" -> model.trash()
@@ -435,7 +440,7 @@ fun FinderApp(
                     .windowInsetsPadding(WindowInsets.safeDrawing)
                     .focusRequester(rootFocus)
                     .onPreviewKeyEvent { event ->
-                        if (event.type != KeyEventType.KeyDown || dialog != null) false
+                        if (event.type != KeyEventType.KeyDown || dialog != null || model.verifiedCopyReview != null) false
                         else {
                             val editing = searchFocused || addressFocused
                             val shortcut =
@@ -1501,6 +1506,8 @@ internal fun ActionMenu(
         if (entries.isEmpty()) {
 
             CommandMenuAction(model, "paste", "Paste", Icons.Outlined.ContentPaste) { action("paste") }
+            if (model.clipboard?.cut == false)
+                CommandMenuAction(model, "pasteVerified", "Paste and verify…", Icons.Outlined.ContentPaste) { action("pasteVerified") }
             MenuAction("Select all", Icons.Outlined.SelectAll, model.entries.isNotEmpty()) {
                 model.selectAll()
                 onDismiss()
@@ -1565,6 +1572,7 @@ internal fun ActionMenu(
             CommandMenuAction(model, "cut", "Cut", Icons.Outlined.ContentCut) { action("cut") }
             CommandMenuAction(model, "batchRename", "Rename with rules…", Icons.Outlined.DriveFileRenameOutline) { action("batchRename") }
             CommandMenuAction(model, "duplicate", "Duplicate", Icons.Outlined.FileCopy) { action("duplicate") }
+            CommandMenuAction(model, "duplicateVerified", "Duplicate and verify…", Icons.Outlined.FileCopy) { action("duplicateVerified") }
             CommandMenuAction(model, "compress", "Compress", Icons.Outlined.FolderZip) { action("compress") }
             if (entries.size == 1 && entries.first().extension == "zip")
                 CommandMenuAction(model, "extract", "Extract archive", Icons.Outlined.Unarchive) { action("extract") }

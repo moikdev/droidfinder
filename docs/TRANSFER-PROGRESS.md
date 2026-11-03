@@ -1,6 +1,6 @@
 # Transfer progress
 
-Findroid explains what a transfer is doing in **Actions → Transfers**, the compact transfer strip, and its Android transfer notification. This update adds recent speed, estimates for the current phase, inspected-item counts during preparation, and specific messages when a storage call takes time.
+Findroid explains what a transfer is doing in **More → Transfers**, the compact transfer strip, and its Android transfer notification. This update adds recent speed, estimates for the current phase, inspected-item counts during preparation, and specific messages when a storage call takes time.
 
 ## Read the current phase
 
@@ -47,3 +47,5 @@ Original URI permissions and all 495/API30 and 443/API36 managed files and origi
 The final full regression passes 405 identical cases on each API, in 47 fresh-process batches per tablet with the exact same app/test APK pair. Final reports have zero failures or skips. The two rejected API36 attempts are retained: an existing archive-preview wait exceeded ten seconds, and an existing single-pane reconnect assertion ran before asynchronous refresh. Each exact case and its complete batch passed unchanged in fresh processes; no product fix is claimed.
 
 Both immutable original private states and absences are restored exactly, and the three owned full-suite screenshots per tablet are retained privately and removed from shared storage. Independent local acceptance passes. Real public-feed 0.41 → 0.42 download and Android installation pass on both tablets, with exact public bytes, preserved synthetic file/Favorite/preference and no repeat offer. API36’s production-source check also passes 1/1. Both tablets finish with font 1.0, exact original metadata/databases/cache/absences and the public APK. The retained Android11 relaunch race is corrected in the host checker by waiting for installer completion. The immutable validation archive passes anonymous-download, all-entry, public-source and recomputed test-total checks. Proposal 39 is implemented; see [the validation record](../VALIDATION.md) for the fixed digest and evidence commit.
+
+For an important copy, choose the reviewed [copy verification](COPY-VERIFICATION.md) actions. The verification phase reads the unfinished destination back; its checked bytes remain separate from the copied-byte total.

@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.42.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.43.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.42.0 release](https://github.com/moikdev/findroid/releases/tag/v0.42.0-preview) and download **`Findroid-0.42.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.43.0 release](https://github.com/moikdev/findroid/releases/tag/v0.43.0-preview) and download **`Findroid-0.43.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -178,6 +178,8 @@ The small details here matter. A filename collision offers **keep both, skip, re
 
 Transfers have a queue with progress, pause, cancellation, and per-file results. Recent speed and time remaining describe the current phase, so copying and verification stay clear. If storage takes time to respond, the progress view explains what it is waiting for. Enlarged text and narrow panes put the named controls below the progress text. [Transfer progress](docs/TRANSFER-PROGRESS.md).
 
+For an important copy, choose **Paste and verify…** or **Duplicate and verify…**, review the sources and destination, then choose **Copy and verify**. Findroid reads the unfinished copy back and checks its SHA-256 and byte count before making it available. **More → Transfers → Details** keeps the results and explains mismatches, read failures and incomplete work. Your source stays in place. [Copy verification](docs/COPY-VERIFICATION.md).
+
 Trash gives you a way back, and many operations support Undo during the current session. Interrupted transfers offer a review when you return to the app. [Transfers](docs/TRANSFER-CENTER.md) · [Batch rename](docs/RENAMING.md).
 
 ![A transfer showing recent speed, the amount copied, and time remaining in the current phase](docs/screenshots/transfer-recent-rate.png)
@@ -274,4 +276,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, nested search rules, optional local search snapshots, and per-document action explanations have shipped in verified increments. **29 of 72 are implemented; 43 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, nested search rules, optional local search snapshots, and per-document action explanations have shipped in verified increments. **30 of 72 are implemented; 42 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).

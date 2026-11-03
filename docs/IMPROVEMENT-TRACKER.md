@@ -43,7 +43,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 37 | Run independent transfers concurrently | Open. Implementation and focused acceptance pending. |
 | 38 | Strengthen background transfers | Open. Implementation and focused acceptance pending. |
 | 39 | Improve throughput and time estimates | Implemented in 0.42.0: 525 JVM checks, 405 matching native cases per API30/API36 tablet in 47 fresh-process batches, optimized upgrade/copy/wait/recovery/pause/cancellation/layout acceptance, real public OTA on both and independently verified immutable evidence. See [transfer progress](TRANSFER-PROGRESS.md). |
-| 40 | Offer optional verification for important copies | Open. Implementation and focused acceptance pending. |
+| 40 | Offer optional verification for important copies | In progress for 0.43.0: reviewed Paste/Duplicate actions, staged SHA-256 readback, durable per-file results and retry choice. All 549 JVM checks and 27 focused native cases per API pass with the revised provider-filename label. All 426 matching native cases per API pass in 48 fresh-process batches. Eight optimized copy scenarios and 18 layouts per API pass; all 72 actual PNGs were inspected. Public OTA and immutable evidence acceptance are being completed. See [copy verification](COPY-VERIFICATION.md). |
 | 41 | Support durable partial-copy resume where safe | Open. Implementation and focused acceptance pending. |
 | 42 | Make Undo survive restarts | Open. Implementation and focused acceptance pending. |
 | 43 | Add reviewed folder synchronization | Open. Implementation and focused acceptance pending. |

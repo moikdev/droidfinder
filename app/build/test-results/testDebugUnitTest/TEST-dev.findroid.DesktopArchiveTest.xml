@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.DesktopArchiveTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-03T11:47:17.906Z" hostname="MacBook-Pro-2.local" time="0.049">
+<testsuite name="dev.findroid.DesktopArchiveTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-03T16:28:49.735Z" hostname="MacBook-Pro-2.local" time="0.046">
   <properties/>
-  <testcase name="namedCompressionKeepsSourceAndAvoidsOverwrites" classname="dev.findroid.DesktopArchiveTest" time="0.004"/>
-  <testcase name="timestampsSurviveRoundTrip" classname="dev.findroid.DesktopArchiveTest" time="0.005"/>
-  <testcase name="dottedFolderNameIsPreserved" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
-  <testcase name="browserInfersFoldersWithoutInflatingFiles" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
+  <testcase name="namedCompressionKeepsSourceAndAvoidsOverwrites" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
+  <testcase name="timestampsSurviveRoundTrip" classname="dev.findroid.DesktopArchiveTest" time="0.004"/>
+  <testcase name="dottedFolderNameIsPreserved" classname="dev.findroid.DesktopArchiveTest" time="0.002"/>
+  <testcase name="browserInfersFoldersWithoutInflatingFiles" classname="dev.findroid.DesktopArchiveTest" time="0.002"/>
   <testcase name="invalidAndUnsafeArchivesLeaveNoOutput" classname="dev.findroid.DesktopArchiveTest" time="0.007"/>
   <testcase name="emptyZipIsValidAndInvalidNamesAreRejected" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
   <testcase name="compressionLevelsProduceReadableArchives" classname="dev.findroid.DesktopArchiveTest" time="0.021"/>

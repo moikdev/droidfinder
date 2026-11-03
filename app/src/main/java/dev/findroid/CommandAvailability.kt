@@ -46,6 +46,13 @@ private val createCommands = setOf("new", "newText", "paste", "groupSelection")
 private val removeCommands = setOf("cut", "moveTo", "moveOtherPane", "trash", "delete", "groupSelection")
 
 internal fun commandProblem(command: String, context: CommandContext): CommandProblem? {
+    val original = when (command) {
+        "pasteVerified" -> "paste"
+        "pasteIntoVerified" -> "pasteInto"
+        "duplicateVerified" -> "duplicate"
+        else -> command
+    }
+    if (original != command) return commandProblem(original, context)
     fun problem(reason: String, recovery: CommandRecovery? = null) = CommandProblem(reason, recovery)
     if (command == "undo" && !context.undo) return problem("There is no action to undo in this session.")
     if (command == "redo" && !context.redo) return problem("There is no action to redo in this session.")
@@ -82,6 +89,12 @@ internal fun commandProblem(command: String, context: CommandContext): CommandPr
 }
 
 internal fun FinderModel.commandProblem(command: String): CommandProblem? {
+    val command = when (command) {
+        "pasteVerified" -> "paste"
+        "pasteIntoVerified" -> "pasteInto"
+        "duplicateVerified" -> "duplicate"
+        else -> command
+    }
     val entries = actionEntries
     val roots = if (command in setOf("rename", "batchRename") || command in removeCommands)
         connectedLocations.map { it.uri }.toSet() else emptySet()
@@ -113,6 +126,7 @@ internal fun FinderModel.commandProblem(command: String): CommandProblem? {
 internal fun commandTitle(command: String): String = when (command) {
     "new" -> "New folder"; "newText" -> "New text file"; "rename", "batchRename" -> "Rename"
     "copy", "copyTo", "copyOtherPane" -> "Copy"; "cut" -> "Cut"; "paste", "pasteInto" -> "Paste"
+    "pasteVerified", "pasteIntoVerified" -> "Paste and verify"; "duplicateVerified" -> "Duplicate and verify"
     "moveTo", "moveOtherPane" -> "Move"; "trash" -> "Move to Trash"; "restore" -> "Restore"
     "delete" -> "Delete permanently"; "empty" -> "Empty Trash"; "duplicate" -> "Duplicate"
     "compress" -> "Compress"; "extract", "extractHere", "extractTo" -> "Extract"; "groupSelection" -> "New folder with selection"
