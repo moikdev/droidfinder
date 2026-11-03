@@ -15,6 +15,8 @@ Clean application/native source: `9aa5b76dcbe2c31ef824bd3279cac89495b404e2`. Pre
 
 Published [0.39.0-preview](https://github.com/moikdev/findroid/releases/tag/v0.39.0-preview). All five original assets match anonymous downloads and GitHub digests. Real public-feed **0.38.1 → 0.39.0** downloads and Android installation pass on both tablets, preserving original synthetic bytes, Favorites and an unrelated preference and offering no repeat update. API36's production-source check passes **1/1**. Both tablets finish with exact private original metadata/preferences, font scale 1.0 and the exact public APK. Physical/OEM/provider, screen-reader, removable-drive and real third-party receiver acceptance remain separately tracked.
 
+Immutable [validation ZIP](https://github.com/moikdev/findroid/releases/download/v0.39.0-preview/Findroid-0.39.0-validation.zip) independently downloaded and verified entry by entry: **28,258,911 bytes**, **1,449 entries**, SHA-256 `331db7ce17d3cbcfa13bc5acaa56e9476f9eaa37adcd0b695ae204b0f09055f8`. Its evidence snapshot is `18c729deac06b3df8372c16af305fae1ad4f6466`; application and native-test source are `9aa5b76dcbe2c31ef824bd3279cac89495b404e2`. The archive is never overwritten.
+
 Proposal **25** is implemented: **26/72**, **46 open or partial**. Actions remains manual-only. Private originals, document payloads, credentials, signing keys and full bugreports are excluded from published evidence.
 
 ## Findroid 0.38.1 — search across chosen folders
