@@ -110,6 +110,11 @@ class FinderSession(
 
     val transferSubmissions = mutableMapOf<String, TransferSubmission>()
 
+    internal val partialCopyApprovals = mutableMapOf<String, PartialCopyReview>()
+    internal val partialCopyReview = mutableStateOf<PartialCopyReviewState?>(null)
+    internal var partialCopyReviewJob: kotlinx.coroutines.Job? = null
+    internal var partialCopyReviewControl: TransferControl? = null
+
     val fileConflict = mutableStateOf<FileConflict?>(null)
 
     @Volatile var conflictAnswer: CompletableDeferred<ConflictDecision>? = null

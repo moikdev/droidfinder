@@ -34,10 +34,11 @@ class SqliteTransferStoreTest {
 
     private fun restoreOldSchema(name: String, version: Int) {
         connection(name).use { db ->
-            db.execSQL("DROP TABLE copy_verifications")
+            if (version < 3) db.execSQL("DROP TABLE copy_verifications")
             if (version == 1) db.execSQL("DROP TABLE estimates")
-            val columns = "id,position,destination,move,state,bytes,items,current,created,started,finished,in_flight,policy"
+            val columns = "id,position,destination,move,state,bytes,items,current,created,started,finished,in_flight,policy" + if (version >= 3) ",verify_copies" else ""
             db.execSQL("CREATE TABLE legacy_jobs (id TEXT PRIMARY KEY, position INTEGER NOT NULL, destination TEXT NOT NULL, move INTEGER NOT NULL, state TEXT NOT NULL, bytes INTEGER NOT NULL, items INTEGER NOT NULL, current TEXT NOT NULL, created INTEGER NOT NULL, started INTEGER NOT NULL, finished INTEGER NOT NULL, in_flight TEXT, policy TEXT NOT NULL)")
+            if (version >= 3) db.execSQL("ALTER TABLE legacy_jobs ADD COLUMN verify_copies INTEGER NOT NULL DEFAULT 0")
             db.execSQL("INSERT INTO legacy_jobs ($columns) SELECT $columns FROM jobs")
             db.execSQL("DROP TABLE jobs")
             db.execSQL("ALTER TABLE legacy_jobs RENAME TO jobs")
@@ -247,7 +248,7 @@ class SqliteTransferStoreTest {
             assertFalse(upgraded.load().single().verifyCopies)
             assertEquals("Not requested", copyVerificationSummary(upgraded.load().single()))
         }
-        connection(name).use { assertEquals(3, it.version) }
+        connection(name).use { assertEquals(4, it.version) }
     }
 
     @Test fun roundTripsVerificationChoiceAndIndividualResultsWithoutRewritingUnchangedRows() = exercise { store, name, legacy ->
@@ -292,6 +293,53 @@ class SqliteTransferStoreTest {
                 bytes = 3, error = "Readback denied")))
         TransferJournal(legacy).save(listOf(job)); val original = legacy.readBytes()
         assertEquals(listOf(job), store.load()); assertArrayEquals(original, legacy.readBytes())
+    }
+
+
+    private fun partialRecord(): PartialCopyRecord {
+        val owner = java.util.UUID.randomUUID().toString()
+        val file = PartialFileStamp(17, 9_007_199_254_740_993L, 8, 1, 123_456_789, 2, 987_654_321, true, false, 1)
+        val folder = file.copy(inode = file.inode + 1, size = 4096, regular = false, directory = true)
+        return PartialCopyRecord(owner, "/source/original.bin", "/out/copy.bin", "/private/$owner/data", file, folder,
+            folder.copy(inode = folder.inode + 1), file.copy(inode = file.inode + 3, size = 3), 3, "a".repeat(64), true)
+    }
+
+    @Test fun upgradesVersionThreeWhileKeepingVerificationRowsAndOldCopiesUnresumable() = exercise { store, name, legacy ->
+        val verification = CopyVerificationResult("/source", "/source", CopyVerificationStatus.VERIFIED, "/out/source", 3, "a".repeat(64), "a".repeat(64))
+        val old = TransferJob(paths = listOf("/source"), destination = "/out", move = false,
+            state = TransferState.COMPLETED, verifyCopies = true, verifications = listOf(verification),
+            estimate = TransferEstimate(3, 1, 0), availableAtStart = 123)
+        store.save(listOf(old)); store.close(); restoreOldSchema(name, 3)
+        SqliteTransferStore(context, name, legacy).use { upgraded ->
+            assertEquals(listOf(old), upgraded.load()); assertNull(upgraded.load().single().partialCopy)
+            assertEquals(0L, upgraded.load().single().reusedBytes)
+        }
+        connection(name).use { assertEquals(4, it.version) }
+    }
+
+    @Test fun exactNativeCheckpointIdentitiesRoundTripAndRejectDuplicateOwners() = exercise { store, _, _ ->
+        val record = partialRecord()
+        val job = TransferJob(paths = listOf(record.source), destination = "/out", move = false, verifyCopies = true,
+            partialCopy = record, reusedBytes = 3, partialCopyNotice = "Reviewed saved bytes")
+        store.save(listOf(job)); assertEquals(listOf(job), store.load())
+        assertTrue(runCatching { store.save(listOf(job, job.copy(id = java.util.UUID.randomUUID().toString()))) }.isFailure)
+        assertEquals(listOf(job), store.load())
+    }
+
+    @Test fun stageOwnershipTransferIsAtomicWhenAJournalInsertFails() = exercise { store, name, _ ->
+        val record = partialRecord()
+        val old = TransferJob(paths = listOf(record.source), destination = "/out", move = false, verifyCopies = true,
+            state = TransferState.INTERRUPTED, partialCopy = record, inFlight = record.source)
+        store.save(listOf(old))
+        val plan = planPartialCopyResume(listOf(old), old.id, PartialCopyReview(record, "b".repeat(64), record.stagingStamp))
+        connection(name).use { db ->
+            db.execSQL("CREATE TRIGGER reject_new_partial BEFORE INSERT ON jobs WHEN NEW.id != '${old.id}' BEGIN SELECT RAISE(ABORT, 'Injected ownership transfer failure'); END")
+            assertTrue(runCatching { store.save(plan.jobs) }.isFailure)
+            assertEquals(listOf(old), store.load())
+            db.execSQL("DROP TRIGGER reject_new_partial")
+        }
+        store.save(plan.jobs); assertEquals(plan.jobs, store.load())
+        assertEquals(1, store.load().count { it.partialCopy != null })
     }
 
 }

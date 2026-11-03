@@ -11,3 +11,5 @@ captures/
 
 __pycache__/
 *.pyc
+
+**/.cxx/

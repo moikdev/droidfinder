@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SearchOptionsTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-03T16:28:52.070Z" hostname="MacBook-Pro-2.local" time="0.008">
+<testsuite name="dev.findroid.SearchOptionsTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:44.096Z" hostname="MacBook-Pro-2.local" time="0.007">
   <properties/>
-  <testcase name="weeksFollowLocaleAndMonthsFollowCalendarIncludingYearBoundary" classname="dev.findroid.SearchOptionsTest" time="0.004"/>
+  <testcase name="weeksFollowLocaleAndMonthsFollowCalendarIncludingYearBoundary" classname="dev.findroid.SearchOptionsTest" time="0.003"/>
   <testcase name="expertSizeEditingRoundTripsEveryWholeByteWithoutRounding" classname="dev.findroid.SearchOptionsTest" time="0.001"/>
   <testcase name="calendarDaysUseZoneBoundariesAndDstInsteadOfRollingHours" classname="dev.findroid.SearchOptionsTest" time="0.002"/>
   <testcase name="savedCalendarChoicesReevaluateButLegacyDaysKeepRollingMeaning" classname="dev.findroid.SearchOptionsTest" time="0.0"/>

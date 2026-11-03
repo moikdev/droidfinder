@@ -1,5 +1,20 @@
 # Android preview verification
 
+## Findroid 0.44.0 — resume saved copies (local acceptance)
+
+Local acceptance is complete for the 0.44.0/code46 candidate. The current public release is still 0.43.0; public OTA and immutable-archive acceptance follow publication.
+
+- **613 JVM cases pass**, with zero failures/errors/skips. Debug, native-test, optimized preview and unsigned release builds pass. Lint: **0 errors / 146 warnings / 12 hints**.
+- **455 identical native cases pass per API30/API36 tablet**, in **50 fresh-process batches each**, using the exact same frozen app/test APK pair. The **39 focused cases per API** cover 18 real descriptor/publication checks, 8 workflow checks and 13 SQLite checks, including schema 3→4 migration and ownership-transaction rollback.
+- Both exact optimized builds pass direct **0.43/code45 → 0.44/code46** upgrades and actual process death during a **512 MiB** verified copy. API30 retains a **12 MiB checkpoint with 4 MiB unchecked tail**; API36 retains a **36 MiB checkpoint with 1.875 MiB unchecked tail**. Reopen and cancelled review start no copy. Manual resume verifies the complete output, reuses the checked prefix, recopies the tail, separates reused bytes from new writes, keeps the old history and removes the owned private stage.
+- **18 layouts pass per API**: 1280×800, 800×1280 and 600×800 dp, fonts 1.0/1.5/2.0, light/dark. All **90 named recovery-control captures per API** independently prove enabled, complete targets of at least 48 dp. All **198 accepted focused/optimized captures** are covered by actual visual inspection, grouping only pixel-identical dialog content.
+- Private staging stays outside Workspace. A small native bridge uses `renameat2(RENAME_NOREPLACE)` and never falls back to replacing an existing destination. Capability probes run before copying source bytes. All **four ABIs** pass **16 KiB** library-segment/alignment checks, ZIP alignment and preview signature verification. Both tablets keep SELinux Enforcing and the preview retains the 0.43 signing certificate.
+- Each optimized checker restores the original **495/API30 and 443/API36 managed files**, their recorded absences, URI grants, storage mode, font/display settings and exact optimized APK. Only owned synthetic test documents are removed. Two rejected API30 host-controller attempts are excluded from accepted totals; both restored original state.
+
+The first increment supports individual local regular files **≥8 MiB**, checkpointed every **4 MiB**, into storage sharing the private stage filesystem and passing no-replace rename/directory-sync probes. Workspace is the intended destination. Providers, folders, moves, replacements and unsupported storage retain restart behavior. Physical/OEM, removable-drive and third-party provider acceptance remain separate.
+
+Preview SHA-256: `d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2`. The exact APKs, reports and mapping are frozen in `captures/partial-copy-resume/accepted-build/`. Proposal 41 remains in progress until publication, real public OTA and independent archive verification pass. [Recovery guide](docs/PARTIAL-COPY-RESUME.md) · [Release notes](docs/releases/0.44.0.md).
+
 ## Findroid 0.43.0 — verify important copies
 
 Local and real public OTA acceptance completed on November 4, 2026. Immutable public evidence acceptance also passes; proposal 40 is implemented.

@@ -157,6 +157,7 @@ fun TransferCenterDialog(
             }
         }
     }
+    PartialCopyReviewDialog(model, onDismiss)
     if (resetJournal)
         AlertDialog(
             onDismissRequest = { resetJournal = false },
@@ -323,6 +324,16 @@ private fun TransferJobCard(
                 color = Muted,
             )
         }
+        job.partialCopy?.let { saved ->
+            Text("Saved checkpoint · ${formatSize(saved.offset)} of ${formatSize(saved.sourceStamp.size)}",
+                Modifier.fillMaxWidth().padding(top = 8.dp), fontSize = 12.sp, color = Ink)
+            if (job.terminal)
+                TextButton(onClick = { model.reviewSavedCopy(job.id) }, modifier = Modifier.heightIn(min = 48.dp)
+                    .testTag("review-saved-copy-${job.id}")) { Text("Review saved copy…") }
+        }
+        if (job.reusedBytes > 0)
+            Text("${formatSize(job.reusedBytes)} of checked saved bytes reused · ${formatSize(job.bytes)} newly copied",
+                Modifier.fillMaxWidth().padding(top = 8.dp), fontSize = 12.sp, color = Muted)
         if (job.verifyCopies)
             Text("Copy verification · ${copyVerificationSummary(job)}", Modifier.fillMaxWidth().padding(top = 8.dp),
                 fontSize = 12.sp, color = Ink)
@@ -392,6 +403,7 @@ private fun TransferJobCard(
                         if (job.paths.size > 1) " + ${job.paths.size - 1} more" else "",
                 )
                 TransferDetail("To", model.displayPath(job.destination))
+                job.partialCopyNotice?.let { TransferDetail("Recovery", it) }
                 job.estimate?.let { estimate ->
                     TransferDetail("Contents", estimate.description())
                     if (!estimate.complete)

@@ -80,8 +80,12 @@ def main():
             if path.startswith('app/src/') or path in {'app/build.gradle.kts','build.gradle.kts','settings.gradle.kts','gradle.properties'}:
                 assert application_tree.get(path)==git_blob(payload),('Archived source bytes differ',path)
         sources = {path for path in application_tree if path.startswith('app/src/') and
-                   (path.endswith('.kt') or path.startswith('app/src/main/') and path.endswith('.xml'))}
-        assert sources.issubset(rows),'Archived Kotlin/XML source is incomplete'
+                   (path.endswith('.kt') or path.startswith('app/src/main/') and path.endswith('.xml') or
+                    path.startswith('app/src/main/cpp/') and (path.endswith(('.c','.h')) or path.endswith('/CMakeLists.txt')))}
+        assert sources.issubset(rows),'Archived Kotlin/XML/native source is incomplete'
+        if any(path.startswith('app/src/main/cpp/') for path in sources):
+            assert 'app/proguard-rules.pro' in rows
+            assert application_tree['app/proguard-rules.pro']==git_blob(archive.read('app/proguard-rules.pro'))
         assert archive.read('captures/release/'+version+'/BUILDINFO.json')==info_bytes
         assert manifest['applicationSourceCommit']==info['source_commit']
         assert manifest['previewApkSha256']==info['artifacts'][0]['sha256']

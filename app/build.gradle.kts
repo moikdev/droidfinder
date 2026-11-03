@@ -6,14 +6,22 @@ plugins {
 android {
     namespace = "dev.findroid"
     compileSdk = 36
+    ndkVersion = "27.1.12297006"
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
     defaultConfig {
         applicationId = "dev.findroid"
         minSdk = 30
         targetSdk = 36
-        versionCode = 45
-        versionName = "0.43.0"
+        versionCode = 46
+        versionName = "0.44.0"
         buildConfigField("String", "UPDATE_REPOSITORY", "\"moikdev/findroid\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild { cmake { arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON" } }
     }
     buildFeatures {
         compose = true

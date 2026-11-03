@@ -29,7 +29,7 @@ class SqliteTransferStore(
                     this.context,
                     name,
                     null,
-                    3,
+                    4,
                     DatabaseErrorHandler {
                         // Android's default handler deletes corrupt databases. Preserve them for
                         // explicit recovery.
@@ -46,7 +46,7 @@ class SqliteTransferStore(
                 override fun onCreate(db: SQLiteDatabase) {
                     db.execSQL("CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)")
                     db.execSQL(
-                        "CREATE TABLE jobs (id TEXT PRIMARY KEY, position INTEGER NOT NULL, destination TEXT NOT NULL, move INTEGER NOT NULL, state TEXT NOT NULL, bytes INTEGER NOT NULL, items INTEGER NOT NULL, current TEXT NOT NULL, created INTEGER NOT NULL, started INTEGER NOT NULL, finished INTEGER NOT NULL, in_flight TEXT, policy TEXT NOT NULL, verify_copies INTEGER NOT NULL DEFAULT 0)",
+                        "CREATE TABLE jobs (id TEXT PRIMARY KEY, position INTEGER NOT NULL, destination TEXT NOT NULL, move INTEGER NOT NULL, state TEXT NOT NULL, bytes INTEGER NOT NULL, items INTEGER NOT NULL, current TEXT NOT NULL, created INTEGER NOT NULL, started INTEGER NOT NULL, finished INTEGER NOT NULL, in_flight TEXT, policy TEXT NOT NULL, verify_copies INTEGER NOT NULL DEFAULT 0, partial_copy TEXT, reused_bytes INTEGER NOT NULL DEFAULT 0, partial_copy_notice TEXT)",
                     )
                     db.execSQL(
                         "CREATE TABLE sources (job_id TEXT NOT NULL REFERENCES jobs(id) ON DELETE CASCADE, position INTEGER NOT NULL, path TEXT NOT NULL, PRIMARY KEY(job_id,position))",
@@ -66,12 +66,17 @@ class SqliteTransferStore(
                 }
 
                 override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-                    check(oldVersion in 1..2 && newVersion == 3) {
+                    check(oldVersion in 1..3 && newVersion == 4) {
                         "Unsupported transfer database upgrade: $oldVersion to $newVersion. Database kept."
                     }
                     if (oldVersion < 2) createEstimates(db)
-                    db.execSQL("ALTER TABLE jobs ADD COLUMN verify_copies INTEGER NOT NULL DEFAULT 0")
-                    createVerifications(db)
+                    if (oldVersion < 3) {
+                        db.execSQL("ALTER TABLE jobs ADD COLUMN verify_copies INTEGER NOT NULL DEFAULT 0")
+                        createVerifications(db)
+                    }
+                    db.execSQL("ALTER TABLE jobs ADD COLUMN partial_copy TEXT")
+                    db.execSQL("ALTER TABLE jobs ADD COLUMN reused_bytes INTEGER NOT NULL DEFAULT 0")
+                    db.execSQL("ALTER TABLE jobs ADD COLUMN partial_copy_notice TEXT")
                 }
             }
             .apply { setWriteAheadLoggingEnabled(true) }
@@ -100,6 +105,7 @@ class SqliteTransferStore(
     }
 
     private fun validate(jobs: List<TransferJob>) {
+        validatePartialCopyJobs(jobs)
         require(jobs.map { it.id }.distinct().size == jobs.size) { "Duplicate transfer ids." }
         jobs.forEach { job ->
             validateCopyVerification(job)
@@ -220,6 +226,9 @@ class SqliteTransferStore(
             "in_flight" to job.inFlight,
             "policy" to job.conflictPolicy.name,
             "verify_copies" to job.verifyCopies,
+            "partial_copy" to job.partialCopy?.let(::encodePartialCopy),
+            "reused_bytes" to job.reusedBytes,
+            "partial_copy_notice" to job.partialCopyNotice,
         )
 
     private fun write(db: SQLiteDatabase, jobs: List<TransferJob>, before: List<TransferJob>) {
@@ -443,6 +452,9 @@ class SqliteTransferStore(
                 inFlight = row.optional("in_flight"),
                 conflictPolicy = ConflictPolicy.valueOf(row.string("policy")),
                 verifyCopies = row.int("verify_copies") == 1,
+                partialCopy = row.optional("partial_copy")?.let(::decodePartialCopy),
+                reusedBytes = row.long("reused_bytes"),
+                partialCopyNotice = row.optional("partial_copy_notice"),
                 verifications = query(db, "copy_verifications", "job_id=?", arrayOf(id)) {
                     CopyVerificationResult(
                         root = it.string("root"), source = it.string("source"),

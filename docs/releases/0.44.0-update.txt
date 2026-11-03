@@ -1,0 +1,1 @@
+Review and resume saved large local copies in Transfers. Check saved bytes, keep existing destinations, and discard private working data with a separate confirmation. Recovery starts with supported local files and Workspace destinations; connected storage, folders and moves keep their existing restart behavior.

@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.22.1)
+project(findroid_files C)
+add_library(findroid_files SHARED file_publication.c)
+set_target_properties(findroid_files PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED YES)
+target_compile_options(findroid_files PRIVATE -Wall -Wextra -Werror -fstack-protector-strong)
+target_link_options(findroid_files PRIVATE -Wl,-z,max-page-size=16384)

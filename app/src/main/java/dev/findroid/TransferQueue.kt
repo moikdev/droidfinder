@@ -46,6 +46,9 @@ data class TransferJob(
     val availableAtStart: Long? = null,
     val verifyCopies: Boolean = false,
     val verifications: List<CopyVerificationResult> = emptyList(),
+    val partialCopy: PartialCopyRecord? = null,
+    val reusedBytes: Long = 0,
+    val partialCopyNotice: String? = null,
 ) {
     val title
         get() =
@@ -63,7 +66,7 @@ data class TransferJob(
     val retryTargets: List<TransferRetryTarget>
         get() = buildList {
             remaining
-                .filter { root -> mergePlans.none { it.source == root } && root != inFlight }
+                .filter { root -> mergePlans.none { it.source == root } && root != inFlight && root != partialCopy?.source }
                 .forEach { add(TransferRetryTarget(it, destination)) }
             mergePlans.forEach { plan ->
                 plan.members
@@ -129,6 +132,9 @@ class TransferJournal(private val file: File) : TransferStore {
                 inFlight = get("inFlight").ifBlank { null },
                 conflictPolicy = ConflictPolicy.valueOf(p.getProperty("$i.conflictPolicy", "ASK")),
                 verifyCopies = p.getProperty("$i.verifyCopies", "false").toBooleanStrict(),
+                partialCopy = p.getProperty("$i.partialCopy")?.takeIf { it.isNotBlank() }?.let(::decodePartialCopy),
+                reusedBytes = p.getProperty("$i.reusedBytes", "0").toLong(),
+                partialCopyNotice = p.getProperty("$i.partialCopyNotice")?.ifBlank { null },
                 verifications = (0 until p.getProperty("$i.verifications", "0").toInt().also {
                     require(it in 0..MAX_COPY_VERIFICATION_RESULTS)
                 }).map { n ->
@@ -151,8 +157,8 @@ class TransferJournal(private val file: File) : TransferStore {
                             p.getProperty("$i.result.$n.skipped", "false").toBooleanStrict(),
                         )
                     },
-            ).also(::validateCopyVerification)
-        }
+            ).also { validateCopyVerification(it); validatePartialCopyJob(it) }
+        }.also(::validatePartialCopyJobs)
     }
 
     @Synchronized
@@ -169,6 +175,7 @@ class TransferJournal(private val file: File) : TransferStore {
     @Synchronized
     override fun save(jobs: List<TransferJob>) {
         jobs.forEach(::validateCopyVerification)
+        validatePartialCopyJobs(jobs)
         require(
             jobs.all {
                 it.mergePlans.isEmpty() && it.estimate == null && it.availableAtStart == null
@@ -198,6 +205,9 @@ class TransferJournal(private val file: File) : TransferStore {
             put("inFlight", job.inFlight)
             put("conflictPolicy", job.conflictPolicy.name)
             put("verifyCopies", job.verifyCopies)
+            put("partialCopy", job.partialCopy?.let(::encodePartialCopy))
+            put("reusedBytes", job.reusedBytes)
+            put("partialCopyNotice", job.partialCopyNotice)
             put("verifications", job.verifications.size)
             job.verifications.forEachIndexed { n, result ->
                 put("verification.$n.root", result.root)

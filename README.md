@@ -243,7 +243,7 @@ The preview uses a development signing key. Production signing and wider physica
 
 ## Build and contribute
 
-You need **JDK 17**, **Android SDK 36**, and an Android 11+ device or emulator. Open the project in Android Studio, or build the installable preview from a terminal:
+You need **JDK 17**, **Android SDK 36**, **NDK 27.1.12297006**, **CMake 3.22.1**, and an Android 11+ device or emulator. The native build tools provide the atomic no-replace file publication used by the developing 0.44 recovery feature. Open the project in Android Studio, or build the installable preview from a terminal:
 
 ```sh
 ./gradlew :app:assemblePreview

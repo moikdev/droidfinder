@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.TransferProgressTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-03T16:28:52.539Z" hostname="MacBook-Pro-2.local" time="0.008">
+<testsuite name="dev.findroid.TransferProgressTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:44.669Z" hostname="MacBook-Pro-2.local" time="0.031">
   <properties/>
   <testcase name="recoveryFromALongReadWarmsUpAgainWithoutInventingABurst" classname="dev.findroid.TransferProgressTest" time="0.0"/>
   <testcase name="recentRateAdaptsToFasterAndSlowerStorageInsteadOfKeepingTheLifetimeAverage" classname="dev.findroid.TransferProgressTest" time="0.0"/>
-  <testcase name="longProviderReadReportsItsActualWaitAndLeavesTheOriginalBytesIntact" classname="dev.findroid.TransferProgressTest" time="0.0"/>
+  <testcase name="longProviderReadReportsItsActualWaitAndLeavesTheOriginalBytesIntact" classname="dev.findroid.TransferProgressTest" time="0.016"/>
   <testcase name="preparationReportsInspectedItemsWithoutClaimingCopiedDataOrAnEta" classname="dev.findroid.TransferProgressTest" time="0.001"/>
   <testcase name="anUnansweredRequestDoesNotBecomeAClaimThatTheTransferHasFailed" classname="dev.findroid.TransferProgressTest" time="0.0"/>
   <testcase name="storageWaitScopesRestoreTheirParentAndClearOnFailure" classname="dev.findroid.TransferProgressTest" time="0.001"/>
   <testcase name="verificationHasSeparateByteCountsAndDoesNotInflateTransferredTotals" classname="dev.findroid.TransferProgressTest" time="0.0"/>
   <testcase name="pausedTimeDoesNotDiluteTheRecentWindowOrAddCopiedBytes" classname="dev.findroid.TransferProgressTest" time="0.0"/>
   <testcase name="timeEstimatesNameTheirPhaseAndDoNotOverflowForHugeKnownFiles" classname="dev.findroid.TransferProgressTest" time="0.0"/>
-  <testcase name="aBlockedLocalWriteIsDescribedAsTheDestinationAndNotAProvider" classname="dev.findroid.TransferProgressTest" time="0.0"/>
+  <testcase name="aBlockedLocalWriteIsDescribedAsTheDestinationAndNotAProvider" classname="dev.findroid.TransferProgressTest" time="0.001"/>
   <testcase name="rateNeedsAnObservationWindowAndExpiresWithoutNewBytes" classname="dev.findroid.TransferProgressTest" time="0.0"/>
-  <testcase name="recentRateRetainsBoundedHistoryDuringDenseLongCopies" classname="dev.findroid.TransferProgressTest" time="0.006"/>
+  <testcase name="recentRateRetainsBoundedHistoryDuringDenseLongCopies" classname="dev.findroid.TransferProgressTest" time="0.012"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

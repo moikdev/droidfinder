@@ -9,3 +9,6 @@
 -dontwarn org.tukaani.xz.MemoryLimitException
 -dontwarn org.tukaani.xz.SingleXZInputStream
 -dontwarn org.tukaani.xz.XZInputStream
+
+# JNI entry point used for atomic no-replace file publication.
+-keep class dev.findroid.NativeFilePublication { *; }

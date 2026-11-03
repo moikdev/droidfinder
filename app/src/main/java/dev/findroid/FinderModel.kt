@@ -4253,7 +4253,7 @@ constructor(
     ) = transferPaths(files.map { it.absolutePath }, parent.absolutePath, move, clearClipboard)
 
     private fun startNextTransfer() {
-        if (busy != null || activeTransferId != null || journalError != null) return
+        if (busy != null || activeTransferId != null || journalError != null || session.partialCopyReview.value?.applying == true) return
         val job = transferJobs.firstOrNull { it.state == TransferState.QUEUED } ?: return
         val origin = transferSubmissions[job.id]?.pane
         if (origin != null && origin !== this) {
@@ -4299,6 +4299,7 @@ constructor(
                     )
                         clearSelection()
                 }
+                session.partialCopyApprovals.remove(job.id)
                 activeTransferId = null
                 saveTransfers()
             },
@@ -4322,6 +4323,7 @@ constructor(
                             if (move) relocateMetadataPaths(paths) else copyMetadataPaths(paths)
                         },
                         steps = steps,
+                        partialApproval = session.partialCopyApprovals[job.id],
                     )
                     .run()
             } finally {
@@ -4371,6 +4373,7 @@ constructor(
                 else it
             }
             transferSubmissions.remove(id)
+            session.partialCopyApprovals.remove(id)
             TransferRuntime.scope.launch { saveTransfers() }
         }
     }
@@ -4390,6 +4393,113 @@ constructor(
             }
     }
 
+    internal val partialCopyReview: PartialCopyReviewState?
+        get() = session.partialCopyReview.value
+
+    internal fun cancelPartialCopyReview() {
+        if (partialCopyReview?.applying == true) return
+        session.partialCopyReview.value = null
+        session.partialCopyReviewControl?.cancel()
+        session.partialCopyReviewJob?.cancel()
+        session.partialCopyReviewControl = null
+        session.partialCopyReviewJob = null
+    }
+
+    internal fun reviewSavedCopy(id: String) {
+        if (partialCopyReview?.applying == true) return
+        val job = transferJobs.firstOrNull { it.id == id && it.terminal } ?: return
+        val record = job.partialCopy ?: return
+        cancelPartialCopyReview()
+        val token = java.util.UUID.randomUUID().toString()
+        session.partialCopyReview.value = PartialCopyReviewState(token, id, record)
+        val control = TransferControl { progress ->
+            TransferRuntime.scope.launch {
+                partialCopyReview?.takeIf { it.token == token }?.let {
+                    session.partialCopyReview.value = it.copy(progress = progress)
+                }
+            }
+        }
+        session.partialCopyReviewControl = control
+        session.partialCopyReviewJob = TransferRuntime.scope.launch {
+            try {
+                val cleanup = withContext(Dispatchers.IO) { documents.reviewPartialCopyCleanup(record) }
+                partialCopyReview?.takeIf { it.token == token }?.let {
+                    session.partialCopyReview.value = it.copy(cleanup = cleanup)
+                }
+                val approval = withContext(Dispatchers.IO) { documents.reviewPartialCopy(record, control) }
+                partialCopyReview?.takeIf { it.token == token }?.let {
+                    session.partialCopyReview.value = it.copy(checking = false, resume = approval)
+                }
+            } catch (error: Exception) {
+                partialCopyReview?.takeIf { it.token == token }?.let {
+                    session.partialCopyReview.value = it.copy(checking = false,
+                        error = error.message ?: "The saved copy could not be checked. Its files were kept.")
+                }
+            }
+        }
+    }
+
+    internal fun resumeSavedCopy() {
+        val review = partialCopyReview?.takeIf { !it.checking && !it.applying } ?: return
+        val approval = review.resume ?: return
+        if (busy != null || activeTransferId != null || journalError != null) {
+            session.partialCopyReview.value = review.copy(error = "Finish the current operation and resolve any history error before resuming.")
+            return
+        }
+        val plan = runCatching { planPartialCopyResume(transferJobs, review.jobId, approval) }.getOrElse {
+            session.partialCopyReview.value = review.copy(error = it.message)
+            return
+        }
+        val old = transferJobs.single { it.id == review.jobId }
+        session.partialCopyReview.value = review.copy(applying = true)
+        transferJobs = plan.jobs
+        TransferRuntime.scope.launch {
+            try {
+                saveTransfers()
+                session.partialCopyApprovals[plan.resumed.id] = approval
+                session.partialCopyReview.value = null
+                message = "The reviewed copy was queued. Its saved bytes will be checked again before use."
+                startNextTransfer()
+            } catch (error: Exception) {
+                // No worker was allowed to start. Restore just the affected ownership in memory.
+                transferJobs = transferJobs.filterNot { it.id == plan.resumed.id }.map {
+                    if (it.id == old.id) old else it
+                }
+                session.partialCopyReview.value = review.copy(error = "The resumed copy could not be queued: ${error.message}")
+            }
+        }
+    }
+
+    internal fun discardSavedCopy() {
+        val review = partialCopyReview?.takeIf { !it.checking && !it.applying } ?: return
+        val cleanup = review.cleanup ?: return
+        val job = transferJobs.firstOrNull { it.id == review.jobId && it.terminal && it.partialCopy == review.record } ?: return
+        if (journalError != null) {
+            session.partialCopyReview.value = review.copy(error = "Resolve the transfer history error before discarding saved bytes.")
+            return
+        }
+        session.partialCopyReview.value = review.copy(applying = true)
+        TransferRuntime.scope.launch {
+            try {
+                withContext(Dispatchers.IO) { documents.discardPartialCopy(cleanup) }
+                updateTransfer(job.id) {
+                    it.copy(partialCopy = null, partialCopyNotice = "The reviewed private saved bytes were discarded. Review the destination before starting another copy.")
+                }
+                try { saveTransfers() } catch (error: Exception) {
+                    updateTransfer(job.id) { it.copy(partialCopy = review.record) }
+                    throw error
+                }
+                session.partialCopyApprovals.remove(job.id)
+                session.partialCopyReview.value = null
+                message = "Private saved bytes were discarded. The source and destination were kept."
+                startNextTransfer()
+            } catch (error: Exception) {
+                session.partialCopyReview.value = review.copy(resume = null, cleanup = null,
+                    error = "Saved-copy cleanup needs another review: ${error.message}")
+            }
+        }
+    }
+
     fun moveQueuedTransfer(id: String, delta: Int) {
         val from = transferJobs.indexOfFirst {
             it.id == id &&
@@ -4403,7 +4513,8 @@ constructor(
     }
 
     fun clearTransferHistory() {
-        transferJobs = transferJobs.filter { !it.terminal }
+        if (partialCopyReview?.applying == true) return
+        transferJobs = transferJobs.filter { !it.terminal || it.partialCopy != null }
         TransferRuntime.scope.launch { saveTransfers() }
     }
 

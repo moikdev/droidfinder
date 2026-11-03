@@ -53,6 +53,23 @@ class DocumentAccess(
     private val spaceProbe: ((String) -> Long?)? = null,
 ) {
     private val resolver = context.contentResolver
+    private val partialStorage = AndroidPartialCopyStorage()
+    private val partialRecovery by lazy {
+        val root = File(context.filesDir, ".partial-copies").absolutePath
+        if (partialStorage.stat(root) == null) partialStorage.createDirectory(root)
+        check(partialStorage.stat(root)?.directory == true) {
+            "The private saved-copy folder needs review."
+        }
+        PartialCopyRecovery(partialStorage, root)
+    }
+
+    internal fun partialCopySession(approval: PartialCopyReview?, changed: (PartialCopyRecord?, String?, Long) -> Unit) =
+        PartialCopySession(partialRecovery, partialStorage, approval, changed)
+
+    internal fun reviewPartialCopy(record: PartialCopyRecord, control: TransferControl) = partialRecovery.review(record, control)
+    internal fun reviewPartialCopyCleanup(record: PartialCopyRecord) = partialRecovery.reviewCleanup(record)
+    internal fun discardPartialCopy(approval: PartialCopyCleanupReview) = partialRecovery.discardReviewed(approval)
+
     private val prefs = context.getSharedPreferences("locations", 0)
     private val parentFile = File(context.filesDir, "document-parents.properties")
     private val parents =
@@ -752,6 +769,7 @@ class DocumentAccess(
         requestedName: String? = null,
         phaseTitle: String = if (move) "Moving" else "Copying",
         verification: CopyVerificationSession? = null,
+        partial: PartialCopySession? = null,
     ): String {
         require(!move || verification == null) { "Optional readback verification is available for copies." }
         lastCopyMappings = emptyList()
@@ -759,10 +777,14 @@ class DocumentAccess(
         control.documentCall(if (isDocumentPath(source)) source else parent) {
             validateTransfer(source, parent, move, requestedName != null)
         }
-        if (!isDocumentPath(source) && !isDocumentPath(parent))
-            return engine
-                .copy(File(source), File(parent), move, control, requestedName, phaseTitle, verification)
-                .absolutePath
+        if (!isDocumentPath(source) && !isDocumentPath(parent)) {
+            if (!move && partial != null) {
+                val target = requestedName?.let { File(parent, validateFilename(it)) } ?: engine.uniqueFile(File(parent), File(source).name)
+                requireTransferSpace(partial.remainingBytes(File(source)), availableSpace(parent))
+                partial.copy(File(source), target, control, verification)?.let { return it }
+            }
+            return engine.copy(File(source), File(parent), move, control, requestedName, phaseTitle, verification).absolutePath
+        }
         control.documentCall(if (isDocumentPath(source)) source else parent) { checkDestination(source, parent) }
         val entry = control.documentCall(source) { read(source) }
         if (move) {

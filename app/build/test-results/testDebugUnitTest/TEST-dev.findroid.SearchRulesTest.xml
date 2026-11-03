@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SearchRulesTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-03T16:28:52.090Z" hostname="MacBook-Pro-2.local" time="0.002">
+<testsuite name="dev.findroid.SearchRulesTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:44.125Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
   <testcase name="legacySingleTagKeepsItsExactMatchBehavior" classname="dev.findroid.SearchRulesTest" time="0.0"/>
-  <testcase name="failingTagsNeverOpenFileContents" classname="dev.findroid.SearchRulesTest" time="0.001"/>
+  <testcase name="failingTagsNeverOpenFileContents" classname="dev.findroid.SearchRulesTest" time="0.0"/>
   <testcase name="everyTagModeStillRequiresOtherCriteria" classname="dev.findroid.SearchRulesTest" time="0.0"/>
   <testcase name="noSelectedTagsDisablesTheFilterInEveryMode" classname="dev.findroid.SearchRulesTest" time="0.0"/>
   <testcase name="scopeSettingsAreActiveAndFolderNamesAreLiteralAndCaseSensitive" classname="dev.findroid.SearchRulesTest" time="0.0"/>
   <testcase name="legacyAndNewSelectionsAreCombinedWithoutDuplicates" classname="dev.findroid.SearchRulesTest" time="0.0"/>
   <testcase name="selectedTagsPreserveUnicodeSpacesAndPunctuation" classname="dev.findroid.SearchRulesTest" time="0.0"/>
-  <testcase name="tagFiltersDoNotSwallowCancellation" classname="dev.findroid.SearchRulesTest" time="0.001"/>
+  <testcase name="tagFiltersDoNotSwallowCancellation" classname="dev.findroid.SearchRulesTest" time="0.0"/>
   <testcase name="remappingIsSimultaneousAndKeepsTheMode" classname="dev.findroid.SearchRulesTest" time="0.0"/>
-  <testcase name="allAnyAndNoneFollowTheCompleteTagTruthTable" classname="dev.findroid.SearchRulesTest" time="0.0"/>
+  <testcase name="allAnyAndNoneFollowTheCompleteTagTruthTable" classname="dev.findroid.SearchRulesTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

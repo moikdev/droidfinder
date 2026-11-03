@@ -18,8 +18,10 @@ class TransferWorker(
     private val ask: suspend (Entry, Entry, Boolean) -> ConflictDecision,
     private val metadata: (List<Pair<String, String>>, Boolean) -> Unit,
     private val steps: MutableList<FileStep>,
+    private val partialApproval: PartialCopyReview? = null,
 ) {
     private var policy = job.conflictPolicy
+    private val completedPartialSources = hashSetOf<String>()
 
     private suspend fun <T> io(work: () -> T): T = withContext(Dispatchers.IO) { work() }
 
@@ -36,11 +38,17 @@ class TransferWorker(
     private suspend fun result(result: TransferItemResult) = save {
         it.copy(
             results = it.results.filterNot { r -> r.source == result.source } + result,
-            inFlight = null,
+            inFlight = if (it.partialCopy?.source == result.source && result.destination == null) result.source else null,
+            partialCopy = it.partialCopy.takeUnless { result.source in completedPartialSources },
         )
     }
 
     suspend fun run() {
+        job.partialCopy?.let { record ->
+            check(partialApproval?.record == record && job.paths == listOf(record.source) && !record.publishing) {
+                "Review the saved copy again before resuming. Its source and saved bytes were kept."
+            }
+        }
         control.phase("Checking files", stage = TransferStage.PREPARING)
         val estimate = io { documents.estimate(job.paths, control) }
         if (job.verifyCopies) check(estimate.files <= MAX_COPY_VERIFICATION_RESULTS) {
@@ -64,6 +72,7 @@ class TransferWorker(
                         error.message ?: "Transfer failed",
                     ),
                 )
+                if (current().partialCopy != null) return
             }
         }
     }
@@ -136,10 +145,15 @@ class TransferWorker(
             documents.validateTransfer(path, parent, move)
             documents.read(path)
         }
-        val existing = io {
-            documents.list(parent).firstOrNull { it.name == before.name && it.path != path }
+        val approved = partialApproval?.takeIf { it.record.source == path }
+        check(approved == null || !move && !before.folder && File(approved.record.target).parent == parent) {
+            "The reviewed copy no longer matches this transfer."
         }
-        var desiredName: String? = null
+        val existing = io {
+            documents.list(parent).firstOrNull { it.name == (approved?.record?.target?.let { File(it).name } ?: before.name) && it.path != path }
+        }
+        check(approved == null || existing == null) { "An item now exists at the destination. Review it before restarting; it was kept." }
+        var desiredName: String? = approved?.record?.target?.let { File(it).name }
         var replaced: Pair<Entry, File>? = null
         if (existing != null) {
             val answer = decision(before, existing, mergeAllowed)
@@ -188,9 +202,24 @@ class TransferWorker(
                 else -> Unit
             }
         }
+        val ownerContext = currentCoroutineContext().minusKey(Job)
+        val partial = if (!move && !before.folder && !isDocumentPath(path) && !isDocumentPath(parent) && replaced == null &&
+            (approved != null || before.size >= PARTIAL_COPY_MINIMUM_BYTES)) {
+            io { documents.partialCopySession(approved) { record, notice, reused ->
+                runBlocking { withContext(ownerContext) {
+                    save { it.copy(partialCopy = record, partialCopyNotice = notice, reusedBytes = maxOf(it.reusedBytes, reused)) }
+                } }
+            } }
+        } else null
+        if (partial == null) save { it.copy(partialCopyNotice = when {
+            isDocumentPath(path) || isDocumentPath(parent) -> "Connected-storage streams must restart after interruption. Review the destination before retrying."
+            move || before.folder || replaced != null -> "Moves, folders and replacements must restart after interruption. Review the destination before retrying."
+            else -> "This file is copied without a saved checkpoint. Review the destination before retrying after interruption."
+        }) }
         val published =
             try {
-                io { documents.copy(path, parent, move, control, desiredName, verification = verification) }
+                io { documents.copy(path, parent, move, control, desiredName, verification = verification, partial = partial) }
+                    .also { if (partial?.completed == true) completedPartialSources += path }
             } catch (error: Exception) {
                 if (replaced != null && error !is TransferPublicationException) {
                     val restored = io { documents.restore(replaced.second) }
