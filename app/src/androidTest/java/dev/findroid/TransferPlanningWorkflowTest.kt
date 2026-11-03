@@ -12,6 +12,11 @@ import org.junit.Rule
 import org.junit.Test
 
 class TransferPlanningWorkflowTest {
+    @org.junit.Before
+    fun resetOwnedUndoSessionForFixture() {
+        compose.runOnIdle { resetOwnedUndoFixture(compose.activity.model) }
+    }
+
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
 
     @org.junit.Before

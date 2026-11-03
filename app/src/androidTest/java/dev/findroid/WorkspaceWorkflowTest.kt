@@ -21,6 +21,11 @@ import org.junit.Rule
 import org.junit.Test
 
 class WorkspaceWorkflowTest {
+    @org.junit.Before
+    fun resetOwnedUndoSessionForFixture() {
+        compose.runOnIdle { resetOwnedUndoFixture(compose.activity.model) }
+    }
+
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
     private val left
         get() = compose.activity.model

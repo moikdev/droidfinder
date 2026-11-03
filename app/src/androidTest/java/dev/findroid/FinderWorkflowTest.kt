@@ -12,6 +12,11 @@ import org.junit.Test
 
 @OptIn(ExperimentalTestApi::class)
 class FinderWorkflowTest {
+    @org.junit.Before
+    fun resetOwnedUndoSessionForFixture() {
+        compose.runOnIdle { resetOwnedUndoFixture(compose.activity.model) }
+    }
+
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
 
     @org.junit.Before
