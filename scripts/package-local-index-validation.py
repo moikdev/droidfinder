@@ -129,7 +129,12 @@ def validate_local(expected):
         report = read(PROOF / f'api{api}-final-native.json')
         accepted(report)
         assert report['serial'] == serial and report['passed'] == 353 and len(report['isolatedBatches']) == 38
-        assert report['apkSha256'] == report['installedApkSha256'] == {k: v for k, v in source.items() if k.endswith('.apk')}
+        contract = read(PROOF / f'api{api}-final-batches/contract.json')
+        native_apks = ('app/build/outputs/apk/debug/app-debug.apk',
+                       'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk')
+        actual_native_hashes = {name: sha(ROOT / name) for name in native_apks}
+        assert contract['serial'] == serial
+        assert report['apkSha256'] == report['installedApkSha256'] == contract['apkSha256'] == actual_native_hashes
         cases = {(row['class'], row['test']) for row in report['cases']}
         assert len(cases) == 353
         identities.append(cases)
