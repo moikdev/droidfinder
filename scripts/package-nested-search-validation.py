@@ -137,7 +137,7 @@ def main():
     signing=read(PROOF/'signing-continuity.json');assert signing['sameSigningCertificate']
     for name in ('native-source-hashes.json','native-classes.txt','final-debug-checks.txt','release-build.txt',
                  'public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','signing-continuity.json','rejected-attempts.json',
-                 'local-acceptance.json','verify-local.py','verify-public.py','verify-validation.py','run-live-feed.py',
+                 'local-acceptance.json','ota-visual-review.json','verify-local.py','verify-public.py','verify-validation.py','run-live-feed.py',
                  'restore-public-tablets.py','write-release-body.py','finalize-docs.py','prepare-visual-review.py','release-package-after-test-correction.txt'):
         files.append(PROOF/name)
     rejected=read(PROOF/'rejected-attempts.json');assert rejected['rejectedAttemptsExcludedFromAcceptance']
@@ -151,6 +151,7 @@ def main():
                             ('nested-search-large-text',36,'600dp-font1.6-groups'),('nested-search-condition',36,'600dp-font1.6-condition')):
         assert sha(ROOT/'docs/screenshots'/(name+'.png'))==sha(PROOF/f'api{api}-optimized'/(target+'.png'))
     assert sha(ROOT/'docs/screenshots/app-updates-0390.png')==sha(PROOF/'api30-ota/up-to-date.png')
+    ota_review=read(PROOF/'ota-visual-review.json');assert ota_review['actualScreenshotInspected'] and ota_review['sha256']==sha(PROOF/'api30-ota/up-to-date.png')
     files=sorted(set(files))
     for path in files:
         assert path.is_file() and path.resolve().is_relative_to(ROOT),path

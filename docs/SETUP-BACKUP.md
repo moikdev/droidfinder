@@ -90,3 +90,5 @@ The organization window still offers its existing scoped tag/collection export. 
 ## Repeatable acceptance
 
 [VALIDATION.md](../VALIDATION.md) records exact counts, devices, and screenshots. The native suite uses controlled local/document-provider fixtures, including read-only and loading states. `scripts/check-setup.py` drives the optimized APK through Android's real CreateDocument/OpenDocument dialogs, root selection, reviewed import, restart, enlarged text, startup rollback, and the damaged-recovery gate. On API30 it compiles a transient shell helper that supplies explicit finger events; no instrumentation or process restart is used to select a file in the external picker. It verifies original fixture bytes and an unrelated preference and restores the exact original metadata without clearing app data.
+
+From 0.39.0, [nested search groups](SEARCH-RULE-GROUPS.md) travel with Smart Folders, workspaces and open tabs. Reviewed tag remapping updates nested references as well as simple tag criteria. Unsupported groups reject the affected saved data instead of silently widening a search.

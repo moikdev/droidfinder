@@ -53,3 +53,5 @@ For search rules and result explanations, see [Search criteria](SEARCH-CRITERIA.
 From 0.38.1, history preserves every [chosen search folder](SEARCH-LOCATIONS.md). **Search original location** restores the full list and can proceed if at least one folder is available; Result details identifies unavailable roots. If all are unavailable, the current tab stays in place.
 
 **Search here** and typing suggestions clear that saved location list and use the current folder or library with the copied filters. Suggestion summaries describe this current-folder action. Literal exclusions keep their original references. Reusing a Smart Folder search still creates independent rules.
+
+From 0.39.0, history also preserves [nested rule groups](SEARCH-RULE-GROUPS.md). Typing suggestions keep a bounded description of the filters applied here; full history shows the complete group. Draft edits do not alter an older entry.

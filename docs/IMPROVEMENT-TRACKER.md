@@ -28,7 +28,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 22 | Choose search roots explicitly | Implemented in 0.38.1; 451 JVM checks, 308 native cases per API30/API36 tablet in 32 fresh-process batches, optimized 0.37 upgrade/real-picker/overlap/unavailable-root/Smart Folder/restart/layout acceptance, and real public OTA on both. See [search locations](SEARCH-LOCATIONS.md) and [validation](../VALIDATION.md). |
 | 23 | Extend exclusions to exact paths | Implemented in 0.36.0; 404 JVM checks, 251 native cases per API30/API36 tablet in 27 fresh-process batches, optimized 0.35 upgrade/four-view/saved-rule/layout acceptance, and real public OTA on both. See [search criteria](SEARCH-CRITERIA.md) and [validation](../VALIDATION.md). |
 | 24 | Offer natural date and size presets | Implemented in 0.36.0; 404 JVM checks, 251 native cases per API30/API36 tablet in 27 fresh-process batches, optimized 0.35 upgrade/four-view/saved-rule/layout acceptance, and real public OTA on both. See [search criteria](SEARCH-CRITERIA.md) and [validation](../VALIDATION.md). |
-| 25 | Support nested search rules | Open. Implementation and focused acceptance pending. |
+| 25 | Support nested search rules | Implemented in 0.39.0; 472 JVM checks, 324 native cases per API30/API36 tablet in 34 fresh-process batches, optimized 0.38.1 upgrade/nested-editor/criteria/history/layout acceptance and real public OTA on both. See [rule groups](SEARCH-RULE-GROUPS.md) and [validation](../VALIDATION.md). |
 | 26 | Show index freshness and partial results | Open. Implementation and focused acceptance pending. |
 | 27 | Measure very large folders | Open. Needs representative large libraries and recorded performance. |
 | 28 | Add SMB connections | Open. Implementation and focused acceptance pending. |
@@ -77,7 +77,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 71 | Expand the failure matrix | Partial: setup transaction write faults/process-death boundaries, changed grants, stale reviews and corrupt recovery are covered in 0.33. Workspace publication faults, disk changes, future catalogs and window closure are covered in 0.34.1. Physical-media removal, full storage and the broader provider matrix remain open. |
 | 72 | Finish release infrastructure | Open. Hosted Actions stays manual-only; long-term signing/recovery needs owner-controlled key custody. |
 
-25 items are implemented across the 0.32.0–0.38.1 increments; 47 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
+26 items are implemented across the 0.32.0–0.39.0 increments; 46 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
 
 ## Verification per increment
 

@@ -1,5 +1,22 @@
 # Android preview verification
 
+## Findroid 0.39.0 — nested search rules
+
+Verified on November 3, 2026:
+
+- **472 JVM tests pass**, with no failures, errors or skips. Debug, native-test, optimized preview and unsigned release builds pass. Lint: **0 errors, 146 warnings, 11 hints**.
+- **324 native cases pass on each API30/API36 tablet**, in **34 fresh-process batches**, with zero failures/skips and identical case sets. New checks cover all three-valued truth tables, passing evidence, immutable bounds, strict codecs, full setup/tag remapping, real nested editing and cancellation, stale contexts, Smart Folder/history/restart, tag-assignment refresh, and chosen provider roots with unknown sizes and one content read. Existing search, drag, sidebar, setup, recovery, input, operation and updater cases remain in the accepted suites.
+- **Exact optimized 0.38.1 → 0.39.0 upgrades pass on both APIs**. Acceptance uses the real nested editor and folder picker, retains all custom date/size/content/name criteria and exclusions, deduplicates overlapping roots, keeps results with an unavailable first root, and audits Smart Folder/history persistence. **Five live replacements of one custom window** and independent persisted tabs pass per API.
+- All six **600/800/1280 dp × font 1.0/1.6** layouts pass per API. Independently parsed captures require full 48dp controls, no scroll-ancestor clipping and reachable content across Search locations, Result details, Search criteria, Rule groups and condition editors. Actual [draft](docs/screenshots/nested-search-draft.png), [results](docs/screenshots/nested-search-tablet.png), [large text](docs/screenshots/nested-search-large-text.png), and [condition](docs/screenshots/nested-search-condition.png) screenshots were inspected.
+- Visual follow-up: the API36 draft overview retains an unavailable Favorite hint after a synthetic root is moved away and restored, although search results have recovered. **Check again** is available; automatic rechecking after a very fast refresh remains a follow-up. The original capture is retained unchanged.
+- Earlier native fixture attempts are retained as rejected diagnostics. The old test scrolled to a heading and assumed the next horizontal chip row was visible; simply scrolling the chip still reached only its horizontal ancestor. The corrected fixture scrolls the outer form until each entire control fits, keeps displayed/selected assertions, and passes on both APIs before the final fresh suites. The superseded API36 coordinator was explicitly stopped and restored. None contributes to final accepted totals. Optimized rejected attempts also retain a platform UiAutomation Bad file descriptor crash and two checker mistakes: inspecting an enabled child label instead of its disabled parent button, and expecting a condition title different from the app. The final checker uses the actual named dialog and clickable controls, retains all full 48dp/scroll bounds, and retries only failed UI dump reads at most three times, recording each retry. All actions and assertions still fail normally.
+
+Clean application/native source: `9aa5b76dcbe2c31ef824bd3279cac89495b404e2`. Preview: **8,438,959 bytes**, SHA-256 `dcf4f353e1a3c3b53bdf4a7815b241659e55f7dadda29c74fa61a890bd1a6ffa`. Development signing is unchanged from frozen 0.38.1. Nested groups are bounded, immutable metadata criteria; result entries/snippets/document bytes never enter saved rules. Unreadable Smart Folder catalogs remain protected from writes. [Rule-group guide](docs/SEARCH-RULE-GROUPS.md).
+
+Published [0.39.0-preview](https://github.com/moikdev/findroid/releases/tag/v0.39.0-preview). All five original assets match anonymous downloads and GitHub digests. Real public-feed **0.38.1 → 0.39.0** downloads and Android installation pass on both tablets, preserving original synthetic bytes, Favorites and an unrelated preference and offering no repeat update. API36's production-source check passes **1/1**. Both tablets finish with exact private original metadata/preferences, font scale 1.0 and the exact public APK. Physical/OEM/provider, screen-reader, removable-drive and real third-party receiver acceptance remain separately tracked.
+
+Proposal **25** is implemented: **26/72**, **46 open or partial**. Actions remains manual-only. Private originals, document payloads, credentials, signing keys and full bugreports are excluded from published evidence.
+
 ## Findroid 0.38.1 — search across chosen folders
 
 Verified on November 3, 2026:
