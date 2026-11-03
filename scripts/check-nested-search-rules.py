@@ -155,7 +155,14 @@ def main():
         device.tap(device.one(device.scroll_to(name,label,x=.9),label))
     def panel(tree,title,footer):
         parents={child:parent for parent in tree.iter() for child in parent}
-        headings=[node for node in tree.iter('node') if node.get('text')==title and len(device.bounds(node))==4 and device.bounds(node)[3]>device.bounds(node)[1]]
+        def clickable_ancestor(node):
+            while node in parents:
+                node=parents[node]
+                if node.get('clickable')=='true':return True
+            return False
+        headings=[node for node in tree.iter('node') if node.get('text')==title
+                  and len(device.bounds(node))==4 and device.bounds(node)[3]>device.bounds(node)[1]
+                  and not clickable_ancestor(node)]
         assert len(headings)==1,(title,len(headings))
         node=headings[0]
         while not device.nodes(node,footer):
@@ -165,9 +172,12 @@ def main():
     def control(tree,title,label,footer):
         scope=panel(tree,title,footer)
         parents={child:parent for parent in scope.iter() for child in parent}
-        node=device.one(scope,label)
-        while node.get('clickable')!='true' and node in parents: node=parents[node]
-        return node
+        controls=[]
+        for node in device.nodes(scope,label):
+            while node.get('clickable')!='true' and node in parents:node=parents[node]
+            if node.get('clickable')=='true' and node not in controls:controls.append(node)
+        assert len(controls)==1,(title,label,len(controls))
+        return controls[0]
     def fully_visible(tree,node):
         l,t,r,b=device.bounds(node);w,h=device.screen
         if not (0<=l<r<=w and 0<=t<b<=h and r-l>=48*density and b-t>=48*density):return False
@@ -217,10 +227,10 @@ def main():
     def group_click(name,label):return dialog_click(name,'Rule groups','Cancel',label)
     def condition(name,kind,value):
         group_click(name+'-add','Add rule…')
-        device.wait(name+'-condition',lambda t: bool(device.nodes(t,'Add group rule')))
-        dialog_click(name+'-type','Add group rule','Cancel',kind)
-        dialog_click(name+'-value','Add group rule','Cancel',value)
-        tree=device.dump(name+'-save');device.tap(assert_control(tree,'Add group rule','Add rule','Cancel'))
+        device.wait(name+'-condition',lambda t: bool(device.nodes(t,'Close Add rule')))
+        dialog_click(name+'-type','Add rule','Cancel',kind)
+        dialog_click(name+'-value','Add rule','Cancel',value)
+        tree=device.dump(name+'-save');device.tap(assert_control(tree,'Add rule','Add rule','Cancel'))
         device.wait(name+'-returned',lambda t: bool(device.nodes(t,'Rule groups')))
     def build_groups():
         filters('new-groups-filters');groups('new-groups',False)
@@ -252,14 +262,14 @@ def main():
         tree,node=dialog_scroll(key+'-add-rule','Rule groups','Cancel','Add rule…')
         assert_control(tree,'Rule groups','Add group','Cancel');device.capture(key+'-groups')
         device.tap(node)
-        device.wait(key+'-condition',lambda t: bool(device.nodes(t,'Add group rule')))
+        device.wait(key+'-condition',lambda t: bool(device.nodes(t,'Close Add rule')))
         for label in ('Name','Kind','Tag','Modified','Size'):
-            dialog_scroll(key+'-type-'+label,'Add group rule','Cancel',label)
-        dialog_click(key+'-condition-kind','Add group rule','Cancel','Kind')
-        dialog_click(key+'-condition-text','Add group rule','Cancel','Text document')
+            dialog_scroll(key+'-type-'+label,'Add rule','Cancel',label)
+        dialog_click(key+'-condition-kind','Add rule','Cancel','Kind')
+        dialog_click(key+'-condition-text','Add rule','Cancel','Text document')
         tree=device.dump(key+'-condition-footer')
-        for label in ('Cancel','Add rule','Close Add group rule'):
-            assert_control(tree,'Add group rule',label,'Cancel')
+        for label in ('Cancel','Add rule','Close Add rule'):
+            assert_control(tree,'Add rule',label,'Cancel')
         device.capture(key+'-condition')
         device.click(key+'-cancel-condition','Cancel')
         device.wait(key+'-back-groups',lambda t: bool(device.nodes(t,'Rule groups')))

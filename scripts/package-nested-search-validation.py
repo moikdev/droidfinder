@@ -32,7 +32,13 @@ def accepted(report):
 def bounds(node):return list(map(int,re.findall(r'-?\d+',node.get('bounds',''))))
 def full_control(tree,title,label,footer,width,height,minimum):
     parents={child:parent for parent in tree.iter() for child in parent}
-    heads=[node for node in tree.iter('node') if node.get('text')==title and len(bounds(node))==4 and bounds(node)[3]>bounds(node)[1]]
+    def clickable_ancestor(node):
+        while node in parents:
+            node=parents[node]
+            if node.get('clickable')=='true':return True
+        return False
+    heads=[node for node in tree.iter('node') if node.get('text')==title
+           and len(bounds(node))==4 and bounds(node)[3]>bounds(node)[1] and not clickable_ancestor(node)]
     assert len(heads)==1,(title,len(heads))
     scope=heads[0]
     while not any(n.get('text')==footer or n.get('content-desc')==footer for n in scope.iter('node')):scope=parents[scope]
@@ -42,7 +48,7 @@ def full_control(tree,title,label,footer,width,height,minimum):
         box=bounds(node)
         if len(box)!=4:continue
         l,t,r,b=box
-        if node.get('enabled')!='true' or not (0<=l<r<=width and 0<=t<b<=height and r-l>=minimum and b-t>=minimum):continue
+        if node.get('clickable')!='true' or node.get('enabled')!='true' or not (0<=l<r<=width and 0<=t<b<=height and r-l>=minimum and b-t>=minimum):continue
         parent=node;clipped=False
         while parent in parents:
             parent=parents[parent]
@@ -105,7 +111,7 @@ def main():
                 ('criteria','Search criteria','Apply filters',('Cancel','Clear','Apply filters','Close Search criteria')),
                 ('groups','Rule groups','Cancel',('Cancel','Remove rule groups','Apply groups','Add rule…','Add group','Close Rule groups')),
                 ('group-modes','Rule groups','Cancel',('All','Any','None')),
-                ('condition','Add group rule','Cancel',('Cancel','Add rule','Close Add group rule'))):
+                ('condition','Add rule','Cancel',('Cancel','Add rule','Close Add rule'))):
                 png=folder/(key+'-'+suffix+'.png');w,h=struct.unpack('>II',png.read_bytes()[16:24])
                 tree=ET.parse(folder/(key+'-'+suffix+'-capture.xml')).getroot()
                 for label in labels:assert full_control(tree,title,label,footer,w,h,48*density),(api,key,title,label)
