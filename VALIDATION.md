@@ -2,7 +2,7 @@
 
 ## Findroid 0.43.0 — verify important copies
 
-Local and real public OTA acceptance completed on November 4, 2026. Immutable evidence acceptance is being completed; proposal 40 remains in progress.
+Local and real public OTA acceptance completed on November 4, 2026. Immutable public evidence acceptance also passes; proposal 40 is implemented.
 
 - **549 JVM checks pass**, with zero failures/errors/skips. Debug, native-test, optimized preview and unsigned release builds pass. App lint: **0 errors / 146 warnings / 12 hints**.
 - **426 identical native cases pass per API30/API36 tablet**, in **48 fresh-process batches each**, using the frozen app/test APK pair. The 27 focused cases include 17 copy-verification workflows and 10 SQLite migration/store checks. Ordinary and verified transfers display a provider filename that differs from its document ID, with **Source item** when no friendly title is cached.
@@ -16,6 +16,8 @@ Rejected attempts remain excluded. Visual review found opaque provider IDs in tr
 An earlier interrupted API36 run required a targeted emulator restart and private disk backup. All recorded original app/provider bytes were recovered. That interrupted controller had not persisted its original grant list or storage mode; its separate recovery receipt records this limitation. Final acceptance persists a private recovery baseline before mutation and verifies restoration against it. Emulator checks do not claim physical-device, screen-reader or third-party-provider acceptance.
 
 **Actual public 0.42 → 0.43 OTA passes on both tablets**, including public-feed download, Android installer completion, matching installed APK bytes, preservation of a synthetic original document/Favorite/preference and no repeat offer. All five initial public assets match anonymous downloads and GitHub digests. API36’s separate production-source download passes 1/1. All twelve OTA screenshots were inspected. Both tablets finish with exact original managed metadata, databases, caches and recorded absences, font1.0 and the public optimized APK. [Up-to-date capture](docs/screenshots/app-updates-0430.png).
+
+The immutable [validation ZIP](https://github.com/moikdev/findroid/releases/download/v0.43.0-preview/Findroid-0.43.0-validation.zip) was anonymously downloaded and all **2,565 entries** checked. It is **32,686,378 bytes**, SHA-256 `0b1610aa896275b02c82a7a5d99bd476bba43eae9f8cdf7f2f87d0d1a7b9b01d`. Application/native source: `21f00217ae6bad9cb6b5de37af79a1a6e5e8469e`; evidence snapshot: `08f5bcd7de46046bef1832108be6fe247f1a32ae`. Later documentation does not regenerate the archive. The [independent verifier](scripts/verify-release-validation.py) matches archived source with public Git trees and recomputes JVM/native totals. Run `python3 scripts/verify-release-validation.py --tag v0.43.0-preview --sha256 0b1610aa896275b02c82a7a5d99bd476bba43eae9f8cdf7f2f87d0d1a7b9b01d`; optionally add `--archive <local-zip>`. The tested APKs, reports and mapping are frozen privately in `captures/copy-verification/accepted-build/`. Proposal 40 is implemented.
 
 [Copy verification guide](docs/COPY-VERIFICATION.md) · [Release notes](docs/releases/0.43.0.md).
 

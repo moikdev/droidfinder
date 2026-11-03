@@ -1,0 +1,38 @@
+{
+  "version": "0.43.0-preview",
+  "versionCode": 45,
+  "applicationSourceCommit": "21f00217ae6bad9cb6b5de37af79a1a6e5e8469e",
+  "evidenceCommit": "08f5bcd7de46046bef1832108be6fe247f1a32ae",
+  "publicArchiveVerified": true,
+  "validationArchive": {
+    "archive": "Findroid-0.43.0-validation.zip",
+    "bytes": 32686378,
+    "sha256": "0b1610aa896275b02c82a7a5d99bd476bba43eae9f8cdf7f2f87d0d1a7b9b01d",
+    "entries": 2565,
+    "applicationSourceCommit": "21f00217ae6bad9cb6b5de37af79a1a6e5e8469e",
+    "nativeTestSourceCommit": "21f00217ae6bad9cb6b5de37af79a1a6e5e8469e",
+    "evidenceCommit": "08f5bcd7de46046bef1832108be6fe247f1a32ae",
+    "jvmCases": 549,
+    "nativeCasesPerApi": 426,
+    "isolatedBatchesPerApi": 48
+  },
+  "artifacts": {
+    "app/build/outputs/apk/debug/app-debug.apk": {
+      "bytes": 87693981,
+      "sha256": "19e660ae8b08d5dc482491ab87390ef3b3fb80e1a363d7b3e64c373fcad4cfa8"
+    },
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": {
+      "bytes": 6267193,
+      "sha256": "7f77fc79760826e54c94b8b9f2d94c9943c6ef6f69db9f75fdfb821f3c07d693"
+    },
+    "app/build/outputs/apk/preview/app-preview.apk": {
+      "bytes": 8586415,
+      "sha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9"
+    },
+    "app/build/outputs/apk/release/app-release-unsigned.apk": {
+      "bytes": 8578207,
+      "sha256": "144faf72e8d810f214b4d06503f84b3e9d815642eeb9fca269479aee59324e8a"
+    }
+  },
+  "preservation": "Private immutable accepted-build copies retain the four tested APKs, JVM/lint reports and optimized mapping. Future releases must not regenerate 0.43 from newer build outputs."
+}
