@@ -1,0 +1,8 @@
+{
+  "applicationSourceCommit": "0ec3ff8ef2810b18dab0853a75489d871e5d3993",
+  "previewApkSha256": "8324a7a88e46840ec02f57bc843937af75506e7feecd630f79b5c4f74a98aefc",
+  "jvmCases": 451,
+  "nativeCasesPerApi": 308,
+  "batchesPerApi": 32,
+  "allLocalGatesPassed": true
+}

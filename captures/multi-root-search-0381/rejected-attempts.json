@@ -1,0 +1,14 @@
+{
+  "version": "0.38.1-preview",
+  "rejectedAttemptsExcludedFromAcceptance": true,
+  "withdrawnCandidate": "captures/multi-root-search/withdrawn-release.json",
+  "withdrawnVersion": "0.38.0-preview",
+  "beforeFixRegression": "captures/multi-root-search/api30-window-regression-corrected-before-fix.json",
+  "earlierReproducerFixtureCorrection": "A cache path outside the supported Workspace browse root was replaced by a synthetic Workspace folder and a location readiness wait. The corrected test reproduced the real crash against the withdrawn APK.",
+  "nativeFocusedAttempts": [],
+  "optimizedAttempts": [],
+  "acceptedFocusedCasesPerApi": 4,
+  "focusedCasesAreNotAddedToFullSuiteTotals": true,
+  "finalNativeExpectedCasesPerApi": 308,
+  "finalNativeExpectedIsolatedBatchesPerApi": 32
+}

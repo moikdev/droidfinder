@@ -1,0 +1,13 @@
+{
+  "release": "v0.38.1-preview",
+  "archive": "Findroid-0.38.1-validation.zip",
+  "bytes": 14338493,
+  "sha256": "913585c9ea1558f4ef5651e65aa505cbd3b67a3708ee612c13dc19e1d490b865",
+  "entries": 869,
+  "anonymousDownloadMatchesLocal": true,
+  "githubDigestMatches": true,
+  "allManifestEntriesVerified": true,
+  "applicationSourceCommit": "0ec3ff8ef2810b18dab0853a75489d871e5d3993",
+  "nativeTestSourceCommit": "0ec3ff8ef2810b18dab0853a75489d871e5d3993",
+  "evidenceCommit": "e99661d5c58721dbf77fc983f84e72fd60596085"
+}

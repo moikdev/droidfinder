@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "passed": 1,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.AppUpdateLiveFeedTest",
+      "test": "publicReleaseDownloadsWithProductionSource",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 8.3,
+  "downloadedVersionCode": 40,
+  "downloadedVersionName": "0.38.1-preview",
+  "downloadedApkSha256": "8324a7a88e46840ec02f57bc843937af75506e7feecd630f79b5c4f74a98aefc"
+}
