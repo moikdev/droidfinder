@@ -16,6 +16,8 @@ Published [0.38.1-preview](https://github.com/moikdev/findroid/releases/tag/v0.3
 
 Both tablets finish with exact private original metadata/preferences, font scale 1.0 and the public optimized APK. The allowlisted validation ZIP is frozen after this evidence snapshot is committed, then independently downloaded and checked. Earlier archives remain unchanged. Private originals, document payloads, credentials, signing keys and full bugreports stay out of the archive. Proposal **22** is implemented: **25 of 72**, with **47 open or partial**. Physical devices, TalkBack, trackpad/stylus, removable media and actual third-party providers retain separate acceptance. GitHub Actions remains manual-only.
 
+The frozen [validation ZIP](https://github.com/moikdev/findroid/releases/download/v0.38.1-preview/Findroid-0.38.1-validation.zip) is **14,338,493 bytes**, with **869 entries** and SHA-256 `913585c9ea1558f4ef5651e65aa505cbd3b67a3708ee612c13dc19e1d490b865`. Its anonymous download matches the local archive and GitHub digest; every manifest entry is verified. Application/native-test source `0ec3ff8ef2810b18dab0853a75489d871e5d3993` and evidence snapshot `e99661d5c58721dbf77fc983f84e72fd60596085` are recorded separately in `EVIDENCE.json`.
+
 ## Findroid 0.37.0 — recent searches and suggestions
 
 Verified on November 3, 2026:
