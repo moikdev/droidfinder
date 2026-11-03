@@ -355,7 +355,11 @@ fun FinderApp(
                     "newWindow" -> onNewWindow(model.location)
                 }
             }
-            LaunchedEffect(model.message) {
+            // A successful Trash operation may still be flushing its recovery record.
+            // Offer the snackbar action only when a tap can start the next operation.
+            val undoSavePending = model.busy != null && model.canUndoTrash && model.message?.endsWith("moved to Trash") == true
+            LaunchedEffect(model.message, undoSavePending) {
+                if (undoSavePending) return@LaunchedEffect
                 model.message?.let { text ->
                     val undo = model.canUndoTrash && text.endsWith("moved to Trash")
                     val result =

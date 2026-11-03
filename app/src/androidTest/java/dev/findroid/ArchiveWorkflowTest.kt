@@ -19,6 +19,11 @@ import org.junit.Assert.*
 
 @OptIn(ExperimentalTestApi::class)
 class ArchiveWorkflowTest {
+    @org.junit.Before
+    fun resetOwnedUndoSessionForFixture() {
+        compose.runOnIdle { resetOwnedUndoFixture(compose.activity.model) }
+    }
+
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
     private lateinit var folder: File
     private lateinit var savedLimits: ZipLimits

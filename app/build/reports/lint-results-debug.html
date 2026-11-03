@@ -179,7 +179,7 @@ document.getElementById(id).style.display = 'none';
     <div class="mdl-layout__header-row">
       <span class="mdl-layout-title">Lint Report: 147 warnings and 12 hints</span>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Wed Nov 04 06:43:41 JST 2026 by AGP (9.2.1)</nav>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Wed Nov 04 08:13:48 JST 2026 by AGP (9.2.1)</nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -773,34 +773,34 @@ Dismiss</button>            </div>
 <span class="lineno">  214 </span>                <span class="keyword">if</span> (entry.extension == <span class="string">"finderlink"</span>)
 </pre>
 
-<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:700</span>: <span class="message">Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize</span><br /><pre class="errorlines">
-<span class="lineno">  697 </span>   )
-<span class="lineno">  698 </span>   <span class="keyword">if</span> (model.busy != <span class="keyword">null</span> || model.transferJobs.any { !it.terminal })
-<span class="lineno">  699 </span>       TransferStrip(model) { action(<span class="string">"transfers"</span>) }
-<span class="caretline"><span class="lineno">  700 </span>   <span class="keyword">if</span> (!model.dualPane &amp;&amp; (!phone || <span class="warning">configuration.screenHeightDp</span> >= <span class="number">480</span>))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno">  701 </span>       PathBar(model) { action(<span class="string">"path"</span>) }
-<span class="lineno">  702 </span>   <span class="keyword">if</span> (phone)
-<span class="lineno">  703 </span>       PhoneBottomBar(
+<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:704</span>: <span class="message">Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize</span><br /><pre class="errorlines">
+<span class="lineno">  701 </span>   )
+<span class="lineno">  702 </span>   <span class="keyword">if</span> (model.busy != <span class="keyword">null</span> || model.transferJobs.any { !it.terminal })
+<span class="lineno">  703 </span>       TransferStrip(model) { action(<span class="string">"transfers"</span>) }
+<span class="caretline"><span class="lineno">  704 </span>   <span class="keyword">if</span> (!model.dualPane &amp;&amp; (!phone || <span class="warning">configuration.screenHeightDp</span> >= <span class="number">480</span>))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  705 </span>       PathBar(model) { action(<span class="string">"path"</span>) }
+<span class="lineno">  706 </span>   <span class="keyword">if</span> (phone)
+<span class="lineno">  707 </span>       PhoneBottomBar(
 </pre>
 
-<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:746</span>: <span class="message">Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize</span><br /><pre class="errorlines">
-<span class="lineno">  743 </span>          onConnectFolder()
-<span class="lineno">  744 </span>      },
-<span class="lineno">  745 </span>      Modifier.fillMaxWidth()
-<span class="caretline"><span class="lineno">  746 </span>          .fillMaxHeight(<span class="keyword">if</span> (<span class="warning">configuration.screenHeightDp</span> &lt; <span class="number">480</span>) <span class="number">1f</span> <span class="keyword">else</span> .<span class="number">9f</span>),&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno">  747 </span>      onLocationChosen = { phoneLocations = <span class="keyword">false</span> },
-<span class="lineno">  748 </span>      onClose = { phoneLocations = <span class="keyword">false</span> },
-<span class="lineno">  749 </span>  )
+<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:750</span>: <span class="message">Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize</span><br /><pre class="errorlines">
+<span class="lineno">  747 </span>          onConnectFolder()
+<span class="lineno">  748 </span>      },
+<span class="lineno">  749 </span>      Modifier.fillMaxWidth()
+<span class="caretline"><span class="lineno">  750 </span>          .fillMaxHeight(<span class="keyword">if</span> (<span class="warning">configuration.screenHeightDp</span> &lt; <span class="number">480</span>) <span class="number">1f</span> <span class="keyword">else</span> .<span class="number">9f</span>),&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  751 </span>      onLocationChosen = { phoneLocations = <span class="keyword">false</span> },
+<span class="lineno">  752 </span>      onClose = { phoneLocations = <span class="keyword">false</span> },
+<span class="lineno">  753 </span>  )
 </pre>
 
-<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:1113</span>: <span class="message">Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize</span><br /><pre class="errorlines">
-<span class="lineno"> 1110 </span>    onLocationChosen: () -> Unit = {},
-<span class="lineno"> 1111 </span>    onClose: (() -> Unit)? = <span class="keyword">null</span>,
-<span class="lineno"> 1112 </span>) {
-<span class="caretline"><span class="lineno"> 1113 </span>    <span class="keyword">val</span> short = <span class="warning">LocalConfiguration.current.screenHeightDp</span> &lt; <span class="number">480</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 1114 </span>    <span class="keyword">val</span> navigate: (String) -> Unit = {
-<span class="lineno"> 1115 </span>        model.navigate(it)
-<span class="lineno"> 1116 </span>        onLocationChosen()
+<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:1117</span>: <span class="message">Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize</span><br /><pre class="errorlines">
+<span class="lineno"> 1114 </span>    onLocationChosen: () -> Unit = {},
+<span class="lineno"> 1115 </span>    onClose: (() -> Unit)? = <span class="keyword">null</span>,
+<span class="lineno"> 1116 </span>) {
+<span class="caretline"><span class="lineno"> 1117 </span>    <span class="keyword">val</span> short = <span class="warning">LocalConfiguration.current.screenHeightDp</span> &lt; <span class="number">480</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 1118 </span>    <span class="keyword">val</span> navigate: (String) -> Unit = {
+<span class="lineno"> 1119 </span>        model.navigate(it)
+<span class="lineno"> 1120 </span>        onLocationChosen()
 </pre>
 
 <span class="location"><a href="../../src/main/java/dev/findroid/HousekeepingDialog.kt">../../src/main/java/dev/findroid/HousekeepingDialog.kt</a>:50</span>: <span class="message">Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize</span><br /><pre class="errorlines">
@@ -1083,14 +1083,14 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:1338</span>: <span class="message">Modifier parameter should be the first optional parameter</span><br /><pre class="errorlines">
-<span class="lineno"> 1335 </span>    enabled: Boolean = <span class="keyword">true</span>,
-<span class="lineno"> 1336 </span>    badge: String? = <span class="keyword">null</span>,
-<span class="lineno"> 1337 </span>    dot: Color? = <span class="keyword">null</span>,
-<span class="caretline"><span class="lineno"> 1338 </span>    <span class="warning">modifier</span>: Modifier = Modifier,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 1339 </span>    onClick: () -> Unit,
-<span class="lineno"> 1340 </span>) {
-<span class="lineno"> 1341 </span>    Row(
+<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:1342</span>: <span class="message">Modifier parameter should be the first optional parameter</span><br /><pre class="errorlines">
+<span class="lineno"> 1339 </span>    enabled: Boolean = <span class="keyword">true</span>,
+<span class="lineno"> 1340 </span>    badge: String? = <span class="keyword">null</span>,
+<span class="lineno"> 1341 </span>    dot: Color? = <span class="keyword">null</span>,
+<span class="caretline"><span class="lineno"> 1342 </span>    <span class="warning">modifier</span>: Modifier = Modifier,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 1343 </span>    onClick: () -> Unit,
+<span class="lineno"> 1344 </span>) {
+<span class="lineno"> 1345 </span>    Row(
 </pre>
 
 <span class="location"><a href="../../src/main/java/dev/findroid/RefinedChrome.kt">../../src/main/java/dev/findroid/RefinedChrome.kt</a>:270</span>: <span class="message">Modifier parameter should be the first optional parameter</span><br /><pre class="errorlines">
@@ -1439,14 +1439,14 @@ Dismiss</button>            </div>
 <span class="lineno">  21 </span>    internal <span class="keyword">fun</span> &lt;T> withHistoryPublication(publish: ((File, File) -> Unit)?, work: () -> T): T {
 </pre>
 
-<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:1254</span>: <span class="message">Consider also using <code>StorageManager#getAllocatableBytes</code> and <code>allocateBytes</code> which will consider clearable cached data</span><br /><pre class="errorlines">
-<span class="lineno"> 1251 </span>             value =
-<span class="lineno"> 1252 </span>                 withContext(Dispatchers.IO) {
-<span class="lineno"> 1253 </span>                     <span class="keyword">val</span> root = <span class="keyword">if</span> (model.hasAccess) model.deviceRoot <span class="keyword">else</span> model.workspace
-<span class="caretline"><span class="lineno"> 1254 </span>                     root.<span class="warning">usableSpace</span> to root.totalSpace&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 1255 </span>                 }
-<span class="lineno"> 1256 </span>         }
-<span class="lineno"> 1257 </span>     <span class="keyword">if</span> (!short)
+<span class="location"><a href="../../src/main/java/dev/findroid/FinderApp.kt">../../src/main/java/dev/findroid/FinderApp.kt</a>:1258</span>: <span class="message">Consider also using <code>StorageManager#getAllocatableBytes</code> and <code>allocateBytes</code> which will consider clearable cached data</span><br /><pre class="errorlines">
+<span class="lineno"> 1255 </span>             value =
+<span class="lineno"> 1256 </span>                 withContext(Dispatchers.IO) {
+<span class="lineno"> 1257 </span>                     <span class="keyword">val</span> root = <span class="keyword">if</span> (model.hasAccess) model.deviceRoot <span class="keyword">else</span> model.workspace
+<span class="caretline"><span class="lineno"> 1258 </span>                     root.<span class="warning">usableSpace</span> to root.totalSpace&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 1259 </span>                 }
+<span class="lineno"> 1260 </span>         }
+<span class="lineno"> 1261 </span>     <span class="keyword">if</span> (!short)
 </pre>
 
 <span class="location"><a href="../../src/debug/java/dev/findroid/testing/FixtureDocumentsProvider.kt">../../src/debug/java/dev/findroid/testing/FixtureDocumentsProvider.kt</a>:113</span>: <span class="message">Consider also using <code>StorageManager#getAllocatableBytes</code> and <code>allocateBytes</code> which will consider clearable cached data</span><br /><pre class="errorlines">

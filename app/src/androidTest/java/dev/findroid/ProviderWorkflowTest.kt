@@ -11,6 +11,11 @@ import org.junit.Rule
 import org.junit.Test
 
 class ProviderWorkflowTest {
+    @org.junit.Before
+    fun resetOwnedUndoSessionForFixture() {
+        compose.runOnIdle { resetOwnedUndoFixture(compose.activity.model) }
+    }
+
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
 
     @org.junit.Before
@@ -174,8 +179,8 @@ class ProviderWorkflowTest {
         compose.waitUntil(10_000) { copy.exists() }
         loaded()
         assertTrue(File(fixture, "Notes.md").exists())
-        copy.renameTo(File(local, "Moved.md"))
-        val moved = File(local, "Moved.md")
+        // Keep the tracked copy intact. An external rename correctly blocks saved Undo.
+        val moved = File(local, "Moved.md").apply { writeText(copy.readText()) }
         compose.runOnIdle { compose.activity.model.transferPaths(listOf(moved.path), root, true) }
         compose.waitUntil(10_000) { !moved.exists() && File(fixture, "Moved.md").exists() }
         loaded()
@@ -185,6 +190,7 @@ class ProviderWorkflowTest {
         compose.runOnIdle { compose.activity.model.redo() }
         compose.waitUntil(10_000) { !moved.exists() && File(fixture, "Moved.md").exists() }
         loaded()
+        assertEquals(File(fixture, "Notes.md").readText(), copy.readText())
     }
 
     @Test

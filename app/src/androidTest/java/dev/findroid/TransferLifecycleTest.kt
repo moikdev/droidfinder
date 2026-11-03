@@ -45,6 +45,7 @@ class TransferLifecycleTest {
         lateinit var model: FinderModel
         scenario.onActivity {
             model = it.model
+            resetOwnedUndoFixture(model)
             model.connectLocation(
                 DocumentsContract.buildTreeDocumentUri(
                     "dev.findroid.fixtures",

@@ -15,6 +15,11 @@ import org.junit.Assert.*
 
 /** Real native input verifies pinning separately from the sidebar's transfer destinations. */
 class FavoritesDragWorkflowTest {
+    @org.junit.Before
+    fun resetOwnedUndoSessionForFixture() {
+        compose.runOnIdle { resetOwnedUndoFixture(compose.activity.model) }
+    }
+
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
     private val model get() = compose.activity.model
     private lateinit var base: File

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.ExplorerLauncherTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:39.447Z" hostname="MacBook-Pro-2.local" time="0.005">
+<testsuite name="dev.findroid.ExplorerLauncherTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:11.393Z" hostname="MacBook-Pro-2.local" time="0.005">
   <properties/>
   <testcase name="findsWordsAcrossNamesDescriptionsAndFullPaths" classname="dev.findroid.ExplorerLauncherTest" time="0.002"/>
   <testcase name="launcherBindingsWorkWhileEditingWithoutChangingAddressShortcuts" classname="dev.findroid.ExplorerLauncherTest" time="0.003"/>

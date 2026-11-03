@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.MultiRootPersistenceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:40.063Z" hostname="MacBook-Pro-2.local" time="0.005">
+<testsuite name="dev.findroid.MultiRootPersistenceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:12.019Z" hostname="MacBook-Pro-2.local" time="0.005">
   <properties/>
   <testcase name="smartFolderSecondaryRepairMaterializesIndependentRulesWithoutChangingTheSavedSearch" classname="dev.findroid.MultiRootPersistenceTest" time="0.002"/>
   <testcase name="workspaceRecoveryInventoriesChosenRootsWithoutScanningHiddenLayoutsOrOldHistory" classname="dev.findroid.MultiRootPersistenceTest" time="0.0"/>

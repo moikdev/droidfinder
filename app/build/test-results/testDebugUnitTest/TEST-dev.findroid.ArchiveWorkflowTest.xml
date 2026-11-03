@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.ArchiveWorkflowTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:38.617Z" hostname="MacBook-Pro-2.local" time="0.163">
+<testsuite name="dev.findroid.ArchiveWorkflowTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:10.497Z" hostname="MacBook-Pro-2.local" time="0.181">
   <properties/>
-  <testcase name="aliasesCollisionsAndUnselectedUnsafeNamesAreRejected" classname="dev.findroid.ArchiveWorkflowTest" time="0.049"/>
-  <testcase name="declaredAndActualBudgetsAndRatioAreEnforced" classname="dev.findroid.ArchiveWorkflowTest" time="0.037"/>
-  <testcase name="crcCorruptionIsReportedAndNeverPublished" classname="dev.findroid.ArchiveWorkflowTest" time="0.014"/>
-  <testcase name="selectedFilesAndFoldersPreservePathsAndDoNotExtractOthers" classname="dev.findroid.ArchiveWorkflowTest" time="0.011"/>
-  <testcase name="capacityFailureAndEntryLimitsLeaveNoOutput" classname="dev.findroid.ArchiveWorkflowTest" time="0.031"/>
-  <testcase name="optionalCompressionMethodsAreRejectedBeforeOpeningStreams" classname="dev.findroid.ArchiveWorkflowTest" time="0.006"/>
-  <testcase name="cancelledExtractionRollsBackAndCheckingDoesNotClaimSuccess" classname="dev.findroid.ArchiveWorkflowTest" time="0.008"/>
-  <testcase name="zip64DirectoryAndLocalHeadersWorkWithoutLargeAllocations" classname="dev.findroid.ArchiveWorkflowTest" time="0.007"/>
+  <testcase name="aliasesCollisionsAndUnselectedUnsafeNamesAreRejected" classname="dev.findroid.ArchiveWorkflowTest" time="0.048"/>
+  <testcase name="declaredAndActualBudgetsAndRatioAreEnforced" classname="dev.findroid.ArchiveWorkflowTest" time="0.031"/>
+  <testcase name="crcCorruptionIsReportedAndNeverPublished" classname="dev.findroid.ArchiveWorkflowTest" time="0.015"/>
+  <testcase name="selectedFilesAndFoldersPreservePathsAndDoNotExtractOthers" classname="dev.findroid.ArchiveWorkflowTest" time="0.01"/>
+  <testcase name="capacityFailureAndEntryLimitsLeaveNoOutput" classname="dev.findroid.ArchiveWorkflowTest" time="0.041"/>
+  <testcase name="optionalCompressionMethodsAreRejectedBeforeOpeningStreams" classname="dev.findroid.ArchiveWorkflowTest" time="0.008"/>
+  <testcase name="cancelledExtractionRollsBackAndCheckingDoesNotClaimSuccess" classname="dev.findroid.ArchiveWorkflowTest" time="0.013"/>
+  <testcase name="zip64DirectoryAndLocalHeadersWorkWithoutLargeAllocations" classname="dev.findroid.ArchiveWorkflowTest" time="0.015"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
