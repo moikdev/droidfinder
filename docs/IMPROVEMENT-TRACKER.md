@@ -42,7 +42,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 36 | Broaden Android picker testing | Open. Needs physical devices and actual third-party editing apps. |
 | 37 | Run independent transfers concurrently | Open. Implementation and focused acceptance pending. |
 | 38 | Strengthen background transfers | Open. Implementation and focused acceptance pending. |
-| 39 | Improve throughput and time estimates | In progress for 0.42.0: 525 JVM checks, 405 native cases per API30/API36 tablet in 47 fresh-process batches, and optimized upgrade/copy/wait/recovery/pause/cancellation/layout acceptance pass. Public OTA and immutable evidence acceptance remain pending. See [transfer progress](TRANSFER-PROGRESS.md). |
+| 39 | Improve throughput and time estimates | In progress for 0.42.0: 525 JVM checks, 405 native cases per API30/API36 tablet in 47 fresh-process batches, and optimized upgrade/copy/wait/recovery/pause/cancellation/layout acceptance pass. Real public 0.41 → 0.42 OTA passes on both tablets and production-source API36 passes 1/1. Immutable archive verification remains pending. See [transfer progress](TRANSFER-PROGRESS.md). |
 | 40 | Offer optional verification for important copies | Open. Implementation and focused acceptance pending. |
 | 41 | Support durable partial-copy resume where safe | Open. Implementation and focused acceptance pending. |
 | 42 | Make Undo survive restarts | Open. Implementation and focused acceptance pending. |

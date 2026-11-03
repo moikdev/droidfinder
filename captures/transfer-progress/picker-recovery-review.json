@@ -1,0 +1,22 @@
+{
+  "actualMissingActionXmlExercised": true,
+  "actualFinalRecoveryPassed": true,
+  "checkerSha256": "19e5e7d9251ac1369b30695536ac08741cac13ea012fa1534d6bd8bfad7e5f52",
+  "localDirectoryHierarchiesNotRetained": true,
+  "actualGrantOnlyForSyntheticProvider": true,
+  "explanation": "The retained Android11 OPEN_DOCUMENT_TREE view contains both synthetic files and no folder-selection action. Switching to the known emulator internal root and back refreshed the picker. The intermediate root is used only for navigation and no permission is requested there. The accepted final run exercises this bounded path and restores every original permission and495 managed files.",
+  "files": [
+    {
+      "path": "captures/transfer-progress/api30-optimized-picker-missing-action/verification.json",
+      "sha256": "28332ff220c2b684742b8b698d6e922c7545d0674a64c47771caba69a0d433b4"
+    },
+    {
+      "path": "captures/transfer-progress/api30-optimized-picker-missing-action/system-picker-fixture.xml",
+      "sha256": "44974239ba2638e429473ca4ec8807ab704726c0bbe389a15a6edf5ad929a12e"
+    },
+    {
+      "path": "captures/transfer-progress/api30-optimized-picker-missing-action/picker-after-restoration.png",
+      "sha256": "6a17f96110fc220fa172639b7e19c9540abd5cabcb1fd5600df00c5a198aacf0"
+    }
+  ]
+}

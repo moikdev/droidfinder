@@ -1,0 +1,155 @@
+{
+  "applicationAndNativeTestApksUnchanged": true,
+  "api30FailedAttemptAccepted": false,
+  "api30Failure": "The version and installed-byte assertions passed, but the immediate am start -W timed out while PackageManager still held the package frozen.",
+  "api30FailureLog": "api30-ota-before-installer-completion-wait-host.txt",
+  "api30SystemLog": "api30-ota-package-frozen.txt",
+  "api36EarlierSuccessExcludedFromFinalAcceptance": true,
+  "correction": "Wait for the actual system installer App installed./Done completion screen before relaunch; retain all UI, public-byte, file and metadata assertions.",
+  "retainedAttempts": [
+    {
+      "path": "api30-ota-before-installer-completion-wait/available.png",
+      "bytes": 158421,
+      "sha256": "d2f93f80787f25a2ccd92bf94803f6584714348bcba4ab2d564ab60cb4b1dead"
+    },
+    {
+      "path": "api30-ota-before-installer-completion-wait/available.xml",
+      "bytes": 7736,
+      "sha256": "63354c08d56280f73a6da4c1ccb2de9041cebd7670eb770f6fcb6bbda411be1b"
+    },
+    {
+      "path": "api30-ota-before-installer-completion-wait/browser.xml",
+      "bytes": 43684,
+      "sha256": "bb0447b2b03b8a09bba39aac419252c69ca79f1945fc1ea6c8f76a7ff087c7e8"
+    },
+    {
+      "path": "api30-ota-before-installer-completion-wait/installer.png",
+      "bytes": 154583,
+      "sha256": "8e0ccc48400ba321bac6029279def5b0d19e0998c67bb13b52123ec7f4839004"
+    },
+    {
+      "path": "api30-ota-before-installer-completion-wait/installer.xml",
+      "bytes": 6032,
+      "sha256": "2bf10c2bc1a339e357a50ff77adccec01d1e2ca7c05a3c791d888b6fe6d4fc18"
+    },
+    {
+      "path": "api30-ota-before-installer-completion-wait/more.xml",
+      "bytes": 10869,
+      "sha256": "3d81769589d68a656e8540994fe6818182cdfde3e8e290260bb1ec2d4a6ed5c0"
+    },
+    {
+      "path": "api30-ota-before-installer-completion-wait/ready.png",
+      "bytes": 165853,
+      "sha256": "95bcbb5f57a40aaf35de8c0cfc395ec02297858d57aea0e7d93d72891aa7fe7e"
+    },
+    {
+      "path": "api30-ota-before-installer-completion-wait/ready.xml",
+      "bytes": 8155,
+      "sha256": "7d37d51d2fbe6af28062f3316e0f828f3eb049e6e83f4bdf8ce0e8d6f622076f"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/available.png",
+      "bytes": 171975,
+      "sha256": "71d070f5265c333592fc3d19a4e9cf23f0d7c4228740b525c283b9e6a1c4fb48"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/available.xml",
+      "bytes": 8308,
+      "sha256": "71e8f078b7c74d969d4be56322d1b26baa26789c204232dd6a444da9b26ace93"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/browser.xml",
+      "bytes": 46472,
+      "sha256": "8dd7f589de937cae41f75bae9e7dfeadd06a32032ab8b6e2ff32613028a461cc"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/installer.png",
+      "bytes": 163537,
+      "sha256": "c59d175e046fbf5f7bc4046c0cf865aec66394084433fa5f056a6e70b3353af6"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/installer.xml",
+      "bytes": 6341,
+      "sha256": "e8caa67bd23b5bad4c1105192c7e5383960378bdddd8f3640f7a791e77caeec4"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/more.xml",
+      "bytes": 11727,
+      "sha256": "18c8c89436057065325a2cbd6ed7f61a070e9ba010d7c6ec0a0662e17be4b263"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/ready.png",
+      "bytes": 179588,
+      "sha256": "bc321ba9a6b0fb792313140908ab620d2e2fd0e99bd8ef8f6cabf3de5e9af2af"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/ready.xml",
+      "bytes": 8753,
+      "sha256": "ad2eef670e67bc2061a53307f50cdd9ce8ca2b0cf2d690be520d46195472235d"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/up-to-date.png",
+      "bytes": 143772,
+      "sha256": "8c5b056c66f02be1211df5941ca438443c4c0335c6e64af2ba1274faced2dc45"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/up-to-date.xml",
+      "bytes": 7583,
+      "sha256": "8a8cd84d5f1e4bcc3afec081613df1e5bbf8b90004b95bf45453c31bc763d4eb"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/upgraded-sidebar.png",
+      "bytes": 133417,
+      "sha256": "94908da87bf1b59c424540d2ad38d3f95c8a0439c786967b2e57039ccfee05a8"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/upgraded-sidebar.xml",
+      "bytes": 46472,
+      "sha256": "8dd7f589de937cae41f75bae9e7dfeadd06a32032ab8b6e2ff32613028a461cc"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait/verification.json",
+      "bytes": 454,
+      "sha256": "9e5033fa41d43087c3fc7101fceb480ea520c5f88e078eba546781c2757c407c"
+    },
+    {
+      "path": "api30-ota-cached-download-attempt/available.xml",
+      "bytes": 8155,
+      "sha256": "7d37d51d2fbe6af28062f3316e0f828f3eb049e6e83f4bdf8ce0e8d6f622076f"
+    },
+    {
+      "path": "api30-ota-cached-download-attempt/browser.xml",
+      "bytes": 43684,
+      "sha256": "20fde4cfa7b8d61e9d8d63179034cde9b738f66c0ab977e6b7d153b2da18b997"
+    },
+    {
+      "path": "api30-ota-cached-download-attempt/more.xml",
+      "bytes": 10869,
+      "sha256": "3d81769589d68a656e8540994fe6818182cdfde3e8e290260bb1ec2d4a6ed5c0"
+    },
+    {
+      "path": "api30-ota-before-installer-completion-wait-host.txt",
+      "bytes": 3479,
+      "sha256": "800181d0c80ad8db81ec33d75e3ac7b75623a83b945db36e21527699c63dc9c8"
+    },
+    {
+      "path": "api36-ota-before-installer-completion-wait-host.txt",
+      "bytes": 454,
+      "sha256": "9e5033fa41d43087c3fc7101fceb480ea520c5f88e078eba546781c2757c407c"
+    },
+    {
+      "path": "api30-ota-cached-download-attempt-host.txt",
+      "bytes": 678,
+      "sha256": "872af8b8620ce75ffb436e000af52df8046d4e46db422b81ecf3fd9c4c231497"
+    },
+    {
+      "path": "api30-ota-package-frozen.txt",
+      "bytes": 209,
+      "sha256": "66ef69edb66e011d0a3670d8bfb959b80ef1261986cc1f2096e6218d12ef8921"
+    }
+  ],
+  "api30RetryCachedDownloadExcluded": true,
+  "api30RetryCachedDownloadReason": "The earlier failed attempt left the correctly verified APK in cache; the available-screen assertion correctly refused to count Install update as a fresh public download. Restore the immutable original cache before the accepted retry.",
+  "retainedScreenshotsInspected": true,
+  "acceptedRetriesHaveFreshPublicDownloadsAndInstallerCompletion": true
+}

@@ -180,14 +180,15 @@ def local(expected):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--local-only',action='store_true');p.add_argument('--output',type=Path);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--local-only',action='store_true');p.add_argument('--list-files',action='store_true');p.add_argument('--output',type=Path);a=p.parse_args()
     preview=ROOT/'app/build/outputs/apk/preview/app-preview.apk';expected=sha(preview)
     files,native_count=local(expected)
     summary=dict(localAcceptancePassed=True,previewApkSha256=expected,jvmCases=525,nativeCasesPerApi=native_count,isolatedBatchesPerApi=47)
     (PROOF/'local-acceptance.json').write_text(json.dumps(summary,indent=2)+'\n')
     if a.local_only:print(json.dumps(summary,indent=2));return
-    assert a.output is not None and not a.output.exists()
-    assert not subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip(),'Commit the exact evidence snapshot first'
+    if not a.list_files:
+        assert a.output is not None and not a.output.exists()
+        assert not subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip(),'Commit the exact evidence snapshot first'
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip();info=read(RELEASE/'BUILDINFO.json')
     assert info['version']=='0.42.0-preview' and int(info['version_code'])==44 and not info['working_tree_dirty']
     assert info['artifacts'][0]['sha256']==expected
@@ -202,7 +203,7 @@ def main():
     for api in (30,36):
         folder=PROOF/f'api{api}-ota';ota=read(folder/'verification.json')
         assert (ota['fromVersionCode'],ota['toVersionCode'])==(43,44) and ota['restoredApkSha256']==expected
-        assert all(ota[key] for key in ('publicFeedDownloadAndAndroidInstall','installedApkMatchesPublicBytes','originalFileBytes','legacyFavoritePreserved','sentinelPreferencePreserved','updatedSidebarVisible','noRepeatOffer','restoredOriginalSetup'))
+        assert all(ota[key] for key in ('publicFeedDownloadAndAndroidInstall','installedApkMatchesPublicBytes','installerCompletionConfirmedBeforeRelaunch','originalFileBytes','legacyFavoritePreserved','sentinelPreferencePreserved','updatedSidebarVisible','noRepeatOffer','restoredOriginalSetup'))
         files += [folder/'verification.json']+list(folder.glob('*.png'))+list(folder.glob('*.xml'))
     public=read(PROOF/'public-downloads.json')
     assert public['public'] and public['sourceCommit']==info['source_commit'] and len(public['assets'])==5
@@ -214,6 +215,19 @@ def main():
     ota_review=read(PROOF/'ota-visual-review.json')
     assert ota_review['actualScreenshotInspected'] and ota_review['sha256']==sha(PROOF/'api30-ota/up-to-date.png')
     assert sha(ROOT/'docs/screenshots/app-updates-0420.png')==ota_review['sha256']
+    assert ota_review['actualScreenshotsInspected']
+    actual_ota_images={str(path.relative_to(PROOF)) for api in (30,36) for path in (PROOF/f'api{api}-ota').glob('*.png')}
+    assert {row['path'] for row in ota_review['images']}==actual_ota_images
+    for row in ota_review['images']:
+        path=PROOF/row['path'];assert path.is_relative_to(PROOF) and sha(path)==row['sha256']
+    correction=read(PROOF/'ota-installer-readiness-correction.json')
+    assert correction['applicationAndNativeTestApksUnchanged'] and not correction['api30FailedAttemptAccepted']
+    assert correction['api36EarlierSuccessExcludedFromFinalAcceptance'] and correction['api30RetryCachedDownloadExcluded']
+    for row in correction['retainedAttempts']:
+        path=PROOF/row['path']
+        assert path.is_relative_to(PROOF) and sha(path)==row['sha256'] and path.stat().st_size==row['bytes']
+        files.append(path)
+    files += [PROOF/'ota-installer-readiness-correction.json',PROOF/'api30-ota-package-frozen.txt']
     assert read(PROOF/'signing-continuity.json')['sameSigningCertificate']
     for name in ('public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','signing-continuity.json','local-acceptance.json','ota-visual-review.json','verify-public.py','run-live-feed.py','restore-public-tablets.py','docs-screenshot-provenance.json'):
         files.append(PROOF/name)
@@ -223,6 +237,8 @@ def main():
         assert path.suffix not in {'.apk','.db','.sqlite','.jks','.keystore','.bin','.tar'}
         assert not any(part in {'native-original','accepted-build','private-native-state','private-native-screenshots'} for part in path.parts)
         assert 'PRIVATE' not in path.name and 'bugreport' not in path.name
+    if a.list_files:
+        print(json.dumps([str(path.relative_to(ROOT)) for path in files],indent=2));return
     native_commit=subprocess.check_output(['git','log','-1','--format=%H',info['source_commit'],'--','app/src/androidTest'],cwd=ROOT,text=True).strip()
     manifest=dict(applicationSourceCommit=info['source_commit'],nativeTestSourceCommit=native_commit,evidenceCommit=commit,previewApkSha256=expected,jvmCases=525,nativeCasesPerApi=native_count,isolatedBatchesPerApi=47,files=[dict(path=str(path.relative_to(ROOT)),bytes=path.stat().st_size,sha256=sha(path)) for path in files])
     a.output.parent.mkdir(parents=True,exist_ok=True)

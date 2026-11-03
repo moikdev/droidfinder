@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.DragPrecisionTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-03T11:47:18.526Z" hostname="MacBook-Pro-2.local" time="0.001">
+  <properties/>
+  <testcase name="onePixelEventsAtTabletDensityAccumulateInBothDirections" classname="dev.findroid.DragPrecisionTest" time="0.001"/>
+  <testcase name="reversingAndStartingAnotherGestureDoesNotLeakMotion" classname="dev.findroid.DragPrecisionTest" time="0.0"/>
+  <testcase name="smallViewportsKeepANeutralCenter" classname="dev.findroid.DragPrecisionTest" time="0.0"/>
+  <testcase name="edgesAccelerateAndStopOutsideTheViewportOrInTheCenter" classname="dev.findroid.DragPrecisionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

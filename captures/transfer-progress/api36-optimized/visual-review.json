@@ -1,0 +1,112 @@
+{
+  "actualScreenshotsInspected": true,
+  "accepted": true,
+  "reviewMethod": "Visually inspected all four API36 contact sheets, covering every one of20 actual optimized screenshots, and compared the600dp/font1.6 strip with the reviewed final API30 layout.",
+  "findings": [
+    "All six dialog layouts show complete title, current file, paused byte count and reachable Resume, Cancel, Details, Open folder and Close controls.",
+    "All six compact-strip layouts retain readable filename and byte count; narrow panes and enlarged text use a separate controls row.",
+    "The600dp/font1.6 strip now shows the full synthetic filename and the byte count rather than the rejected10dp text column.",
+    "Provider wait contains no invented rate or ETA; recovery shows recent throughput and a phase-specific estimate; pause hides both.",
+    "Unknown-size copying shows processed bytes and recent speed without a guessed total or remaining time.",
+    "The real system picker selects the read-only synthetic root; cancellation and completed history are visible.",
+    "Only synthetic filenames and the seeded setup appear in these public screenshots."
+  ],
+  "images": [
+    {
+      "name": "1280dp-font1.0-paused.png",
+      "sha256": "2d0dc15fe3eaf3914300b7fd7256a4cd8952af24e9eb0b72a8d710ab1873f0fa"
+    },
+    {
+      "name": "1280dp-font1.0-strip.png",
+      "sha256": "4beefca9a1c6e03abce405af84c6b59fe483f32ff0b6960245308634585e8580"
+    },
+    {
+      "name": "1280dp-font1.6-paused.png",
+      "sha256": "bfea58bca3f73c19ce64f02869e54886b770d3572ff8c617b4796bc013b13be3"
+    },
+    {
+      "name": "1280dp-font1.6-strip.png",
+      "sha256": "e8c453ba5fec76e86e0d095d6513b7fc5ce608c8635d83cfd02337dd7d34af35"
+    },
+    {
+      "name": "600dp-font1.0-paused.png",
+      "sha256": "0699710d6c42297232b9870d3e8f4a7a498448587ebc2aed3c755c025a64ad67"
+    },
+    {
+      "name": "600dp-font1.0-strip.png",
+      "sha256": "8de0567372c08c7853828dcc173140547b6729b1b06d2b6c9379190aca77a5f6"
+    },
+    {
+      "name": "600dp-font1.6-paused.png",
+      "sha256": "df85a902630026d9417ba5527eecfff525216e97a4ef92afefda1c26bb1f2dd3"
+    },
+    {
+      "name": "600dp-font1.6-strip.png",
+      "sha256": "d842bab4c9b12bf8fa754ffd7e0ccf583902a30c108d0b838cc55ecc32317df8"
+    },
+    {
+      "name": "800dp-font1.0-paused.png",
+      "sha256": "0dd6aa16578a7434282aa0055af25ad8bfaf1d607d0db40b965cc12dafd92f16"
+    },
+    {
+      "name": "800dp-font1.0-strip.png",
+      "sha256": "90035c836aa603604bd62a5b1da69c538b1373c7637ef8d7f49b0f9ac1b3b82a"
+    },
+    {
+      "name": "800dp-font1.6-paused.png",
+      "sha256": "df21df88883878a29b9f9102ee356b8fbb3ffd6509fb424b04bcc426f7fce551"
+    },
+    {
+      "name": "800dp-font1.6-strip.png",
+      "sha256": "4351b88070fa6d60d20a4054506fb9f9dd1ff0c537609b1634684fa41521c188"
+    },
+    {
+      "name": "cancel-wait.png",
+      "sha256": "0f4b675a3cff796a0e29e007dfbe9c35a8e29883e9821a51ebd9cf5130927b35"
+    },
+    {
+      "name": "cancelled.png",
+      "sha256": "bd99e9dcc264bd062ae9d470bf56489a2d7d701e96fae9200b91f931dc98e66d"
+    },
+    {
+      "name": "contact-1280dp.png",
+      "sha256": "8fb347ae8f386e19e8aee274c2604b3924d9fae6d61b4a2a74ec55bda2c621ad"
+    },
+    {
+      "name": "contact-600dp.png",
+      "sha256": "38a1f364ed68a4715d576f9b24ac93c00f9341251de8a86403a240fa20e33710"
+    },
+    {
+      "name": "contact-800dp.png",
+      "sha256": "61d679d2fa8692e362bbf6d6a927b382f83b22508c091bc38756c78dd6d78270"
+    },
+    {
+      "name": "contact-states.png",
+      "sha256": "cb9137f0cd63014d848e11f999e8b131b88688b6c6643a3f02dc31b21d7fccf0"
+    },
+    {
+      "name": "paused.png",
+      "sha256": "2d0dc15fe3eaf3914300b7fd7256a4cd8952af24e9eb0b72a8d710ab1873f0fa"
+    },
+    {
+      "name": "previous-public.png",
+      "sha256": "1424b44bc5bea1656e2daa1b280271343f84ac9a0e8aacd8c763a92ecb013ae9"
+    },
+    {
+      "name": "provider-wait.png",
+      "sha256": "6f7941e5b96e0ee36e477ccefd5781a6ec96433ec2db673f944db76b79d06194"
+    },
+    {
+      "name": "recent-rate.png",
+      "sha256": "84765d2d3e13314638382c41ef5bec5a43be31276570762cc249aeb991e16967"
+    },
+    {
+      "name": "system-picker-fixture.png",
+      "sha256": "1e188f923217cf091d06348d34461e7b95b38bcdaa54344477e45d5c4d6c12c3"
+    },
+    {
+      "name": "unknown-size.png",
+      "sha256": "05dfe13857783cae786b461b09d985d82a94aa730a2985be1c0b1e4abd317506"
+    }
+  ]
+}

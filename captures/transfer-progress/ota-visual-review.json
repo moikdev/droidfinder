@@ -1,0 +1,68 @@
+{
+  "actualScreenshotInspected": true,
+  "actualScreenshotsInspected": true,
+  "sha256": "f67e80f7260686d705b28dfb423cdb2cf678db17cef72e7331489d1406b7138c",
+  "images": [
+    {
+      "path": "api30-ota/available.png",
+      "sha256": "840973eb20fb1ed8a4d4f06c70c2604d5950bf1cb0bd443346141a1d8bb7f357",
+      "api": 30
+    },
+    {
+      "path": "api30-ota/installer-complete.png",
+      "sha256": "5bce1d9faf4a7ee9dc6a8c46d4ba1d39d1a553d819fde41f46031298591362c9",
+      "api": 30
+    },
+    {
+      "path": "api30-ota/installer.png",
+      "sha256": "cc3e2ffdfbb2d0921f287a5b1376a69769bd9197743eaf861d6b2c835598fa12",
+      "api": 30
+    },
+    {
+      "path": "api30-ota/ready.png",
+      "sha256": "f3a0c1700c68cb46cf4a0ee8c6548f64464d2d23be3b8ccd07a8c57249c9eea4",
+      "api": 30
+    },
+    {
+      "path": "api30-ota/up-to-date.png",
+      "sha256": "f67e80f7260686d705b28dfb423cdb2cf678db17cef72e7331489d1406b7138c",
+      "api": 30
+    },
+    {
+      "path": "api30-ota/upgraded-sidebar.png",
+      "sha256": "861dd8e650c808787d35dd573adbf21f6a23bc368f0d6d35ddad6080ba438457",
+      "api": 30
+    },
+    {
+      "path": "api36-ota/available.png",
+      "sha256": "7335968e6e9ad51d542f8fa15f5c57635f7adc0a84ae087cf53ac27e6cd1459d",
+      "api": 36
+    },
+    {
+      "path": "api36-ota/installer-complete.png",
+      "sha256": "659e3d5d45c957f8bc120d84a79fab2bc2dfbe9ca23ab4e75c9e2054224b2bb9",
+      "api": 36
+    },
+    {
+      "path": "api36-ota/installer.png",
+      "sha256": "877b2b640e985896e7797bff2870a9a691805f308d4e7aa6f0a2c03d3b20dbc4",
+      "api": 36
+    },
+    {
+      "path": "api36-ota/ready.png",
+      "sha256": "e75e32d1dfc8d1f74159827359859359a7762a4c5a22efe03ebfcc962204c4c0",
+      "api": 36
+    },
+    {
+      "path": "api36-ota/up-to-date.png",
+      "sha256": "15fbfd74695719919af1997f5e1a58fcf7b3617671106f24d1279fc5af3c42e9",
+      "api": 36
+    },
+    {
+      "path": "api36-ota/upgraded-sidebar.png",
+      "sha256": "d1a798672ecd45b433ba8bd3778496b276b78724ae33317e7733184b9024630d",
+      "api": 36
+    }
+  ],
+  "review": "Inspected both six-state contact sheets and the full API30 up-to-date capture. The release offer, download-ready state, system installer prompt and actual completion, preserved synthetic Favorite/document, and final installed 0.42.0 up-to-date state are readable. Only default and synthetic app locations are shown."
+}

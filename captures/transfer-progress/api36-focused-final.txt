@@ -1,0 +1,52 @@
+INSTRUMENTATION_STATUS: class=dev.findroid.TransferProgressWorkflowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+dev.findroid.TransferProgressWorkflowTest:
+INSTRUMENTATION_STATUS: test=providerWaitExplainsTheDelayAndARecoveredCopyShowsRecentRate
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.TransferProgressWorkflowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=providerWaitExplainsTheDelayAndARecoveredCopyShowsRecentRate
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.TransferProgressWorkflowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=cancellingAWaitingProviderKeepsOriginalsAndStopsTheSampler
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.TransferProgressWorkflowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=cancellingAWaitingProviderKeepsOriginalsAndStopsTheSampler
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.MultiRootSearchWorkflowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+dev.findroid.MultiRootSearchWorkflowTest:
+INSTRUMENTATION_STATUS: test=bothPanesKeepTheirOwnScopesWhenASecondaryProviderDisconnectsAndReconnects
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.MultiRootSearchWorkflowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=bothPanesKeepTheirOwnScopesWhenASecondaryProviderDisconnectsAndReconnects
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 42.445
+
+OK (3 tests)
+
+
+INSTRUMENTATION_CODE: -1

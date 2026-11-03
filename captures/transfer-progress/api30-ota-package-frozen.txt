@@ -1,0 +1,2 @@
+11-03 22:25:29.662   476   496 E ActivityManager: Failure starting process dev.findroid
+11-03 22:25:29.662   476   496 E ActivityManager: java.lang.SecurityException: Package dev.findroid is currently frozen!

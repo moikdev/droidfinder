@@ -1,0 +1,116 @@
+{
+  "rejectedAttemptsExcludedFromAcceptance": true,
+  "applicationSourceUnchangedByTestTimingCorrections": true,
+  "attempts": [
+    {
+      "report": "captures/transfer-progress/api30-focused-native.json",
+      "sha256": "618dc1e823e0b51dca2d9d32558c3e3fbc101439d456f8ed752b38e985227860",
+      "passed": 0,
+      "failed": 2,
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Initial progress-label assertion did not wait for the one-second display clock."
+    },
+    {
+      "report": "captures/transfer-progress/api30-native-before-reconnect-wait/16-MultiRootSearchWorkflowTest-before-retry-1.json",
+      "sha256": "72569fa3fe487e614b8a91fcc85c2115b6a44b3b91be50fe375d4134e8dd598d",
+      "passed": 16,
+      "failed": 1,
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Reconnect assertion accepted pre-refresh idle state while provider connection was still asynchronous; corrected to await actual results in both panes."
+    },
+    {
+      "report": "captures/transfer-progress/api30-native-before-reconnect-wait/16-MultiRootSearchWorkflowTest.json",
+      "sha256": "d27d83557544729eb52f0c5fb4920f3bc4e24682879ec0c3afea5ec9479d217b",
+      "passed": 16,
+      "failed": 1,
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Reconnect assertion accepted pre-refresh idle state while provider connection was still asynchronous; corrected to await actual results in both panes."
+    },
+    {
+      "report": "captures/transfer-progress/api36-focused-native.json",
+      "sha256": "c8d1b995562391ecb0ade0471f93e6f08b979d0dc14c39004c58e2b2ebbdb942",
+      "passed": 0,
+      "failed": 2,
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Initial progress-label assertion did not wait for the one-second display clock."
+    },
+    {
+      "report": "captures/transfer-progress/api36-native-before-reconnect-wait/16-MultiRootSearchWorkflowTest.json",
+      "sha256": "af5029e89ec6929256040f1e13711fab6b50cb2d9867877fad3696ac52857e92",
+      "passed": 16,
+      "failed": 1,
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Reconnect assertion accepted pre-refresh idle state while provider connection was still asynchronous; corrected to await actual results in both panes."
+    },
+    {
+      "report": "captures/transfer-progress/api30-optimized-rejected-strip/verification.json",
+      "sha256": "19dce93c4419a089e83e9a30fcb8513b51cc01bebce22074aaaff2d6e4ee0073",
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Copies and cancellation worked, but600dp/font1.6 squeezed text to10dp; private journal read used non-debuggable APK and cleanup expected a nonexistent Done button. A fixed-URI opt-in native grant bridge and exact private restore recovered the original state. Final acceptance reruns all workflows on the responsive strip APK."
+    },
+    {
+      "report": "captures/transfer-progress/api30-optimized-picker-missing-action/verification.json",
+      "sha256": "28332ff220c2b684742b8b698d6e922c7545d0674a64c47771caba69a0d433b4",
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Android11 system picker retained OPEN_DOCUMENT_TREE but omitted its folder-selection action after the provider was installed/updated. No provider grant or copy was made; all495 private managed files and original grants were restored. The owned picker process is stopped before a fresh exact-checker attempt."
+    },
+    {
+      "report": "captures/transfer-progress/api30-optimized-picker-missing-action-retry/verification.json",
+      "sha256": "28332ff220c2b684742b8b698d6e922c7545d0674a64c47771caba69a0d433b4",
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Stopping the Android11 picker process did not repair its cached-root restoration race. No copies/grants were created;495 original files and permissions were restored. Navigating to another root and back demonstrably restores the missing action; final driver performs this bounded recovery without retaining any local-root hierarchy."
+    },
+    {
+      "report": "captures/transfer-progress/api36-optimized-before-picker-recovery/verification.json",
+      "sha256": "fe43cbeee2c717b25fd71cf74555c323ec9391fd70931042b0fcc319a138e261",
+      "countedTowardFinalAcceptance": false,
+      "explanation": "All optimized acceptance checks passed, including all six actual transfer layouts and443-file private restoration. Repeated with the final identical checker used on both APIs after adding the Android11 cached-root picker recovery."
+    },
+    {
+      "report": "captures/transfer-progress/api30-optimized-disabled-local-root/verification.json",
+      "sha256": "ae8d9c4babde0294bdbf54d119761047a63b620da863bcf9fceafbe76b376a25",
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Picker recovery reached the internal root, whose selection button is intentionally disabled by Android scoped-storage restrictions. The driver now waits for button presence at that intermediate root, then selects only the synthetic root for the actual grant. No user grant was attempted and495 original managed files and original permissions were restored."
+    },
+    {
+      "report": "captures/transfer-progress/api36-optimized-before-local-root-presence/verification.json",
+      "sha256": "84cbbb885f0b4a7048f4e861d8a0bc166104a2d265efd31222d6a27e66241567",
+      "countedTowardFinalAcceptance": false,
+      "explanation": "All optimized workflows and443-file private restoration passed. The final driver changes only the intermediate local-root wait from enabled to visible, respecting Android11 root restrictions. Both APIs are accepted only with that exact final driver; this earlier success is retained but excluded."
+    },
+    {
+      "report": "captures/transfer-progress/api36-final-batches/07-ArchiveWorkflowTest-before-retry-1.json",
+      "sha256": "0f060b824c4b403ea27798d760081b1472e92651cd3e84e21fb40d3418bf8ab4",
+      "passed": 5,
+      "failed": 1,
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Existing ten-second archive-preview UI wait expired in one API36 case. The exact case passes1/1 in an isolated fresh process and the complete six-case batch passes on resumption with the same application/test APK pair. No source change or product fix is claimed."
+    },
+    {
+      "report": "captures/transfer-progress/api36-final-batches/16-MultiRootSearchWorkflowTest-before-retry-1.json",
+      "sha256": "a1d5afacc4f704deb6b5ffdf63fb6ef0075eaa7d1c2047bc3540eb5c5525a51f",
+      "passed": 16,
+      "failed": 1,
+      "countedTowardFinalAcceptance": false,
+      "explanation": "Existing single-pane reconnect test accepted the prior idle state before asynchronous connectLocation finished and refreshed the cloud scope. The expected cloud result was missing at that instant. The exact case passes1/1 and the complete17-case batch passes in fresh processes with the same APK pair. No source change or product fix is claimed."
+    }
+  ],
+  "suiteRestarts": [
+    {
+      "api": 30,
+      "path": "api30-native-before-responsive-strip",
+      "successfulBatches": 17,
+      "interruptedNativeCase": false,
+      "reuseInFinalAcceptance": false
+    },
+    {
+      "api": 36,
+      "path": "api36-native-before-responsive-strip",
+      "successfulBatches": 19,
+      "interruptedBatch": 20,
+      "interruptedNativeCase": true,
+      "onlyExactOwnedFixtureRemoved": true,
+      "reuseInFinalAcceptance": false
+    }
+  ]
+}

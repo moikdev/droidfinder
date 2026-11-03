@@ -1,0 +1,94 @@
+{
+  "success": true,
+  "passed": 16,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "editedFileStopsUndoAndShowsThePersistentReasonWithoutOverwritingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "disconnectedFolderCreationExplainsStorageRecoveryAndPreservesItsScope",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "selectionActionsActivateTheirPaneAndLeaveOnlyOneNamedDragHandle",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyProviderRenameExplainsAndOffersACopyDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsUndoAndRedoShowTheAffectedFolderWithoutLosingOriginals",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyCreationAndKeyboardRenameUseTheSameRecoveryPolicy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsExplainsAnEmptySessionThroughTheNamedMenu",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "anActiveProviderTransferExplainsRenameButStillAllowsQueuedCopyChoices",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyProviderMoveOffersCopyWithoutChangingTheOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsAreSharedAcrossPanesWindowsAndActivityRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "providerHistoryShowsTheActualNameAndGuardsLaterEdits",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "launcherKeepsTheReasonAndOffersTheSameCopyRecovery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "primaryNamesOrderAndBoundsStayFixedAcrossSelectionViewsSearchAndAddress",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "virtualFolderCreationExplainsScopeAndCanChooseARealDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "narrowLargeTextKeepsPrimaryActionsAndRecoveryControlsReachable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "emptyClipboardExplanationDoesNotChangeFilesOrSelection",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 175.4,
+  "timedOut": false
+}

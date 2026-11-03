@@ -1,0 +1,2532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 9.2.1">
+
+    <issue
+        id="OldTargetApi"
+        severity="Warning"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details."
+        category="Correctness"
+        priority="6"
+        summary="Target SDK attribute is not targeting latest version"
+        explanation="When your application or sdk runs on a version of Android that is more recent than your `targetSdk` specifies that it has been tested with, various compatibility modes kick in. This ensures that your application continues to work, but it may look out of place. For example, if the `targetSdk` is less than 14, your app may get an option button in the UI.&#xA;&#xA;To fix this issue, set the `targetSdk` to the highest available value. Then test your app to make sure everything works correctly. You may want to consult the compatibility notes to see what changes apply to each version you are adding support for: https://developer.android.com/reference/android/os/Build.VERSION_CODES.html as well as follow this guide:&#xA;https://developer.android.com/distribute/best-practices/develop/target-sdk.html"
+        url="https://developer.android.com/distribute/best-practices/develop/target-sdk.html"
+        urls="https://developer.android.com/distribute/best-practices/develop/target-sdk.html,https://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        errorLine1="        targetSdk = 36"
+        errorLine2="        ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="12"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        severity="Warning"
+        message="A newer version of Gradle than 9.4.1 is available: 9.8.2"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Android Gradle Plugin Version"
+        explanation="This detector looks for usage of the Android Gradle Plugin where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="distributionUrl=https\://services.gradle.org/distributions/gradle-9.4.1-bin.zip"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/gradle/wrapper/gradle-wrapper.properties"
+            line="3"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of `compileSdk` than 36 is available: 37"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    compileSdk = 36"
+        errorLine2="    ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="8"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.activity:activity-compose than 1.10.1 is available: 1.13.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.activity:activity-compose:1.10.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="51"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.compose.ui:ui than 1.8.3 is available: 1.12.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.compose.ui:ui:1.8.3&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="52"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.compose.ui:ui-tooling-preview than 1.8.3 is available: 1.12.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.compose.ui:ui-tooling-preview:1.8.3&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="53"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="Upgrade `androidx.compose.foundation` for keyboard and mouse support"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.compose.foundation:foundation:1.8.3&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="54"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.compose.material3:material3 than 1.3.1 is available: 1.4.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.compose.material3:material3:1.3.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="55"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.compose.material:material-icons-extended than 1.7.6 is available: 1.7.8"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.compose.material:material-icons-extended:1.7.6&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="56"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.lifecycle:lifecycle-viewmodel-compose than 2.8.7 is available: 2.11.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="57"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.lifecycle:lifecycle-runtime-compose than 2.8.7 is available: 2.11.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.lifecycle:lifecycle-runtime-compose:2.8.7&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="58"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.exifinterface:exifinterface than 1.3.7 is available: 1.4.2"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.exifinterface:exifinterface:1.3.7&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="68"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.core:core-ktx than 1.15.0 is available: 1.19.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.core:core-ktx:1.15.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="74"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.compose.ui:ui-tooling than 1.8.3 is available: 1.12.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    debugImplementation(&quot;androidx.compose.ui:ui-tooling:1.8.3&quot;)"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="76"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.test.ext:junit than 1.2.1 is available: 1.3.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    androidTestImplementation(&quot;androidx.test.ext:junit:1.2.1&quot;)"
+        errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="78"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.test:runner than 1.6.2 is available: 1.7.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    androidTestImplementation(&quot;androidx.test:runner:1.6.2&quot;)"
+        errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="79"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.compose.ui:ui-test-junit4 than 1.8.3 is available: 1.12.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    androidTestImplementation(&quot;androidx.compose.ui:ui-test-junit4:1.8.3&quot;)"
+        errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="80"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.compose.ui:ui-test-manifest than 1.8.3 is available: 1.12.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    debugImplementation(&quot;androidx.compose.ui:ui-test-manifest:1.8.3&quot;)"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="81"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        severity="Warning"
+        message="A newer version of org.commonmark:commonmark than 0.30.0 is available: 0.31.0"
+        category="Correctness"
+        priority="4"
+        summary="Newer Library Versions Available"
+        explanation="This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project. This is similar to the `GradleDependency` check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also **much** slower."
+        errorLine1="    implementation(&quot;org.commonmark:commonmark:0.30.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="60"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        severity="Warning"
+        message="A newer version of org.commonmark:commonmark-ext-gfm-tables than 0.30.0 is available: 0.31.0"
+        category="Correctness"
+        priority="4"
+        summary="Newer Library Versions Available"
+        explanation="This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project. This is similar to the `GradleDependency` check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also **much** slower."
+        errorLine1="    implementation(&quot;org.commonmark:commonmark-ext-gfm-tables:0.30.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="61"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        severity="Warning"
+        message="A newer version of org.commonmark:commonmark-ext-gfm-strikethrough than 0.30.0 is available: 0.31.0"
+        category="Correctness"
+        priority="4"
+        summary="Newer Library Versions Available"
+        explanation="This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project. This is similar to the `GradleDependency` check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also **much** slower."
+        errorLine1="    implementation(&quot;org.commonmark:commonmark-ext-gfm-strikethrough:0.30.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="62"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        severity="Warning"
+        message="A newer version of org.commonmark:commonmark-ext-task-list-items than 0.30.0 is available: 0.31.0"
+        category="Correctness"
+        priority="4"
+        summary="Newer Library Versions Available"
+        explanation="This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project. This is similar to the `GradleDependency` check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also **much** slower."
+        errorLine1="    implementation(&quot;org.commonmark:commonmark-ext-task-list-items:0.30.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="63"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        severity="Warning"
+        message="A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.9.0 is available: 1.11.0"
+        category="Correctness"
+        priority="4"
+        summary="Newer Library Versions Available"
+        explanation="This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project. This is similar to the `GradleDependency` check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also **much** slower."
+        errorLine1="    implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/build.gradle.kts"
+            line="75"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val narrow = config.screenWidthDp &lt; 850"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            line="38"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(820f).dp)"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            line="44"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                .height((config.screenHeightDp * .88f).coerceAtMost(if (narrow) 560f else 520f).dp)"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            line="45"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(650f).dp)"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            line="810"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                    (config.screenHeightDp * .88f)"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            line="812"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="        val compact = LocalPhoneLayout.current || configuration.screenWidthDp &lt; 700"
+        errorLine2="                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
+            line="257"
+            column="51"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="        val short = configuration.screenHeightDp &lt; 480"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
+            line="258"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            (configuration.screenHeightDp * if (short) .96f else .86f).coerceAtMost(620f).dp"
+        errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
+            line="260"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val height = (LocalConfiguration.current.screenHeightDp - 64).coerceAtLeast(160).dp"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DesktopMenus.kt"
+            line="101"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val phone = configuration.screenWidthDp &lt; 600 || configuration.screenHeightDp &lt; 480"
+        errorLine2="                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="107"
+            column="54"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val phone = configuration.screenWidthDp &lt; 600 || configuration.screenHeightDp &lt; 480"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="107"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            val screenWidth = LocalConfiguration.current.screenWidthDp"
+        errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="210"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                        if (!model.dualPane &amp;&amp; (!phone || configuration.screenHeightDp >= 480))"
+        errorLine2="                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="695"
+            column="59"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                            .fillMaxHeight(if (configuration.screenHeightDp &lt; 480) 1f else .9f),"
+        errorLine2="                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="741"
+            column="48"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val short = LocalConfiguration.current.screenHeightDp &lt; 480"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="1108"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(720f).dp)"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
+            line="50"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                .height((config.screenHeightDp * .86f).coerceAtMost(510f).dp)"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
+            line="51"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                                if (config.screenWidthDp &lt; 700 || config.fontScale > 1.3f) 1 else 2,"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
+            line="307"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                                        config.screenWidthDp >= 700 &amp;&amp;"
+        errorLine2="                                        ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
+            line="368"
+            column="41"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val narrow = config.screenWidthDp &lt; 900 || config.fontScale > 1.3f"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/OrganizationDialog.kt"
+            line="42"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(860f).dp)"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/OrganizationDialog.kt"
+            line="55"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                .height((config.screenHeightDp * .88f).coerceAtMost(540f).dp)"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/OrganizationDialog.kt"
+            line="56"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                if (config.screenHeightDp >= 480)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/OrganizationDialog.kt"
+            line="111"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val compact = LocalPhoneLayout.current || LocalConfiguration.current.screenWidthDp &lt; 700"
+        errorLine2="                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/PeekOverlay.kt"
+            line="44"
+            column="47"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            androidx.compose.ui.platform.LocalConfiguration.current.screenHeightDp &lt; 480"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/PhoneChrome.kt"
+            line="357"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val phone = windowConfig.screenWidthDp &lt; 600 || windowConfig.screenHeightDp &lt; 480"
+        errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            line="95"
+            column="53"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val phone = windowConfig.screenWidthDp &lt; 600 || windowConfig.screenHeightDp &lt; 480"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            line="95"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val short = windowConfig.screenHeightDp &lt; 480"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            line="96"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                    val wide = config.screenWidthDp >= 850"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            line="121"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                        if (phone) (config.screenHeightDp - 64f).coerceAtLeast(180f)"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            line="124"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                            }.coerceAtMost(config.screenHeightDp * .86f)"
+        errorLine2="                                           ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            line="132"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(760f).dp)"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ReferenceRepairDialog.kt"
+            line="463"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                .height((config.screenHeightDp * .88f).coerceAtMost(540f).dp),"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ReferenceRepairDialog.kt"
+            line="464"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="    val narrow = config.screenWidthDp &lt; 900 || config.fontScale > 1.3f"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/RenameDialog.kt"
+            line="38"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(860f).dp)"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/RenameDialog.kt"
+            line="64"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                .height((config.screenHeightDp * .88f).coerceAtMost(540f).dp)"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/RenameDialog.kt"
+            line="65"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="        val narrow = config.screenWidthDp &lt; 800"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
+            line="48"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                    (config.screenWidthDp * (if (narrow) .96f else .88f)).coerceAtMost(720f).dp,"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
+            line="51"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ConfigurationScreenWidthHeight"
+        severity="Warning"
+        message="Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        category="Correctness"
+        priority="3"
+        summary="Using Configuration.screenWidthDp/screenHeightDp instead of LocalWindowInfo.current.containerSize"
+        explanation="Configuration.screenWidthDp and Configuration.screenHeightDp have different insets behaviour depending on target SDK version, and are rounded to the nearest Dp. This means that using these values in composition to size a layout can result in issues, as these values do not accurately represent the actual available window size. Instead it is recommended to use WindowInfo.containerSize which accurately represents the window size."
+        errorLine1="                .height((config.screenHeightDp * .86f).coerceAtMost(480f).dp)"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
+            line="53"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="ModifierParameter"
+        severity="Warning"
+        message="Modifier parameter should be the first optional parameter"
+        category="Correctness"
+        priority="3"
+        summary="Guidelines for Modifier parameters in a Composable function"
+        explanation="The first (or only) Modifier parameter in a Composable function should follow the following rules:&#xA;- Be named `modifier`&#xA;- Have a type of `Modifier`&#xA;- Either have no default value, or have a default value of `Modifier`&#xA;- If optional, be the first optional parameter in the parameter list"
+        errorLine1="    modifier: Modifier = Modifier,"
+        errorLine2="    ~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="1333"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="ModifierParameter"
+        severity="Warning"
+        message="Modifier parameter should be the first optional parameter"
+        category="Correctness"
+        priority="3"
+        summary="Guidelines for Modifier parameters in a Composable function"
+        explanation="The first (or only) Modifier parameter in a Composable function should follow the following rules:&#xA;- Be named `modifier`&#xA;- Have a type of `Modifier`&#xA;- Either have no default value, or have a default value of `Modifier`&#xA;- If optional, be the first optional parameter in the parameter list"
+        errorLine1="    modifier: Modifier = Modifier,"
+        errorLine2="    ~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/RefinedChrome.kt"
+            line="270"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnnecessaryComposedModifier"
+        severity="Warning"
+        message="Unnecessary use of Modifier.composed"
+        category="Correctness"
+        priority="3"
+        summary="Modifier.composed should only be used for modifiers that invoke @Composable functions"
+        explanation="`Modifier.composed` allows invoking @Composable functions when creating a `Modifier` instance - for example, using `remember` to have instance-specific state, allowing the same `Modifier` object to be safely used in multiple places. Using `Modifier.composed` without calling any @Composable functions inside is unnecessary, and since the Modifier is no longer skippable, this can cause a lot of extra work inside the composed body, leading to worse performance."
+        errorLine1="internal fun Modifier.favoriteDragSource(model: FinderModel, shortcut: FavoriteShortcut): Modifier = composed {"
+        errorLine2="                                                                                                     ~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderDragDrop.kt"
+            line="227"
+            column="102"/>
+    </issue>
+
+    <issue
+        id="TrustAllX509TrustManager"
+        severity="Warning"
+        message="`checkServerTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers"
+        category="Security"
+        priority="6"
+        summary="Insecure TLS/SSL trust manager"
+        explanation="This check looks for X509TrustManager implementations whose `checkServerTrusted` or `checkClientTrusted` methods do nothing (thus trusting any certificate chain) which could result in insecure network traffic caused by trusting arbitrary TLS/SSL certificates presented by peers."
+        url="https://goo.gle/TrustAllX509TrustManager"
+        urls="https://goo.gle/TrustAllX509TrustManager">
+        <location
+            file="/Users/LENOVO/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15to18/1.86/39bc0c0d7d42684c2532f0bf503b344cc091e5d3/bcpkix-jdk15to18-1.86.jar"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableLongStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var largeBytes by mutableStateOf(prefs.getLong(&quot;large&quot;, 100L * 1024 * 1024))"
+        errorLine2="                      ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisController.kt"
+            line="141"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var oldDays by mutableStateOf(prefs.getInt(&quot;oldDays&quot;, 365))"
+        errorLine2="                   ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisController.kt"
+            line="144"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableLongStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var bytes by mutableStateOf(0L)"
+        errorLine2="                 ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisController.kt"
+            line="381"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var activeTab by mutableStateOf(panePrefs.getInt(&quot;activeTab&quot;, 0).coerceIn(0, tabs.lastIndex))"
+        errorLine2="                     ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="450"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var iconSize by mutableStateOf(panePrefs.getInt(&quot;iconSize&quot;, 120))"
+        errorLine2="                    ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="645"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var columnWidth by mutableStateOf(panePrefs.getInt(&quot;columnWidth&quot;, 240))"
+        errorLine2="                       ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="648"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var previewWidth by mutableStateOf(panePrefs.getInt(&quot;previewWidth&quot;, 280))"
+        errorLine2="                        ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="651"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var windowsLayout by mutableStateOf(panePrefs.getInt(&quot;windowsLayout&quot;, 0))"
+        errorLine2="                         ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="716"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableLongStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    internal var listingRefreshRevision by mutableStateOf(0L)"
+        errorLine2="                                           ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1244"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    val sidebarWidth = mutableStateOf(prefs.getInt(&quot;sidebarWidth&quot;, 206))"
+        errorLine2="                       ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderSession.kt"
+            line="70"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableFloatStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="        mutableStateOf("
+        errorLine2="        ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderSession.kt"
+            line="210"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        severity="Hint"
+        message="Prefer `mutableFloatStateOf` instead of `mutableStateOf`"
+        category="Performance"
+        priority="3"
+        summary="`State&lt;T>` will autobox values assigned to this state. Use a specialized state type instead."
+        explanation="Calling `mutableStateOf&lt;T>()` when `T` is either backed by a primitive type on the JVM or is a value class results in a state implementation that requires all state values to be boxed. This usually causes an additional allocation for each state write, and adds some additional work to auto-unbox values when reading the value of the state. Instead, prefer to use a specialized primitive state implementation for `Int`, `Long`, `Float`, and `Double` when the state does not need to track null values and does not override the default `SnapshotMutationPolicy`. See `mutableIntStateOf()`, `mutableLongStateOf()`, `mutableFloatStateOf()`, and `mutableDoubleStateOf()` for more information."
+        errorLine1="    var zoom by mutableStateOf(1f)"
+        errorLine2="                ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/QuickLookMedia.kt"
+            line="29"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UsableSpace"
+        severity="Warning"
+        message="Consider also using `StorageManager#getAllocatableBytes` and `allocateBytes` which will consider clearable cached data"
+        category="Performance"
+        priority="3"
+        summary="Using getUsableSpace()"
+        explanation="When you need to allocate disk space for large files, consider using the new `allocateBytes(FileDescriptor, long)` API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.&#xA;&#xA;When deciding if the device has enough disk space to hold your new data, call `getAllocatableBytes(UUID)` instead of using `getUsableSpace()`, since the former will consider any cached data that the system is willing to clear on your behalf.&#xA;&#xA;Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on `Build.VERSION.SDK_INT`. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning."
+        errorLine1="                        val space = root.usableSpace"
+        errorLine2="                                         ~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ArchivePreview.kt"
+            line="69"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="UsableSpace"
+        severity="Warning"
+        message="Consider also using `StorageManager#getAllocatableBytes` and `allocateBytes` which will consider clearable cached data"
+        category="Performance"
+        priority="3"
+        summary="Using getUsableSpace()"
+        explanation="When you need to allocate disk space for large files, consider using the new `allocateBytes(FileDescriptor, long)` API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.&#xA;&#xA;When deciding if the device has enough disk space to hold your new data, call `getAllocatableBytes(UUID)` instead of using `getUsableSpace()`, since the former will consider any cached data that the system is willing to clear on your behalf.&#xA;&#xA;Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on `Build.VERSION.SDK_INT`. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning."
+        errorLine1="        if (!isDocumentPath(path)) return runCatching { File(path).usableSpace }.getOrNull()"
+        errorLine2="                                                                   ~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="680"
+            column="68"/>
+    </issue>
+
+    <issue
+        id="UsableSpace"
+        severity="Warning"
+        message="Consider also using `StorageManager#getAllocatableBytes` and `allocateBytes` which will consider clearable cached data"
+        category="Performance"
+        priority="3"
+        summary="Using getUsableSpace()"
+        explanation="When you need to allocate disk space for large files, consider using the new `allocateBytes(FileDescriptor, long)` API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.&#xA;&#xA;When deciding if the device has enough disk space to hold your new data, call `getAllocatableBytes(UUID)` instead of using `getUsableSpace()`, since the former will consider any cached data that the system is willing to clear on your behalf.&#xA;&#xA;Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on `Build.VERSION.SDK_INT`. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning."
+        errorLine1="    private val freeBytes: (File) -> Long? = { runCatching { it.usableSpace }.getOrNull() },"
+        errorLine2="                                                                ~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FileEngine.kt"
+            line="18"
+            column="65"/>
+    </issue>
+
+    <issue
+        id="UsableSpace"
+        severity="Warning"
+        message="Consider also using `StorageManager#getAllocatableBytes` and `allocateBytes` which will consider clearable cached data"
+        category="Performance"
+        priority="3"
+        summary="Using getUsableSpace()"
+        explanation="When you need to allocate disk space for large files, consider using the new `allocateBytes(FileDescriptor, long)` API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.&#xA;&#xA;When deciding if the device has enough disk space to hold your new data, call `getAllocatableBytes(UUID)` instead of using `getUsableSpace()`, since the former will consider any cached data that the system is willing to clear on your behalf.&#xA;&#xA;Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on `Build.VERSION.SDK_INT`. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning."
+        errorLine1="    private val freeBytes: (File) -> Long? = { runCatching { it.usableSpace }.getOrNull() },"
+        errorLine2="                                                                ~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FileEngine.kt"
+            line="18"
+            column="65"/>
+    </issue>
+
+    <issue
+        id="UsableSpace"
+        severity="Warning"
+        message="Consider also using `StorageManager#getAllocatableBytes` and `allocateBytes` which will consider clearable cached data"
+        category="Performance"
+        priority="3"
+        summary="Using getUsableSpace()"
+        explanation="When you need to allocate disk space for large files, consider using the new `allocateBytes(FileDescriptor, long)` API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.&#xA;&#xA;When deciding if the device has enough disk space to hold your new data, call `getAllocatableBytes(UUID)` instead of using `getUsableSpace()`, since the former will consider any cached data that the system is willing to clear on your behalf.&#xA;&#xA;Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on `Build.VERSION.SDK_INT`. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning."
+        errorLine1="                        root.usableSpace to root.totalSpace"
+        errorLine2="                             ~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="1249"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="UsableSpace"
+        severity="Warning"
+        message="Consider also using `StorageManager#getAllocatableBytes` and `allocateBytes` which will consider clearable cached data"
+        category="Performance"
+        priority="3"
+        summary="Using getUsableSpace()"
+        explanation="When you need to allocate disk space for large files, consider using the new `allocateBytes(FileDescriptor, long)` API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.&#xA;&#xA;When deciding if the device has enough disk space to hold your new data, call `getAllocatableBytes(UUID)` instead of using `getUsableSpace()`, since the former will consider any cached data that the system is willing to clear on your behalf.&#xA;&#xA;Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on `Build.VERSION.SDK_INT`. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning."
+        errorLine1="                            Root.COLUMN_AVAILABLE_BYTES -> root.usableSpace"
+        errorLine2="                                                                ~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/debug/java/dev/findroid/testing/FixtureDocumentsProvider.kt"
+            line="111"
+            column="65"/>
+    </issue>
+
+    <issue
+        id="UsableSpace"
+        severity="Warning"
+        message="Consider also using `StorageManager#getAllocatableBytes` and `allocateBytes` which will consider clearable cached data"
+        category="Performance"
+        priority="3"
+        summary="Using getUsableSpace()"
+        explanation="When you need to allocate disk space for large files, consider using the new `allocateBytes(FileDescriptor, long)` API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.&#xA;&#xA;When deciding if the device has enough disk space to hold your new data, call `getAllocatableBytes(UUID)` instead of using `getUsableSpace()`, since the former will consider any cached data that the system is willing to clear on your behalf.&#xA;&#xA;Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on `Build.VERSION.SDK_INT`. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning."
+        errorLine1="                        Root.COLUMN_AVAILABLE_BYTES -> root.usableSpace"
+        errorLine2="                                                            ~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/WorkspaceDocumentsProvider.kt"
+            line="133"
+            column="61"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs"
+        errorLine2="        ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisController.kt"
+            line="293"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                if (isDocumentPath(file.node.path)) android.net.Uri.parse(file.node.path) else null,"
+        errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            line="672"
+            column="53"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putLong(&quot;remindAfter&quot;, System.currentTimeMillis() + 24 * 60 * 60 * 1000L).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AppUpdateController.kt"
+            line="101"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putBoolean(&quot;automatic&quot;, value).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AppUpdateController.kt"
+            line="106"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putLong(&quot;lastAttempt&quot;, System.currentTimeMillis()).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/AppUpdateController.kt"
+            line="119"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        titles[path] ?: Uri.parse(path).lastPathSegment ?: &quot;Document&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="69"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="    fun notificationUri(path: String) = notifications[path] ?: Uri.parse(path)"
+        errorLine2="                                                               ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="71"
+            column="64"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            val document = Uri.parse(path)"
+        errorLine2="                           ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="122"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                    resolver.releasePersistableUriPermission(Uri.parse(root.grant), flag)"
+        errorLine2="                                                             ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="216"
+            column="62"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs"
+        errorLine2="        ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="223"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        val uri = Uri.parse(path)"
+        errorLine2="                  ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="241"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            val grant = Uri.parse(it.grant)"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="244"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            val uri = Uri.parse(path)"
+        errorLine2="                      ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="254"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        val child = Uri.parse(path)"
+        errorLine2="                    ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="265"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        val parent = Uri.parse(ancestor)"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="266"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        val uri = Uri.parse(path)"
+        errorLine2="                  ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="333"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            val uri = Uri.parse(path)"
+        errorLine2="                      ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="347"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        val uri = Uri.parse(path)"
+        errorLine2="                  ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="372"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                    resolver.openAssetFileDescriptor(Uri.parse(path), &quot;r&quot;, signal)"
+        errorLine2="                                                     ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="408"
+            column="54"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        val uri = Uri.parse(path)"
+        errorLine2="                  ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="458"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            resolver.openInputStream(Uri.parse(path))"
+        errorLine2="                                     ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="555"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            resolver.openOutputStream(Uri.parse(path), &quot;wt&quot;)"
+        errorLine2="                                      ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="561"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                Uri.parse(parent),"
+        errorLine2="                ~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="584"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            DocumentsContract.renameDocument(resolver, Uri.parse(path), name)"
+        errorLine2="                                                       ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="603"
+            column="56"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        check(DocumentsContract.deleteDocument(resolver, Uri.parse(path))) {"
+        errorLine2="                                                         ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="620"
+            column="58"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            val a = Uri.parse(source)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="645"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            val b = Uri.parse(parent)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="646"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            val uri = Uri.parse(path)"
+        errorLine2="                      ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="682"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX function `createBitmap` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                                                        Bitmap.createBitmap("
+        errorLine2="                                                        ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FileVisuals.kt"
+            line="332"
+            column="57"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                                model.connectLocation(Uri.parse(choice.selected))"
+        errorLine2="                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="168"
+            column="55"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        windowState.prefs.edit().putString(&quot;activePane&quot;, paneId).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="179"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        windowState.prefs.edit().putBoolean(&quot;dualPane&quot;, dualPane).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="186"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        windowState.prefs.edit().putBoolean(&quot;panesReversed&quot;, panesReversed).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="195"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        windowState.prefs.edit().putFloat(&quot;paneRatio&quot;, paneRatio).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="201"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        windowState.prefs"
+        errorLine2="        ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="386"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putString(&quot;density&quot;, value.name).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="642"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        panePrefs.edit().putBoolean(&quot;navigationTree&quot;, false).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="938"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        panePrefs.edit().putBoolean(&quot;navigationTree&quot;, true).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="944"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putString(&quot;conflictPolicy&quot;, value.name).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1079"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putBoolean(&quot;gestureHintDismissed&quot;, !show).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1150"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        panePrefs"
+        errorLine2="        ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1485"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putBoolean(&quot;extensions&quot;, showExtensions).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1612"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putBoolean(&quot;dark&quot;, darkTheme).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1617"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putInt(&quot;sidebarWidth&quot;, sidebarWidth).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1622"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putBoolean(&quot;sidebarVisible&quot;, sidebarVisible).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1627"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putBoolean(&quot;tagsVisible&quot;, tagsVisible).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1632"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            panePrefs"
+        errorLine2="            ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
+            line="1728"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        check(prefs.edit().putString(SidebarJson.KEY, encoded)"
+        errorLine2="              ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderSession.kt"
+            line="151"
+            column="15"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        isDocumentPath(path) -> android.net.Uri.parse(path).normalizeScheme().toString()"
+        errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FolderViews.kt"
+            line="48"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putInt(&quot;trashDays&quot;, days).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/HousekeepingController.kt"
+            line="106"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putInt(&quot;cacheDays&quot;, days).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/HousekeepingController.kt"
+            line="113"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `Canvas.withSave` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        save()"
+        errorLine2="        ~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ImageQuickLook.kt"
+            line="506"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            prefs.edit().putString(&quot;folder&quot;, destination).apply()"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/IncomingShare.kt"
+            line="467"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                        Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse(&quot;package:$packageName&quot;),"
+        errorLine2="                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/MainActivity.kt"
+            line="80"
+            column="69"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            asked.edit().putBoolean(&quot;asked&quot;, true).apply()"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/MainActivity.kt"
+            line="120"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                        Uri.parse(&quot;package:${provider.packageName}&quot;),"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/MainActivity.kt"
+            line="178"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                                Uri.parse(&quot;package:$packageName&quot;),"
+        errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/MainActivity.kt"
+            line="256"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                prefs"
+        errorLine2="                ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/MediaPlayback.kt"
+            line="68"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                            MediaItem.SubtitleConfiguration.Builder(Uri.parse(uri))"
+        errorLine2="                                                                    ~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/MediaPlayback.kt"
+            line="274"
+            column="69"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="            val editor = prefs.edit()"
+        errorLine2="                         ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/PdfReading.kt"
+            line="142"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX function `createBitmap` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                        Bitmap.createBitmap("
+        errorLine2="                        ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/PdfReading.kt"
+            line="243"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                                    if (isDocumentPath(current)) android.net.Uri.parse(current)"
+        errorLine2="                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/RenameController.kt"
+            line="525"
+            column="66"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                        Uri.parse(root.uri).authority?.let(providerApp)"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
+            line="326"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putString(&quot;volumes&quot;, JSONArray(saved.values.toList()).toString()).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/StorageMonitor.kt"
+            line="117"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        val uri = Uri.parse(target.path)"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/StorageMonitor.kt"
+            line="189"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                        Uri.parse(link).scheme?.lowercase() in setOf(&quot;http&quot;, &quot;https&quot;, &quot;mailto&quot;)"
+        errorLine2="                        ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/StructuredTextViews.kt"
+            line="439"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                                        Intent(Intent.ACTION_VIEW, Uri.parse(link)),"
+        errorLine2="                                                                   ~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/StructuredTextViews.kt"
+            line="447"
+            column="68"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `String.toUri` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="                                                    Uri.parse(key.path),"
+        errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ThumbnailRepository.kt"
+            line="66"
+            column="53"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SQLiteDatabase.transaction` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        db.beginTransaction()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
+            line="164"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SQLiteDatabase.transaction` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        db.beginTransaction()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
+            line="219"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SQLiteDatabase.transaction` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        db.beginTransaction()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
+            line="250"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs.edit().putBoolean(&quot;workspace-in-picker&quot;, value).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
+            line="298"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        severity="Warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        category="Productivity"
+        priority="6"
+        summary="Use KTX extension function"
+        explanation="The Android KTX libraries decorates the Android platform SDK as well as various libraries with more convenient extension functions available from Kotlin, allowing you to use default parameters, named parameters, and more."
+        errorLine1="        prefs"
+        errorLine2="        ^">
+        <location
+            file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ZipLimitsDialog.kt"
+            line="31"
+            column="9"/>
+    </issue>
+
+</issues>

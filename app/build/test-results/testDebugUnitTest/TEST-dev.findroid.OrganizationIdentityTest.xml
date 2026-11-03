@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.OrganizationIdentityTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-03T11:47:19.246Z" hostname="MacBook-Pro-2.local" time="0.072">
+  <properties/>
+  <testcase name="parentAliasesShareIdentityButSelectedSymlinksAndHardLinksStaySeparate" classname="dev.findroid.OrganizationIdentityTest" time="0.003"/>
+  <testcase name="legacyAliasAssignmentsMergeWithoutWritingUntilMutationAndCollectionsDeduplicate" classname="dev.findroid.OrganizationIdentityTest" time="0.009"/>
+  <testcase name="missingChildrenKeepCanonicalParentsAndProviderCapabilitiesStayOpaque" classname="dev.findroid.OrganizationIdentityTest" time="0.001"/>
+  <testcase name="staleRepairAndUndoCannotEraseLaterOrganizationEdits" classname="dev.findroid.OrganizationIdentityTest" time="0.006"/>
+  <testcase name="repairUpdatesAllExactReferencesMergesTagsAndDeduplicatesWithoutTouchingDescendants" classname="dev.findroid.OrganizationIdentityTest" time="0.009"/>
+  <testcase name="providerRepairChangesOnlyReviewedUriAndCanKeepTagsAtOriginal" classname="dev.findroid.OrganizationIdentityTest" time="0.002"/>
+  <testcase name="renamingAFolderSymlinkMovesOnlyItsOwnMetadata" classname="dev.findroid.OrganizationIdentityTest" time="0.004"/>
+  <testcase name="sameAndUnsavedLocationsAreRejectedBeforeRepair" classname="dev.findroid.OrganizationIdentityTest" time="0.001"/>
+  <testcase name="writersThroughCatalogParentAliasesShareThePublicationLock" classname="dev.findroid.OrganizationIdentityTest" time="0.025"/>
+  <testcase name="alternatePathMovesRemapTagsAndChildrenAndCopiesDoNotJoinCollections" classname="dev.findroid.OrganizationIdentityTest" time="0.007"/>
+  <testcase name="wholeCatalogRestoreReturnsThePublishedNormalizedSnapshot" classname="dev.findroid.OrganizationIdentityTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,23 @@
+{
+  "serial": "emulator-5602",
+  "checkerSha256": "ad26eb61c4bdfdf7cafa5645ab2b451bd34037f7317adde44ceb07a175045e77",
+  "helpersSha256": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+  "apkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "previousApkSha256": "280cbe462b635ed65706b6b3182a64f8f3bddf4db84d72a7911d7aa9fd690412",
+  "providerApkSha256": "d060ccf98021759ff77b88edf8daf113d53c198d4b7df7524e127e7e571c2376",
+  "fromVersionCode": 43,
+  "toVersionCode": 44,
+  "separateReadOnlyProvider": true,
+  "syntheticBytesPerStream": 8388608,
+  "directPreviousPublicUpgrade": true,
+  "legacyFavoritePreserved": true,
+  "restoredOriginalUriGrants": true,
+  "restoredOriginalManagedFiles": true,
+  "restoredOriginalFileAbsences": true,
+  "restoredManagedFileCount": 495,
+  "providerControlsAndOwnedMarkersRestored": true,
+  "syntheticFixtureRemoved": true,
+  "restoredOriginalStorageAccess": true,
+  "restoredApkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "cleanupErrors": []
+}

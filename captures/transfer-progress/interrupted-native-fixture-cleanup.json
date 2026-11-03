@@ -1,0 +1,7 @@
+{
+  "serial": "emulator-5582",
+  "interruptedBatch": 20,
+  "onlyExactSyntheticPayloadsAndRecentTestTimestampEligible": true,
+  "removedOwnedFixtureCount": 1,
+  "olderMatchingFolderCountPreserved": 0
+}

@@ -1,0 +1,117 @@
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=
+dev.findroid.ArchiveWorkflowTest:
+INSTRUMENTATION_STATUS: test=limitsKeepSelectionAndBlockOversizedPreviewAndExtraction
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=limitsKeepSelectionAndBlockOversizedPreviewAndExtraction
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=integrityCheckDistinguishesValidCorruptAndZip64
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=integrityCheckDistinguishesValidCorruptAndZip64
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=archiveSearchOwnsSpaceAndMouseContextActionsWork
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=archiveSearchOwnsSpaceAndMouseContextActionsWork
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=memberPeekSupportsMarkdownCsvPdfImagesVideoAndSpaceClose
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=memberPeekSupportsMarkdownCsvPdfImagesVideoAndSpaceClose
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=providerArchiveSelectedMembersPublishAndUndo
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=providerArchiveSelectedMembersPublishAndUndo
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=searchSelectionExtractionAndUndoPreserveArchiveAndFolders
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.ArchiveWorkflowTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=6
+INSTRUMENTATION_STATUS: stack=androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.ArchiveWorkflowTest.open(ArchiveWorkflowTest.kt:156)
+	at dev.findroid.ArchiveWorkflowTest.open$default(ArchiveWorkflowTest.kt:140)
+	at dev.findroid.ArchiveWorkflowTest.searchSelectionExtractionAndUndoPreserveArchiveAndFolders(ArchiveWorkflowTest.kt:195)
+
+INSTRUMENTATION_STATUS: stream=
+Error in searchSelectionExtractionAndUndoPreserveArchiveAndFolders(dev.findroid.ArchiveWorkflowTest):
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.ArchiveWorkflowTest.open(ArchiveWorkflowTest.kt:156)
+	at dev.findroid.ArchiveWorkflowTest.open$default(ArchiveWorkflowTest.kt:140)
+	at dev.findroid.ArchiveWorkflowTest.searchSelectionExtractionAndUndoPreserveArchiveAndFolders(ArchiveWorkflowTest.kt:195)
+
+INSTRUMENTATION_STATUS: test=searchSelectionExtractionAndUndoPreserveArchiveAndFolders
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 101.033
+There was 1 failure:
+1) searchSelectionExtractionAndUndoPreserveArchiveAndFolders(dev.findroid.ArchiveWorkflowTest)
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.ArchiveWorkflowTest.open(ArchiveWorkflowTest.kt:156)
+	at dev.findroid.ArchiveWorkflowTest.open$default(ArchiveWorkflowTest.kt:140)
+	at dev.findroid.ArchiveWorkflowTest.searchSelectionExtractionAndUndoPreserveArchiveAndFolders(ArchiveWorkflowTest.kt:195)
+
+FAILURES!!!
+Tests run: 6,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

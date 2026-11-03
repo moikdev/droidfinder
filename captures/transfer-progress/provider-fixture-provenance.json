@@ -1,0 +1,13 @@
+{
+  "package": "dev.findroid.transferqa",
+  "bytes": 12691,
+  "sha256": "d060ccf98021759ff77b88edf8daf113d53c198d4b7df7524e127e7e571c2376",
+  "source": "scripts/android/TransferDocumentsProvider.java",
+  "sourceSha256": "8a4b01ce262461e7a0467bf8b43151f4fcdebb918a190ae6cb5592289897c17c",
+  "syntheticBytesPerStream": 8388608,
+  "noNetworkPermission": true,
+  "readOnly": true,
+  "separateFromShippingApk": true,
+  "buildTool": "scripts/build-transfer-fixture.py",
+  "buildToolSha256": "de4f76a2e641321c0136dcebaa3fa25c83b684e01fdc2e4b8964e4455d1ba37d"
+}

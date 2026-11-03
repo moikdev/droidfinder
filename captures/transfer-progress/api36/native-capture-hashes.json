@@ -1,0 +1,42 @@
+{
+  "nativeApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "11231fde1a648e4c261fd2165ddea2e840556724f302a3d52dabc62575f06c5a",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "8004f4608053f0f6bb4eb2b486b4fe98bec46645666edd9f02cde0fb41a878b5"
+  },
+  "files": [
+    {
+      "name": "provider-wait.png",
+      "sourceSha256": "2d1e9cef7a5b14f0d425e15749a61162fbd4433abd1ce1f4aa538c352f467476",
+      "cropBounds": [
+        540,
+        384,
+        1380,
+        803
+      ],
+      "sha256": "195a6d1f183dd6eef4de58463aff66f7bb0bbd5b65ef5744d70d381bbbd5b8e8"
+    },
+    {
+      "name": "recent-rate.png",
+      "sourceSha256": "4d868ad13f517478ccf7093e523803f285a788f6e906f757ff07e56046b2fd38",
+      "cropBounds": [
+        540,
+        384,
+        1380,
+        803
+      ],
+      "sha256": "a65114c46e2e79d5a82bae623ddce3182a91b20cfbfc4a20d2c144d5d5236d57"
+    },
+    {
+      "name": "paused.png",
+      "sourceSha256": "725c9764f6f9b738f73d6df539b53ba8bbe47cb959233ca4620c27135c67d837",
+      "cropBounds": [
+        540,
+        384,
+        1380,
+        803
+      ],
+      "sha256": "2bcbe2bd108fff0194b6c6610617c332f0b318538ff5b3cbc1d8bfbff379b777"
+    }
+  ],
+  "source": "focused-final; responsive strip shipping app source and final native APK pair"
+}

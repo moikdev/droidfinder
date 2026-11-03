@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.MultiRootLoaderTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-03T11:47:19.212Z" hostname="MacBook-Pro-2.local" time="0.023">
+  <properties/>
+  <testcase name="perRootSchedulingDeduplicatesCyclesBeforeTheyCanGrowTheQueue" classname="dev.findroid.MultiRootLoaderTest" time="0.003"/>
+  <testcase name="independentRootsCompleteAndTheInitialPublicationPrecedesProviderIo" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="unavailableGrantAliasDoesNotSuppressAnAccessibleReferenceToTheSameFolder" classname="dev.findroid.MultiRootLoaderTest" time="0.0"/>
+  <testcase name="partialRootDisconnectPreservesItsFilesAndReportsIncompleteInsteadOfUnavailable" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="providerAliasesShareAdmissionAndDoNotRepeatAContentRead" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="unavailableExclusionAncestryIsIncompleteRatherThanAnIntentionalExclusion" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="allUnavailableRootsRemainDistinctAndDoNotClaimACompletedEmptySearch" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="anEarlyTimedPublicationDoesNotConsumeTheFirstFullChunkBeforeAProviderStall" classname="dev.findroid.MultiRootLoaderTest" time="0.005"/>
+  <testcase name="overlappingRootsVisitIndependentlyAndAdmitOneCopyOfEachFile" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="descendantFailureOnlyMarksItsOwnRootIncomplete" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="anExplicitNestedRootStillSearchesItsOwnChildrenWithShallowRules" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="scanCapDoesNotMarkUnvisitedRootsComplete" classname="dev.findroid.MultiRootLoaderTest" time="0.0"/>
+  <testcase name="cancellationAfterInitialPublicationNeverOpensAnyRoot" classname="dev.findroid.MultiRootLoaderTest" time="0.002"/>
+  <testcase name="unavailableFirstRootKeepsResultsFromTheOtherRoot" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="shallowRulesApplySeparatelyToEveryChosenRoot" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="resultCapMarksCurrentRootIncompleteAndLaterRootNotScanned" classname="dev.findroid.MultiRootLoaderTest" time="0.002"/>
+  <testcase name="pendingProviderAndEmptyAvailableRootHaveDifferentStates" classname="dev.findroid.MultiRootLoaderTest" time="0.001"/>
+  <testcase name="exactExcludedRootIsDeliberateAndDoesNotOpenTheProvider" classname="dev.findroid.MultiRootLoaderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 44,
+  "versionName": "0.42.0-preview",
+  "apkName": "Findroid-0.42.0-preview.apk",
+  "bytes": 8553647,
+  "sha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.42.0-preview/Findroid-0.42.0-preview.apk",
+  "notes": "Transfer progress is easier to understand. Findroid shows recent speed and time left in the current phase, counts preparation and verification separately, and explains waits for a source, destination or storage provider. Paused and stale estimates disappear. Files with an unknown size keep an honest processed-byte count without a made-up total or ETA.\n"
+}

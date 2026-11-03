@@ -1,0 +1,71 @@
+{
+  "images": [
+    {
+      "path": "docs/screenshots/transfer-provider-wait.png",
+      "source": "captures/transfer-progress/api30-optimized/provider-wait.png",
+      "sourceSha256": "52312d23f4789a76b96f317753ec9c246b07556403f4cf8f3de644b106d3dde0",
+      "xmlSha256": "5128fda7397fbc622d3c7c20324df698cb9b6367128482998913e9ece2a20fa6",
+      "cropBounds": [
+        540,
+        412,
+        1380,
+        752
+      ],
+      "sha256": "f057e6db136e9057bfd4a6f6a2522e0ab51b2a2bb440411e3407cd19694823f8",
+      "actualOptimizedApk": true,
+      "apkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9"
+    },
+    {
+      "path": "docs/screenshots/transfer-recent-rate.png",
+      "source": "captures/transfer-progress/api30-optimized/recent-rate.png",
+      "sourceSha256": "2b7e055c126dc9563faef6bf51ff769bbd595d4d5fffbcd9116e922d4a670e7a",
+      "xmlSha256": "18763a47cd952c48d4046de95bbf060d085a4b91c7d8305bfd296e961ad4f3fb",
+      "cropBounds": [
+        540,
+        412,
+        1380,
+        752
+      ],
+      "sha256": "0ca876738fdce182a1350ee0e9fdc4dcead1cd135c37fe9e7b1ebd7343e05571",
+      "actualOptimizedApk": true,
+      "apkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9"
+    },
+    {
+      "path": "docs/screenshots/transfer-paused-large-text.png",
+      "source": "captures/transfer-progress/api30-optimized/600dp-font1.6-strip.png",
+      "sourceSha256": "14c1cac9d30dde1f010d528eb8bb48afa63e7860a04783e6514705367b2dce60",
+      "xmlSha256": "b244a29f74196961172b2204603a439808ff6f79dbf40c2b564267350445c1c0",
+      "cropBounds": null,
+      "sha256": "2b455e5c746ba3a7fabbc170cead10e5bdc62f5137cc2ab4a26bd6dc0df268a2",
+      "actualOptimizedApk": true,
+      "apkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9"
+    },
+    {
+      "path": "docs/screenshots/transfer-unknown-size.png",
+      "source": "captures/transfer-progress/api30-optimized/unknown-size.png",
+      "sourceSha256": "53d9c35feb34e46123c85bcaeeff565463a5a193de9b0f45c71b951338e82e82",
+      "xmlSha256": "82a10c7c76671d0ec2867ed3c7961c982323ca8480aee2312731db3e6849148f",
+      "cropBounds": [
+        540,
+        372,
+        1380,
+        791
+      ],
+      "sha256": "de0dd0ac403d4e2c224277ebcccae26b1e7046e7b0269d49db6e264762e0fcca",
+      "actualOptimizedApk": true,
+      "apkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9"
+    },
+    {
+      "path": "docs/screenshots/app-updates-0420.png",
+      "source": "captures/transfer-progress/api30-ota/up-to-date.png",
+      "sourceSha256": "f67e80f7260686d705b28dfb423cdb2cf678db17cef72e7331489d1406b7138c",
+      "xmlSha256": "1f41ee93dfe032e44322684c26f80a5ec2bb8d7a9c3f0b626726435e14c6c95b",
+      "cropBounds": null,
+      "sha256": "f67e80f7260686d705b28dfb423cdb2cf678db17cef72e7331489d1406b7138c",
+      "actualOptimizedApk": true,
+      "apkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9"
+    }
+  ],
+  "actualScreenshotsInspected": true,
+  "review": "Inspected all four source states and the three dialog crops. Crops retain all corners, labels and controls; the full600dp/font1.6 strip keeps filename, byte count and named controls readable."
+}

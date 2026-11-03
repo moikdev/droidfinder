@@ -1,0 +1,15 @@
+{
+  "actualRetainedXmlExercised": true,
+  "buttonsAloneWereNotSufficient": true,
+  "rejectedPreviewApkSha256": "768488e9b14a2d07ee00645030a76e593c7e8833f5f4ae4abddfb9ca82a5b4c4",
+  "minimumTextWidthDp": 120,
+  "actualTextWidthsDp": [
+    10.0,
+    10.0
+  ],
+  "previouslySqueezedTextRejected": true,
+  "xml": "captures/transfer-progress/api30-optimized-rejected-strip/600dp-font1.6-strip-capture.xml",
+  "xmlSha256": "8ce58f4cf5e144e8176391c46865eefe8d8fdc52d9518b2659cdeda609c29aa6",
+  "png": "captures/transfer-progress/api30-optimized-rejected-strip/600dp-font1.6-strip.png",
+  "pngSha256": "3c73e55c96b5c7d05cadd4f714f24498d58e5f605cf6ced9884a816508b71312"
+}

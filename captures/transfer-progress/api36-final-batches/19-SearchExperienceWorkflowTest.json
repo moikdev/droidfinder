@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "passed": 7,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "actualFolderPickerAddsAnExactRootExclusionWithoutChangingNameExclusions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "providerUnknownAncestryReportsSkippedResultsBeforeOpeningContents",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "exactSelectionExclusionIsADraftThenPersistsAndCanBeRemoved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "providerScanKeepsSiblingCachesUsesOneReadAndNormalizesTreeAliases",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "naturalChoicesAndExpertByteValuesUseTheActualEditorAndSurviveRestart",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "literalMatchReasonsAndHighlightsAppearInAllFourViewsWithoutPersistingSnippets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchExperienceWorkflowTest",
+      "test": "realSparseFileProvesStrictGigabyteBoundaryAndRefreshReevaluatesCalendarChoices",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 85.4,
+  "timedOut": false
+}

@@ -1,0 +1,35 @@
+{
+  "reviewedSources": {
+    "app/src/main/java/dev/findroid/TransferProgress.kt": "4ef2f8b3d6e5588e169b0133b119651f19669e4f6863fd26155d59566fd46218",
+    "app/src/main/java/dev/findroid/TransferControl.kt": "f380caf290ff5966251ed466c43ae927c62901dee0437211d3ea189d7e56b4ad",
+    "app/src/main/java/dev/findroid/TransferService.kt": "f1f3abd5d8eaeb9daab2bd0ffdb950afd6a1a142bf8c7815b27297ddeaf22eea",
+    "app/src/main/java/dev/findroid/TransferPresentation.kt": "b9dc563224db0b700a461f08d2f646aa38a850acbfe3c78a121441519a52034f",
+    "app/src/main/java/dev/findroid/TransferEstimate.kt": "6da95dc48c573ef7c99c32cd26677a79ed169790dabbf8657fc6dbd05727b2ee",
+    "app/src/main/java/dev/findroid/DocumentAccess.kt": "db9ad4ef710efdf51d805a7a1aefda8cff80bf0839058b187c8e55e4445add97",
+    "app/src/main/java/dev/findroid/FileEngine.kt": "46fd1c71564f168696481727d2515407929bd22a682cf4367ea68f6ab1675fa0",
+    "app/src/main/java/dev/findroid/ZipArchive.kt": "8ed679384c3d808f7abbf0b1df04f2519671286c7725a6dfc73eaa225219eaa5",
+    "app/src/main/java/dev/findroid/TransferWorker.kt": "5a46d226516b4e228cefdef97b066c19d2bdc79d3b75191e8ff365f89ff2ab9b",
+    "app/src/main/java/dev/findroid/TransferStrip.kt": "0a9c5825ed13e2d56e205b69cf49991e017ef444b0e1506a05fbf8834cbe4fe7",
+    "app/src/main/java/dev/findroid/TransferCenterDialog.kt": "dd948df70691306fbc81ee0a8381864da4d89e59d9d1b33a2f0d2b53a4985607",
+    "app/src/androidTest/java/dev/findroid/StorageGrantRecoveryTest.kt": "796858cfc0cf095eb50569cc46484981b4bf4927ffd4426d394143cb80421d01"
+  },
+  "findings": [
+    "Rate samples are bounded to at most one retained point per 250ms in a six-second window, with a 1.5s warmup.",
+    "Explicit pause time is excluded; elapsedRealtime includes device sleep. Rates expire after three seconds without bytes.",
+    "Worker/sampler publication is synchronized; report callbacks run outside the progress-state lock.",
+    "The once-per-second sampler is cancelled when the active operation finishes; there is no idle foreground sampler.",
+    "Blocking-call scopes retain actual source/destination/provider identities and unwind in finally blocks.",
+    "Verification advances phase bytes without inflating bytes transferred; ZIP cancellation assertions use the verification amount.",
+    "Preparation reports inspected counts and does not invent a byte total or ETA.",
+    "Source size/change checks, staging cleanup, cancellation stream closure and final publication boundaries remain in place.",
+    "Progress reporting does not throw a cancellation check after final publication.",
+    "The standalone synthetic provider is separate from shipping app sources, read-only, bounded to eight MiB, and has no network permission.",
+    "Narrow panes and enlarged text move named transfer controls below the filename/phase summary; FlowRow wraps controls if needed.",
+    "The opt-in grant cleanup bridge uses only the hardcoded owned synthetic provider tree and asserts every unrelated permission is unchanged."
+  ],
+  "limits": [
+    "A waiting message identifies an outstanding storage call; it is not a universal provider timeout or proof that a provider has stalled.",
+    "Emulator checks do not establish throughput accuracy or background/power behavior on physical tablets.",
+    "The new optimized acceptance checker uses only owned synthetic documents and restores all original managed bytes and absences."
+  ]
+}

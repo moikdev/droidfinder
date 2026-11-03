@@ -1,0 +1,39 @@
+{
+  "version": "0.42.0",
+  "versionCode": 44,
+  "sourceFiles": 318,
+  "jvm": {
+    "tests": 525,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Fatal": 0,
+    "Warning": 146,
+    "Information": 0,
+    "finalLog": "captures/transfer-progress/final-layout-build.txt",
+    "finalLogSha256": "4e4a56db1f5329d24beee0d7ea5b31c2ca150eed4764ae60753e1dd942085f66",
+    "finalBuildSuccessful": true
+  },
+  "artifacts": {
+    "app/build/outputs/apk/release/app-release-unsigned.apk": {
+      "bytes": 8545439,
+      "sha256": "a6d17fb350f9c8a6cac96461738cc12b507abbfa9efc0b37903d7d4da76bd18d"
+    },
+    "app/build/outputs/apk/preview/app-preview.apk": {
+      "bytes": 8553647,
+      "sha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9"
+    },
+    "app/build/outputs/apk/debug/app-debug.apk": {
+      "bytes": 96162649,
+      "sha256": "11231fde1a648e4c261fd2165ddea2e840556724f302a3d52dabc62575f06c5a"
+    },
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": {
+      "bytes": 6213197,
+      "sha256": "8004f4608053f0f6bb4eb2b486b4fe98bec46645666edd9f02cde0fb41a878b5"
+    }
+  },
+  "finalBuildReason": "Responsive transfer strip keeps progress readable at600dp/font1.6; fixed-URI opt-in test bridge cleans only the synthetic provider grant."
+}

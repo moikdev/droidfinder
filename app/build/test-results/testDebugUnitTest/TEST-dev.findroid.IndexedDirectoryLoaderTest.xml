@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.IndexedDirectoryLoaderTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-03T11:47:19.122Z" hostname="MacBook-Pro-2.local" time="0.051">
+  <properties/>
+  <testcase name="cachedCandidateBudgetsAndSynchronousCancellationBoundWork" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.009"/>
+  <testcase name="flatCursorPreservesExactAncestorExclusionsDepthHiddenAndWorkingRules" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.008"/>
+  <testcase name="replacementDuringMetadataReadIsCaughtBeforeAnyContentRead" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.003"/>
+  <testcase name="deletionDuringContentReadIsCaughtBeforePublishingTheCandidate" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.003"/>
+  <testcase name="currentTagsNestedGroupsAndOneGlobalContentQueryRunOnceAcrossOverlaps" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.007"/>
+  <testcase name="currentMetadataReplacesCachedValuesAndRejectsStalePositiveMatches" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.003"/>
+  <testcase name="missingAndSymlinkReplacedCandidatesNeverBecomeActionableOrOpenContent" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.004"/>
+  <testcase name="unindexedProviderAndCollectionRootsStayExplicitWithoutSilentLiveFallback" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.002"/>
+  <testcase name="newAndRenamedPathsAreDiscoverableByLiveSearchUntilTheSnapshotIsRefreshed" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.004"/>
+  <testcase name="rejectingOldSnapshotDoesNotHideACandidateAdmittedByAnotherNewerRoot" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.003"/>
+  <testcase name="rootReplacementDuringMetadataReadRejectsTheSnapshotBeforePublishingOrReadingContent" classname="dev.findroid.IndexedDirectoryLoaderTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

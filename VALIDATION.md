@@ -2,7 +2,7 @@
 
 ## Findroid 0.42.0 — clearer transfer progress
 
-Local acceptance completed on November 3, 2026:
+Local and public OTA acceptance completed on November 3, 2026:
 
 - **525 JVM tests pass**, with zero failures/errors/skips. Debug, native-test, optimized preview and unsigned release builds pass. Lint: **0 errors / 146 warnings / 12 hints**.
 - **405 native cases pass per API30/API36 tablet**, in **47 fresh-process batches each**, with identical case sets and the exact same application/test APK pair. New coverage exercises a real gated provider pipe, recent-rate recovery, pause/resume, exact output bytes, waiting cancellation and sampler shutdown. Existing archives, search, storage, setup, workspaces, input, dragging, conflicts and updater workflows remain covered.
@@ -13,7 +13,9 @@ Local acceptance completed on November 3, 2026:
 
 Rejected attempts remain excluded. Visual review rejected an earlier 600dp/font1.6 strip whose progress text was squeezed to **10dp**; the responsive production layout puts named controls below the filename and amount. Independent checks retain and reject that actual old XML/PNG. The Android11 picker can reopen its cached provider root without a folder-selection action; the bounded test-driver recovery navigates to a known local root and back, grants access only to the synthetic provider and retains no local-directory hierarchy. An API36 archive-preview ten-second wait and a single-pane reconnect pre-refresh assertion each failed once; the exact cases and then their complete batches passed with the unchanged APK pair. Earlier focused progress-label and two-pane reconnect waits were corrected before the final build. No rejected run counts as acceptance and no product fix is claimed for the unchanged-case retries.
 
-**Public OTA and immutable archive acceptance are still in progress.** Proposal 39 remains open until the published bytes have been installed through the real public feed on both tablets and the immutable validation ZIP is independently checked. [Transfer guide](docs/TRANSFER-PROGRESS.md) · [Release notes](docs/releases/0.42.0.md).
+**Actual public 0.41 → 0.42 OTA passes on both tablets**, including fresh public-feed download, Android installation, matching installed APK bytes, preserved synthetic document/Favorite/preference, and no repeat offer. API36’s separate production-source check passes 1/1. Both tablets finish with exact original managed metadata, databases, caches and absences, font 1.0 and the public APK. [Up-to-date capture](docs/screenshots/app-updates-0420.png). The first Android11 post-install relaunch raced PackageManager’s temporary package freeze; the host checker now waits for the system installer’s actual completion. A cached-download retry is also retained and excluded; full original cache restoration preceded the accepted fresh download.
+
+**Immutable archive acceptance remains in progress.** Proposal 39 remains open until the immutable validation ZIP is independently checked. [Transfer guide](docs/TRANSFER-PROGRESS.md) · [Release notes](docs/releases/0.42.0.md).
 
 ## Findroid 0.41.0 — understand available file actions
 

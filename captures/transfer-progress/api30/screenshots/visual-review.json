@@ -1,0 +1,29 @@
+{
+  "actualScreenshotsInspected": true,
+  "reviewMethod": "Visually inspected the final native contact sheet containing all three complete dialog crops on this API.",
+  "findings": [
+    "Provider waiting shows zero copied bytes, an explicit storage-provider wait, and no invented rate or time estimate.",
+    "Recent copying shows a measured byte rate and an estimate explicitly limited to the current phase.",
+    "Pause retains copied-byte progress and offers Resume while hiding the rate and time estimate.",
+    "Titles, file and phase labels, Details, Open folder and history controls are readable; dialog borders and footer are complete.",
+    "Public crops exclude the private browser/sidebar and contain only synthetic transfer names."
+  ],
+  "images": [
+    {
+      "name": "contact-overview.png",
+      "sha256": "6fe5c4c3d4054cb1e5b30a2604c5701ec1b00058b8e38b1d33d15fd24635971d"
+    },
+    {
+      "name": "paused.png",
+      "sha256": "917eba5ae0f11156de9f272b67a33fff1c1d9fd9bee9fd6820d1f03add4a0964"
+    },
+    {
+      "name": "provider-wait.png",
+      "sha256": "fd96c09e5240c9969e5ece510c79787df49cef36b6492b0f22a45c22cbacc6e9"
+    },
+    {
+      "name": "recent-rate.png",
+      "sha256": "c9e4c6c007ee89de0c4b9ae75c8fc1cf8910c162dc204fea38ebf5340ca20c72"
+    }
+  ]
+}

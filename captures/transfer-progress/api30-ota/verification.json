@@ -1,0 +1,15 @@
+{
+  "serial": "emulator-5602",
+  "fromVersionCode": 43,
+  "toVersionCode": 44,
+  "publicFeedDownloadAndAndroidInstall": true,
+  "installedApkMatchesPublicBytes": true,
+  "installerCompletionConfirmedBeforeRelaunch": true,
+  "originalFileBytes": true,
+  "legacyFavoritePreserved": true,
+  "sentinelPreferencePreserved": true,
+  "updatedSidebarVisible": true,
+  "noRepeatOffer": true,
+  "restoredApkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "restoredOriginalSetup": true
+}

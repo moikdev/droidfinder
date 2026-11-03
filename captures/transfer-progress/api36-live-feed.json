@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "passed": 1,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.AppUpdateLiveFeedTest",
+      "test": "publicReleaseDownloadsWithProductionSource",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 7.4,
+  "downloadedVersionCode": 44,
+  "downloadedVersionName": "0.42.0-preview",
+  "downloadedApkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9"
+}

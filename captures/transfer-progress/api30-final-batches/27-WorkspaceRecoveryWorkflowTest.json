@@ -1,0 +1,94 @@
+{
+  "success": true,
+  "passed": 16,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "missingVirtualDestinationsCanBeReplacedWithoutChangingTheLibrary",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "reviewSurvivesActivityRecreationAndActivePaneChanges",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "anAvailableLayoutOpensWithoutARecoveryConfirmation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "aSavedSearchWithAnUnavailableRootKeepsItsFiltersOnTheReplacementFolder",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "realFolderPickerReviewsAndSavesOnlyTheMissingDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "reconnectingAnOriginalDestinationKeepsItAndDropsItsReplacementChoice",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "aSmartFoldersSecondaryRootRepairCreatesAnIndependentRestoredTab",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "closingACheckOrReviewKeepsCurrentPanesAndSavedLayout",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "readOnlyProviderRootsAreValidReplacementDestinations",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "grantLossAfterReviewRequiresAFreshAvailabilityReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "unrelatedMissingBackHistoryDoesNotBlockAWorkingTab",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "aChangedSavedWorkspaceInvalidatesAnOlderReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "keepingAMissingLocationRequiresAnExplicitChoice",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "openOnceRepairsTheSessionAndKeepsTheSavedLayoutByteForByte",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "aChangedSmartFolderInvalidatesAReviewBeforeAnyRepairIsSaved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceRecoveryWorkflowTest",
+      "test": "repairingASecondarySearchRootKeepsTheWorkingAnchorAndOtherPane",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 51.3,
+  "timedOut": false
+}

@@ -128,6 +128,10 @@ def main():
         assert version() == args.expected_version_code, 'Android did not install the public update'
         installed_path = shell('pm', 'path', 'dev.findroid').decode().strip().splitlines()[0].removeprefix('package:')
         assert hashlib.sha256(call('exec-out', 'cat', installed_path)).digest() == hashlib.sha256(args.to_apk.read_bytes()).digest()
+        # Android 11 may expose the new version before the package is unfrozen.
+        # Wait for the system installer's actual completion before starting the app.
+        root = wait('installer-complete', lambda t: bool(nodes(t, 'App installed.')) and bool(nodes(t, 'Done')), 60)
+        capture('installer-complete'); tap(one(root, 'Done'))
         stop(); launch()
         wait('upgraded-sidebar', lambda t: bool(nodes(t, 'Options for ' + relative.split('/')[-1]))); capture('upgraded-sidebar')
         updates()
@@ -139,7 +143,8 @@ def main():
         assert prefs.find("./string[@name='otaAcceptanceSentinel']").text == stamp
         assert [n.text for n in prefs.findall("./set[@name='favorites']/string")] == [full]
         report = {'serial': args.serial, 'fromVersionCode': old_version, 'toVersionCode': args.expected_version_code,
-            'publicFeedDownloadAndAndroidInstall': True, 'installedApkMatchesPublicBytes': True, 'originalFileBytes': True, 'legacyFavoritePreserved': True,
+            'publicFeedDownloadAndAndroidInstall': True, 'installedApkMatchesPublicBytes': True,
+            'installerCompletionConfirmedBeforeRelaunch': True, 'originalFileBytes': True, 'legacyFavoritePreserved': True,
             'sentinelPreferencePreserved': True, 'updatedSidebarVisible': True, 'noRepeatOffer': True,
             'restoredApkSha256': hashlib.sha256(args.to_apk.read_bytes()).hexdigest()}
     finally:

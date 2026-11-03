@@ -1,0 +1,168 @@
+{
+  "serial": "emulator-5602",
+  "checkerSha256": "19e5e7d9251ac1369b30695536ac08741cac13ea012fa1534d6bd8bfad7e5f52",
+  "helpersSha256": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+  "apkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "previousApkSha256": "280cbe462b635ed65706b6b3182a64f8f3bddf4db84d72a7911d7aa9fd690412",
+  "providerApkSha256": "d060ccf98021759ff77b88edf8daf113d53c198d4b7df7524e127e7e571c2376",
+  "fromVersionCode": 43,
+  "toVersionCode": 44,
+  "separateReadOnlyProvider": true,
+  "syntheticBytesPerStream": 8388608,
+  "directPreviousPublicUpgrade": true,
+  "legacyFavoritePreserved": true,
+  "systemPickerRecoveredMissingFolderAction": true,
+  "actualSystemPickerConnection": true,
+  "visibleProviderWaitWithoutInventedEta": true,
+  "recentRateAndPhaseEtaAfterRecovery": true,
+  "pauseHidesRateAndEta": true,
+  "layouts": [
+    {
+      "widthDp": 1280,
+      "fontScale": 1.0,
+      "pausedTransferSurvivesConfiguration": true,
+      "dialogControlsFullyReachable": true,
+      "stripControlsReachable": true,
+      "stripProgressReadable": true,
+      "stripProgressTextWidthDp": [
+        206.66666666666666,
+        111.33333333333333
+      ],
+      "minimumProgressTextWidthDp": 80.0
+    },
+    {
+      "widthDp": 1280,
+      "fontScale": 1.6,
+      "pausedTransferSurvivesConfiguration": true,
+      "dialogControlsFullyReachable": true,
+      "stripControlsReachable": true,
+      "stripProgressReadable": true,
+      "stripProgressTextWidthDp": [
+        321.3333333333333,
+        179.33333333333334
+      ],
+      "minimumProgressTextWidthDp": 120
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.0,
+      "pausedTransferSurvivesConfiguration": true,
+      "dialogControlsFullyReachable": true,
+      "stripControlsReachable": true,
+      "stripProgressReadable": true,
+      "stripProgressTextWidthDp": [
+        206.66666666666666,
+        111.33333333333333
+      ],
+      "minimumProgressTextWidthDp": 80.0
+    },
+    {
+      "widthDp": 800,
+      "fontScale": 1.6,
+      "pausedTransferSurvivesConfiguration": true,
+      "dialogControlsFullyReachable": true,
+      "stripControlsReachable": true,
+      "stripProgressReadable": true,
+      "stripProgressTextWidthDp": [
+        321.3333333333333,
+        179.33333333333334
+      ],
+      "minimumProgressTextWidthDp": 120
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.0,
+      "pausedTransferSurvivesConfiguration": true,
+      "dialogControlsFullyReachable": true,
+      "stripControlsReachable": true,
+      "stripProgressReadable": true,
+      "stripProgressTextWidthDp": [
+        206.66666666666666,
+        111.33333333333333
+      ],
+      "minimumProgressTextWidthDp": 80.0
+    },
+    {
+      "widthDp": 600,
+      "fontScale": 1.6,
+      "pausedTransferSurvivesConfiguration": true,
+      "dialogControlsFullyReachable": true,
+      "stripControlsReachable": true,
+      "stripProgressReadable": true,
+      "stripProgressTextWidthDp": [
+        321.3333333333333,
+        179.33333333333334
+      ],
+      "minimumProgressTextWidthDp": 120
+    }
+  ],
+  "knownSizeCopy": {
+    "bytes": 8388608,
+    "sha256": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+    "matchesDeterministicSource": true
+  },
+  "unknownSizeHasRateWithoutInventedTotalOrEta": true,
+  "unknownSizeCopy": {
+    "bytes": 8388608,
+    "sha256": "bdf23837181f5808331800c1ae2b4f7d7a839536b10d58491471c50dde23833a",
+    "matchesDeterministicSource": true
+  },
+  "waitingCancellationKeepsOriginal": true,
+  "cancelledDestinationAndStagingAbsent": true,
+  "foregroundServiceStopsAfterFinish": true,
+  "journalReadAfterOptimizedUiWithDebugBuild": true,
+  "syntheticJournal": {
+    "jobs": [
+      {
+        "state": "COMPLETED",
+        "bytes": 8388608,
+        "items": 1
+      },
+      {
+        "state": "COMPLETED",
+        "bytes": 8388608,
+        "items": 1
+      },
+      {
+        "state": "CANCELLED",
+        "bytes": 0,
+        "items": 1
+      }
+    ],
+    "estimates": [
+      {
+        "knownBytes": 8388608,
+        "unknownFiles": 0,
+        "unreadable": 0,
+        "limited": 0
+      },
+      {
+        "knownBytes": 0,
+        "unknownFiles": 1,
+        "unreadable": 0,
+        "limited": 0
+      },
+      {
+        "knownBytes": 8388608,
+        "unknownFiles": 0,
+        "unreadable": 0,
+        "limited": 0
+      }
+    ],
+    "verificationDoesNotDoubleCountCopiedBytes": true
+  },
+  "grantCleanupUsesFixedSyntheticUriBridge": true,
+  "unrelatedUriGrantsUnchanged": true,
+  "restoredOriginalUriGrants": true,
+  "sentinelPreferencePreserved": true,
+  "originalSyntheticDocumentBytes": true,
+  "restoredOriginalManagedFiles": true,
+  "restoredOriginalFileAbsences": true,
+  "restoredManagedFileCount": 495,
+  "providerControlsAndOwnedMarkersRestored": true,
+  "syntheticFixtureRemoved": true,
+  "restoredOriginalStorageAccess": true,
+  "restoredApkSha256": "fd04daad190c58a0c5c2645e0cfa05f3551dc2adf598d8676c5dd843f79d88e9",
+  "cleanupErrors": [],
+  "success": true
+}

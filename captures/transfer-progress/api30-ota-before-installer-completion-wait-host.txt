@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-ota-upgrade.py", line 155, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-ota-upgrade.py", line 131, in main
+    stop(); launch()
+            ~~~~~~^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-ota-upgrade.py", line 83, in launch
+    shell('am', 'start', '-W', '-f', '0x10008000', '--windowingMode', 1, '-n', 'dev.findroid/.MainActivity',
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '--es', 'finderWindowId', 'ota-sidebar-' + stamp, '--es', 'finderLocation', full)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-ota-upgrade.py", line 30, in shell
+    def shell(*parts): return call('shell', shlex.join(map(str, parts)))
+                              ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LENOVO/.t3/projects/droidfinder/scripts/check-ota-upgrade.py", line 26, in call
+    result = subprocess.run([adb, '-s', args.serial, *map(str, parts)], input=data,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/Users/LENOVO/Library/Android/sdk/platform-tools/adb', '-s', 'emulator-5602', 'shell', "am start -W -f 0x10008000 --windowingMode 1 -n dev.findroid/.MainActivity --es finderWindowId ota-sidebar-0452938000 --es finderLocation '/data/user/0/dev.findroid/files/Workspace/OTA sidebar proof 0452938000'"]' timed out after 120 seconds
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['python3', 'scripts/check-ota-upgrade.py', '--serial', 'emulator-5602', '--from-apk', 'captures/release/0.41.0/Findroid-0.41.0-preview.apk', '--to-apk', 'captures/transfer-progress/public/Findroid-0.42.0-preview.apk', '--expected-version-code', '44', '--output', 'captures/transfer-progress/api30-ota']' returned non-zero exit status 1.

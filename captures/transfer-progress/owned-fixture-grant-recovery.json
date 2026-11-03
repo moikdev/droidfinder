@@ -1,0 +1,6 @@
+{
+  "onlyOwnedSyntheticProviderConnectionRemoved": true,
+  "actualPrivateGrantAuditConfirmsAbsence": true,
+  "privateUriMapNotPrintedOrSaved": true,
+  "originalSnapshotAvailableForExactRestoration": true
+}
