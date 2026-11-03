@@ -42,7 +42,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 36 | Broaden Android picker testing | Open. Needs physical devices and actual third-party editing apps. |
 | 37 | Run independent transfers concurrently | Open. Implementation and focused acceptance pending. |
 | 38 | Strengthen background transfers | Open. Implementation and focused acceptance pending. |
-| 39 | Improve throughput and time estimates | In progress for 0.42.0: 525 JVM checks, 405 native cases per API30/API36 tablet in 47 fresh-process batches, and optimized upgrade/copy/wait/recovery/pause/cancellation/layout acceptance pass. Real public 0.41 → 0.42 OTA passes on both tablets and production-source API36 passes 1/1. Immutable archive verification remains pending. See [transfer progress](TRANSFER-PROGRESS.md). |
+| 39 | Improve throughput and time estimates | Implemented in 0.42.0: 525 JVM checks, 405 matching native cases per API30/API36 tablet in 47 fresh-process batches, optimized upgrade/copy/wait/recovery/pause/cancellation/layout acceptance, real public OTA on both and independently verified immutable evidence. See [transfer progress](TRANSFER-PROGRESS.md). |
 | 40 | Offer optional verification for important copies | Open. Implementation and focused acceptance pending. |
 | 41 | Support durable partial-copy resume where safe | Open. Implementation and focused acceptance pending. |
 | 42 | Make Undo survive restarts | Open. Implementation and focused acceptance pending. |
@@ -77,7 +77,7 @@ All 72 items in [NEXT-IMPROVEMENTS.md](NEXT-IMPROVEMENTS.md) were authorized on 
 | 71 | Expand the failure matrix | Partial: setup transaction faults/process death, changed grants, stale reviews, corrupt recovery, workspace publication faults, disk changes, future catalogs and window closure have coverage. Transfer progress adds gated provider waits, stale estimates, recovery and cancellation in the optimized app. Physical-media removal, full storage and the broader provider matrix remain open. |
 | 72 | Finish release infrastructure | Open. Hosted Actions stays manual-only; long-term signing/recovery needs owner-controlled key custody. |
 
-29 items are implemented across the 0.32.0–0.41.0 increments; 43 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
+30 items are implemented across the 0.32.0–0.42.0 increments; 42 remain open or partial. Emulator evidence is recorded separately from physical, screen-reader and third-party acceptance.
 
 ## Verification per increment
 

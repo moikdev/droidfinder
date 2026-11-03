@@ -1,0 +1,12 @@
+{
+  "archive": "Findroid-0.42.0-validation.zip",
+  "bytes": 14047194,
+  "sha256": "affceea037f799dae8311859dedd14d823943af3eb0631a54a67e607914103cd",
+  "entries": 925,
+  "applicationSourceCommit": "c9443d6e295a3746de9cc1ca4670e5cdb148c1ed",
+  "nativeTestSourceCommit": "c9443d6e295a3746de9cc1ca4670e5cdb148c1ed",
+  "evidenceCommit": "b23b724a4bae2191dc9f0196364c84c9350f1240",
+  "jvmCases": 525,
+  "nativeCasesPerApi": 405,
+  "isolatedBatchesPerApi": 47
+}
