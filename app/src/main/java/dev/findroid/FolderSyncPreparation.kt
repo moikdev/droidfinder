@@ -15,6 +15,13 @@ internal data class PreparedFolderSync(
     val roots: List<FolderSyncStagedRoot>,
 )
 
+internal class FolderSyncRecoveryFailure(val recovery: File?, cause: Exception, val moveAttempted: Boolean = false) :
+    Exception(when {
+        recovery != null -> "The original was moved to Trash before synchronization stopped. Its recovery record and working data were kept. ${cause.message}"
+        moveAttempted -> "The recovery move stopped. Review the original location and Trash before continuing. ${cause.message}"
+        else -> "Original files were kept. ${cause.message}"
+    }, cause)
+
 internal class FolderSyncPreparationFailure(val workingDirectory: String?, cause: Exception) :
     Exception(if (workingDirectory == null) cause.message else
         "Synchronization preparation stopped. Original files and the working copies were kept for review. ${cause.message}", cause)

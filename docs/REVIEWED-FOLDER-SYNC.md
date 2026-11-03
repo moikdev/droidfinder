@@ -20,10 +20,12 @@ The final read-only gate verifies the original folders, their contents and every
 
 Draft transition checks also validate the exact membership, identities and hashes of relocated trees. A future apply worker must validate both the declared destination-tree change and the relocated contents. Directory timestamp changes are limited to the affected ancestors; an unrelated edit or newly arrived file cannot become a fresh baseline for later operations.
 
+The draft also has a dedicated original-preservation primitive. It requires same-filesystem native no-replace rename, records the exact original path before the move, and verifies the relocated tree against its old identities and content hashes. It refuses a recursive-copy fallback for these originals. A failure after a completed rename reports the preserved Trash item and its durable mapping instead of hiding the partial result. Its JVM tests cover collisions, changed reviews, last-moment edits and post-move faults; Android and apply-worker integration remain pending.
+
 ## Work still required
 
 - Apply prepared additions with native no-replace publication and recheck the remaining plan between operations.
-- Preserve reviewed replacements and separately confirmed Trash items with exact, durable recovery mappings.
+- Connect the reviewed original-preservation primitive to replacements and separately confirmed Trash items, including recovery-space and filesystem preflight for the entire plan.
 - Record completed and interrupted operations without hiding a partially completed result.
 - Integrate metadata, the transfer lifecycle and appropriate Undo behavior.
 - Add the named, scrolling tablet review and completion controls without adding permanent toolbar icons.

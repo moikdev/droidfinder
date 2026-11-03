@@ -70,3 +70,14 @@ internal fun checkFolderSyncTreeChange(
         }
     }
 }
+
+/** Derives a child proof exclusively from an existing complete review. */
+internal fun folderSyncSubtreeProof(tree:UndoPathProof,path:String):UndoPathProof {
+    if(path==tree.path)return tree
+    check(insideSyncRoot(path,tree.path) && File(path).toPath().normalize().toString()==path) {"This item is outside the reviewed folder."}
+    val parent=File(path).parentFile?.path?:error("The reviewed item has no parent.")
+    val parentStamp=tree.entries[parent]
+    check(parentStamp?.directory==true && tree.entries[path]!=null) {"The item or its parent is missing from the review."}
+    return UndoPathProof(path,tree.resolved+path.removePrefix(tree.path),parent,tree.resolved+parent.removePrefix(tree.path),
+        parentStamp.device,parentStamp.inode,tree.entries.filterKeys {insideSyncRoot(it,path)})
+}

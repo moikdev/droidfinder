@@ -368,6 +368,64 @@ class FileEngine(
         }
     }
 
+    /** Reviewed synchronization never falls back to recursively copying a live original. */
+    @Synchronized
+    internal fun trashReviewedByRename(
+        expected: UndoPathProof,
+        contents: Map<String, String>,
+        files: UndoHistoryFiles,
+        storage: PartialCopyStorage = AndroidPartialCopyStorage(),
+        control: TransferControl = TransferControl(),
+    ): File {
+        var preserved: File? = null
+        var moveAttempted = false
+        try {
+            check(indexWritable) { "Review Trash recovery records before moving synchronization originals." }
+            val source = File(expected.path)
+            val identity = expected.entries[expected.path] ?: error("The reviewed original is unavailable.")
+            val trashIdentity = storage.stat(trashDir.path) ?: error("Trash is unavailable.")
+            val resolvedTrash = storage.canonical(trashDir.path)
+            check(trashIdentity.directory && !trashIdentity.regular && identity.device == trashIdentity.device &&
+                expected.entries.values.all { it.device == identity.device }) {
+                "This storage cannot preserve the reviewed original with an atomic rename. Keep destination-only items or choose another folder."
+            }
+            check(expected.entries.keys.all { it == expected.path || it.startsWith(expected.path.trimEnd('/') + "/") } &&
+                contents.keys == expected.entries.filterValues { it.regular }.keys) { "The original recovery review is incomplete." }
+            control.check()
+            check(files.observe(expected.path) == expected) { "The reviewed original changed. Compare again." }
+            for ((path, hash) in contents) {
+                check(folderSyncDigest(path, expected.entries.getValue(path), control, storage) == hash) { "The reviewed original contents changed. Compare again." }
+            }
+            check(files.observe(expected.path) == expected) { "The reviewed original changed while it was checked. Compare again." }
+            val id = UUID.randomUUID().toString()
+            val bucket = File(trashDir, id)
+            storage.createDirectory(bucket.path)
+            val bucketIdentity = storage.stat(bucket.path) ?: error("The recovery folder is unavailable.")
+            check(bucketIdentity.directory && !bucketIdentity.regular && bucketIdentity.device == trashIdentity.device)
+            index.setProperty(id, source.absolutePath)
+            index.setProperty("$id.trashedAt", System.currentTimeMillis().toString())
+            saveIndex()
+            files.syncDirectory(stateDir)
+            control.check()
+            check(storage.stat(trashDir.path)?.sameObject(trashIdentity) == true && storage.canonical(trashDir.path) == resolvedTrash &&
+                storage.stat(bucket.path)?.sameObject(bucketIdentity) == true && files.observe(expected.path) == expected) {
+                "The reviewed original or its recovery location changed. Original files were kept."
+            }
+            val target = File(bucket, source.name)
+            moveAttempted = true
+            files.moveNoReplace(source, target)
+            preserved = target
+            val recovered = files.observe(target.path)
+            checkFolderSyncRelocation(expected.path, expected.entries, recovered, contents) { path, stamp ->
+                folderSyncDigest(path, stamp, control, storage)
+            }
+            files.sync(setOf(target.path, source.path))
+            return target
+        } catch (error: Exception) {
+            throw FolderSyncRecoveryFailure(preserved, error, moveAttempted)
+        }
+    }
+
     @Synchronized
     fun trashItems(): List<File> =
         trashDir

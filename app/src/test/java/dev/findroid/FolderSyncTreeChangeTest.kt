@@ -65,4 +65,17 @@ class FolderSyncTreeChangeTest {
         val original=mapOf("/old" to stamp(5));val moved=proof("/new",mapOf("/new" to stamp(5).copy(changedNanos=8)))
         rejected {checkFolderSyncRelocation("/old",original,moved,mapOf("/old" to "a".repeat(64))) {_,_->"b".repeat(64)}}
     }
+    @Test fun subtreeProofsRetainReviewedIdentitiesWithoutInspectingNewFiles() {
+        val child=folderSyncSubtreeProof(before,"/destination/Folder/Old")
+        assertEquals("/destination/Folder",child.anchor);assertEquals(3L,child.anchorInode)
+        assertEquals(mapOf("/destination/Folder/Old" to stamp(4)),child.entries)
+        assertEquals("/destination/Folder/Old",child.resolved)
+    }
+    @Test fun aWholeRootReusesItsOriginalCompleteProof() {
+        assertSame(before,folderSyncSubtreeProof(before,before.path))
+    }
+    @Test fun missingOutsideOrUnnormalizedSubtreesCannotInventProofs() {
+        for(path in listOf("/destination/Missing","/other/Folder","/destination/Folder/../Keep"))
+            rejected {folderSyncSubtreeProof(before,path)}
+    }
 }
