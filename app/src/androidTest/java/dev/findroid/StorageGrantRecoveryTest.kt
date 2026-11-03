@@ -98,4 +98,18 @@ class StorageGrantRecoveryTest {
         )
         assertFalse(resolver.persistedUriPermissions.any { it.uri == tree })
     }
+    @Test
+    fun auditPersistedPermissionsForSyntheticAcceptance() {
+        assumeTrue(InstrumentationRegistry.getArguments().getString("storageQaAudit") == "true")
+        syntheticRelativePath() // Reject arbitrary custom acceptance roots.
+        val permissions = org.json.JSONObject()
+        InstrumentationRegistry.getInstrumentation().targetContext.contentResolver.persistedUriPermissions
+            .sortedBy { it.uri.toString() }.forEach { permission ->
+                permissions.put(permission.uri.toString(), org.json.JSONArray()
+                    .put(permission.isReadPermission).put(permission.isWritePermission))
+            }
+        // The optimized checker keeps this output only in memory and publishes boolean comparisons.
+        println("FINDROID_GRANT_AUDIT:" + android.util.Base64.encodeToString(
+            permissions.toString().toByteArray(Charsets.UTF_8), android.util.Base64.NO_WRAP))
+    }
 }
