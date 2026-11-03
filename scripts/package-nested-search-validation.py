@@ -117,7 +117,7 @@ def main():
         for image in review['images']:
             assert Path(image['name']).name==image['name'] and Path(image['name']).suffix=='.png'
             assert sha(folder/image['name'])==image['sha256']
-        files += [folder/name for name in ('verification.json','synthetic-smart-folders.json','synthetic-history.json','visual-review.json')]+list(folder.glob('*.png'))+list(folder.glob('*.xml'))
+        files += [folder/name for name in ('verification.json','synthetic-smart-folders.json','synthetic-history.json','visual-review.json','inspection-retries.json','contact-sources.json')]+list(folder.glob('*.png'))+list(folder.glob('*.xml'))
         for suffix,from_code in (('ota',40),):
             ota=PROOF/f'api{api}-{suffix}';report=read(ota/'verification.json')
             assert report['fromVersionCode']==from_code and report['toVersionCode']==41 and report['restoredApkSha256']==expected
@@ -132,7 +132,7 @@ def main():
     for name in ('native-source-hashes.json','native-classes.txt','final-debug-checks.txt','release-build.txt',
                  'public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','signing-continuity.json','rejected-attempts.json',
                  'local-acceptance.json','verify-local.py','verify-public.py','verify-validation.py','run-live-feed.py',
-                 'restore-public-tablets.py','write-release-body.py','finalize-docs.py'):
+                 'restore-public-tablets.py','write-release-body.py','finalize-docs.py','prepare-visual-review.py','release-package-after-test-correction.txt'):
         files.append(PROOF/name)
     rejected=read(PROOF/'rejected-attempts.json');assert rejected['rejectedAttemptsExcludedFromAcceptance']
     for attempt in rejected['attempts']:

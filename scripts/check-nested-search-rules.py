@@ -15,6 +15,25 @@ import time
 import xml.etree.ElementTree as ET
 from android.acceptance import AndroidDevice, ROOT
 
+class InspectionDevice(AndroidDevice):
+    """Retry only a failed UI Automator read; actions and assertions still fail normally."""
+    def __init__(self,*args,**kwargs):
+        self.inspection_retries=[]
+        super().__init__(*args,**kwargs)
+        (self.output/'inspection-retries.json').write_text('[]\n')
+
+    def dump(self,name):
+        for attempt in range(1,4):
+            try:
+                return super().dump(name)
+            except RuntimeError as error:
+                if 'uiautomator dump' not in str(error):raise
+                self.inspection_retries.append({'capture':name,'attempt':attempt,'error':str(error)})
+                (self.output/'inspection-retries.json').write_text(json.dumps(self.inspection_retries,indent=2)+'\n')
+                if attempt==3:raise
+                time.sleep(.2)
+
+
 FILES = {'tags.properties', 'workspaces.json', 'folder-views.json', 'folder-styles.properties',
          'rename-presets.properties', 'setup-previous.json', 'document-parents.properties'}
 
@@ -29,7 +48,7 @@ def main():
     args = parser.parse_args()
     assert args.serial in {'emulator-5602', 'emulator-5582'}, 'Use an assigned acceptance tablet.'
     assert not args.output.exists(), 'Retain earlier attempts; use a fresh output directory.'
-    device = AndroidDevice(args.serial, args.output, all_windows=True)
+    device = InspectionDevice(args.serial, args.output, all_windows=True)
     debug = ROOT/'app/build/outputs/apk/debug/app-debug.apk'
     demo = '/storage/emulated/0/Download/Findroid rule groups demo ' + str(time.time_ns())[-10:]
     source, target = demo+'/Writing project', demo+'/Research project'
@@ -289,6 +308,7 @@ def main():
         installed=device.shell('pm','path','dev.findroid').decode().strip().splitlines()[0].removeprefix('package:')
         assert hashlib.sha256(device.call('exec-out','cat',installed)).hexdigest()==report['apkSha256']
         report.update(actual0381Upgrade=True,installedOptimizedBytes=True)
+        print('Verified exact optimized 0.38.1 upgrade.',flush=True)
         scope_dialog('initial-scope'); add_target('cancel-target')
         device.click('cancel-draft','Cancel')
         tree=browser('cancel-preserved','Report current.txt');assert not device.nodes(tree,'Report here.txt')
@@ -314,6 +334,7 @@ def main():
         stop();launch();all_matches('smart-after-restart')
         report['smartFolderScopeSurvivesRestart']=True
         report['nestedSmartFolderSurvivesRestart']=True
+        print('Verified nested editing, chosen roots, exclusions and saved-search restart.',flush=True)
         layouts=[]
         for width,height in ((1280,800),(800,1000),(600,800)):
             for scale in (1.0,1.6):
@@ -331,6 +352,7 @@ def main():
                 close_details(key+'-close-details')
                 group_layout=check_group_layout(key)
                 layouts.append({**group_layout,'widthDp':width,'fontScale':scale,'footerVisible':True,'fullTouchBounds':True,'addFolderReachable':True,'detailsVisible':True})
+                print('Verified layout '+key,flush=True)
         report['layouts']=layouts
         stop();device.shell('wm','size',original_size);device.screen=(round(1280*density),round(800*density))
         device.shell('settings','put','system','font_scale','1.0')
@@ -379,6 +401,7 @@ def main():
         device.shell('appops','set','dev.findroid','MANAGE_EXTERNAL_STORAGE',original_access)
         device.shell('rm','-rf',demo)
         device.close()
+    report['inspectionRetries']=device.inspection_retries
     (args.output/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
 
