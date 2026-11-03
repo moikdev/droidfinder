@@ -25,7 +25,11 @@ The preview is **8,520,879 bytes**, SHA-256 `bd47bd616d6f7de63c738ba84ad7c53c2a3
 
 Both tablets finish with exact private original metadata/preferences, font scale 1.0 and the public optimized APK. Index registrations/rows remain excluded from setup backups. Private originals, database payloads, signing keys, credentials, private APK captures and full crash buffers are excluded from public evidence. GitHub Actions remains manual-only. Physical/OEM/provider, accessibility, removable media and actual third-party receiving-app acceptance remain separately tracked.
 
-The immutable validation archive is being finalized. Proposals 19 and 26 remain pending its independent public-artifact check.
+The immutable [validation ZIP](https://github.com/moikdev/findroid/releases/download/v0.40.0-preview/Findroid-0.40.0-validation.zip) was anonymously downloaded and all **1,235 entries** verified. It is **29,663,443 bytes**, SHA-256 `d7b915f66039d065ef6359581dbee1e0d68aa9ec591e3c3bf8bc3241845cf357`. Its evidence snapshot is `4a4ee8f285add584ede234238f7a7bc973ff49f3`; later documentation does not regenerate this archive.
+
+The archive records application source `783780a` and native-test source `5cef85e` separately; the intervening commit changes only the evidence packager. The [independent public verifier](scripts/verify-local-index-validation.py) checks every archived entry and compares the archived source bytes with both public Git trees. It replaces the initial helper retained in the immutable ZIP, whose commit-ID equality assertion was too strict. Run `python3 scripts/verify-local-index-validation.py`; add `--archive <local-zip>` to compare a downloaded copy too.
+
+Proposals **19 and 26** complete **28 of 72 improvements**; **44 remain open or partial**. [Local index guide](docs/LOCAL-SEARCH-INDEX.md) · [Improvement tracker](docs/IMPROVEMENT-TRACKER.md).
 
 ## Findroid 0.39.0 — nested search rules
 

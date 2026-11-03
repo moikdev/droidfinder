@@ -51,4 +51,4 @@ A complete indexed search can be slower despite earlier initial matches. Choose 
 
 489 JVM tests and 353 native cases per API30/API36 tablet pass, with 38 fresh-process batches per API and zero failures/errors/skips. The exact optimized previous-public upgrade, six real window/font combinations per API, 50,000-file process-death/pause/remove/delete checks and actual public OTA installation pass on both tablets. Actual screenshots are inspected. [Detailed validation](../VALIDATION.md).
 
-The immutable validation archive is being finalized. Proposals 19 and 26 remain pending its independent public-artifact check.
+The immutable [validation ZIP](https://github.com/moikdev/findroid/releases/download/v0.40.0-preview/Findroid-0.40.0-validation.zip) was anonymously downloaded and all **1,235 entries** verified. It is **29,663,443 bytes**, SHA-256 `d7b915f66039d065ef6359581dbee1e0d68aa9ec591e3c3bf8bc3241845cf357`. Its evidence snapshot is `4a4ee8f285add584ede234238f7a7bc973ff49f3`; later documentation does not regenerate this archive.
