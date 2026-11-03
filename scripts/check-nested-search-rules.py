@@ -224,7 +224,8 @@ def main():
         device.wait(name+'-returned',lambda t: bool(device.nodes(t,'Rule groups')))
     def build_groups():
         filters('new-groups-filters');groups('new-groups',False)
-        assert not device.ready(device.dump('empty-group'),'Apply groups')
+        tree=device.dump('empty-group')
+        assert control(tree,'Rule groups','Apply groups','Cancel').get('enabled')=='false'
         group_click('kind-group','Add group');group_click('kind-any','Any')
         condition('pdf','Kind','PDF document');condition('text','Kind','Text document')
         group_click('kind-parent','Back to parent group')
