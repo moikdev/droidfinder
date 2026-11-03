@@ -87,4 +87,29 @@ class CommandAvailabilityTest {
         assertNull(commandProblem("rename", selected.copy(removeAllowed = false)))
         assertEquals(CommandRecovery.TRANSFERS, commandProblem("rename", selected.copy(renameAllowed = false, busy = "Copying"))?.recovery)
     }
+    @Test fun permanentDeletionNeedsTheRemovalCapabilityEvenInTrash() {
+        val context = selected.copy(trash = true, removeAllowed = false)
+        assertEquals(CommandRecovery.COPY, commandProblem("delete", context)?.recovery)
+        assertNull(commandProblem("restore", context))
+    }
+    @Test fun preciseStorageReasonsKeepTheirRecoveryAndBusyPrecedence() {
+        val detail = CommandProblem("This document did not report rename support", CommandRecovery.STORAGE)
+        val context = selected.copy(renameAllowed = false, renameProblem = detail)
+        assertEquals(detail, commandProblem("rename", context))
+        assertEquals(CommandRecovery.TRANSFERS, commandProblem("rename", context.copy(busy = "Copying"))?.recovery)
+        assertTrue(commandProblem("rename", context.copy(trash = true))!!.reason.contains("Restore"))
+        assertTrue(commandProblem("rename", context.copy(selected = 0))!!.reason.contains("Select"))
+    }
+    @Test fun preciseCreationAndSelectedDestinationReasonsHaveSeparateScopes() {
+        val here = CommandProblem("Current folder did not report create support", CommandRecovery.STORAGE)
+        val destination = CommandProblem("Selected folder is read only", CommandRecovery.STORAGE)
+        val context = selected.copy(createAllowed = false, createProblem = here, selectedFolder = true,
+            selectedFolderWritable = false, selectedFolderProblem = destination, clipboard = true)
+        assertEquals(here, commandProblem("new", context))
+        assertEquals(destination, commandProblem("pasteInto", context))
+        assertTrue(commandProblem("new", context.copy(loading = true))!!.reason.contains("finish loading"))
+    }
+    @Test fun cachedActionDetailsRemainAvailableWhileAnotherOperationIsBusy() {
+        assertNull(commandProblem("availableActions", selected.copy(busy = "Copying", disconnected = true)))
+    }
 }

@@ -203,9 +203,11 @@ internal class StorageMonitor(
             check(entry.folder) { "This saved location is no longer a folder." }
             val grants = documents.grantState(target.path)
             val writable = grants?.second != false
+            val capabilitiesKnown = entry.providerAccess?.flags != null
             val health =
                 when {
                     !writable -> StorageHealth.READ_ONLY
+                    !capabilitiesKnown -> StorageHealth.LIMITED
                     entry.writable -> StorageHealth.AVAILABLE
                     entry.canRename || entry.canDelete -> StorageHealth.LIMITED
                     else -> StorageHealth.READ_ONLY
@@ -213,13 +215,18 @@ internal class StorageMonitor(
             return StorageStatus(
                 target,
                 health,
-                if (entry.writable) "Folder access is available"
-                else "Creating items isn't supported here",
+                when {
+                    !writable -> "Android's saved folder permission is read only"
+                    !capabilitiesKnown -> "The provider did not report which changes this folder supports"
+                    entry.writable -> "Folder access is available"
+                    else -> "Creating items isn't supported here"
+                },
                 available = documents.reportedAvailableBytes(target.path, token),
                 create = entry.writable,
                 rename = entry.canRename,
                 delete = entry.canDelete,
                 provider = label,
+                capabilitiesKnown = capabilitiesKnown,
                 grantNote =
                     if (grants?.first == true)
                         "Saved read${if(grants.second)" and write"else "-only"} permission"

@@ -1,0 +1,7 @@
+Understand available file actions
+
+Choose More → Available actions… for the current folder or selected items. Read, create, change contents, rename, delete and Trash details explain what the last folder load reported, with exact counts for mixed selections and up to three named examples. The window uses cached information; Refresh access info explicitly reloads permissions and folder metadata in the background.
+
+A provider folder cannot promise the same capabilities for every child. Missing or malformed flags are shown as Not reported. A read-only saved permission, explicit unsupported action or lost location gets its own explanation. Blocked commands name the affected item and offer the appropriate recovery action.
+
+Provider Trash uses a local Findroid recovery copy before deleting the original; it does not use the provider's own Trash. Restoring may create new document addresses. Opening the details keeps the selection and does not contact the provider. Available from More, context menus and Find action, without another permanent toolbar icon.

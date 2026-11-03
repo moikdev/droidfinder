@@ -57,6 +57,8 @@ data class Entry(
     val style: FolderStyle? = null,
     val sizeKnown: Boolean = true,
     val searchEvidence: SearchEvidence? = null,
+    val readable: Boolean? = file.canRead(),
+    val providerAccess: ProviderAccessEvidence? = null,
 ) {
     val path: String
         get() = documentUri?.toString() ?: file.absolutePath
@@ -2955,6 +2957,27 @@ constructor(
                 .storageVolumes
                 .mapNotNull { it.directory }
                 .filter { it != deviceRoot && it.canRead() }
+    }
+
+    internal var storageActionRefresh by mutableStateOf(false)
+        private set
+
+    internal fun refreshStorageActionFacts() {
+        if (storageActionRefresh || busy != null || loading) return
+        storageActionRefresh = true
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) { documents.refreshGrantState() }
+                storage.refresh(hasAccess)
+                refresh()
+            } catch (error: kotlinx.coroutines.CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                message = "Couldn't refresh storage access: ${error.message ?: "Try Storage locations."}"
+            } finally {
+                storageActionRefresh = false
+            }
+        }
     }
 
     fun onResume() {

@@ -21,6 +21,10 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         @Volatile var readDelayMillis: Map<String, Long> = emptyMap()
         @Volatile var mimeOverrides: Map<String, String> = emptyMap()
         @Volatile var unknownSizePaths: Set<String> = emptySet()
+        @Volatile var capabilityFlags: Map<String, Any?> = emptyMap()
+        @Volatile var omittedCapabilityColumns: Set<String> = emptySet()
+        val metadataQueries = java.util.concurrent.ConcurrentHashMap<String, java.util.concurrent.atomic.AtomicInteger>()
+        val childQueries = java.util.concurrent.ConcurrentHashMap<String, java.util.concurrent.atomic.AtomicInteger>()
         @Volatile var transferGate: java.util.concurrent.CountDownLatch? = null
         @Volatile var gateOpened: java.util.concurrent.CountDownLatch? = null
         @Volatile var beforeDelete: ((String) -> Unit)? = null
@@ -134,7 +138,8 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                         else if (file.isDirectory) 0L else file.length()
                     Document.COLUMN_LAST_MODIFIED -> file.lastModified()
                     Document.COLUMN_FLAGS ->
-                        if (readOnly(file)) 0
+                        if (capabilityFlags.containsKey(file.canonicalPath)) capabilityFlags[file.canonicalPath]
+                        else if (readOnly(file)) 0
                         else
                             Document.FLAG_SUPPORTS_DELETE or
                                 Document.FLAG_SUPPORTS_RENAME or
@@ -146,9 +151,15 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         }
     }
 
-    override fun queryDocument(documentId: String, projection: Array<out String>?): Cursor =
-        MatrixCursor(projection ?: columns).apply {
-            val file = file(documentId)
+    private fun capabilityColumns(projection: Array<out String>?, file: File): Array<out String> =
+        (projection ?: columns).filterNot {
+            it == Document.COLUMN_FLAGS && file.canonicalPath in omittedCapabilityColumns
+        }.toTypedArray()
+
+    override fun queryDocument(documentId: String, projection: Array<out String>?): Cursor {
+        val file = file(documentId)
+        metadataQueries.computeIfAbsent(file.canonicalPath) { java.util.concurrent.atomic.AtomicInteger() }.incrementAndGet()
+        return MatrixCursor(capabilityColumns(projection, file)).apply {
             if (file.canonicalPath == metadataDirectory) {
                 metadataOpened?.countDown()
                 check(metadataGate?.await(15, java.util.concurrent.TimeUnit.SECONDS) != false) {
@@ -162,6 +173,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
             if (!file.exists()) throw FileNotFoundException(documentId)
             row(this, file)
         }
+    }
 
     override fun queryChildDocuments(
         parentDocumentId: String,
@@ -169,10 +181,11 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         sortOrder: String?,
     ): Cursor {
         val parent = file(parentDocumentId)
+        childQueries.computeIfAbsent(parent.canonicalPath) { java.util.concurrent.atomic.AtomicInteger() }.incrementAndGet()
         if (parent.canonicalPath == listingFailure)
             throw FileNotFoundException("Fixture location is offline")
         val controlled = parent.canonicalPath == listingDirectory
-        return object : MatrixCursor(projection ?: columns) {
+        return object : MatrixCursor(capabilityColumns(projection, parent)) {
                 private var waited = false
 
                 override fun onMove(oldPosition: Int, newPosition: Int): Boolean {

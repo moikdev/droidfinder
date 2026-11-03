@@ -271,14 +271,16 @@ private fun StorageCard(
                 color = Ink,
             )
             Text(
-                "Read · ${if(status.create)"Create" else "No create"}${if(target.kind==StorageKind.PROVIDER)" · ${if(status.rename)"Rename"else "No rename"} · ${if(status.delete)"Delete"else "No delete"}"else ""}",
+                if (target.kind == StorageKind.PROVIDER && !status.capabilitiesKnown && status.health != StorageHealth.READ_ONLY)
+                    "Metadata read · Create: not reported · Rename: not reported · Delete: not reported"
+                else "${if(target.kind == StorageKind.PROVIDER) "Metadata read" else "Read"} · ${if(status.create)"Create" else "No create"}${if(target.kind==StorageKind.PROVIDER)" · ${if(status.rename)"Rename"else "No rename"} · ${if(status.delete)"Delete"else "No delete"}"else ""}",
                 Modifier.padding(top = 6.dp),
                 fontSize = 11.sp,
                 color = Muted,
             )
             if (target.kind == StorageKind.PROVIDER)
                 Text(
-                    "Individual files can have different capabilities.",
+                    "Individual files can have different capabilities. Select items in the folder, then choose More → Available actions for their own details.",
                     Modifier.padding(top = 6.dp),
                     fontSize = 10.sp,
                     color = Muted,

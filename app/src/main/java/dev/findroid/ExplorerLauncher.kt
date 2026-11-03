@@ -67,6 +67,7 @@ private fun launcherCommands(model: FinderModel): List<LauncherChoice> {
         command("undo", "Undo ${model.undoLabel ?: "recent action"}", "Recovery checks protect files changed later", if (model.undoLabel == null) "There is no eligible action to undo in this session." else busy),
         command("dualPane", if (model.dualPane) "Close second pane" else "Open second pane", "Compare folders side by side", keywords = "split two panels"),
         command("workspaces", "Saved workspaces…", "Save or restore your tablet layout", keywords = "tabs session"),
+        command("availableActions", "Available actions…", "Explain read, create, rename, delete and Trash support for this folder or selection", keywords = "permissions capability provider read only unavailable write access"),
         command("storage", "Storage locations…", "Review permissions, capacity and reconnect options", keywords = "grant provider usb drive unavailable"),
         command("setup", "Back up or restore setup…", "Review Favorites, tags, workspaces and root mappings", keywords = "backup import export migrate metadata preferences"),
         command("settings", "Preferences…", "Browsing, sidebar and advanced choices", keywords = "settings density theme appearance"),

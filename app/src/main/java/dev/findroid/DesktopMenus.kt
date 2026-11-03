@@ -366,6 +366,8 @@ fun FileContextMenu(
                 FileCommandItem(model, "share", "Share…", Icons.Outlined.IosShare) { run("share") }
                 FileCommandItem(model, "trash", "Move to Trash", Icons.Outlined.DeleteOutline, "Delete") { run("trash") }
             }
+            if (request.background || items.isNotEmpty())
+                ContextItem("Available actions…", Icons.Outlined.Info) { run("availableActions") }
             ContextItem("Recent actions…", Icons.Outlined.History) { run("recentActions") }
             if (model.undoLabel != null || model.redoLabel != null) {
                 HorizontalDivider(color = Border)

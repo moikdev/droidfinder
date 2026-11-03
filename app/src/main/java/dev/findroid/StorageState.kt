@@ -41,6 +41,7 @@ internal data class StorageStatus(
     val delete: Boolean = false,
     val provider: String? = null,
     val grantNote: String? = null,
+    val capabilitiesKnown: Boolean = true,
 ) {
     val canOpen
         get() =

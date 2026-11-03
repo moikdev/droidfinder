@@ -31,6 +31,10 @@ internal data class CommandContext(
     val selectedFolderWritable: Boolean = false,
     val searchActive: Boolean = false,
     val otherWritable: Boolean = false,
+    val renameProblem: CommandProblem? = null,
+    val removeProblem: CommandProblem? = null,
+    val createProblem: CommandProblem? = null,
+    val selectedFolderProblem: CommandProblem? = null,
 )
 
 private val selectedCommands = setOf("rename", "batchRename", "copy", "cut", "copyTo", "moveTo",
@@ -39,7 +43,7 @@ private val selectedCommands = setOf("rename", "batchRename", "copy", "cut", "co
 private val serialCommands = setOf("new", "newText", "rename", "batchRename", "trash", "restore", "delete",
     "empty", "duplicate", "compress", "extract", "extractHere", "extractTo", "groupSelection", "shortcut", "undo", "redo", "tags", "collections", "appearance")
 private val createCommands = setOf("new", "newText", "paste", "groupSelection")
-private val removeCommands = setOf("cut", "moveTo", "moveOtherPane", "trash", "groupSelection")
+private val removeCommands = setOf("cut", "moveTo", "moveOtherPane", "trash", "delete", "groupSelection")
 
 internal fun commandProblem(command: String, context: CommandContext): CommandProblem? {
     fun problem(reason: String, recovery: CommandRecovery? = null) = CommandProblem(reason, recovery)
@@ -56,16 +60,16 @@ internal fun commandProblem(command: String, context: CommandContext): CommandPr
     if (command in createCommands && !context.createAllowed) return when {
         context.virtual -> problem("This is a library or search view. Choose a real folder for new files.", CommandRecovery.FOLDER)
         context.loading -> problem("Wait for this folder to finish loading, then try again.")
-        else -> problem("This folder does not allow creating files. Choose a writable folder or check its storage access.", CommandRecovery.STORAGE)
+        else -> context.createProblem ?: problem("This folder does not allow creating files. Choose a writable folder or check its storage access.", CommandRecovery.STORAGE)
     }
     if (command in setOf("rename", "batchRename") && !context.renameAllowed)
-        return problem("The selected storage does not allow renaming one or more of these items. You can copy them to a writable folder instead.", CommandRecovery.COPY)
+        return context.renameProblem ?: problem("The selected storage does not allow renaming one or more of these items. You can copy them to a writable folder instead.", CommandRecovery.COPY)
     if (command in removeCommands && !context.removeAllowed)
-        return problem("The selected storage does not allow removing one or more originals. You can copy them instead.", CommandRecovery.COPY)
+        return context.removeProblem ?: problem("The selected storage does not allow removing one or more originals. You can copy them instead.", CommandRecovery.COPY)
     if (command == "pasteInto" && (context.selected != 1 || !context.selectedFolder))
         return problem("Select one destination folder first.")
     if (command == "pasteInto" && !context.selectedFolderWritable)
-        return problem("The selected folder does not allow creating files. Choose another destination or check its storage access.", CommandRecovery.STORAGE)
+        return context.selectedFolderProblem ?: problem("The selected folder does not allow creating files. Choose another destination or check its storage access.", CommandRecovery.STORAGE)
     if (command in setOf("copyOtherPane", "moveOtherPane") && !context.otherWritable)
         return problem("The other pane needs an available, writable folder before it can receive files.", CommandRecovery.OTHER)
     if (command in setOf("extract", "extractHere", "extractTo") && !context.archive)
@@ -79,9 +83,19 @@ internal fun commandProblem(command: String, context: CommandContext): CommandPr
 
 internal fun FinderModel.commandProblem(command: String): CommandProblem? {
     val entries = actionEntries
+    val roots = if (command in setOf("rename", "batchRename") || command in removeCommands)
+        connectedLocations.map { it.uri }.toSet() else emptySet()
+    val renameDenied = if (command in setOf("rename", "batchRename"))
+        entries.firstOrNull { !it.canRename || (it.path in roots && it.parentPath == null) } else null
+    val removeDenied = if (command in removeCommands)
+        entries.firstOrNull { !it.canDelete || it.path in roots } else null
+    val createProblem = if (!canCreate && command in createCommands)
+        folderInfo?.let { storageCommandProblem(it, StorageAction.CREATE) } else null
+    val folderProblem = if (command == "pasteInto") entries.singleOrNull()?.takeIf { it.folder && !it.writable }
+        ?.let { storageCommandProblem(it, StorageAction.CREATE) } else null
     return commandProblem(command, CommandContext(
         selected = entries.size,
-        renameAllowed = entries.all { it.canRename }, removeAllowed = entries.all { it.canDelete },
+        renameAllowed = renameDenied == null, removeAllowed = removeDenied == null,
         createAllowed = canCreate, virtual = folderPath == null, disconnected = folderStorageIssue != null || (listingError != null && !loading),
         loading = loading, busy = busy, clipboard = clipboard != null, trash = isTrash,
         undo = undoLabel != null, redo = redoLabel != null,
@@ -90,6 +104,9 @@ internal fun FinderModel.commandProblem(command: String): CommandProblem? {
         searchActive = query.isNotBlank() || effectiveSearchRules.active,
         selectedFolderWritable = entries.singleOrNull()?.let { it.folder && it.writable } == true,
         otherWritable = command in setOf("copyOtherPane", "moveOtherPane") && this in windowState.panes && otherPane.canCreate,
+        renameProblem = renameDenied?.let { storageCommandProblem(it, StorageAction.RENAME) },
+        removeProblem = removeDenied?.let { storageCommandProblem(it, StorageAction.DELETE) },
+        createProblem = createProblem, selectedFolderProblem = folderProblem,
     ))
 }
 
@@ -100,6 +117,6 @@ internal fun commandTitle(command: String): String = when (command) {
     "delete" -> "Delete permanently"; "empty" -> "Empty Trash"; "duplicate" -> "Duplicate"
     "compress" -> "Compress"; "extract", "extractHere", "extractTo" -> "Extract"; "groupSelection" -> "New folder with selection"
     "tags" -> "Tags"; "collections" -> "Collections"; "appearance" -> "Customize folder"
-    "shortcut" -> "Make shortcut"; "undo" -> "Undo"; "redo" -> "Redo"; "share" -> "Share"
+    "availableActions" -> "Available actions"; "shortcut" -> "Make shortcut"; "undo" -> "Undo"; "redo" -> "Redo"; "share" -> "Share"
     else -> "This command"
 }

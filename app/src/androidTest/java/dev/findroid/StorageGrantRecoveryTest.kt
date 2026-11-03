@@ -9,13 +9,24 @@ import org.junit.Test
 
 /** Opt-in bridge for the documented real DocumentsUI grant/revoke/cold-start/reconnect check. */
 class StorageGrantRecoveryTest {
+    private fun syntheticRelativePath(): String {
+        val requested = InstrumentationRegistry.getArguments().getString("storageQaRoot")
+            ?: return "Documents/Findroid-Storage-QA"
+        require(Regex("Documents/Findroid actions demo [0-9]{10,20}").matches(requested)) {
+            "Custom grant acceptance is limited to a uniquely named synthetic folder"
+        }
+        return requested
+    }
+
+    private fun syntheticTree() = DocumentsContract.buildTreeDocumentUri(
+        "com.android.externalstorage.documents", "primary:${syntheticRelativePath()}",
+    )
+
     @Test
     fun grantExplicitSyntheticTreeThroughSystemPicker() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         assumeTrue(InstrumentationRegistry.getArguments().getString("storageQaGrant") == "true")
-        val tree = DocumentsContract.buildTreeDocumentUri(
-            "com.android.externalstorage.documents", "primary:Documents/Findroid-Storage-QA",
-        )
+        val tree = syntheticTree()
         val document = DocumentsContract.buildDocumentUriUsingTree(
             tree, DocumentsContract.getTreeDocumentId(tree),
         )
@@ -28,7 +39,7 @@ class StorageGrantRecoveryTest {
             // synthetic tree. This does not inject a permission or modify DocumentsUI state.
             MainActivity::class.java.getDeclaredMethod("chooseFolder", ConnectedLocation::class.java)
                 .apply { isAccessible = true }
-                .invoke(activity, ConnectedLocation(document.toString(), tree.toString(), "Findroid-Storage-QA"))
+                .invoke(activity, ConnectedLocation(document.toString(), tree.toString(), syntheticRelativePath().substringAfterLast('/')))
         }
         fun find(text: String): android.view.accessibility.AccessibilityNodeInfo? =
             instrumentation.uiAutomation.rootInActiveWindow
@@ -42,7 +53,7 @@ class StorageGrantRecoveryTest {
             }
         }
         waitFor("system picker at the synthetic folder") {
-            find("Findroid-Storage-QA")?.packageName?.toString()?.endsWith("documentsui") == true &&
+            find(syntheticRelativePath().substringAfterLast('/'))?.packageName?.toString()?.endsWith("documentsui") == true &&
                 find("USE THIS FOLDER")?.isEnabled == true
         }
         assertTrue(find("USE THIS FOLDER")!!.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK))
@@ -62,11 +73,7 @@ class StorageGrantRecoveryTest {
     fun restrictExplicitSyntheticTreeToReadOnly() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         assumeTrue(InstrumentationRegistry.getArguments().getString("storageQaReadOnly") == "true")
-        val tree =
-            DocumentsContract.buildTreeDocumentUri(
-                "com.android.externalstorage.documents",
-                "primary:Documents/Findroid-Storage-QA",
-            )
+        val tree = syntheticTree()
         val resolver = instrumentation.targetContext.contentResolver
         assertTrue(resolver.persistedUriPermissions.any { it.uri == tree && it.isReadPermission })
         resolver.releasePersistableUriPermission(tree, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
@@ -79,11 +86,7 @@ class StorageGrantRecoveryTest {
     fun revokeExplicitSyntheticTreeOnly() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         assumeTrue(InstrumentationRegistry.getArguments().getString("storageQaRevoke") == "true")
-        val tree =
-            DocumentsContract.buildTreeDocumentUri(
-                "com.android.externalstorage.documents",
-                "primary:Documents/Findroid-Storage-QA",
-            )
+        val tree = syntheticTree()
         val resolver = instrumentation.targetContext.contentResolver
         assertTrue(
             "Grant the synthetic QA folder through DocumentsUI first",

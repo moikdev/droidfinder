@@ -314,6 +314,7 @@ fun FinderApp(
                     "folderViews" -> dialog = "folderViews"
                     "about" -> dialog = "about"
                     "filters" -> dialog = "filters"
+                    "availableActions" -> dialog = "availableActions"
                     "searchIndex" -> dialog = "searchIndex"
                     "recentSearches" -> { model.rememberCurrentSearch(); dialog = "recentSearches" }
                     "searchLocations" -> { model.rememberCurrentSearch(); dialog = "searchLocations" }
@@ -816,6 +817,7 @@ fun FinderApp(
                     )
                 "searchLocations" -> SearchLocationsDialog(model) { dialog = null }
                 "filters" -> SearchFiltersDialog(model) { dialog = null }
+                "availableActions" -> AvailableActionsDialog(model, { dialog = "storage" }) { dialog = null }
                 "searchIndex" -> LocalIndexDialog(model) { dialog = null }
                 "recentSearches" -> RecentSearchesDialog(model, action) { dialog = null }
                 "launcher", "quickJump" -> ExplorerLauncherDialog(model, dialog == "quickJump", action) { dialog = null }
@@ -1645,6 +1647,7 @@ internal fun ActionMenu(
         ) {
             action("analysis")
         }
+        MenuAction("Available actions…", Icons.Outlined.Info) { action("availableActions") }
         MenuAction("Storage locations…", Icons.Outlined.Storage) { action("storage") }
         MenuAction("Trash & cache…", Icons.Outlined.CleaningServices) { action("housekeeping") }
         MenuAction("Preferences…", Icons.Outlined.Tune) { action("settings") }

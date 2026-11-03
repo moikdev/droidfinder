@@ -415,8 +415,14 @@ class DocumentAccess(
         val uri = DocumentsContract.buildDocumentUriUsingTree(tree, id)
         val name = string(Document.COLUMN_DISPLAY_NAME)
         val mime = string(Document.COLUMN_MIME_TYPE)
-        val flags = number(Document.COLUMN_FLAGS).toInt()
-        val mayWrite = grantState(uri.toString())?.second != false
+        val flagsIndex = cursor.getColumnIndex(Document.COLUMN_FLAGS)
+        val flags = if (flagsIndex < 0) null else runCatching {
+            if (cursor.getType(flagsIndex) != android.database.Cursor.FIELD_TYPE_INTEGER) null
+            else cursor.getLong(flagsIndex).takeIf { it in 0L..Int.MAX_VALUE.toLong() }?.toInt()
+        }.getOrNull()
+        val bits = flags ?: 0
+        val grants = grantState(uri.toString())
+        val mayWrite = grants?.second != false
         val folder = mime == Document.MIME_TYPE_DIR
         val file = cacheFile(uri.toString(), name)
         titles[uri.toString()] = name
@@ -430,14 +436,16 @@ class DocumentAccess(
             uri,
             parent,
             mayWrite &&
-                (if (folder) flags and Document.FLAG_DIR_SUPPORTS_CREATE != 0
-                else flags and Document.FLAG_SUPPORTS_WRITE != 0),
-            mayWrite && (flags and Document.FLAG_SUPPORTS_RENAME != 0),
-            mayWrite && (flags and Document.FLAG_SUPPORTS_DELETE != 0),
+                (if (folder) bits and Document.FLAG_DIR_SUPPORTS_CREATE != 0
+                else bits and Document.FLAG_SUPPORTS_WRITE != 0),
+            mayWrite && (bits and Document.FLAG_SUPPORTS_RENAME != 0),
+            mayWrite && (bits and Document.FLAG_SUPPORTS_DELETE != 0),
             mime,
             sizeKnown =
                 !cursor.isNull(cursor.getColumnIndexOrThrow(Document.COLUMN_SIZE)) &&
                     number(Document.COLUMN_SIZE) >= 0,
+            readable = null,
+            providerAccess = ProviderAccessEvidence(uri.toString(), flags, grants?.first, grants?.second),
         )
     }
 
