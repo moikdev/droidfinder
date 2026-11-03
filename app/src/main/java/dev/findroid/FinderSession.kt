@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelStore
 import java.io.File
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.sync.Mutex
-import org.json.JSONArray
 
 /** App-owned shared operation state. Pane models own navigation and independent listing jobs. */
 class FinderSession(
@@ -43,7 +42,16 @@ class FinderSession(
 
     val hasAccess = mutableStateOf(Environment.isExternalStorageManager())
 
-    val smartFolders = mutableStateOf(loadSmartFolders())
+    private val smartFolderPersistence = PreferencesSmartFolderPersistence(prefs)
+    private val loadedSmartFolders = runCatching { smartFolderPersistence.load() }
+    internal val smartFolderNotice = mutableStateOf(if (loadedSmartFolders.isFailure) SMART_FOLDER_READ_NOTICE else null)
+    val smartFolders = mutableStateOf(loadedSmartFolders.getOrDefault(emptyList()))
+
+    internal fun saveSmartFolders(values: List<SmartFolder>) {
+        smartFolderPersistence.save(values)
+        smartFolders.value = values
+        smartFolderNotice.value = null
+    }
 
     internal val recentSearches = RecentSearchHistory(PreferencesRecentSearchPersistence(prefs))
 
@@ -164,20 +172,7 @@ class FinderSession(
             .mapKeys { it.key.removePrefix("tag:") }
             .mapValues { it.value.toString() }
 
-    private fun loadSmartFolders(): List<SmartFolder> = runCatching {
-        val array = JSONArray(prefs.getString("smartFolders", "[]"))
-        (0 until array.length()).map { index ->
-            val item = array.getJSONObject(index)
-            val r = item.getJSONObject("rules")
-            SmartFolder(
-                item.getString("id"),
-                item.getString("name"),
-                item.getString("root"),
-                NavigationJson.rules(r),
-            )
-        }
-    }
-        .getOrDefault(emptyList())
+
 }
 
 data class TransferSubmission(

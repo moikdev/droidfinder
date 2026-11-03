@@ -34,6 +34,7 @@ internal fun RecentSearch.checked(): RecentSearch = apply {
     require(id.isNotBlank() && id.length <= 128 && id.none(Char::isISOControl)) { "Invalid recent search identity." }
     require(recentSearchRootSupported(root) && usedAt >= 0) { "Invalid recent search location or time." }
     checkedSearchLocations(rules.locations)
+    rules.ruleGroup?.let(::checkedRuleGroup)
     require(rules.active) { "An empty search doesn't need a history entry." }
     require(rules.days >= 0 && rules.minimumBytes >= 0 && rules.maximumBytes >= 0 &&
         (rules.minimumBytes == 0L || rules.maximumBytes == 0L || rules.minimumBytes <= rules.maximumBytes)) { "Invalid recent search bounds." }
@@ -58,6 +59,7 @@ internal val RecentSearch.title: String get() = when {
     rules.content.isNotBlank() -> "Text: ${rules.content}"
     rules.choiceDescription.isNotBlank() -> rules.choiceDescription
     rules.filterTags.isNotEmpty() -> "Tags: ${rules.filterTags.sorted().joinToString(", ")}"
+    rules.ruleGroup != null -> "Rule groups · ${rules.ruleGroup.join.title}"
     else -> "Filtered search"
 }
 
@@ -67,8 +69,17 @@ internal val RecentSearch.summary: String get() = buildList {
     if (rules.choiceDescription.isNotBlank()) add(rules.choiceDescription)
     if (rules.filterTags.isNotEmpty()) add("${rules.tagMatch.title} tags: ${rules.filterTags.sorted().joinToString(", ")}")
     if (rules.content.isNotBlank()) add("Text contains “${rules.content}”")
+    rules.ruleGroup?.let { add("Rule groups: ${it.summary}") }
     add(rules.scopeDescription)
 }.joinToString(" · ")
+
+/** A typing suggestion applies here and keeps a bounded, Unicode-safe description. */
+internal val RecentSearch.suggestionSummary: String
+    get() {
+        val text = copy(rules = rules.copy(locations = emptyList())).summary
+        if (text.codePointCount(0, text.length) <= 360) return text
+        return text.substring(0, text.offsetByCodePoints(0, 359)) + "…"
+    }
 
 internal fun recentSearchMatches(search: RecentSearch, query: String, includeRoot: Boolean = true): Boolean {
     val criteria = if (includeRoot) search else search.copy(rules = search.rules.copy(locations = emptyList()))

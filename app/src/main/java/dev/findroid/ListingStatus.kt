@@ -44,7 +44,7 @@ internal fun ListingStatus(model: FinderModel) {
         (model.loading && showLoading) ||
             progress.incomplete ||
             progress.providerInfo.isNotEmpty() ||
-            scoped || rules.choiceDescription.isNotBlank()
+            scoped || rules.choiceDescription.isNotBlank() || rules.ruleGroup != null
     val visible = if (dragging) pinnedVisibility else wanted
     SideEffect { if (!dragging) pinnedVisibility = wanted }
     if (!visible) return
@@ -80,7 +80,7 @@ internal fun ListingStatus(model: FinderModel) {
                         progress.issueCount > 0 -> "Some items couldn't be scanned"
                         progress.providerInfo.isNotEmpty() -> "Storage information"
                         scoped -> "Search scope · $results"
-                        rules.choiceDescription.isNotBlank() -> "Search · $results"
+                        rules.choiceDescription.isNotBlank() || rules.ruleGroup != null -> "Search · $results"
                         else -> "Ready · $items"
                     }
                 Text(
@@ -104,7 +104,7 @@ internal fun ListingStatus(model: FinderModel) {
                             else "${progress.issueCount} checks need attention"
                         else ->
                             progress.providerInfo.firstOrNull()
-                                ?: if (scoped) rules.scopeDescription else rules.choiceDescription.ifBlank { "Scan complete" }
+                                ?: if (scoped) rules.scopeDescription else rules.choiceDescription.ifBlank { rules.ruleGroup?.summary ?: "Scan complete" }
                     },
                     color = Muted,
                     fontSize = 10.sp,
@@ -216,6 +216,11 @@ internal fun ListingDetails(model: FinderModel) {
                 Text(it, color = Ink, fontSize = 12.sp)
                 if (model.effectiveSearchRules.date != SearchDate.ANY)
                     Text(searchCalendarDescription(model.effectiveSearchRules.date, SearchCalendar()), color = Muted, fontSize = 12.sp)
+            }
+            model.effectiveSearchRules.ruleGroup?.let { group ->
+                Text("Rule groups", color = Ink, fontSize = 14.sp)
+                Text(group.summary, color = Ink, fontSize = 12.sp, modifier = Modifier.testTag("result-rule-groups"))
+                Text("The other search criteria and exclusions must also match.", color = Muted, fontSize = 11.sp)
             }
             if (model.effectiveSearchRules.scoped) {
                 val rules = model.effectiveSearchRules

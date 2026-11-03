@@ -81,7 +81,8 @@ class SetupWorkflowTest {
         val snapshot = SetupSnapshot(
             SidebarLayout(listOf(FavoriteShortcut("project", project, "Writing projects", "work")) + if (missing) listOf(FavoriteShortcut("missing", "$old/Missing folder", "Offline notes")) else emptyList(), listOf(FavoriteGroup("work", "Work"))),
             OrganizationSnapshot(TagSnapshot(defaultTags + FinderTag("Research", "Purple"), mapOf(file to setOf("Research"))), listOf(FinderCollection("references", "Research set", paths = listOf(file)))),
-            listOf(SmartFolder(UUID.randomUUID().toString(), "Writing notes", project, SearchRules(name = "Keep", tags = setOf("Research")))),
+            listOf(SmartFolder(UUID.randomUUID().toString(), "Writing notes", project, SearchRules(name = "Keep", tags = setOf("Research"), ruleGroup = SearchRuleGroup(SearchRuleJoin.ALL, listOf(
+                SearchTagRule("Research"), SearchRuleGroup(SearchRuleJoin.ANY, listOf(SearchKindRule("Text document"), SearchKindRule("PDF document")))))))),
             listOf(SavedWorkspace(UUID.randomUUID().toString(), "Writing desk", pane(project), pane("$old/Reference"), true, false, .5f, "primary")),
             SavedWorkspace("open-tabs", "Open tabs", pane(project), pane("$old/Reference"), true, false, .5f, "primary"),
             mapOf(project to FolderView(mode = ViewMode.GALLERY)), mapOf(project to FolderStyle("Green", "✎")),

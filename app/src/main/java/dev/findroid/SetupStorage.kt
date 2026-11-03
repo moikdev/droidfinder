@@ -102,6 +102,7 @@ internal class SetupStorage(private val app: Application) {
         session.styleStore.acceptSetup(value.folderStyles)
         session.sidebar.value = value.sidebar
         session.smartFolders.value = value.searches
+        session.smartFolderNotice.value = null
         session.savedWorkspaces.value = value.workspaces
         session.folderViews.acceptSetup(value.folderViews)
         session.folderStyles.value = session.styleStore.styles

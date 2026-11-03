@@ -20,6 +20,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         @Volatile var readByteLimits: Map<String, Int> = emptyMap()
         @Volatile var readDelayMillis: Map<String, Long> = emptyMap()
         @Volatile var mimeOverrides: Map<String, String> = emptyMap()
+        @Volatile var unknownSizePaths: Set<String> = emptySet()
         @Volatile var transferGate: java.util.concurrent.CountDownLatch? = null
         @Volatile var gateOpened: java.util.concurrent.CountDownLatch? = null
         @Volatile var beforeDelete: ((String) -> Unit)? = null
@@ -129,7 +130,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                                     .getMimeTypeFromExtension(file.extension)
                                 ?: "application/octet-stream"
                     Document.COLUMN_SIZE ->
-                        if (file.name == "Unknown-size.bin") null
+                        if (file.name == "Unknown-size.bin" || file.canonicalPath in unknownSizePaths) null
                         else if (file.isDirectory) 0L else file.length()
                     Document.COLUMN_LAST_MODIFIED -> file.lastModified()
                     Document.COLUMN_FLAGS ->

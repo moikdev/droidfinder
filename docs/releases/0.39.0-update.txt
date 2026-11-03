@@ -1,0 +1,7 @@
+Combine search rules with All, Any and None. For example, find PDFs or text documents tagged Review or Approved.
+
+Open More → Search filters… → Add rule groups…. Add name, kind, tag, modified-date or size rules. Apply groups updates the draft; Apply filters runs the search. Cancel preserves the parent draft.
+
+Tabs, Smart Folders, recent searches, workspaces and reviewed setup backups retain nested rules. Tag changes refresh results. Locations and exclusions apply to the whole search. Unknown provider sizes are explained rather than guessed.
+
+Unreadable Smart Folder data is preserved and protected from accidental overwrite. Existing searches retain their behavior. The tablet editor uses named controls, scrolling content and fixed Cancel/Apply actions.

@@ -121,7 +121,7 @@ internal fun SearchQueryField(
                 DropdownMenuItem(
                     text = { Column(Modifier.widthIn(max = 440.dp)) {
                         Text(search.title, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                        Text(search.copy(rules = search.rules.copy(locations = emptyList())).summary, fontSize = 12.sp, color = Muted, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                        Text(search.suggestionSummary, fontSize = 12.sp, color = Muted, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     } },
                     onClick = { choose(search) },
                     modifier = Modifier.testTag("recent-search-suggestion-${search.id}")

@@ -266,7 +266,7 @@ internal fun mergeSetup(
     if (SetupSection.WORKSPACES in sections && !replace) mapped.workspaces.forEach(::addWorkspace)
     if (SetupSection.OPEN_TABS in sections) mapped.openTabs?.let { addWorkspace(it.copy(id = setupStableId(backupId, "open-tabs"), name = "Restored open tabs")) }
     if (SetupSection.ORGANIZATION !in sections) {
-        val unavailable = mapped.searches.flatMap { it.rules.filterTags }.toSet() - organization.tags.definitions.map { it.name }.toSet()
+        val unavailable = mapped.searches.flatMap { it.rules.referencedTags }.toSet() - organization.tags.definitions.map { it.name }.toSet()
         if (unavailable.isNotEmpty() && SetupSection.SEARCHES in sections) notes += "${unavailable.size} search tags are absent. Include Tags and collections to restore their definitions."
     }
     if (SetupSection.PREFERENCES in sections && !replace) notes += "Browsing and archive preferences keep this tablet’s current values in Merge mode. Use Replace selected sections to restore them."

@@ -225,8 +225,10 @@ fun DestinationDialog(
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
+    val original = remember { Triple(model.tabs[model.activeTab].id, model.location, model.effectiveSearchRules) }
     var rules by remember {
         val initial = model.effectiveSearchRules
         mutableStateOf(initial.copy(tag = "", tags = initial.filterTags))
@@ -241,6 +243,18 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
         mutableStateOf(rules.excludedFolderNames.sorted().joinToString("\n"))
     }
     var choosingExclusion by remember { mutableStateOf(false) }
+    var choosingGroups by remember { mutableStateOf(false) }
+    var error by remember { mutableStateOf<String?>(null) }
+    fun contextValid() = original == Triple(model.tabs.getOrNull(model.activeTab)?.id, model.location, model.effectiveSearchRules)
+    fun applyDraft(value: SearchRules) {
+        if (!contextValid()) error = "The current tab or search changed. Close Search criteria and try again."
+        else { model.updateSearchRules(value); dismiss() }
+    }
+    if (choosingGroups) {
+        SearchRuleGroupsDialog(rules.ruleGroup, (model.tagNames + rules.referencedTags).distinct(), ::contextValid,
+            apply = { rules = rules.copy(ruleGroup = it); choosingGroups = false }, dismiss = { choosingGroups = false })
+        return
+    }
     val calendar = remember { SearchCalendar() }
     val selected = model.selectedEntries
     val minimumBytes = searchBytes(minimum)
@@ -255,11 +269,17 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
             }, dismiss = { choosingExclusion = false })
         return
     }
-    AlertDialog(
-        onDismissRequest = dismiss,
-        title = { Text("Search criteria") },
-        text = {
-            Column(Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState())) {
+    WorkspaceUtility("Search criteria", "Every simple criterion and the complete rule group must match. Locations and exclusions apply to the whole search.",
+        "search-criteria", dismiss, width = 720.dp) { limit ->
+            Column(Modifier.fillMaxWidth().weight(1f, fill = false).heightIn(max = limit).verticalScroll(rememberScrollState())
+                .padding(horizontal = 20.dp, vertical = 12.dp).testTag("search-criteria-scroll")) {
+                Text("Rule groups (optional)", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                rules.ruleGroup?.let { Text(it.summary, fontSize = 13.sp, modifier = Modifier.testTag("search-rule-group-summary")) }
+                TextButton({ choosingGroups = true }, Modifier.heightIn(min = 48.dp).testTag("edit-search-rule-groups")) {
+                    Text(if (rules.ruleGroup == null) "Add rule groups…" else "Edit rule groups…")
+                }
+                Text("Combine alternatives such as PDF or text, together with Review or Approved. The other criteria below still apply.", color = Muted, fontSize = 11.sp)
+                Spacer(Modifier.height(12.dp))
                 Text("Search depth", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                 Row(
                     Modifier.horizontalScroll(rememberScrollState()),
@@ -485,39 +505,20 @@ fun SearchFiltersDialog(model: FinderModel, dismiss: () -> Unit) {
                     }
                 }
             }
-        },
-        confirmButton = {
-            TextButton(
-                enabled = minimumBytes != null && maximumBytes != null && !invalidRange,
-                onClick = {
-                    model.updateSearchRules(
-                        rules.copy(
-                            excludedFolderNames =
-                                excludedNames.lines().filter(String::isNotBlank).toSet(),
-                            minimumBytes = requireNotNull(minimumBytes),
-                            maximumBytes = requireNotNull(maximumBytes),
-                        ),
-                    )
-                    dismiss()
-                },
-            ) {
-                Text("Apply filters")
-            }
-        },
-        dismissButton = {
-            Row {
-                TextButton(
-                    onClick = {
-                        model.updateSearchRules(SearchRules())
-                        dismiss()
-                    },
-                ) {
-                    Text("Clear")
-                }
-                TextButton(onClick = dismiss) { Text("Cancel") }
-            }
-        },
-    )
+        HorizontalDivider()
+        error?.let { Text(it, Modifier.padding(horizontal = 20.dp, vertical = 8.dp).testTag("search-criteria-error"), color = MaterialTheme.colorScheme.error) }
+        FlowRow(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            TextButton(dismiss, Modifier.heightIn(min = 48.dp).testTag("cancel-search-criteria")) { Text("Cancel") }
+            TextButton({ applyDraft(SearchRules()) }, Modifier.heightIn(min = 48.dp).testTag("clear-search-criteria")) { Text("Clear") }
+            Button({
+                applyDraft(rules.copy(
+                    excludedFolderNames = excludedNames.lines().filter(String::isNotBlank).toSet(),
+                    minimumBytes = requireNotNull(minimumBytes), maximumBytes = requireNotNull(maximumBytes),
+                ))
+            }, enabled = minimumBytes != null && maximumBytes != null && !invalidRange,
+                modifier = Modifier.heightIn(min = 48.dp).testTag("apply-search-criteria")) { Text("Apply filters") }
+        }
+    }
 }
 
 @Composable
@@ -708,6 +709,7 @@ fun PreferencesDialog(model: FinderModel, onUpdates: () -> Unit = {}, dismiss: (
                         }
                     }
                 }
+                model.session.smartFolderNotice.value?.let { Text(it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
                 if (model.smartFolders.isNotEmpty()) {
                     Text(
                         "Saved Smart Folders",

@@ -105,6 +105,7 @@ object NavigationJson {
                 if (r.locations.isNotEmpty()) put("locations", JSONArray(checkedSearchLocations(r.locations)))
                 if (r.date != SearchDate.ANY) put("date", r.date.name)
                 if (r.size != SearchSize.ANY) put("size", r.size.name)
+                r.ruleGroup?.let { put("ruleGroup", SearchRuleGroupJson.encode(it)) }
             }
 
     fun rules(r: JSONObject?): SearchRules =
@@ -140,6 +141,7 @@ object NavigationJson {
                 },
                 date = if (!r.has("date")) SearchDate.ANY else SearchDate.valueOf(r.getString("date")),
                 size = if (!r.has("size")) SearchSize.ANY else SearchSize.valueOf(r.getString("size")),
+                ruleGroup = if (!r.has("ruleGroup")) null else SearchRuleGroupJson.decode(r.get("ruleGroup")),
             )
 
     private fun strings(a: JSONArray?, max: Int): List<String> =

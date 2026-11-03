@@ -1387,33 +1387,19 @@ constructor(
                 folder,
                 effectiveSearchRules,
             )
-        smartFolders = smartFolders + smart
-        persistSmartFolders()
-        navigate("@smart:${smart.id}")
+        if (persistSmartFolders(smartFolders + smart)) navigate("@smart:${smart.id}")
     }
 
-    private fun persistSmartFolders() {
-        prefs
-            .edit()
-            .putString(
-                "smartFolders",
-                JSONArray(
-                        smartFolders.map { smart ->
-                            JSONObject()
-                                .put("id", smart.id)
-                                .put("name", smart.name)
-                                .put("root", smart.root)
-                                .put("rules", NavigationJson.rules(smart.rules))
-                        },
-                    )
-                    .toString(),
-            )
-            .apply()
-    }
+    private fun persistSmartFolders(values: List<SmartFolder>): Boolean = runCatching {
+        session.saveSmartFolders(values)
+    }.fold(onSuccess = { true }, onFailure = {
+        message = it.message ?: "Couldn't save Smart Folders. Try again."
+        session.smartFolderNotice.value = message
+        false
+    })
 
     fun removeSmartFolder(id: String) {
-        smartFolders = smartFolders.filterNot { it.id == id }
-        persistSmartFolders()
+        if (!persistSmartFolders(smartFolders.filterNot { it.id == id })) return
         session.panes
             .filter { it.location == "@smart:$id" }
             .forEach { it.navigate(workspace.absolutePath) }
@@ -1433,10 +1419,9 @@ constructor(
     fun updateSearchRules(rules: SearchRules) {
         val smart = currentSmartFolder
         if (smart != null) {
-            smartFolders = smartFolders.map {
+            if (!persistSmartFolders(smartFolders.map {
                 if (it.id == smart.id) it.copy(root = rules.locations.firstOrNull() ?: it.root, rules = rules) else it
-            }
-            persistSmartFolders()
+            })) return
             query = ""
             session.panes
                 .filter { it !== this && it.location == location }
@@ -1455,10 +1440,9 @@ constructor(
     fun renameSmartFolder(name: String) {
         val smart = currentSmartFolder ?: return
         if (name.isNotBlank()) {
-            smartFolders = smartFolders.map {
+            persistSmartFolders(smartFolders.map {
                 if (it.id == smart.id) it.copy(name = name.trim()) else it
-            }
-            persistSmartFolders()
+            })
         }
     }
 
@@ -2500,7 +2484,7 @@ constructor(
         if (route != null) relocateMetadataPaths(listOf(route))
         session.panes
             .filter {
-                it.location.startsWith("@tag:") || it.effectiveSearchRules.filterTags.isNotEmpty()
+                it.location.startsWith("@tag:") || it.effectiveSearchRules.referencedTags.isNotEmpty()
             }
             .forEach { it.refresh() }
     }
@@ -2861,10 +2845,9 @@ constructor(
             val replacements = tagRoutes.associate {
                 it.first.removePrefix("@tag:") to it.second.removePrefix("@tag:")
             }
-            smartFolders = smartFolders.map {
+            persistSmartFolders(smartFolders.map {
                 it.copy(rules = it.rules.remapTags(replacements))
-            }
-            persistSmartFolders()
+            })
             session.panes.forEach { pane ->
                 pane.searchRules = pane.searchRules.remapTags(replacements)
             }
@@ -2876,8 +2859,7 @@ constructor(
         folderStyles = styleStore.styles
         fun update(path: String): String = remapPath(path, names)
         editSidebar { it.remap(names) }
-        smartFolders = smartFolders.map { it.copy(root = update(it.root), rules = it.rules.remapRoutes(names)) }
-        persistSmartFolders()
+        persistSmartFolders(smartFolders.map { it.copy(root = update(it.root), rules = it.rules.remapRoutes(names)) })
         folderViews.relocate(names)
         session.savedWorkspaces.value = savedWorkspaces.map { it.remap(names) }
         if (savedWorkspaces.isNotEmpty()) persistWorkspaces()

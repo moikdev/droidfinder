@@ -36,12 +36,16 @@ data class SearchRules(
     val date: SearchDate = SearchDate.ANY,
     val size: SearchSize = SearchSize.ANY,
     val locations: List<String> = emptyList(),
+    val ruleGroup: SearchRuleGroup? = null,
 ) {
-    init { checkedSearchLocations(locations) }
+    init { checkedSearchLocations(locations); ruleGroup?.let(::checkedRuleGroup) }
     private val contentPattern by lazy { StreamingText(content) }
 
     val filterTags: Set<String>
         get() = if (tag.isBlank()) tags else tags + tag
+
+    internal val referencedTags: Set<String>
+        get() = filterTags + ruleGroup?.referencedTags.orEmpty()
 
     val scoped: Boolean
         get() = locations.isNotEmpty() || !includeSubfolders || excludedFolderNames.isNotEmpty() || excludedLocations.isNotEmpty()
@@ -85,6 +89,7 @@ data class SearchRules(
         copy(
             tag = replacements[tag] ?: tag,
             tags = tags.map { replacements[it] ?: it }.toSet(),
+            ruleGroup = ruleGroup?.let { it.remapRuleTags(replacements) as SearchRuleGroup },
         )
 
     val active
@@ -99,6 +104,7 @@ data class SearchRules(
                 maximumBytes > 0 ||
                 content.isNotBlank() ||
                 nameTerms.isNotEmpty() ||
+                ruleGroup != null ||
                 scoped
 
     fun matches(
@@ -144,6 +150,15 @@ data class SearchRules(
         if (hasSizeFilter && (entry.folder || !entry.sizeKnown)) return null
         if (minimumBytes > 0 && entry.size < minimumBytes || maximumBytes > 0 && entry.size > maximumBytes) return null
         if (size.minimum > 0 && entry.size < size.minimum || size.maximum > 0 && entry.size > size.maximum) return null
+        val grouped = ruleGroup?.evaluate(entry, tags, calendar, check)
+        when (grouped?.outcome) {
+            SearchRuleOutcome.NO_MATCH -> return null
+            SearchRuleOutcome.UNKNOWN_SIZE -> {
+                contentIssue("Unknown size: this item couldn't be checked against the rule group")
+                return null
+            }
+            else -> Unit
+        }
         val snippet = if (content.isNotBlank()) {
             if (entry.folder || entry.kind != "Text document") return null
             try {
@@ -157,11 +172,12 @@ data class SearchRules(
                 return null
             }
         } else null
-        val terms = (listOf(name) + nameTerms).filter(String::isNotBlank)
+        val flatTerms = (listOf(name) + nameTerms).filter(String::isNotBlank)
+        val terms = flatTerms + grouped?.nameTerms.orEmpty()
         return SearchEvidence(
             nameRanges = matchRanges(entry.name, terms),
             reasons = buildList {
-                if (terms.isNotEmpty()) add("Name")
+                if (flatTerms.isNotEmpty()) add("Name")
                 if (selectedTags.isNotEmpty()) {
                     val names = (if (tagMatch == TagMatch.NONE) selectedTags else selectedTags.intersect(tags)).sorted()
                     add((if (tagMatch == TagMatch.NONE) "Without tags: " else "Tags: ") +
@@ -172,8 +188,9 @@ data class SearchRules(
                 if (days > 0) add("Modified: past $days ${if (days == 1) "day" else "days"}")
                 if (this@SearchRules.size != SearchSize.ANY) add("Size: ${this@SearchRules.size.title}")
                 if (minimumBytes > 0 || maximumBytes > 0) add("Size: ${entry.displaySize}")
+                addAll(grouped?.reasons.orEmpty())
                 if (snippet != null) add("Text contents")
-            },
+            }.distinct(),
             snippet = snippet,
         )
     }

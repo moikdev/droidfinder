@@ -40,6 +40,7 @@ internal object RecentSearchJson {
     }
     fun decode(text: String): List<RecentSearch> {
         require(text.length <= TOTAL_BYTES && text.toByteArray(Charsets.UTF_8).size <= TOTAL_BYTES)
+        SetupJsonTree.validate(text)
         val value = JSONObject(text)
         value.checkKeys(setOf("version", "searches"))
         require(value.get("version") == 1) { "Unsupported recent search version." }
@@ -56,7 +57,7 @@ internal object RecentSearchJson {
     // Navigation rules accept legacy input. History preserves unknown/damaged criteria.
     private fun decodeRules(value: JSONObject): SearchRules {
         val required = setOf("name", "kind", "tag", "days", "min", "max", "content", "terms", "tags", "tagMatch", "includeSubfolders", "excludedFolderNames")
-        value.checkKeys(required, setOf("excludedLocations", "date", "size", "locations"))
+        value.checkKeys(required, setOf("excludedLocations", "date", "size", "locations", "ruleGroup"))
         for (key in listOf("name", "kind", "tag", "content", "tagMatch")) require(value.get(key) is String)
         for (key in listOf("days", "min", "max")) require(value.get(key) is Int || value.get(key) is Long)
         require(value.getLong("days") in 0..Int.MAX_VALUE.toLong() && value.get("includeSubfolders") is Boolean)
@@ -83,6 +84,7 @@ internal object RecentSearchJson {
             locations = if (value.has("locations")) checkedSearchLocations(strings("locations", SEARCH_LOCATION_LIMIT)) else emptyList(),
             date = if (value.has("date")) SearchDate.valueOf(value.getString("date")) else SearchDate.ANY,
             size = if (value.has("size")) SearchSize.valueOf(value.getString("size")) else SearchSize.ANY,
+            ruleGroup = if (!value.has("ruleGroup")) null else SearchRuleGroupJson.decode(value.get("ruleGroup")),
         )
     }
 
