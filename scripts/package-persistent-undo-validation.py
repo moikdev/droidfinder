@@ -21,7 +21,7 @@ SCRIPTS=('scripts/check-persistent-undo.py','scripts/package-persistent-undo-val
          'scripts/check-ota-upgrade.py','scripts/package-preview.py','scripts/verify-release-validation.py',
          'scripts/android/acceptance.py','scripts/android/NativeTap.java',
          'captures/persistent-undo/private-native-state.py','captures/persistent-undo/native-reset.py','captures/persistent-undo/after-native.py',
-         'captures/persistent-undo/check-public-privacy.py',
+         'captures/persistent-undo/check-public-privacy.py','captures/persistent-undo/check-snackbar-save-gate.py',
          'captures/persistent-undo/verify-public.py','captures/persistent-undo/restore-public-tablets.py',
          'captures/persistent-undo/check-live-feed.py','captures/persistent-undo/run-final-acceptance.py','captures/persistent-undo/check-build-artifacts.py','captures/persistent-undo/derive-focused.py')
 OPT_REQUIRED=('success','operationsUseExactOptimizedApk','freshAndroidHierarchies','originalEnvironmentPersistedBeforeMutation',
@@ -81,13 +81,13 @@ def check_layout_captures(folder, layouts):
 
 
 def local():
-    frozen=read(PROOF/'candidate-build-5.json')
+    frozen=read(PROOF/'candidate-build-6.json')
     assert (frozen['version'],frozen['versionCode'])==('0.45.0-preview',47)
     assert frozen['apkMetadata']['preview']=={'versionName':'0.45.0-preview','versionCode':47}
     assert frozen['apkMetadata']['release']=={'versionName':'0.45.0','versionCode':47}
     for name,row in frozen['files'].items():assert sha(ROOT/name)==row['sha256']
     for name,digest in frozen['sourceFiles'].items():assert sha(ROOT/name)==digest
-    files=[PROOF/'candidate-build-5.json'];totals=dict(tests=0,failures=0,errors=0,skipped=0)
+    files=[PROOF/'candidate-build-6.json'];totals=dict(tests=0,failures=0,errors=0,skipped=0)
     for path in sorted((ROOT/'app/build/test-results/testDebugUnitTest').glob('TEST-*.xml')):
         root=ET.parse(path).getroot()
         for key in totals:totals[key]+=int(root.get(key,'0'))
@@ -97,6 +97,23 @@ def local():
     files += [lint,ROOT/'app/build/reports/lint-results-debug.html']
     pair={str(p.relative_to(ROOT)):sha(p) for p in (ROOT/'app/build/outputs/apk/debug/app-debug.apk',ROOT/'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk')}
     expected=sha(ROOT/'app/build/outputs/apk/preview/app-preview.apk');sets=[];screens=[]
+    gate_dir=PROOF/'snackbar-save-gate';gate=read(gate_dir/'verification.json')
+    assert gate['regressionReproducedAndCorrected'] and gate['newAppSha256']==pair['app/build/outputs/apk/debug/app-debug.apk']
+    assert gate['testApkSha256']==pair['app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'] and gate['oldAppSha256']!=gate['newAppSha256']
+    assert {r['serial'] for r in gate['tablets']}=={serial for api,serial in SERIALS}
+    for row in gate['tablets']:
+        assert row['newAppHoldsActionUntilSaveCompletes']
+        assert row['oldAppPrematureActionReproduced']==(row['serial']=='emulator-5602')
+        for result in row['results']:
+            report_path=ROOT/result['report'];assert report_path.is_relative_to(gate_dir)
+            report=read(report_path);assert report['serial']==row['serial'] and len(report['cases'])==1
+            if result['stage']=='old':
+                assert result['appSha256']==gate['oldAppSha256'] and report['failed']==1 and report['passed']==0
+                assert 'assert count' in report['cases'][0]['error'].lower()
+            else:
+                successful(report);assert report['passed']==1 and result['appSha256']==gate['newAppSha256']
+            files += [report_path,report_path.with_suffix('.txt')]
+    files += [gate_dir/'verification.json',gate_dir/'restoration.txt',gate_dir/'api30-driver.txt',gate_dir/'api36-driver.txt']
     for api,serial in SERIALS:
         native=read(PROOF/(api+'-regression.json'));successful(native)
         assert native['serial']==serial and native['passed']==485 and len(native['isolatedBatches'])==52
@@ -193,7 +210,7 @@ def main():
         files.append(PROOF/name)
     files=sorted(set(files));relative=[str(path.relative_to(ROOT)) for path in files]
     for path in files:
-        assert path.is_file() and not any('PRIVATE' in part or 'private-native-screenshots' in part or part in ('private-native-state','candidate-build','candidate-build-2','candidate-build-3','candidate-build-4','candidate-build-5','accepted-build','private-native-screenshots') for part in path.parts)
+        assert path.is_file() and not any('PRIVATE' in part or 'private-native-screenshots' in part or part in ('private-native-state','candidate-build','candidate-build-2','candidate-build-3','candidate-build-4','candidate-build-5','candidate-build-6','accepted-build','private-native-screenshots') for part in path.parts)
         assert path.suffix not in ('.apk','.tar','.db','.sqlite','.keystore','.jks','.bin')
     if a.list_files:print(json.dumps(relative,indent=2));return
     assert a.output is not None and not a.output.exists(), 'Never overwrite an immutable archive'
