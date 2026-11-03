@@ -6,6 +6,7 @@ import android.net.Uri
 import android.provider.DocumentsContract
 import android.view.inputmethod.InputMethodManager
 import android.view.inspector.WindowInspector
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -54,6 +55,29 @@ class SearchExperienceWorkflowTest {
         compose.onNodeWithContentDescription("Search filters").performClick()
         compose.onNodeWithText("Search criteria").assertIsDisplayed()
     }
+    private fun criterion(tag: String): SemanticsNodeInteraction {
+        val target = compose.onNodeWithTag(tag)
+        val form = compose.onNodeWithTag("search-criteria-scroll")
+        repeat(12) {
+            // A chip's closest scroll ancestor is its horizontal row. Reach that
+            // choice horizontally, then move the outer form until its full bounds fit.
+            target.performScrollTo()
+            val scale = compose.activity.resources.displayMetrics.density
+            val viewport = form.fetchSemanticsNode().boundsInRoot
+            val bounds = target.getUnclippedBoundsInRoot()
+            val top = bounds.top.value * scale
+            val bottom = bounds.bottom.value * scale
+            if (top >= viewport.top && bottom <= viewport.bottom) {
+                return target.assertIsDisplayed()
+            }
+            val delta = if (top < viewport.top) top - viewport.top - 8f * scale
+                else bottom - viewport.bottom + 8f * scale
+            form.performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, delta) }
+            compose.waitForIdle()
+        }
+        error("The complete search control is unreachable: $tag")
+    }
+
     private fun hideKeyboard() {
         compose.runOnIdle {
             val input = compose.activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -186,12 +210,9 @@ class SearchExperienceWorkflowTest {
         assertEquals(SearchDate.ANY, model.effectiveSearchRules.date)
         openFilters()
         hideKeyboard()
-        compose.onNodeWithText("Modified").performScrollTo()
-        compose.onNodeWithTag("search-date-THIS_WEEK").assertIsDisplayed().performClick().assertIsSelected()
-        compose.onNodeWithText("Kind").performScrollTo()
-        compose.onNodeWithTag("search-kind-Image").assertIsDisplayed().performClick().assertIsSelected()
-        compose.onNodeWithText("1 KB = 1,024 bytes. Presets replace custom limits; imported combined limits must all match.").performScrollTo()
-        compose.onNodeWithTag("search-size-OVER_1_GB").assertIsDisplayed().performClick().assertIsSelected()
+        criterion("search-date-THIS_WEEK").performClick().assertIsSelected()
+        criterion("search-kind-Image").performClick().assertIsSelected()
+        criterion("search-size-OVER_1_GB").performClick().assertIsSelected()
         capture("natural-criteria")
         compose.onNodeWithText("Apply filters").performClick(); loaded()
         assertEquals(SearchDate.THIS_WEEK, model.effectiveSearchRules.date)
