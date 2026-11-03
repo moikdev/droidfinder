@@ -81,13 +81,13 @@ def check_layout_captures(folder, layouts):
 
 
 def local():
-    frozen=read(PROOF/'candidate-build-4.json')
+    frozen=read(PROOF/'candidate-build-5.json')
     assert (frozen['version'],frozen['versionCode'])==('0.45.0-preview',47)
     assert frozen['apkMetadata']['preview']=={'versionName':'0.45.0-preview','versionCode':47}
     assert frozen['apkMetadata']['release']=={'versionName':'0.45.0','versionCode':47}
     for name,row in frozen['files'].items():assert sha(ROOT/name)==row['sha256']
     for name,digest in frozen['sourceFiles'].items():assert sha(ROOT/name)==digest
-    files=[PROOF/'candidate-build-4.json'];totals=dict(tests=0,failures=0,errors=0,skipped=0)
+    files=[PROOF/'candidate-build-5.json'];totals=dict(tests=0,failures=0,errors=0,skipped=0)
     for path in sorted((ROOT/'app/build/test-results/testDebugUnitTest').glob('TEST-*.xml')):
         root=ET.parse(path).getroot()
         for key in totals:totals[key]+=int(root.get(key,'0'))
@@ -193,7 +193,7 @@ def main():
         files.append(PROOF/name)
     files=sorted(set(files));relative=[str(path.relative_to(ROOT)) for path in files]
     for path in files:
-        assert path.is_file() and not any('PRIVATE' in part or 'private-native-screenshots' in part or part in ('private-native-state','candidate-build','candidate-build-2','candidate-build-3','candidate-build-4','accepted-build','private-native-screenshots') for part in path.parts)
+        assert path.is_file() and not any('PRIVATE' in part or 'private-native-screenshots' in part or part in ('private-native-state','candidate-build','candidate-build-2','candidate-build-3','candidate-build-4','candidate-build-5','accepted-build','private-native-screenshots') for part in path.parts)
         assert path.suffix not in ('.apk','.tar','.db','.sqlite','.keystore','.jks','.bin')
     if a.list_files:print(json.dumps(relative,indent=2));return
     assert a.output is not None and not a.output.exists(), 'Never overwrite an immutable archive'
