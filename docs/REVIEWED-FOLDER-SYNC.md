@@ -1,0 +1,31 @@
+# Reviewed folder synchronization — implementation in progress
+
+Proposal 43 adds a one-way review to folder comparison. This branch contains the planner, read-only inspection and working-copy preparation. Applying a plan, its tablet interface, native acceptance and a release remain pending. The feature is not exposed in the app yet.
+
+The planned review separates additions, proposed updates, conflicts, destination-only items and unchanged items. Additions are initially selected. Updates require a separate replacement confirmation; moving destination-only items to Trash requires its own confirmation. Neither timestamps nor file sizes choose which copy should win. Different file/folder types remain a manual conflict.
+
+A newly added subtree is one selectable operation with every descendant disclosed. Preparation materializes exactly those reviewed nodes. It never recursively copies a live directory after review, so a file added later cannot silently join the operation.
+
+## Inspection and preparation
+
+Inspection supports separate, available local folders. It compares complete native snapshots, rejects aliases and overlapping roots, refuses links and special files, and checks original file contents with SHA-256. The comparison must include every item in both native snapshots, including hidden files. Regular-file sizes come from the native snapshot. Incomplete, ambiguous, oversized or changed comparisons cannot prepare a plan.
+
+Reads use pinned regular-file descriptors with non-following and nonblocking opens. The code checks identities, exact lengths, end-of-file and content hashes. Both original folder snapshots must still match after the reads finish. The review holds the original proofs and digests; reopening a review does not invent replacement identities for them.
+
+Preparation creates a new owned `.findroid-sync-…` directory beside the destination folder. That location must support preparation on the destination filesystem. An existing working directory is never reused. An immutable `review.json` records the selected operations, confirmations, original proofs and checksums before any working copy is made. `prepared.json` records the completed staged roots.
+
+Working copies are saved and read back before they can pass the preparation gate. Partial writes, rewrites, renamed parents, changed permissions, newly arrived files, occupied working names and readback mismatches stop preparation. Original source and destination trees remain in place. On interruption, cancellation or failure, the owned record and working data remain available for manual review. There is no automatic replay or recursive cleanup.
+
+The final read-only gate verifies the original folders, their contents and every prepared copy again. Later edits, occupied destination names and changes to working files invalidate the prepared plan.
+
+## Work still required
+
+- Apply prepared additions with native no-replace publication and recheck the remaining plan between operations.
+- Preserve reviewed replacements and separately confirmed Trash items with exact, durable recovery mappings.
+- Record completed and interrupted operations without hiding a partially completed result.
+- Integrate metadata, the transfer lifecycle and appropriate Undo behavior.
+- Add the named, scrolling tablet review and completion controls without adding permanent toolbar icons.
+- Exercise actual Android descriptors, stale reviews, cancellation, collisions, process death and recovery on both assigned API levels.
+- Inspect the optimized tablet interface and complete public release and OTA acceptance.
+
+JVM coverage currently includes planning, inspection, digest reads, working-file staging, complete subtree preparation and the final read-only gate. Device and release acceptance have not been claimed for this draft.
