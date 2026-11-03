@@ -575,7 +575,7 @@
         errorLine2="                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="700"
+            line="704"
             column="59"/>
     </issue>
 
@@ -591,7 +591,7 @@
         errorLine2="                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="746"
+            line="750"
             column="48"/>
     </issue>
 
@@ -607,7 +607,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1113"
+            line="1117"
             column="17"/>
     </issue>
 
@@ -1007,7 +1007,7 @@
         errorLine2="    ~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1338"
+            line="1342"
             column="5"/>
     </issue>
 
@@ -1325,7 +1325,7 @@
         errorLine2="                             ~~~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1254"
+            line="1258"
             column="30"/>
     </issue>
 
