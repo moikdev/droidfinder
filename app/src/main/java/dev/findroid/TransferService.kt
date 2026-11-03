@@ -15,6 +15,10 @@ import androidx.core.app.ServiceCompat
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.withTimeout
 
@@ -33,6 +37,7 @@ object TransferRuntime {
     @Volatile private var paused = false
     @Volatile private var pausable = false
     private var foregroundReady: CompletableDeferred<Unit>? = null
+    private var progressTicker: Job? = null
 
     suspend fun begin(
         context: Context,
@@ -50,6 +55,13 @@ object TransferRuntime {
         context.startForegroundService(Intent(context, TransferService::class.java))
         // Short operations must not stop the service before Android has promoted it.
         withTimeout(4_000) { ready.await() }
+        progressTicker?.cancel()
+        progressTicker = scope.launch {
+            while (isActive && control === token) {
+                delay(1000)
+                if (control === token) token.refreshProgress()
+            }
+        }
     }
 
     @SuppressLint(
@@ -79,6 +91,8 @@ object TransferRuntime {
     }
 
     fun finish(context: Context) {
+        progressTicker?.cancel()
+        progressTicker = null
         label = null
         control = null
         foregroundReady = null
@@ -118,7 +132,7 @@ object TransferRuntime {
             .setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle((if (paused) "Paused · " else "") + (label ?: "Findroid"))
             .setContentText(
-                listOf(progress.phase, transferPhaseAmount(progress), progress.current)
+                listOf(progress.phase, transferPhaseSummary(progress, paused), progress.current)
                     .filter { it.isNotEmpty() }
                     .joinToString(" · "),
             )

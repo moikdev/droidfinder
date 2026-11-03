@@ -44,6 +44,9 @@ private inline fun <T> withDocumentPreviewLock(
 
 class PreviewSizeLimitException(message: String) : IllegalStateException(message)
 
+private fun <T> TransferControl.documentCall(path: String, work: () -> T): T =
+    storage(if (isDocumentPath(path)) TransferIo.PROVIDER else TransferIo.STORAGE, work)
+
 class DocumentAccess(
     private val context: Context,
     private val engine: FileEngine = FileEngine(context.filesDir),
@@ -664,9 +667,9 @@ class DocumentAccess(
             { path ->
                 if (!isDocumentPath(path))
                     check(File(path).exists()) { "This item is unavailable." }
-                node(read(path))
+                node(control.documentCall(path) { read(path) })
             },
-            { list(it).asSequence().map(::node).asIterable() },
+            { path -> control.documentCall(path) { list(path) }.asSequence().map(::node).asIterable() },
             control,
         )
     }
@@ -748,13 +751,16 @@ class DocumentAccess(
         phaseTitle: String = if (move) "Moving" else "Copying",
     ): String {
         lastCopyMappings = emptyList()
-        validateTransfer(source, parent, move, requestedName != null)
+        control.phase("Checking files", stage = TransferStage.PREPARING)
+        control.documentCall(if (isDocumentPath(source)) source else parent) {
+            validateTransfer(source, parent, move, requestedName != null)
+        }
         if (!isDocumentPath(source) && !isDocumentPath(parent))
             return engine
                 .copy(File(source), File(parent), move, control, requestedName, phaseTitle)
                 .absolutePath
-        checkDestination(source, parent)
-        val entry = read(source)
+        control.documentCall(if (isDocumentPath(source)) source else parent) { checkDestination(source, parent) }
+        val entry = control.documentCall(source) { read(source) }
         if (move) {
             check(entry.canDelete) { "The source is read only. Copy it instead." }
             require(this.parent(source) != parent || requestedName != null) {
@@ -764,13 +770,13 @@ class DocumentAccess(
         val name =
             requestedName?.also {
                 validateFilename(it)
-                check(list(parent).none { child -> child.name == it }) { "$it already exists." }
-            } ?: uniqueName(parent, entry.name)
-        control.phase("Checking files")
+                check(control.documentCall(parent) { list(parent) }.none { child -> child.name == it }) { "$it already exists." }
+            } ?: control.documentCall(parent) { uniqueName(parent, entry.name) }
+        control.phase("Checking files", stage = TransferStage.PREPARING)
         val estimate = estimate(listOf(source), control)
-        requireTransferSpace(estimate.knownBytes, availableSpace(parent))
-        control.phase(phaseTitle, estimate.totalBytes)
-        val staging = create(parent, ".findroid-${UUID.randomUUID()}", entry.folder, entry.mime)
+        requireTransferSpace(estimate.knownBytes, control.documentCall(parent) { availableSpace(parent) })
+        control.phase(phaseTitle, estimate.totalBytes, TransferStage.COPYING)
+        val staging = control.documentCall(parent) { create(parent, ".findroid-${UUID.randomUUID()}", entry.folder, entry.mime) }
         val mappings = mutableListOf<Pair<String, String>>()
         val traversal = TransferTraversal()
         fun copyContents(from: Entry, to: String, depth: Int = 0) {
@@ -780,16 +786,22 @@ class DocumentAccess(
             if (from.documentUri == null)
                 check(!Files.isSymbolicLink(from.file.toPath())) { "Symbolic links aren't copied." }
             if (from.folder) {
-                val children = list(from.path)
+                val children = control.documentCall(from.path) { list(from.path) }
                 children.forEach { child ->
-                    copyContents(child, create(to, child.name, child.folder, child.mime), depth + 1)
+                    copyContents(child, control.documentCall(to) { create(to, child.name, child.folder, child.mime) }, depth + 1)
                 }
-                check(list(from.path).map { it.path }.toSet() == children.map { it.path }.toSet()) {
+                check(control.documentCall(from.path) { list(from.path) }.map { it.path }.toSet() == children.map { it.path }.toSet()) {
                     "The source folder changed while copying. The source was kept."
                 }
             } else {
-                val copied = input(from.path).use { input -> output(to).use { control.copy(input, it, from.size.takeIf { from.sizeKnown }) } }
-                val after = read(from.path)
+                val copied = control.documentCall(from.path) { input(from.path) }.use { input ->
+                    control.documentCall(to) { output(to) }.use { output ->
+                        control.copy(input, output, from.size.takeIf { from.sizeKnown },
+                            sourceIsProvider = from.documentUri != null,
+                            destinationIsProvider = isDocumentPath(to))
+                    }
+                }
+                val after = control.documentCall(from.path) { read(from.path) }
                 check((!from.sizeKnown || copied == from.size) &&
                     (!from.sizeKnown || after.sizeKnown && after.size == from.size) &&
                     after.folder == from.folder && after.modified == from.modified) {
@@ -801,7 +813,8 @@ class DocumentAccess(
             try {
                 copyContents(entry, staging)
                 control.check()
-                rename(staging, name)
+                control.phase("Publishing copy", stage = TransferStage.FINISHING)
+                control.documentCall(staging) { rename(staging, name) }
             } catch (error: Exception) {
                 runCatching { delete(staging) }
                 throw error
@@ -811,7 +824,8 @@ class DocumentAccess(
         }
         if (move)
             try {
-                delete(source)
+                control.phase("Removing original after copy", stage = TransferStage.FINISHING)
+                control.documentCall(source) { delete(source) }
             } catch (error: Exception) {
                 throw TransferPublicationException(
                     completed,
@@ -838,21 +852,27 @@ class DocumentAccess(
     fun importUri(uri: Uri, parent: String, control: TransferControl): String {
         val readControl = ListingControl()
         return control.guard(java.io.Closeable { readControl.cancel() }) {
-            val (name, expected) = sharedMetadata(uri, readControl)
+            control.phase("Checking shared file", stage = TransferStage.PREPARING)
+            val (name, expected) = control.storage(TransferIo.PROVIDER) { sharedMetadata(uri, readControl) }
             validateFilename(name)
-            val desired = uniqueName(parent, name)
-            val staging = create(parent, ".findroid-${UUID.randomUUID()}", false,
-                resolver.getType(uri) ?: "application/octet-stream")
+            val desired = control.documentCall(parent) { uniqueName(parent, name) }
+            control.phase("Copying shared file", expected, TransferStage.COPYING)
+            val staging = control.documentCall(parent) { create(parent, ".findroid-${UUID.randomUUID()}", false,
+                resolver.getType(uri) ?: "application/octet-stream") }
             try {
                 control.item(name)
-                val copied = input(uri.toString(), readControl).use { input ->
-                    output(staging).use { control.copy(input, it, expected) }
+                val copied = control.storage(TransferIo.PROVIDER) { input(uri.toString(), readControl) }.use { input ->
+                    control.documentCall(staging) { output(staging) }.use { output ->
+                        control.copy(input, output, expected, sourceIsProvider = true,
+                            destinationIsProvider = isDocumentPath(staging))
+                    }
                 }
                 check(expected == null || copied == expected) {
                     "The provider returned an incomplete file or the source changed. Share it again."
                 }
                 control.check()
-                rename(staging, desired)
+                control.phase("Publishing shared file", stage = TransferStage.FINISHING)
+                control.documentCall(staging) { rename(staging, desired) }
             } catch (error: Exception) {
                 runCatching { delete(staging) }
                 throw error
@@ -927,22 +947,28 @@ class DocumentAccess(
                 }
                 val hash = MessageDigest.getInstance("SHA-256")
                 var bytes = 0L
-                (reads?.let { input(entry.path, it) } ?: input(entry.path)).use { source ->
+                (if (control == null) input(entry.path)
+                 else control.documentCall(entry.path) { input(entry.path, reads!!) }).use { source ->
                     fun read() {
                         val buffer = ByteArray(64 * 1024)
                         while (true) {
                             control?.check()
-                            val n = source.read(buffer)
+                            val n = if (control == null) source.read(buffer)
+                                else control.storage(if (entry.documentUri != null) TransferIo.PROVIDER else TransferIo.SOURCE) {
+                                    source.read(buffer)
+                                }
                             if (n < 0) break
                             bytes += n
                             hash.update(buffer, 0, n)
+                            control?.verifiedBytes(n)
                         }
                     }
                     if (control != null) control.guard(source, ::read) else read()
                 }
                 return hash.digest() to bytes
             }
-            val root = reads?.let { read(path, it) } ?: read(path)
+            val root = if (control == null) read(path)
+                else control.documentCall(path) { read(path, reads!!) }
             if (!root.folder) return content(root).first.joinToString("") { "%02x".format(it) }
             val digest = MessageDigest.getInstance("SHA-256")
             val seen = mutableSetOf<String>()

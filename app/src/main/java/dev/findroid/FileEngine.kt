@@ -222,12 +222,12 @@ class FileEngine(
                 }
             } ?: uniqueFile(parent, source.name)
         if (move) {
-            control.phase(phaseTitle)
+            control.phase(phaseTitle, stage = TransferStage.FINISHING)
             control.item(source.name)
             control.check()
             // Publication must not be followed by a cancellation check that hides its result.
             try {
-                Files.move(source.toPath(), target.toPath())
+                control.storage(TransferIo.STORAGE) { Files.move(source.toPath(), target.toPath()) }
                 return target
             } catch (error: java.nio.file.FileAlreadyExistsException) {
                 throw error
@@ -235,16 +235,17 @@ class FileEngine(
                 // Cross-volume directory moves need a staged copy before source cleanup.
             }
         }
-        control.phase("Checking files")
+        control.phase("Checking files", stage = TransferStage.PREPARING)
         val estimate = estimateLocalTransfer(listOf(source.path), control)
         requireTransferSpace(estimate.knownBytes, freeBytes(parent))
-        control.phase(phaseTitle, estimate.totalBytes)
+        control.phase(phaseTitle, estimate.totalBytes, TransferStage.COPYING)
         // Hide incomplete copies and only expose the result after a successful copy.
         val staging = File(parent, ".findroid-${UUID.randomUUID()}")
         try {
             copyTree(source, staging, control)
             control.check()
-            Files.move(staging.toPath(), target.toPath())
+            control.phase("Publishing copy", stage = TransferStage.FINISHING)
+            control.storage(TransferIo.DESTINATION) { Files.move(staging.toPath(), target.toPath()) }
         } catch (error: Exception) {
             staging.deleteTreeWithoutLinks()
             throw error
@@ -565,7 +566,7 @@ class FileEngine(
                 val staging =
                     File(parent, ".findroid-${UUID.randomUUID()}").apply { check(mkdir()) }
                 try {
-                    control.phase("Extracting ZIP", total)
+                    control.phase("Extracting ZIP", total, TransferStage.COPYING)
                     val budget = ZipReadBudget()
                     val modified = mutableListOf<Pair<File, Long>>()
                     for (item in items) {

@@ -2794,8 +2794,8 @@ constructor(
                             "application/json",
                         )
                     try {
-                        documents.output(staged).use { output ->
-                            bytes.inputStream().use { transferControl.copy(it, output) }
+                        transferControl.storage(if (isDocumentPath(staged)) TransferIo.PROVIDER else TransferIo.DESTINATION) { documents.output(staged) }.use { output ->
+                            bytes.inputStream().use { transferControl.copy(it, output, destinationIsProvider = isDocumentPath(staged)) }
                         }
                         transferControl.check()
                         documents.rename(staged, desired)
@@ -3600,9 +3600,9 @@ constructor(
                             "text/plain",
                         )
                     try {
-                        documents.output(staging).use { output ->
+                        transferControl.storage(if (isDocumentPath(staging)) TransferIo.PROVIDER else TransferIo.DESTINATION) { documents.output(staging) }.use { output ->
                             checksumLine(sum).byteInputStream().use {
-                                transferControl.copy(it, output)
+                                transferControl.copy(it, output, destinationIsProvider = isDocumentPath(staging))
                             }
                         }
                         transferControl.check()
@@ -3692,7 +3692,7 @@ constructor(
                                                 ?: error(
                                                     "Keep at least one file from every duplicate group.",
                                                 )
-                                        transferControl.phase("Rechecking duplicate contents")
+                                        transferControl.phase("Rechecking duplicate contents", stage = TransferStage.VERIFYING)
                                         check(
                                             fileChecksum(
                                                     analysisSource,
@@ -3795,7 +3795,7 @@ constructor(
                     val control = transferControl
                     val reads = ListingControl()
                     control.guardSuspending(java.io.Closeable { reads.cancel() }) {
-                        control.phase("Checking reviewed names")
+                        control.phase("Checking reviewed names", stage = TransferStage.PREPARING)
                         val fresh =
                             reviewed.rows.map { row ->
                                 if (!row.included) row.input
@@ -3858,7 +3858,7 @@ constructor(
                         val stamps = mutableMapOf<String, String>()
                         val purelyLocal = entries.all { it.documentUri == null }
                         if (prepareUndo) {
-                            control.phase("Preparing Undo checks")
+                            control.phase("Preparing Undo checks", stage = TransferStage.VERIFYING)
                             for (entry in entries) {
                                 control.item(entry.name)
                                 stamps[entry.path] =
@@ -3889,7 +3889,7 @@ constructor(
                         Triple(entries, stamps.toMap(), rows.associate { it.input.id to it.name!! })
                     }
                 }
-            transferControl.phase("Renaming reviewed items")
+            transferControl.phase("Renaming reviewed items", stage = TransferStage.FINISHING)
             val pairs =
                 withContext(Dispatchers.IO) {
                     documents.renameBatch(
@@ -3994,6 +3994,7 @@ constructor(
                                 transferControl.phase(
                                     "Saving ${position + 1} of ${items.size}",
                                     item.bytes,
+                                    TransferStage.COPYING,
                                 )
                                 val name = validateFilename(item.name)
                                 require(!isWorkingFileName(name)) {
@@ -4015,16 +4016,18 @@ constructor(
                                         java.io.Closeable { readControl.cancel() },
                                     ) {
                                         val expected = item.uri?.let {
-                                            documents.sharedMetadata(it, readControl).second
+                                            transferControl.storage(TransferIo.PROVIDER) { documents.sharedMetadata(it, readControl).second }
                                         } ?: item.bytes.takeIf { item.uri == null }
                                         val input =
                                             if (item.uri == null)
                                                 (text ?: error("Shared text is missing"))
                                                     .byteInputStream(Charsets.UTF_8)
-                                            else documents.input(item.uri.toString(), readControl)
+                                            else transferControl.storage(TransferIo.PROVIDER) { documents.input(item.uri.toString(), readControl) }
                                         val copied = input.use { source ->
-                                            documents.output(staging).use {
-                                                transferControl.copy(source, it, expected)
+                                            transferControl.storage(if (isDocumentPath(staging)) TransferIo.PROVIDER else TransferIo.DESTINATION) { documents.output(staging) }.use {
+                                                transferControl.copy(source, it, expected,
+                                                    sourceIsProvider = item.uri != null,
+                                                    destinationIsProvider = isDocumentPath(staging))
                                             }
                                         }
                                         check(expected == null || copied == expected) {

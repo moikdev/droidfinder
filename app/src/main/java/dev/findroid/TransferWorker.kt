@@ -38,7 +38,7 @@ class TransferWorker(
     }
 
     suspend fun run() {
-        control.phase("Checking files")
+        control.phase("Checking files", stage = TransferStage.PREPARING)
         val estimate = io { documents.estimate(job.paths, control) }
         val available = io { documents.availableSpace(job.destination) }
         save { it.copy(estimate = estimate, availableAtStart = available) }
@@ -160,7 +160,7 @@ class TransferWorker(
                 throw error
             }
         val mappings = documents.lastCopyMappings.ifEmpty { listOf(before.path to published) }
-        control.phase("Preparing Undo")
+        control.phase("Preparing Undo", stage = TransferStage.VERIFYING)
         val historyError =
             try {
                 steps += io {
@@ -206,7 +206,7 @@ class TransferWorker(
             require(target.documentUri != null || !Files.isSymbolicLink(target.file.toPath())) {
                 "A destination folder link cannot be merged implicitly."
             }
-            control.phase("Verifying source")
+            control.phase("Verifying source", stage = TransferStage.VERIFYING)
             val stamp = documents.digest(source.path, control)
             val members =
                 planMergeMembers(
@@ -297,7 +297,7 @@ class TransferWorker(
         try {
             io {
                 control.check()
-                control.phase("Verifying merge")
+                control.phase("Verifying merge", stage = TransferStage.VERIFYING)
                 check(documents.digest(source.path, control) == plan.sourceStamp) {
                     "The source changed during the merge. All sources were kept; review the destination copies."
                 }

@@ -89,7 +89,7 @@ internal object ArchivePreviewCache {
                                     val bounded =
                                         limits.copy(memberBytes = cap, expandedBytes = cap)
                                     validateZipWork(listOf(item), bounded)
-                                    control.phase("Preparing archive preview", item.size)
+                                    control.phase("Preparing archive preview", item.size, TransferStage.COPYING)
                                     control.item(item.path)
                                     temporary.outputStream().use { output ->
                                         control.guard(output) {

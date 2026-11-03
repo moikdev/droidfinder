@@ -1,0 +1,1 @@
+Transfer progress is easier to understand. Findroid shows recent speed and time left in the current phase, counts preparation and verification separately, and explains waits for a source, destination or storage provider. Paused and stale estimates disappear. Files with an unknown size keep an honest processed-byte count without a made-up total or ETA.

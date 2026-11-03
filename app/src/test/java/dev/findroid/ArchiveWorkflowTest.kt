@@ -170,8 +170,10 @@ class ArchiveWorkflowTest {
         assertFalse(File(root, "Cancel").exists())
         assertTrue(root.listFiles()!!.none { it.name.startsWith(".findroid-") })
         lateinit var checking: TransferControl
-        checking = TransferControl { if (it.bytes >= 64 * 1024) checking.cancel() }
+        checking = TransferControl { if (it.phaseBytes >= 64 * 1024) checking.cancel() }
         assertThrows(CancellationException::class.java) { verifyZip(archive, control = checking) }
+        assertEquals(0L, checking.snapshot.bytes)
+        assertTrue(checking.snapshot.phaseBytes >= 64 * 1024)
     }
 
     @Test

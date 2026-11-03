@@ -52,6 +52,7 @@ fun estimateTransfer(
             control.check()
             if (++inspected > limit) return result.copy(limited = true)
             val (node, depth) = pending.removeFirst()
+            control.inspected()
             if (node.link || !seen.add(node.path)) {
                 result = result.copy(unreadable = result.unreadable + 1)
                 continue
@@ -123,4 +124,5 @@ fun requireTransferSpace(knownBytes: Long, available: Long?) {
         throw InsufficientSpaceException(knownBytes, available)
 }
 
-fun transferClockMillis() = System.nanoTime() / 1_000_000
+// Includes device sleep so an old estimate expires when a tablet wakes.
+fun transferClockMillis() = android.os.SystemClock.elapsedRealtime()

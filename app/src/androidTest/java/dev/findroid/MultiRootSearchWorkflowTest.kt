@@ -277,8 +277,16 @@ class MultiRootSearchWorkflowTest {
         assertEquals(setOf("Report Research.txt"), other.entries.map { it.name }.toSet())
         assertEquals(listOf(first.path, providerRoot), model.effectiveSearchRules.locations)
         assertEquals(listOf(second.path, providerRoot), other.effectiveSearchRules.locations)
-        compose.runOnIdle { model.connectLocation(tree, false, replacing = providerRoot) }; loaded()
-        compose.waitUntil(15_000) { !other.loading }
+        compose.runOnIdle { model.connectLocation(tree, false, replacing = providerRoot) }
+        // Connecting starts with provider IO; neither pane is loading until that IO returns.
+        // Wait for the actual reconnect result before accepting an idle pane as refreshed.
+        compose.waitUntil(20_000) {
+            model.connectedLocations.any { it.uri == providerRoot } &&
+                !model.loading && !other.loading &&
+                "Report Cloud.txt" in names() &&
+                other.entries.any { it.name == "Report Cloud.txt" }
+        }
+        loaded()
         assertEquals(localNames + "Report Cloud.txt", names())
         assertEquals(setOf("Report Research.txt", "Report Cloud.txt"), other.entries.map { it.name }.toSet())
     }

@@ -272,7 +272,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                                         val size = input.read(buffer)
                                         if (size < 0) break
                                         output.write(buffer, 0, size)
-                                        if (file.name == "Slow.bin" || file.name == "Slow.txt")
+                                        if (file.name == "Slow.bin" || file.name == "Slow.txt" || readDelayMillis.containsKey(file.canonicalPath))
                                             Thread.sleep(readDelayMillis[file.canonicalPath] ?: 50)
                                     }
                                 }

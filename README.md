@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.41.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.42.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.41.0 release](https://github.com/moikdev/findroid/releases/tag/v0.41.0-preview) and download **`Findroid-0.41.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.42.0 release](https://github.com/moikdev/findroid/releases/tag/v0.42.0-preview) and download **`Findroid-0.42.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -176,7 +176,11 @@ Save a named layout for a recurring task. Compare two folders when you need to s
 
 The small details here matter. A filename collision offers **keep both, skip, rename, or replace**. Folder merges show conflicts. Batch rename lets you review the proposed names before applying numbering, text changes, or a saved preset.
 
-Transfers have a queue with progress, pause, cancellation, and per-file results. Trash gives you a way back, and many operations support Undo during the current session. Interrupted transfers offer a review when you return to the app. [Transfers](docs/TRANSFER-CENTER.md) · [Batch rename](docs/RENAMING.md).
+Transfers have a queue with progress, pause, cancellation, and per-file results. Recent speed and time remaining describe the current phase, so copying and verification stay clear. If storage takes time to respond, the progress view explains what it is waiting for. Enlarged text and narrow panes put the named controls below the progress text. [Transfer progress](docs/TRANSFER-PROGRESS.md).
+
+Trash gives you a way back, and many operations support Undo during the current session. Interrupted transfers offer a review when you return to the app. [Transfers](docs/TRANSFER-CENTER.md) · [Batch rename](docs/RENAMING.md).
+
+![A transfer showing recent speed, the amount copied, and time remaining in the current phase](docs/screenshots/transfer-recent-rate.png)
 
 ### Organize a project without rearranging every folder
 

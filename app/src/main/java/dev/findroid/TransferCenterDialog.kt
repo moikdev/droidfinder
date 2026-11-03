@@ -313,25 +313,12 @@ private fun TransferJobCard(
                     color = Blue,
                     trackColor = Border,
                 )
-            Row(
+            Text(
+                transferPhaseSummary(progress, paused, now).ifEmpty { "Checking files…" },
                 Modifier.fillMaxWidth().padding(top = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    transferPhaseAmount(progress).ifEmpty { "Checking files…" },
-                    Modifier.weight(1f),
-                    fontSize = 11.sp,
-                    color = Muted,
-                )
-                if (!paused && progress.fresh(now)) {
-                    Text(
-                        transferEta(progress)
-                            ?: progress.bytesPerSecond?.let { "${formatSize(it)}/s" }.orEmpty(),
-                        fontSize = 11.sp,
-                        color = Muted,
-                    )
-                }
-            }
+                fontSize = 12.sp,
+                color = Muted,
+            )
         }
         if (job.state == TransferState.INTERRUPTED)
             Text(

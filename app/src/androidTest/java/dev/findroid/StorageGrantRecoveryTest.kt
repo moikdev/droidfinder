@@ -99,6 +99,25 @@ class StorageGrantRecoveryTest {
         assertFalse(resolver.persistedUriPermissions.any { it.uri == tree })
     }
     @Test
+    fun releaseOnlySyntheticTransferProviderPermission() {
+        assumeTrue(InstrumentationRegistry.getArguments().getString("transferQaGrantCleanup") == "true")
+        val resolver = InstrumentationRegistry.getInstrumentation().targetContext.contentResolver
+        val tree = DocumentsContract.buildTreeDocumentUri("dev.findroid.transferqa.documents", "root")
+        fun unrelated() = resolver.persistedUriPermissions.filterNot { it.uri == tree }.associate {
+            it.uri to (it.isReadPermission to it.isWritePermission)
+        }
+        val before = unrelated()
+        if (resolver.persistedUriPermissions.any { it.uri == tree }) {
+            resolver.releasePersistableUriPermission(
+                tree,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION,
+            )
+        }
+        assertFalse("Only the owned synthetic provider grant is released", resolver.persistedUriPermissions.any { it.uri == tree })
+        assertTrue("Unrelated saved folder permissions must stay unchanged", before == unrelated())
+    }
+
+    @Test
     fun auditPersistedPermissionsForSyntheticAcceptance() {
         assumeTrue(InstrumentationRegistry.getArguments().getString("storageQaAudit") == "true")
         syntheticRelativePath() // Reject arbitrary custom acceptance roots.

@@ -246,7 +246,7 @@ internal fun readZipMember(
             val buffer = ByteArray(64 * 1024)
             while (true) {
                 control.check()
-                val count = input.read(buffer)
+                val count = control.storage(TransferIo.SOURCE) { input.read(buffer) }
                 control.check()
                 if (count < 0) break
                 if (count == 0) continue
@@ -262,8 +262,8 @@ internal fun readZipMember(
                     throw ZipIntegrityException("Size differs from ZIP metadata: ${item.path}")
                 checkRatio(bytes, item.compressedSize, limits, item.path)
                 crc.update(buffer, 0, count)
-                output?.write(buffer, 0, count)
-                control.bytes(count)
+                if (output != null) control.storage(TransferIo.DESTINATION) { output.write(buffer, 0, count) }
+                if (output == null) control.verifiedBytes(count) else control.bytes(count)
             }
         }
     }
@@ -282,7 +282,7 @@ fun verifyZip(
         control.guard(zip) {
             val contents = inspectZipOpen(zip, limits, control)
             val files = contents.items.filter { !it.folder }
-            control.phase("Checking ZIP", contents.size)
+            control.phase("Checking ZIP", contents.size, TransferStage.VERIFYING)
             val budget = ZipReadBudget()
             var checked = 0
             var failed = 0

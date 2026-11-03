@@ -92,7 +92,7 @@ fun compareFolders(
         }
         return result
     }
-    control.phase(if (verifyContents) "Comparing contents" else "Comparing folders")
+    control.phase(if (verifyContents) "Comparing contents" else "Comparing folders", stage = if (verifyContents) TransferStage.VERIFYING else TransferStage.PREPARING)
     while (queue.isNotEmpty()) {
         control.check()
         val item = queue.removeFirst()
