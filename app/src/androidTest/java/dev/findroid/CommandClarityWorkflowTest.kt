@@ -45,8 +45,8 @@ class CommandClarityWorkflowTest {
             model.navigate(base.path); model.updateQuery("")
             model.changeMode(ViewMode.LIST); model.changeGrouping(GroupBy.NONE)
             model.showGestureHint(false)
-            model.session.history.clear(); model.session.undoLabel.value = null; model.session.redoLabel.value = null
-            model.session.recentActions.value = emptyList(); model.session.historyFailure.value = null
+            model.session.history.resetSavedHistory(); model.session.undoLabel.value = null; model.session.redoLabel.value = null
+            model.session.recentActions.value = emptyList(); model.session.historyFailure.value = null; model.session.historyRecoveryProblem.value = null; model.session.historyPersistenceNotice.value = null
             model.session.clipboard.value = null
         }
         loaded()
@@ -65,8 +65,8 @@ class CommandClarityWorkflowTest {
             model.activatePane(); model.navigate(model.workspace.path); model.closeOtherTabs(model.activeTab)
             providerRoot?.let(model::disconnectLocation)
             if (model.sidebarVisible != sidebar) model.toggleSidebar()
-            model.session.history.clear(); model.session.undoLabel.value = null; model.session.redoLabel.value = null
-            model.session.recentActions.value = emptyList(); model.session.historyFailure.value = null
+            model.session.history.resetSavedHistory(); model.session.undoLabel.value = null; model.session.redoLabel.value = null
+            model.session.recentActions.value = emptyList(); model.session.historyFailure.value = null; model.session.historyRecoveryProblem.value = null; model.session.historyPersistenceNotice.value = null
             model.folderViews.values.keys.filter { pathWithin(it, folderViewKey(base.path)!!) }.forEach(model::forgetFolderView)
         }
         loaded(); base.deleteRecursively(); fixture?.deleteRecursively()
@@ -85,6 +85,10 @@ class CommandClarityWorkflowTest {
         compose.onNodeWithContentDescription("Actions").performClick()
         compose.onNodeWithText("Recent actions…").performScrollTo().performClick()
         compose.onNodeWithTag("recent-actions").assertExists()
+    }
+    private fun recentControl(tag: String): SemanticsNodeInteraction {
+        compose.onNodeWithTag("recent-actions-list").performScrollToNode(hasTestTag(tag))
+        return compose.onNodeWithTag(tag).assertIsDisplayed()
     }
     private fun connect(readOnly: Boolean = true) {
         fixture = File(compose.activity.filesDir, "ProviderFixtures/Commands-${System.nanoTime()}").apply { mkdirs() }
@@ -267,10 +271,10 @@ class CommandClarityWorkflowTest {
 
     @Test fun recentActionsExplainsAnEmptySessionThroughTheNamedMenu() {
         recent()
-        compose.onNodeWithText("No recent actions in this session").assertExists()
+        compose.onNodeWithText("No recent actions").assertExists()
         compose.onNodeWithTag("recent-undo").assertIsNotEnabled()
         compose.onNodeWithTag("recent-redo").assertIsNotEnabled()
-        compose.onNodeWithText("Close").performClick()
+        recentControl("close-recent-actions").performClick()
     }
 
     @Test fun recentActionsUndoAndRedoShowTheAffectedFolderWithoutLosingOriginals() {
@@ -282,30 +286,32 @@ class CommandClarityWorkflowTest {
         recent()
         compose.onNodeWithText(created.path, substring = true).assertExists()
         screenshot("recent-created")
-        compose.onNodeWithTag("recent-undo").performClick(); loaded()
+        recentControl("recent-undo").performClick(); loaded()
         assertFalse(created.exists())
         compose.onNodeWithText("Undone · Next to redo").assertExists()
-        compose.onNodeWithTag("recent-redo").performClick(); loaded()
+        recentControl("recent-redo").performClick(); loaded()
         assertTrue(created.isDirectory)
         compose.onNodeWithText("Completed · Next to undo").assertExists()
         assertEquals("Keep this original brief", note.readText())
-        compose.onNodeWithText("Close").performClick()
+        recentControl("close-recent-actions").performClick()
     }
 
     @Test fun editedFileStopsUndoAndShowsThePersistentReasonWithoutOverwritingBytes() {
         compose.runOnIdle { model.createTextFile("Draft.txt") }; loaded()
         val draft = File(base, "Draft.txt").apply { writeText("Later edits must survive") }
         recent()
-        compose.onNodeWithTag("recent-undo").performClick(); loaded()
+        recentControl("recent-undo").performClick(); loaded()
+        compose.onNodeWithTag("recent-actions-list").performScrollToNode(hasTestTag("recent-action-failure"))
         compose.onNodeWithTag("recent-action-failure").assertExists()
-        compose.onNode(hasText("Draft.txt changed after this operation. Undo was stopped to protect your edits.") and hasAnyAncestor(hasTestTag("recent-action-failure"))).assertExists()
+        compose.onNode(hasText("Draft.txt or its folder changed after this action. Saved Undo stopped to protect the current files.") and hasAnyAncestor(hasTestTag("recent-action-failure"))).assertExists()
         assertEquals("Later edits must survive", draft.readText())
         compose.onNodeWithTag("recent-redo").assertIsNotEnabled()
         screenshot("guarded-undo")
-        compose.onNodeWithText("Close").performClick(); recent()
+        recentControl("close-recent-actions").performClick(); recent()
+        compose.onNodeWithTag("recent-actions-list").performScrollToNode(hasTestTag("recent-action-failure"))
         compose.onNodeWithTag("recent-action-failure").assertExists()
         assertEquals("Later edits must survive", draft.readText())
-        compose.onNodeWithText("Close").performClick()
+        recentControl("close-recent-actions").performClick()
     }
 
     @Test fun providerHistoryShowsTheActualNameAndGuardsLaterEdits() {
@@ -314,10 +320,11 @@ class CommandClarityWorkflowTest {
         val created = File(fixture, "Provider draft.txt").apply { writeText("Provider edits must survive") }
         recent()
         compose.onNode(hasText("Provider draft.txt", substring = true) and hasAnyAncestor(hasTestTag("recent-actions"))).assertExists()
-        compose.onNodeWithTag("recent-undo").performClick(); loaded()
+        recentControl("recent-undo").performClick(); loaded()
+        compose.onNodeWithTag("recent-actions-list").performScrollToNode(hasTestTag("recent-action-failure"))
         compose.onNodeWithTag("recent-action-failure").assertExists()
         assertEquals("Provider edits must survive", created.readText())
-        compose.onNodeWithText("Close").performClick()
+        recentControl("close-recent-actions").performClick()
     }
 
     @Test fun recentActionsAreSharedAcrossPanesWindowsAndActivityRecreation() {
@@ -334,10 +341,10 @@ class CommandClarityWorkflowTest {
         } finally { compose.runOnIdle { application.releaseWindow(windowId) } }
         compose.activityRule.scenario.recreate(); loaded()
         assertEquals(before, model.recentActions)
-        recent(); compose.onNodeWithTag("recent-undo").performClick(); loaded()
+        recent(); recentControl("recent-undo").performClick(); loaded()
         assertFalse(File(base, "Shared action").exists())
         assertEquals(model.recentActions, model.secondaryPane.recentActions)
-        compose.onNodeWithText("Close").performClick()
+        recentControl("close-recent-actions").performClick()
     }
 
     @Test fun narrowLargeTextKeepsPrimaryActionsAndRecoveryControlsReachable() {
@@ -357,9 +364,9 @@ class CommandClarityWorkflowTest {
         screenshot("600-large-text")
         compose.runOnIdle { model.createTextFile("Large text.txt") }; loaded()
         File(base, "Large text.txt").writeText("Keep later changes")
-        recent(); compose.onNodeWithTag("recent-undo").performClick(); loaded()
+        recent(); recentControl("recent-undo").performClick(); loaded()
         compose.onNodeWithTag("recent-action-failure").performScrollTo().assertIsDisplayed()
-        compose.onNodeWithTag("recent-undo").assertIsDisplayed()
-        compose.onNodeWithText("Close").assertIsDisplayed().performClick()
+        recentControl("recent-undo").assertIsDisplayed()
+        recentControl("close-recent-actions").assertIsDisplayed().performClick()
     }
 }

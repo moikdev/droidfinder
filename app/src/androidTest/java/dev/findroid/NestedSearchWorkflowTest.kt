@@ -68,7 +68,7 @@ class NestedSearchWorkflowTest {
             providerRoot?.let(model.documents::disconnect)
             model.session.connectedLocations.value = model.documents.locations
             model.recentSearchHistory.clear(); model.discardSearchDraft()
-            model.session.history.clear(); model.session.undoLabel.value = null; model.session.redoLabel.value = null
+            model.session.history.resetSavedHistory(); model.syncHistory(); model.session.undoLabel.value = null; model.session.redoLabel.value = null
         }
         loaded(); folder.deleteRecursively(); providerFolder?.deleteRecursively()
     }

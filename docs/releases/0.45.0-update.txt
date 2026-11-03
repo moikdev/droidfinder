@@ -1,0 +1,1 @@
+Keep supported local Undo and Redo after reopening Findroid. Recent actions explains which changes are saved, stops when files or destinations changed, and offers a reviewed reset that preserves documents, Trash and the old record. Connected storage, replacements and unsupported operations remain available only in the current session.

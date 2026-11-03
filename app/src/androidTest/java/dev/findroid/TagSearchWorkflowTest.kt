@@ -61,7 +61,7 @@ class TagSearchWorkflowTest {
             )
             model.syncLibrary()
             model.refresh()
-            model.session.history.clear()
+            model.session.history.resetSavedHistory(); model.syncHistory()
         }
         loaded()
     }
@@ -131,7 +131,7 @@ class TagSearchWorkflowTest {
             model.syncLibrary()
             providerRoot?.let { model.documents.disconnect(it) }
             model.session.connectedLocations.value = model.documents.locations
-            model.session.history.clear()
+            model.session.history.resetSavedHistory(); model.syncHistory()
             model.session.undoLabel.value = null
             model.session.redoLabel.value = null
         }

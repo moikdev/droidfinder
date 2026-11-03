@@ -60,7 +60,7 @@ class OrganizationWorkflowTest {
             model.changeMode(ViewMode.LIST)
             model.navigate(folder.path)
             model.defineTag(topic, "Purple")
-            model.session.history.clear()
+            model.session.history.resetSavedHistory(); model.syncHistory()
             model.session.undoLabel.value = null
             model.session.redoLabel.value = null
         }
@@ -150,7 +150,7 @@ class OrganizationWorkflowTest {
         compose.runOnIdle {
             state.dismissExport()
             state.close()
-            model.session.history.clear()
+            model.session.history.resetSavedHistory(); model.syncHistory()
             model.session.undoLabel.value = null
             model.session.redoLabel.value = null
             model.session.tagStore.restore(original.tags.definitions, original.tags.assignments)

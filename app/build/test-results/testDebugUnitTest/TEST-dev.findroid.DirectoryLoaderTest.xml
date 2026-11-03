@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.DirectoryLoaderTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:40.702Z" hostname="MacBook-Pro-2.local" time="0.7">
+<testsuite name="dev.findroid.DirectoryLoaderTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:39.002Z" hostname="MacBook-Pro-2.local" time="0.444">
   <properties/>
-  <testcase name="sizePresetsReportUnknownSizesBeforeContentReads" classname="dev.findroid.DirectoryLoaderTest" time="0.048"/>
-  <testcase name="providerPendingErrorAndInformationKeepAvailableFilesVisible" classname="dev.findroid.DirectoryLoaderTest" time="0.004"/>
+  <testcase name="sizePresetsReportUnknownSizesBeforeContentReads" classname="dev.findroid.DirectoryLoaderTest" time="0.024"/>
+  <testcase name="providerPendingErrorAndInformationKeepAvailableFilesVisible" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
   <testcase name="traversalBudgetAndHiddenSymlinkAndProtectedPoliciesAreIndependent" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
   <testcase name="unverifiedExactProviderExclusionsSkipContentAndReportIncompleteResults" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
   <testcase name="oneCalendarReferenceAndOneContentReadSupplyAdmissionAndEvidence" classname="dev.findroid.DirectoryLoaderTest" time="0.006"/>
   <testcase name="recursiveTraversalKeepsReadableSiblingsAndReportsOfflineLocations" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
-  <testcase name="slowPublicationLeavesTimeToScanBeforeSortingAnotherBatch" classname="dev.findroid.DirectoryLoaderTest" time="0.049"/>
+  <testcase name="slowPublicationLeavesTimeToScanBeforeSortingAnotherBatch" classname="dev.findroid.DirectoryLoaderTest" time="0.026"/>
   <testcase name="unreadableDirectFolderIsAnErrorRatherThanAnEmptySuccess" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
-  <testcase name="limitsAreExplicitAndAHigherBudgetCanReturnTheRemainingItems" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
-  <testcase name="recentsKeepsTheNewestTwoHundredAcrossAllRoots" classname="dev.findroid.DirectoryLoaderTest" time="0.062"/>
-  <testcase name="sevenThousandItemsArePublishedProgressivelyWithoutTheOldFiveThousandCap" classname="dev.findroid.DirectoryLoaderTest" time="0.474"/>
+  <testcase name="limitsAreExplicitAndAHigherBudgetCanReturnTheRemainingItems" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
+  <testcase name="recentsKeepsTheNewestTwoHundredAcrossAllRoots" classname="dev.findroid.DirectoryLoaderTest" time="0.046"/>
+  <testcase name="sevenThousandItemsArePublishedProgressivelyWithoutTheOldFiveThousandCap" classname="dev.findroid.DirectoryLoaderTest" time="0.304"/>
   <testcase name="shallowSearchStillReportsRootProviderFailuresAndPendingResults" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
   <testcase name="exclusionsPruneEveryMatchingSubtreeWithoutMatchingPrefixesOrFiles" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
   <testcase name="shallowSearchNeverOpensChildrenEvenWhenRecursiveWasRequested" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
   <testcase name="issueExamplesAreBoundedAndUnknownSizesAreNotTreatedAsZero" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
   <testcase name="explicitCollectionsStayNonrecursiveAndOnlyExcludeMatchingFolderEntries" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
-  <testcase name="cancellationStopsPublicationAndDoesNotBecomeAnUnreadableFileWarning" classname="dev.findroid.DirectoryLoaderTest" time="0.028"/>
-  <testcase name="exactExclusionsPruneRootsAndSubtreesAndKeepSiblingCacheFolders" classname="dev.findroid.DirectoryLoaderTest" time="0.013"/>
+  <testcase name="cancellationStopsPublicationAndDoesNotBecomeAnUnreadableFileWarning" classname="dev.findroid.DirectoryLoaderTest" time="0.019"/>
+  <testcase name="exactExclusionsPruneRootsAndSubtreesAndKeepSiblingCacheFolders" classname="dev.findroid.DirectoryLoaderTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

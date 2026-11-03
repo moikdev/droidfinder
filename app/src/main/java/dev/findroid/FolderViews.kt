@@ -338,6 +338,11 @@ class FolderViews(private val store: FolderViewPersistence) : AutoCloseable {
         signals.trySend(Unit)
     }
 
+    internal suspend fun awaitSaved() {
+        withTimeout(10_000) { while (saving) delay(20) }
+        check(error == null && !protectedFile) { error ?: "Folder settings could not be saved." }
+    }
+
     override fun close() {
         signals.close()
         scope.cancel()

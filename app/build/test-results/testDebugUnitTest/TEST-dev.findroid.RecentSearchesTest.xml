@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.RecentSearchesTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:43.971Z" hostname="MacBook-Pro-2.local" time="0.015">
+<testsuite name="dev.findroid.RecentSearchesTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:46.595Z" hostname="MacBook-Pro-2.local" time="0.012">
   <properties/>
   <testcase name="suggestionsMatchUnicodeAndAllWordsAndDeduplicateRulesAcrossRoots" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
-  <testcase name="clearAndRemovePersistImmediatelyAndInvalidateStaleDrafts" classname="dev.findroid.RecentSearchesTest" time="0.013"/>
+  <testcase name="clearAndRemovePersistImmediatelyAndInvalidateStaleDrafts" classname="dev.findroid.RecentSearchesTest" time="0.009"/>
   <testcase name="corruptRecordingFlagDoesNotSilentlyEnableRecording" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
-  <testcase name="supportedRootsIncludeOnlyRealFoldersAndKnownLibraryKinds" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
-  <testcase name="repeatedSearchMovesToFrontWithStableIdentityAndNewUseTime" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
+  <testcase name="supportedRootsIncludeOnlyRealFoldersAndKnownLibraryKinds" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
+  <testcase name="repeatedSearchMovesToFrontWithStableIdentityAndNewUseTime" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="historyKeepsOnlyTwentyMostRecentlyUsedSearches" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
-  <testcase name="failedWritesRetainTheAcceptedStateAndExplainTheFailure" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
+  <testcase name="failedWritesRetainTheAcceptedStateAndExplainTheFailure" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
   <testcase name="storedRulesOwnTheirCollectionSnapshotsAndPreserveLiteralWhitespace" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="damagedHistoryIsPreservedUntilAnExplicitSuccessfulClear" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
-  <testcase name="anOversizedQueryReportsFailureWithoutLosingEarlierEntries" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
+  <testcase name="anOversizedQueryReportsFailureWithoutLosingEarlierEntries" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="settingTheSameRecordingPreferenceDoesNotInvalidatePendingDrafts" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="pauseStopsNewWritesButKeepsExistingSearchesAndInvalidatesOldDrafts" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="sameQueryAtDifferentRootsOrWithDifferentFiltersStaysDistinct" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
@@ -18,7 +18,7 @@
   <testcase name="opaqueProviderRelocationUsesExactRoutesAndConvergingSearchesKeepNewestIdentity" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="invalidAndDuplicateIdentitiesRejectTheWholeLoadedListWithoutWriting" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="fullHistoryFilteringIncludesLocationWhileInlineSuggestionsDoNot" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
-  <testcase name="localRelocationHonorsBoundariesAndRemapsRulesAndTags" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
+  <testcase name="localRelocationHonorsBoundariesAndRemapsRulesAndTags" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

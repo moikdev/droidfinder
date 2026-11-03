@@ -17,6 +17,17 @@ class FileEngine(
     private val stateDir: File,
     private val freeBytes: (File) -> Long? = { runCatching { it.usableSpace }.getOrNull() },
 ) {
+    private var historyPublication: ((File, File) -> Unit)? = null
+    internal fun <T> withHistoryPublication(publish: ((File, File) -> Unit)?, work: () -> T): T {
+        val previous = historyPublication
+        historyPublication = publish
+        return try { work() } finally { historyPublication = previous }
+    }
+    private fun moveEntry(source: Path, target: Path) {
+        val publish = historyPublication
+        if (publish == null) Files.move(source, target) else publish(source.toFile(), target.toFile())
+    }
+
     private val trashDir = File(stateDir, "Trash").apply { mkdirs() }
     private val indexFile = File(stateDir, "trash.properties")
     private val indexBackup = File(stateDir, "trash.properties.bak")
@@ -38,7 +49,7 @@ class FileEngine(
             val damaged = listOf(indexFile) + if (recovered == null) listOf(indexBackup) else emptyList()
             damaged.filter { it.exists() }.forEach { file ->
                 try {
-                    Files.move(file.toPath(), File(file.path + ".damaged-${UUID.randomUUID()}").toPath())
+                    moveEntry(file.toPath(), File(file.path + ".damaged-${UUID.randomUUID()}").toPath())
                 } catch (_: IOException) {
                     // Browsing must remain possible; never overwrite records we couldn't preserve.
                     indexWritable = false
@@ -74,7 +85,7 @@ class FileEngine(
         val target = File(source.parentFile!!, validateName(name))
         if (source == target) return source
         if (!Files.exists(target.toPath(), java.nio.file.LinkOption.NOFOLLOW_LINKS)) {
-            Files.move(source.toPath(), target.toPath())
+            moveEntry(source.toPath(), target.toPath())
             return target
         }
         return renameBatch(listOf(RenameProposal(source, name))).single().second
@@ -105,12 +116,12 @@ class FileEngine(
                 control?.item(proposal.file.name)
                 val temporary =
                     File(proposal.file.parentFile!!, ".findroid-rename-${UUID.randomUUID()}")
-                Files.move(proposal.file.toPath(), temporary.toPath())
+                moveEntry(proposal.file.toPath(), temporary.toPath())
                 positions[proposal.file] = temporary
             }
             changed.zip(targets).forEach { (proposal, target) ->
                 control?.check()
-                Files.move(positions.getValue(proposal.file).toPath(), target.toPath())
+                moveEntry(positions.getValue(proposal.file).toPath(), target.toPath())
                 positions[proposal.file] = target
             }
         } catch (error: Exception) {
@@ -120,7 +131,7 @@ class FileEngine(
                     val temporary =
                         File(original.parentFile!!, ".findroid-rollback-${UUID.randomUUID()}")
                     runCatching {
-                        Files.move(current.toPath(), temporary.toPath())
+                        moveEntry(current.toPath(), temporary.toPath())
                         positions[original] = temporary
                     }
                 }
@@ -130,7 +141,7 @@ class FileEngine(
                     .filter { (original, current) -> current != original }
                     .filter { (original, current) ->
                         runCatching {
-                            Files.move(current.toPath(), original.toPath())
+                            moveEntry(current.toPath(), original.toPath())
                             positions[original] = original
                         }
                             .isFailure
@@ -144,7 +155,7 @@ class FileEngine(
                                     original.parentFile!!,
                                     recoveredRenameName(original.name),
                                 )
-                            Files.move(current.toPath(), recovered.toPath())
+                            moveEntry(current.toPath(), recovered.toPath())
                             recovered
                         }
                             .getOrDefault(current)
@@ -239,7 +250,7 @@ class FileEngine(
             control.check()
             // Publication must not be followed by a cancellation check that hides its result.
             try {
-                control.storage(TransferIo.STORAGE) { Files.move(source.toPath(), target.toPath()) }
+                control.storage(TransferIo.STORAGE) { moveEntry(source.toPath(), target.toPath()) }
                 return target
             } catch (error: java.nio.file.FileAlreadyExistsException) {
                 throw error
@@ -257,7 +268,7 @@ class FileEngine(
             copyTree(source, staging, control, verification = verification)
             control.check()
             control.phase("Publishing copy", stage = TransferStage.FINISHING)
-            control.storage(TransferIo.DESTINATION) { Files.move(staging.toPath(), target.toPath()) }
+            control.storage(TransferIo.DESTINATION) { moveEntry(staging.toPath(), target.toPath()) }
         } catch (error: Exception) {
             staging.deleteTreeWithoutLinks()
             throw error
@@ -286,7 +297,7 @@ class FileEngine(
         check(target.parentFile?.isDirectory == true) { "The original folder is unavailable." }
         checkDestination(source, target.parentFile!!)
         try {
-            Files.move(source.toPath(), target.toPath())
+            moveEntry(source.toPath(), target.toPath())
             return target
         } catch (error: java.nio.file.FileAlreadyExistsException) {
             throw error
@@ -295,7 +306,7 @@ class FileEngine(
         }
         val temporary = copy(source, target.parentFile!!, control = control)
         try {
-            if (temporary != target) Files.move(temporary.toPath(), target.toPath())
+            if (temporary != target) moveEntry(temporary.toPath(), target.toPath())
         } catch (error: Exception) {
             temporary.deleteTreeWithoutLinks()
             throw error
@@ -404,6 +415,9 @@ class FileEngine(
         return items to issues
     }
 
+    internal fun ownsRecovery(item: File): Boolean =
+        item.isAbsolute && item.toPath().normalize().toString() == item.path && item.parentFile?.parentFile?.absoluteFile == trashDir.absoluteFile
+
     fun originalPath(item: File): String? = index.getProperty(item.parentFile?.name)
 
     @Synchronized
@@ -442,6 +456,13 @@ class FileEngine(
         val result = copy(item, parent, move = true, control = control)
         removeBucket(item)
         return result
+    }
+
+    internal fun restoreExact(item: File, target: File): File {
+        check(ownsRecovery(item) && originalPath(item) == target.absolutePath) { "The saved recovery location changed. Review Trash before continuing." }
+        relocate(item, target)
+        removeBucket(item)
+        return target
     }
 
     private fun removeBucket(item: File) {
@@ -555,7 +576,7 @@ class FileEngine(
                 }
             }
             control.check()
-            Files.move(staging.toPath(), target.toPath())
+            moveEntry(staging.toPath(), target.toPath())
         } catch (error: Exception) {
             staging.delete()
             throw error
@@ -613,7 +634,7 @@ class FileEngine(
                     modified
                         .sortedByDescending { it.first.path.length }
                         .forEach { (file, time) -> file.setLastModified(time) }
-                    Files.move(staging.toPath(), target.toPath())
+                    moveEntry(staging.toPath(), target.toPath())
                 } catch (error: Exception) {
                     staging.deleteTreeWithoutLinks()
                     throw error

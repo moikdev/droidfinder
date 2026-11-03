@@ -43,7 +43,7 @@ class RenameWorkflowTest {
         compose.runOnIdle {
             state.close()
             model.windowState.peekEntry.value = null
-            model.session.history.clear()
+            model.session.history.resetSavedHistory(); model.syncHistory()
             model.session.undoLabel.value = null
             model.session.redoLabel.value = null
             if (model.dualPane) model.toggleDualPane()
@@ -121,7 +121,7 @@ class RenameWorkflowTest {
         compose.waitUntil(15_000) { model.busy == null }
         compose.runOnIdle {
             state.close()
-            model.session.history.clear()
+            model.session.history.resetSavedHistory(); model.syncHistory()
             model.session.undoLabel.value = null
             model.session.redoLabel.value = null
             root?.let(model::disconnectLocation)

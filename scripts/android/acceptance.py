@@ -21,7 +21,7 @@ class AndroidDevice:
         self.sdk = Path(os.environ.get('ANDROID_SDK_ROOT') or os.environ.get('ANDROID_HOME') or Path.home() / 'Library/Android/sdk')
         self.adb = str(self.sdk / 'platform-tools/adb')
         self.touch_jar = None
-        self.xml = '/sdcard/findroid-native-acceptance.xml'
+        self.xml = '/sdcard/findroid-native-acceptance-'+str(time.time_ns())+'.xml'
         self.screen = tuple(map(int, re.findall(r'(\d+)x(\d+)', self.shell('wm', 'size').decode())[-1]))
         if int(self.shell('getprop', 'ro.build.version.sdk')) <= 30:
             self._prepare_finger_input()
@@ -68,7 +68,10 @@ class AndroidDevice:
         return any(n.get('enabled') == 'true' for n in self.nodes(tree, label))
 
     def dump(self, name):
-        self.shell('uiautomator', 'dump', *(['--windows'] if self.all_windows else []), self.xml)
+        self.shell('rm', '-f', '--', self.xml)
+        result = self.shell('uiautomator', 'dump', *(['--windows'] if self.all_windows else []), self.xml).decode(errors='replace')
+        if not any(marker in result for marker in ('UI hierchary dumped to:', 'UI hierarchy dumped to:')):
+            raise RuntimeError('uiautomator dump did not produce a fresh hierarchy: '+name)
         data = self.call('exec-out', 'cat', self.xml)
         (self.output / (name + '.xml')).write_bytes(data)
         tree = ET.fromstring(data)

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SetupTransactionTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:44.200Z" hostname="MacBook-Pro-2.local" time="0.172">
+<testsuite name="dev.findroid.SetupTransactionTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:46.733Z" hostname="MacBook-Pro-2.local" time="0.119">
   <properties/>
   <testcase name="staleReviewIsRejectedBeforeCreatingARecoveryJournal" classname="dev.findroid.SetupTransactionTest" time="0.004"/>
   <testcase name="preferenceFailureAfterWritesRestoresTheOriginalPreferenceTypesAndAbsences" classname="dev.findroid.SetupTransactionTest" time="0.009"/>
-  <testcase name="committedJournalCleanupDoesNotUndoACompletedRestore" classname="dev.findroid.SetupTransactionTest" time="0.008"/>
-  <testcase name="processDeathAtEachBoundaryRecoversBeforeAnotherImport" classname="dev.findroid.SetupTransactionTest" time="0.07"/>
-  <testcase name="eachFileFailureRollsBackAllFilesAndPreferences" classname="dev.findroid.SetupTransactionTest" time="0.064"/>
-  <testcase name="startupRemovesNewFilesWhenTheOriginalSetupFilesWereAbsent" classname="dev.findroid.SetupTransactionTest" time="0.005"/>
-  <testcase name="corruptRecoveryMetadataStaysPreservedWithoutChangingSetupFiles" classname="dev.findroid.SetupTransactionTest" time="0.002"/>
-  <testcase name="invalidImportTargetsAndPreferenceValuesCannotWriteOutsideTheSetup" classname="dev.findroid.SetupTransactionTest" time="0.003"/>
+  <testcase name="committedJournalCleanupDoesNotUndoACompletedRestore" classname="dev.findroid.SetupTransactionTest" time="0.006"/>
+  <testcase name="processDeathAtEachBoundaryRecoversBeforeAnotherImport" classname="dev.findroid.SetupTransactionTest" time="0.048"/>
+  <testcase name="eachFileFailureRollsBackAllFilesAndPreferences" classname="dev.findroid.SetupTransactionTest" time="0.037"/>
+  <testcase name="startupRemovesNewFilesWhenTheOriginalSetupFilesWereAbsent" classname="dev.findroid.SetupTransactionTest" time="0.004"/>
+  <testcase name="corruptRecoveryMetadataStaysPreservedWithoutChangingSetupFiles" classname="dev.findroid.SetupTransactionTest" time="0.003"/>
+  <testcase name="invalidImportTargetsAndPreferenceValuesCannotWriteOutsideTheSetup" classname="dev.findroid.SetupTransactionTest" time="0.002"/>
   <testcase name="successfulCommitChangesOnlyWhitelistedMetadataAndPreservesUserBytes" classname="dev.findroid.SetupTransactionTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

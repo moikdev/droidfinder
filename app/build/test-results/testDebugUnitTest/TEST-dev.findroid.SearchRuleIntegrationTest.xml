@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SearchRuleIntegrationTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:44.117Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.SearchRuleIntegrationTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:46.689Z" hostname="MacBook-Pro-2.local" time="0.003">
   <properties/>
   <testcase name="unknownSizeAlternativesCanMatchButUnresolvedNoneReportsAnIssueWithoutReading" classname="dev.findroid.SearchRuleIntegrationTest" time="0.001"/>
   <testcase name="aCompleteGroupChecksContentOnceAndMetadataFailureNeverOpensIt" classname="dev.findroid.SearchRuleIntegrationTest" time="0.0"/>
   <testcase name="nestedTagsAreReferencedForRefreshAndRemappingButNeverBecomeFlatAndRequirements" classname="dev.findroid.SearchRuleIntegrationTest" time="0.0"/>
-  <testcase name="tabAndScanBudgetRemappingPreservesGlobalLocationsAndExclusions" classname="dev.findroid.SearchRuleIntegrationTest" time="0.001"/>
-  <testcase name="groupsIntersectEveryExistingMetadataCriterionAndExactExclusion" classname="dev.findroid.SearchRuleIntegrationTest" time="0.0"/>
-  <testcase name="historyDraftEditingIsIndependentAndContainsOnlyRules" classname="dev.findroid.SearchRuleIntegrationTest" time="0.001"/>
+  <testcase name="tabAndScanBudgetRemappingPreservesGlobalLocationsAndExclusions" classname="dev.findroid.SearchRuleIntegrationTest" time="0.0"/>
+  <testcase name="groupsIntersectEveryExistingMetadataCriterionAndExactExclusion" classname="dev.findroid.SearchRuleIntegrationTest" time="0.001"/>
+  <testcase name="historyDraftEditingIsIndependentAndContainsOnlyRules" classname="dev.findroid.SearchRuleIntegrationTest" time="0.0"/>
   <testcase name="emptyDraftGroupsRemainEditableButCannotBeAppliedEvenInsideAny" classname="dev.findroid.SearchRuleIntegrationTest" time="0.0"/>
-  <testcase name="finalNameHighlightsOnlyUsePositiveEvidenceFromPassingBranches" classname="dev.findroid.SearchRuleIntegrationTest" time="0.0"/>
+  <testcase name="finalNameHighlightsOnlyUsePositiveEvidenceFromPassingBranches" classname="dev.findroid.SearchRuleIntegrationTest" time="0.001"/>
   <testcase name="typingSuggestionsHaveBoundedUnicodeSafeCurrentFolderDescriptions" classname="dev.findroid.SearchRuleIntegrationTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -131,13 +131,16 @@ class FinderSession(
 
     val clipboard = mutableStateOf<ClipboardFiles?>(null)
 
-    val history = FileHistory(engine)
+    internal val undoFiles = AndroidUndoHistoryFiles()
+    val history = FileHistory(engine, UndoHistoryStore(File(app.filesDir, ".undo-history"), undoFiles::syncDirectory), undoFiles)
 
-    val undoLabel = mutableStateOf<String?>(null)
+    val undoLabel = mutableStateOf(history.undoLabel)
 
-    val redoLabel = mutableStateOf<String?>(null)
-    internal val recentActions = mutableStateOf<List<RecentFileAction>>(emptyList())
-    internal val historyFailure = mutableStateOf<String?>(null)
+    val redoLabel = mutableStateOf(history.redoLabel)
+    internal val recentActions = mutableStateOf(history.recentActions())
+    internal val historyFailure = mutableStateOf(history.lastFailure)
+    internal val historyRecoveryProblem = mutableStateOf(history.recoveryProblem)
+    internal val historyPersistenceNotice = mutableStateOf(history.persistenceNotice)
 
     val transferProgress = mutableStateOf(TransferProgress())
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.MergePlannerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:42.234Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.MergePlannerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:40.041Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
-  <testcase name="symbolicSourceAndPairedDestinationLinksAreRejected" classname="dev.findroid.MergePlannerTest" time="0.002"/>
+  <testcase name="symbolicSourceAndPairedDestinationLinksAreRejected" classname="dev.findroid.MergePlannerTest" time="0.001"/>
   <testcase name="rejectsCyclesDuplicateDestinationsAndOversizedPlans" classname="dev.findroid.MergePlannerTest" time="0.0"/>
   <testcase name="mergesExistingFolderPairsAndKeepsNewSubtreesAtomic" classname="dev.findroid.MergePlannerTest" time="0.0"/>
   <testcase name="cancelledPlansStopBeforeListingOrWriting" classname="dev.findroid.MergePlannerTest" time="0.0"/>
-  <testcase name="emptyFoldersHaveAnEmptyButCompletePlan" classname="dev.findroid.MergePlannerTest" time="0.0"/>
+  <testcase name="emptyFoldersHaveAnEmptyButCompletePlan" classname="dev.findroid.MergePlannerTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

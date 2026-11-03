@@ -1132,6 +1132,8 @@ constructor(
 
     internal val recentActions get() = session.recentActions.value
     internal val historyFailure get() = session.historyFailure.value
+    internal val historyRecoveryProblem get() = session.historyRecoveryProblem.value
+    internal val historyPersistenceNotice get() = session.historyPersistenceNotice.value
 
     val canUndoTrash
         get() = undoLabel == "Move to Trash"
@@ -2509,16 +2511,22 @@ constructor(
         }
         message = null
         return runCatching {
+            history.beginOperation(label)
             val before = tagStore.reload().tags
             check(tagStore.error == null) { tagStore.error!! }
             edit()
             recordTags(label, before, tagStore.snapshot().tags, route)
+            // Tag callbacks stay in this session; the boundary removes unreachable older saved actions.
+            history.finishOperation(true)
             syncLibrary()
+            syncHistory()
             true
         }
             .getOrElse {
+                runCatching { history.finishOperation(false) }
                 message = it.message
                 syncLibrary()
+                syncHistory()
                 false
             }
     }
@@ -2854,9 +2862,9 @@ constructor(
             val replacements = tagRoutes.associate {
                 it.first.removePrefix("@tag:") to it.second.removePrefix("@tag:")
             }
-            persistSmartFolders(smartFolders.map {
+            check(persistSmartFolders(smartFolders.map {
                 it.copy(rules = it.rules.remapTags(replacements))
-            })
+            })) { "Couldn't save Smart Folder changes." }
             session.panes.forEach { pane ->
                 pane.searchRules = pane.searchRules.remapTags(replacements)
             }
@@ -2867,8 +2875,8 @@ constructor(
         styleStore.relocate(names)
         folderStyles = styleStore.styles
         fun update(path: String): String = remapPath(path, names)
-        editSidebar { it.remap(names) }
-        persistSmartFolders(smartFolders.map { it.copy(root = update(it.root), rules = it.rules.remapRoutes(names)) })
+        check(editSidebar { it.remap(names) }) { "Couldn't save Favorite changes." }
+        check(persistSmartFolders(smartFolders.map { it.copy(root = update(it.root), rules = it.rules.remapRoutes(names)) })) { "Couldn't save Smart Folder changes." }
         folderViews.relocate(names)
         session.savedWorkspaces.value = savedWorkspaces.map { it.remap(names) }
         if (savedWorkspaces.isNotEmpty()) persistWorkspaces()
@@ -3286,11 +3294,13 @@ constructor(
         }
     }
 
-    private fun syncHistory() {
+    internal fun syncHistory() {
         undoLabel = history.undoLabel
         redoLabel = history.redoLabel
         session.recentActions.value = history.recentActions()
         session.historyFailure.value = history.lastFailure
+        session.historyRecoveryProblem.value = history.recoveryProblem
+        session.historyPersistenceNotice.value = history.persistenceNotice
     }
 
     private suspend fun rememberOperation(label: String, steps: List<FileStep>) {
@@ -3307,6 +3317,7 @@ constructor(
         label: String,
         destination: String? = folderPath,
         clearOriginSelection: Boolean = true,
+        beginUndoRecord: Boolean = true,
         onFinished: suspend (Exception?) -> Unit = {},
         onRejected: () -> Unit = {},
         onStarted: (TransferControl) -> Unit = {},
@@ -3367,6 +3378,7 @@ constructor(
                         "$label\n${destination?:location}\n${System.currentTimeMillis()}",
                     )
                 }
+                if (beginUndoRecord) withContext(Dispatchers.IO) { history.beginOperation(label) }
                 message = work()
             } catch (error: Exception) {
                 failure = error
@@ -3380,7 +3392,15 @@ constructor(
                     try {
                         onFinished(failure)
                     } catch (error: Exception) {
+                        failure = error
                         message = "Transfer history: ${error.message}"
+                    }
+                    try {
+                        if (failure == null) flushUndoMetadata()
+                        withContext(Dispatchers.IO) { history.finishOperation(failure == null) }
+                    } catch (error: Exception) {
+                        withContext(Dispatchers.IO) { runCatching { history.finishOperation(false) } }
+                        message = "Files were kept. Saved Undo needs review: ${error.message}"
                     }
                     marker.delete()
                     TransferRuntime.finish(getApplication())
@@ -3406,10 +3426,40 @@ constructor(
         }
     }
 
+    private suspend fun flushUndoMetadata() {
+        if (session.workspaceWrites.intValue > 0) {
+            kotlinx.coroutines.withTimeout(10_000) { while (session.workspaceWrites.intValue > 0) kotlinx.coroutines.delay(20) }
+        }
+        check(workspaceError == null) { workspaceError ?: "Saved workspaces could not be saved." }
+        folderViews.awaitSaved()
+        check(session.smartFolderNotice.value == null) { session.smartFolderNotice.value!! }
+        withContext(Dispatchers.IO) {
+            val app = getApplication<Application>()
+            val preferences = listOf(app.getSharedPreferences("finder", 0), app.getSharedPreferences("locations", 0)) +
+                session.panes.flatMap { listOf(it.panePrefs, it.windowState.prefs) }
+            preferences.distinct().forEach { check(it.edit().commit()) { "Couldn't save preferences after the file operation." } }
+            val metadata = app.filesDir.listFiles().orEmpty().filter { it.isFile && it.extension in setOf("json", "properties", "txt") }.map { it.path }.toSet()
+            session.undoFiles.sync(metadata)
+            val shared = File(app.filesDir.parentFile, "shared_prefs")
+            if (shared.isDirectory) session.undoFiles.syncDirectory(shared)
+            session.undoFiles.syncDirectory(app.filesDir)
+        }
+    }
+
+    internal fun resetSavedUndo() {
+        if (busy != null) { message = "Wait for the current operation."; return }
+        operation("Resetting saved Undo…", clearOriginSelection = false, beginUndoRecord = false) {
+            val preserved = withContext(Dispatchers.IO) { history.resetSavedHistory() }
+            syncHistory()
+            if (preserved == null) "Undo list reset. Files and Trash were kept."
+            else "Undo list reset. The prior recovery record was preserved in app storage. Files and Trash were kept."
+        }
+    }
+
     private suspend fun runHistory(backward: Boolean) {
         try {
             val changes =
-                withContext(Dispatchers.IO) { if (backward) history.undo() else history.redo() }
+                withContext(Dispatchers.IO) { if (backward) history.undoDeferred() else history.redoDeferred() }
             relocateMetadataPaths(changes)
         } catch (error: HistoryFailure) {
             relocateMetadataPaths(error.changes)
@@ -3422,7 +3472,7 @@ constructor(
 
     fun undo() {
         val label = undoLabel ?: return
-        operation("Undoing $label…") {
+        operation("Undoing $label…", beginUndoRecord = false) {
             runHistory(true)
             "Undid $label"
         }
@@ -3430,7 +3480,7 @@ constructor(
 
     fun redo() {
         val label = redoLabel ?: return
-        operation("Redoing $label…") {
+        operation("Redoing $label…", beginUndoRecord = false) {
             runHistory(false)
             "Redid $label"
         }

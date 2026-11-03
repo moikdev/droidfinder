@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.TransferPlanningTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-03T19:05:44.662Z" hostname="MacBook-Pro-2.local" time="0.006">
+<testsuite name="dev.findroid.TransferPlanningTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:47.009Z" hostname="MacBook-Pro-2.local" time="0.006">
   <properties/>
   <testcase name="changedAndUnknownSizesDoNotInventPercentagesOrEtas" classname="dev.findroid.TransferPlanningTest" time="0.0"/>
   <testcase name="cyclesLinksAndLimitsDoNotBecomeExactTotals" classname="dev.findroid.TransferPlanningTest" time="0.001"/>

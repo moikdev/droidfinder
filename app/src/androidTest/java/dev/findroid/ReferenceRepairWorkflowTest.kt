@@ -69,7 +69,7 @@ class ReferenceRepairWorkflowTest {
             model.updateSearchRules(SearchRules())
             model.changeGrouping(GroupBy.NONE)
             model.navigate(base.path)
-            model.session.history.clear()
+            model.session.history.resetSavedHistory(); model.syncHistory()
             model.session.undoLabel.value = null
             model.session.redoLabel.value = null
         }
@@ -170,7 +170,7 @@ class ReferenceRepairWorkflowTest {
             repair.dismiss()
             state.locations.dismiss()
             state.close()
-            model.session.history.clear()
+            model.session.history.resetSavedHistory(); model.syncHistory()
             model.session.undoLabel.value = null
             model.session.redoLabel.value = null
             val store = model.session.tagStore
