@@ -29,7 +29,7 @@ The backup includes:
 
 File contents, Android access grants, provider sign-ins, notification/file-picker permissions, transfer jobs, Undo/Redo history, recent-search history and its recording preference, Trash, caches, and updater state remain on the original installation. Findroid's Android automatic backup exclusion remains enabled; this feature is an explicit user-created export.
 
-Exact search exclusions enter the reference review and follow explicit root mappings. Match snippets remain in the current listing and are omitted from the backup.
+Exact search exclusions and, from 0.38.1, every chosen search folder enter the reference review and follow explicit root mappings. This includes Smart Folders, saved/open tabs and scan-budget scopes. Match snippets remain in the current listing and are omitted from the backup. Recent searches remain outside setup backups. See [Search locations](SEARCH-LOCATIONS.md).
 
 The JSON can reveal folder names, file paths, tag names, and saved search text. Choose a suitable place to keep it.
 

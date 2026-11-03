@@ -79,3 +79,10 @@ The separate production-source API36 check passes 1/1 for code 37, name 0.36.0-p
 The real **0.36 → 0.37** public-feed download and Android installer upgrade pass on both dedicated API30/API36 tablets. Each installs the exact anonymously downloaded APK, preserves the synthetic original file, legacy Favorite and unrelated preference, and reports [up to date](screenshots/app-updates-037.png).
 
 The separate production-source API36 check passes 1/1 for code 38, name 0.37.0-preview, the exact public APK digest, package/certificate and no repeat offer. Both tablets finish with their exact original metadata/preferences, font scale 1.0 and the public optimized APK. The signing certificate is unchanged from 0.36. See [recent searches](RECENT-SEARCHES.md) and [validation](../VALIDATION.md). Physical/OEM acceptance remains separate.
+
+
+## 0.38.1 public upgrade acceptance
+
+Both **0.37 → 0.38.1** and withdrawn-preview **0.38 → 0.38.1** public-feed download and Android installer upgrade pass on both dedicated API30/API36 tablets. Each installs the exact anonymously downloaded APK, preserves the synthetic original file, legacy Favorite and unrelated preference, and reports [up to date](screenshots/app-updates-0381.png).
+
+The separate production-source API36 check passes 1/1 for code 40, name 0.38.1-preview, the exact public APK digest, package/certificate and no repeat offer. Both tablets finish with their exact original metadata/preferences, font scale 1.0 and the public optimized APK. The signing certificate is unchanged from 0.37. See [search locations](SEARCH-LOCATIONS.md) and [validation](../VALIDATION.md). Physical/OEM acceptance remains separate.

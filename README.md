@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.37.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.38.1-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.37.0 release](https://github.com/moikdev/findroid/releases/tag/v0.37.0-preview) and download **`Findroid-0.37.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.38.1 release](https://github.com/moikdev/findroid/releases/tag/v0.38.1-preview) and download **`Findroid-0.38.1-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -124,6 +124,15 @@ This is useful when you repeat the same filters across projects without wanting 
 
 ![Recent searches with complete filters, original locations, and named Search here and Search original location actions](docs/screenshots/recent-searches-tablet.png)
 
+### Search a whole project, even across folders
+
+Open **More → Search locations…** and choose up to ten folders. Search your writing folder and research folder together, including folders from a connected document provider. Overlapping locations show each document once.
+
+A disconnected folder does not hide the results from the others. **Result details** shows which folders finished, are unavailable, or still need scanning. Save the search as a Smart Folder to keep that complete project scope across restarts.
+
+Recent searches keep the scope too. **Search original location** reuses the chosen folders; **Search here** and typing suggestions reuse the filters in your current folder. [Search-location guide](docs/SEARCH-LOCATIONS.md).
+
+![Search results from several chosen folders, with the location scope available through named commands](docs/screenshots/search-locations-tablet.png)
 
 *Actual optimized Android tablet capture with sample text files.*
 
@@ -231,4 +240,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, and recent-search history have shipped in verified increments. **24 of 72 are implemented; 48 remain open or partial.** Work continues on choosing several search roots, indexing, storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, and chosen search folders have shipped in verified increments. **25 of 72 are implemented; 47 remain open or partial.** Work continues on nested search rules, indexing, storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).

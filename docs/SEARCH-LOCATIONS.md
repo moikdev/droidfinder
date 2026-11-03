@@ -1,6 +1,6 @@
 # Search across chosen folders
 
-Development increment for 0.38.1. The published preview remains 0.37. The first 0.38 candidate was withdrawn after public OTA acceptance exposed a secondary-window teardown crash; the replacement adds lifecycle ownership and regression checks before publication.
+Available in [0.38.1-preview](https://github.com/moikdev/findroid/releases/tag/v0.38.1-preview). Search several project folders together while keeping each location’s availability visible.
 
 Open **More → Search locations…**, or find “Search locations” in the action launcher. Choose up to ten folders from Workspace, tablet storage, connected providers, tabs, or Favorites. Read-only folders can be included.
 
@@ -46,3 +46,14 @@ Recent searches keep the complete scope with the filters:
 Setup backups inventory chosen roots in Smart Folders, saved/open tabs and scan-budget scopes, so the existing reviewed mapping includes them. Workspace recovery can replace a missing secondary search root without changing the working anchor. Repairing a Smart Folder inside a saved workspace creates independent rules for that restored tab and preserves the shared saved search.
 
 Saved criteria and backups contain references, not result entries, snippets or file bytes. Recent history remains outside setup backups. See [Search criteria](SEARCH-CRITERIA.md), [Recent searches](RECENT-SEARCHES.md), and [Setup backup](SETUP-BACKUP.md).
+
+
+![Choose and review several folders before applying the complete search scope](screenshots/search-locations-draft.png)
+
+![An unavailable first folder retains matches from the other chosen folders](screenshots/search-locations-unavailable.png)
+
+## Verified delivery
+
+451 JVM tests and 308 native cases per API30/API36 tablet pass, with no failures or skips and 32 isolated batches per API. The optimized 0.37 upgrade checks the real folder chooser, Cancel/Search, overlapping roots, literal exclusions, a missing first root, saved Smart Folders, restart, five optimized custom-window task replacements and full criteria/history preservation. All six 600/800/1280 dp × font-scale 1.0/1.6 layouts pass per API with full 48dp controls and scroll reachability.
+
+Real public-feed upgrades from 0.37 and withdrawn 0.38 to 0.38.1 pass on both tablets, including Android installation. Public APK bytes and signing continuity are verified, and the exact original metadata/preferences are restored. Physical devices and actual third-party providers remain separate acceptance. [Detailed evidence](../VALIDATION.md).

@@ -46,3 +46,10 @@ The list and its recording preference persist across restarts and are shared by 
 History is bounded to 256 KiB overall and 64 KiB per entry. Large sets of rules can reduce the number of retained entries; a search that exceeds the per-entry limit can still be saved as a Smart Folder. If history cannot be read or its format is newer than this app understands, Findroid retains the original data and pauses recording until you explicitly clear it.
 
 For search rules and result explanations, see [Search criteria](SEARCH-CRITERIA.md). For reusable named rules, use **More → Save search as Smart Folder…**.
+
+
+## Reuse a search with several folders
+
+From 0.38.1, history preserves every [chosen search folder](SEARCH-LOCATIONS.md). **Search original location** restores the full list and can proceed if at least one folder is available; Result details identifies unavailable roots. If all are unavailable, the current tab stays in place.
+
+**Search here** and typing suggestions clear that saved location list and use the current folder or library with the copied filters. Suggestion summaries describe this current-folder action. Literal exclusions keep their original references. Reusing a Smart Folder search still creates independent rules.

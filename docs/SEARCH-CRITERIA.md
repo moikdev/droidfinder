@@ -44,4 +44,4 @@ Connected document providers use their document identities and actual ancestry c
 
 New criteria survive tabs, app restarts, Smart Folders and saved workspaces. Exact exclusions also enter the setup backup's reference inventory. A reviewed restore remaps them alongside the rest of the setup, including saved navigation budgets. Original documents and snippet contents are not included in the backup. See [setup backup](SETUP-BACKUP.md).
 
-This increment implements proposals 20, 23 and 24. Optional indexing, search history, explicit multiple roots and nested search rules remain separate work on the [improvement tracker](IMPROVEMENT-TRACKER.md).
+The criteria increment implements proposals 20, 23 and 24. [Recent searches](RECENT-SEARCHES.md) ship in 0.37, and [chosen search folders](SEARCH-LOCATIONS.md) ship in 0.38.1. The same criteria and literal exclusions apply across every chosen folder. Optional indexing and nested search rules remain separate work on the [improvement tracker](IMPROVEMENT-TRACKER.md).

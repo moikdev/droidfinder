@@ -105,7 +105,11 @@ def main():
         roots=smart[0]['rules']['locations'];assert len(roots)==3 and smart[0]['root']==roots[0]
         assert roots[2]==roots[1]+'/Cache' and smart[0]['rules']['excludedLocations']==[{'path':roots[0]+'/Cache','folder':True}]
         history=read(folder/'synthetic-history.json');assert any(r['rules']==smart[0]['rules'] for r in history['searches'])
-        files += [folder/name for name in ('verification.json','synthetic-smart-folders.json','synthetic-history.json')]+list(folder.glob('*.png'))+list(folder.glob('*.xml'))
+        review=read(folder/'visual-review.json');assert review['api']==api and review['actualScreenshotsInspected']
+        for image in review['images']:
+            assert Path(image['name']).name==image['name'] and Path(image['name']).suffix=='.png'
+            assert sha(folder/image['name'])==image['sha256']
+        files += [folder/name for name in ('verification.json','synthetic-smart-folders.json','synthetic-history.json','visual-review.json')]+list(folder.glob('*.png'))+list(folder.glob('*.xml'))
         for suffix,from_code in (('ota',38),('withdrawn-ota',39)):
             ota=PROOF/f'api{api}-{suffix}';report=read(ota/'verification.json')
             assert report['fromVersionCode']==from_code and report['toVersionCode']==40 and report['restoredApkSha256']==expected
@@ -147,9 +151,9 @@ def main():
         assert folder.parent==PROOF and re.fullmatch(r'api(30|36)-optimized-before-[a-z0-9-]+',folder.name)
         files.append(log)
         files += [path for path in folder.iterdir() if path.is_file() and path.suffix in ('.png','.xml','.json')]
-    for name,target in (('search-locations-draft','search-locations-draft'),('search-locations-tablet','search-locations-tablet'),
-                        ('search-locations-unavailable','search-locations-unavailable'),('search-locations-large-text','600dp-font1.6-scope')):
-        assert sha(ROOT/'docs/screenshots'/(name+'.png'))==sha(PROOF/'api36-optimized'/(target+'.png'))
+    for name,api,target in (('search-locations-draft',36,'search-locations-draft'),('search-locations-tablet',30,'search-locations-tablet'),
+                            ('search-locations-unavailable',36,'search-locations-unavailable'),('search-locations-large-text',36,'600dp-font1.6-scope')):
+        assert sha(ROOT/'docs/screenshots'/(name+'.png'))==sha(PROOF/f'api{api}-optimized'/(target+'.png'))
     assert sha(ROOT/'docs/screenshots/app-updates-0381.png')==sha(PROOF/'api30-ota/up-to-date.png')
     files=sorted(set(files))
     for path in files:
