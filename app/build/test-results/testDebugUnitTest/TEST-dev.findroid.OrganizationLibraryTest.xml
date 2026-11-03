@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.OrganizationLibraryTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-03T21:41:40.140Z" hostname="MacBook-Pro-2.local" time="0.884">
+<testsuite name="dev.findroid.OrganizationLibraryTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:12.091Z" hostname="MacBook-Pro-2.local" time="0.775">
   <properties/>
-  <testcase name="collectionHistoryGuardsPreserveTagsAndRefuseChangedMembership" classname="dev.findroid.OrganizationLibraryTest" time="0.005"/>
+  <testcase name="collectionHistoryGuardsPreserveTagsAndRefuseChangedMembership" classname="dev.findroid.OrganizationLibraryTest" time="0.006"/>
   <testcase name="membershipIsDeduplicatedAndRemovalNeverRemovesTags" classname="dev.findroid.OrganizationLibraryTest" time="0.004"/>
   <testcase name="collectionsRoundTripWithoutTouchingReferencedFiles" classname="dev.findroid.OrganizationLibraryTest" time="0.001"/>
-  <testcase name="reviewedChangesPreserveMixedAssignmentsAndUntouchedTags" classname="dev.findroid.OrganizationLibraryTest" time="0.0"/>
-  <testcase name="exportsRecognizeBothWorkspaceAliasAndCanonicalLocations" classname="dev.findroid.OrganizationLibraryTest" time="0.014"/>
-  <testcase name="selectionExportsExcludeUnrelatedNamesPathsAndCollectionMembers" classname="dev.findroid.OrganizationLibraryTest" time="0.004"/>
+  <testcase name="reviewedChangesPreserveMixedAssignmentsAndUntouchedTags" classname="dev.findroid.OrganizationLibraryTest" time="0.001"/>
+  <testcase name="exportsRecognizeBothWorkspaceAliasAndCanonicalLocations" classname="dev.findroid.OrganizationLibraryTest" time="0.015"/>
+  <testcase name="selectionExportsExcludeUnrelatedNamesPathsAndCollectionMembers" classname="dev.findroid.OrganizationLibraryTest" time="0.003"/>
   <testcase name="copiesCarryTagsWithoutAddingReferencesToCollections" classname="dev.findroid.OrganizationLibraryTest" time="0.002"/>
-  <testcase name="collectionNamesAndIdsStayDistinctAndColorEditsPreserveMembership" classname="dev.findroid.OrganizationLibraryTest" time="0.002"/>
-  <testcase name="namesRejectCanonicalCaseCollisionsInvalidUnicodeAndControlCharacters" classname="dev.findroid.OrganizationLibraryTest" time="0.003"/>
+  <testcase name="collectionNamesAndIdsStayDistinctAndColorEditsPreserveMembership" classname="dev.findroid.OrganizationLibraryTest" time="0.003"/>
+  <testcase name="namesRejectCanonicalCaseCollisionsInvalidUnicodeAndControlCharacters" classname="dev.findroid.OrganizationLibraryTest" time="0.002"/>
   <testcase name="legacyCatalogMigratesOnSuccessfulWriteAndKeepsEmptyCatalogsEmpty" classname="dev.findroid.OrganizationLibraryTest" time="0.003"/>
   <testcase name="exportsContainMetadataAndRelativeWorkspaceLocationsWithoutContents" classname="dev.findroid.OrganizationLibraryTest" time="0.002"/>
-  <testcase name="virtualLocationsAreAtomicEvenWhenTagNamesContainSlashes" classname="dev.findroid.OrganizationLibraryTest" time="0.001"/>
-  <testcase name="encodedByteLimitsStopOversizedWritesWithoutExposingPartialState" classname="dev.findroid.OrganizationLibraryTest" time="0.521"/>
-  <testcase name="boundsFailBeforePublishingOrChangingMemory" classname="dev.findroid.OrganizationLibraryTest" time="0.277"/>
-  <testcase name="malformedIncompleteAndOversizedCatalogsRemainUntouched" classname="dev.findroid.OrganizationLibraryTest" time="0.031"/>
-  <testcase name="deletionReviewsRefuseNewAssignmentsOrReferences" classname="dev.findroid.OrganizationLibraryTest" time="0.004"/>
+  <testcase name="virtualLocationsAreAtomicEvenWhenTagNamesContainSlashes" classname="dev.findroid.OrganizationLibraryTest" time="0.0"/>
+  <testcase name="encodedByteLimitsStopOversizedWritesWithoutExposingPartialState" classname="dev.findroid.OrganizationLibraryTest" time="0.417"/>
+  <testcase name="boundsFailBeforePublishingOrChangingMemory" classname="dev.findroid.OrganizationLibraryTest" time="0.271"/>
+  <testcase name="malformedIncompleteAndOversizedCatalogsRemainUntouched" classname="dev.findroid.OrganizationLibraryTest" time="0.033"/>
+  <testcase name="deletionReviewsRefuseNewAssignmentsOrReferences" classname="dev.findroid.OrganizationLibraryTest" time="0.003"/>
   <testcase name="movesAndSwapsRemapReferencesSimultaneouslyIncludingProviderChildren" classname="dev.findroid.OrganizationLibraryTest" time="0.002"/>
-  <testcase name="corruptionIsPreservedAndLastGoodStateCannotBeOverwritten" classname="dev.findroid.OrganizationLibraryTest" time="0.002"/>
-  <testcase name="tagHistoryGuardsPreserveUnrelatedCollections" classname="dev.findroid.OrganizationLibraryTest" time="0.003"/>
+  <testcase name="corruptionIsPreservedAndLastGoodStateCannotBeOverwritten" classname="dev.findroid.OrganizationLibraryTest" time="0.001"/>
+  <testcase name="tagHistoryGuardsPreserveUnrelatedCollections" classname="dev.findroid.OrganizationLibraryTest" time="0.004"/>
   <testcase name="writesFromTwoInstancesReloadAndSerializeBeforePublication" classname="dev.findroid.OrganizationLibraryTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

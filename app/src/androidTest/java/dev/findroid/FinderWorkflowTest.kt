@@ -214,8 +214,18 @@ class FinderWorkflowTest {
         val file = File(fixture, "Notes.md")
         compose.onNodeWithText("Notes.md").performMouseInput { click() }
         compose.waitUntil(5_000) { compose.activity.model.focused?.name == "Notes.md" }
-        selectionCommand("Move to Trash")
-        compose.waitUntil(10_000) { !file.exists() && compose.activity.model.canUndoTrash }
+        compose.runOnIdle { compose.activity.model.session.workspaceWrites.intValue++ }
+        try {
+            selectionCommand("Move to Trash")
+            compose.waitUntil(10_000) {
+                val model = compose.activity.model
+                !file.exists() && model.canUndoTrash && model.busy != null && model.message?.endsWith("moved to Trash") == true
+            }
+            compose.onAllNodesWithText("Undo").assertCountEquals(0)
+        } finally {
+            compose.runOnIdle { compose.activity.model.session.workspaceWrites.intValue-- }
+        }
+        compose.waitUntil(10_000) { compose.activity.model.busy == null }
         compose.waitUntil(5_000) {
             compose.onAllNodesWithText("Undo").fetchSemanticsNodes().isNotEmpty()
         }
