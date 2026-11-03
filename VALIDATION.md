@@ -2,7 +2,7 @@
 
 ## Findroid 0.44.0 — resume saved copies
 
-The public **0.44.0/code46** preview matches the locally accepted build. All five initial release assets match anonymous downloads and GitHub digests. Actual public OTA from 0.43/code45 to 0.44/code46 passes on both assigned tablets. Immutable-archive acceptance remains in progress.
+The public **0.44.0/code46** preview matches the locally accepted build. All five initial release assets match anonymous downloads and GitHub digests. Actual public OTA from 0.43/code45 to 0.44/code46 passes on both assigned tablets. Immutable-archive acceptance passes; proposal 41 is implemented.
 
 - **613 JVM cases pass**, with zero failures/errors/skips. Debug, native-test, optimized preview and unsigned release builds pass. Lint: **0 errors / 146 warnings / 12 hints**.
 - **455 identical native cases pass per API30/API36 tablet**, in **50 fresh-process batches each**, using the exact same frozen app/test APK pair. The **39 focused cases per API** cover 18 real descriptor/publication checks, 8 workflow checks and 13 SQLite checks, including schema 3→4 migration and ownership-transaction rollback.
@@ -15,7 +15,7 @@ The first increment supports individual local regular files **≥8 MiB**, checkp
 
 - Both tablets pass public-feed download and Android installation, with installer completion confirmed before relaunch. Installed bytes match the anonymous public APK; synthetic original bytes, Favorite and unrelated preference survive, and no repeat offer appears. All 12 OTA captures were visually inspected. API36’s separate production-source download check passes **1/1**. The final restoration pass rechecks exact original managed files and absences, grants, storage/font/display settings and the public APK on both tablets. Rejected host-controller attempts remain excluded.
 
-Preview SHA-256: `d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2`. The exact APKs, reports and mapping are frozen in `captures/partial-copy-resume/accepted-build/`. Proposal 41 remains in progress until independent archive verification passes. [Recovery guide](docs/PARTIAL-COPY-RESUME.md) · [Release notes](docs/releases/0.44.0.md).
+Preview SHA-256: `d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2`. The exact APKs, reports and mapping are frozen in `captures/partial-copy-resume/accepted-build/`. The immutable validation archive passes independent anonymous verification: **40,798,564 bytes / 1,567 entries**, SHA-256 `b600fd19f9fdd7474e9423d29b41ad746bdba083a627b53bd9bae020515720fd`. Application/native source: `9a7f71cb4882c7f0c9d78c2ddf7e0d5235b05eb1`; evidence: `379f841de4336887e1a73488ca55bdc0f394865e`. Every manifest entry and archived source is checked against the public commits. [Recovery guide](docs/PARTIAL-COPY-RESUME.md) · [Release notes](docs/releases/0.44.0.md).
 
 ## Findroid 0.43.0 — verify important copies
 

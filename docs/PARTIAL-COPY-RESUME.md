@@ -1,6 +1,6 @@
 # Resume an interrupted copy
 
-Partial-copy recovery is available in **0.44.0-preview**. Both assigned tablets pass local acceptance and actual public OTA upgrades. Immutable-archive verification is being completed.
+Partial-copy recovery is available in **0.44.0-preview**. Both assigned tablets pass local acceptance and actual public OTA upgrades. The immutable public validation archive also passes independent anonymous verification.
 
 When Android stops a large copy, Findroid can keep a private checkpoint instead of losing all its progress. Open **Actions → Transfers**, find the interrupted transfer, and choose **Review saved copy…**.
 
@@ -41,6 +41,6 @@ The full **455-case native regression** passes in **50 fresh-process batches per
 
 Each API passes **18 layouts**: 1280×800, 800×1280 and 600×800 dp, font scales 1.0/1.5/2.0, and light/dark themes. All 90 named recovery-control captures per API independently prove enabled, complete 48 dp targets. All 198 focused and optimized captures were inspected. The native libraries for all four ABIs pass 16 KiB segment/alignment checks, and the preview retains the previous signing certificate.
 
-Public OTA and immutable-archive acceptance remain pending before proposal 41 is marked complete. No physical tablet, removable-drive or third-party provider result is implied by these emulator checks.
+Proposal 41 is implemented. The immutable validation archive passes independent anonymous verification: **40,798,564 bytes / 1,567 entries**, SHA-256 `b600fd19f9fdd7474e9423d29b41ad746bdba083a627b53bd9bae020515720fd`. Application/native source: `9a7f71cb4882c7f0c9d78c2ddf7e0d5235b05eb1`; evidence: `379f841de4336887e1a73488ca55bdc0f394865e`. Every manifest entry and archived source is checked against the public commits. No physical tablet, removable-drive or third-party provider result is implied by these emulator checks.
 
 ![A completed resumed copy keeps the interrupted history and reports saved bytes separately from new writes](screenshots/partial-copy-results.png)
