@@ -1,0 +1,10 @@
+{
+  "apkSha256": "d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2",
+  "libraries": [
+    "lib/arm64-v8a/libfindroid_files.so",
+    "lib/armeabi-v7a/libfindroid_files.so",
+    "lib/x86/libfindroid_files.so",
+    "lib/x86_64/libfindroid_files.so"
+  ],
+  "allLoadSegmentsAlignedAtLeast16384": true
+}

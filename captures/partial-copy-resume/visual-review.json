@@ -1,0 +1,1357 @@
+{
+  "actualScreenshotsInspected": true,
+  "scope": "All 198 accepted native and optimized captures. Full workflow images were inspected individually. Recovery dialog content was inspected at native pixels using crops, grouping only pixel-identical dialog states. Focused native captures were individually inspected in the earlier recorded review.",
+  "distinctOptimizedDialogStates": 37,
+  "layoutControlsIndependentlyCheckedFromCaptureXml": true,
+  "images": [
+    {
+      "path": "api30-native-images/changed-source.png",
+      "sha256": "c81e76fd8c2e47c9023bf320132fdd05034dff31aa1058951cf53f0fa4bab420"
+    },
+    {
+      "path": "api30-native-images/publication-review.png",
+      "sha256": "6fa98c956a7b0b454a8d9713fca026d109d2f7910d322d86674ac0a1c5ad27ec"
+    },
+    {
+      "path": "api30-native-images/ready.png",
+      "sha256": "81643c2efc73ca2c2535a39bfb433466a623dc5f08cc034ec29b357f242d0683"
+    },
+    {
+      "path": "api30-native-images/unchecked-tail.png",
+      "sha256": "261bbed1f84991964ea00db014df92a59f18c9f3fe11d5c4eb2782ab4119e851"
+    },
+    {
+      "path": "api30-optimized/interrupted-after-reopen.png",
+      "sha256": "8ba5cce098cd7bc689803f2d63d3411cd93abc8c2a7dd97f6c832093b54c8373",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api30-optimized/previous-public-sidebar.png",
+      "sha256": "c46cb80f117377bd56dc618e5c609036759211c8cdf3e617528aeeaf1e0d27e5",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api30-optimized/resume-ready.png",
+      "sha256": "af311f1e5c18a6f7f5c5c6e583bb460be4f7f7fc82fc0dc5cd5356c4cac248ba",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api30-optimized/resumed-completed.png",
+      "sha256": "7e80235b998440cb4c354b2b0c411fdaf32376b5aa53bfd1c44cc08194716e22",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Check.png",
+      "sha256": "7bc066c4c3e9634345f2b39841f316e7683e6ab40467a64e72e50ec445382d29",
+      "dialogPixelSha256": "866ed253a4bfcb98cd69b9086e3a384765e954c498a6f53e749310b17a044c07"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Close.png",
+      "sha256": "e4ff8cc70e9452a385a56fc981db7bb40670f4c5551a7b848a2995b8c2a3008a",
+      "dialogPixelSha256": "866ed253a4bfcb98cd69b9086e3a384765e954c498a6f53e749310b17a044c07"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Discard.png",
+      "sha256": "7bc066c4c3e9634345f2b39841f316e7683e6ab40467a64e72e50ec445382d29",
+      "dialogPixelSha256": "866ed253a4bfcb98cd69b9086e3a384765e954c498a6f53e749310b17a044c07"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Open.png",
+      "sha256": "e4ff8cc70e9452a385a56fc981db7bb40670f4c5551a7b848a2995b8c2a3008a",
+      "dialogPixelSha256": "866ed253a4bfcb98cd69b9086e3a384765e954c498a6f53e749310b17a044c07"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Resume.png",
+      "sha256": "7bc066c4c3e9634345f2b39841f316e7683e6ab40467a64e72e50ec445382d29",
+      "dialogPixelSha256": "866ed253a4bfcb98cd69b9086e3a384765e954c498a6f53e749310b17a044c07"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Check.png",
+      "sha256": "fc3daa905700a5373a59a49c6292ff33407470a920a5811e4e7455821b7cac85",
+      "dialogPixelSha256": "49b97d60a2167183f53bbfbd1e8ef7868372e01d8cdfd14f652503f6d02577d5"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Close.png",
+      "sha256": "fc3daa905700a5373a59a49c6292ff33407470a920a5811e4e7455821b7cac85",
+      "dialogPixelSha256": "49b97d60a2167183f53bbfbd1e8ef7868372e01d8cdfd14f652503f6d02577d5"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Discard.png",
+      "sha256": "fc3daa905700a5373a59a49c6292ff33407470a920a5811e4e7455821b7cac85",
+      "dialogPixelSha256": "49b97d60a2167183f53bbfbd1e8ef7868372e01d8cdfd14f652503f6d02577d5"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Open.png",
+      "sha256": "fc3daa905700a5373a59a49c6292ff33407470a920a5811e4e7455821b7cac85",
+      "dialogPixelSha256": "49b97d60a2167183f53bbfbd1e8ef7868372e01d8cdfd14f652503f6d02577d5"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Resume.png",
+      "sha256": "fc3daa905700a5373a59a49c6292ff33407470a920a5811e4e7455821b7cac85",
+      "dialogPixelSha256": "49b97d60a2167183f53bbfbd1e8ef7868372e01d8cdfd14f652503f6d02577d5"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Check.png",
+      "sha256": "29c6b1629be989cb99838c6cd98e4492124bf7e86b1ea1106e4976c9979f4b55",
+      "dialogPixelSha256": "2e05537b20dc444348bd56f1f7eeade7c040324ae7f7bfd2f9a7bfae9d1303c6"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Close.png",
+      "sha256": "29c6b1629be989cb99838c6cd98e4492124bf7e86b1ea1106e4976c9979f4b55",
+      "dialogPixelSha256": "2e05537b20dc444348bd56f1f7eeade7c040324ae7f7bfd2f9a7bfae9d1303c6"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Discard.png",
+      "sha256": "29c6b1629be989cb99838c6cd98e4492124bf7e86b1ea1106e4976c9979f4b55",
+      "dialogPixelSha256": "2e05537b20dc444348bd56f1f7eeade7c040324ae7f7bfd2f9a7bfae9d1303c6"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Open.png",
+      "sha256": "29c6b1629be989cb99838c6cd98e4492124bf7e86b1ea1106e4976c9979f4b55",
+      "dialogPixelSha256": "2e05537b20dc444348bd56f1f7eeade7c040324ae7f7bfd2f9a7bfae9d1303c6"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Resume.png",
+      "sha256": "29c6b1629be989cb99838c6cd98e4492124bf7e86b1ea1106e4976c9979f4b55",
+      "dialogPixelSha256": "2e05537b20dc444348bd56f1f7eeade7c040324ae7f7bfd2f9a7bfae9d1303c6"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Check.png",
+      "sha256": "ab4fa1aa06fd3a0a9af14dbc7f0d22b38f521e761d73ed963f86c292f5ead19d",
+      "dialogPixelSha256": "ca5faf0ac00ddd4d0859e37af0d4456a8969b3d115f52a81026fac531f6bdb10"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Close.png",
+      "sha256": "ab4fa1aa06fd3a0a9af14dbc7f0d22b38f521e761d73ed963f86c292f5ead19d",
+      "dialogPixelSha256": "ca5faf0ac00ddd4d0859e37af0d4456a8969b3d115f52a81026fac531f6bdb10"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Discard.png",
+      "sha256": "ab4fa1aa06fd3a0a9af14dbc7f0d22b38f521e761d73ed963f86c292f5ead19d",
+      "dialogPixelSha256": "ca5faf0ac00ddd4d0859e37af0d4456a8969b3d115f52a81026fac531f6bdb10"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Open.png",
+      "sha256": "ab4fa1aa06fd3a0a9af14dbc7f0d22b38f521e761d73ed963f86c292f5ead19d",
+      "dialogPixelSha256": "ca5faf0ac00ddd4d0859e37af0d4456a8969b3d115f52a81026fac531f6bdb10"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Resume.png",
+      "sha256": "ab4fa1aa06fd3a0a9af14dbc7f0d22b38f521e761d73ed963f86c292f5ead19d",
+      "dialogPixelSha256": "ca5faf0ac00ddd4d0859e37af0d4456a8969b3d115f52a81026fac531f6bdb10"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Check.png",
+      "sha256": "8a7683df383927249d72137d5b20f06fa4b381b5df811388fbeb23a98128a7a8",
+      "dialogPixelSha256": "f779a285d2cf9102f5dff445a7a6e83f369e09b68bf7885c72aa68dd6873a064"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Close.png",
+      "sha256": "21e23b586a6d4e83326c4836ac49b1b6161b6284e1d918e4ab8967780f50bbc1",
+      "dialogPixelSha256": "e47dd4618fc4bb52fc4275b93414eed7d4440a3a6c0e62a152f3649b0b0e7820"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Discard.png",
+      "sha256": "8a7683df383927249d72137d5b20f06fa4b381b5df811388fbeb23a98128a7a8",
+      "dialogPixelSha256": "f779a285d2cf9102f5dff445a7a6e83f369e09b68bf7885c72aa68dd6873a064"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Open.png",
+      "sha256": "21e23b586a6d4e83326c4836ac49b1b6161b6284e1d918e4ab8967780f50bbc1",
+      "dialogPixelSha256": "e47dd4618fc4bb52fc4275b93414eed7d4440a3a6c0e62a152f3649b0b0e7820"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Resume.png",
+      "sha256": "8a7683df383927249d72137d5b20f06fa4b381b5df811388fbeb23a98128a7a8",
+      "dialogPixelSha256": "f779a285d2cf9102f5dff445a7a6e83f369e09b68bf7885c72aa68dd6873a064"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Check.png",
+      "sha256": "8df690717bd7a8199d830d0cd24f1164a77369b9a6e7aa7009594461e2a771c0",
+      "dialogPixelSha256": "cecaf346176c06e0b04f423b39a2113344e28706d2c1d42a8f353db8411e1035"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Close.png",
+      "sha256": "8df690717bd7a8199d830d0cd24f1164a77369b9a6e7aa7009594461e2a771c0",
+      "dialogPixelSha256": "cecaf346176c06e0b04f423b39a2113344e28706d2c1d42a8f353db8411e1035"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Discard.png",
+      "sha256": "8df690717bd7a8199d830d0cd24f1164a77369b9a6e7aa7009594461e2a771c0",
+      "dialogPixelSha256": "cecaf346176c06e0b04f423b39a2113344e28706d2c1d42a8f353db8411e1035"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Open.png",
+      "sha256": "8df690717bd7a8199d830d0cd24f1164a77369b9a6e7aa7009594461e2a771c0",
+      "dialogPixelSha256": "cecaf346176c06e0b04f423b39a2113344e28706d2c1d42a8f353db8411e1035"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Resume.png",
+      "sha256": "8df690717bd7a8199d830d0cd24f1164a77369b9a6e7aa7009594461e2a771c0",
+      "dialogPixelSha256": "cecaf346176c06e0b04f423b39a2113344e28706d2c1d42a8f353db8411e1035"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Check.png",
+      "sha256": "b2d343feaa35efa5e51a7033a7a2a9d431a41a1c142c17fc7c848b466d36c4f7",
+      "dialogPixelSha256": "4523346dbbbc07a65839102c659b7f7f6cecb7dd7ed0d85b41139ff60d97cfff"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Close.png",
+      "sha256": "b2d343feaa35efa5e51a7033a7a2a9d431a41a1c142c17fc7c848b466d36c4f7",
+      "dialogPixelSha256": "4523346dbbbc07a65839102c659b7f7f6cecb7dd7ed0d85b41139ff60d97cfff"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Discard.png",
+      "sha256": "b2d343feaa35efa5e51a7033a7a2a9d431a41a1c142c17fc7c848b466d36c4f7",
+      "dialogPixelSha256": "4523346dbbbc07a65839102c659b7f7f6cecb7dd7ed0d85b41139ff60d97cfff"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Open.png",
+      "sha256": "b2d343feaa35efa5e51a7033a7a2a9d431a41a1c142c17fc7c848b466d36c4f7",
+      "dialogPixelSha256": "4523346dbbbc07a65839102c659b7f7f6cecb7dd7ed0d85b41139ff60d97cfff"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Resume.png",
+      "sha256": "15f5831177c16acd38a45bcde07c65e58b53bbbfe407c7e222220f822bb7a0f3",
+      "dialogPixelSha256": "4523346dbbbc07a65839102c659b7f7f6cecb7dd7ed0d85b41139ff60d97cfff"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Check.png",
+      "sha256": "85ca76f33665b5c5566283be2d3fed9e75d6a4a17fd16f7602ce0ded8cdc9826",
+      "dialogPixelSha256": "618c3fdf3f069899eaf37d408645ab21574bb9628ce1484e18be84d4bd4e7858"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Close.png",
+      "sha256": "85ca76f33665b5c5566283be2d3fed9e75d6a4a17fd16f7602ce0ded8cdc9826",
+      "dialogPixelSha256": "618c3fdf3f069899eaf37d408645ab21574bb9628ce1484e18be84d4bd4e7858"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Discard.png",
+      "sha256": "85ca76f33665b5c5566283be2d3fed9e75d6a4a17fd16f7602ce0ded8cdc9826",
+      "dialogPixelSha256": "618c3fdf3f069899eaf37d408645ab21574bb9628ce1484e18be84d4bd4e7858"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Open.png",
+      "sha256": "85ca76f33665b5c5566283be2d3fed9e75d6a4a17fd16f7602ce0ded8cdc9826",
+      "dialogPixelSha256": "618c3fdf3f069899eaf37d408645ab21574bb9628ce1484e18be84d4bd4e7858"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Resume.png",
+      "sha256": "85d282f0373a9ed49a72f9cc669da6eb5cebe996494fc9f4f6fe4719c10e5f2b",
+      "dialogPixelSha256": "618c3fdf3f069899eaf37d408645ab21574bb9628ce1484e18be84d4bd4e7858"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Check.png",
+      "sha256": "e8d26a92c825e0fae43997e9d8a2d450d30f8fbf5afc8c20a1db9cc912b5ffb2",
+      "dialogPixelSha256": "793d0e6e09a6a0f53ae0a5b3a2d2bcdf391c25caa7162c232bef1bf07e1e5f5c"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Close.png",
+      "sha256": "28425c749063363491e00fdceb049c0aa16b405160fd2147fb6c2ca2d254533e",
+      "dialogPixelSha256": "793d0e6e09a6a0f53ae0a5b3a2d2bcdf391c25caa7162c232bef1bf07e1e5f5c"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Discard.png",
+      "sha256": "e8d26a92c825e0fae43997e9d8a2d450d30f8fbf5afc8c20a1db9cc912b5ffb2",
+      "dialogPixelSha256": "793d0e6e09a6a0f53ae0a5b3a2d2bcdf391c25caa7162c232bef1bf07e1e5f5c"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Open.png",
+      "sha256": "e8d26a92c825e0fae43997e9d8a2d450d30f8fbf5afc8c20a1db9cc912b5ffb2",
+      "dialogPixelSha256": "793d0e6e09a6a0f53ae0a5b3a2d2bcdf391c25caa7162c232bef1bf07e1e5f5c"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Resume.png",
+      "sha256": "e8d26a92c825e0fae43997e9d8a2d450d30f8fbf5afc8c20a1db9cc912b5ffb2",
+      "dialogPixelSha256": "793d0e6e09a6a0f53ae0a5b3a2d2bcdf391c25caa7162c232bef1bf07e1e5f5c"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Check.png",
+      "sha256": "b11b233481993503003b41bcdb90192cf3819495f9e19acde619ce2221d983c5",
+      "dialogPixelSha256": "d042c5145a1b7ab5c793bc931787ad342fe5422333d3fe11900dbd5029e9db1f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Close.png",
+      "sha256": "b11b233481993503003b41bcdb90192cf3819495f9e19acde619ce2221d983c5",
+      "dialogPixelSha256": "d042c5145a1b7ab5c793bc931787ad342fe5422333d3fe11900dbd5029e9db1f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Discard.png",
+      "sha256": "ebcca602968495e157ca82b3e658a71d497840c9035a9cf1c702ecb6a0523ec5",
+      "dialogPixelSha256": "d042c5145a1b7ab5c793bc931787ad342fe5422333d3fe11900dbd5029e9db1f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Open.png",
+      "sha256": "b11b233481993503003b41bcdb90192cf3819495f9e19acde619ce2221d983c5",
+      "dialogPixelSha256": "d042c5145a1b7ab5c793bc931787ad342fe5422333d3fe11900dbd5029e9db1f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Resume.png",
+      "sha256": "ebcca602968495e157ca82b3e658a71d497840c9035a9cf1c702ecb6a0523ec5",
+      "dialogPixelSha256": "d042c5145a1b7ab5c793bc931787ad342fe5422333d3fe11900dbd5029e9db1f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Check.png",
+      "sha256": "63a70c8cc4e95f384825311cb9658b71be35b20e399564699b742d0015bc3f5f",
+      "dialogPixelSha256": "4e1153fdcf3a4197a710209d2dc3948ffd08bced4f86f36d325bf75d23de79a0"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Close.png",
+      "sha256": "63a70c8cc4e95f384825311cb9658b71be35b20e399564699b742d0015bc3f5f",
+      "dialogPixelSha256": "4e1153fdcf3a4197a710209d2dc3948ffd08bced4f86f36d325bf75d23de79a0"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Discard.png",
+      "sha256": "63a70c8cc4e95f384825311cb9658b71be35b20e399564699b742d0015bc3f5f",
+      "dialogPixelSha256": "4e1153fdcf3a4197a710209d2dc3948ffd08bced4f86f36d325bf75d23de79a0"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Open.png",
+      "sha256": "63a70c8cc4e95f384825311cb9658b71be35b20e399564699b742d0015bc3f5f",
+      "dialogPixelSha256": "4e1153fdcf3a4197a710209d2dc3948ffd08bced4f86f36d325bf75d23de79a0"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Resume.png",
+      "sha256": "63a70c8cc4e95f384825311cb9658b71be35b20e399564699b742d0015bc3f5f",
+      "dialogPixelSha256": "4e1153fdcf3a4197a710209d2dc3948ffd08bced4f86f36d325bf75d23de79a0"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Check.png",
+      "sha256": "615c0a67ac7ce9c33fa5db62cd1e5ce7f1075dd08cc0098112129bb38cda26c1",
+      "dialogPixelSha256": "e138f1d188d13566f30444d042a899d343c516c316dc83dd51b644a99b15af4f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Close.png",
+      "sha256": "615c0a67ac7ce9c33fa5db62cd1e5ce7f1075dd08cc0098112129bb38cda26c1",
+      "dialogPixelSha256": "e138f1d188d13566f30444d042a899d343c516c316dc83dd51b644a99b15af4f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Discard.png",
+      "sha256": "615c0a67ac7ce9c33fa5db62cd1e5ce7f1075dd08cc0098112129bb38cda26c1",
+      "dialogPixelSha256": "e138f1d188d13566f30444d042a899d343c516c316dc83dd51b644a99b15af4f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Open.png",
+      "sha256": "615c0a67ac7ce9c33fa5db62cd1e5ce7f1075dd08cc0098112129bb38cda26c1",
+      "dialogPixelSha256": "e138f1d188d13566f30444d042a899d343c516c316dc83dd51b644a99b15af4f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Resume.png",
+      "sha256": "615c0a67ac7ce9c33fa5db62cd1e5ce7f1075dd08cc0098112129bb38cda26c1",
+      "dialogPixelSha256": "e138f1d188d13566f30444d042a899d343c516c316dc83dd51b644a99b15af4f"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Check.png",
+      "sha256": "1003fb6cebc749816888cba9492e7e6865d9b7514781d7b978b6e9da6ccd237f",
+      "dialogPixelSha256": "195df9de27c7c07ff837f1580b69490439273969b04f67501f89f95d93f69fc2"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Close.png",
+      "sha256": "1003fb6cebc749816888cba9492e7e6865d9b7514781d7b978b6e9da6ccd237f",
+      "dialogPixelSha256": "195df9de27c7c07ff837f1580b69490439273969b04f67501f89f95d93f69fc2"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Discard.png",
+      "sha256": "1003fb6cebc749816888cba9492e7e6865d9b7514781d7b978b6e9da6ccd237f",
+      "dialogPixelSha256": "195df9de27c7c07ff837f1580b69490439273969b04f67501f89f95d93f69fc2"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Open.png",
+      "sha256": "1003fb6cebc749816888cba9492e7e6865d9b7514781d7b978b6e9da6ccd237f",
+      "dialogPixelSha256": "195df9de27c7c07ff837f1580b69490439273969b04f67501f89f95d93f69fc2"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Resume.png",
+      "sha256": "1003fb6cebc749816888cba9492e7e6865d9b7514781d7b978b6e9da6ccd237f",
+      "dialogPixelSha256": "195df9de27c7c07ff837f1580b69490439273969b04f67501f89f95d93f69fc2"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Check.png",
+      "sha256": "6cbadbf527b1cbd9783b629fceeb1e021855d0c1b1d4fb183e241ae31e2a87ac",
+      "dialogPixelSha256": "7658583a654796e272331cecb2c3a99da513a82a0b599dc00df785022784c22a"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Close.png",
+      "sha256": "6cbadbf527b1cbd9783b629fceeb1e021855d0c1b1d4fb183e241ae31e2a87ac",
+      "dialogPixelSha256": "7658583a654796e272331cecb2c3a99da513a82a0b599dc00df785022784c22a"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Discard.png",
+      "sha256": "6cbadbf527b1cbd9783b629fceeb1e021855d0c1b1d4fb183e241ae31e2a87ac",
+      "dialogPixelSha256": "7658583a654796e272331cecb2c3a99da513a82a0b599dc00df785022784c22a"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Open.png",
+      "sha256": "6cbadbf527b1cbd9783b629fceeb1e021855d0c1b1d4fb183e241ae31e2a87ac",
+      "dialogPixelSha256": "7658583a654796e272331cecb2c3a99da513a82a0b599dc00df785022784c22a"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Resume.png",
+      "sha256": "6cbadbf527b1cbd9783b629fceeb1e021855d0c1b1d4fb183e241ae31e2a87ac",
+      "dialogPixelSha256": "7658583a654796e272331cecb2c3a99da513a82a0b599dc00df785022784c22a"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Check.png",
+      "sha256": "0a57f4f02b38d823025c27891e1d7416ee918387f45380a918ac434f7d282e73",
+      "dialogPixelSha256": "a62f5b5be41df941eebe2ac8a3e5d307b1004eebaee718e5f651a5758a6abe7c"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Close.png",
+      "sha256": "0a57f4f02b38d823025c27891e1d7416ee918387f45380a918ac434f7d282e73",
+      "dialogPixelSha256": "a62f5b5be41df941eebe2ac8a3e5d307b1004eebaee718e5f651a5758a6abe7c"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Discard.png",
+      "sha256": "0a57f4f02b38d823025c27891e1d7416ee918387f45380a918ac434f7d282e73",
+      "dialogPixelSha256": "a62f5b5be41df941eebe2ac8a3e5d307b1004eebaee718e5f651a5758a6abe7c"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Open.png",
+      "sha256": "0a57f4f02b38d823025c27891e1d7416ee918387f45380a918ac434f7d282e73",
+      "dialogPixelSha256": "a62f5b5be41df941eebe2ac8a3e5d307b1004eebaee718e5f651a5758a6abe7c"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Resume.png",
+      "sha256": "0a57f4f02b38d823025c27891e1d7416ee918387f45380a918ac434f7d282e73",
+      "dialogPixelSha256": "a62f5b5be41df941eebe2ac8a3e5d307b1004eebaee718e5f651a5758a6abe7c"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Check.png",
+      "sha256": "99a023d7709d6d8a0bbcbd2586915a212c3f8883104121a36f8fa368b2590788",
+      "dialogPixelSha256": "eadc4321e038d1624c0710e5f16a0802ec9e35807d29adf7604535aa14f79390"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Close.png",
+      "sha256": "99a023d7709d6d8a0bbcbd2586915a212c3f8883104121a36f8fa368b2590788",
+      "dialogPixelSha256": "eadc4321e038d1624c0710e5f16a0802ec9e35807d29adf7604535aa14f79390"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Discard.png",
+      "sha256": "99a023d7709d6d8a0bbcbd2586915a212c3f8883104121a36f8fa368b2590788",
+      "dialogPixelSha256": "eadc4321e038d1624c0710e5f16a0802ec9e35807d29adf7604535aa14f79390"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Open.png",
+      "sha256": "99a023d7709d6d8a0bbcbd2586915a212c3f8883104121a36f8fa368b2590788",
+      "dialogPixelSha256": "eadc4321e038d1624c0710e5f16a0802ec9e35807d29adf7604535aa14f79390"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Resume.png",
+      "sha256": "99a023d7709d6d8a0bbcbd2586915a212c3f8883104121a36f8fa368b2590788",
+      "dialogPixelSha256": "eadc4321e038d1624c0710e5f16a0802ec9e35807d29adf7604535aa14f79390"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Check.png",
+      "sha256": "c23af2efd85a82d2993c6e03e9c167853d306ff5cd6649019f916c6b915146dc",
+      "dialogPixelSha256": "3ecdc8a36d9e7e45029095089790cb86341a0162f091d2cfea4a44fff5d5fd03"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Close.png",
+      "sha256": "c23af2efd85a82d2993c6e03e9c167853d306ff5cd6649019f916c6b915146dc",
+      "dialogPixelSha256": "3ecdc8a36d9e7e45029095089790cb86341a0162f091d2cfea4a44fff5d5fd03"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Discard.png",
+      "sha256": "c23af2efd85a82d2993c6e03e9c167853d306ff5cd6649019f916c6b915146dc",
+      "dialogPixelSha256": "3ecdc8a36d9e7e45029095089790cb86341a0162f091d2cfea4a44fff5d5fd03"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Open.png",
+      "sha256": "c23af2efd85a82d2993c6e03e9c167853d306ff5cd6649019f916c6b915146dc",
+      "dialogPixelSha256": "3ecdc8a36d9e7e45029095089790cb86341a0162f091d2cfea4a44fff5d5fd03"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Resume.png",
+      "sha256": "1a96e51e8ddf1e2b082ed1f432bbee9570c753a6ec581cc396e9603249ea25c9",
+      "dialogPixelSha256": "3ecdc8a36d9e7e45029095089790cb86341a0162f091d2cfea4a44fff5d5fd03"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Check.png",
+      "sha256": "66040b3f817b1603fe2e4c4e30ad25e435920b3a5a3d6a3a0835e1d0f65b5122",
+      "dialogPixelSha256": "8cbcb295c70d0ca2b16e1fea454e44487eb8873787c93dc33b586c2ac99dfa65"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Close.png",
+      "sha256": "66040b3f817b1603fe2e4c4e30ad25e435920b3a5a3d6a3a0835e1d0f65b5122",
+      "dialogPixelSha256": "8cbcb295c70d0ca2b16e1fea454e44487eb8873787c93dc33b586c2ac99dfa65"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Discard.png",
+      "sha256": "66040b3f817b1603fe2e4c4e30ad25e435920b3a5a3d6a3a0835e1d0f65b5122",
+      "dialogPixelSha256": "8cbcb295c70d0ca2b16e1fea454e44487eb8873787c93dc33b586c2ac99dfa65"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Open.png",
+      "sha256": "66040b3f817b1603fe2e4c4e30ad25e435920b3a5a3d6a3a0835e1d0f65b5122",
+      "dialogPixelSha256": "8cbcb295c70d0ca2b16e1fea454e44487eb8873787c93dc33b586c2ac99dfa65"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Resume.png",
+      "sha256": "c84d9787f567c45f037792408b0c43997e504b39f45e15f840aed54c7942a673",
+      "dialogPixelSha256": "8cbcb295c70d0ca2b16e1fea454e44487eb8873787c93dc33b586c2ac99dfa65"
+    },
+    {
+      "path": "api30-optimized/upgraded-sidebar.png",
+      "sha256": "81bbdc269e8b9096b63f937fb70b55563bfaa8850fef62fabc35c216a4fb8ccf",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api36-native-images/changed-source.png",
+      "sha256": "0b4b1685c53051edcdf99b0065328e717caf26e94f66b00aeb5760cab344c581"
+    },
+    {
+      "path": "api36-native-images/publication-review.png",
+      "sha256": "c67f33f6435808b945241b23f791a37ed0f8aeba2bcd416e277cb804b9d7aefe"
+    },
+    {
+      "path": "api36-native-images/ready.png",
+      "sha256": "10efa79dcdf7618feaec4ebb1fbb6c2e10e8be2fe5c8c50dc5756980c274b4a6"
+    },
+    {
+      "path": "api36-native-images/unchecked-tail.png",
+      "sha256": "192bc1b37add9d95b6fc8a308719f61834514696ee35077297a435f44c7d9663"
+    },
+    {
+      "path": "api36-optimized/interrupted-after-reopen.png",
+      "sha256": "ecee34a5d0aa99b8c8f526ddb5ff58c6346947d4cfede0d17e4661b7f01edbce",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api36-optimized/previous-public-sidebar.png",
+      "sha256": "48544a9ea3925f9d9fb60420d7f83e3cddfe718a1e5e60da7c6dee68dd44d3fb",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api36-optimized/resume-ready.png",
+      "sha256": "fe743b59732003be727a0505ff5fa7c236519d9813bd53c5cb095fc04f190373",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api36-optimized/resumed-completed.png",
+      "sha256": "efce2de6eada8b61fc874c8fe7e26eed10beb1264f994e1168536c4240600593",
+      "inspectedAsCompleteScreenshot": true
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Check.png",
+      "sha256": "f47aaddc8ec1eedae3a5a1d5066328bc8b1793fb0964969c336881cd6732d491",
+      "dialogPixelSha256": "caffc91394d3859d8fb2663f8b8d20814bbf924c4ae5e99eb89409788c9e5ff7"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Close.png",
+      "sha256": "4898fd1e6f0c41f5bec9e627b63f041ee2395e234ca4eb59e8cff42e03c3b478",
+      "dialogPixelSha256": "caffc91394d3859d8fb2663f8b8d20814bbf924c4ae5e99eb89409788c9e5ff7"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Discard.png",
+      "sha256": "f47aaddc8ec1eedae3a5a1d5066328bc8b1793fb0964969c336881cd6732d491",
+      "dialogPixelSha256": "caffc91394d3859d8fb2663f8b8d20814bbf924c4ae5e99eb89409788c9e5ff7"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Open.png",
+      "sha256": "f47aaddc8ec1eedae3a5a1d5066328bc8b1793fb0964969c336881cd6732d491",
+      "dialogPixelSha256": "caffc91394d3859d8fb2663f8b8d20814bbf924c4ae5e99eb89409788c9e5ff7"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Resume.png",
+      "sha256": "7ad641730af71fef296754172e0478edb1395aaccac8b760ebdfd44fb96317df",
+      "dialogPixelSha256": "caffc91394d3859d8fb2663f8b8d20814bbf924c4ae5e99eb89409788c9e5ff7"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Check.png",
+      "sha256": "42a6a65eb9103df16fd5238b95754a8748bd62d416244e5433732cca153206a1",
+      "dialogPixelSha256": "26304718f5f237304db064462200dabdea0601534a3fb3c0f421cccc1c9b5d4b"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Close.png",
+      "sha256": "42a6a65eb9103df16fd5238b95754a8748bd62d416244e5433732cca153206a1",
+      "dialogPixelSha256": "26304718f5f237304db064462200dabdea0601534a3fb3c0f421cccc1c9b5d4b"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Discard.png",
+      "sha256": "42a6a65eb9103df16fd5238b95754a8748bd62d416244e5433732cca153206a1",
+      "dialogPixelSha256": "26304718f5f237304db064462200dabdea0601534a3fb3c0f421cccc1c9b5d4b"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Open.png",
+      "sha256": "42a6a65eb9103df16fd5238b95754a8748bd62d416244e5433732cca153206a1",
+      "dialogPixelSha256": "26304718f5f237304db064462200dabdea0601534a3fb3c0f421cccc1c9b5d4b"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Resume.png",
+      "sha256": "42a6a65eb9103df16fd5238b95754a8748bd62d416244e5433732cca153206a1",
+      "dialogPixelSha256": "26304718f5f237304db064462200dabdea0601534a3fb3c0f421cccc1c9b5d4b"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Check.png",
+      "sha256": "0dff6d7022af1f3b792ca8205435e1507a0e2156755c79f0d5750b3d3d8953de",
+      "dialogPixelSha256": "e57443961e06cc86069128800d0a3bc1d0b23a948babeee3b212e75a6076404a"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Close.png",
+      "sha256": "873f69b57b3540fc8840628adeb81df8339595f288a3cfb3004c691f1b674d17",
+      "dialogPixelSha256": "e57443961e06cc86069128800d0a3bc1d0b23a948babeee3b212e75a6076404a"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Discard.png",
+      "sha256": "0dff6d7022af1f3b792ca8205435e1507a0e2156755c79f0d5750b3d3d8953de",
+      "dialogPixelSha256": "e57443961e06cc86069128800d0a3bc1d0b23a948babeee3b212e75a6076404a"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Open.png",
+      "sha256": "873f69b57b3540fc8840628adeb81df8339595f288a3cfb3004c691f1b674d17",
+      "dialogPixelSha256": "e57443961e06cc86069128800d0a3bc1d0b23a948babeee3b212e75a6076404a"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Resume.png",
+      "sha256": "0dff6d7022af1f3b792ca8205435e1507a0e2156755c79f0d5750b3d3d8953de",
+      "dialogPixelSha256": "e57443961e06cc86069128800d0a3bc1d0b23a948babeee3b212e75a6076404a"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Check.png",
+      "sha256": "c865ad2d39e4a1af94e9f49725789618c232eff2fe2b3f4c10630a3105d0bf73",
+      "dialogPixelSha256": "583303d231dfff2ca69ad753b0d5992667c0a0acb6650f098a61fe33bf75c3bb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Close.png",
+      "sha256": "c865ad2d39e4a1af94e9f49725789618c232eff2fe2b3f4c10630a3105d0bf73",
+      "dialogPixelSha256": "583303d231dfff2ca69ad753b0d5992667c0a0acb6650f098a61fe33bf75c3bb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Discard.png",
+      "sha256": "c865ad2d39e4a1af94e9f49725789618c232eff2fe2b3f4c10630a3105d0bf73",
+      "dialogPixelSha256": "583303d231dfff2ca69ad753b0d5992667c0a0acb6650f098a61fe33bf75c3bb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Open.png",
+      "sha256": "c865ad2d39e4a1af94e9f49725789618c232eff2fe2b3f4c10630a3105d0bf73",
+      "dialogPixelSha256": "583303d231dfff2ca69ad753b0d5992667c0a0acb6650f098a61fe33bf75c3bb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Resume.png",
+      "sha256": "c865ad2d39e4a1af94e9f49725789618c232eff2fe2b3f4c10630a3105d0bf73",
+      "dialogPixelSha256": "583303d231dfff2ca69ad753b0d5992667c0a0acb6650f098a61fe33bf75c3bb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Check.png",
+      "sha256": "6e9bbdcb79ea86a8995a90491c6c70bb4a292e3e8b15b89a9252d1944fbf190a",
+      "dialogPixelSha256": "3c1523a80e64156a1ec992ff3fc2c5cf65a7b5f1a6fe0e391f368976eafc6269"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Close.png",
+      "sha256": "6e9bbdcb79ea86a8995a90491c6c70bb4a292e3e8b15b89a9252d1944fbf190a",
+      "dialogPixelSha256": "3c1523a80e64156a1ec992ff3fc2c5cf65a7b5f1a6fe0e391f368976eafc6269"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Discard.png",
+      "sha256": "6e9bbdcb79ea86a8995a90491c6c70bb4a292e3e8b15b89a9252d1944fbf190a",
+      "dialogPixelSha256": "3c1523a80e64156a1ec992ff3fc2c5cf65a7b5f1a6fe0e391f368976eafc6269"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Open.png",
+      "sha256": "6e9bbdcb79ea86a8995a90491c6c70bb4a292e3e8b15b89a9252d1944fbf190a",
+      "dialogPixelSha256": "3c1523a80e64156a1ec992ff3fc2c5cf65a7b5f1a6fe0e391f368976eafc6269"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Resume.png",
+      "sha256": "6e9bbdcb79ea86a8995a90491c6c70bb4a292e3e8b15b89a9252d1944fbf190a",
+      "dialogPixelSha256": "3c1523a80e64156a1ec992ff3fc2c5cf65a7b5f1a6fe0e391f368976eafc6269"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Check.png",
+      "sha256": "385212d4eae5627e101d20c0dc1c7ff6a44459f4ee1723362ad05329e59dd5d0",
+      "dialogPixelSha256": "06d22c3335c2d76a90257de86b0a4f63a92e182dc5669e6fb89369005c4052cb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Close.png",
+      "sha256": "ea4e3e8719ece6c455f185c9c97654ee505efe590c012f5d630f6e9bed63191c",
+      "dialogPixelSha256": "06d22c3335c2d76a90257de86b0a4f63a92e182dc5669e6fb89369005c4052cb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Discard.png",
+      "sha256": "385212d4eae5627e101d20c0dc1c7ff6a44459f4ee1723362ad05329e59dd5d0",
+      "dialogPixelSha256": "06d22c3335c2d76a90257de86b0a4f63a92e182dc5669e6fb89369005c4052cb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Open.png",
+      "sha256": "ea4e3e8719ece6c455f185c9c97654ee505efe590c012f5d630f6e9bed63191c",
+      "dialogPixelSha256": "06d22c3335c2d76a90257de86b0a4f63a92e182dc5669e6fb89369005c4052cb"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Resume.png",
+      "sha256": "385212d4eae5627e101d20c0dc1c7ff6a44459f4ee1723362ad05329e59dd5d0",
+      "dialogPixelSha256": "06d22c3335c2d76a90257de86b0a4f63a92e182dc5669e6fb89369005c4052cb"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Check.png",
+      "sha256": "89be536f0c83fda423c492748213289c0e0d835a4e0e13a839cb4fc48c5cfb81",
+      "dialogPixelSha256": "f3fcd1a15f3983c8a8f9ad4e0447ab532590dcb35ac47ac8c0f9c3f870c54907"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Close.png",
+      "sha256": "a66166a180e5e60fea5bb2208a448527d70f281ea274d66fbc25b2c0bec33371",
+      "dialogPixelSha256": "f3fcd1a15f3983c8a8f9ad4e0447ab532590dcb35ac47ac8c0f9c3f870c54907"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Discard.png",
+      "sha256": "89be536f0c83fda423c492748213289c0e0d835a4e0e13a839cb4fc48c5cfb81",
+      "dialogPixelSha256": "f3fcd1a15f3983c8a8f9ad4e0447ab532590dcb35ac47ac8c0f9c3f870c54907"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Open.png",
+      "sha256": "a66166a180e5e60fea5bb2208a448527d70f281ea274d66fbc25b2c0bec33371",
+      "dialogPixelSha256": "f3fcd1a15f3983c8a8f9ad4e0447ab532590dcb35ac47ac8c0f9c3f870c54907"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Resume.png",
+      "sha256": "89be536f0c83fda423c492748213289c0e0d835a4e0e13a839cb4fc48c5cfb81",
+      "dialogPixelSha256": "f3fcd1a15f3983c8a8f9ad4e0447ab532590dcb35ac47ac8c0f9c3f870c54907"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Check.png",
+      "sha256": "f73f20616360f60db9548f57b027bbee392e7b0f1157418818a70bb5f8d22131",
+      "dialogPixelSha256": "7af18be2104a6fffac79c044a8cfe88b991db55ea6f766c975ee53befa38d82b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Close.png",
+      "sha256": "03d1d82cc85a6afa73a8bd6a51727a716bd52f3641e737d995f49f656d7317d3",
+      "dialogPixelSha256": "7af18be2104a6fffac79c044a8cfe88b991db55ea6f766c975ee53befa38d82b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Discard.png",
+      "sha256": "f73f20616360f60db9548f57b027bbee392e7b0f1157418818a70bb5f8d22131",
+      "dialogPixelSha256": "7af18be2104a6fffac79c044a8cfe88b991db55ea6f766c975ee53befa38d82b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Open.png",
+      "sha256": "f73f20616360f60db9548f57b027bbee392e7b0f1157418818a70bb5f8d22131",
+      "dialogPixelSha256": "7af18be2104a6fffac79c044a8cfe88b991db55ea6f766c975ee53befa38d82b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Resume.png",
+      "sha256": "f73f20616360f60db9548f57b027bbee392e7b0f1157418818a70bb5f8d22131",
+      "dialogPixelSha256": "7af18be2104a6fffac79c044a8cfe88b991db55ea6f766c975ee53befa38d82b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Check.png",
+      "sha256": "6f55ac19d7a0fb00657ef0713aefbeff6d32847f5953060090648e0856bda5d6",
+      "dialogPixelSha256": "250f0fa1bff14509907e17da05423f5d7394ceb4139f6eb4dc2d61a7b98f39eb"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Close.png",
+      "sha256": "57fa7208cb08729a640936a3f17c280dc2779e945e9cf2e0b02f6382120c2ce9",
+      "dialogPixelSha256": "250f0fa1bff14509907e17da05423f5d7394ceb4139f6eb4dc2d61a7b98f39eb"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Discard.png",
+      "sha256": "6f55ac19d7a0fb00657ef0713aefbeff6d32847f5953060090648e0856bda5d6",
+      "dialogPixelSha256": "250f0fa1bff14509907e17da05423f5d7394ceb4139f6eb4dc2d61a7b98f39eb"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Open.png",
+      "sha256": "6f55ac19d7a0fb00657ef0713aefbeff6d32847f5953060090648e0856bda5d6",
+      "dialogPixelSha256": "250f0fa1bff14509907e17da05423f5d7394ceb4139f6eb4dc2d61a7b98f39eb"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Resume.png",
+      "sha256": "5f13fbcc258af2592643d50c38bc388110b534586af1fca4d94d43dd87293423",
+      "dialogPixelSha256": "250f0fa1bff14509907e17da05423f5d7394ceb4139f6eb4dc2d61a7b98f39eb"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Check.png",
+      "sha256": "afc93e3d805c98963be287d6b426cf93803112f11ccc127017d8140d4c288b30",
+      "dialogPixelSha256": "bb86dcbc10b1a9d6bc4570d0248d206d0bccd2194a7e0af7e19a1d09469bf902"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Close.png",
+      "sha256": "afc93e3d805c98963be287d6b426cf93803112f11ccc127017d8140d4c288b30",
+      "dialogPixelSha256": "bb86dcbc10b1a9d6bc4570d0248d206d0bccd2194a7e0af7e19a1d09469bf902"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Discard.png",
+      "sha256": "afc93e3d805c98963be287d6b426cf93803112f11ccc127017d8140d4c288b30",
+      "dialogPixelSha256": "bb86dcbc10b1a9d6bc4570d0248d206d0bccd2194a7e0af7e19a1d09469bf902"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Open.png",
+      "sha256": "afc93e3d805c98963be287d6b426cf93803112f11ccc127017d8140d4c288b30",
+      "dialogPixelSha256": "bb86dcbc10b1a9d6bc4570d0248d206d0bccd2194a7e0af7e19a1d09469bf902"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Resume.png",
+      "sha256": "afc93e3d805c98963be287d6b426cf93803112f11ccc127017d8140d4c288b30",
+      "dialogPixelSha256": "bb86dcbc10b1a9d6bc4570d0248d206d0bccd2194a7e0af7e19a1d09469bf902"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Check.png",
+      "sha256": "1168d73d58a9f2ed137265122806defa6e7d6f79b30aaa269e6776dba55af061",
+      "dialogPixelSha256": "0ae5a8634ef4afc70e10b1428c7c5252ddda71c1f23577d540ee715f6cccbc17"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Close.png",
+      "sha256": "1168d73d58a9f2ed137265122806defa6e7d6f79b30aaa269e6776dba55af061",
+      "dialogPixelSha256": "0ae5a8634ef4afc70e10b1428c7c5252ddda71c1f23577d540ee715f6cccbc17"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Discard.png",
+      "sha256": "76fb9b8f3673ea38bac2170286e69a57b9edc1af4e5f6c0c87ae93f1b155c86f",
+      "dialogPixelSha256": "0ae5a8634ef4afc70e10b1428c7c5252ddda71c1f23577d540ee715f6cccbc17"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Open.png",
+      "sha256": "1168d73d58a9f2ed137265122806defa6e7d6f79b30aaa269e6776dba55af061",
+      "dialogPixelSha256": "0ae5a8634ef4afc70e10b1428c7c5252ddda71c1f23577d540ee715f6cccbc17"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Resume.png",
+      "sha256": "76fb9b8f3673ea38bac2170286e69a57b9edc1af4e5f6c0c87ae93f1b155c86f",
+      "dialogPixelSha256": "0ae5a8634ef4afc70e10b1428c7c5252ddda71c1f23577d540ee715f6cccbc17"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Check.png",
+      "sha256": "d1b9a6076fefe4db514e241b6588e9f13a0b0747a65d2dea8e2df058f06b1a8e",
+      "dialogPixelSha256": "6b3ecf3d5917b3a01806c72ff0d4d412bbbbeb743ff7734d8e9ce62b2a1bd838"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Close.png",
+      "sha256": "d1b9a6076fefe4db514e241b6588e9f13a0b0747a65d2dea8e2df058f06b1a8e",
+      "dialogPixelSha256": "6b3ecf3d5917b3a01806c72ff0d4d412bbbbeb743ff7734d8e9ce62b2a1bd838"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Discard.png",
+      "sha256": "d1b9a6076fefe4db514e241b6588e9f13a0b0747a65d2dea8e2df058f06b1a8e",
+      "dialogPixelSha256": "6b3ecf3d5917b3a01806c72ff0d4d412bbbbeb743ff7734d8e9ce62b2a1bd838"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Open.png",
+      "sha256": "d1b9a6076fefe4db514e241b6588e9f13a0b0747a65d2dea8e2df058f06b1a8e",
+      "dialogPixelSha256": "6b3ecf3d5917b3a01806c72ff0d4d412bbbbeb743ff7734d8e9ce62b2a1bd838"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Resume.png",
+      "sha256": "d1b9a6076fefe4db514e241b6588e9f13a0b0747a65d2dea8e2df058f06b1a8e",
+      "dialogPixelSha256": "6b3ecf3d5917b3a01806c72ff0d4d412bbbbeb743ff7734d8e9ce62b2a1bd838"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Check.png",
+      "sha256": "e706e503a8475906aea5aadb40b0df4f4ed2fa7de56fa8553696c7162d776e27",
+      "dialogPixelSha256": "923b9e6a7fc8f552a4b6eb35f8c3941bb7d8cd8f1de8018698d33d83e0c1acaa"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Close.png",
+      "sha256": "e706e503a8475906aea5aadb40b0df4f4ed2fa7de56fa8553696c7162d776e27",
+      "dialogPixelSha256": "923b9e6a7fc8f552a4b6eb35f8c3941bb7d8cd8f1de8018698d33d83e0c1acaa"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Discard.png",
+      "sha256": "97ce0217aa65c8b8efa5b8a84e8577670656f7fb4f5a14c4d2d88e534c336385",
+      "dialogPixelSha256": "923b9e6a7fc8f552a4b6eb35f8c3941bb7d8cd8f1de8018698d33d83e0c1acaa"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Open.png",
+      "sha256": "e706e503a8475906aea5aadb40b0df4f4ed2fa7de56fa8553696c7162d776e27",
+      "dialogPixelSha256": "923b9e6a7fc8f552a4b6eb35f8c3941bb7d8cd8f1de8018698d33d83e0c1acaa"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Resume.png",
+      "sha256": "97ce0217aa65c8b8efa5b8a84e8577670656f7fb4f5a14c4d2d88e534c336385",
+      "dialogPixelSha256": "923b9e6a7fc8f552a4b6eb35f8c3941bb7d8cd8f1de8018698d33d83e0c1acaa"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Check.png",
+      "sha256": "dd87a1ceb45dbc3793025e383d41e61b5b998a98be4605b0982519385d09fe45",
+      "dialogPixelSha256": "1ffd9677a880ba624b17ff2977b8ff9b1d81866175b08bd3f4c08f456745c997"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Close.png",
+      "sha256": "db835fbab5cb38cb5d214afd45abf6e7bc37a10c6db2281d7ce6385b2aaffd35",
+      "dialogPixelSha256": "1ffd9677a880ba624b17ff2977b8ff9b1d81866175b08bd3f4c08f456745c997"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Discard.png",
+      "sha256": "dd87a1ceb45dbc3793025e383d41e61b5b998a98be4605b0982519385d09fe45",
+      "dialogPixelSha256": "1ffd9677a880ba624b17ff2977b8ff9b1d81866175b08bd3f4c08f456745c997"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Open.png",
+      "sha256": "db835fbab5cb38cb5d214afd45abf6e7bc37a10c6db2281d7ce6385b2aaffd35",
+      "dialogPixelSha256": "1ffd9677a880ba624b17ff2977b8ff9b1d81866175b08bd3f4c08f456745c997"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Resume.png",
+      "sha256": "dd87a1ceb45dbc3793025e383d41e61b5b998a98be4605b0982519385d09fe45",
+      "dialogPixelSha256": "1ffd9677a880ba624b17ff2977b8ff9b1d81866175b08bd3f4c08f456745c997"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Check.png",
+      "sha256": "a1a0182e8d39fe504f0800fb6ecffdbfd2bb01e96976458e506370e885d758b7",
+      "dialogPixelSha256": "0c6eb6ecdb7c4cf3fb48886af2967d1df5f1ea0cc455ffbc47e1e7344eba38a6"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Close.png",
+      "sha256": "a1a0182e8d39fe504f0800fb6ecffdbfd2bb01e96976458e506370e885d758b7",
+      "dialogPixelSha256": "0c6eb6ecdb7c4cf3fb48886af2967d1df5f1ea0cc455ffbc47e1e7344eba38a6"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Discard.png",
+      "sha256": "a1a0182e8d39fe504f0800fb6ecffdbfd2bb01e96976458e506370e885d758b7",
+      "dialogPixelSha256": "0c6eb6ecdb7c4cf3fb48886af2967d1df5f1ea0cc455ffbc47e1e7344eba38a6"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Open.png",
+      "sha256": "a1a0182e8d39fe504f0800fb6ecffdbfd2bb01e96976458e506370e885d758b7",
+      "dialogPixelSha256": "0c6eb6ecdb7c4cf3fb48886af2967d1df5f1ea0cc455ffbc47e1e7344eba38a6"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Resume.png",
+      "sha256": "a1a0182e8d39fe504f0800fb6ecffdbfd2bb01e96976458e506370e885d758b7",
+      "dialogPixelSha256": "0c6eb6ecdb7c4cf3fb48886af2967d1df5f1ea0cc455ffbc47e1e7344eba38a6"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Check.png",
+      "sha256": "26245909238825e025f3924f095ecec7264d5d85c0fd27fd1996887d6cffd91b",
+      "dialogPixelSha256": "926ad7741772b30954dd43fbfb2408ddffab8bd5eb72686e09f96a288ea89a3e"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Close.png",
+      "sha256": "26245909238825e025f3924f095ecec7264d5d85c0fd27fd1996887d6cffd91b",
+      "dialogPixelSha256": "926ad7741772b30954dd43fbfb2408ddffab8bd5eb72686e09f96a288ea89a3e"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Discard.png",
+      "sha256": "26245909238825e025f3924f095ecec7264d5d85c0fd27fd1996887d6cffd91b",
+      "dialogPixelSha256": "926ad7741772b30954dd43fbfb2408ddffab8bd5eb72686e09f96a288ea89a3e"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Open.png",
+      "sha256": "26245909238825e025f3924f095ecec7264d5d85c0fd27fd1996887d6cffd91b",
+      "dialogPixelSha256": "926ad7741772b30954dd43fbfb2408ddffab8bd5eb72686e09f96a288ea89a3e"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Resume.png",
+      "sha256": "a4061eb1a82f4d1366c6378590fcda607a2782c806b0d835bbdf92776cb7bc2e",
+      "dialogPixelSha256": "926ad7741772b30954dd43fbfb2408ddffab8bd5eb72686e09f96a288ea89a3e"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Check.png",
+      "sha256": "156c022fd6967938e26e510d1a84a528bc865accc2d3a3522a1669266dbe7c0b",
+      "dialogPixelSha256": "5f34d536ce0b2988b5b08f80eaef920fdb85d8d07a9a54990d2c4f4985fd1ff3"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Close.png",
+      "sha256": "156c022fd6967938e26e510d1a84a528bc865accc2d3a3522a1669266dbe7c0b",
+      "dialogPixelSha256": "5f34d536ce0b2988b5b08f80eaef920fdb85d8d07a9a54990d2c4f4985fd1ff3"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Discard.png",
+      "sha256": "156c022fd6967938e26e510d1a84a528bc865accc2d3a3522a1669266dbe7c0b",
+      "dialogPixelSha256": "5f34d536ce0b2988b5b08f80eaef920fdb85d8d07a9a54990d2c4f4985fd1ff3"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Open.png",
+      "sha256": "156c022fd6967938e26e510d1a84a528bc865accc2d3a3522a1669266dbe7c0b",
+      "dialogPixelSha256": "5f34d536ce0b2988b5b08f80eaef920fdb85d8d07a9a54990d2c4f4985fd1ff3"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Resume.png",
+      "sha256": "7ca2cd9366aa44b65eb52891700d402a34dbb31ed8a8f2a478f3d59c9e2aba9b",
+      "dialogPixelSha256": "5f34d536ce0b2988b5b08f80eaef920fdb85d8d07a9a54990d2c4f4985fd1ff3"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Check.png",
+      "sha256": "1dbb1658f973fedc4f75138b9ea057817133783cc2e444d9397be7c6e6e68806",
+      "dialogPixelSha256": "54d59d5215c55694bfe4ce3f1c97c04f3c74ec7ae85560bcc75c15c9fd3ead65"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Close.png",
+      "sha256": "0b0da37dd634c8c175ac4e8bd2245374077ac499ea4615442e9f960348668645",
+      "dialogPixelSha256": "54d59d5215c55694bfe4ce3f1c97c04f3c74ec7ae85560bcc75c15c9fd3ead65"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Discard.png",
+      "sha256": "1dbb1658f973fedc4f75138b9ea057817133783cc2e444d9397be7c6e6e68806",
+      "dialogPixelSha256": "54d59d5215c55694bfe4ce3f1c97c04f3c74ec7ae85560bcc75c15c9fd3ead65"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Open.png",
+      "sha256": "0b0da37dd634c8c175ac4e8bd2245374077ac499ea4615442e9f960348668645",
+      "dialogPixelSha256": "54d59d5215c55694bfe4ce3f1c97c04f3c74ec7ae85560bcc75c15c9fd3ead65"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Resume.png",
+      "sha256": "1dbb1658f973fedc4f75138b9ea057817133783cc2e444d9397be7c6e6e68806",
+      "dialogPixelSha256": "54d59d5215c55694bfe4ce3f1c97c04f3c74ec7ae85560bcc75c15c9fd3ead65"
+    },
+    {
+      "path": "api36-optimized/upgraded-sidebar.png",
+      "sha256": "7f0a5b83e00d02cd4108b38bf04276c0517687559821d2df1391514339e4170e",
+      "inspectedAsCompleteScreenshot": true
+    }
+  ],
+  "identicalDialogPixelGroups": [
+    {
+      "pixelSha256": "866ed253a4bfcb98cd69b9086e3a384765e954c498a6f53e749310b17a044c07",
+      "paths": [
+        "api30-optimized/review-1280x800-font1.0-dark-Check.png",
+        "api30-optimized/review-1280x800-font1.0-dark-Close.png",
+        "api30-optimized/review-1280x800-font1.0-dark-Discard.png",
+        "api30-optimized/review-1280x800-font1.0-dark-Open.png",
+        "api30-optimized/review-1280x800-font1.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "49b97d60a2167183f53bbfbd1e8ef7868372e01d8cdfd14f652503f6d02577d5",
+      "paths": [
+        "api30-optimized/review-1280x800-font1.0-light-Check.png",
+        "api30-optimized/review-1280x800-font1.0-light-Close.png",
+        "api30-optimized/review-1280x800-font1.0-light-Discard.png",
+        "api30-optimized/review-1280x800-font1.0-light-Open.png",
+        "api30-optimized/review-1280x800-font1.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "2e05537b20dc444348bd56f1f7eeade7c040324ae7f7bfd2f9a7bfae9d1303c6",
+      "paths": [
+        "api30-optimized/review-1280x800-font1.5-dark-Check.png",
+        "api30-optimized/review-1280x800-font1.5-dark-Close.png",
+        "api30-optimized/review-1280x800-font1.5-dark-Discard.png",
+        "api30-optimized/review-1280x800-font1.5-dark-Open.png",
+        "api30-optimized/review-1280x800-font1.5-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "ca5faf0ac00ddd4d0859e37af0d4456a8969b3d115f52a81026fac531f6bdb10",
+      "paths": [
+        "api30-optimized/review-1280x800-font1.5-light-Check.png",
+        "api30-optimized/review-1280x800-font1.5-light-Close.png",
+        "api30-optimized/review-1280x800-font1.5-light-Discard.png",
+        "api30-optimized/review-1280x800-font1.5-light-Open.png",
+        "api30-optimized/review-1280x800-font1.5-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "f779a285d2cf9102f5dff445a7a6e83f369e09b68bf7885c72aa68dd6873a064",
+      "paths": [
+        "api30-optimized/review-1280x800-font2.0-dark-Check.png",
+        "api30-optimized/review-1280x800-font2.0-dark-Discard.png",
+        "api30-optimized/review-1280x800-font2.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "e47dd4618fc4bb52fc4275b93414eed7d4440a3a6c0e62a152f3649b0b0e7820",
+      "paths": [
+        "api30-optimized/review-1280x800-font2.0-dark-Close.png",
+        "api30-optimized/review-1280x800-font2.0-dark-Open.png"
+      ]
+    },
+    {
+      "pixelSha256": "cecaf346176c06e0b04f423b39a2113344e28706d2c1d42a8f353db8411e1035",
+      "paths": [
+        "api30-optimized/review-1280x800-font2.0-light-Check.png",
+        "api30-optimized/review-1280x800-font2.0-light-Close.png",
+        "api30-optimized/review-1280x800-font2.0-light-Discard.png",
+        "api30-optimized/review-1280x800-font2.0-light-Open.png",
+        "api30-optimized/review-1280x800-font2.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "4523346dbbbc07a65839102c659b7f7f6cecb7dd7ed0d85b41139ff60d97cfff",
+      "paths": [
+        "api30-optimized/review-600x800-font1.0-dark-Check.png",
+        "api30-optimized/review-600x800-font1.0-dark-Close.png",
+        "api30-optimized/review-600x800-font1.0-dark-Discard.png",
+        "api30-optimized/review-600x800-font1.0-dark-Open.png",
+        "api30-optimized/review-600x800-font1.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "618c3fdf3f069899eaf37d408645ab21574bb9628ce1484e18be84d4bd4e7858",
+      "paths": [
+        "api30-optimized/review-600x800-font1.0-light-Check.png",
+        "api30-optimized/review-600x800-font1.0-light-Close.png",
+        "api30-optimized/review-600x800-font1.0-light-Discard.png",
+        "api30-optimized/review-600x800-font1.0-light-Open.png",
+        "api30-optimized/review-600x800-font1.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "793d0e6e09a6a0f53ae0a5b3a2d2bcdf391c25caa7162c232bef1bf07e1e5f5c",
+      "paths": [
+        "api30-optimized/review-600x800-font1.5-dark-Check.png",
+        "api30-optimized/review-600x800-font1.5-dark-Close.png",
+        "api30-optimized/review-600x800-font1.5-dark-Discard.png",
+        "api30-optimized/review-600x800-font1.5-dark-Open.png",
+        "api30-optimized/review-600x800-font1.5-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "d042c5145a1b7ab5c793bc931787ad342fe5422333d3fe11900dbd5029e9db1f",
+      "paths": [
+        "api30-optimized/review-600x800-font1.5-light-Check.png",
+        "api30-optimized/review-600x800-font1.5-light-Close.png",
+        "api30-optimized/review-600x800-font1.5-light-Discard.png",
+        "api30-optimized/review-600x800-font1.5-light-Open.png",
+        "api30-optimized/review-600x800-font1.5-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "4e1153fdcf3a4197a710209d2dc3948ffd08bced4f86f36d325bf75d23de79a0",
+      "paths": [
+        "api30-optimized/review-600x800-font2.0-dark-Check.png",
+        "api30-optimized/review-600x800-font2.0-dark-Close.png",
+        "api30-optimized/review-600x800-font2.0-dark-Discard.png",
+        "api30-optimized/review-600x800-font2.0-dark-Open.png",
+        "api30-optimized/review-600x800-font2.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "e138f1d188d13566f30444d042a899d343c516c316dc83dd51b644a99b15af4f",
+      "paths": [
+        "api30-optimized/review-600x800-font2.0-light-Check.png",
+        "api30-optimized/review-600x800-font2.0-light-Close.png",
+        "api30-optimized/review-600x800-font2.0-light-Discard.png",
+        "api30-optimized/review-600x800-font2.0-light-Open.png",
+        "api30-optimized/review-600x800-font2.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "195df9de27c7c07ff837f1580b69490439273969b04f67501f89f95d93f69fc2",
+      "paths": [
+        "api30-optimized/review-800x1280-font1.0-dark-Check.png",
+        "api30-optimized/review-800x1280-font1.0-dark-Close.png",
+        "api30-optimized/review-800x1280-font1.0-dark-Discard.png",
+        "api30-optimized/review-800x1280-font1.0-dark-Open.png",
+        "api30-optimized/review-800x1280-font1.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "7658583a654796e272331cecb2c3a99da513a82a0b599dc00df785022784c22a",
+      "paths": [
+        "api30-optimized/review-800x1280-font1.0-light-Check.png",
+        "api30-optimized/review-800x1280-font1.0-light-Close.png",
+        "api30-optimized/review-800x1280-font1.0-light-Discard.png",
+        "api30-optimized/review-800x1280-font1.0-light-Open.png",
+        "api30-optimized/review-800x1280-font1.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "a62f5b5be41df941eebe2ac8a3e5d307b1004eebaee718e5f651a5758a6abe7c",
+      "paths": [
+        "api30-optimized/review-800x1280-font1.5-dark-Check.png",
+        "api30-optimized/review-800x1280-font1.5-dark-Close.png",
+        "api30-optimized/review-800x1280-font1.5-dark-Discard.png",
+        "api30-optimized/review-800x1280-font1.5-dark-Open.png",
+        "api30-optimized/review-800x1280-font1.5-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "eadc4321e038d1624c0710e5f16a0802ec9e35807d29adf7604535aa14f79390",
+      "paths": [
+        "api30-optimized/review-800x1280-font1.5-light-Check.png",
+        "api30-optimized/review-800x1280-font1.5-light-Close.png",
+        "api30-optimized/review-800x1280-font1.5-light-Discard.png",
+        "api30-optimized/review-800x1280-font1.5-light-Open.png",
+        "api30-optimized/review-800x1280-font1.5-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "3ecdc8a36d9e7e45029095089790cb86341a0162f091d2cfea4a44fff5d5fd03",
+      "paths": [
+        "api30-optimized/review-800x1280-font2.0-dark-Check.png",
+        "api30-optimized/review-800x1280-font2.0-dark-Close.png",
+        "api30-optimized/review-800x1280-font2.0-dark-Discard.png",
+        "api30-optimized/review-800x1280-font2.0-dark-Open.png",
+        "api30-optimized/review-800x1280-font2.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "8cbcb295c70d0ca2b16e1fea454e44487eb8873787c93dc33b586c2ac99dfa65",
+      "paths": [
+        "api30-optimized/review-800x1280-font2.0-light-Check.png",
+        "api30-optimized/review-800x1280-font2.0-light-Close.png",
+        "api30-optimized/review-800x1280-font2.0-light-Discard.png",
+        "api30-optimized/review-800x1280-font2.0-light-Open.png",
+        "api30-optimized/review-800x1280-font2.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "caffc91394d3859d8fb2663f8b8d20814bbf924c4ae5e99eb89409788c9e5ff7",
+      "paths": [
+        "api36-optimized/review-1280x800-font1.0-dark-Check.png",
+        "api36-optimized/review-1280x800-font1.0-dark-Close.png",
+        "api36-optimized/review-1280x800-font1.0-dark-Discard.png",
+        "api36-optimized/review-1280x800-font1.0-dark-Open.png",
+        "api36-optimized/review-1280x800-font1.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "26304718f5f237304db064462200dabdea0601534a3fb3c0f421cccc1c9b5d4b",
+      "paths": [
+        "api36-optimized/review-1280x800-font1.0-light-Check.png",
+        "api36-optimized/review-1280x800-font1.0-light-Close.png",
+        "api36-optimized/review-1280x800-font1.0-light-Discard.png",
+        "api36-optimized/review-1280x800-font1.0-light-Open.png",
+        "api36-optimized/review-1280x800-font1.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "e57443961e06cc86069128800d0a3bc1d0b23a948babeee3b212e75a6076404a",
+      "paths": [
+        "api36-optimized/review-1280x800-font1.5-dark-Check.png",
+        "api36-optimized/review-1280x800-font1.5-dark-Close.png",
+        "api36-optimized/review-1280x800-font1.5-dark-Discard.png",
+        "api36-optimized/review-1280x800-font1.5-dark-Open.png",
+        "api36-optimized/review-1280x800-font1.5-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "583303d231dfff2ca69ad753b0d5992667c0a0acb6650f098a61fe33bf75c3bb",
+      "paths": [
+        "api36-optimized/review-1280x800-font1.5-light-Check.png",
+        "api36-optimized/review-1280x800-font1.5-light-Close.png",
+        "api36-optimized/review-1280x800-font1.5-light-Discard.png",
+        "api36-optimized/review-1280x800-font1.5-light-Open.png",
+        "api36-optimized/review-1280x800-font1.5-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "3c1523a80e64156a1ec992ff3fc2c5cf65a7b5f1a6fe0e391f368976eafc6269",
+      "paths": [
+        "api36-optimized/review-1280x800-font2.0-dark-Check.png",
+        "api36-optimized/review-1280x800-font2.0-dark-Close.png",
+        "api36-optimized/review-1280x800-font2.0-dark-Discard.png",
+        "api36-optimized/review-1280x800-font2.0-dark-Open.png",
+        "api36-optimized/review-1280x800-font2.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "06d22c3335c2d76a90257de86b0a4f63a92e182dc5669e6fb89369005c4052cb",
+      "paths": [
+        "api36-optimized/review-1280x800-font2.0-light-Check.png",
+        "api36-optimized/review-1280x800-font2.0-light-Close.png",
+        "api36-optimized/review-1280x800-font2.0-light-Discard.png",
+        "api36-optimized/review-1280x800-font2.0-light-Open.png",
+        "api36-optimized/review-1280x800-font2.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "f3fcd1a15f3983c8a8f9ad4e0447ab532590dcb35ac47ac8c0f9c3f870c54907",
+      "paths": [
+        "api36-optimized/review-600x800-font1.0-dark-Check.png",
+        "api36-optimized/review-600x800-font1.0-dark-Close.png",
+        "api36-optimized/review-600x800-font1.0-dark-Discard.png",
+        "api36-optimized/review-600x800-font1.0-dark-Open.png",
+        "api36-optimized/review-600x800-font1.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "7af18be2104a6fffac79c044a8cfe88b991db55ea6f766c975ee53befa38d82b",
+      "paths": [
+        "api36-optimized/review-600x800-font1.0-light-Check.png",
+        "api36-optimized/review-600x800-font1.0-light-Close.png",
+        "api36-optimized/review-600x800-font1.0-light-Discard.png",
+        "api36-optimized/review-600x800-font1.0-light-Open.png",
+        "api36-optimized/review-600x800-font1.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "250f0fa1bff14509907e17da05423f5d7394ceb4139f6eb4dc2d61a7b98f39eb",
+      "paths": [
+        "api36-optimized/review-600x800-font1.5-dark-Check.png",
+        "api36-optimized/review-600x800-font1.5-dark-Close.png",
+        "api36-optimized/review-600x800-font1.5-dark-Discard.png",
+        "api36-optimized/review-600x800-font1.5-dark-Open.png",
+        "api36-optimized/review-600x800-font1.5-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "bb86dcbc10b1a9d6bc4570d0248d206d0bccd2194a7e0af7e19a1d09469bf902",
+      "paths": [
+        "api36-optimized/review-600x800-font1.5-light-Check.png",
+        "api36-optimized/review-600x800-font1.5-light-Close.png",
+        "api36-optimized/review-600x800-font1.5-light-Discard.png",
+        "api36-optimized/review-600x800-font1.5-light-Open.png",
+        "api36-optimized/review-600x800-font1.5-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "0ae5a8634ef4afc70e10b1428c7c5252ddda71c1f23577d540ee715f6cccbc17",
+      "paths": [
+        "api36-optimized/review-600x800-font2.0-dark-Check.png",
+        "api36-optimized/review-600x800-font2.0-dark-Close.png",
+        "api36-optimized/review-600x800-font2.0-dark-Discard.png",
+        "api36-optimized/review-600x800-font2.0-dark-Open.png",
+        "api36-optimized/review-600x800-font2.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "6b3ecf3d5917b3a01806c72ff0d4d412bbbbeb743ff7734d8e9ce62b2a1bd838",
+      "paths": [
+        "api36-optimized/review-600x800-font2.0-light-Check.png",
+        "api36-optimized/review-600x800-font2.0-light-Close.png",
+        "api36-optimized/review-600x800-font2.0-light-Discard.png",
+        "api36-optimized/review-600x800-font2.0-light-Open.png",
+        "api36-optimized/review-600x800-font2.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "923b9e6a7fc8f552a4b6eb35f8c3941bb7d8cd8f1de8018698d33d83e0c1acaa",
+      "paths": [
+        "api36-optimized/review-800x1280-font1.0-dark-Check.png",
+        "api36-optimized/review-800x1280-font1.0-dark-Close.png",
+        "api36-optimized/review-800x1280-font1.0-dark-Discard.png",
+        "api36-optimized/review-800x1280-font1.0-dark-Open.png",
+        "api36-optimized/review-800x1280-font1.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "1ffd9677a880ba624b17ff2977b8ff9b1d81866175b08bd3f4c08f456745c997",
+      "paths": [
+        "api36-optimized/review-800x1280-font1.0-light-Check.png",
+        "api36-optimized/review-800x1280-font1.0-light-Close.png",
+        "api36-optimized/review-800x1280-font1.0-light-Discard.png",
+        "api36-optimized/review-800x1280-font1.0-light-Open.png",
+        "api36-optimized/review-800x1280-font1.0-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "0c6eb6ecdb7c4cf3fb48886af2967d1df5f1ea0cc455ffbc47e1e7344eba38a6",
+      "paths": [
+        "api36-optimized/review-800x1280-font1.5-dark-Check.png",
+        "api36-optimized/review-800x1280-font1.5-dark-Close.png",
+        "api36-optimized/review-800x1280-font1.5-dark-Discard.png",
+        "api36-optimized/review-800x1280-font1.5-dark-Open.png",
+        "api36-optimized/review-800x1280-font1.5-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "926ad7741772b30954dd43fbfb2408ddffab8bd5eb72686e09f96a288ea89a3e",
+      "paths": [
+        "api36-optimized/review-800x1280-font1.5-light-Check.png",
+        "api36-optimized/review-800x1280-font1.5-light-Close.png",
+        "api36-optimized/review-800x1280-font1.5-light-Discard.png",
+        "api36-optimized/review-800x1280-font1.5-light-Open.png",
+        "api36-optimized/review-800x1280-font1.5-light-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "5f34d536ce0b2988b5b08f80eaef920fdb85d8d07a9a54990d2c4f4985fd1ff3",
+      "paths": [
+        "api36-optimized/review-800x1280-font2.0-dark-Check.png",
+        "api36-optimized/review-800x1280-font2.0-dark-Close.png",
+        "api36-optimized/review-800x1280-font2.0-dark-Discard.png",
+        "api36-optimized/review-800x1280-font2.0-dark-Open.png",
+        "api36-optimized/review-800x1280-font2.0-dark-Resume.png"
+      ]
+    },
+    {
+      "pixelSha256": "54d59d5215c55694bfe4ce3f1c97c04f3c74ec7ae85560bcc75c15c9fd3ead65",
+      "paths": [
+        "api36-optimized/review-800x1280-font2.0-light-Check.png",
+        "api36-optimized/review-800x1280-font2.0-light-Close.png",
+        "api36-optimized/review-800x1280-font2.0-light-Discard.png",
+        "api36-optimized/review-800x1280-font2.0-light-Open.png",
+        "api36-optimized/review-800x1280-font2.0-light-Resume.png"
+      ]
+    }
+  ]
+}

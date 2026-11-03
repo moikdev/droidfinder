@@ -1,0 +1,52 @@
+{
+  "jobs": [
+    {
+      "id": "44d29086-366f-4e61-8330-8f7d26b11fa6",
+      "state": "INTERRUPTED",
+      "bytes": 29425664,
+      "items": 1,
+      "in_flight": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+      "verify_copies": 1,
+      "reused_bytes": 0,
+      "partial_copy_notice": "This saved copy was continued in a separately reviewed transfer.",
+      "partialCopy": null
+    },
+    {
+      "id": "79f9a91c-2a9a-4c71-93d1-501f321e53ea",
+      "state": "COMPLETED",
+      "bytes": 499122176,
+      "items": 1,
+      "in_flight": null,
+      "verify_copies": 1,
+      "reused_bytes": 37748736,
+      "partial_copy_notice": null,
+      "partialCopy": null
+    }
+  ],
+  "verifications": [
+    {
+      "job_id": "44d29086-366f-4e61-8330-8f7d26b11fa6",
+      "root": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+      "source": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+      "position": 0,
+      "status": "INCOMPLETE",
+      "destination": null,
+      "bytes": 0,
+      "expected": null,
+      "actual": null,
+      "error": null
+    },
+    {
+      "job_id": "79f9a91c-2a9a-4c71-93d1-501f321e53ea",
+      "root": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+      "source": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+      "position": 0,
+      "status": "VERIFIED",
+      "destination": "/data/user/0/dev.findroid/files/Workspace/Resume-1793735359316789000/Out/Resumable original.bin",
+      "bytes": 536870912,
+      "expected": "9acca8e8c22201155389f65abbf6bc9723edc7384ead80503839f49dcc56d767",
+      "actual": "9acca8e8c22201155389f65abbf6bc9723edc7384ead80503839f49dcc56d767",
+      "error": null
+    }
+  ]
+}

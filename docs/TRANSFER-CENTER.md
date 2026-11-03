@@ -1,6 +1,6 @@
 # Transfer and conflict foundation — 0.5.0
 
-Current transfer guides: [progress and estimates](TRANSFER-PROGRESS.md), [optional copy verification](COPY-VERIFICATION.md), and [partial-copy recovery in development](PARTIAL-COPY-RESUME.md). The rest of this page records the original 0.5.0 foundation; later increments extend its behavior.
+Current transfer guides: [progress and estimates](TRANSFER-PROGRESS.md), [optional copy verification](COPY-VERIFICATION.md), and [reviewed partial-copy recovery](PARTIAL-COPY-RESUME.md). The rest of this page records the original 0.5.0 foundation; later increments extend its behavior.
 
 This is the first implementation increment of the [full improvement roadmap](ROADMAP.md). The full roadmap remains active. Dual panes, indexing, direct network connections, expanded formats and the other unchecked items are not included in this increment.
 

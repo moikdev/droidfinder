@@ -1,8 +1,8 @@
 # Android preview verification
 
-## Findroid 0.44.0 — resume saved copies (local acceptance)
+## Findroid 0.44.0 — resume saved copies
 
-Local acceptance is complete for the 0.44.0/code46 candidate. The current public release is still 0.43.0; public OTA and immutable-archive acceptance follow publication.
+The public **0.44.0/code46** preview matches the locally accepted build. All five initial release assets match anonymous downloads and GitHub digests. Actual public OTA from 0.43/code45 to 0.44/code46 passes on both assigned tablets. Immutable-archive acceptance remains in progress.
 
 - **613 JVM cases pass**, with zero failures/errors/skips. Debug, native-test, optimized preview and unsigned release builds pass. Lint: **0 errors / 146 warnings / 12 hints**.
 - **455 identical native cases pass per API30/API36 tablet**, in **50 fresh-process batches each**, using the exact same frozen app/test APK pair. The **39 focused cases per API** cover 18 real descriptor/publication checks, 8 workflow checks and 13 SQLite checks, including schema 3→4 migration and ownership-transaction rollback.
@@ -13,7 +13,9 @@ Local acceptance is complete for the 0.44.0/code46 candidate. The current public
 
 The first increment supports individual local regular files **≥8 MiB**, checkpointed every **4 MiB**, into storage sharing the private stage filesystem and passing no-replace rename/directory-sync probes. Workspace is the intended destination. Providers, folders, moves, replacements and unsupported storage retain restart behavior. Physical/OEM, removable-drive and third-party provider acceptance remain separate.
 
-Preview SHA-256: `d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2`. The exact APKs, reports and mapping are frozen in `captures/partial-copy-resume/accepted-build/`. Proposal 41 remains in progress until publication, real public OTA and independent archive verification pass. [Recovery guide](docs/PARTIAL-COPY-RESUME.md) · [Release notes](docs/releases/0.44.0.md).
+- Both tablets pass public-feed download and Android installation, with installer completion confirmed before relaunch. Installed bytes match the anonymous public APK; synthetic original bytes, Favorite and unrelated preference survive, and no repeat offer appears. All 12 OTA captures were visually inspected. API36’s separate production-source download check passes **1/1**. The final restoration pass rechecks exact original managed files and absences, grants, storage/font/display settings and the public APK on both tablets. Rejected host-controller attempts remain excluded.
+
+Preview SHA-256: `d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2`. The exact APKs, reports and mapping are frozen in `captures/partial-copy-resume/accepted-build/`. Proposal 41 remains in progress until independent archive verification passes. [Recovery guide](docs/PARTIAL-COPY-RESUME.md) · [Release notes](docs/releases/0.44.0.md).
 
 ## Findroid 0.43.0 — verify important copies
 

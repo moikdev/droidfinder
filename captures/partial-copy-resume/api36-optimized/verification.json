@@ -1,0 +1,167 @@
+{
+  "serial": "emulator-5582",
+  "checkerSha256": "7337bbc82e5565e5595eafd69d39aed9d141de1e2d748bcfbc6a0b21e068efc1",
+  "helpersSha256": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+  "apkSha256": "d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2",
+  "previousApkSha256": "1df866a34c2b1fcbcfbd92eed2532136b1f15c0abf143ef837a120c15cf174d9",
+  "debugInspectionApkSha256": "feea3be548a3798d84392dd93de027d6abf857a36caa0b9698578b57c69dc6ef",
+  "fromVersionCode": 45,
+  "toVersionCode": 46,
+  "sourceBytes": 536870912,
+  "interruptDelaySeconds": 1.5,
+  "operationsUseExactOptimizedApk": true,
+  "originalEnvironmentPersistedBeforeMutation": true,
+  "directPreviousPublicUpgrade": true,
+  "actualOptimizedProcessDeath": true,
+  "durableBytesBeforeDeath": 37748736,
+  "uncheckedTailBytes": 1966080,
+  "privateStageOutsideWorkspace": true,
+  "originalSourceBytesVerified": true,
+  "restartAndCancelledReviewStartNoCopy": true,
+  "layouts": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.5,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.5,
+      "dark": true,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.5,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.5,
+      "dark": true,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": true,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.5,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.5,
+      "dark": true,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsReachable": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "allNamedControlsReachable": true
+    }
+  ],
+  "manualResumePublishesExactBytes": true,
+  "reusedBytesSeparateFromNewWrites": true,
+  "readbackVerificationPreserved": true,
+  "oldHistoryRetained": true,
+  "ownedPrivateStageRemovedAfterPublication": true,
+  "unrelatedDestinationKept": true,
+  "legacyFavoritePreserved": true,
+  "sentinelPreferencePreserved": true,
+  "unrelatedUriGrantsUnchanged": true,
+  "restoredOriginalUriGrants": true,
+  "restoredOriginalManagedFiles": true,
+  "restoredOriginalFileAbsences": true,
+  "restoredManagedFileCount": 443,
+  "syntheticPublicFixtureRemoved": true,
+  "restoredOriginalStorageAccess": true,
+  "restoredApkSha256": "d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2",
+  "cleanupErrors": [],
+  "success": true
+}

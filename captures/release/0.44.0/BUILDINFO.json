@@ -1,0 +1,20 @@
+{
+  "version": "0.44.0-preview",
+  "version_code": "46",
+  "application_id": "dev.findroid",
+  "source_commit": "9a7f71cb4882c7f0c9d78c2ddf7e0d5235b05eb1",
+  "working_tree_dirty": false,
+  "signing": "development-preview; release APK is unsigned",
+  "artifacts": [
+    {
+      "name": "Findroid-0.44.0-preview.apk",
+      "bytes": 8695596,
+      "sha256": "d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2"
+    },
+    {
+      "name": "Findroid-0.44.0-unsigned.apk",
+      "bytes": 8687384,
+      "sha256": "a6f6441af4b8d15d1fc47d0a7b4f3bd7193d0101f9e589fb40a97a43d11c22fd"
+    }
+  ]
+}

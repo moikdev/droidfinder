@@ -1,0 +1,54 @@
+{
+  "actualScreenshotsInspected": true,
+  "scope": "All 12 accepted public OTA captures: native-pixel dialog crops for available, ready, installer, installer-complete and up-to-date on both APIs; each upgraded sidebar inspected in full. Named controls and version/install states are readable without clipping.",
+  "images": [
+    {
+      "path": "api30-ota/available.png",
+      "sha256": "85b0ddefb597f907b06c4eb7db0ac28cabc8c80288571ad653a5027798e53129"
+    },
+    {
+      "path": "api30-ota/ready.png",
+      "sha256": "7c9175ca5a9b4147a4f1ddc82f6f3ac263aa2e6ee41ee9c51377e2d1285d726f"
+    },
+    {
+      "path": "api30-ota/installer.png",
+      "sha256": "0dead4d7dc51dffa2bc079b6eeb25020715a5aa395df7cc1027c6f51b0fbf05c"
+    },
+    {
+      "path": "api30-ota/installer-complete.png",
+      "sha256": "d82c462ce7ad631a4b8c2982e0fa83a35edb5682c200aba5e7023546593045d5"
+    },
+    {
+      "path": "api30-ota/upgraded-sidebar.png",
+      "sha256": "b0888ae5829d0a2618d3a4faaea732b2190344da9acb627970b9b8a88a3afd15"
+    },
+    {
+      "path": "api30-ota/up-to-date.png",
+      "sha256": "28d8b0a91dfec51f6a833fc597166069d3976709083d6870071d16e882d8588a"
+    },
+    {
+      "path": "api36-ota/available.png",
+      "sha256": "e46d73ca788ec982ae72cb3753d49474bfd1329d890191593ddf5e8de76d813a"
+    },
+    {
+      "path": "api36-ota/ready.png",
+      "sha256": "1141a74653becda973d847a7c16f4543b574ee7ec593d7cfdb324fdbed0ed7c7"
+    },
+    {
+      "path": "api36-ota/installer.png",
+      "sha256": "5165e41088a0150103a78f2b1eaee64ee5926f65b9484856bc069e93e7f3cebb"
+    },
+    {
+      "path": "api36-ota/installer-complete.png",
+      "sha256": "7b26c46481278a99d986769145ad97a4491d860d8a9f70f20b16c057a9c396a3"
+    },
+    {
+      "path": "api36-ota/upgraded-sidebar.png",
+      "sha256": "d47771480cbdb9fbc23f6780660627bb6e59b941f1a77b534b6ed83866d73e98"
+    },
+    {
+      "path": "api36-ota/up-to-date.png",
+      "sha256": "f0b200514cb1bac4879bd55a39b16871a765eb9e194c63f7766a92593d34dbe2"
+    }
+  ]
+}

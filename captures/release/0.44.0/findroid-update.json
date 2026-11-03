@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 46,
+  "versionName": "0.44.0-preview",
+  "apkName": "Findroid-0.44.0-preview.apk",
+  "bytes": 8695596,
+  "sha256": "d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.44.0-preview/Findroid-0.44.0-preview.apk",
+  "notes": "Review and resume saved large local copies in Transfers. Check saved bytes, keep existing destinations, and discard private working data with a separate confirmation. Recovery starts with supported local files and Workspace destinations; connected storage, folders and moves keep their existing restart behavior.\n"
+}

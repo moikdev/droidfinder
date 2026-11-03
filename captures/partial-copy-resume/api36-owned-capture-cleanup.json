@@ -1,0 +1,25 @@
+{
+  "serial": "emulator-5582",
+  "nativeApkPair": {
+    "app/build/outputs/apk/debug/app-debug.apk": "feea3be548a3798d84392dd93de027d6abf857a36caa0b9698578b57c69dc6ef",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "ce801120d39ab005e467da62997e9fc98b6283c0cf66333bb866df026e895809"
+  },
+  "fullScreenshotsExcludedFromPublication": true,
+  "files": [
+    {
+      "name": "provider-wait",
+      "retainedPrivately": true,
+      "removedOnlyOwnedSharedCapture": true
+    },
+    {
+      "name": "recent-rate",
+      "retainedPrivately": true,
+      "removedOnlyOwnedSharedCapture": true
+    },
+    {
+      "name": "paused",
+      "retainedPrivately": true,
+      "removedOnlyOwnedSharedCapture": true
+    }
+  ]
+}

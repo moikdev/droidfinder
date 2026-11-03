@@ -19,7 +19,10 @@ def main():
     p.add_argument('--to-apk', type=Path, required=True)
     p.add_argument('--expected-version-code', type=int, required=True)
     p.add_argument('--output', type=Path, required=True)
-    args = p.parse_args(); args.output.mkdir(parents=True, exist_ok=True)
+    args = p.parse_args(); assert not args.output.exists(), 'Preserve prior attempts; use a fresh output directory'
+    args.output.mkdir(parents=True)
+    qa_xml = '/sdcard/findroid-ota-qa-'+str(time.time_ns())+'.xml'
+    menu_tap_retries = 0
     adb = str(Path.home() / 'Library/Android/sdk/platform-tools/adb')
     debug = ROOT / 'app/build/outputs/apk/debug/app-debug.apk'
     def call(*parts, data=None):
@@ -41,9 +44,16 @@ def main():
     def write(path, data): call('shell', 'run-as dev.findroid sh -c ' + shlex.quote('cat > ' + shlex.quote(path)), data=data)
     def version(): return int(re.search(r'versionCode=(\d+)', shell('dumpsys', 'package', 'dev.findroid').decode()).group(1))
     def dump(name):
-        shell('uiautomator', 'dump', '/sdcard/findroid-ota-qa.xml')
-        data = call('exec-out', 'cat', '/sdcard/findroid-ota-qa.xml')
-        (args.output / f'{name}.xml').write_bytes(data); return ET.fromstring(data)
+        # A failed UiAutomator dump can exit zero and leave an old XML file behind.
+        for attempt in range(3):
+            shell('rm', '-f', '--', qa_xml)
+            result = shell('uiautomator', 'dump', qa_xml).decode(errors='replace')
+            if 'UI hierchary dumped to:' in result or 'UI hierarchy dumped to:' in result:
+                data = call('exec-out', 'cat', qa_xml)
+                tree = ET.fromstring(data)
+                (args.output / f'{name}.xml').write_bytes(data); return tree
+            time.sleep(.2)
+        raise AssertionError('Could not obtain a fresh Android hierarchy: '+name)
     def nodes(root, name): return [n for n in root.iter('node') if n.get('text') == name or n.get('content-desc') == name]
     def wait(name, predicate, seconds=45):
         deadline = time.monotonic() + seconds
@@ -83,8 +93,20 @@ def main():
         shell('am', 'start', '-W', '-f', '0x10008000', '--windowingMode', 1, '-n', 'dev.findroid/.MainActivity',
             '--es', 'finderWindowId', 'ota-sidebar-' + stamp, '--es', 'finderLocation', full)
     def updates():
+        nonlocal menu_tap_retries
         launch(); root = wait('browser', lambda t: bool(nodes(t, 'Actions'))); tap(one(root, 'Actions'))
-        root = wait('more', lambda t: bool(nodes(t, 'App updates'))); tap(one(root, 'App updates'))
+        wait('more', lambda t: bool(nodes(t, 'App updates')))
+        for attempt in range(5):
+            root = dump('open-updates')
+            if any(n.get('text', '').startswith('Installed: ') for n in root.iter('node')): return
+            item = one(root, 'App updates')
+            l,t,r,b = map(int, re.findall(r'\d+', item.get('bounds')))
+            assert r>l and b>t, 'App updates must have visible bounds'
+            tap(item)
+            if attempt: menu_tap_retries += 1
+            time.sleep(.2)
+        root = dump('open-updates')
+        assert any(n.get('text', '').startswith('Installed: ') for n in root.iter('node')), 'App updates did not open'
     try:
         stop(); call('install', '-r', debug)
         assert subprocess.run([adb,'-s',args.serial,'shell','run-as','dev.findroid','test','!','-e','files/.setup-transaction'],stdout=subprocess.PIPE,stderr=subprocess.PIPE).returncode==0
@@ -146,13 +168,16 @@ def main():
             'publicFeedDownloadAndAndroidInstall': True, 'installedApkMatchesPublicBytes': True,
             'installerCompletionConfirmedBeforeRelaunch': True, 'originalFileBytes': True, 'legacyFavoritePreserved': True,
             'sentinelPreferencePreserved': True, 'updatedSidebarVisible': True, 'noRepeatOffer': True,
-            'restoredApkSha256': hashlib.sha256(args.to_apk.read_bytes()).hexdigest()}
+            'restoredApkSha256': hashlib.sha256(args.to_apk.read_bytes()).hexdigest(),
+            'checkerSha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'freshAndroidHierarchies': True, 'verifiedUpdateDialogOpened': True, 'menuTapRetries': menu_tap_retries}
     finally:
         stop()
         if original_setup is not None:
             call('install', '-r', debug); restore()
             shell('run-as', 'dev.findroid', 'rm', '-rf', 'files/' + relative)
         call('install', '-r', args.to_apk)
+        shell('rm', '-f', '--', qa_xml)
     report['restoredOriginalSetup'] = True
     (args.output / 'verification.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))

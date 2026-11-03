@@ -1,0 +1,20 @@
+{
+  "actualOptimizedScreenshots": true,
+  "images": [
+    {
+      "documentPath": "docs/screenshots/partial-copy-review.png",
+      "capturePath": "captures/partial-copy-resume/api30-optimized/review-1280x800-font1.0-light-Resume.png",
+      "sha256": "fc3daa905700a5373a59a49c6292ff33407470a920a5811e4e7455821b7cac85"
+    },
+    {
+      "documentPath": "docs/screenshots/partial-copy-results.png",
+      "capturePath": "captures/partial-copy-resume/api30-optimized/resumed-completed.png",
+      "sha256": "7e80235b998440cb4c354b2b0c411fdaf32376b5aa53bfd1c44cc08194716e22"
+    },
+    {
+      "documentPath": "docs/screenshots/app-updates-0440.png",
+      "capturePath": "captures/partial-copy-resume/api30-ota/up-to-date.png",
+      "sha256": "28d8b0a91dfec51f6a833fc597166069d3976709083d6870071d16e882d8588a"
+    }
+  ]
+}

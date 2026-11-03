@@ -1,0 +1,90 @@
+{
+  "jobs": [
+    {
+      "id": "44d29086-366f-4e61-8330-8f7d26b11fa6",
+      "state": "RUNNING",
+      "bytes": 29425664,
+      "items": 1,
+      "in_flight": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+      "verify_copies": 1,
+      "reused_bytes": 0,
+      "partial_copy_notice": null,
+      "partialCopy": {
+        "schema": 1,
+        "owner": "fd386f71-f2ec-49f4-a016-c5cb3b558590",
+        "source": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+        "target": "/data/user/0/dev.findroid/files/Workspace/Resume-1793735359316789000/Out/Resumable original.bin",
+        "staging": "/data/user/0/dev.findroid/files/.partial-copies/fd386f71-f2ec-49f4-a016-c5cb3b558590/data",
+        "sourceStamp": {
+          "device": "98",
+          "inode": "229498",
+          "size": "536870912",
+          "modifiedSeconds": "1793735364",
+          "modifiedNanos": "308005871",
+          "changedSeconds": "1793735364",
+          "changedNanos": "308005871",
+          "regular": true,
+          "directory": false,
+          "links": "1"
+        },
+        "destinationParentStamp": {
+          "device": "65077",
+          "inode": "591225",
+          "size": "4096",
+          "modifiedSeconds": "1793735364",
+          "modifiedNanos": "720005871",
+          "changedSeconds": "1793735364",
+          "changedNanos": "720005871",
+          "regular": false,
+          "directory": true,
+          "links": "2"
+        },
+        "stagingParentStamp": {
+          "device": "65077",
+          "inode": "591233",
+          "size": "4096",
+          "modifiedSeconds": "1793735411",
+          "modifiedNanos": "272005894",
+          "changedSeconds": "1793735411",
+          "changedNanos": "272005894",
+          "regular": false,
+          "directory": true,
+          "links": "2"
+        },
+        "stagingStamp": {
+          "device": "65077",
+          "inode": "591235",
+          "size": "37748736",
+          "modifiedSeconds": "1793735412",
+          "modifiedNanos": "444005894",
+          "changedSeconds": "1793735412",
+          "changedNanos": "444005894",
+          "regular": true,
+          "directory": false,
+          "links": "1"
+        },
+        "offset": "37748736",
+        "prefixSha256": "d4d77915154843d612e41c6a72645b31766b8f0d9d53c4980d8b31bacb90c8f3",
+        "verifyCopies": true,
+        "publishing": false,
+        "resolvedSource": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+        "resolvedDestinationParent": "/data/data/dev.findroid/files/Workspace/Resume-1793735359316789000/Out",
+        "resolvedPrivateRoot": "/data/data/dev.findroid/files/.partial-copies"
+      }
+    }
+  ],
+  "verifications": [
+    {
+      "job_id": "44d29086-366f-4e61-8330-8f7d26b11fa6",
+      "root": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+      "source": "/storage/emulated/0/Documents/Findroid resume demo 1793735359316789000/Resumable original.bin",
+      "position": 0,
+      "status": "INCOMPLETE",
+      "destination": null,
+      "bytes": 0,
+      "expected": null,
+      "actual": null,
+      "error": null
+    }
+  ]
+}

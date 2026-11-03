@@ -1,6 +1,6 @@
 # Resume an interrupted copy
 
-Partial-copy recovery is implemented for **0.44.0**, with local acceptance complete. Publication and real public OTA acceptance are next; the current public release is 0.43.0.
+Partial-copy recovery is available in **0.44.0-preview**. Both assigned tablets pass local acceptance and actual public OTA upgrades. Immutable-archive verification is being completed.
 
 When Android stops a large copy, Findroid can keep a private checkpoint instead of losing all its progress. Open **Actions → Transfers**, find the interrupted transfer, and choose **Review saved copy…**.
 

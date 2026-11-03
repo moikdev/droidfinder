@@ -1,0 +1,209 @@
+{
+  "success": true,
+  "passed": 39,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "replacedSourceWithTheSameBytesCannotResume",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "aNewDestinationCannotBeOverwrittenByAnApprovedResume",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "corruptedPrefixCannotResumeEvenAtTheSameLength",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "directoryAndFifoTypesAreRejectedWithoutBlocking",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "resumedOptionalVerificationRecordsTheFullPublishedCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "noReplacePublicationPreservesAnExistingDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "nativePublicationPreservesNonBmpUnicodeFilenames",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "reviewedPublicationCleanupKeepsTheRenamedDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "aRealUncheckpointedTailIsReviewedThenRecopied",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "createNewNeverTruncatesACollidingFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "opensRealRegularDescriptorsAndSyncsPrivateDirectories",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "descriptorIdentityDoesNotFollowAReplacedPath",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "staleCleanupApprovalCannotDeleteAReplacedPrivateFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "cancellingAReviewKeepsAllPrivateBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "realResumeReadsBackAndPublishesOnlyTheRemainingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "changedSourceCannotReuseAnOldReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "kernelNoReplaceRenameKeepsBothFilesOnCollision",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "aFinalSymlinkCannotBeOpenedAsASourceOrWorkingFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "finishingRecoveryHasCleanupControlsAndKeepsThePublishedCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "uncheckedTailIsDisclosedAndNeverCountedAsReusedBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "changedSourceBlocksResumeAndOffersOwnedDiscard",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "namedReviewResumesExactBytesAndKeepsDurableSeparateHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "cancellingAReviewedDialogStartsNoCopyAndKeepsCheckpointBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "aDestinationCreatedAfterReviewCannotBeReplacedByResume",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "clearFinishedKeepsSavedCopiesAvailableForReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "manualDiscardKeepsSourceAndOtherDestinationItems",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "corruptDatabaseIsPreservedInsteadOfAutomaticallyDeleted",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "failedTransactionRollsBackMetadataAndInvalidatesTheSnapshotCache",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "verificationRowFailureRollsBackTheWholeCheckpoint",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "malformedLegacyJournalDoesNotCommitTheMigrationMarker",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "upgradesVersionThreeWhileKeepingVerificationRowsAndOldCopiesUnresumable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "stageOwnershipTransferIsAtomicWhenAJournalInsertFails",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "incrementalCheckpointsKeepUnchangedSourcesMembersAndChildRows",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "roundTripsVerificationChoiceAndIndividualResultsWithoutRewritingUnchangedRows",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "migratesLegacyOnceAndRetainsTheOriginalFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "upgradesVersionTwoWithoutInventingVerificationForOldCopies",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "exactNativeCheckpointIdentitiesRoundTripAndRejectDuplicateOwners",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "importsVerifiedLegacyRecordsWithoutChangingTheLegacyBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SqliteTransferStoreTest",
+      "test": "upgradesVersionOneWithoutChangingJobsAndRoundTripsNullableEstimates",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 34.2,
+  "timedOut": false
+}

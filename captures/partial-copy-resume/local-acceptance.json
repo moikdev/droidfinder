@@ -1,0 +1,9 @@
+{
+  "localAcceptancePassed": true,
+  "previewApkSha256": "d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2",
+  "jvmCases": 613,
+  "nativeCasesPerApi": 455,
+  "isolatedBatchesPerApi": 50,
+  "focusedCasesPerApi": 39,
+  "namedRecoveryControlsPerApi": 90
+}

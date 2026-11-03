@@ -147,6 +147,8 @@ def main():
     for api,serial in SERIALS:
         folder=PROOF/(api+'-ota');ota=read(folder/'verification.json')
         assert ota['serial']==serial and (ota['fromVersionCode'],ota['toVersionCode'])==(45,46) and ota['restoredApkSha256']==expected
+        assert ota['checkerSha256']==sha(ROOT/'scripts/check-ota-upgrade.py')
+        assert ota['freshAndroidHierarchies'] and ota['verifiedUpdateDialogOpened']
         assert all(ota[key] for key in ('publicFeedDownloadAndAndroidInstall','installedApkMatchesPublicBytes','installerCompletionConfirmedBeforeRelaunch','originalFileBytes','legacyFavoritePreserved','sentinelPreferencePreserved','updatedSidebarVisible','noRepeatOffer','restoredOriginalSetup'))
         images=list(folder.glob('*.png'));ota_images+=images
         files += [folder/'verification.json']+images+list(folder.glob('*.xml'))
