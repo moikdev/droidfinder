@@ -24,6 +24,8 @@ The draft also has a dedicated original-preservation primitive. It requires same
 
 The draft publication primitive moves one fully prepared root with native no-replace rename. It requires a durable intent callback outside the reviewed trees, checks the staged bytes and both exact trees again after that callback, and validates the resulting destination and working-tree transitions. A collision keeps the arriving file and the staged copy. An error after publication keeps the completed result and reports its destination for manual review. This primitive is not a complete apply worker or an automatic recovery path.
 
+The draft publication journal allocates a fresh app-private run directory outside the compared and working trees. Each intent, completed publication and run completion gets a new immutable record, synchronized and read back before it is accepted. A pending intent prevents another publication. Partial writes, unexpected files, rewritten records, redirected parents and a readback mismatch close the writer and preserve its existing bytes. Existing run directories are never reopened for writing. The journal contains manual evidence only; it has no replay, rollback, pruning or deletion API. Complete-plan and apply-worker integration remain pending.
+
 ## Work still required
 
 - Connect guarded native publication to a complete apply worker, with a fresh remaining-plan check between operations.
