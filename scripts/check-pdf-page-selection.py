@@ -170,6 +170,7 @@ def run(a):
             report['browserHorizontalScrolls'].append(dict(name=name,attempt=attempt,paneBoundsPx=[l,t,r,b],namedControlRecheckedBeforeTap=True))
             d.shell('input','swipe',round(l+(r-l)*first),(t+b)//2,round(l+(r-l)*last),(t+b)//2,300)
         else:raise AssertionError('Named file actions unavailable after horizontal navigation')
+        d.wait(name+'-file-menu-ready',lambda tree:ready(tree,'Quick Look'))
         ui.click(name+'-quick-look','Quick Look')
         d.wait(name+'-preview',lambda tree:ready(tree,'Select page text'))
         ui.text(name+'-rendered-page','PDF page text selection')

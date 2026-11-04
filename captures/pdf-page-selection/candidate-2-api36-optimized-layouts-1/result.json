@@ -1,0 +1,263 @@
+{
+  "serial": "emulator-5582",
+  "section": "layouts",
+  "sourceCommit": "93d36afd3d3caf1c972a3dcd42256978fac468cb",
+  "checkerSha256": "6191c3e0fb656a8f401ba4128f6821b4d990508e69939a7d2fa7a75cef933ced",
+  "buildReceiptSha256": "3037aa8ee145e3559f7db2383cc5ab20af982d08edcfcbf89f8fae47c9a9326e",
+  "apkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "previousApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+  "fromVersionCode": 50,
+  "toVersionCode": 51,
+  "checkerDependencies": {
+    "scripts/check-reviewed-folder-sync.py": "82fcfd46b08c64ae73d13400f7954a57eb8a1a2a36316c387d6cfc55c59320dd",
+    "scripts/check-local-search-index.py": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+    "scripts/android/acceptance.py": "58413d03fa96c29c1146bae2ca3a5b4c87dba9a1c2f1b777707697bf381bc016",
+    "scripts/android/PdfSelectionInput.java": "a2d495390acd942aa6c976f8fd0df29cc4bcc7ec66e5ac62e3db6b1df093f7a6",
+    "scripts/android/PdfSelectionInputGlobal.java": "bcdbc4749a44bfd5dc334c0abe5e63f623b578922d3167006d1218a3f425406c"
+  },
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "checks": [],
+  "layouts": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          361,
+          758,
+          499,
+          788
+        ],
+        "textWidth": 138,
+        "textHeight": 30,
+        "rasterGlyphWidth": 136,
+        "rasterGlyphHeight": 21,
+        "image": "layout-1280x800-font1.0-light-copy-glyph.png",
+        "sha256": "9523d0c4eb913dcdeca1c9bd79e9cdfc12fb5b5fc1c0b932321951fe221b36b0"
+      }
+    }
+  ],
+  "captures": [
+    {
+      "path": "layout-1280x800-font1.0-light-selection-surface.png",
+      "sha256": "007afa1cfe894ae6e65594c01035bc82c6fb8287d9333b007717e75c510e23f9",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "19f445c86789deb8366e5b0b6b669f686bb302876e72ae78225195cec4565eee",
+      "privateRawHierarchySha256": "f54bc26a5d01081ae915f63c381b9fb67aea119897b32b4375581ed93b490a6c"
+    },
+    {
+      "path": "layout-1280x800-font1.0-light-pan-surface.png",
+      "sha256": "f4dda220442546f269e9c43267730b2092614ab9df76299c0b751ea88b7ce467",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "746080557402bb7f9eb7446692149f200ba789c5d875221f7d17bd712458791f",
+      "privateRawHierarchySha256": "36d9cf6d98d79e5cfe9ad071bfd5092e3dc0bb50e90772e0763abb6407f05e38"
+    }
+  ],
+  "clipboardProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    }
+  ],
+  "controlProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        285,
+        1902,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        857,
+        353,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        343,
+        737,
+        517,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        737,
+        337,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        359,
+        737,
+        533,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        285,
+        1902,
+        357
+      ],
+      "density": 1.5
+    }
+  ],
+  "selectionHandleProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        931,
+        335,
+        1003,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        1003,
+        335,
+        1075,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    }
+  ],
+  "screenChecks": [
+    {
+      "requestedWidthDp": 1280,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 1920,
+      "actualHeightPx": 1200
+    },
+    {
+      "requestedWidthDp": 1280,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 1920,
+      "actualHeightPx": 1200
+    }
+  ],
+  "densityChecks": [],
+  "browserHorizontalScrolls": [],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "inputHelper": {
+    "platformApi": 36,
+    "className": "PdfSelectionInputGlobal",
+    "sourceSha256": "bcdbc4749a44bfd5dc334c0abe5e63f623b578922d3167006d1218a3f425406c",
+    "shellOnly": true
+  },
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "hierarchyRetries": []
+}

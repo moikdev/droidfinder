@@ -1,0 +1,33 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/no-text-layer-surface.png",
+      "sha256": "3d33b7e148e7f6c5fd0d00a173a2625817db8ca00917d1afbd9026d6849d1942"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/retained-selection-pan-mode-surface.png",
+      "sha256": "1548960572c2e1db1252dd4de163e2dbbb33f9bbcee757e2c8af1c48e3b96174"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/two-lines-surface.png",
+      "sha256": "4bc282192a495ec2297711b926449cc8ee10ed222147506827805a790731ba71"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/visible-zoomed-selection-surface.png",
+      "sha256": "890e80d576fa2d8c9ff263e0f488432ea106956278af1d46637954a09ba3eacf"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/word-and-handles-surface.png",
+      "sha256": "bcf35b092e2b2e50d21b7fae9df6a3d966f24f7ef3231dcf55e4c0e36ff0f4d5"
+    }
+  ],
+  "method": "Opened all three private labeled sheets covering all five optimized API36 core surface captures.",
+  "findings": [
+    "Only the synthetic Field guide PDF and preview controls are visible.",
+    "Word and two-line highlights are visible; both handles have complete distinct accessibility targets.",
+    "The selected word remains fully visible after real zoom/pan. Pan mode keeps the highlight and copy actions and hides adjustment handles.",
+    "The blank page explains its missing text layer and disables unavailable actions."
+  ],
+  "fullReleaseAcceptanceComplete": false
+}

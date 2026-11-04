@@ -1,5 +1,15 @@
 # Android preview verification
 
+## Findroid 0.49.0 — PDF page selection, acceptance in progress
+
+Proposal 46 is still open and the implemented count remains **36/72**. The signed preview has not been publicly released. Frozen candidate 2 binds 403 source inputs / 105 outputs to application/native-test source `93d36afd3d3caf1c972a3dcd42256978fac468cb`; 948 JVM cases pass, lint reports 0 errors / 148 existing warnings / 12 hints. The preview SHA-256 is `c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3`.
+
+Both optimized core sections pass four workflows and six real foreground clipboard reads per API, with all ten surface captures inspected. API30's complete 12-layout/two-density section passes, including 26 further exact clipboard reads, complete 48 dp controls/handles and text/raster-glyph growth in six size/theme groups. All 26 matrix surface captures and 12 glyph crops were inspected. API36 layouts and both full native regressions remain pending.
+
+API36's first native run stopped on a 10-second archive-opening wait before its keyboard/context-menu steps; the five other archive cases passed. The cause remains undetermined. A complete unchanged archive-class retry is explicitly selected while the matching first 14 successful batch reports remain preserved. Its first optimized-layout run completed one layout, then received only an inactive SystemUI status bar immediately after opening a menu; a fresh-hierarchy named-action wait is added for the complete retry. Original managed bytes/absences, Workspace, grants and settings were restored with public 0.48 after both stopped attempts. These attempts are excluded from complete acceptance.
+
+Public release, actual 50→51 OTA and independent immutable-archive verification remain pending. [Guide](docs/PDF-PAGE-SELECTION.md) · [Release notes](docs/releases/0.49.0.md).
+
 ## Findroid 0.48.0 — review transfer space
 
 Local, actual public OTA and independent immutable-archive acceptance completed on November 4, 2026. Proposal 45 is implemented; the tracker now records **36/72 implemented**.

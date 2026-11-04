@@ -1,0 +1,166 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/density-240-selection-surface.png",
+      "sha256": "3ad1a9b76968bb465006d47849d411e079fb554f63b227e07f8188ff89ee3ea0"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/density-300-selection-surface.png",
+      "sha256": "8586856345a6fb9f602c1f87b0bd10f81e450e5e2b09eb631ff8d47e888eb531"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-copy-glyph.png",
+      "sha256": "8a83810f007d643fd36125ae3e2d46ae0b3c1fd944dae6bc8309a174ebf3d742"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-pan-surface.png",
+      "sha256": "38a0f8d24cb6b23d4f2379b07853c6429a7dbe265cb4fb24e20490b22f690a4b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-selection-surface.png",
+      "sha256": "278cc3fe36572766d5a12a769e7531a57c0fff52e43fa09e60ef0dca5438b213"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-light-copy-glyph.png",
+      "sha256": "1e44006efaf18cc85877a009df249a9803b5e3a1f0ec4e6e0dc2cb36c87cb5cd"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-light-pan-surface.png",
+      "sha256": "37a4f0b72a961a5139195268000ea7b91ce2fc8356913221720fd884a882c5ca"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-light-selection-surface.png",
+      "sha256": "fef987270fb563e87de7262fa1af672f735aad1a6f4bb89a70819ffa413a6a40"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-copy-glyph.png",
+      "sha256": "271988183758f414d80d3fb035e4411738c2b4c60701e2a7e5e449e94cd410a7"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-pan-surface.png",
+      "sha256": "1b7517dc46d5509a70a600c7ada9eb1f7e8d407bd048a958df7ea6af4ba574cf"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-selection-surface.png",
+      "sha256": "faa01438ddfb029dbf4400dd45ebdac2a08f9c24dfe8f82216fa3783bbe5c31b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-light-copy-glyph.png",
+      "sha256": "c153fd6c0bc696c175a20120fcf38494f9c808ebb078d65f61434d517e4c317c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-light-pan-surface.png",
+      "sha256": "934771a6f64f1ab2d24381a96f07bee813ba6bfe30474e16b5f4eb28ce4a549d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-light-selection-surface.png",
+      "sha256": "31722e3bc3c3c7392782b26d06f2b8828df5a0f4738b01cad48c0b059f9cad88"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-dark-copy-glyph.png",
+      "sha256": "ba405028645b4ada346fd186da5da91620e1a249fec58c1c65b62f382c7d9714"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-dark-pan-surface.png",
+      "sha256": "88eb0e3ddeb1d83e90048145e5919b1367c6d3b48049c6112f6d7541dfff4e90"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-dark-selection-surface.png",
+      "sha256": "81f2e051ca314024921057f9feb1b70e24a33d8d6f95c41a2b9c03c2ec1bb462"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-light-copy-glyph.png",
+      "sha256": "fb5b930c817913d33734943457229751301dc482b7cb5ca965bd6ef45757b6be"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-light-pan-surface.png",
+      "sha256": "6e0027b3a71649b34a19e68e0caeec8dc226ea88880be0768f9e52d8d90d11ed"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-light-selection-surface.png",
+      "sha256": "7fd76cb239f1ba79ed41e93ff16b901eeac060efed98f5f4da516a864c5e4a35"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-dark-copy-glyph.png",
+      "sha256": "530b385b9b495240612e491e1102d5af4e8ca3a6fe525ec72a84d150168dc639"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-dark-pan-surface.png",
+      "sha256": "ccfd3ce36bbbadaac7c91cda830aac9718306cebb71b0303dccbed59d317c080"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-dark-selection-surface.png",
+      "sha256": "e5420e87f2ef6aa36894923dfa741c5dbebe670995f23e37bcde7f97784a058a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-light-copy-glyph.png",
+      "sha256": "582df3f30c948f64805b99baad91c13f9a710f8ca7d73b3c76cfa320d6c7e978"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-light-pan-surface.png",
+      "sha256": "031bef9b57f6d640c62480a529835309adda41e400ea4bfe22aae7c198bef776"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-light-selection-surface.png",
+      "sha256": "1c147bc3533860b8bc6d3696644bbe79d2c3f32e3cb1fcb0017a6134e8e13826"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-copy-glyph.png",
+      "sha256": "b95b38909c7315d1f619cff7e2599c3c5a4af35dd842b561696f4f52fb5521c9"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-pan-surface.png",
+      "sha256": "083de5af958433200223d4796b8379adfebb5205431d6fe6416d55922b42cd92"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-selection-surface.png",
+      "sha256": "5af5f306963fb9640aeb39af7466483f8606ac3c37d4431df1795510443762e4"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-light-copy-glyph.png",
+      "sha256": "dc9dc15f7fc4d93f79a29c253877b8bd28d23fcedfc0665846f4f15e81c554c9"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-light-pan-surface.png",
+      "sha256": "8be7695927ce99d6878c05cfc6c68d8a403ce5852a8a9f81b3a13aae8d71d579"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-light-selection-surface.png",
+      "sha256": "ca6d7aca3094e6f906e1c4a736123885834e57f6620dd7cfde0caaf1cb038e9b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-copy-glyph.png",
+      "sha256": "2e4cd68deea5ea9a6bc44617f96a45748b7b58399c00b24b08aee0158d28c260"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-pan-surface.png",
+      "sha256": "f8146c9d91058ef33f0a76cab5af951a0920654c337a5da8412a04702f5e6096"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-selection-surface.png",
+      "sha256": "158c8b8f72c5a281f8588453cd905f57f3d3c18791de5ba829110b0233d0cc8b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-light-copy-glyph.png",
+      "sha256": "dc7f1de4f944c45fa85fbdb8bd1341cc47ec38fdb33954bac8fc242ce668ad37"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-light-pan-surface.png",
+      "sha256": "27853d2aa1a64786b0b924b00e2cbcb3435f029f4cdd52e9b16f767963c8321c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-light-selection-surface.png",
+      "sha256": "3ad1a9b76968bb465006d47849d411e079fb554f63b227e07f8188ff89ee3ea0"
+    }
+  ],
+  "method": "Opened all seven private labeled surface sheets and the unscaled glyph sheet, covering every selected matrix screenshot and glyph crop.",
+  "findings": [
+    "All 12 size/font/theme combinations show the full synthetic filename and complete Copy/Select all/Clear/Pan controls.",
+    "At doubled system text the controls wrap into rows and remain readable in portrait and 600 dp split view.",
+    "Selection handles remain visible; pan mode retains the highlight and copy actions and hides the handles.",
+    "Both 240/300 dpi captures show complete named controls. All six copy-label groups visibly enlarge at system font scale 2.0.",
+    "Only synthetic PDF and preview contents appear in these public crops; no browser backdrop or original document names are included."
+  ],
+  "fullReleaseAcceptanceComplete": false
+}

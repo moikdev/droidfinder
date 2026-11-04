@@ -1,0 +1,16 @@
+{
+  "serial": "emulator-5582",
+  "originalAttemptPreserved": true,
+  "explicitWholeBatchRetrySelected": true,
+  "applicationAndTestApksWillRemainUnchanged": true,
+  "failedCase": "dev.findroid.ArchiveWorkflowTest#archiveSearchOwnsSpaceAndMouseContextActionsWork",
+  "failureLocation": "ArchiveWorkflowTest.open, line 161: waiting for ZIP archive read-only contents after the open action, before keyboard/search/context-menu steps.",
+  "acceptedBatchesBeforeFailure": 14,
+  "failedBatchPassedCases": 5,
+  "failedBatchFailedCases": 1,
+  "restorationComplete": true,
+  "originalWorkspaceTreeKept": true,
+  "cause": "Undetermined; no renderer, memory or application cause inferred from this UI wait timeout.",
+  "decision": "After optimized layout restoration, explicitly retry the complete six-case archive class and continue all remaining classes. Reuse only the 14 successful batches with matching frozen APK hashes/selectors, retaining all prior logs and their provenance.",
+  "priorProvenanceSha256": "c6c7ec6f24b77478ba8564b209a83d8c7d066fdd43cbdc589d15ec23e3a888f5"
+}

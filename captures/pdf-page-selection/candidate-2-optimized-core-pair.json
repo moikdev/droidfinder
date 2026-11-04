@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "93d36afd3d3caf1c972a3dcd42256978fac468cb",
+  "apkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "workflowsPerApi": 4,
+  "foregroundClipboardProofsPerApi": 6,
+  "matchingWorkflowNames": true,
+  "matchingActualClipboardText": true,
+  "bothComplete48DpHandleTargets": true,
+  "allOriginalDataAndPublic048Restored": true,
+  "fullNativeLayoutsAndPublicOtaRemainPending": true
+}

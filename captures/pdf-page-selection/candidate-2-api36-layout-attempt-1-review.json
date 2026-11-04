@@ -1,0 +1,14 @@
+{
+  "originalAttemptPreserved": true,
+  "serial": "emulator-5582",
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "originalWorkspaceTreeKept": true,
+  "completedLayouts": 1,
+  "stop": "The checker read the native hierarchy immediately after opening the file actions. That dump contained only the inactive SystemUI status bar and no active application window.",
+  "evidence": "The retained private dark-quick-look hierarchy contains 28 SystemUI nodes and no active application window; the prior file-actions hierarchy contains the named synthetic file action.",
+  "cause": "Transient missing active application window in the native hierarchy. No application crash or memory cause is inferred.",
+  "fix": "Wait for a fresh hierarchy with the complete enabled Quick Look action inside the active Findroid application window before tapping it. All existing complete 48 dp target assertions remain.",
+  "next": "Explicitly rerun all 12 layouts and two display densities in a fresh folder with unchanged optimized APK and application sources.",
+  "privateHierarchySha256": "2cdafc8a28c626c943800bc3fcbf9e69626e60ee9ce0a6c4bef824e62620bd05"
+}
