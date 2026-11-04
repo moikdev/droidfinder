@@ -72,7 +72,14 @@ class FolderSyncWorkflowTest {
     }
     private fun control(tag: String): SemanticsNodeInteraction {
         compose.onNodeWithTag("folder-sync-list").performScrollToNode(hasTestTag(tag))
-        return compose.onNodeWithTag(tag).assertIsDisplayed()
+        val control = compose.onNodeWithTag(tag).performScrollTo().assertIsDisplayed()
+        val node = control.fetchSemanticsNode()
+        if (node.config.contains(androidx.compose.ui.semantics.SemanticsActions.OnClick)) {
+            val minimum = 48f * compose.activity.resources.displayMetrics.density
+            assertTrue("$tag needs a complete 48 dp height", node.size.height >= minimum - 1)
+            assertTrue("$tag must be completely visible", node.boundsInRoot.height >= node.size.height - 1 && node.boundsInRoot.width >= node.size.width - 1)
+        }
+        return control
     }
     private fun clickText(text: String) {
         compose.onNodeWithTag("folder-sync-list").performScrollToNode(hasText(text))
@@ -189,7 +196,7 @@ class FolderSyncWorkflowTest {
         val captures = File(compose.activity.cacheDir, "folder-sync-qa").apply { check(isDirectory || mkdir()) }
         File(captures, "font-layout.json").writeText(
             "{\"normalLabelHeightPx\":$normalHeight,\"enlargedLabelHeightPx\":$enlargedHeight,\"requestedCompositionFontScale\":2.0,\"actualSystemFontChangeClaimed\":false}")
-        control("sync-apply"); capture("large-text-confirmation"); control("sync-close").performClick()
+        control("sync-close"); control("sync-apply"); capture("large-text-confirmation"); control("sync-close").performClick()
         assertFalse(model.folderSyncReview!!.visible); assertEquals("original destination", File(destination, "Update.txt").readText())
     }
     @Test fun secondaryPaneRequestsUseTheStrictPrimaryOwnerEvenAfterPanesSwap() {

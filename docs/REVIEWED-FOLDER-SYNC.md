@@ -48,6 +48,8 @@ Earlier attempts remain preserved locally. The first run passed 17/19 on both AP
 
 These draft counts are separate from the accepted 0.45 release totals. The authorized tracker remains **33/72 complete**, with proposal 43 still in progress until its full release acceptance finishes.
 
+The versioned 0.46/code 48 candidate now builds in debug, optimized preview and unsigned release variants. Its regression list contains 55 fresh-process batches, with the new sync cases first. The final candidate tests also require interacted controls to be fully visible and at least 48 dp high. These candidate checks remain pending; the 20/20 evidence above belongs to the earlier integration build.
+
 ## Remaining acceptance
 
 - Run the full native regression suite against the final versioned candidate.
