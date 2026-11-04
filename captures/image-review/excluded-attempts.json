@@ -63,5 +63,6 @@
       ],
       "recovery": "captures/image-review/api36-launcher-recovery.json"
     }
-  ]
+  ],
+  "finalOutcome": "Fresh final-candidate acceptance passes: the same 25 native cases in four isolated batches per Android 11/16 tablet, exact optimized core and all 12 balanced layouts per API. No superseded APK acceptance is reused. Actual public 54-to-55 OTA and original-state restoration pass on both tablets."
 }

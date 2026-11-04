@@ -1,0 +1,25 @@
+{
+  "version": "0.53.0-preview",
+  "versionCode": 55,
+  "applicationSourceCommit": "2b9c157dff077eadf66583c2a61b36b925a891e9",
+  "publicOtaComplete": true,
+  "fromVersionCode": 54,
+  "toVersionCode": 55,
+  "originalStateRestoredOnBothApis": true,
+  "originalWorkspaceTreesKept": true,
+  "installedPublicPreviewSha256": "81cc0b75ac6f038aec555e5c930c5cbaed5cb2debdf79d63db1f006f81402f0e",
+  "reviewedPublicOtaCaptures": 12,
+  "totalReviewedCapturePaths": 74,
+  "independentArchiveVerificationPending": true,
+  "proposalImplemented": false,
+  "evidence": [
+    {
+      "path": "captures/image-review/candidate-3-api30-public-ota/verification.json",
+      "sha256": "f0eab9f3e2e53758ae644dee11775c6c032f0b2ccf515af6132f4030226283b1"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-public-ota/verification.json",
+      "sha256": "3b49fab3add07683f83c5550cffe8b148c239b7f5d1a75fc35f54d36fcc02c78"
+    }
+  ]
+}

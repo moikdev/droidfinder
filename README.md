@@ -2,7 +2,7 @@
 
 **A Finder-inspired file explorer that makes room for your files on Android.**
 
-Browse folders, preview documents, organize a project, and move files between locations with tabs and two panes. Designed around the extra space on a tablet, with layouts for phones and support for a keyboard and mouse.
+Browse folders, preview documents, organize a project, and move files between locations with tabs and two panes. Designed around the extra space on a tablet, with support for smaller tablet windows, a keyboard and a mouse.
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 

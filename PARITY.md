@@ -159,7 +159,7 @@ See [the current verification record](VALIDATION.md) for local test coverage, op
 - [x] Flags, current item and reference retained through activity recreation; reviewed tagging keeps its own window in front. Closing/process loss discards session decisions.
 - [x] Wrapped, independently scrolling review/viewer controls keep room for the photo at enlarged system text sizes.
 
-Proposal 50 local acceptance is complete for 0.53; actual public OTA and archive acceptance remain pending. See the [photo review guide](docs/IMAGE-REVIEW.md).
+Proposal 50 local and actual public OTA acceptance is complete for 0.53; independent immutable-archive acceptance remains pending. See the [photo review guide](docs/IMAGE-REVIEW.md).
 
 ## Image Peek pass
 

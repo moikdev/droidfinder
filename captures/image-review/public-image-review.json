@@ -1,0 +1,659 @@
+{
+  "applicationSourceCommit": "2b9c157dff077eadf66583c2a61b36b925a891e9",
+  "images": [
+    {
+      "path": "captures/image-review/candidate-3-api30-native/images/after-batch-001/image-review-qa/flagged-review.png",
+      "sha256": "f33ab4be206ffc45916bf078a495990a122da8efc5fb6a8bde35177350e6f48f",
+      "inspected": true,
+      "basis": "Actual native review UI inspected directly."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-native/images/after-batch-001/image-review-qa/retained-review.png",
+      "sha256": "65ba273317bb8cd193f0a31e557b46004f8283a40dfe4a6b57f6acb7d8d53fca",
+      "inspected": true,
+      "basis": "Actual native review UI inspected directly."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-native/images/after-batch-001/image-review-qa/unreadable-review.png",
+      "sha256": "4817a991546893956dc1e4b0d3f31aa2201305a14d4517930a5c3efb8378870f",
+      "inspected": true,
+      "basis": "Actual native review UI inspected directly."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/core-review-comparison-preview.png",
+      "sha256": "e73c899732eb8b6b954b8b285726a91708618d2322688bb30b4da76e69cbb034",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/core-review-comparison-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/core-review-flagged-preview.png",
+      "sha256": "e591ab82390aca0c9821b13e43498d03e8009837cf43d26a4e22f9c55b483657",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/core-review-flagged-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/core-review-tag-draft-preview.png",
+      "sha256": "7c63dd815d968efe905202b09f09538346383af4435ad6c12ec0b5631e336e84",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/core-review-tag-draft-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/core-review-tags-applied-preview.png",
+      "sha256": "0c9fee88d4af7ae0f5261c7830ac7f61dba023c8dec1c2a9d13ea06138155d41",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/core-review-tags-applied-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font1.0-dark-glyph.png",
+      "sha256": "c7002cca9e6a75f631b4d685f43ce424c211ae1f526bfdad08655d40aa47552c",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font1.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        84,
+        158,
+        209,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "c941e69b84667b887ebd59669a1f259c7a9a106c35d77a66619bd414890d7a59",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "470c0abfa09b9a32dd92bec72b21e964ee1eeb426c103698a022725743a0d1c9",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        84,
+        158,
+        209,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "32d517e62eaa0f8e39daff44a57b02f98d64a19a57f81de353dd54dc21013f78",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font2.0-dark-glyph.png",
+      "sha256": "e512d0de01049215548a1bee2ab2eb2515584f4ed167cdc687372f72d5bd40e3",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font2.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        84,
+        114,
+        314,
+        170
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "43af49f33cb143fa6867edd93a4d1b747cede894c836a18227a26be4d2002b1b",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "947652e8850025ea6f63b6d9c69d6607a7d0e4ce994c8fb7b7bf553efe05f5bc",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        84,
+        112,
+        314,
+        168
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "7e096cfeb0d3c49bc0f455ac033eba6cd6a57283a15edff0925a4d6164f9c92c",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-1280x800-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font1.0-dark-glyph.png",
+      "sha256": "c7002cca9e6a75f631b4d685f43ce424c211ae1f526bfdad08655d40aa47552c",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font1.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        158,
+        173,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "6d440288121f1d2ddf66dc241e95a49b94154fbd2818d0d01251c4a6d4a0a9d8",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font1.0-light-glyph.png",
+      "sha256": "470c0abfa09b9a32dd92bec72b21e964ee1eeb426c103698a022725743a0d1c9",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        158,
+        173,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "dd0673f0b1f558b9d1f39e60537175a22a049885178f3c01a2dfc562f0e316ed",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font2.0-dark-glyph.png",
+      "sha256": "e512d0de01049215548a1bee2ab2eb2515584f4ed167cdc687372f72d5bd40e3",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font2.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        153,
+        278,
+        209
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "c1b5ff869c782175ef45139415fb8a11eb87ec3d0a218a6725e0e35cc6b90df1",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font2.0-light-glyph.png",
+      "sha256": "947652e8850025ea6f63b6d9c69d6607a7d0e4ce994c8fb7b7bf553efe05f5bc",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        185,
+        278,
+        241
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "3290d0891935ce643375484591d1c5280db61e6213842a6d0a118a090cf4d11d",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-600x800-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "c7002cca9e6a75f631b4d685f43ce424c211ae1f526bfdad08655d40aa47552c",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font1.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        158,
+        173,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "34f62e0a345d2593a795bd033aff3c76547ca3aac78898b5050f59d9e64683c7",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font1.0-light-glyph.png",
+      "sha256": "470c0abfa09b9a32dd92bec72b21e964ee1eeb426c103698a022725743a0d1c9",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        158,
+        173,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "a787eaeece228b3d6e9c3b340265a720f48fcb85e133466f5679e9fdd98e3ffb",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "e512d0de01049215548a1bee2ab2eb2515584f4ed167cdc687372f72d5bd40e3",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font2.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        185,
+        278,
+        241
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "44c2d7b16bda6b75c87a43daa230426f52e41e840d0fe4393946e447c7318a60",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font2.0-light-glyph.png",
+      "sha256": "947652e8850025ea6f63b6d9c69d6607a7d0e4ce994c8fb7b7bf553efe05f5bc",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        185,
+        278,
+        241
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "d09096b9e26eab17630095ce353f995b563fcecfb96a1c087d31353eb0d408fd",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api30-optimized/layout-800x1280-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-native-2/images/after-batch-001/image-review-qa/flagged-review.png",
+      "sha256": "7b98232e90d32b405680e59b27a90ccbcf4f222f69f202be2665f7c549452921",
+      "inspected": true,
+      "basis": "Actual native review UI inspected directly."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-native-2/images/after-batch-001/image-review-qa/retained-review.png",
+      "sha256": "655e7d5a0f0fb30bb1dee13e0b3f30b29a9470299286d2aa0b2afa1b47ff80dc",
+      "inspected": true,
+      "basis": "Actual native review UI inspected directly."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-native-2/images/after-batch-001/image-review-qa/unreadable-review.png",
+      "sha256": "429ff928273e31604e06c995476a60ff9b7b8ea457438b6ac64f891d3183d07c",
+      "inspected": true,
+      "basis": "Actual native review UI inspected directly."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/core-review-comparison-preview.png",
+      "sha256": "69177b5f2d2421bb663ee0dcc62627c146ae88bcde35ace81930e3b494db38f5",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/core-review-comparison-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/core-review-flagged-preview.png",
+      "sha256": "01cdb74365acd3437e9e8e08efa0616d3261a39b298fa239111a820ff8a26e68",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/core-review-flagged-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/core-review-tag-draft-preview.png",
+      "sha256": "6b03dcd8677b2e7c0d7e294478c9288fbb01350feb6b7598882dd4dd9667829a",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/core-review-tag-draft-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/core-review-tags-applied-preview.png",
+      "sha256": "d8ecdb44f45f940f41dfeaec5d78932ae7bd62f40579a766249ed980430d1e88",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/core-review-tags-applied-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font1.0-dark-glyph.png",
+      "sha256": "51ae9f3a86603ad276dc9b479a6c6a8c150fc9f61bad411b90a3383ec490db31",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font1.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        84,
+        158,
+        209,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "55d594a354f7dd738b2f26e665c4901308cac20f20f2d33624b090d2e9be696d",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "6eac983d309519a89550e2a45eb6cf4dd95030daf73dce793620582d80114d59",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        84,
+        158,
+        209,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "7f22c1a7763a5079a5de0877868ff09117781446d2d8d11ef19f994a94a6eafc",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font2.0-dark-glyph.png",
+      "sha256": "8b9150cb9f7b4524492dacca41e0eb879afcf2f1f5065908b13fa920a91d162e",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font2.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        84,
+        118,
+        314,
+        174
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "cc149f02c01ff879c85b6a05750e5b3b3eb8e3111f13348f3507f0b77d52f7f6",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "0b99edff9bf1ccc5cb3278fa1bf16c59b0707ddbf21c03bc72850dfece176c8b",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        84,
+        174,
+        314,
+        230
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "7f17a35b0728db74b7a55638b5401ad83a58cf295ac774fae7acb12e0db88926",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-1280x800-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font1.0-dark-glyph.png",
+      "sha256": "51ae9f3a86603ad276dc9b479a6c6a8c150fc9f61bad411b90a3383ec490db31",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font1.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        158,
+        173,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "3cedbae9dc134cc2c0edb46987b516a827f6df85197b96780f6df84edfef15ff",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font1.0-light-glyph.png",
+      "sha256": "6eac983d309519a89550e2a45eb6cf4dd95030daf73dce793620582d80114d59",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        158,
+        173,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "c641df98ca6c9598df6634aaddc820939506d9285bad1fc714693b61e2f179a3",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font2.0-dark-glyph.png",
+      "sha256": "8b9150cb9f7b4524492dacca41e0eb879afcf2f1f5065908b13fa920a91d162e",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font2.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        185,
+        278,
+        241
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "ebd139b89f957964e7284e1a36f6359dd87b02188f39d2efb5a6aca46a6cd635",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font2.0-light-glyph.png",
+      "sha256": "0b99edff9bf1ccc5cb3278fa1bf16c59b0707ddbf21c03bc72850dfece176c8b",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        185,
+        278,
+        241
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "77ce3d39823ff929d099e54170b3bbf23eabb1ebdd9818ef9c324baa4582ed17",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-600x800-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "51ae9f3a86603ad276dc9b479a6c6a8c150fc9f61bad411b90a3383ec490db31",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font1.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        158,
+        173,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "2fa68f96d4fbbb3fb55b3eb237751ea1f4f17a003b5705d917bd78eb0261957c",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font1.0-light-glyph.png",
+      "sha256": "6eac983d309519a89550e2a45eb6cf4dd95030daf73dce793620582d80114d59",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        158,
+        173,
+        188
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "4ecc802905b67ae8490cc0de82dc8ba89a7d7da45849de8c4ea119ee6695d97b",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "8b9150cb9f7b4524492dacca41e0eb879afcf2f1f5065908b13fa920a91d162e",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font2.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        185,
+        278,
+        241
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "1ce701923137c06d4b014cb53993b52f60a25f665538c85c72b7bcd4f572d3a2",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font2.0-light-glyph.png",
+      "sha256": "0b99edff9bf1ccc5cb3278fa1bf16c59b0707ddbf21c03bc72850dfece176c8b",
+      "inspected": true,
+      "basis": "Exact pixel subset of an inspected actual Android frame.",
+      "inspectedParent": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        48,
+        185,
+        278,
+        241
+      ]
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "dceaed0a6837d7d18ccb2d1549e0b344f90c97121f72c11cf3c88d9cac13527f",
+      "inspected": true,
+      "basis": "Actual optimized Android UI inspected directly or in a labelled source-image contact sheet.",
+      "inspectedSource": "captures/image-review/candidate-3-api36-optimized/layout-800x1280-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-public-ota/public-ota/available.png",
+      "sha256": "a995db955cbe03e1dae82219655fa0a752f4773fd5241a9736be521573b44ea1",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-public-ota/public-ota/ready.png",
+      "sha256": "ad1627e1b1716c8e8c6d3c2c18b5faeb0033b40b19c9f2fcb937bffd04c5de91",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-public-ota/public-ota/installer.png",
+      "sha256": "7da7d3ccf30c26a6e9d16170c9b9bf59ef013dcf5879abfbe8807b3546249f1b",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-public-ota/public-ota/installer-complete.png",
+      "sha256": "2fe77c726019740981301cc6cf0aded6a82017d511ad64c42902fff63e98eec3",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-public-ota/public-ota/upgraded-sidebar.png",
+      "sha256": "682b02be0f332847de631124179c3da6ef435b031068c2e656b83843b3cbf0ff",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-public-ota/public-ota/up-to-date.png",
+      "sha256": "a9a33c872e67b35f4e02f281f7582233fb2aea45824373b3330d5af947f81aa5",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-public-ota/public-ota/available.png",
+      "sha256": "1a9cfe1b3378f7146ecf4610e43cb5d2170e63eb89115f467231f0446951c338",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-public-ota/public-ota/ready.png",
+      "sha256": "855d3372da845bae05ee1b0793db4dcfe4dbb690f34547c6d048a8890bce879e",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-public-ota/public-ota/installer.png",
+      "sha256": "cbbef9e67735a368e2a3893605432201349006007b97295052a7620034c501bb",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-public-ota/public-ota/installer-complete.png",
+      "sha256": "92fa3eca11de108a033d5333826c60451514dd67f72fb393a93a2e9bf04f9a2e",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-public-ota/public-ota/upgraded-sidebar.png",
+      "sha256": "2f7cbfa667ae02f98834800bad6ab405a6a1014f2b069168094f742ac388d58f",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-public-ota/public-ota/up-to-date.png",
+      "sha256": "94fcdca88bc74a6793139799b7c5dd2f42dc4e74a95f123745e987b96cafdef1",
+      "inspected": true,
+      "basis": "Actual public OTA UI inspected directly, including the system installer and installed-version screen."
+    }
+  ],
+  "nativeAndOptimizedCapturePaths": 62,
+  "actualUiFramesInspected": 50,
+  "exactGlyphSubsets": 24,
+  "headerContextMayScrollOutOfViewAtLargeText": true,
+  "thumbnailNamesMayEllipsize": true,
+  "currentNamesAndPhotosActuallyVisible": true,
+  "documentationCopyVerified": true,
+  "scope": "Synthetic photo/review/tag and public OTA UI. Private originals, diagnostics and document contents are excluded. The Android 11 completion backdrop shows only the synthetic Field guide.pdf fixture title, defined in the public PDF test sources.",
+  "publicOtaCapturePaths": 12,
+  "totalReviewedCapturePaths": 74
+}
