@@ -6,9 +6,7 @@ from threading import Lock
 root=Path(__file__).resolve().parents[2];proof=root/'captures/persistent-undo'
 adb=str(Path.home()/'Library/Android/sdk/platform-tools/adb');serials=('emulator-5602','emulator-5582')
 debug=root/'app/build/outputs/apk/debug/app-debug.apk'
-p=argparse.ArgumentParser(description=__doc__);p.add_argument('--public-apk',type=Path,default=root/'captures/release/0.44.0/Findroid-0.44.0-preview.apk');a=p.parse_args()
-apk=a.public_apk.resolve();assert apk.is_file() and apk.is_relative_to(root/'captures')
-expected=hashlib.sha256(apk.read_bytes()).hexdigest();restore_lock=Lock()
+restore_lock=Lock()
 def call(serial,*parts):
     return subprocess.run([adb,'-s',serial,*map(str,parts)],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=180).stdout
 def shell(serial,*parts):return call(serial,'shell',shlex.join(map(str,parts)))
@@ -20,7 +18,9 @@ def grants(serial):
     logs=shell(serial,'logcat','-d','-T',since,'-v','raw','-s','FindroidGrantAudit:I','System.out:I').decode()
     found=re.findall(r'FINDROID_GRANT_AUDIT:([A-Za-z0-9+/=]+)',logs.rsplit(marker,1)[1]);assert len(found)==1
     return json.loads(base64.b64decode(found[0],validate=True))
-def restore_one(serial):
+def restore_one(serial,apk):
+    apk=apk.resolve();assert apk.is_file() and apk.is_relative_to(root/'captures')
+    expected=hashlib.sha256(apk.read_bytes()).hexdigest()
     baseline=json.loads((proof/'private-native-state'/serial/'PRIVATE-ENVIRONMENT.json').read_text())
     api='api30' if serial=='emulator-5602' else 'api36'
     display=json.loads((proof/(api+'-optimized')/'PRIVATE-recovery/PRIVATE-ENVIRONMENT.json').read_text())
@@ -50,9 +50,18 @@ def restore_one(serial):
     installed=shell(serial,'pm','path','dev.findroid').decode().strip().splitlines()[0].removeprefix('package:')
     digest=hashlib.sha256(call(serial,'exec-out','cat',installed)).hexdigest();assert digest==expected
     return dict(**row,installedPublicApkSha256=digest,fontScale=scale,originalEnvironmentMatchesPersistedBaseline=True,originalUriGrantsKept=True,originalStorageModeRestored=True,originalScreenSizeRestored=True,originalSizeOverrideRestored=True,restorationCheckerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
-def work(serial):
-    with (proof/('.'+serial+'-acceptance.lock')).open('a') as device_lock:
-        fcntl.flock(device_lock,fcntl.LOCK_EX)
-        return restore_one(serial)
-with ThreadPoolExecutor(max_workers=2) as pool:rows=list(pool.map(work,serials))
-(proof/'restored-public-tablets.json').write_text(json.dumps(rows,indent=2)+'\n');print(json.dumps(rows,indent=2))
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--public-apk',type=Path,default=root/'captures/release/0.44.0/Findroid-0.44.0-preview.apk')
+    p.add_argument('--serial',action='append',choices=serials,help='Defaults to both assigned tablets')
+    p.add_argument('--output',type=Path,default=proof/'restored-public-tablets.json')
+    a=p.parse_args()
+    selected=a.serial or serials;assert len(selected)==len(set(selected))
+    def work(serial):
+        with (proof/('.'+serial+'-acceptance.lock')).open('a') as device_lock:
+            fcntl.flock(device_lock,fcntl.LOCK_EX)
+            return restore_one(serial,a.public_apk)
+    with ThreadPoolExecutor(max_workers=2) as pool:rows=list(pool.map(work,selected))
+    a.output.write_text(json.dumps(rows,indent=2)+'\n');print(json.dumps(rows,indent=2))
+
+if __name__=='__main__':main()
