@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncDigestTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:08.797Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.FolderSyncDigestTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:22.869Z" hostname="MacBook-Pro-2.local" time="0.003">
   <properties/>
   <testcase name="aSameSizeRewriteWithRestoredMtimeIsStillRefused" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
   <testcase name="replacingOnlyThePathWhileItsOldDescriptorIsOpenIsRefused" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
-  <testcase name="aReplacementBeforeOpenIsRefusedWithoutReadingIt" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
-  <testcase name="anEmptyFileStillChecksItsDescriptorAndEndOfFile" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
+  <testcase name="aReplacementBeforeOpenIsRefusedWithoutReadingIt" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
+  <testcase name="anEmptyFileStillChecksItsDescriptorAndEndOfFile" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
   <testcase name="descriptorIdentityIsCheckedBeforeTheFirstByte" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
   <testcase name="shorterDataAndAdditionalTailBytesAreBothRefused" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
   <testcase name="cancellationDuringChunkedReadsClosesThePinnedDescriptor" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>

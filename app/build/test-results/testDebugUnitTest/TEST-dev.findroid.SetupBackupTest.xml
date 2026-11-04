@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SetupBackupTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:17.550Z" hostname="MacBook-Pro-2.local" time="0.008">
+<testsuite name="dev.findroid.SetupBackupTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:40.298Z" hostname="MacBook-Pro-2.local" time="0.008">
   <properties/>
   <testcase name="exactSearchExclusionsAreInventoriedAndRemappedAcrossEveryRulesContainer" classname="dev.findroid.SetupBackupTest" time="0.002"/>
   <testcase name="unicodeLibraryNamesUseTheSameIdentityAsTheOrganizationStore" classname="dev.findroid.SetupBackupTest" time="0.001"/>
   <testcase name="caseInsensitiveTagMergeRemapsSearchesAndVirtualTabLocations" classname="dev.findroid.SetupBackupTest" time="0.001"/>
   <testcase name="unrelatedExistingMissingTabHistoryDoesNotBlockRestoringPreferences" classname="dev.findroid.SetupBackupTest" time="0.0"/>
-  <testcase name="openTabsGetTheirRequestedNamedWorkspaceEvenWhenASavedLayoutHasIdenticalTabs" classname="dev.findroid.SetupBackupTest" time="0.0"/>
-  <testcase name="reimportingAnUnchangedBackupReusesPreviouslyRenamedSearchesAndWorkspaces" classname="dev.findroid.SetupBackupTest" time="0.001"/>
+  <testcase name="openTabsGetTheirRequestedNamedWorkspaceEvenWhenASavedLayoutHasIdenticalTabs" classname="dev.findroid.SetupBackupTest" time="0.001"/>
+  <testcase name="reimportingAnUnchangedBackupReusesPreviouslyRenamedSearchesAndWorkspaces" classname="dev.findroid.SetupBackupTest" time="0.0"/>
   <testcase name="excludedSectionsDoNotTriggerUnrelatedPresetOrNameConflicts" classname="dev.findroid.SetupBackupTest" time="0.0"/>
   <testcase name="reviewIncludesVirtualDestinationsWhoseOrganizationSectionWasNotImported" classname="dev.findroid.SetupBackupTest" time="0.0"/>
   <testcase name="mergeLeavesPreferencesAndFolderViewOverridesWhileReplaceRestoresThem" classname="dev.findroid.SetupBackupTest" time="0.001"/>

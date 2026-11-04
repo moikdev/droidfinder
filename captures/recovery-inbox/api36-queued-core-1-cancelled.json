@@ -1,0 +1,10 @@
+{
+  "serial": "emulator-5582",
+  "queuedSection": "core",
+  "attempt": 1,
+  "deviceWorkStarted": false,
+  "cancelledBeforeReservation": true,
+  "reason": "The API30 collector proved the startup Surface contains an Android ScrollView. The prior collector assumed an android.view.View child. Native regression still owns this tablet; the queued collector was stopped before obtaining its reservation.",
+  "checkerSha256": "34c689fe17acfe7ded6eb91bdd62e5d9b4673387e781452c36499186ef5984ef",
+  "appAndFrozenOutputsUnchanged": true
+}

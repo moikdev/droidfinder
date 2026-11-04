@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 49,
+  "versionName": "0.47.0-preview",
+  "apkName": "Findroid-0.47.0-preview.apk",
+  "bytes": 8892204,
+  "sha256": "5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.47.0-preview/Findroid-0.47.0-preview.apk",
+  "notes": "Recovery inbox brings interrupted transfers, saved partial copies, preserved originals and synchronization records into one place. Open More \u2192 Recovery inbox\u2026 to see what needs review and the next step for each item.\n\nReview links open existing transfer details, saved-copy checks, Trash, synchronization records, Recent actions or storage access. Opening the inbox never resumes, restores or removes files.\n\nOperation notices now remain available after dismissal and restart. A newer operation preserves the previous marker before replacing it. Named controls scroll and wrap at enlarged text sizes, without another permanent toolbar icon.\n"
+}

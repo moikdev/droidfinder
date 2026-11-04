@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.MultiRootPersistenceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:10.210Z" hostname="MacBook-Pro-2.local" time="0.005">
+<testsuite name="dev.findroid.MultiRootPersistenceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:25.068Z" hostname="MacBook-Pro-2.local" time="0.011">
   <properties/>
-  <testcase name="smartFolderSecondaryRepairMaterializesIndependentRulesWithoutChangingTheSavedSearch" classname="dev.findroid.MultiRootPersistenceTest" time="0.002"/>
+  <testcase name="smartFolderSecondaryRepairMaterializesIndependentRulesWithoutChangingTheSavedSearch" classname="dev.findroid.MultiRootPersistenceTest" time="0.004"/>
   <testcase name="workspaceRecoveryInventoriesChosenRootsWithoutScanningHiddenLayoutsOrOldHistory" classname="dev.findroid.MultiRootPersistenceTest" time="0.0"/>
   <testcase name="repairingOnlyASecondaryRootPreservesTheWorkingAnchorAndLiteralDescendantExclusion" classname="dev.findroid.MultiRootPersistenceTest" time="0.0"/>
   <testcase name="renamedLocalRootsAndExactProviderReplacementsFollowTabsAndBudgetScopes" classname="dev.findroid.MultiRootPersistenceTest" time="0.001"/>
   <testcase name="choosingOnlyFoldersCreatesAnActiveRecursiveSearchAndHistoryCopiesTheScope" classname="dev.findroid.MultiRootPersistenceTest" time="0.001"/>
-  <testcase name="suggestionsDeduplicateAfterRemovingTheOriginalScopeAndHistoryFiltersAllChosenFolders" classname="dev.findroid.MultiRootPersistenceTest" time="0.001"/>
+  <testcase name="suggestionsDeduplicateAfterRemovingTheOriginalScopeAndHistoryFiltersAllChosenFolders" classname="dev.findroid.MultiRootPersistenceTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

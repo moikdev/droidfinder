@@ -1,0 +1,149 @@
+{
+  "success": true,
+  "passed": 27,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "acknowledgmentRetainsTheExactNativeMarkerIdentity",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "anUnreadableArchiveDoesNotHideASeparateValidRecord",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "liveMarkerIsOnlyAnInterruptedNoticeInAFreshStore",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "identicalReplacementInodeIsKeptForReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "nextOperationPreservesEarlierBytesBeforeReplacingItsMarker",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "openingAndListingExistingRecordsDoNotRewriteThem",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "finalSymlinkCannotReadOrChangeItsTarget",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "hardLinksAreRefusedByThePlatformOrByTheNoticeReader",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "changedMarkerRefusesCompletionAndAStaleAcknowledgment",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "fifoMarkerIsRefusedWithoutBlockingOrOpeningIt",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "redirectedArchiveDirectoryIsRefusedWithoutWritingOutsideIt",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "durableFailedMarkerAndArchiveSurviveFreshStoreConstruction",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "aLaterSuccessfulOperationKeepsTheEarlierNoticeInTheInbox",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "acknowledgmentKeepsTheNoticeAvailableToAFreshModel",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "normalAndEnlargedTextKeepAllReviewControlsReachable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "failedOperationLeavesAReviewableNoticeAndKeepsTheExistingFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "transferLinkOpensTheChosenExistingJobWithoutReplayingIt",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "aNoticePreservationFailureStopsWorkAndAlwaysFinishesTheService",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "recordedLocationsAreShownOnlyByAnExplicitNamedControl",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "anUnlistedDestinationExplainsStorageAccessWithoutNavigating",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "savedCopyLinkChecksTheExistingCheckpointWithoutResumingIt",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "namedMenuOpensAReadOnlyInboxWithoutStartingAnOperation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "secondaryPaneAndReversedLayoutKeepThePrimaryRecoveryOwner",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "changedSavedCopyLinkKeepsTheInboxAndRequestsAFreshReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "oneUnreadableSourceDoesNotHideIndependentTransferRecords",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "staleTransferLinkKeepsTheInboxAndExplainsTheMissingRecord",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "aStaleAcknowledgmentDoesNotDismissOrDeleteANewerMarker",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 128.9,
+  "timedOut": false
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "sheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font1.0.png",
+    "sources": [
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-startup-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-inbox-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-startup-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-inbox-surface.png"
+    ]
+  },
+  {
+    "sheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font2.0.png",
+    "sources": [
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-startup-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-inbox-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-startup-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-inbox-surface.png"
+    ]
+  },
+  {
+    "sheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font1.0.png",
+    "sources": [
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-startup-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-inbox-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-startup-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-inbox-surface.png"
+    ]
+  },
+  {
+    "sheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font2.0.png",
+    "sources": [
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-startup-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-inbox-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-startup-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-inbox-surface.png"
+    ]
+  },
+  {
+    "sheet": "captures/recovery-inbox/review-contact-sheets/api30-density.png",
+    "sources": [
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/density-240-inbox-surface.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/density-300-inbox-surface.png"
+    ]
+  },
+  {
+    "sheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+    "sources": [
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-light-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-light-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-close-glyph.png",
+      "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-close-glyph.png"
+    ]
+  }
+]
