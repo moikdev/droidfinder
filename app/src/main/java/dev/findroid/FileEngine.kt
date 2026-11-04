@@ -368,6 +368,49 @@ class FileEngine(
         }
     }
 
+    /** Checks every reviewed original before the apply worker can change its first destination. */
+    @Synchronized
+    internal fun reviewSyncTrash(
+        originals: Collection<UndoPathProof>,
+        files: UndoHistoryFiles,
+        storage: PartialCopyStorage = AndroidPartialCopyStorage(),
+    ): FolderSyncTrashLocation {
+        check(indexWritable && trashIndexNotice == null) { "Review Trash recovery records before synchronizing replacements or destination-only items." }
+        check(originals.isNotEmpty() && originals.size <= 10_000 && originals.map { it.path }.toSet().size == originals.size) {
+            "The original recovery plan is empty, duplicated or too large. Review it again."
+        }
+        val identity = storage.stat(trashDir.path) ?: error("Trash is unavailable.")
+        val resolved = storage.canonical(trashDir.path)
+        check(identity.directory && !identity.regular) { "Trash is unavailable." }
+        val projected = Properties().apply { putAll(index) }
+        val paths = originals.map { it.path }.toSet()
+        for (proof in originals) {
+            check(File(proof.path).isAbsolute && File(proof.path).toPath().normalize().toString() == proof.path &&
+                proof.entries[proof.path] != null && proof.entries.all { (path, stamp) ->
+                    (path == proof.path || path.startsWith(proof.path.trimEnd('/') + "/")) && stamp.device == identity.device &&
+                        stamp.regular != stamp.directory && (stamp.directory || stamp.links == 1L)
+                }) { "This storage cannot preserve every reviewed original with native rename. Keep those items or choose another local destination." }
+            check(generateSequence(File(proof.path).parentFile) { it.parentFile }.none { it.path in paths } &&
+                !File(resolved).toPath().startsWith(File(proof.resolved).toPath()) &&
+                !File(proof.resolved).toPath().startsWith(File(resolved).toPath())) {
+                "The recovery plan overlaps another original or its own Trash storage. Choose separate folders and review again."
+            }
+            check(files.observe(proof.path) == proof) { "A reviewed original changed. Compare again." }
+            var id: String
+            do { id = UUID.randomUUID().toString() } while (projected.containsKey(id) || projected.containsKey("$id.trashedAt"))
+            projected.setProperty(id, proof.path)
+            projected.setProperty("$id.trashedAt", Long.MAX_VALUE.toString())
+        }
+        val bytes = java.io.ByteArrayOutputStream().use { buffer -> projected.store(buffer, "Findroid trash original paths"); buffer.size().toLong() }
+        check(bytes <= 16L * 1024 * 1024) { "The complete recovery mapping would exceed the Trash record limit. Choose fewer changes and review existing Trash records." }
+        val reserve = 1024L * 1024 + bytes * 3 + originals.size * 8192L
+        val available = freeBytes(trashDir)
+        check(available != null && available >= reserve) { "There is not enough verified recovery space for this complete plan. Original files were kept." }
+        check(storage.stat(trashDir.path)?.sameObject(identity) == true && storage.canonical(trashDir.path) == resolved &&
+            originals.all { files.observe(it.path) == it }) { "The recovery location or a reviewed original changed during preflight." }
+        return FolderSyncTrashLocation(trashDir.path, resolved, identity)
+    }
+
     /** Reviewed synchronization never falls back to recursively copying a live original. */
     @Synchronized
     internal fun trashReviewedByRename(
@@ -376,17 +419,23 @@ class FileEngine(
         files: UndoHistoryFiles,
         storage: PartialCopyStorage = AndroidPartialCopyStorage(),
         control: TransferControl = TransferControl(),
+        recovery: FolderSyncTrashLocation? = null,
     ): File {
         var preserved: File? = null
         var moveAttempted = false
         try {
-            check(indexWritable) { "Review Trash recovery records before moving synchronization originals." }
+            check(indexWritable && trashIndexNotice == null) { "Review Trash recovery records before moving synchronization originals." }
             val source = File(expected.path)
             val identity = expected.entries[expected.path] ?: error("The reviewed original is unavailable.")
             val trashIdentity = storage.stat(trashDir.path) ?: error("Trash is unavailable.")
             val resolvedTrash = storage.canonical(trashDir.path)
+            check(recovery == null || recovery.path == trashDir.path && recovery.resolved == resolvedTrash && trashIdentity.sameObject(recovery.identity)) {
+                "The preflighted recovery location changed. Original files were kept."
+            }
             check(trashIdentity.directory && !trashIdentity.regular && identity.device == trashIdentity.device &&
-                expected.entries.values.all { it.device == identity.device }) {
+                expected.entries.values.all { it.device == identity.device } &&
+                !File(resolvedTrash).toPath().startsWith(File(expected.resolved).toPath()) &&
+                !File(expected.resolved).toPath().startsWith(File(resolvedTrash).toPath())) {
                 "This storage cannot preserve the reviewed original with an atomic rename. Keep destination-only items or choose another folder."
             }
             check(expected.entries.keys.all { it == expected.path || it.startsWith(expected.path.trimEnd('/') + "/") } &&

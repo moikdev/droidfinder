@@ -6,6 +6,8 @@ import java.io.File
 import java.util.UUID
 import java.util.concurrent.CancellationException
 
+internal data class FolderSyncTrashLocation(val path: String, val resolved: String, val identity: PartialFileStamp)
+
 internal data class FolderSyncStagedRoot(val operation: FolderSyncEntry, val path: String)
 internal data class PreparedFolderSync(
     val inspection: FolderSyncInspection,

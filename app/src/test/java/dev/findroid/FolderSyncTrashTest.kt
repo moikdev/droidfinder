@@ -64,6 +64,17 @@ class FolderSyncTrashTest {
         val error=stopped{f.move()};val saved=error.recovery
         assertNotNull(saved);assertEquals("latest original edit",saved!!.readText());assertEquals(f.source.path,f.engine.originalPath(saved))
     }
+    @Test fun recoveryCannotMoveTrashIntoItselfOrAnAncestorEvenWithoutAPreflightToken() {
+        val f = Fixture(); val trash = File(f.state, "Trash")
+        val ancestor = f.files.observe(f.state.path)
+        stopped { f.engine.trashReviewedByRename(ancestor, emptyMap(), f.files, f.storage) }
+        assertTrue(trash.listFiles()!!.isEmpty()); assertFalse(File(f.state, "trash.properties").exists())
+        val original = File(trash, "Kept.txt").apply { writeText("keep recovery bytes") }
+        val proof = f.files.observe(original.path)
+        stopped { f.engine.trashReviewedByRename(proof, mapOf(original.path to digest(original)), f.files, f.storage) }
+        assertEquals("keep recovery bytes", original.readText()); assertEquals(listOf(original), trash.listFiles()!!.toList())
+        assertFalse(File(f.state, "trash.properties").exists())
+    }
     @Test fun cancellationBeforeTheMoveLeavesTheReviewedOriginalInPlace() {
         val f=Fixture();val error=stopped{f.move(TransferControl().apply {cancel()})}
         assertNull(error.recovery);assertEquals("reviewed original",f.source.readText());assertTrue(f.engine.trashItems().isEmpty())

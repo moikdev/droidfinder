@@ -26,6 +26,8 @@ The draft publication primitive moves one fully prepared root with native no-rep
 
 The draft publication journal allocates a fresh app-private run directory outside the compared and working trees. Each intent, completed publication and run completion gets a new immutable record, synchronized and read back before it is accepted. A pending intent prevents another publication. Partial writes, unexpected files, rewritten records, redirected parents and a readback mismatch close the writer and preserve its existing bytes. Existing run directories are never reopened for writing. The journal contains manual evidence only; it has no replay, rollback, pruning or deletion API. Complete-plan and apply-worker integration remain pending.
 
+The draft Trash preflight checks all originals in a selected plan before any recovery bucket is made. It rejects cross-filesystem or changed originals, overlapping selections, unknown or insufficient recovery space, and a projected complete original-path mapping above the existing 16 MiB limit. A returned recovery location can be pinned through the later original-preservation move, so a replaced Trash root is refused. This preflight still needs to be connected to the complete apply worker.
+
 ## Work still required
 
 - Connect guarded native publication to a complete apply worker, with a fresh remaining-plan check between operations.
