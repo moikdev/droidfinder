@@ -1,0 +1,30 @@
+{
+  "serial": "emulator-5602",
+  "completedBatch": 12,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/changed-file.png",
+      "sha256": "8cc55d98248964b2b1cb47056cf22e98979b7ed9184714d405180f0d2ccf6173"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/interrupted-review.png",
+      "sha256": "f371bafde025a12fbdf1d7957d1aad56a0601794e8d8023880332adb98b47e10"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/large-text-reset.png",
+      "sha256": "b2691b1ab6c53be22bbca3a8ce938c7c71166daecbe78dba3c5b1a93f28bddf5"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/reset-review.png",
+      "sha256": "b2691b1ab6c53be22bbca3a8ce938c7c71166daecbe78dba3c5b1a93f28bddf5"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/saved.png",
+      "sha256": "22f77cc089bdea53902370e6f2f66766e736f4b2bacec44952e5565c2cf2bb62"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/session-boundary.png",
+      "sha256": "5ab4253a9681ea8ae9e24dbc778b1d5c4f03f3bd2e78fe34c67ea799706aea83"
+    }
+  ]
+}

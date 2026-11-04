@@ -1,0 +1,2166 @@
+{
+  "serial": "emulator-5582",
+  "section": "layouts",
+  "sourceCommit": "93d36afd3d3caf1c972a3dcd42256978fac468cb",
+  "checkerSha256": "5575bbd98acf1a218976b26eea34ab08f972dc12800b088b570e9bac836ffa67",
+  "buildReceiptSha256": "3037aa8ee145e3559f7db2383cc5ab20af982d08edcfcbf89f8fae47c9a9326e",
+  "apkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "previousApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+  "fromVersionCode": 50,
+  "toVersionCode": 51,
+  "checkerDependencies": {
+    "scripts/check-reviewed-folder-sync.py": "82fcfd46b08c64ae73d13400f7954a57eb8a1a2a36316c387d6cfc55c59320dd",
+    "scripts/check-local-search-index.py": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+    "scripts/android/acceptance.py": "58413d03fa96c29c1146bae2ca3a5b4c87dba9a1c2f1b777707697bf381bc016",
+    "scripts/android/PdfSelectionInput.java": "a2d495390acd942aa6c976f8fd0df29cc4bcc7ec66e5ac62e3db6b1df093f7a6",
+    "scripts/android/PdfSelectionInputGlobal.java": "bcdbc4749a44bfd5dc334c0abe5e63f623b578922d3167006d1218a3f425406c"
+  },
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "checks": [],
+  "layouts": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          361,
+          758,
+          499,
+          788
+        ],
+        "textWidth": 138,
+        "textHeight": 30,
+        "rasterGlyphWidth": 136,
+        "rasterGlyphHeight": 21,
+        "image": "layout-1280x800-font1.0-light-copy-glyph.png",
+        "sha256": "9523d0c4eb913dcdeca1c9bd79e9cdfc12fb5b5fc1c0b932321951fe221b36b0"
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          361,
+          758,
+          499,
+          788
+        ],
+        "textWidth": 138,
+        "textHeight": 30,
+        "rasterGlyphWidth": 136,
+        "rasterGlyphHeight": 21,
+        "image": "layout-1280x800-font1.0-dark-copy-glyph.png",
+        "sha256": "6266a845f14c4340cc08f933bbd6d2aeafb049c282cb1b7583dbcb7a4464efd0"
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          478,
+          633,
+          735,
+          689
+        ],
+        "textWidth": 257,
+        "textHeight": 56,
+        "rasterGlyphWidth": 253,
+        "rasterGlyphHeight": 39,
+        "image": "layout-1280x800-font2.0-light-copy-glyph.png",
+        "sha256": "7d7e22027db8d45ac45776a5422d71de864af9df26e6b8277ef5e693dff85f8c"
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          478,
+          633,
+          735,
+          689
+        ],
+        "textWidth": 257,
+        "textHeight": 56,
+        "rasterGlyphWidth": 253,
+        "rasterGlyphHeight": 39,
+        "image": "layout-1280x800-font2.0-dark-copy-glyph.png",
+        "sha256": "e436d7a49c8a2e87e34234c8087ebeaebd128e869f4b8a6e1db6b667c4066433"
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          311,
+          1442,
+          449,
+          1472
+        ],
+        "textWidth": 138,
+        "textHeight": 30,
+        "rasterGlyphWidth": 136,
+        "rasterGlyphHeight": 21,
+        "image": "layout-800x1280-font1.0-light-copy-glyph.png",
+        "sha256": "7d266a45cc770e0f84060fa34848e830a9b807f2eeb1a13fb438a5e40c6c003f"
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          311,
+          1442,
+          449,
+          1472
+        ],
+        "textWidth": 138,
+        "textHeight": 30,
+        "rasterGlyphWidth": 136,
+        "rasterGlyphHeight": 21,
+        "image": "layout-800x1280-font1.0-dark-copy-glyph.png",
+        "sha256": "b8dbbd33c53d411e955d468bb845dad5150151b5000e42b2bd0558a829cf94b7"
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          428,
+          1234,
+          685,
+          1290
+        ],
+        "textWidth": 257,
+        "textHeight": 56,
+        "rasterGlyphWidth": 253,
+        "rasterGlyphHeight": 39,
+        "image": "layout-800x1280-font2.0-light-copy-glyph.png",
+        "sha256": "89b8546c692d3d7dbb0caa1dfcbea0173276d9a4ac07a5eeded87098f214fb0e"
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          428,
+          1234,
+          685,
+          1290
+        ],
+        "textWidth": 257,
+        "textHeight": 56,
+        "rasterGlyphWidth": 253,
+        "rasterGlyphHeight": 39,
+        "image": "layout-800x1280-font2.0-dark-copy-glyph.png",
+        "sha256": "a6b2889d8411d9cc268dc7613b07dde9568bebfa8793828732439f45e5e48d47"
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          245,
+          758,
+          383,
+          788
+        ],
+        "textWidth": 138,
+        "textHeight": 30,
+        "rasterGlyphWidth": 136,
+        "rasterGlyphHeight": 21,
+        "image": "layout-600x800-font1.0-light-copy-glyph.png",
+        "sha256": "5f83b9ea36a1c51976dee78096a04fb97e374dc0bf239c2fd8156d798844f1fd"
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          245,
+          758,
+          383,
+          788
+        ],
+        "textWidth": 138,
+        "textHeight": 30,
+        "rasterGlyphWidth": 136,
+        "rasterGlyphHeight": 21,
+        "image": "layout-600x800-font1.0-dark-copy-glyph.png",
+        "sha256": "2a2df95bf6e0e3b906111be41a7f99855feabecba4d8a730fdb17f43ac2181fa"
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "wordAndRetainedPanClipboardExact": true,
+      "originalPdfBytesKept": true,
+      "systemFont": {
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          362,
+          550,
+          619,
+          606
+        ],
+        "textWidth": 257,
+        "textHeight": 56,
+        "rasterGlyphWidth": 253,
+        "rasterGlyphHeight": 39,
+        "image": "layout-600x800-font2.0-light-copy-glyph.png",
+        "sha256": "1f082381531db0f671668bb24af858c775c2a30535f8eb64ea93b38e16ab61db"
+      }
+    }
+  ],
+  "captures": [
+    {
+      "path": "layout-1280x800-font1.0-light-selection-surface.png",
+      "sha256": "007afa1cfe894ae6e65594c01035bc82c6fb8287d9333b007717e75c510e23f9",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "87f603a85c48e41a9fb40ea1f644285b963fc3aec5cc0a6498b320016b2f90dc",
+      "privateRawHierarchySha256": "bc3ebe9914a8c1e952c3cddcad65d291216b3e6ec2cba86e23c7f1b85a8b66da"
+    },
+    {
+      "path": "layout-1280x800-font1.0-light-pan-surface.png",
+      "sha256": "f4dda220442546f269e9c43267730b2092614ab9df76299c0b751ea88b7ce467",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "bccf46ba44185c877e866348dfdd75b3e1610c2ffc39a40e3bb62a1b9579cea3",
+      "privateRawHierarchySha256": "9aa731b3d842c2251f0b1dcf730b2fc386e2db8906c3bfd760746ed62c73e875"
+    },
+    {
+      "path": "layout-1280x800-font1.0-dark-selection-surface.png",
+      "sha256": "f98866c50ef60dd9567820ff28d581a9baec7911e2d831dc786e9a99279c46d6",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "6a41072c95ce40c283564efe4904191b4fe57289f87f5b8d664bd5f82d8dda09",
+      "privateRawHierarchySha256": "d48af8a69a6264462dc9e21c13cc1b0f67a7f4f4fb44a05f737e4c17019bc94b"
+    },
+    {
+      "path": "layout-1280x800-font1.0-dark-pan-surface.png",
+      "sha256": "41af335b057e94611288d33c1298ea3de899ea16278a148f4db263ffdc5e1349",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "084352f1346da20245e50d3cf7c5de33ca37dee96f91870eb23639970b32e716",
+      "privateRawHierarchySha256": "2036018ac0a8dd69fd3dff11c070b5525439cda1c0665cb742045b2439bbece0"
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-selection-surface.png",
+      "sha256": "c1c28a6b1b1a649ec07fc974cba3b0d1932c9a1b819d815f6cd175107b2c69db",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "2d45409da21189ae181f03b8f78f378ed861297308392e9281ab5541ff77879e",
+      "privateRawHierarchySha256": "a03e5727d8662f6757f050742d0278cd1926c72954ac3b620c14f9e894e1f7a1"
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-pan-surface.png",
+      "sha256": "318b14ad83fe011277fc3a90e1772cece2765879951295053d823584092637e7",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "7cee158de8606373f66625fccab032bd0e8a172899fb66acae836a296cd4d7e4",
+      "privateRawHierarchySha256": "8c4a830d1d82fdced398b2c4cd121691c644de2551fd4908e6683bfbf4600966"
+    },
+    {
+      "path": "layout-1280x800-font2.0-dark-selection-surface.png",
+      "sha256": "35487535faa4229211e7faf3dac60357ba216812597dbb4cdb42acdee1f0ceea",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "4bc58986183fb0711a8a8c91cbd65e0e0c0d8c4950f34f57f60dd6f000c7d574",
+      "privateRawHierarchySha256": "f1eb88bbca31475e3bc9d0697c5ee97c53bdd743c32874a3bd433ccfea4a6f37"
+    },
+    {
+      "path": "layout-1280x800-font2.0-dark-pan-surface.png",
+      "sha256": "9cdff2d6293636c75e68271a5a497ae890e363533d5a26594b4676edbb5b6ec4",
+      "surfaceBoundsPx": [
+        134,
+        92,
+        1785,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "9aa63f31cec0e7ca2aff040e4d9f1acbb87439defd3434698c6fadc4d0003925",
+      "privateRawHierarchySha256": "d523bcd0a060fa279146109c1989fa4e949e127466d353fac8d0b0a4eadf8707"
+    },
+    {
+      "path": "layout-800x1280-font1.0-light-selection-surface.png",
+      "sha256": "c51c84c728147be0bc2920c1eaeeea3a73274cdf74104a33bd7b53c7cc546117",
+      "surfaceBoundsPx": [
+        84,
+        128,
+        1116,
+        1780
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "4ae96935aa215f56f9d8661c9e63933a93d8fcdc43a660ddcbe7c208e0118b15",
+      "privateRawHierarchySha256": "0bd64508bb15472593c5567e3dcd97da2190ec6fd4ae84b448126a09d008b7aa"
+    },
+    {
+      "path": "layout-800x1280-font1.0-light-pan-surface.png",
+      "sha256": "a702cb889b11b14e6687ad026bc4df7175d04cdef800472c1c035d35e5e35ad3",
+      "surfaceBoundsPx": [
+        84,
+        128,
+        1116,
+        1780
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "b7b2577045eba69fb9d665d78481947a405ad109c45676d7717a66165cb31f8b",
+      "privateRawHierarchySha256": "5d8b88b36561fa74091181dbd01d9312b8d52532e7893a2f83c39642d17ea62b"
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-selection-surface.png",
+      "sha256": "3c1690c6c23e70c1b5976bfc93fe8ba88cb072cfe01a4c4bdf73c40f01b4cfb6",
+      "surfaceBoundsPx": [
+        84,
+        128,
+        1116,
+        1780
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "a0cd9a2f48cb6df367e89d9de09465e373ac70cee0df052d98e66bc28ab5e85a",
+      "privateRawHierarchySha256": "7cde79a49444e72c1ecc002b435de460f8f04b34ed277bdf5feaea3b4d09e84b"
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-pan-surface.png",
+      "sha256": "c8d03dfefa7fabd106bbffefa1ec3170aea4f2340b5a9cb736781c2787f03b70",
+      "surfaceBoundsPx": [
+        84,
+        128,
+        1116,
+        1780
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "463eea2b92d6fa29ceabce7fe759ea9241a68f535bab6cd86aae05c80d3cd071",
+      "privateRawHierarchySha256": "073bae1bf2b70f66ce1d704aa576aee9c693009c6f456baa4fe8f76a811fbd49"
+    },
+    {
+      "path": "layout-800x1280-font2.0-light-selection-surface.png",
+      "sha256": "0a9f9b2ed5ecafb31cc2ac92f836f5370a69b0c91d6b1f603c9ca1e0898b0767",
+      "surfaceBoundsPx": [
+        84,
+        128,
+        1116,
+        1780
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "e4f02a426da8eb5a1338dfec7969e6fe220c6831fc9e18d788649c911d63179c",
+      "privateRawHierarchySha256": "e83181033e374362ddaf975e710e622e34733f0f84ad5418e8fa0214925e5af5"
+    },
+    {
+      "path": "layout-800x1280-font2.0-light-pan-surface.png",
+      "sha256": "cf605ef3a5707cd2f57a6e67627d0a1c8a47fbbdb9dd02a9d86f431bd3161e76",
+      "surfaceBoundsPx": [
+        84,
+        128,
+        1116,
+        1780
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "bc3ace4604faff478e107c56ed37af164ef9ed0d45da6fea96df7a382984587b",
+      "privateRawHierarchySha256": "316ad776f2841caaf60c2aec3323b880c7e6fd0cf4322325c8be641cb5c51f5e"
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-selection-surface.png",
+      "sha256": "37c4eeee80dd927e67fa991a61a46c142ed7cc61dae2f5cbd2626b01de2807f2",
+      "surfaceBoundsPx": [
+        84,
+        128,
+        1116,
+        1780
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "0db25f209a4cd6e77a6e3ae1cbcb3e16b14563c5e5a4b0f787f05e19db711236",
+      "privateRawHierarchySha256": "12eba35a808f3c255327b993f88bb78f8ba1546bd65fe4689df17e4b01cbca4e"
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-pan-surface.png",
+      "sha256": "a2e4f7d148c8c6b3bb45d48f2566534c6ec4402995080c1b387210b4623c1a00",
+      "surfaceBoundsPx": [
+        84,
+        128,
+        1116,
+        1780
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "0042f1f2b3ace0f6e97080d7fc4daf48625755bb482f49302d8ebf11e94e4735",
+      "privateRawHierarchySha256": "e88a7caff46bfefc36acc844c637ac4ffc15307b40d29a424323f969690b64aa"
+    },
+    {
+      "path": "layout-600x800-font1.0-light-selection-surface.png",
+      "sha256": "e7cbf95a0664566f7914ab28909d3650e5643d3152da3b763556d81a36ee8f0f",
+      "surfaceBoundsPx": [
+        18,
+        92,
+        882,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "c6d87a63809cf16a81f03163523376ddfc203eee8042ff45a55c758095261d6d",
+      "privateRawHierarchySha256": "d64ef6d581968a3e2938e8816c580556ce2424803b3466d36c27abbaae8f52d4"
+    },
+    {
+      "path": "layout-600x800-font1.0-light-pan-surface.png",
+      "sha256": "f41694d286ab184c10c303524c4b7309418bcc2ca2d680960d46c8663f1b21cb",
+      "surfaceBoundsPx": [
+        18,
+        92,
+        882,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "45b8f4794e59d4b9fc000dfd6825777b661ea853c331b2187923c5b9cf99f3cb",
+      "privateRawHierarchySha256": "179e0ddc6d87f748abaa2f9b04b6e01d936581c9a6de04f4e9132a1eebcfc66b"
+    },
+    {
+      "path": "layout-600x800-font1.0-dark-selection-surface.png",
+      "sha256": "8dfecdfd8059f49ae715e46aba575322c49d46e8c8ed5e9996afe11c5a61a90d",
+      "surfaceBoundsPx": [
+        18,
+        92,
+        882,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "20de75f14d895cf45dfd988ee315056472b3d18f8b0ce3851475668df22f619d",
+      "privateRawHierarchySha256": "7dd60b28076e7dcb6d21c4f3581a1bbd1660df54cdf7edb937de6c64a697aaf0"
+    },
+    {
+      "path": "layout-600x800-font1.0-dark-pan-surface.png",
+      "sha256": "2b94b75fc89701402ba8509aafd8d943377580dc27566e6f0fe4f2ecef703708",
+      "surfaceBoundsPx": [
+        18,
+        92,
+        882,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "858389cec4a954ed39c0c0d646cf6fe5b3726b07d4a6ff1686ce0ca69a2ee4e4",
+      "privateRawHierarchySha256": "9655ef69cd60636ded42ad71437b7b929e9a640fb886d2b0d542d0cbb4986d51"
+    },
+    {
+      "path": "layout-600x800-font2.0-light-selection-surface.png",
+      "sha256": "c41477609b8825c0e788911a2e3dadedcd3418b29712c792040364a4f7de3477",
+      "surfaceBoundsPx": [
+        18,
+        92,
+        882,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "99e2a0808f488983269af1c284315f0a33a4fccdbe4db5082a1249e3aa7cd9df",
+      "privateRawHierarchySha256": "aaf0b8c2af9ace1f6b2d44fb713d0477d5913224aa8422ccf79233b6b59dc15a"
+    },
+    {
+      "path": "layout-600x800-font2.0-light-pan-surface.png",
+      "sha256": "d6a980eba2cafd55e80f0458656945c2308d8883f76e0d2b29373d16126f058f",
+      "surfaceBoundsPx": [
+        18,
+        92,
+        882,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "24e028fc2fbc9cd8e6c66b0aee54fe10564feb141a8a68b21dd74060f4e38dad",
+      "privateRawHierarchySha256": "c2d890f49381fd5bb7dfdb0f6d1c2ab1fd6fe304a2cb3277f9639f9797b974b8"
+    },
+    {
+      "path": "layout-600x800-font2.0-dark-selection-surface.png",
+      "sha256": "f66eb65f61f6b82d1a689e6a51e2c82c2e90efa6b2586619dc8294ad1eee454b",
+      "surfaceBoundsPx": [
+        18,
+        92,
+        882,
+        1096
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "55fec993b14108488defbc8ff671b2a8cf77cbb0b10638876829bc7ff2f00efe",
+      "privateRawHierarchySha256": "5d1921dae7785c67a88720299c87a6bc58dec68bfa74989d298ebd7b864d6658"
+    }
+  ],
+  "clipboardProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light-pan",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    }
+  ],
+  "controlProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        285,
+        1902,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        857,
+        353,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        343,
+        737,
+        517,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        737,
+        337,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        359,
+        737,
+        533,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        285,
+        1902,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        857,
+        353,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        343,
+        737,
+        517,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        737,
+        337,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        359,
+        737,
+        533,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        294,
+        1902,
+        366
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        849,
+        485,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        460,
+        621,
+        753,
+        701
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        621,
+        454,
+        701
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        491,
+        621,
+        784,
+        701
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        294,
+        1902,
+        366
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        849,
+        485,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        460,
+        621,
+        753,
+        701
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        621,
+        454,
+        701
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        491,
+        621,
+        784,
+        701
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1110,
+        285,
+        1182,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        437,
+        1110,
+        509
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        117,
+        1541,
+        303,
+        1613
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        293,
+        1421,
+        467,
+        1493
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        117,
+        1421,
+        287,
+        1493
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        309,
+        1421,
+        483,
+        1493
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1110,
+        285,
+        1182,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        437,
+        1110,
+        509
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        117,
+        1541,
+        303,
+        1613
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        293,
+        1421,
+        467,
+        1493
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        117,
+        1421,
+        287,
+        1493
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        309,
+        1421,
+        483,
+        1493
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1110,
+        382,
+        1182,
+        454
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        520,
+        1110,
+        592
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        117,
+        1533,
+        435,
+        1613
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        410,
+        1222,
+        703,
+        1302
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        117,
+        1222,
+        404,
+        1302
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        441,
+        1222,
+        734,
+        1302
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1110,
+        382,
+        1182,
+        454
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        520,
+        1110,
+        592
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        117,
+        1533,
+        435,
+        1613
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        410,
+        1222,
+        703,
+        1302
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        117,
+        1222,
+        404,
+        1302
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        441,
+        1222,
+        734,
+        1302
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        818,
+        285,
+        890,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        443,
+        116,
+        818,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        51,
+        857,
+        237,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        227,
+        737,
+        401,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        51,
+        737,
+        221,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        243,
+        737,
+        417,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        818,
+        285,
+        890,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        443,
+        116,
+        818,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        51,
+        857,
+        237,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        227,
+        737,
+        401,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        51,
+        737,
+        221,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        243,
+        737,
+        417,
+        809
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        818,
+        382,
+        890,
+        454
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        443,
+        116,
+        818,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        51,
+        849,
+        369,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        344,
+        538,
+        637,
+        618
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        51,
+        538,
+        338,
+        618
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-pan-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        375,
+        538,
+        668,
+        618
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        818,
+        382,
+        890,
+        454
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        443,
+        116,
+        818,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        51,
+        849,
+        369,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        344,
+        538,
+        637,
+        618
+      ],
+      "density": 1.5
+    }
+  ],
+  "selectionHandleProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        931,
+        335,
+        1003,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        1003,
+        335,
+        1075,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        931,
+        335,
+        1003,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        1003,
+        335,
+        1075,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        974,
+        322,
+        1046,
+        394
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        1046,
+        322,
+        1118,
+        394
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        974,
+        322,
+        1046,
+        394
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        1046,
+        322,
+        1118,
+        394
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        342,
+        477,
+        414,
+        549
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        501,
+        477,
+        573,
+        549
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        342,
+        477,
+        414,
+        549
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        501,
+        477,
+        573,
+        549
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        379,
+        418,
+        451,
+        490
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        523,
+        418,
+        595,
+        490
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        379,
+        418,
+        451,
+        490
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        523,
+        418,
+        595,
+        490
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        398,
+        335,
+        470,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        470,
+        335,
+        542,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        398,
+        335,
+        470,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        470,
+        335,
+        542,
+        407
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        472,
+        314,
+        544,
+        386
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        544,
+        314,
+        616,
+        386
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        472,
+        314,
+        544,
+        386
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        544,
+        314,
+        616,
+        386
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    }
+  ],
+  "screenChecks": [
+    {
+      "requestedWidthDp": 1280,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 1920,
+      "actualHeightPx": 1200
+    },
+    {
+      "requestedWidthDp": 1280,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 1920,
+      "actualHeightPx": 1200
+    },
+    {
+      "requestedWidthDp": 1280,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 1920,
+      "actualHeightPx": 1200
+    },
+    {
+      "requestedWidthDp": 1280,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 1920,
+      "actualHeightPx": 1200
+    },
+    {
+      "requestedWidthDp": 800,
+      "requestedHeightDp": 1280,
+      "densityDpi": 240,
+      "actualWidthPx": 1200,
+      "actualHeightPx": 1920
+    },
+    {
+      "requestedWidthDp": 800,
+      "requestedHeightDp": 1280,
+      "densityDpi": 240,
+      "actualWidthPx": 1200,
+      "actualHeightPx": 1920
+    },
+    {
+      "requestedWidthDp": 800,
+      "requestedHeightDp": 1280,
+      "densityDpi": 240,
+      "actualWidthPx": 1200,
+      "actualHeightPx": 1920
+    },
+    {
+      "requestedWidthDp": 800,
+      "requestedHeightDp": 1280,
+      "densityDpi": 240,
+      "actualWidthPx": 1200,
+      "actualHeightPx": 1920
+    },
+    {
+      "requestedWidthDp": 600,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 900,
+      "actualHeightPx": 1200
+    },
+    {
+      "requestedWidthDp": 600,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 900,
+      "actualHeightPx": 1200
+    },
+    {
+      "requestedWidthDp": 600,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 900,
+      "actualHeightPx": 1200
+    },
+    {
+      "requestedWidthDp": 600,
+      "requestedHeightDp": 800,
+      "densityDpi": 240,
+      "actualWidthPx": 900,
+      "actualHeightPx": 1200
+    }
+  ],
+  "densityChecks": [],
+  "browserHorizontalScrolls": [],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "inputHelper": {
+    "platformApi": 36,
+    "className": "PdfSelectionInputGlobal",
+    "sourceSha256": "bcdbc4749a44bfd5dc334c0abe5e63f623b578922d3167006d1218a3f425406c",
+    "shellOnly": true
+  },
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "hierarchyRetries": []
+}

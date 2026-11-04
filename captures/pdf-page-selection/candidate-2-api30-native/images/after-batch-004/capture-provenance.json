@@ -1,0 +1,10 @@
+{
+  "serial": "emulator-5602",
+  "completedBatch": 4,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-004/space-plan-qa/normal-review.png",
+      "sha256": "641f01642ef47c2c4e37e04670dc8a553b47620aedec13adafa8830ccb8a07e2"
+    }
+  ]
+}

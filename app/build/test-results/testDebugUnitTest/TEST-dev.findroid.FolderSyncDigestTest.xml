@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncDigestTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:15.056Z" hostname="MacBook-Pro-2.local" time="0.004">
+<testsuite name="dev.findroid.FolderSyncDigestTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:39.030Z" hostname="MacBook-Pro-2.local" time="0.004">
   <properties/>
   <testcase name="aSameSizeRewriteWithRestoredMtimeIsStillRefused" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
   <testcase name="replacingOnlyThePathWhileItsOldDescriptorIsOpenIsRefused" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
-  <testcase name="aReplacementBeforeOpenIsRefusedWithoutReadingIt" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
+  <testcase name="aReplacementBeforeOpenIsRefusedWithoutReadingIt" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
   <testcase name="anEmptyFileStillChecksItsDescriptorAndEndOfFile" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
-  <testcase name="descriptorIdentityIsCheckedBeforeTheFirstByte" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
-  <testcase name="shorterDataAndAdditionalTailBytesAreBothRefused" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
+  <testcase name="descriptorIdentityIsCheckedBeforeTheFirstByte" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
+  <testcase name="shorterDataAndAdditionalTailBytesAreBothRefused" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
   <testcase name="cancellationDuringChunkedReadsClosesThePinnedDescriptor" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
-  <testcase name="aPinnedRegularFileProducesItsStandardContentChecksum" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
+  <testcase name="aPinnedRegularFileProducesItsStandardContentChecksum" classname="dev.findroid.FolderSyncDigestTest" time="0.001"/>
   <testcase name="cancellationBeforeOpenReadsNothing" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
   <testcase name="specialLinkedOrInvalidFileProofsNeverOpenADescriptor" classname="dev.findroid.FolderSyncDigestTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>

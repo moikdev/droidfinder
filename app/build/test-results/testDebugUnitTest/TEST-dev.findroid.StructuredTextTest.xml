@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.StructuredTextTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:30.049Z" hostname="MacBook-Pro-2.local" time="0.143">
+<testsuite name="dev.findroid.StructuredTextTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:49.929Z" hostname="MacBook-Pro-2.local" time="0.114">
   <properties/>
-  <testcase name="markdownSupportsNestedListsTablesTasksAndLiteralHtml" classname="dev.findroid.StructuredTextTest" time="0.021"/>
-  <testcase name="incompleteAndMalformedCsvDoNotInventCompleteRows" classname="dev.findroid.StructuredTextTest" time="0.002"/>
+  <testcase name="markdownSupportsNestedListsTablesTasksAndLiteralHtml" classname="dev.findroid.StructuredTextTest" time="0.02"/>
+  <testcase name="incompleteAndMalformedCsvDoNotInventCompleteRows" classname="dev.findroid.StructuredTextTest" time="0.003"/>
   <testcase name="processingHonorsCancellationCheckpoints" classname="dev.findroid.StructuredTextTest" time="0.001"/>
-  <testcase name="oversizedMarkdownTableOmitsTheRecordInsteadOfPublishingPartialCells" classname="dev.findroid.StructuredTextTest" time="0.003"/>
+  <testcase name="oversizedMarkdownTableOmitsTheRecordInsteadOfPublishingPartialCells" classname="dev.findroid.StructuredTextTest" time="0.004"/>
   <testcase name="quotedMultilineCsvAndTrailingFields" classname="dev.findroid.StructuredTextTest" time="0.0"/>
   <testcase name="encodingsBomAndTruncatedCodePoints" classname="dev.findroid.StructuredTextTest" time="0.003"/>
-  <testcase name="pathologicalMarkdownRemainsBoundedAndSignalsItsLimit" classname="dev.findroid.StructuredTextTest" time="0.107"/>
-  <testcase name="strictJsonPreservesDuplicateKeysAndNumberSpelling" classname="dev.findroid.StructuredTextTest" time="0.006"/>
+  <testcase name="pathologicalMarkdownRemainsBoundedAndSignalsItsLimit" classname="dev.findroid.StructuredTextTest" time="0.078"/>
+  <testcase name="strictJsonPreservesDuplicateKeysAndNumberSpelling" classname="dev.findroid.StructuredTextTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

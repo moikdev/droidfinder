@@ -1,0 +1,26 @@
+{
+  "serial": "emulator-5582",
+  "completedBatch": 2,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/direct-handle-drag.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/first-long-press-drag.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/two-line-selection.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/word-and-handles.png",
+      "sha256": "c9876e2689f9254fcd82cee1f2341112cd84b66db08d8d4eca00f5bbebe35f7c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/zoomed-selection.png",
+      "sha256": "7746fd1d620401039b675d6c34d1c1d5220ed94cf96f4fdf0219f0a6c5a2b78a"
+    }
+  ]
+}

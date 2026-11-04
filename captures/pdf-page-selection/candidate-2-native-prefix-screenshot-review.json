@@ -1,0 +1,167 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/direct-handle-drag.png",
+      "sha256": "25cebcba2e7bf9125f209bc2f87e51927870badca474e43a5b3326dfe69e6657"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/first-long-press-drag.png",
+      "sha256": "25cebcba2e7bf9125f209bc2f87e51927870badca474e43a5b3326dfe69e6657"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/two-line-selection.png",
+      "sha256": "25cebcba2e7bf9125f209bc2f87e51927870badca474e43a5b3326dfe69e6657"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/word-and-handles.png",
+      "sha256": "825c96e4ec995b2a98965ca19f42b6ea8f4b25badc6aef45430a93223fc996eb"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/zoomed-selection.png",
+      "sha256": "826b56ed4f82fc39c4b30e6ee37b1cee12de8ecc54a1e43a48d20a0f0a207dd4"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-004/space-plan-qa/normal-review.png",
+      "sha256": "641f01642ef47c2c4e37e04670dc8a553b47620aedec13adafa8830ccb8a07e2"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-006/recovery-inbox-qa/large-text-review.png",
+      "sha256": "5c45416fa8af6b854541c655fae170a409d6138fce56b9c5a977f0d7d9e2556f"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-006/recovery-inbox-qa/normal-review.png",
+      "sha256": "9c7d209cf93b79f79f3b751ed5c42d8dca20055faf74da2b7fb2ace8b35068f1"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/completed-addition.png",
+      "sha256": "1d7acb291201138a9299b4cc13670bcb1b38e733bd90277b3349a1768b08cf0b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/confirmed-replacement-and-trash.png",
+      "sha256": "ba888ce7b6d2ee7314cf8f2140186ca6d6ba0304ca6345e7c37b88e56c6e0c52"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/default-choices.png",
+      "sha256": "d84040be01868c33897b842fb3d837d7be61b6e5af4958b497b2ec9383b28ad3"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/large-text-confirmation.png",
+      "sha256": "f121325bcc37976b0d0882dc2cf5a46b96e7ed032c91cdb8463a8801a2696074"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/stale-review-stopped.png",
+      "sha256": "e2c31a5e2ffe91488ceb1eb4cf8d0d359e58a3e93bfb4e5a292ae8f0fd17a777"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/changed-file.png",
+      "sha256": "8cc55d98248964b2b1cb47056cf22e98979b7ed9184714d405180f0d2ccf6173"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/interrupted-review.png",
+      "sha256": "f371bafde025a12fbdf1d7957d1aad56a0601794e8d8023880332adb98b47e10"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/large-text-reset.png",
+      "sha256": "b2691b1ab6c53be22bbca3a8ce938c7c71166daecbe78dba3c5b1a93f28bddf5"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/reset-review.png",
+      "sha256": "b2691b1ab6c53be22bbca3a8ce938c7c71166daecbe78dba3c5b1a93f28bddf5"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/saved.png",
+      "sha256": "22f77cc089bdea53902370e6f2f66766e736f4b2bacec44952e5565c2cf2bb62"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/session-boundary.png",
+      "sha256": "5ab4253a9681ea8ae9e24dbc778b1d5c4f03f3bd2e78fe34c67ea799706aea83"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/direct-handle-drag.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/first-long-press-drag.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/two-line-selection.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/word-and-handles.png",
+      "sha256": "c9876e2689f9254fcd82cee1f2341112cd84b66db08d8d4eca00f5bbebe35f7c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/zoomed-selection.png",
+      "sha256": "7746fd1d620401039b675d6c34d1c1d5220ed94cf96f4fdf0219f0a6c5a2b78a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-004/space-plan-qa/normal-review.png",
+      "sha256": "4bda17f598d525d0c90f74f4c2f9ee061cb314af1b21007680afa54f4ba62dc3"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-006/recovery-inbox-qa/large-text-review.png",
+      "sha256": "84cbe860a363c2d69667f2886af6d89fe1179aa5bc22b50fead8f66bd0336b5c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-006/recovery-inbox-qa/normal-review.png",
+      "sha256": "bc1de54c1dad6766be34292a9da99c56b57206a3d348564da414f23267424705"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/completed-addition.png",
+      "sha256": "6ba3bf87df5a35e84d66f195f58570fa4a8ca01e8d63c3c002a149102601f874"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/confirmed-replacement-and-trash.png",
+      "sha256": "31036d36ac4bc89c093a6ed5ecaebca7a14734aa8879ddb08f3e6142f8f31de2"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/default-choices.png",
+      "sha256": "e8587eb89e7ce867752bcf95f317b6894a2574a4de65ad337d53e1b4e508334c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/large-text-confirmation.png",
+      "sha256": "8fbaf15b5763fc5ab4e294105d26dc4609c084d28c8a58a7331a2c8400434dde"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/stale-review-stopped.png",
+      "sha256": "8bb91dbdf57ade76f0fb3766d89fa730ac1c449ba5f975f5df66ad4f2b83a68f"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/changed-file.png",
+      "sha256": "bec99bf8b21e8d754932133697725134c185fd28b0fc2bc6769800dd86148a54"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/interrupted-review.png",
+      "sha256": "d409b827e5c6d4e536c2c45fbced7ec4971e2de2efc67fb7ff6bfda7659283aa"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/large-text-reset.png",
+      "sha256": "8cdc122c6717d15d8e8e9d6c844c91677c1fc58ec04b13ccf2f9a5fce99b02fd"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/reset-review.png",
+      "sha256": "8cdc122c6717d15d8e8e9d6c844c91677c1fc58ec04b13ccf2f9a5fce99b02fd"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/saved.png",
+      "sha256": "3075f0ede097cc2ea479ddf14698947195f7f93af59c668162d20c834c93cd62"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/session-boundary.png",
+      "sha256": "8b4655c4c16ed7b40c35690bb2f33d150f43c15ec2436e623f42588eb20535c9"
+    }
+  ],
+  "method": "Opened all ten private labeled sheets covering the 19 completed-prefix native captures per API.",
+  "findings": [
+    "Only named synthetic PDFs, Workspace fixtures and cropped review dialogs are visible.",
+    "The five PDF captures per API show word/range highlights, visible connecting stems and retained zoomed selection.",
+    "Storage-space and recovery-inbox controls remain readable; large-text states wrap their named actions.",
+    "Folder synchronization keeps explicit replacement/Trash confirmations and a clear stopped-review explanation.",
+    "Saved Undo, changed-file refusal, interrupted review, session boundary and both reset confirmations remain readable."
+  ],
+  "fullNativeRegressionComplete": false,
+  "api36CaptureOrigin": "The first 14 passing batches of the retained stopped attempt; these exact batch bytes are selected for explicit reuse in the resumed run."
+}

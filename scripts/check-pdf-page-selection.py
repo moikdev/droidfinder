@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import re
 import shlex
+import shutil
 import time
 import subprocess
 import tempfile
@@ -78,7 +79,22 @@ def run(a):
     match = re.search(r'Override size: (\d+x\d+)', d.shell('wm', 'size').decode())
     original_size = match.group(1) if match else 'reset'
     original_scale = d.shell('settings', 'get', 'system', 'font_scale').decode().strip()
-    ui = sync.NativeControls(d, density)
+    class StableNativeControls(sync.NativeControls):
+        def __init__(self, *args):
+            super().__init__(*args)
+            self.window_waits = []
+        def reach(self, name, label, *, clickable=True, enabled=True):
+            for attempt in range(4):
+                try:
+                    return super().reach(name+'-active-'+str(attempt), label, clickable=clickable, enabled=enabled)
+                except AssertionError as error:
+                    if error.args != (('active Findroid window', 0),) or attempt == 3:
+                        raise
+                    self.window_waits.append(dict(name=name,attempt=attempt,onlyReadsRetried=True,allNamedTargetAssertionsRetained=True))
+                    self.d.wait(name+'-fresh-active-window-'+str(attempt), lambda tree:any(
+                        w.get('active')=='true' and w.get('type')=='TYPE_APPLICATION' and any(n.get('package')=='dev.findroid' for n in w.iter('node')) for w in tree.iter('window')))
+            raise AssertionError('No stable active Findroid window')
+    ui = StableNativeControls(d, density)
     platform_api = int(d.shell('getprop','ro.build.version.sdk'))
     input_class = 'PdfSelectionInput' if platform_api <= 30 else 'PdfSelectionInputGlobal'
     stamp = str(time.time_ns()); fixture_rel = 'files/Workspace/Pdf-selection-acceptance-'+stamp
@@ -89,6 +105,38 @@ def run(a):
         buildReceiptSha256=sha(a.build_receipt.read_bytes()), apkSha256=expected, previousApkSha256=sha(public.read_bytes()), fromVersionCode=50, toVersionCode=51,
         checkerDependencies={name:sha((ROOT/name).read_bytes()) for name in ('scripts/check-reviewed-folder-sync.py','scripts/check-local-search-index.py','scripts/android/acceptance.py','scripts/android/PdfSelectionInput.java','scripts/android/PdfSelectionInputGlobal.java')},
         operationsUseExactOptimizedApk=True, acceptanceComplete=False, restorationComplete=False, checks=[], layouts=[], captures=[], clipboardProofs=[], controlProofs=[], selectionHandleProofs=[], screenChecks=[], densityChecks=[], browserHorizontalScrolls=[])
+
+    reused_layout_names = set()
+    if a.resume_layouts_from:
+        assert a.section == 'layouts', 'Only an explicitly named incomplete layout section can be resumed'
+        prior_path = a.resume_layouts_from.resolve()
+        assert prior_path.is_relative_to(ROOT/'captures/pdf-page-selection')
+        prior = json.loads(prior_path.read_text())
+        assert not prior['acceptanceComplete'] and prior['restorationComplete'] and prior['originalWorkspaceTreeKept']
+        assert prior['immutableOriginalBytesVerifiedBeforeTests'] and prior['operationsUseExactOptimizedApk']
+        for key in ('serial','sourceCommit','buildReceiptSha256','apkSha256','previousApkSha256','checkerDependencies'):
+            assert prior[key] == report[key], ('Prior layout source/APK/dependency mismatch', key)
+        assert 0 < len(prior['layouts']) < 12
+        for row in prior['layouts']:
+            assert row['allNamedControlsHaveComplete48DpBounds'] and row['wordAndRetainedPanClipboardExact'] and row['originalPdfBytesKept']
+            reused_layout_names.add(f"layout-{row['widthDp']}x{row['heightDp']}-font{row['fontScale']}-{'dark' if row['dark'] else 'light'}")
+        assert len(reused_layout_names) == len(prior['layouts'])
+        accepted_name = lambda name:any(name == prefix or name.startswith(prefix+'-') for prefix in reused_layout_names)
+        for key in ('clipboardProofs','controlProofs','selectionHandleProofs','browserHorizontalScrolls'):
+            report[key] = [row for row in prior[key] if accepted_name(row['name'])]
+        report['layouts'] = prior['layouts'][:]
+        report['screenChecks'] = prior['screenChecks'][:len(prior['layouts'])]
+        for row in prior['captures']:
+            if accepted_name(row['path']):
+                source = prior_path.parent/row['path'];assert source.name == row['path'] and sha(source.read_bytes()) == row['sha256']
+                shutil.copy2(source,a.output/source.name);report['captures'].append(row)
+        for row in report['layouts']:
+            glyph = row['systemFont'];source=prior_path.parent/glyph['image']
+            assert source.name == glyph['image'] and sha(source.read_bytes()) == glyph['sha256']
+            shutil.copy2(source,a.output/source.name)
+        report['explicitLayoutResume'] = dict(previousResult=str(prior_path.relative_to(ROOT)),previousResultSha256=sha(prior_path.read_bytes()),
+            previousCheckerSha256=prior['checkerSha256'],reusedLayouts=sorted(reused_layout_names),completedLayoutCount=len(report['layouts']),
+            priorAttemptPreserved=True,unfinishedLayoutRepeatedInFull=True,applicationApkUnchanged=True)
 
     def prepare_input():
         nonlocal input_jar
@@ -266,10 +314,13 @@ def run(a):
             checked('keyboard-and-preview-scope',keyboardSelectAllPassageAndLineBreaksVerified=True,escapeLeavesSelection=True,reopenHasNoStaleSelection=True,originalPdfBytesKept=True)
         if a.section in ('layouts','all'):
             glyphs={}
+            for row in report['layouts']:
+                glyphs.setdefault((row['widthDp'],row['heightDp'],'dark' if row['dark'] else 'light'),{})[row['fontScale']] = row['systemFont']
             for width,height in ((1280,800),(800,1280),(600,800)):
                 for font in (1.0,2.0):
                     for dark in (False,True):
                         theme='dark' if dark else 'light';name=f'layout-{width}x{height}-font{font}-{theme}'
+                        if name in reused_layout_names: continue
                         relative=seed(name,dark=dark);screen(width,height,round(density*160));d.shell('settings','put','system','font_scale',font)
                         assert float(d.shell('settings','get','system','font_scale').decode())==font
                         optimized(name);selecting(name);word(name);controls(name+'-controls');tree,image=capture(name+'-selection')
@@ -309,7 +360,7 @@ def run(a):
                 assert installed('dev.findroid.test')==frozen_original['files'][PAIR[1]]['sha256']
             else:d.call('install','-r','-d',public)
         finally:
-            report['controlProofs']+=ui.proofs;report['hierarchyRetries']=d.retries
+            report['controlProofs']+=ui.proofs;report['hierarchyRetries']=d.retries;report['activeWindowWaits']=ui.window_waits
             (a.output/'result.json').write_text(json.dumps(report,indent=2)+'\n')
             if input_jar is not None:d.shell('rm','-f','--',input_jar)
             d.close()
@@ -321,7 +372,9 @@ def main():
     parser.add_argument('--serial',required=True,choices=('emulator-5602','emulator-5582'))
     parser.add_argument('--apk',required=True,type=Path);parser.add_argument('--previous-apk',required=True,type=Path)
     parser.add_argument('--build-receipt',required=True,type=Path);parser.add_argument('--output',required=True,type=Path)
-    parser.add_argument('--section',choices=('core','layouts','all'),default='all');a=parser.parse_args()
+    parser.add_argument('--section',choices=('core','layouts','all'),default='all')
+    parser.add_argument('--resume-layouts-from',type=Path,help='Explicit restored incomplete result; reuse only its complete verified layouts')
+    a=parser.parse_args()
     with (ORIGINAL/('.'+a.serial+'-acceptance.lock')).open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);run(a)
 if __name__=='__main__':main()

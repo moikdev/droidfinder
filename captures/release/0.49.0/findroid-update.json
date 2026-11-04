@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 51,
+  "versionName": "0.49.0-preview",
+  "apkName": "Findroid-0.49.0-preview.apk",
+  "bytes": 8957736,
+  "sha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.49.0-preview/Findroid-0.49.0-preview.apk",
+  "notes": "Select text directly on PDF pages. Touch a word, drag across lines, or hold to begin, then adjust the named selection handles and copy the extracted passage. Pan and zoom keeps the highlight and copy actions. Keyboard Select All/Copy/Escape and accessible handle actions are available. Pages without a text layer and extraction restrictions are explained.\n"
+}

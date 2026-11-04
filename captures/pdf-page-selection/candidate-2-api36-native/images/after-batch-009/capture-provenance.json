@@ -1,0 +1,30 @@
+{
+  "serial": "emulator-5582",
+  "completedBatch": 9,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/completed-addition.png",
+      "sha256": "6ba3bf87df5a35e84d66f195f58570fa4a8ca01e8d63c3c002a149102601f874"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/confirmed-replacement-and-trash.png",
+      "sha256": "31036d36ac4bc89c093a6ed5ecaebca7a14734aa8879ddb08f3e6142f8f31de2"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/default-choices.png",
+      "sha256": "e8587eb89e7ce867752bcf95f317b6894a2574a4de65ad337d53e1b4e508334c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/font-layout.json",
+      "sha256": "c7fa2a052d4b46ec7294ec597c0ea07ad0f3164cd378bd913d0064dc94420631"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/large-text-confirmation.png",
+      "sha256": "8fbaf15b5763fc5ab4e294105d26dc4609c084d28c8a58a7331a2c8400434dde"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/stale-review-stopped.png",
+      "sha256": "8bb91dbdf57ade76f0fb3766d89fa730ac1c449ba5f975f5df66ad4f2b83a68f"
+    }
+  ]
+}

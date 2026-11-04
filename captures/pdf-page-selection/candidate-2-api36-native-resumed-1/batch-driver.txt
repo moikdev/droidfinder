@@ -1,0 +1,683 @@
+Accepted batch 1/61: dev.findroid.PdfPageSelectionNativeTest (3 cases)
+Accepted batch 2/61: dev.findroid.PdfPageSelectionWorkflowTest (11 cases)
+Accepted batch 3/61: dev.findroid.TransferSpaceInspectionNativeTest (8 cases)
+Accepted batch 4/61: dev.findroid.TransferSpaceWorkflowTest (9 cases)
+Accepted batch 5/61: dev.findroid.RecoveryNoticeNativeTest (12 cases)
+Accepted batch 6/61: dev.findroid.RecoveryInboxWorkflowTest (15 cases)
+Accepted batch 7/61: dev.findroid.FolderSyncDraftNativeTest (4 cases)
+Accepted batch 8/61: dev.findroid.FolderSyncApplyNativeTest (8 cases)
+Accepted batch 9/61: dev.findroid.FolderSyncWorkflowTest (8 cases)
+Accepted batch 10/61: dev.findroid.FinderWorkflowTest (11 cases)
+Accepted batch 11/61: dev.findroid.PersistentUndoNativeTest (22 cases)
+Accepted batch 12/61: dev.findroid.PersistentUndoWorkflowTest (8 cases)
+Accepted batch 13/61: dev.findroid.DragWorkflowTest (13 cases)
+Accepted batch 14/61: dev.findroid.FileConflictWorkflowTest (6 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 6 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/15-ArchiveWorkflowTest.txt
+Accepted batch 15/61: dev.findroid.ArchiveWorkflowTest (6 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 5 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/16-ProviderWorkflowTest.txt
+Accepted batch 16/61: dev.findroid.ProviderWorkflowTest (5 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 20 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/17-RecentSearchWorkflowTest.txt
+Accepted batch 17/61: dev.findroid.RecentSearchWorkflowTest (20 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 2 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/18-TransferProgressWorkflowTest.txt
+Accepted batch 18/61: dev.findroid.TransferProgressWorkflowTest (2 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 1 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/19-TransferPlanningWorkflowTest.txt
+Accepted batch 19/61: dev.findroid.TransferPlanningWorkflowTest (1 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 3 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/20-TransferLifecycleTest.txt
+Accepted batch 20/61: dev.findroid.TransferLifecycleTest (3 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 2 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/21-TransferQueueWorkflowTest.txt
+Accepted batch 21/61: dev.findroid.TransferQueueWorkflowTest (2 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 17 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/22-FolderMergeTest.txt
+Accepted batch 22/61: dev.findroid.FolderMergeTest (17 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 13 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/23-SqliteTransferStoreTest.txt
+Accepted batch 23/61: dev.findroid.SqliteTransferStoreTest (13 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 8 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/24-DocumentCapabilitiesTest.txt
+Accepted batch 24/61: dev.findroid.DocumentCapabilitiesTest (8 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 7 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/25-StorageCapabilitiesWorkflowTest.txt
+Accepted batch 25/61: dev.findroid.StorageCapabilitiesWorkflowTest (7 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 18 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/26-LocalIndexStoreTest.txt
+Accepted batch 26/61: dev.findroid.LocalIndexStoreTest (18 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 3 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/27-SearchSourceCodecTest.txt
+Accepted batch 27/61: dev.findroid.SearchSourceCodecTest (3 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 6 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/28-LocalIndexWorkflowTest.txt
+Accepted batch 28/61: dev.findroid.LocalIndexWorkflowTest (6 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 9 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/29-SearchRuleGroupCodecTest.txt
+Accepted batch 29/61: dev.findroid.SearchRuleGroupCodecTest (9 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 7 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/30-NestedSearchWorkflowTest.txt
+Accepted batch 30/61: dev.findroid.NestedSearchWorkflowTest (7 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 6 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/31-MultiRootCodecTest.txt
+Accepted batch 31/61: dev.findroid.MultiRootCodecTest (6 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 17 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/32-MultiRootSearchWorkflowTest.txt
+Accepted batch 32/61: dev.findroid.MultiRootSearchWorkflowTest (17 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 8 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/33-RecentSearchCodecTest.txt
+Accepted batch 33/61: dev.findroid.RecentSearchCodecTest (8 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 7 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/34-SearchExperienceWorkflowTest.txt
+Accepted batch 34/61: dev.findroid.SearchExperienceWorkflowTest (7 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 4 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/35-SearchScopeWorkflowTest.txt
+Accepted batch 35/61: dev.findroid.SearchScopeWorkflowTest (4 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 8 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/36-TagSearchWorkflowTest.txt
+Accepted batch 36/61: dev.findroid.TagSearchWorkflowTest (8 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 10 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/37-LoadingWorkflowTest.txt
+Accepted batch 37/61: dev.findroid.LoadingWorkflowTest (10 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 16 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/38-CommandClarityWorkflowTest.txt
+Accepted batch 38/61: dev.findroid.CommandClarityWorkflowTest (16 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 11 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/39-FavoritesDragWorkflowTest.txt
+Accepted batch 39/61: dev.findroid.FavoritesDragWorkflowTest (11 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 4 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/40-OutgoingDragTest.txt
+Accepted batch 40/61: dev.findroid.OutgoingDragTest (4 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 16 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/41-WorkspaceRecoveryWorkflowTest.txt
+Accepted batch 41/61: dev.findroid.WorkspaceRecoveryWorkflowTest (16 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 6 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/42-WorkspaceRecoveryPersistenceTest.txt
+Accepted batch 42/61: dev.findroid.WorkspaceRecoveryPersistenceTest (6 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 1 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/43-WorkspaceSaveFailureTest.txt
+Accepted batch 43/61: dev.findroid.WorkspaceSaveFailureTest (1 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 7 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/44-NavigationWorkflowTest.txt
+Accepted batch 44/61: dev.findroid.NavigationWorkflowTest (7 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 12 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/45-SetupCodecTest.txt
+Accepted batch 45/61: dev.findroid.SetupCodecTest (12 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 17 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/46-SetupWorkflowTest.txt
+Accepted batch 46/61: dev.findroid.SetupWorkflowTest (17 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 13 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/47-SidebarWorkflowTest.txt
+Accepted batch 47/61: dev.findroid.SidebarWorkflowTest (13 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 10 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/48-BrowsingClarityWorkflowTest.txt
+Accepted batch 48/61: dev.findroid.BrowsingClarityWorkflowTest (10 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 6 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/49-AppUpdateWorkflowTest.txt
+Accepted batch 49/61: dev.findroid.AppUpdateWorkflowTest (6 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 9 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/50-WorkspaceWorkflowTest.txt
+Accepted batch 50/61: dev.findroid.WorkspaceWorkflowTest (9 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 9 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/51-AdvancedWorkflowTest.txt
+Accepted batch 51/61: dev.findroid.AdvancedWorkflowTest (9 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 13 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/52-RenameWorkflowTest.txt
+Accepted batch 52/61: dev.findroid.RenameWorkflowTest (13 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 18 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/53-OrganizationWorkflowTest.txt
+Accepted batch 53/61: dev.findroid.OrganizationWorkflowTest (18 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 12 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/54-InputWorkflowTest.txt
+Accepted batch 54/61: dev.findroid.InputWorkflowTest#oneTouchOpensFoldersInEveryView,dev.findroid.InputWorkflowTest#oneTouchOpensFilesThroughAndroidInEveryView,dev.findroid.InputWorkflowTest#mouseSingleClickSelectsAndDoubleClickOpensInEveryView,dev.findroid.InputWorkflowTest#touchAfterMouseSelectionStillOpensAndLongPressEntersSelectionMode,dev.findroid.InputWorkflowTest#scrollingAndCancelledTouchDoNotOpenFiles,dev.findroid.InputWorkflowTest#fileActionsDoNotAccidentallyOpenTheFile,dev.findroid.InputWorkflowTest#controlAndShiftMouseSelectionNeverActivateAFile,dev.findroid.InputWorkflowTest#mouseSourceWithFingerToolIsTreatedAsACursorNotATouchTap,dev.findroid.InputWorkflowTest#providerFoldersUseTheSamePerGestureActivation,dev.findroid.InputWorkflowTest#clickingFileGlyphsUsesTheSameRulesAsFileNames,dev.findroid.InputWorkflowTest#mouseSelectionInChildColumnsDoesNotNavigateOrLoseTheSelectedEntry,dev.findroid.InputWorkflowTest#archiveEntriesHonorTouchAndMouseActivationAndKeepExtractionReachable (12 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 5 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/55-NavigationCodecTest.txt
+Accepted batch 55/61: dev.findroid.NavigationCodecTest (5 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 4 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/56-WindowLifecycleWorkflowTest.txt
+Accepted batch 56/61: dev.findroid.WindowLifecycleWorkflowTest (4 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 1 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/57-LocalIndexBenchmarkTest.txt
+Accepted batch 57/61: dev.findroid.LocalIndexBenchmarkTest (1 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 17 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/58-CopyVerificationWorkflowTest.txt
+Accepted batch 58/61: dev.findroid.CopyVerificationWorkflowTest (17 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 18 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/59-PartialCopyRecoveryTest.txt
+Accepted batch 59/61: dev.findroid.PartialCopyRecoveryTest (18 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 8 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/60-PartialCopyWorkflowTest.txt
+Accepted batch 60/61: dev.findroid.PartialCopyWorkflowTest (8 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 5 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/61-ExternalDragWorkflowTest.txt
+Accepted batch 61/61: dev.findroid.ExternalDragWorkflowTest (5 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+emulator-5582: 563 passed in 61 isolated batches; zero failures/skips.

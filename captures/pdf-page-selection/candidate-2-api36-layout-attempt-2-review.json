@@ -1,0 +1,15 @@
+{
+  "originalAttemptPreserved": true,
+  "serial": "emulator-5582",
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "originalWorkspaceTreeKept": true,
+  "completedLayouts": 11,
+  "clipboardReadsBeforeStop": 22,
+  "stop": "The hierarchy read immediately after Copy returned no windows or nodes; no active Findroid application scope was available.",
+  "cause": "An empty native accessibility snapshot. No crash, renderer or memory cause is inferred.",
+  "fix": "Wait for a fresh active Findroid window only when the hierarchy has zero matching active application windows, then repeat the read/target lookup. Do not repeat a click or weaken full 48 dp assertions.",
+  "explicitResumeSelected": true,
+  "decision": "Reuse only the 11 completed layouts with unchanged APK/source/dependency hashes and verified public capture/glyph hashes. Repeat the unfinished twelfth layout in full and run both density checks in a fresh output folder.",
+  "privateHierarchySha256": "0047cee5bb457551883eef5e7b59a65f5585e97d78127591d54c7f2359046520"
+}

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncRecoveryPreflightTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:16.382Z" hostname="MacBook-Pro-2.local" time="0.492">
+<testsuite name="dev.findroid.FolderSyncRecoveryPreflightTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:39.893Z" hostname="MacBook-Pro-2.local" time="0.437">
   <properties/>
   <testcase name="overlappingOriginalSubtreesCannotBeScheduledTwice" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.004"/>
-  <testcase name="unavailableOrInsufficientSpaceRejectsTheCompletePlan" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.01"/>
-  <testcase name="aLaterCrossFilesystemOriginalRejectsTheEntirePlanBeforeAnyBucketExists" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.002"/>
-  <testcase name="theProjectedCompleteMappingMustFitTheExistingTrashRecordLimit" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.461"/>
+  <testcase name="unavailableOrInsufficientSpaceRejectsTheCompletePlan" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.005"/>
+  <testcase name="aLaterCrossFilesystemOriginalRejectsTheEntirePlanBeforeAnyBucketExists" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.003"/>
+  <testcase name="theProjectedCompleteMappingMustFitTheExistingTrashRecordLimit" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.392"/>
   <testcase name="neitherTrashItselfNorAnOriginalContainingTrashCanBeMovedIntoItsRecoveryLocation" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.003"/>
-  <testcase name="aCompletePlanPreflightLeavesAllOriginalsAndTrashUnchanged" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.002"/>
-  <testcase name="aPreflightedTrashRootCannotBeReplacedBeforeMovingAnOriginal" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.007"/>
+  <testcase name="aCompletePlanPreflightLeavesAllOriginalsAndTrashUnchanged" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.022"/>
+  <testcase name="aPreflightedTrashRootCannotBeReplacedBeforeMovingAnOriginal" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.005"/>
   <testcase name="changedOriginalsAndDuplicateOrEmptyPlansAreRefusedWithoutSavingMappings" classname="dev.findroid.FolderSyncRecoveryPreflightTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

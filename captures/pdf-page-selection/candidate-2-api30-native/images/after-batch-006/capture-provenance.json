@@ -1,0 +1,14 @@
+{
+  "serial": "emulator-5602",
+  "completedBatch": 6,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-006/recovery-inbox-qa/large-text-review.png",
+      "sha256": "5c45416fa8af6b854541c655fae170a409d6138fce56b9c5a977f0d7d9e2556f"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-006/recovery-inbox-qa/normal-review.png",
+      "sha256": "9c7d209cf93b79f79f3b751ed5c42d8dca20055faf74da2b7fb2ace8b35068f1"
+    }
+  ]
+}

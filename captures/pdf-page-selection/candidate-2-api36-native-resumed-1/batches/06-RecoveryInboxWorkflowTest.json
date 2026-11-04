@@ -1,0 +1,89 @@
+{
+  "success": true,
+  "passed": 15,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "aLaterSuccessfulOperationKeepsTheEarlierNoticeInTheInbox",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "acknowledgmentKeepsTheNoticeAvailableToAFreshModel",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "normalAndEnlargedTextKeepAllReviewControlsReachable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "failedOperationLeavesAReviewableNoticeAndKeepsTheExistingFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "transferLinkOpensTheChosenExistingJobWithoutReplayingIt",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "aNoticePreservationFailureStopsWorkAndAlwaysFinishesTheService",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "recordedLocationsAreShownOnlyByAnExplicitNamedControl",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "anUnlistedDestinationExplainsStorageAccessWithoutNavigating",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "savedCopyLinkChecksTheExistingCheckpointWithoutResumingIt",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "namedMenuOpensAReadOnlyInboxWithoutStartingAnOperation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "secondaryPaneAndReversedLayoutKeepThePrimaryRecoveryOwner",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "changedSavedCopyLinkKeepsTheInboxAndRequestsAFreshReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "oneUnreadableSourceDoesNotHideIndependentTransferRecords",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "staleTransferLinkKeepsTheInboxAndExplainsTheMissingRecord",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryInboxWorkflowTest",
+      "test": "aStaleAcknowledgmentDoesNotDismissOrDeleteANewerMarker",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 80.0,
+  "timedOut": false
+}

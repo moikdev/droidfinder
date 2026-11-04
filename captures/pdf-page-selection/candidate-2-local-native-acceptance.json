@@ -1,0 +1,57 @@
+{
+  "frozenApplicationAndTestSourceCommit": "93d36afd3d3caf1c972a3dcd42256978fac468cb",
+  "localNativeAcceptanceComplete": true,
+  "tablets": {
+    "api30": {
+      "native": "captures/pdf-page-selection/candidate-2-api30-native/native.json",
+      "nativeSha256": "fd0b60b8d6835249f67f7f1656b4268f685565ab1257a5cfb6ab0a4930e2e394",
+      "provenance": "captures/pdf-page-selection/candidate-2-api30-native/build-provenance.json",
+      "provenanceSha256": "9feadd34ba53294e2fee65c8d1c990127f1a4a19af07af278c57d1d0440caf45",
+      "distinctCases": 563,
+      "isolatedBatches": 61,
+      "restorationComplete": true,
+      "originalWorkspaceTreeKept": true
+    },
+    "api36": {
+      "native": "captures/pdf-page-selection/candidate-2-api36-native-resumed-1/native.json",
+      "nativeSha256": "0cbb7c3ebc04a81e406a23825e9b1166159749cbac60ef1069406bd3ca918533",
+      "provenance": "captures/pdf-page-selection/candidate-2-api36-native-resumed-1/build-provenance.json",
+      "provenanceSha256": "148ff83aa35e33d38636362c0545d71c726f8de67b646025040aa4a7bfc106dc",
+      "distinctCases": 563,
+      "isolatedBatches": 61,
+      "restorationComplete": true,
+      "originalWorkspaceTreeKept": true
+    }
+  },
+  "caseIdentitiesMatch": true,
+  "api36ExplicitSuccessfulBatchReuse": {
+    "count": 14,
+    "batches": [
+      "01-PdfPageSelectionNativeTest.json",
+      "02-PdfPageSelectionWorkflowTest.json",
+      "03-TransferSpaceInspectionNativeTest.json",
+      "04-TransferSpaceWorkflowTest.json",
+      "05-RecoveryNoticeNativeTest.json",
+      "06-RecoveryInboxWorkflowTest.json",
+      "07-FolderSyncDraftNativeTest.json",
+      "08-FolderSyncApplyNativeTest.json",
+      "09-FolderSyncWorkflowTest.json",
+      "10-FinderWorkflowTest.json",
+      "11-PersistentUndoNativeTest.json",
+      "12-PersistentUndoWorkflowTest.json",
+      "13-DragWorkflowTest.json",
+      "14-FileConflictWorkflowTest.json"
+    ],
+    "reportAndLogBytesMatchOriginal": true
+  },
+  "failedArchiveBatchRetainedAt": [
+    "captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/15-ArchiveWorkflowTest-before-retry-1.json",
+    "captures/pdf-page-selection/candidate-2-api36-native-resumed-1/batches/15-ArchiveWorkflowTest-before-retry-1.txt"
+  ],
+  "api36ArchiveWholeClassRetry": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "actualOtaAndIndependentArchiveAcceptancePending": true
+}
