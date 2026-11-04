@@ -124,6 +124,62 @@ class PdfPageSelectionWorkflowTest {
         capture("two-line-selection")
     }
 
+    @Test fun draggingTheEndHandleExtendsTheActualCopiedRange() {
+        open();ready();tapOcean()
+        val layer = compose.onNodeWithTag("pdf-page-selection-layer").fetchSemanticsNode().boundsInRoot
+        val edge = kotlinx.coroutines.runBlocking {
+            val session = PdfReadingSession(compose.activity, Entry(pdf))
+            try {
+                val map = pdfSelectionMap(session.text(0))
+                map.edge(map.wordAt(.15f,.09f,.001f,.001f)!!, false)!!
+            } finally { session.close() }
+        }
+        compose.onNodeWithContentDescription("End of PDF text selection").performTouchInput {
+            down(center)
+            moveBy(Offset((.15f-edge.right)*layer.width, (.165f-edge.bottom)*layer.height), delayMillis=250)
+            up()
+        }
+        compose.waitUntil(5_000) { selected().contains("Far") }
+        assertEquals("Ocean light\nFar",copy().trim());capture("direct-handle-drag")
+    }
+
+    @Test fun theFirstLongPressCanContinueIntoADragAfterLoadingTheTextLayer() {
+        open()
+        compose.onNodeWithTag("pdf-page-selection-layer").performTouchInput {
+            down(Offset(width * .15f,height * .09f))
+        }
+        compose.waitUntil(15_000) { selected() == "Ocean" }
+        compose.waitForIdle()
+        compose.onNodeWithTag("pdf-page-selection-layer").performTouchInput {
+            moveTo(Offset(width * .15f,height * .165f), delayMillis=250)
+            up()
+        }
+        compose.waitUntil(5_000) { selected().contains("Far") }
+        assertEquals("Ocean light\nFar",copy().trim());capture("first-long-press-drag")
+    }
+
+    @Test fun keyboardSelectAllCopyAndEscapeOperateOnTheCurrentPdfPage() {
+        open();ready();tapOcean()
+        fun key(code: Int, meta: Int = 0) {
+            val now = android.os.SystemClock.uptimeMillis()
+            val instrumentation = InstrumentationRegistry.getInstrumentation()
+            instrumentation.sendKeySync(KeyEvent(now,now,KeyEvent.ACTION_DOWN,code,0,meta))
+            instrumentation.sendKeySync(KeyEvent(now,now,KeyEvent.ACTION_UP,code,0,meta))
+        }
+        key(KeyEvent.KEYCODE_A,KeyEvent.META_CTRL_ON)
+        compose.waitUntil(5_000) { selected().contains("shore") }
+        key(KeyEvent.KEYCODE_C,KeyEvent.META_CTRL_ON)
+        compose.waitUntil(5_000) { compose.onAllNodesWithText("Copied selected text",substring=false).fetchSemanticsNodes().isNotEmpty() }
+        compose.runOnIdle {
+            val text = compose.activity.getSystemService(ClipboardManager::class.java).primaryClip!!
+                .getItemAt(0).coerceToText(compose.activity).toString()
+            assertEquals("Ocean light\nFar shore",text.trim())
+        }
+        key(KeyEvent.KEYCODE_ESCAPE)
+        compose.onNodeWithText("Select page text",substring=false).assertExists()
+        compose.onNodeWithContentDescription("End of PDF text selection").assertDoesNotExist()
+    }
+
     @Test fun accessibilityActionsCanExtendAHandleAndClearTheSelection() {
         open();ready();tapOcean()
         val actions = compose.onNodeWithContentDescription("End of PDF text selection").fetchSemanticsNode().config[SemanticsActions.CustomActions]

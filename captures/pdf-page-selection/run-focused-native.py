@@ -23,17 +23,23 @@ PAIR = ('app/build/outputs/apk/debug/app-debug.apk', 'app/build/outputs/apk/andr
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('--serial', required=True, choices=('emulator-5602', 'emulator-5582'))
 p.add_argument('--output', required=True, type=Path)
+p.add_argument('--build-receipt', type=Path, required=True)
+p.add_argument('--expected-cases', type=int, required=True)
 a = p.parse_args()
+a.build_receipt = a.build_receipt.resolve()
+assert a.build_receipt.is_relative_to(ROOT / 'captures/pdf-page-selection') and a.expected_cases > 0
 a.output = a.output.resolve()
 assert a.output.is_relative_to(ROOT / 'captures/pdf-page-selection') and not a.output.exists()
 adb = str(Path.home() / 'Library/Android/sdk/platform-tools/adb')
 public = MAIN / 'captures/release/0.48.0/Findroid-0.48.0-preview.apk'
 sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
 assert sha(public) == '3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a'
-build = json.loads((ROOT / 'captures/pdf-page-selection/draft-build-1.json').read_text())
+build = json.loads(a.build_receipt.read_text())
 assert build['jvm'] == dict(tests=948, failures=0, errors=0, skipped=0)
 for name, row in build['files'].items():
     assert sha(ROOT / name) == row['sha256'], ('Draft bytes changed; preserve and rebuild the draft receipt', name)
+for name, digest in build.get('sourceFiles', {}).items():
+    assert sha(ROOT / name) == digest, ('Draft source differs from its compiled receipt', name)
 original_build = json.loads((ORIGINAL / 'candidate-build-6.json').read_text())
 for name in PAIR:
     assert sha(MAIN / name) == original_build['files'][name]['sha256']
@@ -80,7 +86,8 @@ with (ORIGINAL / ('.' + a.serial + '-acceptance.lock')).open('a') as lock:
     source = {str(f.relative_to(ROOT)): sha(f) for f in sorted((ROOT / 'app/src').rglob('*')) if f.is_file()}
     receipt = dict(serial=a.serial, draftOnly=True, frozenReleaseCandidate=False,
         sourceCommit=build['sourceCommit'], sourceSha256=source,
-        controllerSha256=sha(Path(__file__)), draftBuildReceiptSha256=sha(ROOT / 'captures/pdf-page-selection/draft-build-1.json'),
+        controllerSha256=sha(Path(__file__)), draftBuildReceiptSha256=sha(a.build_receipt), draftBuildReceipt=str(a.build_receipt.relative_to(ROOT)),
+        expectedNativeCases=a.expected_cases,
         apkSha256={name: sha(ROOT / name) for name in PAIR}, main045RestorationPairUnchanged=True,
         immutableOriginalBytesVerifiedBeforeTests=False, nativeFocusedComplete=False, restorationComplete=False)
     verified = False
@@ -111,7 +118,7 @@ with (ORIGINAL / ('.' + a.serial + '-acceptance.lock')).open('a') as lock:
         if (a.output / 'native.json').exists():
             native = json.loads((a.output / 'native.json').read_text())
             receipt.update(nativePassed=native['passed'], nativeFailed=native['failed'], nativeSkipped=native['skipped'])
-            assert result.returncode == 0 and native['success'] and native['passed'] == 10 and native['failed'] == native['skipped'] == 0
+            assert result.returncode == 0 and native['success'] and native['passed'] == a.expected_cases and native['failed'] == native['skipped'] == 0
             receipt['nativeFocusedComplete'] = True
         else:
             raise RuntimeError('Focused draft stopped; retain every attempt and inspect the batch driver')

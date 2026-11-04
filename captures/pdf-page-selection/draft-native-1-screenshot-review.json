@@ -1,0 +1,38 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-1/images/after-batch-002/two-line-selection.png",
+      "sha256": "52ca11a6fcef6536c2127ea934279524e7b91368f7725e5905039df22e1b249f"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-1/images/after-batch-002/word-and-handles.png",
+      "sha256": "8926b7ae7cd67184d209a7f1764899e42d7395cf5166fa41ba832a53db23b0a6"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-1/images/after-batch-002/zoomed-selection.png",
+      "sha256": "c8f359e4e3d76e8262ec4a803b9c9342bfc470706b93cddaea2b09abd533c99c"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-1/images/after-batch-002/two-line-selection.png",
+      "sha256": "6a5a0a4ad4ceedcad2d153cb624c4f97e7fa5f2234ba0ffbe8eeaf7ad1cd6ca6"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-1/images/after-batch-002/word-and-handles.png",
+      "sha256": "503ab16b882e99af3c8f2b793f13f1afe4fe9c07d07223092c0482b7d9f07bad"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-1/images/after-batch-002/zoomed-selection.png",
+      "sha256": "100292e548e340a55b375545548d8ab85d1b83e8560a6dc838a88afda041f017"
+    }
+  ],
+  "method": "Opened all four labeled sheets covering the six original draft PDF-selection screenshots.",
+  "findings": [
+    "The text and line-break copy assertions pass on both APIs and the selected text is highlighted.",
+    "Visible handle knobs are displaced from the small fitted glyphs, especially the end handle, which is unnecessarily moved down for a narrow selection. Improve visible anchoring before freezing the release.",
+    "The zoom capture correctly clips the zoomed page to its viewport; subsequent acceptance must inspect the selected region after panning it into view.",
+    "All captures contain only synthetic PDF pages and preview controls."
+  ],
+  "draftOnly": true,
+  "releaseAcceptanceComplete": false
+}

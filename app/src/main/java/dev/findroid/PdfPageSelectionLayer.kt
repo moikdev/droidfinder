@@ -78,14 +78,18 @@ internal fun PdfPageSelectionLayer(
                     else awaitLongPressOrCancellation(down.id) ?: return@awaitEachGesture
                 val point = touch(start.position)
                 currentRequest(point)
-                val index = currentMap
-                val anchor = index?.wordAt(point.x, point.y, point.toleranceX, point.toleranceY)
+                var index = currentMap
+                var anchor = index?.wordAt(point.x, point.y, point.toleranceX, point.toleranceY)
                 if (index != null) currentChange(anchor)
                 start.consume()
                 drag(start.id) { change ->
                     val next = touch(change.position, clamp = true)
+                    if (index == null) {
+                        index = currentMap
+                        anchor = index?.wordAt(point.x, point.y, point.toleranceX, point.toleranceY)
+                    }
                     if (anchor != null && currentMap === index)
-                        currentChange(index!!.extend(anchor, next.x, next.y, next.toleranceX, next.toleranceY))
+                        currentChange(index!!.extend(anchor!!, next.x, next.y, next.toleranceX, next.toleranceY))
                     change.consume()
                 }
             }
@@ -98,12 +102,7 @@ internal fun PdfPageSelectionLayer(
         if (map != null && selection != null) for (start in listOf(true, false)) {
             val edge = map.edge(selection, start) ?: continue
             val pointOnGlyph = Offset((if (start) edge.left else edge.right) * size.width, edge.bottom * size.height)
-            var center = Offset(pointOnGlyph.x + (if (start) -target / 2 else target / 2), pointOnGlyph.y + target / 2)
-            // Separate the 48 dp handles even for a one-glyph selection.
-            if (!start) {
-                val first = map.edge(selection, true)
-                if (first != null && (edge.right - first.left) * size.width < target) center = center.copy(y = center.y + target)
-            }
+            val center = Offset(pointOnGlyph.x + (if (start) -target / 2 else target / 2), pointOnGlyph.y + target / 2)
             val offset = IntOffset((center.x - target / 2).roundToInt().coerceIn(0, (size.width - target).roundToInt().coerceAtLeast(0)),
                 (center.y - target / 2).roundToInt().coerceIn(0, (size.height - target).roundToInt().coerceAtLeast(0)))
             val currentPointOnGlyph by rememberUpdatedState(pointOnGlyph)
@@ -130,9 +129,17 @@ internal fun PdfPageSelectionLayer(
                         }
                     }
                 }) {
-                drawCircle(Color.White, 9.dp.toPx())
-                drawCircle(color, 7.dp.toPx())
-                drawCircle(color.copy(alpha = .5f), 9.dp.toPx(), style = Stroke(1.dp.toPx()))
+                // Keep the visible knob near the glyph while its touch target remains 48 dp.
+                val radius = minOf(9.dp.toPx(), this.size.width / 2, this.size.height / 2)
+                val glyph = currentPointOnGlyph - Offset(offset.x.toFloat(), offset.y.toFloat())
+                val knob = Offset(
+                    (glyph.x + if (start) -radius else radius).coerceIn(radius, this.size.width - radius),
+                    (glyph.y + radius).coerceIn(radius, this.size.height - radius),
+                )
+                drawLine(color, glyph, knob, strokeWidth = 1.5.dp.toPx())
+                drawCircle(Color.White, radius, knob)
+                drawCircle(color, radius * 7 / 9, knob)
+                drawCircle(color.copy(alpha = .5f), radius, knob, style = Stroke(1.dp.toPx()))
             }
         }
     }

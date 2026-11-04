@@ -1,0 +1,19 @@
+{
+  "serial": "emulator-5602",
+  "completedBatch": 2,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-1/images/after-batch-002/two-line-selection.png",
+      "sha256": "52ca11a6fcef6536c2127ea934279524e7b91368f7725e5905039df22e1b249f"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-1/images/after-batch-002/word-and-handles.png",
+      "sha256": "8926b7ae7cd67184d209a7f1764899e42d7395cf5166fa41ba832a53db23b0a6"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-1/images/after-batch-002/zoomed-selection.png",
+      "sha256": "c8f359e4e3d76e8262ec4a803b9c9342bfc470706b93cddaea2b09abd533c99c"
+    }
+  ],
+  "syntheticPdfPreviewOnly": true
+}

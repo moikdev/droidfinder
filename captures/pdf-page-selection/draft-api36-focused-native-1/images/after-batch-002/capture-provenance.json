@@ -1,0 +1,19 @@
+{
+  "serial": "emulator-5582",
+  "completedBatch": 2,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-1/images/after-batch-002/two-line-selection.png",
+      "sha256": "6a5a0a4ad4ceedcad2d153cb624c4f97e7fa5f2234ba0ffbe8eeaf7ad1cd6ca6"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-1/images/after-batch-002/word-and-handles.png",
+      "sha256": "503ab16b882e99af3c8f2b793f13f1afe4fe9c07d07223092c0482b7d9f07bad"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-1/images/after-batch-002/zoomed-selection.png",
+      "sha256": "100292e548e340a55b375545548d8ab85d1b83e8560a6dc838a88afda041f017"
+    }
+  ],
+  "syntheticPdfPreviewOnly": true
+}

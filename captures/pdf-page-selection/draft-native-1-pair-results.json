@@ -1,0 +1,10 @@
+{
+  "draftOnly": true,
+  "distinctFocusedNativeCasesPerApi": 10,
+  "isolatedBatchesPerApi": 2,
+  "matchingCaseSets": true,
+  "geometryRotationCropCombinations": 32,
+  "originalDataAndPublic048Restored": true,
+  "visualHandlePositionImprovementRequired": true,
+  "fullRegressionOptimizedAndPublicOtaPending": true
+}

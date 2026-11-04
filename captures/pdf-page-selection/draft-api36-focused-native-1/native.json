@@ -1,0 +1,91 @@
+{
+  "success": true,
+  "passed": 10,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "aPageWithoutATextLayerCannotCreateAnInventedSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionRespectsTheDocumentsExistingTextExtractionPermission",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionBoxesFollowActualRenderedGlyphsAcrossPageAndTextRotationsAndCropBoxes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "changingPagesAndReopeningThePreviewDoNotReuseThePriorSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "holdingTheRenderedWordOpensSelectionWithoutASeparateModeTap",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "zoomKeepsTheSelectionAnchoredToThePageAndUsesTheSameCopyText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "accessibilityActionsCanExtendAHandleAndClearTheSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "draggingAcrossTwoRenderedLinesKeepsTheirActualLineBreak",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "anEmptyTextLayerExplainsWhyThereIsNothingToCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "touchingAWordOnTheRenderedPageCopiesExactlyItsTextAndShowsNamedHandles",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 67.0,
+  "wallSecondsThisInvocation": 75.0,
+  "timedOut": false,
+  "isolatedBatches": [
+    {
+      "selector": "dev.findroid.PdfPageSelectionNativeTest",
+      "report": "captures/pdf-page-selection/draft-api36-focused-native-1/batches/01-PdfPageSelectionNativeTest.json",
+      "log": "captures/pdf-page-selection/draft-api36-focused-native-1/batches/01-PdfPageSelectionNativeTest.txt",
+      "reportSha256": "6a8bc04b9f02da36caedad28612d8cc9f038bdd3d8d970f1b08da7050834273c",
+      "logSha256": "1c8ef6f6c59ecabc0a435df415f5b0b82715acb3a9002f7a9d9557f10ca2cf6a",
+      "passed": 3
+    },
+    {
+      "selector": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "report": "captures/pdf-page-selection/draft-api36-focused-native-1/batches/02-PdfPageSelectionWorkflowTest.json",
+      "log": "captures/pdf-page-selection/draft-api36-focused-native-1/batches/02-PdfPageSelectionWorkflowTest.txt",
+      "reportSha256": "d4858c7a123a490a02d0e2350c020506ee53ed02072aca6ada89200062e9aa4f",
+      "logSha256": "bb698c7a7956811bcb9f66843f3f1f2717f4085030265fde19f2c194cff771d5",
+      "passed": 7
+    }
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "bd7e2af10f606772380de46279b80aaeebecc93ca040867574a8bd3010d5c1bb",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "e85f657edec6c1ce5edbb2826ac4e0177909975a13be4c7872d6603d50cd87c2"
+  },
+  "installedApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "bd7e2af10f606772380de46279b80aaeebecc93ca040867574a8bd3010d5c1bb",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "e85f657edec6c1ce5edbb2826ac4e0177909975a13be4c7872d6603d50cd87c2"
+  }
+}

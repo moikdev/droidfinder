@@ -18,7 +18,7 @@ counter = output / 'PRIVATE-reset-counter.json'
 index = json.loads(counter.read_text()) if counter.exists() else 0
 baseline = json.loads((ORIGINAL / 'private-native-state' / serial / 'PRIVATE-MANIFEST.json').read_text())['files']
 folder = 'cache/pdf-page-selection-qa'
-allowed = {'word-and-handles.png', 'two-line-selection.png', 'zoomed-selection.png'}
+allowed = {'word-and-handles.png', 'two-line-selection.png', 'zoomed-selection.png', 'direct-handle-drag.png', 'first-long-press-drag.png'}
 
 def run(*parts, check=True):
     return subprocess.run([adb, '-s', serial, *map(str, parts)], check=check,
