@@ -17,6 +17,8 @@ Earlier receipts remain intact and excluded from final acceptance. They include 
 
 Actual public **52→53 OTA passes on both tablets**, including public-feed download, Android installer completion, installed-byte identity, retained synthetic original/favorite/preference, no repeat offer and exact original restoration with public 0.51 installed. All 12 OTA PNGs were inspected, bringing the selected image paths to **84**. Independent immutable-archive acceptance remains pending. Proposal 48 stays open and **38/72** proposals are implemented.
 
+The [immutable public validation archive](https://github.com/moikdev/findroid/releases/download/v0.51.0-preview/Findroid-0.51.0-validation.zip) contains **835 evidence files plus its manifest**, **12,044,210 bytes**, SHA-256 `61ee6e22b89d55bf20187f995f275beb9a868cdc1ab8a1a8835823942fda6282`. Application/native source: `c4b8e26b39f2c3826d4ca45f15a67b10ca6207b3`; archived evidence: `f08724d78ee3f590b440723dab41acbc31d3caff`. Independent public verification remains pending. The archive preserves its earlier committed pending-acceptance documentation as an immutable snapshot.
+
 [Office guide](docs/OFFICE-PREVIEWS.md) · [Release notes](docs/releases/0.51.0.md).
 
 ## Findroid 0.50.0 — optional local OCR, acceptance complete
