@@ -174,7 +174,14 @@ class StructuredPreviewWorkflowTest {
     @Test
     fun searchOwnsSpacesAndEscapeReturnsToPeek() {
         open("Brief.md")
+        // The container appears while its text is still loading; Find is disabled until ready.
+        compose.waitUntil(5_000) {
+            compose.onAllNodes(hasContentDescription("Find in document") and isEnabled()).fetchSemanticsNodes().isNotEmpty()
+        }
         compose.onNodeWithContentDescription("Find in document").performClick()
+        compose.waitUntil(5_000) {
+            compose.onAllNodesWithTag("preview-find").fetchSemanticsNodes().isNotEmpty()
+        }
         compose.onNodeWithTag("preview-find").performTextInput("Ocean")
         key(KeyEvent.KEYCODE_SPACE)
         compose.onNodeWithTag("preview-find").assertTextContains("Ocean ")
