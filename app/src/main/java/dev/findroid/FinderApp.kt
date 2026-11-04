@@ -1103,7 +1103,7 @@ fun FinderApp(
             fileComparison?.let { targets ->
                 FileComparisonDialog(targets, model.documents, model::allowedPath) { fileComparison = null }
             }
-            if (model.imageReview.selection != null) ImageReviewDialog(model)
+            if (model.imageReview.selection != null && !model.organization.visible) ImageReviewDialog(model)
             quickLook?.let { entry ->
                 PeekOverlay(
                     entry = entry,

@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.test.platform.app.InstrumentationRegistry
 import java.io.File
 import java.security.MessageDigest
 import org.junit.*
@@ -76,6 +77,10 @@ class ImageReviewWorkflowTest {
     }
     @Test fun menuFlagsCandidatesFiltersAndComparesReferenceWithoutChangingBrowserSelection() {
         open(); val selection = model.selected.toSet()
+        compose.onNodeWithContentDescription("Review 03 Evening.png").performClick()
+        assertEquals(photos()[2].path, state.selection!!.active)
+        compose.onNodeWithContentDescription("Review 01 Morning.png").performClick()
+        assertEquals(photos()[0].path, state.selection!!.active)
         click("Use as reference"); click("Flag image"); click("Next image"); click("Next image"); click("Flag image")
         click("Show flagged only")
         assertEquals(listOf(photos()[0].path, photos()[2].path), state.selection!!.shown)
@@ -116,6 +121,16 @@ class ImageReviewWorkflowTest {
         compose.activityRule.scenario.recreate(); ready()
         assertEquals(review, state.selection); assertEquals(selected, model.selected)
         capture("retained-review")
+        click("Tag flagged…"); organizeReady()
+        compose.activityRule.scenario.recreate(); organizeReady()
+        compose.onNodeWithTag("image-review").assertDoesNotExist()
+        compose.waitUntil(10_000) {
+            InstrumentationRegistry.getInstrumentation().uiAutomation.rootInActiveWindow
+                ?.findAccessibilityNodeInfosByText("Organize")?.isNotEmpty() == true
+        }
+        assertEquals(review, state.selection)
+        compose.onNodeWithContentDescription("Close organization library").performClick(); ready()
+        assertEquals(review, state.selection)
         click("Show all images"); click("Clear flags"); assertTrue(state.selection!!.flagged.isEmpty())
     }
     @Test fun keyboardNavigationFlagsAndViewerZoomAreScopedToReview() {
