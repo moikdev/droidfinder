@@ -1,0 +1,2 @@
+emulator-5582: system-font-tablet-layouts
+{"serial": "emulator-5582", "section": "layouts", "checks": 1, "layouts": 12, "acceptanceComplete": true, "restorationComplete": true}

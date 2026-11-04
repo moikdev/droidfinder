@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-1.py", line 300, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-1.py", line 297, in main
+    api='api30' if a.serial=='emulator-5602' else 'api36';native=json.loads((ROOT/'captures/transfer-space-plans'/('candidate-2-'+api+'-native')/'native.json').read_text())
+                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/candidate-2-api36-native/native.json'

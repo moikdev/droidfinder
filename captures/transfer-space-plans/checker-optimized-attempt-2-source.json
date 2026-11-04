@@ -1,0 +1,8 @@
+{
+  "source": "captures/transfer-space-plans/checker-optimized-attempt-2.py",
+  "sha256": "e4d645d54dd4b3affe2901fccd6c57167f1f3d9e2a9f46af04bd029272767400",
+  "canonicalSourceSha256": "e4d645d54dd4b3affe2901fccd6c57167f1f3d9e2a9f46af04bd029272767400",
+  "candidateManifest": "captures/transfer-space-plans/candidate-build-2.json",
+  "immutableCheckerSnapshot": true,
+  "change": "Fresh hierarchy, horizontal navigation of the existing synthetic file table, and complete 48 dp source-action verification before tapping. Frozen application and native sources/outputs unchanged."
+}

@@ -1,0 +1,30 @@
+{
+  "serial": "emulator-5602",
+  "completedBatch": 7,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-native/images/after-batch-007/folder-sync-qa/completed-addition.png",
+      "sha256": "274822590be34e75018261e1372be0cf099e077fd90826c194308b4fb415b80e"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-native/images/after-batch-007/folder-sync-qa/confirmed-replacement-and-trash.png",
+      "sha256": "ba888ce7b6d2ee7314cf8f2140186ca6d6ba0304ca6345e7c37b88e56c6e0c52"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-native/images/after-batch-007/folder-sync-qa/default-choices.png",
+      "sha256": "64c0eff96c886a6eba61be765341bc7c008c467df5396e7e50ce7fb1babbbb85"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-native/images/after-batch-007/folder-sync-qa/font-layout.json",
+      "sha256": "c7fa2a052d4b46ec7294ec597c0ea07ad0f3164cd378bd913d0064dc94420631"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-native/images/after-batch-007/folder-sync-qa/large-text-confirmation.png",
+      "sha256": "f121325bcc37976b0d0882dc2cf5a46b96e7ed032c91cdb8463a8801a2696074"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-native/images/after-batch-007/folder-sync-qa/stale-review-stopped.png",
+      "sha256": "ddcdef471dc2951185bfeb4431c79f8564f70b34fa5257805781d7ab9fa4415c"
+    }
+  ]
+}

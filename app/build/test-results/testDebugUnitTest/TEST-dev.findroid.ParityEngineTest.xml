@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.ParityEngineTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:27.017Z" hostname="MacBook-Pro-2.local" time="0.212">
+<testsuite name="dev.findroid.ParityEngineTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:18.696Z" hostname="MacBook-Pro-2.local" time="0.101">
   <properties/>
-  <testcase name="numberedRenamePreservesExtensionsAndFolders" classname="dev.findroid.ParityEngineTest" time="0.003"/>
-  <testcase name="shortcutsRoundTripAndRejectExecutableText" classname="dev.findroid.ParityEngineTest" time="0.002"/>
+  <testcase name="numberedRenamePreservesExtensionsAndFolders" classname="dev.findroid.ParityEngineTest" time="0.005"/>
+  <testcase name="shortcutsRoundTripAndRejectExecutableText" classname="dev.findroid.ParityEngineTest" time="0.001"/>
   <testcase name="smartRulesCombineNameKindSizeAndContents" classname="dev.findroid.ParityEngineTest" time="0.001"/>
   <testcase name="batchCollisionLeavesEveryOriginalUntouched" classname="dev.findroid.ParityEngineTest" time="0.002"/>
-  <testcase name="assigningAnExistingTagTogglesOnlyThatTag" classname="dev.findroid.ParityEngineTest" time="0.002"/>
+  <testcase name="assigningAnExistingTagTogglesOnlyThatTag" classname="dev.findroid.ParityEngineTest" time="0.003"/>
   <testcase name="folderStatsSkipSymbolicLinks" classname="dev.findroid.ParityEngineTest" time="0.002"/>
-  <testcase name="customMultipleTagsSurviveRestartAndMove" classname="dev.findroid.ParityEngineTest" time="0.003"/>
-  <testcase name="deletingAllTagsDoesNotResurrectDefaults" classname="dev.findroid.ParityEngineTest" time="0.002"/>
-  <testcase name="undoPreflightProtectsAnEntireBatch" classname="dev.findroid.ParityEngineTest" time="0.003"/>
-  <testcase name="batchRenameCanSwapNames" classname="dev.findroid.ParityEngineTest" time="0.003"/>
-  <testcase name="undoMoveRefusesCollision" classname="dev.findroid.ParityEngineTest" time="0.003"/>
-  <testcase name="undoRedoTrashMaintainsIndex" classname="dev.findroid.ParityEngineTest" time="0.018"/>
-  <testcase name="providerMetadataMovesIncludeEncodedDescendantPaths" classname="dev.findroid.ParityEngineTest" time="0.005"/>
-  <testcase name="newOperationClearsRedo" classname="dev.findroid.ParityEngineTest" time="0.008"/>
-  <testcase name="undoRedoMovedItemPreservesData" classname="dev.findroid.ParityEngineTest" time="0.003"/>
-  <testcase name="cancellationUnblocksAWaitingStream" classname="dev.findroid.ParityEngineTest" time="0.129"/>
+  <testcase name="customMultipleTagsSurviveRestartAndMove" classname="dev.findroid.ParityEngineTest" time="0.005"/>
+  <testcase name="deletingAllTagsDoesNotResurrectDefaults" classname="dev.findroid.ParityEngineTest" time="0.005"/>
+  <testcase name="undoPreflightProtectsAnEntireBatch" classname="dev.findroid.ParityEngineTest" time="0.005"/>
+  <testcase name="batchRenameCanSwapNames" classname="dev.findroid.ParityEngineTest" time="0.002"/>
+  <testcase name="undoMoveRefusesCollision" classname="dev.findroid.ParityEngineTest" time="0.007"/>
+  <testcase name="undoRedoTrashMaintainsIndex" classname="dev.findroid.ParityEngineTest" time="0.009"/>
+  <testcase name="providerMetadataMovesIncludeEncodedDescendantPaths" classname="dev.findroid.ParityEngineTest" time="0.01"/>
+  <testcase name="newOperationClearsRedo" classname="dev.findroid.ParityEngineTest" time="0.003"/>
+  <testcase name="undoRedoMovedItemPreservesData" classname="dev.findroid.ParityEngineTest" time="0.002"/>
+  <testcase name="cancellationUnblocksAWaitingStream" classname="dev.findroid.ParityEngineTest" time="0.003"/>
   <testcase name="undoRedoCopyDoesNotDeleteEditedFiles" classname="dev.findroid.ParityEngineTest" time="0.003"/>
-  <testcase name="undoRedoCreatedItemUsesRecoverableTrash" classname="dev.findroid.ParityEngineTest" time="0.006"/>
+  <testcase name="undoRedoCreatedItemUsesRecoverableTrash" classname="dev.findroid.ParityEngineTest" time="0.005"/>
   <testcase name="replacingTextRejectsDuplicateDestinations" classname="dev.findroid.ParityEngineTest" time="0.002"/>
   <testcase name="tagSwapsAreAppliedSimultaneously" classname="dev.findroid.ParityEngineTest" time="0.003"/>
-  <testcase name="undoRedoBatchRenameHandlesCycles" classname="dev.findroid.ParityEngineTest" time="0.004"/>
+  <testcase name="undoRedoBatchRenameHandlesCycles" classname="dev.findroid.ParityEngineTest" time="0.019"/>
   <testcase name="cancellationRemovesPartialCopy" classname="dev.findroid.ParityEngineTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

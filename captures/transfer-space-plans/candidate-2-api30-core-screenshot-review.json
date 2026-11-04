@@ -1,0 +1,41 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-core-1/read-only-replacement-budget-surface.png",
+      "sha256": "9440f2b4a751220cad9f1f460353ba11952732693479a71173e7fcab9f8c52c4",
+      "actualImageInspected": true,
+      "onlyOwnedSyntheticContent": true,
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-core-1/copy-alternative-destination-picker-surface.png",
+      "sha256": "b47a734ee82bde05045eeb6076712e60190a795f8f92b73023831f86197d5845",
+      "actualImageInspected": true,
+      "onlyOwnedSyntheticContent": true,
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-core-1/known-shortfall-surface.png",
+      "sha256": "9c1d3c29d5bf7b03d14687f43666748d05abd6c685729d48fceab93179a15227",
+      "actualImageInspected": true,
+      "onlyOwnedSyntheticContent": true,
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-core-1/move-before-start-surface.png",
+      "sha256": "5ff6d2f9eb9c268e687a71962fc8389f1902fc33e2979917c2d7836c0da78980",
+      "actualImageInspected": true,
+      "onlyOwnedSyntheticContent": true,
+      "browserBackdropExcluded": true
+    }
+  ],
+  "method": "Opened the labeled 2x2 sheet containing all four accepted optimized API30 core PNGs.",
+  "findings": [
+    "Replacement allowance and same-volume combined budget are visible.",
+    "Alternative destination picker shows named synthetic folders and explicit review/cancel controls.",
+    "Known shortfall has a visible red explanation and a disabled start button.",
+    "Move review explains the full copy fallback and uses an explicit Move action."
+  ],
+  "scope": "API30 core only; remaining optimized and OTA images pending."
+}

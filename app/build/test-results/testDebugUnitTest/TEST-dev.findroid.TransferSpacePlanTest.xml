@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.TransferSpacePlanTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:30.390Z" hostname="MacBook-Pro-2.local" time="0.001">
+  <properties/>
+  <testcase name="saturatingTotalsNeverBecomeNegativeOrClaimAnExactFit" classname="dev.findroid.TransferSpacePlanTest" time="0.001"/>
+  <testcase name="equalContentAndCapacityStillExplainsUncountedOverhead" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="movesBudgetTheirFallbackWithoutCreditingSourceDeletion" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="stagingDoesNotDoubleThePayload" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="sharedFilesystemUsesTheLowerReportedCapacity" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="distinctProvenStorageVolumesHaveSeparateBudgets" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="identicalUnknownLocationCombinesItsDemand" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="zeroFreeBytesAreARealReportedCapacity" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="unreadableOrLimitedInventoriesRemainLowerBounds" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="unknownProviderCapacityIsNotZeroOrInfinite" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="aZeroLengthPayloadStillDoesNotPromiseMetadataOverheadIsFree" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="anUnknownBackupKeepsTheCombinedRequirementIncomplete" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="aKnownLowerBoundCanAlreadyProveAShortfall" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="negativeProviderCapacityIsUnreported" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="incompleteInventoryNeverClaimsTheWholeOperationFits" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="provenSharedFilesystemCombinesPayloadAndRecoveryDemand" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="duplicateRequirementIdentitiesAreRefused" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="unknownPhysicalRelationshipDoesNotAddTwoCapacities" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="missingObservationOnAProvenSharedVolumeRetainsTheOtherReport" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="negativeRequirementsAreRefused" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

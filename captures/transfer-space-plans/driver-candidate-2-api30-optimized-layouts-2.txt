@@ -1,0 +1,58 @@
+Traceback (most recent call last):
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 269, in run
+    alternate(name);ready_controls(name+'-alternative-controls');close_review(name+'-close');no_document_work(name+'-read-only',relative)
+                                                                                             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 195, in no_document_work
+    assert inspect_jobs(name)==[],'Reviewing space must not submit a transfer'
+           ~~~~~~~~~~~~^^^^^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 186, in inspect_jobs
+    install(debug);stop();directory=private/('sqlite-'+name);directory.mkdir()
+    ~~~~~~~^^^^^^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 75, in install
+    stop();d.call('install','-r',*(['-d'] if downgrade else []),path);stop()
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/findroid-space-plans-48dp/scripts/android/acceptance.py", line 33, in call
+    raise RuntimeError(f'adb {parts[:2]} failed: {result.stderr.decode(errors="replace")}')
+RuntimeError: adb ('install', '-r') failed: adb: failed to run abb_exec. Error: device offline
+adb: connect error for write: device offline
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 284, in run
+    stop()
+    ~~~~^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 70, in stop
+    def stop():d.shell('am','force-stop','dev.findroid')
+               ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/findroid-space-plans-48dp/scripts/android/acceptance.py", line 37, in shell
+    return self.call('shell', shlex.join(map(str, parts)), **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/findroid-space-plans-48dp/scripts/android/acceptance.py", line 33, in call
+    raise RuntimeError(f'adb {parts[:2]} failed: {result.stderr.decode(errors="replace")}')
+RuntimeError: adb ('shell', 'am force-stop dev.findroid') failed: adb: device offline
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 320, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 319, in main
+    run(a)
+    ~~~^^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-2.py", line 304, in run
+    (a.output/'result.json').write_text(json.dumps(report,indent=2)+'\n');d.close()
+                                                                          ~~~~~~~^^
+  File "/tmp/findroid-space-plans-48dp/scripts/android/acceptance.py", line 146, in close
+    self.shell('rm', '-f', self.touch_jar)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/findroid-space-plans-48dp/scripts/android/acceptance.py", line 37, in shell
+    return self.call('shell', shlex.join(map(str, parts)), **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/findroid-space-plans-48dp/scripts/android/acceptance.py", line 33, in call
+    raise RuntimeError(f'adb {parts[:2]} failed: {result.stderr.decode(errors="replace")}')
+RuntimeError: adb ('shell', 'rm -f /data/local/tmp/findroid-touch-1793777760209460000.jar') failed: adb: device offline
+

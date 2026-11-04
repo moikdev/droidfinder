@@ -1,0 +1,125 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font1.0-dark-review-surface.png",
+      "sha256": "80cb6a9ce8586b748417cb75268d49ba43a87ece8672d1a94a0280c62597aef4"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font1.0-dark-destination-picker-surface.png",
+      "sha256": "4a5732ea0d4e24c9b1fd72b2dc88c5207a459bf3f39d0ee1759bf96ae83eec10"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font1.0-light-review-surface.png",
+      "sha256": "fcfb86d50fd05977dd94728fb910d7682f0c8de42a3c729d334ce56d52e92aec"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font1.0-light-destination-picker-surface.png",
+      "sha256": "694550b4da7694cab1f148aa0bc5433d8db998ddd3b78a9f8cab07eb0cacd310"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font2.0-dark-review-surface.png",
+      "sha256": "4c4ec3ddd9eaedfafa3123448b942cda464386128e2e182f0e8738b0b4d76d51"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font2.0-dark-destination-picker-surface.png",
+      "sha256": "bad8aabf1e2c8c79ff209ab898f8978848d0dba74900dad93ac5ad569cec7146"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font2.0-light-review-surface.png",
+      "sha256": "5bbfa1d1c01bd5156c66b04ecc82d127f2eea3c117f313e4a83bf830ced767eb"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font2.0-light-destination-picker-surface.png",
+      "sha256": "710402e77226ba6c191a3f3a3be558574ce110d73ca28e37cd40c2d6248c7081"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font1.0-dark-review-surface.png",
+      "sha256": "21e1ddc56127759cbc9b8e23c800b467a7482babe8ddc9649d0b952ea9c8a73d"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font1.0-dark-destination-picker-surface.png",
+      "sha256": "3d90522d0ab71f3438505cc2b82d6fc64cac21b8f3807a524ef56de75f4200c4"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font1.0-light-review-surface.png",
+      "sha256": "f7e1f4699a340fe39016912c94452eafec2c6383d66f00ba1f3f7006347b3799"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font1.0-light-destination-picker-surface.png",
+      "sha256": "fbd1d87310305f269a6b8260611b7d2a6e83556efe3ac9ceae337c7f0f32bcaa"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font2.0-light-review-surface.png",
+      "sha256": "64d4a78ae30499bf5ab22eb3d75813537e1d6b5fc7f6bdcb7905776a9d3d6319"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font2.0-light-destination-picker-surface.png",
+      "sha256": "36f083aa84ffa8ad67583700b081eb27446ac65b6e01c4ca21e67849b260053a"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font1.0-dark-review-surface.png",
+      "sha256": "34bb81fea87a1bae50fbbd1683b1eade8208fca679edf34eb5c2f7b3da425037"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font1.0-dark-destination-picker-surface.png",
+      "sha256": "caf98effd09df96d66b86a38457a3683d4499f5646107b1e99b232f0b24ffe60"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font1.0-light-review-surface.png",
+      "sha256": "7ebf90d7854642291c577ec9cdde9737cda72314e425c35d7e93e6886ccb1ba0"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font1.0-light-destination-picker-surface.png",
+      "sha256": "26c6f321830f0ea24f65acb540e733a90b5d0d61925255267056e3d7440ff3ca"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font2.0-dark-review-surface.png",
+      "sha256": "82b3cda79118c8107e8ed01f38c6293c1cd462eae4aa62a3983fcc4cddbff508"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font2.0-dark-destination-picker-surface.png",
+      "sha256": "ac061912aaf9b62016e2a56d38347666d152d8270517ff442a95ad0b75bfcf65"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font1.0-dark-review-surface.png",
+      "sha256": "8b15f49af4dafaf368f4c5f08a277e2eb175f8edc0618274bcb880e4901d5af1"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font1.0-dark-destination-picker-surface.png",
+      "sha256": "02385565b971251de0fc742aab3aa818e1131b672a2cfc16d697270239d9bc37"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font1.0-light-review-surface.png",
+      "sha256": "763cf8b10d49f53227ab6be939b80e32e88e0b0647ff84bae024d2441187475f"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font1.0-light-destination-picker-surface.png",
+      "sha256": "6cd38ed47279fdcbca5d96cc7f2128a2d31e9f209a1f3b17b8e0a072456296fd"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font2.0-dark-review-surface.png",
+      "sha256": "64f297f252afceb37146ea26b06b735c815a33186de38fce4e93f505e4114edc"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font2.0-dark-destination-picker-surface.png",
+      "sha256": "78a13a8d556443d02d642378d90ea147324e600d8e2fe739c39992bfb1d117f8"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font2.0-light-review-surface.png",
+      "sha256": "a374415f68c51a3ac2c4616e70482ce53861ad3d836781c75ea546a3b679319f"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font2.0-light-destination-picker-surface.png",
+      "sha256": "3b5e06196b84c655058d9e87f9095f5f88fa288072ba62cb542b3ac9b7d05c4c"
+    }
+  ],
+  "method": "Opened all seven labeled sheets covering the 28 original image paths listed here. The sheets include review and destination dialogs at normal and enlarged system text in both themes; inspection is limited to the configurations listed.",
+  "findings": [
+    "Named actions wrap onto additional rows at font scale 2.0.",
+    "Alternative chooser keeps folder names and explicit Cancel and Review this destination controls visible.",
+    "Review crops intentionally capture the scrolled controls; they do not imply all explanatory text is visible at once.",
+    "Only synthetic acceptance paths appear in these dialog crops."
+  ],
+  "scope": "Partial image review while matrices run; no completed matrix acceptance claimed."
+}

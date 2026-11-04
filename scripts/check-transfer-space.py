@@ -56,7 +56,7 @@ def run(a):
     report=dict(serial=a.serial,section=a.section,sourceCommit=candidate['sourceCommit'],checkerSha256=sha(Path(__file__).read_bytes()),
         checkerDependencies={name:sha((ROOT/name).read_bytes()) for name in ('scripts/check-reviewed-folder-sync.py','scripts/check-local-search-index.py','scripts/android/acceptance.py')},
         apkSha256=expected,previousApkSha256=sha(public.read_bytes()),fromVersionCode=49,toVersionCode=50,
-        operationsUseExactOptimizedApk=True,acceptanceComplete=False,restorationComplete=False,checks=[],layouts=[],captures=[],densityChecks=[],screenChecks=[],controlProofs=[])
+        operationsUseExactOptimizedApk=True,acceptanceComplete=False,restorationComplete=False,checks=[],layouts=[],captures=[],densityChecks=[],screenChecks=[],controlProofs=[],browserHorizontalScrolls=[])
     saved=None;workspace=None;verified=False
     def apply_screen(width,height,dpi):
         requested=(round(width*dpi/160),round(height*dpi/160))
@@ -139,8 +139,28 @@ def run(a):
         return browser(name)
     def optimized(name):install(a.apk);return launch(name)
     def menu(name,label):ui.click(name+'-actions','Actions');ui.click(name+'-command',label)
+    def source_actions(name):
+        label='Actions for Report.txt'
+        for attempt in range(8):
+            tree=d.dump(name+'-source-horizontal-'+str(attempt));scope=ui.scope(tree)
+            node=ui.node(scope,label,True)
+            if node is not None and node.get('enabled')=='true' and ui.full(scope,node,True):
+                ui.proofs.append(dict(name=name+'-source-actions',text=node.get('text'),description=node.get('content-desc'),bounds=d.bounds(node),density=ui.density))
+                d.tap(node);return
+            # The saved list columns may extend past a portrait browser. Reach the actual
+            # complete action in its horizontal viewport before tapping it.
+            panes=[n for n in scope.iter('node') if n.get('class')=='android.widget.HorizontalScrollView'
+                and n.get('scrollable')=='true' and any(child.get('text')=='Report.txt' or child.get('content-desc')==label for child in n.iter('node'))]
+            assert len(panes)==1,(name,'Expected the synthetic file table horizontal viewport')
+            l,t,r,b=d.bounds(panes[0]);assert r>l and b>t
+            direction=1 if attempt<4 else -1
+            first,last=(.82,.22) if direction==1 else (.22,.82)
+            report['browserHorizontalScrolls'].append(dict(name=name,attempt=attempt,paneBoundsPx=[l,t,r,b],direction=direction,
+                visibleActionBoundsPx=d.bounds(node) if node is not None else None,namedControlRecheckedBeforeTap=True))
+            d.shell('input','swipe',round(l+(r-l)*first),(t+b)//2,round(l+(r-l)*last),(t+b)//2,300)
+        raise AssertionError((name,label,'complete named 48 dp action unavailable after horizontal navigation'))
     def open_space(name,move=False,destination='Destination'):
-        ui.click(name+'-source-actions','Actions for Report.txt')
+        source_actions(name)
         ui.click(name+'-transfer-command','Move to…' if move else 'Copy to…')
         ui.click(name+'-parent','Parent destination folder')
         ui.click(name+'-destination-row',destination)

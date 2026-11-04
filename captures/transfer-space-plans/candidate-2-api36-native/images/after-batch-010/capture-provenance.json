@@ -1,0 +1,30 @@
+{
+  "serial": "emulator-5582",
+  "completedBatch": 10,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-010/persistent-undo-qa/changed-file.png",
+      "sha256": "374c91e265c2da0483560b12d1290651e20299a3e90cd4ca8fad55cf8591860f"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-010/persistent-undo-qa/interrupted-review.png",
+      "sha256": "ed9ffe18a6b121ccf9ccf90655c9ee1ec228fe30d1ab0af9bba43993c1028421"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-010/persistent-undo-qa/large-text-reset.png",
+      "sha256": "fd714bb6f1b5761a712791a54a0a8ac1ade0f9a2cb710d18e9220d1ad776f2f4"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-010/persistent-undo-qa/reset-review.png",
+      "sha256": "fd714bb6f1b5761a712791a54a0a8ac1ade0f9a2cb710d18e9220d1ad776f2f4"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-010/persistent-undo-qa/saved.png",
+      "sha256": "588946f77d9877f885fb50d8557b6f6a545bd23eac85610a89af74ba22ec5398"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-010/persistent-undo-qa/session-boundary.png",
+      "sha256": "2257d65c7294822b9eaf2beeb65998474d218da32bd2e70d963d0cf36e4acb97"
+    }
+  ]
+}

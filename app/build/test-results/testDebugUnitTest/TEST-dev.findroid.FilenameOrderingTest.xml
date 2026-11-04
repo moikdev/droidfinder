@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FilenameOrderingTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:18.747Z" hostname="MacBook-Pro-2.local" time="0.355">
+<testsuite name="dev.findroid.FilenameOrderingTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:10.430Z" hostname="MacBook-Pro-2.local" time="0.412">
   <properties/>
-  <testcase name="caseEquivalentSpellingsHaveDeterministicRawTieBreaks" classname="dev.findroid.FilenameOrderingTest" time="0.001"/>
-  <testcase name="arbitraryLengthNumbersNeverOverflowOrLosePrecision" classname="dev.findroid.FilenameOrderingTest" time="0.0"/>
+  <testcase name="caseEquivalentSpellingsHaveDeterministicRawTieBreaks" classname="dev.findroid.FilenameOrderingTest" time="0.0"/>
+  <testcase name="arbitraryLengthNumbersNeverOverflowOrLosePrecision" classname="dev.findroid.FilenameOrderingTest" time="0.001"/>
   <testcase name="numbersSortByValueIncludingEveryRunAndExtensions" classname="dev.findroid.FilenameOrderingTest" time="0.0"/>
-  <testcase name="orderingDoesNotDependOnDefaultLocale" classname="dev.findroid.FilenameOrderingTest" time="0.001"/>
+  <testcase name="orderingDoesNotDependOnDefaultLocale" classname="dev.findroid.FilenameOrderingTest" time="0.0"/>
   <testcase name="unicodeDecimalScriptsAndSupplementaryDigitsUseNumericValues" classname="dev.findroid.FilenameOrderingTest" time="0.001"/>
   <testcase name="fewerLeadingZeroesBreakEqualNumericValues" classname="dev.findroid.FilenameOrderingTest" time="0.0"/>
-  <testcase name="mixedScriptsPunctuationAndPaddingRespectComparatorContract" classname="dev.findroid.FilenameOrderingTest" time="0.054"/>
-  <testcase name="metadataTiesUseNaturalNamesThenStablePathsInBothDirections" classname="dev.findroid.FilenameOrderingTest" time="0.001"/>
-  <testcase name="fiftyThousandNamesProduceTheExpectedNumericSequence" classname="dev.findroid.FilenameOrderingTest" time="0.297"/>
-  <testcase name="folderPlacementIsIndependentOfSortDirection" classname="dev.findroid.FilenameOrderingTest" time="0.0"/>
+  <testcase name="mixedScriptsPunctuationAndPaddingRespectComparatorContract" classname="dev.findroid.FilenameOrderingTest" time="0.063"/>
+  <testcase name="metadataTiesUseNaturalNamesThenStablePathsInBothDirections" classname="dev.findroid.FilenameOrderingTest" time="0.002"/>
+  <testcase name="fiftyThousandNamesProduceTheExpectedNumericSequence" classname="dev.findroid.FilenameOrderingTest" time="0.336"/>
+  <testcase name="folderPlacementIsIndependentOfSortDirection" classname="dev.findroid.FilenameOrderingTest" time="0.009"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncStagingTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:24.604Z" hostname="MacBook-Pro-2.local" time="0.008">
+<testsuite name="dev.findroid.FolderSyncStagingTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:17.030Z" hostname="MacBook-Pro-2.local" time="0.007">
   <properties/>
-  <testcase name="staleSourceProofsFailBeforeCreatingAnyWorkingFile" classname="dev.findroid.FolderSyncStagingTest" time="0.002"/>
-  <testcase name="partialWritesAreCompletedBeforeVerification" classname="dev.findroid.FolderSyncStagingTest" time="0.001"/>
+  <testcase name="staleSourceProofsFailBeforeCreatingAnyWorkingFile" classname="dev.findroid.FolderSyncStagingTest" time="0.001"/>
+  <testcase name="partialWritesAreCompletedBeforeVerification" classname="dev.findroid.FolderSyncStagingTest" time="0.002"/>
   <testcase name="aRewriteWithTheSameSizeAndMtimeCannotBecomeAWorkingCandidate" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
   <testcase name="reviewedContentHashesAreCheckedEvenWhenMetadataLooksUnchanged" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
-  <testcase name="invalidOrLinkedSourceProofsNeverOpenFiles" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
+  <testcase name="invalidOrLinkedSourceProofsNeverOpenFiles" classname="dev.findroid.FolderSyncStagingTest" time="0.001"/>
   <testcase name="verifiedWorkingCopyPreservesTheSourceAndReadsBackEveryByte" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
-  <testcase name="redirectedWorkingParentsFailBeforeSourceReads" classname="dev.findroid.FolderSyncStagingTest" time="0.001"/>
+  <testcase name="redirectedWorkingParentsFailBeforeSourceReads" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
   <testcase name="aSourceChangeDuringReadbackInvalidatesTheCandidate" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
   <testcase name="cancellationBeforeAnyReadCreatesNoWorkingFile" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
   <testcase name="aChangedPinnedSourceDescriptorFailsBeforeDestinationCreation" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
   <testcase name="cancellationDuringCopyClosesBothDescriptorsAndKeepsWorkingData" classname="dev.findroid.FolderSyncStagingTest" time="0.002"/>
-  <testcase name="anExistingWorkingNameIsNeverOpenedOrOverwritten" classname="dev.findroid.FolderSyncStagingTest" time="0.001"/>
+  <testcase name="anExistingWorkingNameIsNeverOpenedOrOverwritten" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
   <testcase name="aFolderReplacementDuringCopyPreventsVerificationAndDirectorySync" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
   <testcase name="readbackMismatchKeepsTheWorkingCopyUnpublished" classname="dev.findroid.FolderSyncStagingTest" time="0.0"/>
   <testcase name="aReplacedWorkingPathIsNeverAcceptedUsingItsOldOpenDescriptor" classname="dev.findroid.FolderSyncStagingTest" time="0.001"/>

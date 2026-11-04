@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.AppUpdateTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:16.440Z" hostname="MacBook-Pro-2.local" time="0.128">
+<testsuite name="dev.findroid.AppUpdateTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:07.970Z" hostname="MacBook-Pro-2.local" time="0.08">
   <properties/>
-  <testcase name="manifestRejectsAnotherPackageAndInvalidVersions" classname="dev.findroid.AppUpdateTest" time="0.087"/>
-  <testcase name="manifestRejectsUnboundedSizesAndMissingIntegrityInformation" classname="dev.findroid.AppUpdateTest" time="0.011"/>
-  <testcase name="partialChangedAndOversizedDownloadsFailVerification" classname="dev.findroid.AppUpdateTest" time="0.021"/>
-  <testcase name="redirectsNeverAllowCleartextLocalHostsCredentialsOrUnrelatedSites" classname="dev.findroid.AppUpdateTest" time="0.002"/>
-  <testcase name="renamedRepositoryAcceptsOnlyItsKnownLegacyReleaseAssets" classname="dev.findroid.AppUpdateTest" time="0.001"/>
-  <testcase name="manifestRoundTripsWithoutLosingVersionSizeOrDigest" classname="dev.findroid.AppUpdateTest" time="0.002"/>
-  <testcase name="assetsMustBelongToTheConfiguredRepositoryAndExactFilename" classname="dev.findroid.AppUpdateTest" time="0.002"/>
+  <testcase name="manifestRejectsAnotherPackageAndInvalidVersions" classname="dev.findroid.AppUpdateTest" time="0.027"/>
+  <testcase name="manifestRejectsUnboundedSizesAndMissingIntegrityInformation" classname="dev.findroid.AppUpdateTest" time="0.009"/>
+  <testcase name="partialChangedAndOversizedDownloadsFailVerification" classname="dev.findroid.AppUpdateTest" time="0.03"/>
+  <testcase name="redirectsNeverAllowCleartextLocalHostsCredentialsOrUnrelatedSites" classname="dev.findroid.AppUpdateTest" time="0.006"/>
+  <testcase name="renamedRepositoryAcceptsOnlyItsKnownLegacyReleaseAssets" classname="dev.findroid.AppUpdateTest" time="0.003"/>
+  <testcase name="manifestRoundTripsWithoutLosingVersionSizeOrDigest" classname="dev.findroid.AppUpdateTest" time="0.0"/>
+  <testcase name="assetsMustBelongToTheConfiguredRepositoryAndExactFilename" classname="dev.findroid.AppUpdateTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

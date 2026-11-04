@@ -1,0 +1,83 @@
+Accepted batch 1/59: dev.findroid.TransferSpaceInspectionNativeTest (8 cases)
+Accepted batch 2/59: dev.findroid.TransferSpaceWorkflowTest (9 cases)
+Accepted batch 3/59: dev.findroid.RecoveryNoticeNativeTest (12 cases)
+Accepted batch 4/59: dev.findroid.RecoveryInboxWorkflowTest (15 cases)
+Accepted batch 5/59: dev.findroid.FolderSyncDraftNativeTest (4 cases)
+Accepted batch 6/59: dev.findroid.FolderSyncApplyNativeTest (8 cases)
+Accepted batch 7/59: dev.findroid.FolderSyncWorkflowTest (8 cases)
+Accepted batch 8/59: dev.findroid.FinderWorkflowTest (11 cases)
+Accepted batch 9/59: dev.findroid.PersistentUndoNativeTest (22 cases)
+Accepted batch 10/59: dev.findroid.PersistentUndoWorkflowTest (8 cases)
+Accepted batch 11/59: dev.findroid.DragWorkflowTest (13 cases)
+Accepted batch 12/59: dev.findroid.FileConflictWorkflowTest (6 cases)
+Accepted batch 13/59: dev.findroid.ArchiveWorkflowTest (6 cases)
+Accepted batch 14/59: dev.findroid.ProviderWorkflowTest (5 cases)
+Accepted batch 15/59: dev.findroid.RecentSearchWorkflowTest (20 cases)
+Accepted batch 16/59: dev.findroid.TransferProgressWorkflowTest (2 cases)
+Accepted batch 17/59: dev.findroid.TransferPlanningWorkflowTest (1 cases)
+Accepted batch 18/59: dev.findroid.TransferLifecycleTest (3 cases)
+Accepted batch 19/59: dev.findroid.TransferQueueWorkflowTest (2 cases)
+Accepted batch 20/59: dev.findroid.FolderMergeTest (17 cases)
+Accepted batch 21/59: dev.findroid.SqliteTransferStoreTest (13 cases)
+Accepted batch 22/59: dev.findroid.DocumentCapabilitiesTest (8 cases)
+Accepted batch 23/59: dev.findroid.StorageCapabilitiesWorkflowTest (7 cases)
+Accepted batch 24/59: dev.findroid.LocalIndexStoreTest (18 cases)
+Accepted batch 25/59: dev.findroid.SearchSourceCodecTest (3 cases)
+Accepted batch 26/59: dev.findroid.LocalIndexWorkflowTest (6 cases)
+Accepted batch 27/59: dev.findroid.SearchRuleGroupCodecTest (9 cases)
+Accepted batch 28/59: dev.findroid.NestedSearchWorkflowTest (7 cases)
+Accepted batch 29/59: dev.findroid.MultiRootCodecTest (6 cases)
+Accepted batch 30/59: dev.findroid.MultiRootSearchWorkflowTest (17 cases)
+Accepted batch 31/59: dev.findroid.RecentSearchCodecTest (8 cases)
+Accepted batch 32/59: dev.findroid.SearchExperienceWorkflowTest (7 cases)
+Accepted batch 33/59: dev.findroid.SearchScopeWorkflowTest (4 cases)
+Accepted batch 34/59: dev.findroid.TagSearchWorkflowTest (8 cases)
+Accepted batch 35/59: dev.findroid.LoadingWorkflowTest (10 cases)
+Accepted batch 36/59: dev.findroid.CommandClarityWorkflowTest (16 cases)
+Accepted batch 37/59: dev.findroid.FavoritesDragWorkflowTest (11 cases)
+Accepted batch 38/59: dev.findroid.OutgoingDragTest (4 cases)
+Accepted batch 39/59: dev.findroid.WorkspaceRecoveryWorkflowTest (16 cases)
+Accepted batch 40/59: dev.findroid.WorkspaceRecoveryPersistenceTest (6 cases)
+Accepted batch 41/59: dev.findroid.WorkspaceSaveFailureTest (1 cases)
+Accepted batch 42/59: dev.findroid.NavigationWorkflowTest (7 cases)
+Accepted batch 43/59: dev.findroid.SetupCodecTest (12 cases)
+Accepted batch 44/59: dev.findroid.SetupWorkflowTest (17 cases)
+Accepted batch 45/59: dev.findroid.SidebarWorkflowTest (13 cases)
+Accepted batch 46/59: dev.findroid.BrowsingClarityWorkflowTest (10 cases)
+Accepted batch 47/59: dev.findroid.AppUpdateWorkflowTest (6 cases)
+Accepted batch 48/59: dev.findroid.WorkspaceWorkflowTest (9 cases)
+Accepted batch 49/59: dev.findroid.AdvancedWorkflowTest (9 cases)
+Accepted batch 50/59: dev.findroid.RenameWorkflowTest (13 cases)
+Accepted batch 51/59: dev.findroid.OrganizationWorkflowTest (18 cases)
+Accepted batch 52/59: dev.findroid.InputWorkflowTest#oneTouchOpensFoldersInEveryView,dev.findroid.InputWorkflowTest#oneTouchOpensFilesThroughAndroidInEveryView,dev.findroid.InputWorkflowTest#mouseSingleClickSelectsAndDoubleClickOpensInEveryView,dev.findroid.InputWorkflowTest#touchAfterMouseSelectionStillOpensAndLongPressEntersSelectionMode,dev.findroid.InputWorkflowTest#scrollingAndCancelledTouchDoNotOpenFiles,dev.findroid.InputWorkflowTest#fileActionsDoNotAccidentallyOpenTheFile,dev.findroid.InputWorkflowTest#controlAndShiftMouseSelectionNeverActivateAFile,dev.findroid.InputWorkflowTest#mouseSourceWithFingerToolIsTreatedAsACursorNotATouchTap,dev.findroid.InputWorkflowTest#providerFoldersUseTheSamePerGestureActivation,dev.findroid.InputWorkflowTest#clickingFileGlyphsUsesTheSameRulesAsFileNames,dev.findroid.InputWorkflowTest#mouseSelectionInChildColumnsDoesNotNavigateOrLoseTheSelectedEntry,dev.findroid.InputWorkflowTest#archiveEntriesHonorTouchAndMouseActivationAndKeepExtractionReachable (12 cases)
+Accepted batch 53/59: dev.findroid.NavigationCodecTest (5 cases)
+Accepted batch 54/59: dev.findroid.WindowLifecycleWorkflowTest (4 cases)
+Accepted batch 55/59: dev.findroid.LocalIndexBenchmarkTest (1 cases)
+Accepted batch 56/59: dev.findroid.CopyVerificationWorkflowTest (17 cases)
+Accepted batch 57/59: dev.findroid.PartialCopyRecoveryTest (18 cases)
+Accepted batch 58/59: dev.findroid.PartialCopyWorkflowTest (8 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 5 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/candidate-2-api36-native/batches/59-ExternalDragWorkflowTest.txt
+Accepted batch 59/59: dev.findroid.ExternalDragWorkflowTest (5 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+emulator-5582: 549 passed in 59 isolated batches; zero failures/skips.

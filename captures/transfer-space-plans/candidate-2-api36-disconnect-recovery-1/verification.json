@@ -1,0 +1,9 @@
+{
+  "serial": "emulator-5582",
+  "controllerSha256": "bcf5e965460800dc046d5bc1d93c3be6492aaa8efeddb880786aec46e4d9d810",
+  "restorationComplete": false,
+  "originalSnapshotsPreserved": true,
+  "scope": "Assigned AVD only; no wipe, uninstall, clear-data, global adb restart, or automatic recovery replay.",
+  "rebootRequestedForExistingAssignedAvd": true,
+  "error": "TimeoutExpired: Command '['/Users/LENOVO/Library/Android/sdk/platform-tools/adb', '-s', 'emulator-5582', 'reboot']' timed out after 15 seconds"
+}
