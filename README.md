@@ -208,7 +208,7 @@ Opening the inbox reads the records. Resuming a transfer or restoring an origina
 
 ![Review an earlier operation notice in the Recovery inbox, with named destination, transfer and storage controls](docs/screenshots/recovery-inbox-tablet.png)
 
-*Actual optimized Android tablet dialog with a synthetic operation notice. The browser backdrop is excluded. Available in the public 0.47 preview. Local and actual public OTA acceptance pass; independent immutable-archive acceptance is in progress.*
+*Actual optimized Android tablet dialog with a synthetic operation notice. The browser backdrop is excluded. Available in the public 0.47 preview. Local, actual public OTA and independent immutable-archive acceptance pass.*
 
 ### Organize a project without rearranging every folder
 
@@ -302,4 +302,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, nested search rules, optional local search snapshots, per-document action explanations, copy verification, saved-copy recovery, and persistent local Undo have shipped in verified increments. **34 of 72 are implemented; 38 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, nested search rules, optional local search snapshots, per-document action explanations, copy verification, saved-copy recovery, persistent local Undo, reviewed folder synchronization, and the recovery inbox have shipped in verified increments. **35 of 72 are implemented; 37 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
