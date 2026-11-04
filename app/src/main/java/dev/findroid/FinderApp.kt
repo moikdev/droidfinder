@@ -129,6 +129,7 @@ fun FinderApp(
                 ),
         ) {
             var dialog by remember { mutableStateOf<String?>(null) }
+            var fileComparison by remember { mutableStateOf<List<FileComparisonTarget>?>(null) }
             var recoveryTransferId by remember { mutableStateOf<String?>(null) }
             var commandExplanation by remember { mutableStateOf<CommandExplanation?>(null) }
             var quickLook by workspaceModel.windowState.peekEntry
@@ -138,7 +139,7 @@ fun FinderApp(
             var phoneLocations by remember { mutableStateOf(false) }
             LaunchedEffect(model.location, phone) { phoneLocations = false }
             var cursorMenu by remember { mutableStateOf<FinderContextRequest?>(null) }
-            LaunchedEffect(dialog, cursorMenu, menu, phoneLocations, quickLook, model.transferSpaceReview) {
+            LaunchedEffect(dialog, cursorMenu, menu, phoneLocations, quickLook, fileComparison, model.transferSpaceReview) {
                 workspaceModel.windowState.fileClicks.reset()
             }
             if (model.analysis.visible) FileAnalysisDialog(model)
@@ -241,9 +242,10 @@ fun FinderApp(
             LaunchedEffect(quickLook) {
                 if (quickLook == null && !searchActive && !addressActive) rootFocus.requestFocus()
             }
-            LaunchedEffect(dialog, cursorMenu, model.organization.visible, model.verifiedCopyReview, model.transferSpaceReview) {
+            LaunchedEffect(dialog, cursorMenu, fileComparison, model.organization.visible, model.verifiedCopyReview, model.transferSpaceReview) {
                 if (
                     dialog == null &&
+                        fileComparison == null &&
                         cursorMenu == null &&
                         !model.organization.visible &&
                         model.verifiedCopyReview == null &&
@@ -353,6 +355,7 @@ fun FinderApp(
                     "copyOtherPane" -> model.transferToOtherPane(false)
                     "moveOtherPane" -> model.transferToOtherPane(true)
                     "comparePanes" -> dialog = "comparePanes"
+                    "compareFiles" -> fileComparison = model.selectedEntries.map { FileComparisonTarget(it.path, it.name) }
                     "shortcuts" -> dialog = "shortcuts"
                     "launcher" -> dialog = "launcher"
                     "quickJump" -> dialog = "quickJump"
@@ -801,6 +804,7 @@ fun FinderApp(
                     FolderComparisonDialog(
                         if (model.panesReversed) model.secondaryPane else model.primaryPane,
                         if (model.panesReversed) model.primaryPane else model.secondaryPane,
+                        onCompareFiles = { fileComparison = it },
                     ) {
                         dialog = null
                     }
@@ -1093,6 +1097,9 @@ fun FinderApp(
             model.fileConflict?.let { FileConflictDialog(model, it) }
             cursorMenu?.let { request ->
                 FileContextMenu(request, model, action) { cursorMenu = null }
+            }
+            fileComparison?.let { targets ->
+                FileComparisonDialog(targets, model.documents, model::allowedPath) { fileComparison = null }
             }
             quickLook?.let { entry ->
                 PeekOverlay(
@@ -1519,6 +1526,7 @@ internal fun ActionMenu(
             onDismiss()
         }
         MenuSection("Files")
+        CommandMenuAction(model, "compareFiles", "Compare files…", Icons.Outlined.Compare) { action("compareFiles") }
         CommandMenuAction(model, "new", "New folder", Icons.Outlined.CreateNewFolder) { action("new") }
         CommandMenuAction(model, "newText", "New text file…", Icons.AutoMirrored.Outlined.NoteAdd) { action("newText") }
         if (entries.isEmpty()) {

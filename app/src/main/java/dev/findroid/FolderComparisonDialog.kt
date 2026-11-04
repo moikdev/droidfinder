@@ -27,7 +27,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 @Composable
-fun FolderComparisonDialog(left: FinderModel, right: FinderModel, dismiss: () -> Unit) {
+internal fun FolderComparisonDialog(left: FinderModel, right: FinderModel,
+    onCompareFiles: (List<FileComparisonTarget>) -> Unit = {}, dismiss: () -> Unit) {
     val leftPath = remember { left.folderPath }
     val rightPath = remember { right.folderPath }
     var verify by remember { mutableStateOf(false) }
@@ -201,6 +202,14 @@ fun FolderComparisonDialog(left: FinderModel, right: FinderModel, dismiss: () ->
                                         )
                                     }
                                 }
+                            }
+                        }
+                        selected?.takeIf { it.left?.folder == false && it.right?.folder == false }?.let { row ->
+                            TextButton(onClick = {
+                                onCompareFiles(listOf(FileComparisonTarget(row.left!!.path, row.left.name), FileComparisonTarget(row.right!!.path, row.right.name)))
+                                dismiss()
+                            }, modifier = Modifier.padding(horizontal = 12.dp).heightIn(min = 48.dp).testTag("compare-row-files")) {
+                                Text("Compare selected files…")
                             }
                         }
                         if (

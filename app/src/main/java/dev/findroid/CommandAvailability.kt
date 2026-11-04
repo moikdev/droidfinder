@@ -39,7 +39,7 @@ internal data class CommandContext(
 
 private val selectedCommands = setOf("rename", "batchRename", "copy", "cut", "copyTo", "moveTo",
     "copyOtherPane", "moveOtherPane", "trash", "restore", "delete", "duplicate", "compress", "extract", "extractHere",
-    "extractTo", "groupSelection", "shortcut", "share", "info", "copyPath", "pasteInto")
+    "extractTo", "groupSelection", "shortcut", "share", "info", "copyPath", "pasteInto", "compareFiles")
 private val serialCommands = setOf("new", "newText", "rename", "batchRename", "trash", "restore", "delete",
     "empty", "duplicate", "compress", "extract", "extractHere", "extractTo", "groupSelection", "shortcut", "undo", "redo", "tags", "collections", "appearance")
 private val createCommands = setOf("new", "newText", "paste", "groupSelection")
@@ -54,6 +54,7 @@ internal fun commandProblem(command: String, context: CommandContext): CommandPr
     }
     if (original != command) return commandProblem(original, context)
     fun problem(reason: String, recovery: CommandRecovery? = null) = CommandProblem(reason, recovery)
+    if (command == "compareFiles" && context.selected != 2) return problem("Select exactly two text files or two images to compare.")
     if (command == "undo" && !context.undo) return problem("There is no action to undo in this session.")
     if (command == "redo" && !context.redo) return problem("There is no action to redo in this session.")
     if (command in selectedCommands && context.selected == 0) return problem("Select a file or folder first.")
@@ -131,6 +132,7 @@ internal fun commandTitle(command: String): String = when (command) {
     "delete" -> "Delete permanently"; "empty" -> "Empty Trash"; "duplicate" -> "Duplicate"
     "compress" -> "Compress"; "extract", "extractHere", "extractTo" -> "Extract"; "groupSelection" -> "New folder with selection"
     "tags" -> "Tags"; "collections" -> "Collections"; "appearance" -> "Customize folder"
+    "compareFiles" -> "Compare files"
     "availableActions" -> "Available actions"; "shortcut" -> "Make shortcut"; "undo" -> "Undo"; "redo" -> "Redo"; "share" -> "Share"
     else -> "This command"
 }

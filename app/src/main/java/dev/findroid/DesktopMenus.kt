@@ -344,6 +344,8 @@ fun FileContextMenu(
                     }
                 }
                 FileCommandItem(model, "info", "Get info", Icons.Outlined.Info, shortcut = "Ctrl I") { run("info") }
+                if (items.size == 2)
+                    FileCommandItem(model, "compareFiles", "Compare files…", Icons.Outlined.Compare) { run("compareFiles") }
                 HorizontalDivider(color = Border)
                 FileCommandItem(model, "copy", "Copy", Icons.Outlined.ContentCopy, shortcut = "Ctrl C") { run("copy") }
                 FileCommandItem(model, "cut", "Cut", Icons.Outlined.ContentCut, "Ctrl X") { run("cut") }

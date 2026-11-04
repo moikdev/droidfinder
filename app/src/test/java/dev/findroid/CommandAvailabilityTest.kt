@@ -4,6 +4,15 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class CommandAvailabilityTest {
+    @Test fun comparisonRequiresExactlyTwoItemsWithAUsefulReason() {
+        listOf(0,1,3).forEach { count -> assertTrue(commandProblem("compareFiles",CommandContext(selected=count))!!.reason.contains("exactly two")) }
+        assertNull(commandProblem("compareFiles",CommandContext(selected=2)))
+    }
+    @Test fun readOnlyComparisonCanRunDuringTransfersButOffersOfflineRecovery() {
+        val context=CommandContext(selected=2,renameAllowed=false,removeAllowed=false,createAllowed=false,busy="Copying")
+        assertNull(commandProblem("compareFiles",context))
+        assertEquals(CommandRecovery.STORAGE,commandProblem("compareFiles",context.copy(disconnected=true))?.recovery)
+    }
     private val selected = CommandContext(selected = 1)
     @Test fun renamingUsesTheRenameCapabilityWithoutBlockingReadOnlyCopies() {
         val context = selected.copy(renameAllowed = false)
