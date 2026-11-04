@@ -1,0 +1,9 @@
+{
+  "attempt": "captures/pdf-page-selection/candidate-1-api36-optimized-core-1/result.json",
+  "accepted": false,
+  "frozenApkChanged": false,
+  "reason": "Checker tapped the file, opening Android Drive PDF viewer rather than Findroid Quick Look. The corrected checker uses the named file actions > Quick Look.",
+  "clipboardProofsCompleted": 0,
+  "originalDataAndPublic048Restored": true,
+  "privateHierarchiesNotPublished": true
+}

@@ -86,7 +86,7 @@ def run(a):
     report = dict(serial=a.serial, section=a.section, sourceCommit=candidate['sourceCommit'], checkerSha256=sha(Path(__file__).read_bytes()),
         buildReceiptSha256=sha(a.build_receipt.read_bytes()), apkSha256=expected, previousApkSha256=sha(public.read_bytes()), fromVersionCode=50, toVersionCode=51,
         checkerDependencies={name:sha((ROOT/name).read_bytes()) for name in ('scripts/check-reviewed-folder-sync.py','scripts/check-local-search-index.py','scripts/android/acceptance.py','scripts/android/PdfSelectionInput.java')},
-        operationsUseExactOptimizedApk=True, acceptanceComplete=False, restorationComplete=False, checks=[], layouts=[], captures=[], clipboardProofs=[], controlProofs=[], screenChecks=[], densityChecks=[])
+        operationsUseExactOptimizedApk=True, acceptanceComplete=False, restorationComplete=False, checks=[], layouts=[], captures=[], clipboardProofs=[], controlProofs=[], selectionHandleProofs=[], screenChecks=[], densityChecks=[], browserHorizontalScrolls=[])
 
     def prepare_input():
         nonlocal input_jar
@@ -157,14 +157,24 @@ def run(a):
         stop(); d.shell('am','start','-W','-f','0x10008000','--windowingMode',1,'-n','dev.findroid/.MainActivity')
         d.wait(name+'-browser',lambda tree:ready(tree,'Actions'),seconds=90)
     def open_preview(name):
-        ui.click(name+'-select-file','Field guide.pdf')
-        d.shell('input','keyevent',62)
+        label='Actions for Field guide.pdf'
+        for attempt in range(8):
+            tree=d.dump(name+'-file-actions-'+str(attempt));scope=ui.scope(tree);node=ui.node(scope,label,True)
+            if node is not None and node.get('enabled')=='true' and ui.full(scope,node,True):
+                ui.proofs.append(dict(name=name+'-file-actions',text=node.get('text'),description=node.get('content-desc'),bounds=d.bounds(node),density=ui.density));d.tap(node);break
+            panes=[n for n in scope.iter('node') if n.get('class')=='android.widget.HorizontalScrollView' and n.get('scrollable')=='true' and any(c.get('text')=='Field guide.pdf' or c.get('content-desc')==label for c in n.iter('node'))]
+            assert len(panes)==1,'Expected the synthetic file table horizontal viewport'
+            l,t,r,b=d.bounds(panes[0]);first,last=(.82,.22) if attempt<4 else (.22,.82)
+            report['browserHorizontalScrolls'].append(dict(name=name,attempt=attempt,paneBoundsPx=[l,t,r,b],namedControlRecheckedBeforeTap=True))
+            d.shell('input','swipe',round(l+(r-l)*first),(t+b)//2,round(l+(r-l)*last),(t+b)//2,300)
+        else:raise AssertionError('Named file actions unavailable after horizontal navigation')
+        ui.click(name+'-quick-look','Quick Look')
         d.wait(name+'-preview',lambda tree:ready(tree,'Select page text'))
         ui.text(name+'-rendered-page','PDF page text selection')
     def optimized(name): install(a.apk); launch(name); open_preview(name)
-    def selecting(name):
+    def selecting(name,*,empty=False):
         ui.click(name+'-select-page-text','Select page text')
-        d.wait(name+'-map',lambda tree:ready(tree,'Select all page text'))
+        d.wait(name+'-map',lambda tree:ready(tree,'Select all page text') or empty and bool(d.nodes(tree,'This page has no text layer to select.')))
     def point(name,x,y):
         tree=d.dump(name); node=d.one(ui.scope(tree),'PDF page text selection'); l,t,r,b=d.bounds(node)
         assert abs((b-t)/(r-l)-800/600)<.03, 'Use exact fitted page geometry before transforming'
@@ -197,6 +207,11 @@ def run(a):
         labels=['Close Quick Look','Next PDF page','Zoom in','Pan and zoom' if selection else 'Select page text']
         if selection: labels+=['Copy selection','Select all page text','Clear selection']
         for label in labels:ui.reach(name+'-'+label,label)
+        if selection:
+            for label in ('Start of PDF text selection','End of PDF text selection'):
+                tree,node=ui.reach(name+'-'+label,label,clickable=False,enabled=False)
+                l,t,r,b=d.bounds(node);assert r-l>=48*ui.density-1 and b-t>=48*ui.density-1
+                report['selectionHandleProofs'].append(dict(name=name,label=label,boundsPx=[l,t,r,b],density=ui.density,complete48DpTarget=True))
     def unchanged(relative):
         install(ROOT/PAIR[0]);assert read(relative+'/Field guide.pdf')==pdf_bytes
         assert installed('dev.findroid')==candidate['files'][PAIR[0]]['sha256']
@@ -235,7 +250,7 @@ def run(a):
             d.wait('long-press-loaded',lambda tree:ready(tree,'Copy selection'));copy('first-long-press','Ocean')
             ui.click('next-page','Next PDF page');ui.reach('page-cleared-selection','Select page text')
             tree=d.dump('cleared-page');assert not d.nodes(ui.scope(tree),'Copy selection')
-            ui.click('blank-page','Last PDF page');selecting('no-text-layer');ui.text('no-text-explanation','This page has no text layer to select.')
+            ui.click('blank-page','Last PDF page');selecting('no-text-layer',empty=True);ui.text('no-text-explanation','This page has no text layer to select.')
             tree=d.dump('no-text-disabled');scope=ui.scope(tree);node=ui.node(scope,'Copy selection',True);assert node is not None and node.get('enabled')=='false'
             capture('no-text-layer')
             checked('first-long-press-and-page-clear',firstLongPressClipboardExact=True,pageChangeClearedSelection=True,noTextLayerExplained=True,emptyPageCopyDisabled=True)

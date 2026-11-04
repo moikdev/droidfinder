@@ -1,0 +1,20 @@
+{
+  "accepted": false,
+  "sourceCommit": "cfa783fa4f9adee41a5c9d38067020e8d34ed2e6",
+  "originalDataAndPublic048Restored": true,
+  "finding": "Overlapping 48 dp handle areas cause Android accessibility to report the start handle partially covered for a short word near the fitted page edge. Candidate 2 must separate intersecting handle target rectangles.",
+  "startHandleBoundsPx": [
+    939,
+    330,
+    1006,
+    402
+  ],
+  "endHandleBoundsPx": [
+    1006,
+    330,
+    1078,
+    402
+  ],
+  "density": 1.5,
+  "privateHierarchiesNotPublished": true
+}

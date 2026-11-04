@@ -102,6 +102,11 @@ class PdfPageSelectionWorkflowTest {
         open();ready();tapOcean()
         compose.onNodeWithContentDescription("Start of PDF text selection").assertIsDisplayed()
         compose.onNodeWithContentDescription("End of PDF text selection").assertIsDisplayed()
+        val start = compose.onNodeWithContentDescription("Start of PDF text selection").fetchSemanticsNode().boundsInRoot
+        val end = compose.onNodeWithContentDescription("End of PDF text selection").fetchSemanticsNode().boundsInRoot
+        val target = 48 * compose.activity.resources.displayMetrics.density
+        assertTrue("Both handles retain the complete 48 dp touch target",start.width >= target - 1 && end.width >= target - 1 && start.height >= target - 1 && end.height >= target - 1)
+        assertFalse("Handle targets must not cover one another",start.overlaps(end))
         assertEquals("Ocean",copy());capture("word-and-handles")
     }
 

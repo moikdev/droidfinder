@@ -1,0 +1,59 @@
+{
+  "serial": "emulator-5602",
+  "section": "core",
+  "sourceCommit": "cfa783fa4f9adee41a5c9d38067020e8d34ed2e6",
+  "checkerSha256": "2598ddee4fd6aa0894c45b021a61cb77e0a1ff9d087c0c9bbc69c17c732c155c",
+  "buildReceiptSha256": "e47df3d895d4f0212b93ebc97c0f29bf6eaf5fa46d670f79a50685f2758ff3a6",
+  "apkSha256": "2cd3bb22ee5909183d1865bdd0268a83f7096ebee77811878813e6bbd6732213",
+  "previousApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+  "fromVersionCode": 50,
+  "toVersionCode": 51,
+  "checkerDependencies": {
+    "scripts/check-reviewed-folder-sync.py": "82fcfd46b08c64ae73d13400f7954a57eb8a1a2a36316c387d6cfc55c59320dd",
+    "scripts/check-local-search-index.py": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+    "scripts/android/acceptance.py": "58413d03fa96c29c1146bae2ca3a5b4c87dba9a1c2f1b777707697bf381bc016",
+    "scripts/android/PdfSelectionInput.java": "a2d495390acd942aa6c976f8fd0df29cc4bcc7ec66e5ac62e3db6b1df093f7a6"
+  },
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "checks": [],
+  "layouts": [],
+  "captures": [],
+  "clipboardProofs": [],
+  "controlProofs": [
+    {
+      "name": "public50-to51-select-file",
+      "text": "",
+      "description": "",
+      "bounds": [
+        12,
+        285,
+        1908,
+        357
+      ],
+      "density": 1.5
+    }
+  ],
+  "screenChecks": [],
+  "densityChecks": [],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "hierarchyRetries": []
+}
