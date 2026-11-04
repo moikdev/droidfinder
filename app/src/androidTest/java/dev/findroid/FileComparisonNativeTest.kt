@@ -71,7 +71,8 @@ class FileComparisonNativeTest {
         try {
             val gateway=DocumentAccess(context)
             val uri=DocumentsContract.buildTreeDocumentUri("dev.findroid.fixtures","root/${provider.name}")
-            val entries=gateway.list(uri.toString()).sortedBy { it.name }
+            val document=DocumentsContract.buildDocumentUriUsingTree(uri,"root/${provider.name}")
+            val entries=gateway.list(document.toString()).sortedBy { it.name }
             assertTrue(entries.all { !it.sizeKnown&&it.extension.isEmpty()&&it.comparisonType=="image" })
             entries.forEach { it.file.parentFile!!.mkdirs();it.file.writeText("deliberately stale cached preview") }
             val targets=entries.map { FileComparisonTarget(it.path,it.name) }

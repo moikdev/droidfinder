@@ -154,7 +154,7 @@ def run(a):
         except AssertionError:return False
     def wait(name,label):return d.wait(name,lambda tree:ready(tree,label),seconds=50)
     def click(name,label):
-        if label not in ('Comparison limits…','Previous difference','Next difference','Copy differences','Swap sides'):
+        if label not in ('Comparison limits…','Previous difference','Next difference','Copy differences','Swap sides','Fit both images','Zoom both images in','Zoom both images out','Pan both images right','Close file comparison','Close comparison limits','Compare again'):
             wait(name+'-ready',label)
         ui.click(name,label)
     def launch(name):
@@ -234,7 +234,7 @@ def run(a):
             for width,height in ((1280,800),(800,1280),(600,800)):
                 for dark in (False,True):
                     for font_scale in (1.0,2.0):
-                        kind='image' if dark else 'text'
+                        kind='text' if (width==800)==dark else 'image'
                         name=f'layout-{width}x{height}-font{font_scale}-'+('dark' if dark else 'light')
                         case=seed(name,dark,kind);requested=(round(width*ui.density),round(height*ui.density))
                         d.shell('wm','size',f'{requested[0]}x{requested[1]}');d.screen=requested
