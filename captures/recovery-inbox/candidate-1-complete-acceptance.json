@@ -1,0 +1,19 @@
+{
+  "proposal": 44,
+  "status": "implemented",
+  "implementedProposals": 35,
+  "remainingOpenOrPartial": 37,
+  "release": "v0.47.0-preview",
+  "applicationSourceCommit": "3a713b36158f761f918ea26d9efd3fbf8a66ded0",
+  "archivedEvidenceCommit": "a9161bccd8d0917080a60f84a322d08572c60d9d",
+  "validationArchiveSha256": "a3580418d137e0e5c0c0b50f4bd3f84d5aa4fe2a4a7288055e7c99f52acc0c68",
+  "allSixAnonymousAssetsVerified": true,
+  "independentArchiveVerified": true,
+  "actualPublicOtaAccepted": [
+    "candidate-1-api30-public-ota-1",
+    "candidate-1-api36-public-ota-2"
+  ],
+  "originalsRestored": true,
+  "allSelectedImagePathsInspected": 101,
+  "scope": "Assigned API30/API36 emulators; actual multiple-link reader refusal remains JVM evidence because Android denies the fixture hard link."
+}

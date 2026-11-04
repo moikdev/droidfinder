@@ -1,0 +1,12 @@
+[
+  "README.md",
+  "PARITY.md",
+  "VALIDATION.md",
+  "docs/RECOVERY-INBOX.md",
+  "docs/IMPROVEMENT-TRACKER.md",
+  "docs/releases/0.47.0.md",
+  "captures/recovery-inbox/candidate-1-complete-acceptance.json",
+  "captures/recovery-inbox/candidate-1-independent-archive-verification.json",
+  "captures/recovery-inbox/candidate-1-all-six-public-artifacts.json",
+  "captures/release/0.47.0/Findroid-0.47.0-validation.json"
+]

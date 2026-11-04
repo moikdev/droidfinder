@@ -2,7 +2,7 @@
 
 ## Findroid 0.47.0 — recovery inbox
 
-Local and actual public OTA acceptance pass on November 4, 2026. Independent immutable-archive verification remains pending; proposal 44 is still open.
+Local, actual public OTA and independent immutable-archive acceptance completed on November 4, 2026. Proposal 44 is implemented.
 
 - **894 JVM cases pass**, zero failures/errors/skips. Lint: **0 errors / 148 warnings / 12 hints**. The frozen candidate pins **388 source inputs and 102 build/report outputs**. `BUILDINFO.json` honestly keeps its generated-report dirty flag; the complete source-binding receipt proves every frozen source matches public commit `3a713b36158f761f918ea26d9efd3fbf8a66ded0`, including declared Windows-wrapper checkout line endings.
 - Both assigned tablets pass the same **532 distinct native cases in 57 fresh-process batches**, zero failures or skips. The 43 focused JVM and 27 focused native recovery cases are subsets. Android denies fixture hard-link creation; native acceptance proves platform refusal or app refusal according to capability, while actual multiple-link reader refusal is demonstrated in JVM fixtures.
@@ -13,6 +13,8 @@ Local and actual public OTA acceptance pass on November 4, 2026. Independent imm
 - Signing matches public 0.46. Preview and unsigned native libraries pass **16 KiB** load-segment and ZIP alignment on all four included ABIs. Preview: **8,892,204 bytes**, SHA-256 `5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09`.
 
 Both tablets pass actual public-feed **48→49** download and Android installation with installer completion confirmed before relaunch. Installed bytes match the anonymous public APK; synthetic original bytes, Favorite and sentinel preference survive, and there is no repeat offer. The API36 first attempt timed out before opening More; a complete unchanged OTA-checker retry passes and the failed attempt remains excluded. Its retry controller verifies the exact public 0.47 APK restored by the first attempt before independently starting the tested 48→49 upgrade. All 12 accepted OTA images were actually inspected. Final restoration rechecks original managed bytes/absences, Workspace, grants, storage/font/display/size settings and the exact public 0.47 APK on both tablets.
+
+The [immutable public validation archive](https://github.com/moikdev/findroid/releases/download/v0.47.0-preview/Findroid-0.47.0-validation.zip) contains **902 evidence files plus its manifest**, **20,057,564 bytes**, SHA-256 `a3580418d137e0e5c0c0b50f4bd3f84d5aa4fe2a4a7288055e7c99f52acc0c68`. Independent anonymous verification passes every entry hash, public source/evidence binding, recorded JVM/native total and GitHub digest. Application/native source: `3a713b36158f761f918ea26d9efd3fbf8a66ded0`; archived evidence: `a9161bccd8d0917080a60f84a322d08572c60d9d`. All six public assets match local bytes and digests. The archive keeps the pending-independent-acceptance documentation as its committed snapshot; later verification receipts complete acceptance without repackaging it.
 
 Opening the inbox reads saved records; resuming, restoring, discarding and retrying remain explicit choices. Limits and manual recovery behavior are explained in the [guide](docs/RECOVERY-INBOX.md). [Release notes](docs/releases/0.47.0.md).
 
