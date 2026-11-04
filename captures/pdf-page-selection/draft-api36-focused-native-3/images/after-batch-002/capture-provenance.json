@@ -1,0 +1,27 @@
+{
+  "serial": "emulator-5582",
+  "completedBatch": 2,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-3/images/after-batch-002/direct-handle-drag.png",
+      "sha256": "9a0a34324ca249b1535f18462e534a40460f92112ec78b272efcf00516df05cb"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-3/images/after-batch-002/first-long-press-drag.png",
+      "sha256": "9a0a34324ca249b1535f18462e534a40460f92112ec78b272efcf00516df05cb"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-3/images/after-batch-002/two-line-selection.png",
+      "sha256": "9a0a34324ca249b1535f18462e534a40460f92112ec78b272efcf00516df05cb"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-3/images/after-batch-002/word-and-handles.png",
+      "sha256": "b0b3335a072b6277d179d491387c610d496eae68ddefa83466ccd322a0c156ef"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-3/images/after-batch-002/zoomed-selection.png",
+      "sha256": "30787a815294715708dd61205d175a20eeee3e1a678e7fb68b4b92d0735428e4"
+    }
+  ],
+  "syntheticPdfPreviewOnly": true
+}

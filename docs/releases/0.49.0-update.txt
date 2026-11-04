@@ -1,0 +1,1 @@
+Select text directly on PDF pages. Touch a word, drag across lines, or hold to begin, then adjust the named selection handles and copy the extracted passage. Pan and zoom keeps the highlight and copy actions. Keyboard Select All/Copy/Escape and accessible handle actions are available. Pages without a text layer and extraction restrictions are explained.

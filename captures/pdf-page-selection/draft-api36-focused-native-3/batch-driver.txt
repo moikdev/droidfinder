@@ -1,0 +1,39 @@
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 3 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/draft-api36-focused-native-3/batches/01-PdfPageSelectionNativeTest.txt
+Accepted batch 1/2: dev.findroid.PdfPageSelectionNativeTest (3 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 11 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-pdf-page-selection/captures/pdf-page-selection/draft-api36-focused-native-3/batches/02-PdfPageSelectionWorkflowTest.txt
+Accepted batch 2/2: dev.findroid.PdfPageSelectionWorkflowTest (11 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+emulator-5582: 14 passed in 2 isolated batches; zero failures/skips.

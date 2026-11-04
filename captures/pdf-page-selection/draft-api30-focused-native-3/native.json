@@ -1,0 +1,111 @@
+{
+  "success": true,
+  "passed": 14,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "aPageWithoutATextLayerCannotCreateAnInventedSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionRespectsTheDocumentsExistingTextExtractionPermission",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionBoxesFollowActualRenderedGlyphsAcrossPageAndTextRotationsAndCropBoxes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "theFirstLongPressCanContinueIntoADragAfterLoadingTheTextLayer",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "switchingToReadingTextClearsTheRetainedRenderedPageSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "draggingTheEndHandleExtendsTheActualCopiedRange",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "changingPagesAndReopeningThePreviewDoNotReuseThePriorSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "holdingTheRenderedWordOpensSelectionWithoutASeparateModeTap",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "zoomKeepsTheSelectionAnchoredToThePageAndUsesTheSameCopyText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "accessibilityActionsCanExtendAHandleAndClearTheSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "draggingAcrossTwoRenderedLinesKeepsTheirActualLineBreak",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "anEmptyTextLayerExplainsWhyThereIsNothingToCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "touchingAWordOnTheRenderedPageCopiesExactlyItsTextAndShowsNamedHandles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "keyboardSelectAllCopyAndEscapeOperateOnTheCurrentPdfPage",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 56.3,
+  "wallSecondsThisInvocation": 65.1,
+  "timedOut": false,
+  "isolatedBatches": [
+    {
+      "selector": "dev.findroid.PdfPageSelectionNativeTest",
+      "report": "captures/pdf-page-selection/draft-api30-focused-native-3/batches/01-PdfPageSelectionNativeTest.json",
+      "log": "captures/pdf-page-selection/draft-api30-focused-native-3/batches/01-PdfPageSelectionNativeTest.txt",
+      "reportSha256": "b25dafee5ab78615d4fae61fc7137f3775ff44d3947c4fe4abbfe4965699ebef",
+      "logSha256": "cb4696eb6ffaa9e4d0231858511f44ecb20c6f1e277d065d61cd03935e7f97e9",
+      "passed": 3
+    },
+    {
+      "selector": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "report": "captures/pdf-page-selection/draft-api30-focused-native-3/batches/02-PdfPageSelectionWorkflowTest.json",
+      "log": "captures/pdf-page-selection/draft-api30-focused-native-3/batches/02-PdfPageSelectionWorkflowTest.txt",
+      "reportSha256": "b71b0456a40d8041d190acc8481c288124d6de54020a695fedbbab60117fb50d",
+      "logSha256": "1cf2b676765c1bb8ecc56983f9e7d763444af9746e41c780e4d06a69cb56c673",
+      "passed": 11
+    }
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "9b20c24ef18066533a9b556ec2c62312ea8af3c2320c0c9997b48535b0c6970a",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "5aeecb007476b99b44b1f9a858356bc57438ddbe8b8de933c8ea159ceb02fa0a"
+  },
+  "installedApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "9b20c24ef18066533a9b556ec2c62312ea8af3c2320c0c9997b48535b0c6970a",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "5aeecb007476b99b44b1f9a858356bc57438ddbe8b8de933c8ea159ceb02fa0a"
+  }
+}
