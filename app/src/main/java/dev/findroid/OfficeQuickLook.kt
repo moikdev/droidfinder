@@ -92,54 +92,62 @@ internal fun OfficeQuickLook(entry: Entry, modifier: Modifier = Modifier) {
         keys?.handle=handler;keys?.editing=editing
         onDispose { if(keys!=null && keys.handle===handler) { keys.handle=null;keys.editing=false } }
     }
-    Column(modifier.testTag("office-preview")) {
-        FlowRow(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) {
-            Text(format.label,Modifier.padding(12.dp),style=MaterialTheme.typography.titleMedium)
-            TextButton(onClick={details=true},modifier=Modifier.heightIn(min=48.dp)) { Text("Preview limits…") }
-            if(document!=null) {
-                TextButton(onClick={selected--},enabled=selected>0,modifier=Modifier.heightIn(min=48.dp)) { Text("Previous section") }
-                TextButton(onClick={selected++},enabled=selected<document.sections.lastIndex,modifier=Modifier.heightIn(min=48.dp)) { Text("Next section") }
-                TextButton(onClick=::copy,enabled=section?.text?.isNotBlank()==true&&!copying,modifier=Modifier.heightIn(min=48.dp)) { Text("Copy loaded section") }
-            }
-        }
-        Text("Read-only text preview; layout and formatting can differ.",Modifier.padding(horizontal=12.dp),style=MaterialTheme.typography.bodySmall)
-        when {
-            stopped -> {
-                Text("Office preview stopped.",Modifier.padding(12.dp))
-                TextButton(onClick={attempt++},modifier=Modifier.heightIn(min=48.dp)) { Text("Retry Office preview") }
-            }
-            loaded==null -> {
-                LinearProgressIndicator(Modifier.fillMaxWidth().padding(12.dp))
-                TextButton(onClick={stopped=true;control.cancel()},modifier=Modifier.heightIn(min=48.dp)) { Text("Stop Office preview") }
-            }
-            loaded!!.isFailure -> {
-                val error=loaded!!.exceptionOrNull()
-                Text(when(error) {
-                    is PreviewSizeLimitException -> "Office text previews support files up to 64 MiB. Open this document in another app."
-                    is java.util.zip.ZipException -> "Couldn't read this Office package. It may be damaged, encrypted, or use unsupported compression. Open it in another app."
-                    is java.nio.charset.CharacterCodingException -> "This Office text uses an unsupported XML encoding. Open it in another app."
-                    is org.xml.sax.SAXException -> "Couldn't read this Office XML. Open the document in another app."
-                    else -> error?.message?.take(300) ?: "Couldn't prepare this Office preview."
-                },Modifier.padding(12.dp))
-                TextButton(onClick={attempt++},modifier=Modifier.heightIn(min=48.dp)) { Text("Retry Office preview") }
-            }
-            section!=null -> {
-                Text("${selected+1} of ${document!!.sections.size} · ${section.title}",Modifier.padding(12.dp),style=MaterialTheme.typography.titleSmall)
-                if(document.limited)Text("Partial preview. Copy and Find cover loaded content only.",Modifier.padding(horizontal=12.dp),style=MaterialTheme.typography.bodySmall)
-                if(format==OfficeFormat.XLSX)Text("Stored values; formulas aren't recalculated.",Modifier.padding(horizontal=12.dp),style=MaterialTheme.typography.bodySmall)
-                OutlinedTextField(query,{query=OfficePolicy.clip(it,200)},label={Text("Find in loaded section")},singleLine=true,
-                    modifier=Modifier.fillMaxWidth().padding(12.dp).testTag("office-search").then(Modifier.onOfficeEditing { editing=it }))
-                if(query.isNotBlank())FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
-                    Text(if(matches.isEmpty()) "No matching rows in loaded section" else "${active+1} of ${matches.size} matching rows",Modifier.padding(12.dp))
-                    TextButton(onClick={active=Math.floorMod(active-1,matches.size)},enabled=matches.isNotEmpty(),modifier=Modifier.heightIn(min=48.dp)) { Text("Previous Office match") }
-                    TextButton(onClick={active=Math.floorMod(active+1,matches.size)},enabled=matches.isNotEmpty(),modifier=Modifier.heightIn(min=48.dp)) { Text("Next Office match") }
+    val controlsScroll=rememberScrollState()
+    LaunchedEffect(identity) { controlsScroll.scrollTo(0) }
+    BoxWithConstraints(modifier.testTag("office-preview")) {
+        val controlsMaxHeight=maxHeight*0.6f
+        Column(Modifier.fillMaxSize()) {
+            Column(Modifier.fillMaxWidth().heightIn(max=if(section!=null)controlsMaxHeight else maxHeight)
+                .verticalScroll(controlsScroll).testTag("office-preview-controls")) {
+                FlowRow(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                    Text(format.label,Modifier.padding(12.dp),style=MaterialTheme.typography.titleMedium)
+                    TextButton(onClick={details=true},modifier=Modifier.heightIn(min=48.dp)) { Text("Preview limits…") }
+                    if(document!=null) {
+                        TextButton(onClick={selected--},enabled=selected>0,modifier=Modifier.heightIn(min=48.dp)) { Text("Previous section") }
+                        TextButton(onClick={selected++},enabled=selected<document.sections.lastIndex,modifier=Modifier.heightIn(min=48.dp)) { Text("Next section") }
+                        TextButton(onClick=::copy,enabled=section?.text?.isNotBlank()==true&&!copying,modifier=Modifier.heightIn(min=48.dp)) { Text("Copy loaded section") }
+                    }
                 }
-                status?.let { Text(it,Modifier.padding(horizontal=12.dp).testTag("office-status")) }
-                Box(Modifier.weight(1f).fillMaxWidth()) {
-                    if(section.text.isBlank())Text(if(document.limited)"No more text is available within this preview's limits." else "No stored text was found in this section.",Modifier.padding(12.dp))
-                    else if(section.table!=null)CsvReadView(section.table,true,list,horizontal,query,matches.getOrNull(active))
-                    else SourceReadView(lines,list,horizontal,true,query,matches.getOrNull(active),false)
+                Text("Read-only text preview; layout and formatting can differ.",Modifier.padding(horizontal=12.dp),style=MaterialTheme.typography.bodySmall)
+                when {
+                    stopped -> {
+                        Text("Office preview stopped.",Modifier.padding(12.dp))
+                        TextButton(onClick={attempt++},modifier=Modifier.heightIn(min=48.dp)) { Text("Retry Office preview") }
+                    }
+                    loaded==null -> {
+                        LinearProgressIndicator(Modifier.fillMaxWidth().padding(12.dp))
+                        TextButton(onClick={stopped=true;control.cancel()},modifier=Modifier.heightIn(min=48.dp)) { Text("Stop Office preview") }
+                    }
+                    loaded!!.isFailure -> {
+                        val error=loaded!!.exceptionOrNull()
+                        Text(when(error) {
+                            is PreviewSizeLimitException -> "Office text previews support files up to 64 MiB. Open this document in another app."
+                            is java.util.zip.ZipException -> "Couldn't read this Office package. It may be damaged, encrypted, or use unsupported compression. Open it in another app."
+                            is java.nio.charset.CharacterCodingException -> "This Office text uses an unsupported XML encoding. Open it in another app."
+                            is org.xml.sax.SAXException -> "Couldn't read this Office XML. Open the document in another app."
+                            else -> error?.message?.take(300) ?: "Couldn't prepare this Office preview."
+                        },Modifier.padding(12.dp))
+                        TextButton(onClick={attempt++},modifier=Modifier.heightIn(min=48.dp)) { Text("Retry Office preview") }
+                    }
+                    section!=null -> {
+                        Text("${selected+1} of ${document!!.sections.size} · ${section.title}",Modifier.padding(12.dp),style=MaterialTheme.typography.titleSmall)
+                        if(document.limited)Text("Partial preview. Copy and Find cover loaded content only.",Modifier.padding(horizontal=12.dp),style=MaterialTheme.typography.bodySmall)
+                        if(format==OfficeFormat.XLSX)Text("Stored values; formulas aren't recalculated.",Modifier.padding(horizontal=12.dp),style=MaterialTheme.typography.bodySmall)
+                        OutlinedTextField(query,{query=OfficePolicy.clip(it,200)},label={Text("Find in loaded section")},singleLine=true,
+                            modifier=Modifier.fillMaxWidth().padding(12.dp).testTag("office-search").then(Modifier.onOfficeEditing { editing=it }))
+                        if(query.isNotBlank())FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
+                            Text(if(matches.isEmpty()) "No matching rows in loaded section" else "${active+1} of ${matches.size} matching rows",Modifier.padding(12.dp))
+                            TextButton(onClick={active=Math.floorMod(active-1,matches.size)},enabled=matches.isNotEmpty(),modifier=Modifier.heightIn(min=48.dp)) { Text("Previous Office match") }
+                            TextButton(onClick={active=Math.floorMod(active+1,matches.size)},enabled=matches.isNotEmpty(),modifier=Modifier.heightIn(min=48.dp)) { Text("Next Office match") }
+                        }
+                        status?.let { Text(it,Modifier.padding(horizontal=12.dp).testTag("office-status")) }
+                    }
                 }
+            }
+            if(section!=null&&!stopped)Box(Modifier.weight(1f).fillMaxWidth()) {
+                if(section.text.isBlank())Text(if(document?.limited==true)"No more text is available within this preview's limits." else "No stored text was found in this section.",Modifier.padding(12.dp))
+                else if(section.table!=null)CsvReadView(section.table,true,list,horizontal,query,matches.getOrNull(active))
+                else SourceReadView(lines,list,horizontal,true,query,matches.getOrNull(active),false)
             }
         }
     }
