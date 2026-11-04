@@ -1,0 +1,69 @@
+{
+  "version": "0.53.0-preview",
+  "versionCode": 55,
+  "applicationSourceCommit": "2b9c157dff077eadf66583c2a61b36b925a891e9",
+  "nativeTestSourceCommit": "2b9c157dff077eadf66583c2a61b36b925a891e9",
+  "evidenceCommit": "09da3963610d32beb33f553ead5020b04b1f9926",
+  "localAcceptanceComplete": true,
+  "publicOtaComplete": true,
+  "independentPublicArchiveVerificationComplete": true,
+  "allSixPublicArtifactsVerified": true,
+  "proposal": 50,
+  "proposalImplemented": true,
+  "implementedProposals": 41,
+  "totalProposals": 72,
+  "jvmCases": 1017,
+  "nativeCasesPerApi": 25,
+  "isolatedNativeBatchesPerApi": 4,
+  "optimizedCoreWorkflowsPerApi": 1,
+  "balancedLayoutsPerApi": 12,
+  "named48DpTargetsPerApi": 156,
+  "actualSystemFontGrowthGroupsPerApi": 6,
+  "reviewedCapturePaths": 74,
+  "originalStateRestoredOnBothApis": true,
+  "originalWorkspaceTreesKept": true,
+  "previewApkSha256": "81cc0b75ac6f038aec555e5c930c5cbaed5cb2debdf79d63db1f006f81402f0e",
+  "previewApkBytes": 38066148,
+  "noSupersededApkAcceptanceReused": true,
+  "archive": {
+    "path": "captures/release/0.53.0/Findroid-0.53.0-validation.zip",
+    "sha256": "25190c928813fd78939a3bd6bbed09a0b2d90647ba7cccf60fe8ea0316455ed7",
+    "bytes": 11266002,
+    "entries": 761
+  },
+  "scope": "Emulated Android 11 and Android 16 tablets. Physical tablet, third-party provider and screen-reader acceptance remain open.",
+  "evidence": [
+    {
+      "path": "captures/image-review/local-acceptance.json",
+      "sha256": "1aac7a86ac9edc1605f38f7b639347eb5aa9b51e016d7e2a1a44f51e6e7c2a71"
+    },
+    {
+      "path": "captures/image-review/independent-public-verification.json",
+      "sha256": "8a7708f6560b202e92232b9c280120978ec80ccc2a1f1bc3257d3e52dd3d48c8"
+    },
+    {
+      "path": "captures/image-review/public-final-artifacts.json",
+      "sha256": "ca8d2fac453afa2aa1e76735e8adf34e592835c9fb1fccad9d718fbb07ba0ae0"
+    },
+    {
+      "path": "captures/image-review/public-image-review.json",
+      "sha256": "73891812d83beed6bf7570ecc256153fd6bb43513833168c6e4d6665cc82eaf6"
+    },
+    {
+      "path": "captures/image-review/public-privacy-review.json",
+      "sha256": "b8099b0ec473bf37d2a833aa5708293c35ae5838af80c16f06c74b5d2cd55938"
+    },
+    {
+      "path": "captures/image-review/public-ota-acceptance.json",
+      "sha256": "cc5e603deaea4ffe902c5e5cd4b548f22e51cd703a1edb62016fce46208aa09f"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-public-ota/verification.json",
+      "sha256": "f0eab9f3e2e53758ae644dee11775c6c032f0b2ccf515af6132f4030226283b1"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-public-ota/verification.json",
+      "sha256": "3b49fab3add07683f83c5550cffe8b148c239b7f5d1a75fc35f54d36fcc02c78"
+    }
+  ]
+}
