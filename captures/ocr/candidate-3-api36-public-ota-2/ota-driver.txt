@@ -1,0 +1,20 @@
+{
+  "serial": "emulator-5582",
+  "fromVersionCode": 51,
+  "toVersionCode": 52,
+  "publicFeedDownloadAndAndroidInstall": true,
+  "installedApkMatchesPublicBytes": true,
+  "installerCompletionConfirmedBeforeRelaunch": true,
+  "originalFileBytes": true,
+  "legacyFavoritePreserved": true,
+  "sentinelPreferencePreserved": true,
+  "updatedSidebarVisible": true,
+  "noRepeatOffer": true,
+  "restoredApkSha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+  "checkerSha256": "38778064c41bdbd68b612e7b73859b61837a0791d31ce5929ce2602794263db4",
+  "freshAndroidHierarchies": true,
+  "verifiedUpdateDialogOpened": true,
+  "menuTapRetries": 1,
+  "updateDialogAlreadyVisibleOnLaunchCount": 0,
+  "restoredOriginalSetup": true
+}

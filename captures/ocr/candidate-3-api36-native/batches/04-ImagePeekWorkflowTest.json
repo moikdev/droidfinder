@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "passed": 6,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "metadataLocationIsExplicitAndRotationDoesNotModifySource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "malformedOversizedAndChangedSourcesHaveRecoverableErrors",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "mimeOnlyProviderImageAndBlockedPreparationCanStop",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "zoomWheelPanKeyboardAndRecreationKeepTheView",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "largeSourceUsesBoundedRegionsAndNavigatorPansAtActualPixels",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "nativeCanvasHonorsAllExifOrientationsAndSpaceCloses",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 129.7,
+  "timedOut": false
+}

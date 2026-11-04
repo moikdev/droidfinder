@@ -1,0 +1,88 @@
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+dev.findroid.OcrWorkflowTest:
+INSTRUMENTATION_STATUS: test=imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=scannedPdfWithoutTextLayerCanBeRecognizedReadOnly
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stack=androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.recognize(OcrWorkflowTest.kt:65)
+	at dev.findroid.OcrWorkflowTest.scannedPdfWithoutTextLayerCanBeRecognizedReadOnly(OcrWorkflowTest.kt:106)
+
+INSTRUMENTATION_STATUS: stream=
+Error in scannedPdfWithoutTextLayerCanBeRecognizedReadOnly(dev.findroid.OcrWorkflowTest):
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.recognize(OcrWorkflowTest.kt:65)
+	at dev.findroid.OcrWorkflowTest.scannedPdfWithoutTextLayerCanBeRecognizedReadOnly(OcrWorkflowTest.kt:106)
+
+INSTRUMENTATION_STATUS: test=scannedPdfWithoutTextLayerCanBeRecognizedReadOnly
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=openingOcrOffersExplicitModelChoiceAndStartsNoRecognition
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stack=androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.openingOcrOffersExplicitModelChoiceAndStartsNoRecognition(OcrWorkflowTest.kt:81)
+
+INSTRUMENTATION_STATUS: stream=
+Error in openingOcrOffersExplicitModelChoiceAndStartsNoRecognition(dev.findroid.OcrWorkflowTest):
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.openingOcrOffersExplicitModelChoiceAndStartsNoRecognition(OcrWorkflowTest.kt:81)
+
+INSTRUMENTATION_STATUS: test=openingOcrOffersExplicitModelChoiceAndStartsNoRecognition
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 46.901
+There were 2 failures:
+1) scannedPdfWithoutTextLayerCanBeRecognizedReadOnly(dev.findroid.OcrWorkflowTest)
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.recognize(OcrWorkflowTest.kt:65)
+	at dev.findroid.OcrWorkflowTest.scannedPdfWithoutTextLayerCanBeRecognizedReadOnly(OcrWorkflowTest.kt:106)
+2) openingOcrOffersExplicitModelChoiceAndStartsNoRecognition(dev.findroid.OcrWorkflowTest)
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.openingOcrOffersExplicitModelChoiceAndStartsNoRecognition(OcrWorkflowTest.kt:81)
+
+FAILURES!!!
+Tests run: 3,  Failures: 2
+
+
+INSTRUMENTATION_CODE: -1

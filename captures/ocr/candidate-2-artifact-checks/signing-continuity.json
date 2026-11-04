@@ -1,0 +1,17 @@
+{
+  "sameSigningCertificate": true,
+  "artifacts": [
+    {
+      "apk": "Findroid-0.49.0-preview.apk",
+      "apkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+      "signingCertificateSha256": "e7bee2db540fcbb0633d82870b2c4e3d14ecc0c18474b1a7c73d47eb0bf92c08",
+      "signatureLogSha256": "59abd6359af135cbebbbf7553af21d762be423c83da279044f238bf0f15ee497"
+    },
+    {
+      "apk": "app-preview.apk",
+      "apkSha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+      "signingCertificateSha256": "e7bee2db540fcbb0633d82870b2c4e3d14ecc0c18474b1a7c73d47eb0bf92c08",
+      "signatureLogSha256": "59abd6359af135cbebbbf7553af21d762be423c83da279044f238bf0f15ee497"
+    }
+  ]
+}

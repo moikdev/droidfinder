@@ -1,0 +1,34 @@
+{
+  "success": true,
+  "passed": 4,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "cancellationEndsAnIdlePipeReadBeforeTheWriterCloses",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "declaredAssetOffsetAndLengthDoNotExposeSurroundingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "cancelingACacheWaitReleasesOnlyThatReader",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "unknownLengthPipeReadsChunksAndFinishesAtEof",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 4.5,
+  "timedOut": false
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 5 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-local-ocr/captures/ocr/draft-4-api36-native/batches/01-OcrNativeTest.txt
+Accepted batch 1/2: dev.findroid.OcrNativeTest (5 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 2 passed, 0 skipped, 1 failed; runner complete: True
+dev.findroid.OcrWorkflowTest#imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose: androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+Log: /private/tmp/findroid-local-ocr/captures/ocr/draft-4-api36-native/batches/02-OcrWorkflowTest.txt
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Traceback (most recent call last):
+  File "/private/tmp/findroid-local-ocr/scripts/check-device-batches.py", line 105, in <module>
+    if __name__=='__main__': main()
+                             ~~~~^^
+  File "/private/tmp/findroid-local-ocr/scripts/check-device-batches.py", line 80, in main
+    assert result.returncode==0, f'Batch failed; inspect {report_path}. It is not accepted.'
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: Batch failed; inspect /private/tmp/findroid-local-ocr/captures/ocr/draft-4-api36-native/batches/02-OcrWorkflowTest.json. It is not accepted.

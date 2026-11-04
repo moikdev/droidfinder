@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "passed": 3,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "aPageWithoutATextLayerCannotCreateAnInventedSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionRespectsTheDocumentsExistingTextExtractionPermission",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionBoxesFollowActualRenderedGlyphsAcrossPageAndTextRotationsAndCropBoxes",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 10.0,
+  "timedOut": false
+}

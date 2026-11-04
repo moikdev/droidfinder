@@ -1,0 +1,11 @@
+{
+  "serial": "emulator-5582",
+  "selectors": [
+    "dev.findroid.OcrNativeTest",
+    "dev.findroid.OcrWorkflowTest"
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "c5b6c8a5c93549cdfd0c24faa9b98aafffff7bd4ef39b9d98392c93dc13e0ca1",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "b9e1ab65525fed3fc511191fc17bd50400fd11a926bd0b4aa8c866aeda272e1c"
+  }
+}

@@ -1,0 +1,3 @@
+Checked 115 runtime packages; 0 with OSV matches.
+Database results require reachability review and may lag newly published advisories.
+Report: /private/tmp/findroid-local-ocr/captures/ocr/candidate-1-dependency-audit.json

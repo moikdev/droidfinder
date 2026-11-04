@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/private/tmp/findroid-local-ocr/scripts/check-ota-upgrade.py", line 205, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "/private/tmp/findroid-local-ocr/scripts/check-ota-upgrade.py", line 179, in main
+    root = wait('up-to-date', lambda t: any("up to date" in n.get('text', '').lower() for n in t.iter('node')), 60)
+  File "/private/tmp/findroid-local-ocr/scripts/check-ota-upgrade.py", line 65, in wait
+    raise AssertionError('Timed out: ' + name)
+AssertionError: Timed out: up-to-date

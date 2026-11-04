@@ -1,0 +1,3022 @@
+{
+  "serial": "emulator-5582",
+  "section": "layouts",
+  "sourceCommit": "688bf25972fa93cd40d29403088ce8c6b38a61f8",
+  "checkerSha256": "00465807c2fc4bf0ae0ce3f2d138882efaceb1565ce6c1b7314d379705770ea1",
+  "buildReceiptSha256": "b7d85091ed231429b1c575c07d4089fa91bc7fa9731b75c7f2055554e0971f17",
+  "apkSha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+  "previousApkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "checks": [
+    {
+      "name": "layout-1280x800-font1.0-light"
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark"
+    },
+    {
+      "name": "layout-1280x800-font2.0-light"
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark"
+    },
+    {
+      "name": "layout-800x1280-font1.0-light"
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark"
+    },
+    {
+      "name": "layout-800x1280-font2.0-light"
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark"
+    },
+    {
+      "name": "layout-600x800-font1.0-light"
+    },
+    {
+      "name": "layout-600x800-font1.0-dark"
+    },
+    {
+      "name": "layout-600x800-font2.0-light"
+    },
+    {
+      "name": "layout-600x800-font2.0-dark"
+    }
+  ],
+  "layouts": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "previewDocument": "Scan.png",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-1280x800-font1.0-light",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          398,
+          739,
+          519,
+          811
+        ],
+        "textHeight": 72,
+        "textWidth": 121,
+        "rasterGlyphHeight": 55,
+        "rasterGlyphWidth": 119,
+        "glyphBands": [
+          [
+            8,
+            30
+          ],
+          [
+            44,
+            62
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 48,
+        "image": "layout-1280x800-font1.0-light-recognized-glyph.png",
+        "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b"
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "previewDocument": "Scanned page.pdf",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-1280x800-font1.0-dark",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          398,
+          739,
+          519,
+          847
+        ],
+        "textHeight": 108,
+        "textWidth": 121,
+        "rasterGlyphHeight": 91,
+        "rasterGlyphWidth": 119,
+        "glyphBands": [
+          [
+            8,
+            30
+          ],
+          [
+            80,
+            98
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 48,
+        "image": "layout-1280x800-font1.0-dark-recognized-glyph.png",
+        "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe"
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "previewDocument": "Scan.png",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-1280x800-font2.0-light",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          398,
+          871,
+          608,
+          997
+        ],
+        "textHeight": 126,
+        "textWidth": 210,
+        "rasterGlyphHeight": 96,
+        "rasterGlyphWidth": 207,
+        "glyphBands": [
+          [
+            14,
+            54
+          ],
+          [
+            77,
+            109
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 96,
+        "image": "layout-1280x800-font2.0-light-recognized-glyph.png",
+        "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea"
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "previewDocument": "Scanned page.pdf",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-1280x800-font2.0-dark",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          398,
+          808,
+          608,
+          997
+        ],
+        "textHeight": 189,
+        "textWidth": 210,
+        "rasterGlyphHeight": 159,
+        "rasterGlyphWidth": 207,
+        "glyphBands": [
+          [
+            14,
+            54
+          ],
+          [
+            140,
+            172
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 96,
+        "image": "layout-1280x800-font2.0-dark-recognized-glyph.png",
+        "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302"
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": false,
+      "previewDocument": "Scan.png",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-800x1280-font1.0-light",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          66,
+          768,
+          187,
+          840
+        ],
+        "textHeight": 72,
+        "textWidth": 121,
+        "rasterGlyphHeight": 55,
+        "rasterGlyphWidth": 119,
+        "glyphBands": [
+          [
+            8,
+            30
+          ],
+          [
+            44,
+            62
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 48,
+        "image": "layout-800x1280-font1.0-light-recognized-glyph.png",
+        "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b"
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": true,
+      "previewDocument": "Scanned page.pdf",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-800x1280-font1.0-dark",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          66,
+          768,
+          187,
+          876
+        ],
+        "textHeight": 108,
+        "textWidth": 121,
+        "rasterGlyphHeight": 91,
+        "rasterGlyphWidth": 119,
+        "glyphBands": [
+          [
+            8,
+            30
+          ],
+          [
+            80,
+            98
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 48,
+        "image": "layout-800x1280-font1.0-dark-recognized-glyph.png",
+        "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe"
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": false,
+      "previewDocument": "Scan.png",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-800x1280-font2.0-light",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          66,
+          1116,
+          276,
+          1242
+        ],
+        "textHeight": 126,
+        "textWidth": 210,
+        "rasterGlyphHeight": 96,
+        "rasterGlyphWidth": 207,
+        "glyphBands": [
+          [
+            14,
+            54
+          ],
+          [
+            77,
+            109
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 96,
+        "image": "layout-800x1280-font2.0-light-recognized-glyph.png",
+        "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea"
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": true,
+      "previewDocument": "Scanned page.pdf",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-800x1280-font2.0-dark",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          66,
+          1116,
+          276,
+          1305
+        ],
+        "textHeight": 189,
+        "textWidth": 210,
+        "rasterGlyphHeight": 159,
+        "rasterGlyphWidth": 207,
+        "glyphBands": [
+          [
+            14,
+            54
+          ],
+          [
+            140,
+            172
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 96,
+        "image": "layout-800x1280-font2.0-dark-recognized-glyph.png",
+        "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302"
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "previewDocument": "Scan.png",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-600x800-font1.0-light",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          57,
+          775,
+          178,
+          847
+        ],
+        "textHeight": 72,
+        "textWidth": 121,
+        "rasterGlyphHeight": 55,
+        "rasterGlyphWidth": 119,
+        "glyphBands": [
+          [
+            8,
+            30
+          ],
+          [
+            44,
+            62
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 48,
+        "image": "layout-600x800-font1.0-light-recognized-glyph.png",
+        "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b"
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "previewDocument": "Scanned page.pdf",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-600x800-font1.0-dark",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          57,
+          775,
+          178,
+          883
+        ],
+        "textHeight": 108,
+        "textWidth": 121,
+        "rasterGlyphHeight": 91,
+        "rasterGlyphWidth": 119,
+        "glyphBands": [
+          [
+            8,
+            30
+          ],
+          [
+            80,
+            98
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 48,
+        "image": "layout-600x800-font1.0-dark-recognized-glyph.png",
+        "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe"
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "previewDocument": "Scan.png",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-600x800-font2.0-light",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          57,
+          871,
+          267,
+          997
+        ],
+        "textHeight": 126,
+        "textWidth": 210,
+        "rasterGlyphHeight": 96,
+        "rasterGlyphWidth": 207,
+        "glyphBands": [
+          [
+            14,
+            54
+          ],
+          [
+            77,
+            109
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 96,
+        "image": "layout-600x800-font2.0-light-recognized-glyph.png",
+        "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea"
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "previewDocument": "Scanned page.pdf",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "recognizedPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-600x800-font2.0-dark",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          57,
+          808,
+          267,
+          997
+        ],
+        "textHeight": 189,
+        "textWidth": 210,
+        "rasterGlyphHeight": 159,
+        "rasterGlyphWidth": 207,
+        "glyphBands": [
+          [
+            14,
+            54
+          ],
+          [
+            140,
+            172
+          ]
+        ],
+        "twoCompleteGlyphLines": true,
+        "minimumReadableTextHeightPx": 96,
+        "image": "layout-600x800-font2.0-dark-recognized-glyph.png",
+        "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302"
+      }
+    }
+  ],
+  "captures": [
+    {
+      "path": "layout-1280x800-font1.0-light-result-dialog.png",
+      "sha256": "24306673a4e5f7a39c8c6e0dcb5c1590608b4e9e1184090617f7ab7ec200177e",
+      "surfaceBoundsPx": [
+        398,
+        110,
+        1522,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b",
+      "surfaceBoundsPx": [
+        398,
+        739,
+        519,
+        811
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-light-options-dialog.png",
+      "sha256": "9a692908f7977985abea21f2e70d7cb2f1ed04ea13f9e3cf3d42892a348548c1",
+      "surfaceBoundsPx": [
+        398,
+        110,
+        1522,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-dark-result-dialog.png",
+      "sha256": "1fcbfa0ff8948f1888701c31d5a1f7b45c6b60277e994a624d9ed451f9a0b8a1",
+      "surfaceBoundsPx": [
+        398,
+        110,
+        1522,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe",
+      "surfaceBoundsPx": [
+        398,
+        739,
+        519,
+        847
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-dark-options-dialog.png",
+      "sha256": "abe33b52890e1723725b28353f2121cb81741a0fc22e28e84282203acad66d56",
+      "surfaceBoundsPx": [
+        398,
+        110,
+        1522,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-result-dialog.png",
+      "sha256": "bec3fcb4ba715f52d73674d5e596ffbe0c1bd4ffeb6414ec21c8882896a804f8",
+      "surfaceBoundsPx": [
+        398,
+        110,
+        1522,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea",
+      "surfaceBoundsPx": [
+        398,
+        871,
+        608,
+        997
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-options-dialog.png",
+      "sha256": "8b91f23650a035b5f5165aac0ac3313149287c79227199231dadb4e2018deaf4",
+      "surfaceBoundsPx": [
+        398,
+        110,
+        1522,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-dark-result-dialog.png",
+      "sha256": "f64f2ba82ae998f55863a152267971aec9d073d8bbdc70e524bf9f9efd2e170d",
+      "surfaceBoundsPx": [
+        398,
+        110,
+        1522,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302",
+      "surfaceBoundsPx": [
+        398,
+        808,
+        608,
+        997
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-dark-options-dialog.png",
+      "sha256": "e458a753b4cd2a9445e8a72e5441e426eeea376d6ec92bafa6c4a4e483f50884",
+      "surfaceBoundsPx": [
+        398,
+        110,
+        1522,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-light-result-dialog.png",
+      "sha256": "11c82a3382ec2bcb7aa3d78a7d95a4c36ef23c11e9f89ed91e0b7eefc703e7e1",
+      "surfaceBoundsPx": [
+        66,
+        139,
+        1134,
+        1768
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b",
+      "surfaceBoundsPx": [
+        66,
+        768,
+        187,
+        840
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-light-options-dialog.png",
+      "sha256": "5af3bb481080fdc3f6e5b4477bdb296a55c273ae1452d800fd8787e69bcc3d67",
+      "surfaceBoundsPx": [
+        66,
+        139,
+        1134,
+        1768
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-result-dialog.png",
+      "sha256": "f768c3ab16a1bc5392f938d096e70708f996d4b47f4b09440d4ca36f6484fac7",
+      "surfaceBoundsPx": [
+        66,
+        139,
+        1134,
+        1768
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe",
+      "surfaceBoundsPx": [
+        66,
+        768,
+        187,
+        876
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-options-dialog.png",
+      "sha256": "1dea56e0a538a38f793392a7a45e6269ed47cd675793ce78c4151154460ab438",
+      "surfaceBoundsPx": [
+        66,
+        139,
+        1134,
+        1768
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-light-result-dialog.png",
+      "sha256": "db188bb9b746f81136f1d2cdbe3c062b029fb21de13d057cdbfd66d8bbcaa581",
+      "surfaceBoundsPx": [
+        66,
+        139,
+        1134,
+        1768
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea",
+      "surfaceBoundsPx": [
+        66,
+        1116,
+        276,
+        1242
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-light-options-dialog.png",
+      "sha256": "4ac1b356485c1178cb45a3f4b08d38db3128032b95225e506fed8f483da39bae",
+      "surfaceBoundsPx": [
+        66,
+        139,
+        1134,
+        1768
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-result-dialog.png",
+      "sha256": "a36e79b0f44ab054f9362ee6d806e46ff2e9d6fb4b7d0a0229d5e3fdc8613a93",
+      "surfaceBoundsPx": [
+        66,
+        139,
+        1134,
+        1768
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302",
+      "surfaceBoundsPx": [
+        66,
+        1116,
+        276,
+        1305
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-options-dialog.png",
+      "sha256": "1686f28ee9ede82844dcbdb42dd36408fd977f0041dfac094dcdf82fd88ff342",
+      "surfaceBoundsPx": [
+        66,
+        139,
+        1134,
+        1768
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-600x800-font1.0-light-result-dialog.png",
+      "sha256": "4f1c892d2384271bfb82d84a5bf7ce2c2dd72274f3a447b72b57be96bd3e75eb",
+      "surfaceBoundsPx": [
+        57,
+        110,
+        843,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-600x800-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b",
+      "surfaceBoundsPx": [
+        57,
+        775,
+        178,
+        847
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-light-options-dialog.png",
+      "sha256": "c67e3fa1f2bb6bc0f89de3cad93177477ec892689e1d1fa7ce2888e55a08cde2",
+      "surfaceBoundsPx": [
+        57,
+        110,
+        843,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-600x800-font1.0-dark-result-dialog.png",
+      "sha256": "d1dba690269ff097c9b8d8eef7930e6261451179b044210391d81ad7314a808f",
+      "surfaceBoundsPx": [
+        57,
+        110,
+        843,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-600x800-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe",
+      "surfaceBoundsPx": [
+        57,
+        775,
+        178,
+        883
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-dark-options-dialog.png",
+      "sha256": "5b2190f5add5d860ec91ca16e5860eb48f85492964f7e3fa90bada86ccd1f2d8",
+      "surfaceBoundsPx": [
+        57,
+        110,
+        843,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-600x800-font2.0-light-result-dialog.png",
+      "sha256": "8cb8caf9c1c45c9c03f0598cb370574ad962392b4c8d77f6088de69255599018",
+      "surfaceBoundsPx": [
+        57,
+        110,
+        843,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-600x800-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea",
+      "surfaceBoundsPx": [
+        57,
+        871,
+        267,
+        997
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font2.0-light-options-dialog.png",
+      "sha256": "8fb8cae90b4e501c81f5df5b14490e7e450f2b814cd2b85056c8ccdd36bfb84f",
+      "surfaceBoundsPx": [
+        57,
+        110,
+        843,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-600x800-font2.0-dark-result-dialog.png",
+      "sha256": "24e25b29b646e95c8d2f03e52d9d29732a3c2998afe186530aae4a7afeae9060",
+      "surfaceBoundsPx": [
+        57,
+        110,
+        843,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "layout-600x800-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302",
+      "surfaceBoundsPx": [
+        57,
+        808,
+        267,
+        997
+      ],
+      "browserBackdropExcluded": true,
+      "recognizedTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font2.0-dark-options-dialog.png",
+      "sha256": "b9b9b7605021377d8641f8e89d134a10926fd23c6563a58f774a79151c95a749",
+      "surfaceBoundsPx": [
+        57,
+        110,
+        843,
+        1077
+      ],
+      "browserBackdropExcluded": true
+    }
+  ],
+  "clipboardProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "actualSyntheticText": "Ocean light\nFar shore",
+      "sha256": "70b3dd72d28d92cbb1e71bb7c90d8de92b054651bec4fb418e2caa415f394701",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "actualSyntheticText": "Ocean light\n\nFar shore",
+      "sha256": "0654142c0725868cb7b8fe7056ae90a31639318b0f12a3677ea2e56a9b30d0e9",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "actualSyntheticText": "Ocean light\nFar shore",
+      "sha256": "70b3dd72d28d92cbb1e71bb7c90d8de92b054651bec4fb418e2caa415f394701",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "actualSyntheticText": "Ocean light\n\nFar shore",
+      "sha256": "0654142c0725868cb7b8fe7056ae90a31639318b0f12a3677ea2e56a9b30d0e9",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "actualSyntheticText": "Ocean light\nFar shore",
+      "sha256": "70b3dd72d28d92cbb1e71bb7c90d8de92b054651bec4fb418e2caa415f394701",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "actualSyntheticText": "Ocean light\n\nFar shore",
+      "sha256": "0654142c0725868cb7b8fe7056ae90a31639318b0f12a3677ea2e56a9b30d0e9",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "actualSyntheticText": "Ocean light\nFar shore",
+      "sha256": "70b3dd72d28d92cbb1e71bb7c90d8de92b054651bec4fb418e2caa415f394701",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "actualSyntheticText": "Ocean light\n\nFar shore",
+      "sha256": "0654142c0725868cb7b8fe7056ae90a31639318b0f12a3677ea2e56a9b30d0e9",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "actualSyntheticText": "Ocean light\nFar shore",
+      "sha256": "70b3dd72d28d92cbb1e71bb7c90d8de92b054651bec4fb418e2caa415f394701",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "actualSyntheticText": "Ocean light\n\nFar shore",
+      "sha256": "0654142c0725868cb7b8fe7056ae90a31639318b0f12a3677ea2e56a9b30d0e9",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "actualSyntheticText": "Ocean light\nFar shore",
+      "sha256": "70b3dd72d28d92cbb1e71bb7c90d8de92b054651bec4fb418e2caa415f394701",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "actualSyntheticText": "Ocean light\n\nFar shore",
+      "sha256": "0654142c0725868cb7b8fe7056ae90a31639318b0f12a3677ea2e56a9b30d0e9",
+      "readByForegroundTestOnlyActivity": true
+    }
+  ],
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "operationsUseExactOptimizedApk": true,
+  "textVisibilityProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        398,
+        739,
+        519,
+        811
+      ],
+      "textHeight": 72,
+      "textWidth": 121,
+      "rasterGlyphHeight": 55,
+      "rasterGlyphWidth": 119,
+      "glyphBands": [
+        [
+          8,
+          30
+        ],
+        [
+          44,
+          62
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 48,
+      "image": "layout-1280x800-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b"
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        398,
+        739,
+        519,
+        847
+      ],
+      "textHeight": 108,
+      "textWidth": 121,
+      "rasterGlyphHeight": 91,
+      "rasterGlyphWidth": 119,
+      "glyphBands": [
+        [
+          8,
+          30
+        ],
+        [
+          80,
+          98
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 48,
+      "image": "layout-1280x800-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe"
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        398,
+        871,
+        608,
+        997
+      ],
+      "textHeight": 126,
+      "textWidth": 210,
+      "rasterGlyphHeight": 96,
+      "rasterGlyphWidth": 207,
+      "glyphBands": [
+        [
+          14,
+          54
+        ],
+        [
+          77,
+          109
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 96,
+      "image": "layout-1280x800-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea"
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        398,
+        808,
+        608,
+        997
+      ],
+      "textHeight": 189,
+      "textWidth": 210,
+      "rasterGlyphHeight": 159,
+      "rasterGlyphWidth": 207,
+      "glyphBands": [
+        [
+          14,
+          54
+        ],
+        [
+          140,
+          172
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 96,
+      "image": "layout-1280x800-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302"
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        66,
+        768,
+        187,
+        840
+      ],
+      "textHeight": 72,
+      "textWidth": 121,
+      "rasterGlyphHeight": 55,
+      "rasterGlyphWidth": 119,
+      "glyphBands": [
+        [
+          8,
+          30
+        ],
+        [
+          44,
+          62
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 48,
+      "image": "layout-800x1280-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b"
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        66,
+        768,
+        187,
+        876
+      ],
+      "textHeight": 108,
+      "textWidth": 121,
+      "rasterGlyphHeight": 91,
+      "rasterGlyphWidth": 119,
+      "glyphBands": [
+        [
+          8,
+          30
+        ],
+        [
+          80,
+          98
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 48,
+      "image": "layout-800x1280-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe"
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        66,
+        1116,
+        276,
+        1242
+      ],
+      "textHeight": 126,
+      "textWidth": 210,
+      "rasterGlyphHeight": 96,
+      "rasterGlyphWidth": 207,
+      "glyphBands": [
+        [
+          14,
+          54
+        ],
+        [
+          77,
+          109
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 96,
+      "image": "layout-800x1280-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea"
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        66,
+        1116,
+        276,
+        1305
+      ],
+      "textHeight": 189,
+      "textWidth": 210,
+      "rasterGlyphHeight": 159,
+      "rasterGlyphWidth": 207,
+      "glyphBands": [
+        [
+          14,
+          54
+        ],
+        [
+          140,
+          172
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 96,
+      "image": "layout-800x1280-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302"
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        57,
+        775,
+        178,
+        847
+      ],
+      "textHeight": 72,
+      "textWidth": 121,
+      "rasterGlyphHeight": 55,
+      "rasterGlyphWidth": 119,
+      "glyphBands": [
+        [
+          8,
+          30
+        ],
+        [
+          44,
+          62
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 48,
+      "image": "layout-600x800-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b"
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        57,
+        775,
+        178,
+        883
+      ],
+      "textHeight": 108,
+      "textWidth": 121,
+      "rasterGlyphHeight": 91,
+      "rasterGlyphWidth": 119,
+      "glyphBands": [
+        [
+          8,
+          30
+        ],
+        [
+          80,
+          98
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 48,
+      "image": "layout-600x800-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe"
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        57,
+        871,
+        267,
+        997
+      ],
+      "textHeight": 126,
+      "textWidth": 210,
+      "rasterGlyphHeight": 96,
+      "rasterGlyphWidth": 207,
+      "glyphBands": [
+        [
+          14,
+          54
+        ],
+        [
+          77,
+          109
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 96,
+      "image": "layout-600x800-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea"
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        57,
+        808,
+        267,
+        997
+      ],
+      "textHeight": 189,
+      "textWidth": 210,
+      "rasterGlyphHeight": 159,
+      "rasterGlyphWidth": 207,
+      "glyphBands": [
+        [
+          14,
+          54
+        ],
+        [
+          140,
+          172
+        ]
+      ],
+      "twoCompleteGlyphLines": true,
+      "minimumReadableTextHeightPx": 96,
+      "image": "layout-600x800-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302"
+    }
+  ],
+  "controlProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        930,
+        407,
+        1002
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        476,
+        745,
+        548
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Copy recognized text",
+      "bounds": [
+        398,
+        502,
+        632,
+        574
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Find in recognized text",
+      "bounds": [
+        398,
+        589,
+        1522,
+        685
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        398,
+        257,
+        768,
+        329
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Close OCR",
+      "bounds": [
+        398,
+        1005,
+        533,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        502,
+        632,
+        574
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        257,
+        768,
+        329
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        1005,
+        533,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        359,
+        857,
+        600,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        476,
+        745,
+        548
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Copy recognized text",
+      "bounds": [
+        398,
+        502,
+        632,
+        574
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Find in recognized text",
+      "bounds": [
+        398,
+        589,
+        1522,
+        685
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        398,
+        257,
+        768,
+        329
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Close OCR",
+      "bounds": [
+        398,
+        1005,
+        533,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        502,
+        632,
+        574
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        257,
+        768,
+        329
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        1005,
+        533,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        922,
+        597,
+        1002
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        655,
+        988,
+        735
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Copy recognized text",
+      "bounds": [
+        398,
+        688,
+        803,
+        768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Find in recognized text",
+      "bounds": [
+        398,
+        783,
+        1522,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        398,
+        309,
+        1058,
+        389
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Close OCR",
+      "bounds": [
+        398,
+        997,
+        619,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        688,
+        803,
+        768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        400,
+        1058,
+        480
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        997,
+        619,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        491,
+        849,
+        911,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        655,
+        988,
+        735
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Copy recognized text",
+      "bounds": [
+        398,
+        688,
+        803,
+        768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Find in recognized text",
+      "bounds": [
+        398,
+        783,
+        1522,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        398,
+        309,
+        1058,
+        389
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Close OCR",
+      "bounds": [
+        398,
+        997,
+        619,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        688,
+        803,
+        768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        400,
+        1058,
+        480
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        997,
+        619,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        437,
+        1110,
+        509
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        1614,
+        357,
+        1686
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        505,
+        413,
+        577
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Copy recognized text",
+      "bounds": [
+        66,
+        531,
+        300,
+        603
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Find in recognized text",
+      "bounds": [
+        66,
+        618,
+        1134,
+        714
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        66,
+        286,
+        436,
+        358
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Close OCR",
+      "bounds": [
+        66,
+        1696,
+        201,
+        1768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        531,
+        300,
+        603
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        286,
+        436,
+        358
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        1696,
+        201,
+        1768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        509,
+        1110,
+        581
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        309,
+        1541,
+        550,
+        1613
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        505,
+        413,
+        577
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Copy recognized text",
+      "bounds": [
+        66,
+        531,
+        300,
+        603
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Find in recognized text",
+      "bounds": [
+        66,
+        618,
+        1134,
+        714
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        66,
+        286,
+        436,
+        358
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Close OCR",
+      "bounds": [
+        66,
+        1696,
+        201,
+        1768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        531,
+        300,
+        603
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        286,
+        436,
+        358
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        1696,
+        201,
+        1768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        520,
+        1110,
+        592
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        1606,
+        547,
+        1686
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        684,
+        656,
+        764
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Copy recognized text",
+      "bounds": [
+        66,
+        808,
+        471,
+        888
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Find in recognized text",
+      "bounds": [
+        66,
+        903,
+        1134,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        66,
+        429,
+        726,
+        509
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Close OCR",
+      "bounds": [
+        66,
+        1688,
+        287,
+        1768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        808,
+        471,
+        888
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        429,
+        726,
+        509
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        1688,
+        287,
+        1768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        520,
+        1110,
+        592
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        441,
+        1533,
+        861,
+        1613
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        684,
+        656,
+        764
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Copy recognized text",
+      "bounds": [
+        66,
+        808,
+        471,
+        888
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Find in recognized text",
+      "bounds": [
+        66,
+        903,
+        1134,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        66,
+        429,
+        726,
+        509
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Close OCR",
+      "bounds": [
+        66,
+        1688,
+        287,
+        1768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        808,
+        471,
+        888
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        429,
+        726,
+        509
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        66,
+        1688,
+        287,
+        1768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        443,
+        116,
+        818,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        930,
+        291,
+        1002
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        512,
+        404,
+        584
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Copy recognized text",
+      "bounds": [
+        57,
+        538,
+        291,
+        610
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Find in recognized text",
+      "bounds": [
+        57,
+        625,
+        843,
+        721
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        57,
+        293,
+        427,
+        365
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Close OCR",
+      "bounds": [
+        57,
+        1005,
+        192,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        538,
+        291,
+        610
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        293,
+        427,
+        365
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        1005,
+        192,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        443,
+        116,
+        818,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        243,
+        857,
+        484,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        512,
+        404,
+        584
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Copy recognized text",
+      "bounds": [
+        57,
+        538,
+        291,
+        610
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Find in recognized text",
+      "bounds": [
+        57,
+        625,
+        843,
+        721
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        57,
+        293,
+        427,
+        365
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Close OCR",
+      "bounds": [
+        57,
+        1005,
+        192,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        538,
+        291,
+        610
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        293,
+        427,
+        365
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        1005,
+        192,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        443,
+        116,
+        818,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        922,
+        481,
+        1002
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        718,
+        647,
+        798
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Copy recognized text",
+      "bounds": [
+        57,
+        688,
+        462,
+        768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Find in recognized text",
+      "bounds": [
+        57,
+        783,
+        843,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        57,
+        309,
+        717,
+        389
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Close OCR",
+      "bounds": [
+        57,
+        997,
+        278,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        688,
+        462,
+        768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        463,
+        717,
+        543
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        997,
+        278,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        443,
+        116,
+        818,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        375,
+        849,
+        795,
+        929
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        718,
+        647,
+        798
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Copy recognized text",
+      "bounds": [
+        57,
+        688,
+        462,
+        768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Find in recognized text",
+      "bounds": [
+        57,
+        783,
+        843,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Language and recognition options\u2026",
+      "bounds": [
+        57,
+        309,
+        717,
+        389
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Close OCR",
+      "bounds": [
+        57,
+        997,
+        278,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        688,
+        462,
+        768
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        462,
+        717,
+        542
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        57,
+        997,
+        278,
+        1077
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    }
+  ],
+  "explicitLayoutResume": {
+    "previousResult": "captures/ocr/candidate-3-api36-optimized-layouts-2/result.json",
+    "previousResultSha256": "abec1746714cb8ffbac84f12d4a9d39d3b0235e9825e586d55a7d87c8c67cbe5",
+    "previousCheckerSha256": "13cedb096abd0afec906e955432744c1fc53ec4d3c4a640e7a4b6e1f298f51ef",
+    "reusedLayouts": [
+      "layout-1280x800-font1.0-dark",
+      "layout-1280x800-font1.0-light"
+    ],
+    "copiedCaptures": [
+      {
+        "path": "layout-1280x800-font1.0-light-result-dialog.png",
+        "sha256": "24306673a4e5f7a39c8c6e0dcb5c1590608b4e9e1184090617f7ab7ec200177e"
+      },
+      {
+        "path": "layout-1280x800-font1.0-light-recognized-glyph.png",
+        "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b"
+      },
+      {
+        "path": "layout-1280x800-font1.0-light-options-dialog.png",
+        "sha256": "9a692908f7977985abea21f2e70d7cb2f1ed04ea13f9e3cf3d42892a348548c1"
+      },
+      {
+        "path": "layout-1280x800-font1.0-dark-result-dialog.png",
+        "sha256": "1fcbfa0ff8948f1888701c31d5a1f7b45c6b60277e994a624d9ed451f9a0b8a1"
+      },
+      {
+        "path": "layout-1280x800-font1.0-dark-recognized-glyph.png",
+        "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe"
+      },
+      {
+        "path": "layout-1280x800-font1.0-dark-options-dialog.png",
+        "sha256": "abe33b52890e1723725b28353f2121cb81741a0fc22e28e84282203acad66d56"
+      }
+    ],
+    "unfinishedLayoutRepeatedInFull": true,
+    "applicationApkUnchanged": true
+  },
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "systemFontGroups": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "dark": false,
+      "actualTextAndGlyphGrowth": true
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "dark": true,
+      "actualTextAndGlyphGrowth": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "dark": false,
+      "actualTextAndGlyphGrowth": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "dark": true,
+      "actualTextAndGlyphGrowth": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "dark": false,
+      "actualTextAndGlyphGrowth": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "dark": true,
+      "actualTextAndGlyphGrowth": true
+    }
+  ],
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "hierarchyRetries": []
+}

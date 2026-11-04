@@ -1,0 +1,56 @@
+{
+  "images": [
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/explicit-model-choice-dialog.png",
+      "sha256": "90b3b89d373581a632d72a52f7892eee3ca38e780dee616935791ee119e9b6d8",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/image-result-dialog.png",
+      "sha256": "ce531c588a21e57cddb8edbb79e0d6918b5ef9ffa11cbe4ff128af91728238fc",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/image-search-result-dialog.png",
+      "sha256": "cc7c1cc679fdd9b37fa4875b029c68930550477ae19c5251eddfc34eca30abac",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/imported-model-ready-dialog.png",
+      "sha256": "03a11b831421725fd81f86d6f4f9082ac7853cdfd8b9abaf92fb33f86fffb6bb",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/scanned-pdf-result-dialog.png",
+      "sha256": "3bb70646cf7486a87a937a43bf217bd9c7b9d2dd2d4fb028275f3627814328af",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/explicit-model-choice-dialog.png",
+      "sha256": "f7b62602c6e4866bc1cab2b250a0f0eabef6222ba29116240a492ebd04ba9c8a",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/image-result-dialog.png",
+      "sha256": "24306673a4e5f7a39c8c6e0dcb5c1590608b4e9e1184090617f7ab7ec200177e",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/image-search-result-dialog.png",
+      "sha256": "10262477fe892500abb31e634de29ff2c7e00841f8a14af50e9697f3c346978d",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/imported-model-ready-dialog.png",
+      "sha256": "acdd3bc205a7060768917ecf25e64252783865136ea12e7c1ead4d632323d4ea",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/scanned-pdf-result-dialog.png",
+      "sha256": "239657e43948a7e4f7f83e44bc3fc6c9e390d8229eea7ab6df1124f7b323026d",
+      "inspected": true
+    }
+  ],
+  "allTenCoreDialogImagesInspected": true,
+  "findings": "Model opt-in, readable image/PDF results, highlighted match and ready state after actual Android-picker import are visible. Options can scroll while the Close OCR action stays available. Only synthetic dialog surfaces are selected."
+}

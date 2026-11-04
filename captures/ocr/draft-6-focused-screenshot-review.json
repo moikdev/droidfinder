@@ -1,0 +1,37 @@
+{
+  "images": [
+    {
+      "path": "captures/ocr/draft-6-api30-native/images/after-batch-002/ocr-qa/explicit-language-choice.png",
+      "sha256": "8c4a6c88bbad84f0c0272b1bf9e7b57e0c9862231ac09cc57848d44576bd37d6",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/draft-6-api30-native/images/after-batch-002/ocr-qa/image-recognized-text.png",
+      "sha256": "a32cd2a0dfb8c4c4834de13187409e1adebd911932f0d395cfe251996bc53936",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/draft-6-api30-native/images/after-batch-002/ocr-qa/scanned-pdf-recognized-text.png",
+      "sha256": "b9527a817f8aae3f81509c0df3fd7b8a87e01729779fd622fa7a08411cad2bec",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/draft-6-api36-native/images/after-batch-002/ocr-qa/explicit-language-choice.png",
+      "sha256": "7e89e4211b7556e7c3a0b060c4d4d9eb3ac09db35b1632026ba831038be6bf92",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/draft-6-api36-native/images/after-batch-002/ocr-qa/image-recognized-text.png",
+      "sha256": "898448d720cf870c343e3d14b56481651f0ce25859dc8bd826a4f6bee08f5647",
+      "inspected": true
+    },
+    {
+      "path": "captures/ocr/draft-6-api36-native/images/after-batch-002/ocr-qa/scanned-pdf-recognized-text.png",
+      "sha256": "9c1a217744fb1e60bc6ec66bab5fd36c36d773b931c9ffde6ca699bae2b08950",
+      "inspected": true
+    }
+  ],
+  "allSixSelectedImagesInspected": true,
+  "findings": "Explicit opt-in model controls, disabled recognition without a model, readable scanned-page result, Copy/Find and highlighted result are visible. Native captures are OCR-dialog-only; scrolled match capture does not show all setup controls.",
+  "publicationLimitedToSyntheticDialogSurfaces": true
+}

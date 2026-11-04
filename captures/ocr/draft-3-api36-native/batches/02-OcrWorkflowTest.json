@@ -1,0 +1,31 @@
+{
+  "success": false,
+  "passed": 1,
+  "skipped": 0,
+  "failed": 2,
+  "runnerCompleted": true,
+  "runnerSucceeded": false,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "scannedPdfWithoutTextLayerCanBeRecognizedReadOnly",
+      "code": -2,
+      "error": "androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms"
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "openingOcrOffersExplicitModelChoiceAndStartsNoRecognition",
+      "code": -2,
+      "error": "androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms"
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 48.5,
+  "timedOut": false
+}

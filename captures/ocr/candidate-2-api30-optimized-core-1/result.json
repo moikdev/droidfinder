@@ -1,0 +1,448 @@
+{
+  "serial": "emulator-5602",
+  "section": "core",
+  "sourceCommit": "688bf25972fa93cd40d29403088ce8c6b38a61f8",
+  "checkerSha256": "042363714b55f7c7d56115d77ad3951ac7d513ab8ff130a073b0f74eff1468e2",
+  "buildReceiptSha256": "53d55b59b34179ac206cf3a3afe2f70e737b1563c0c7bdbc3caba7b0c6665f55",
+  "apkSha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+  "previousApkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "checks": [
+    {
+      "name": "public51-to52-local-image-and-scanned-pdf",
+      "actualPinnedHttpsDownload": true,
+      "realAndroidModelImport": true,
+      "reviewedRemovalAndCancellation": true,
+      "installedModelSurvivesColdStart": true,
+      "actualClipboardRead": true,
+      "findMatch": true,
+      "sourceBytesKept": true,
+      "noImplicitRecognition": true
+    }
+  ],
+  "layouts": [],
+  "captures": [
+    {
+      "path": "explicit-model-choice-dialog.png",
+      "sha256": "90b3b89d373581a632d72a52f7892eee3ca38e780dee616935791ee119e9b6d8",
+      "surfaceBoundsPx": [
+        398,
+        109,
+        1522,
+        1054
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "image-result-dialog.png",
+      "sha256": "ce531c588a21e57cddb8edbb79e0d6918b5ef9ffa11cbe4ff128af91728238fc",
+      "surfaceBoundsPx": [
+        398,
+        109,
+        1522,
+        1054
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "image-search-result-dialog.png",
+      "sha256": "cc7c1cc679fdd9b37fa4875b029c68930550477ae19c5251eddfc34eca30abac",
+      "surfaceBoundsPx": [
+        398,
+        109,
+        1522,
+        1054
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "scanned-pdf-result-dialog.png",
+      "sha256": "3bb70646cf7486a87a937a43bf217bd9c7b9d2dd2d4fb028275f3627814328af",
+      "surfaceBoundsPx": [
+        398,
+        109,
+        1522,
+        1054
+      ],
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "imported-model-ready-dialog.png",
+      "sha256": "03a11b831421725fd81f86d6f4f9082ac7853cdfd8b9abaf92fb33f86fffb6bb",
+      "surfaceBoundsPx": [
+        398,
+        109,
+        1522,
+        1054
+      ],
+      "browserBackdropExcluded": true
+    }
+  ],
+  "clipboardProofs": [
+    {
+      "name": "image",
+      "actualSyntheticText": "Ocean light\nFar shore",
+      "sha256": "70b3dd72d28d92cbb1e71bb7c90d8de92b054651bec4fb418e2caa415f394701",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "pdf",
+      "actualSyntheticText": "Ocean light\n\nFar shore",
+      "sha256": "0654142c0725868cb7b8fe7056ae90a31639318b0f12a3677ea2e56a9b30d0e9",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "offline-reopen",
+      "actualSyntheticText": "Ocean light\nFar shore",
+      "sha256": "70b3dd72d28d92cbb1e71bb7c90d8de92b054651bec4fb418e2caa415f394701",
+      "readByForegroundTestOnlyActivity": true
+    }
+  ],
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "operationsUseExactOptimizedApk": true,
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "controlProofs": [
+    {
+      "name": "missing-language-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        168,
+        1830,
+        240
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "missing-language-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        907,
+        407,
+        979
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "download",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        388,
+        704,
+        460
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "image-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        475,
+        745,
+        547
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "image-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        501,
+        632,
+        573
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "search",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        588,
+        1522,
+        684
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "next-match",
+      "text": "",
+      "description": "",
+      "bounds": [
+        638,
+        750,
+        829,
+        822
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-image-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        982,
+        534,
+        1054
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-image-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        96,
+        227,
+        168
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "pdf-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        168,
+        1830,
+        240
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "pdf-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        359,
+        834,
+        600,
+        906
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "pdf-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        475,
+        745,
+        547
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "pdf-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        501,
+        632,
+        573
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "model-options",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        256,
+        768,
+        328
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "review-remove",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        388,
+        615,
+        460
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "keep-model",
+      "text": "",
+      "description": "",
+      "bounds": [
+        956,
+        630,
+        1130,
+        702
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "review-remove-again",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        388,
+        615,
+        460
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "remove-model",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1142,
+        630,
+        1344,
+        702
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "import-model",
+      "text": "",
+      "description": "",
+      "bounds": [
+        716,
+        388,
+        1041,
+        460
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-pdf-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        982,
+        534,
+        1054
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-pdf-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        96,
+        227,
+        168
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "offline-reopen-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        168,
+        1830,
+        240
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "offline-reopen-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        907,
+        407,
+        979
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "offline-reopen-recognize",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        475,
+        745,
+        547
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "offline-reopen-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        501,
+        632,
+        573
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-offline-ocr",
+      "text": "",
+      "description": "",
+      "bounds": [
+        398,
+        982,
+        534,
+        1054
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-offline-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        96,
+        227,
+        168
+      ],
+      "density": 1.5
+    }
+  ],
+  "hierarchyRetries": []
+}

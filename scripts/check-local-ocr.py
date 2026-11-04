@@ -17,7 +17,7 @@ import tarfile
 import time
 import xml.etree.ElementTree as ET
 import zlib
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFont
 from android.acceptance import ROOT
 
 MAIN = Path('/Users/LENOVO/.t3/projects/droidfinder')
@@ -83,7 +83,32 @@ def run(a):
     report = dict(serial=a.serial, section=a.section, sourceCommit=build['sourceCommit'],
         checkerSha256=sha(Path(__file__).read_bytes()), buildReceiptSha256=sha(a.build_receipt.read_bytes()),
         apkSha256=expected, previousApkSha256=sha(public.read_bytes()), checks=[], layouts=[], captures=[], clipboardProofs=[],
-        acceptanceComplete=False, restorationComplete=False, operationsUseExactOptimizedApk=True)
+        acceptanceComplete=False, restorationComplete=False, operationsUseExactOptimizedApk=True, textVisibilityProofs=[])
+    reused=set()
+    if a.resume_layouts_from:
+        import shutil
+        prior_path=a.resume_layouts_from.resolve();assert prior_path.is_relative_to(ROOT/'captures/ocr')
+        prior=json.loads(prior_path.read_text())
+        assert a.section=='layouts' and prior['section']=='layouts' and not prior['acceptanceComplete']
+        assert prior['restorationComplete'] and prior['originalWorkspaceTreeKept'] and 0<len(prior['layouts'])<12
+        assert prior['operationsUseExactOptimizedApk'] and prior['immutableOriginalBytesVerifiedBeforeTests']
+        for key in ('serial','sourceCommit','buildReceiptSha256','apkSha256','previousApkSha256'):
+            assert prior[key]==report[key],key
+        for row in prior['layouts']:
+            assert row['recognizedPassageActuallyVisible'] and row['systemFont']['twoCompleteGlyphLines']
+            assert row['actualClipboardTextChecked'] and row['allNamedControlsHaveComplete48DpBounds'] and row['sourceBytesKept']
+            reused.add(f"layout-{row['widthDp']}x{row['heightDp']}-font{row['fontScale']}-"+('dark' if row['dark'] else 'light'))
+        chosen=lambda name:any(name==prefix or name.startswith(prefix+'-') for prefix in reused)
+        for key in ('layouts','checks'):report[key]=[row for row in prior[key] if key=='layouts' or chosen(row['name'])]
+        for key in ('clipboardProofs','controlProofs','textVisibilityProofs'):
+            report[key]=[row for row in prior[key] if chosen(row['name'])]
+        copied=[]
+        for row in prior['captures']:
+            if chosen(row['path']):
+                origin=prior_path.parent/row['path'];assert origin.name==row['path'] and sha(origin.read_bytes())==row['sha256']
+                shutil.copy2(origin,a.output/origin.name);assert sha((a.output/origin.name).read_bytes())==row['sha256']
+                report['captures'].append(row);copied.append(dict(path=origin.name,sha256=row['sha256']))
+        report['explicitLayoutResume']=dict(previousResult=str(prior_path.relative_to(ROOT)),previousResultSha256=sha(prior_path.read_bytes()),previousCheckerSha256=prior['checkerSha256'],reusedLayouts=sorted(reused),copiedCaptures=copied,unfinishedLayoutRepeatedInFull=True,applicationApkUnchanged=True)
 
     def installed(package='dev.findroid'):
         path=d.shell('pm','path',package).decode().strip().splitlines()[0].removeprefix('package:')
@@ -138,7 +163,10 @@ def run(a):
             return d.ready(scope,label)
         except AssertionError:return False
     def wait(name,label):return d.wait(name,lambda tree:ready(tree,label),seconds=50)
-    def click(name,label):wait(name+'-ready',label); ui.click(name,label)
+    def click(name,label):
+        # This control can be above the current scroll position after reading the result.
+        if label!='Language and recognition options…':wait(name+'-ready',label)
+        ui.click(name,label)
     def launch(name):
         assert installed()==expected
         stop();d.shell('am','start','-W','-f','0x10008000','--windowingMode',1,'-n','dev.findroid/.MainActivity')
@@ -164,6 +192,44 @@ def run(a):
         l,t,r,b=bounds;assert 0<l<r<image.width and 0<t<b<image.height
         target=a.output/(name+'-dialog.png');image.crop(tuple(bounds)).save(target)
         report['captures'].append(dict(path=target.name,sha256=sha(target.read_bytes()),surfaceBoundsPx=bounds,browserBackdropExcluded=True))
+        return tree,image
+    def reveal_result(name, font_scale):
+        previous=None
+        minimum=round(2*16*ui.density*font_scale)
+        for attempt in range(12):
+            tree=d.dump(name+'-text-visibility');scope=ui.scope(tree)
+            node=ui.node(scope,lambda text,desc:'Ocean light' in text and 'Far shore' in text,False)
+            bounds=d.bounds(node) if node is not None else None
+            complete=bounds is not None and bounds[3]-bounds[1]>=minimum and ui.full(scope,node,False)
+            if complete and bounds==previous:
+                return minimum
+            previous=bounds
+            panes=[n for n in scope.iter('node') if n.get('scrollable')=='true' and len(d.bounds(n))==4]
+            if not panes:
+                assert complete,'Recognized passage must have room for both lines'
+                return minimum
+            pane=max(panes,key=lambda n:(d.bounds(n)[2]-d.bounds(n)[0])*(d.bounds(n)[3]-d.bounds(n)[1]))
+            l,t,r,b=d.bounds(pane)
+            d.shell('input','swipe',(l+r)//2,round(t+(b-t)*.82),(l+r)//2,round(t+(b-t)*.28),300)
+        raise AssertionError('Could not reveal the full two-line recognized passage')
+    def glyph_proof(name,tree,image,font_scale,minimum):
+        scope=ui.scope(tree);node=ui.node(scope,lambda text,desc:'Ocean light' in text and 'Far shore' in text,False)
+        assert node is not None
+        bounds=d.bounds(node);l,t,r,b=bounds;assert b-t>=minimum and ui.full(scope,node,False)
+        crop=image.crop(tuple(bounds));background=crop.getpixel((crop.width-1,crop.height-1))
+        channels=ImageChops.difference(crop,Image.new('RGB',crop.size,background)).split()
+        mask=ImageChops.lighter(ImageChops.lighter(channels[0],channels[1]),channels[2]).point(lambda v:255 if v>32 else 0)
+        occupied=[y for y in range(mask.height) if mask.crop((0,y,mask.width,y+1)).getbbox()]
+        bands=[]
+        for y in occupied:
+            if not bands or y-bands[-1][1]>max(3,round(3*ui.density)):bands.append([y,y])
+            else:bands[-1][1]=y
+        assert len(bands)==2 and all(end-start+1>=8*ui.density*font_scale for start,end in bands),('Both actual glyph lines must be readable',bands)
+        pixels=mask.getbbox();target=a.output/(name+'-recognized-glyph.png');crop.save(target)
+        report['captures'].append(dict(path=target.name,sha256=sha(target.read_bytes()),surfaceBoundsPx=bounds,browserBackdropExcluded=True,recognizedTextOnly=True))
+        proof=dict(name=name,systemFontScale=font_scale,textBoundsPx=bounds,textHeight=b-t,textWidth=r-l,rasterGlyphHeight=pixels[3]-pixels[1],rasterGlyphWidth=pixels[2]-pixels[0],glyphBands=bands,twoCompleteGlyphLines=True,minimumReadableTextHeightPx=minimum,image=target.name,sha256=sha(target.read_bytes()))
+        report['textVisibilityProofs'].append(proof)
+        return proof
     def recognize(name):
         click(name+'-recognize','Recognize this image or page')
         wait(name+'-result','Copy recognized text')
@@ -233,19 +299,28 @@ def run(a):
                 for font_scale in (1.0,2.0):
                     for dark in (False,True):
                         name=f'layout-{width}x{height}-font{font_scale}-'+('dark' if dark else 'light')
+                        if name in reused:continue
                         case=seed(name,dark,model=True)
                         requested=(round(width*dpi/160),round(height*dpi/160));d.shell('wm','size',f'{requested[0]}x{requested[1]}');d.screen=requested
                         actual=tuple(map(int,re.findall(r'(?:Physical|Override) size: (\d+)x(\d+)',d.shell('wm','size').decode())[-1]));assert actual==requested
                         d.shell('settings','put','system','font_scale',font_scale);assert float(d.shell('settings','get','system','font_scale').decode())==font_scale
-                        install(a.apk);launch(name);open_ocr(name);recognize(name)
+                        filename='Scanned page.pdf' if dark else 'Scan.png'
+                        install(a.apk);launch(name);open_ocr(name,filename);recognize(name)
                         for label in ('Copy recognized text','Find in recognized text','Language and recognition options…','Close OCR'):
                             tree,node=ui.reach(name+'-control',label)
                             ui.proofs.append(dict(name=name,label=label,bounds=d.bounds(node),density=ui.density))
-                        copy(name);ui.text(name+'-text',lambda text,desc:'Ocean light' in text and 'Far shore' in text);capture(name+'-result')
+                        copy(name);minimum=reveal_result(name,font_scale);tree,image=capture(name+'-result')
+                        font_proof=glyph_proof(name,tree,image,font_scale,minimum)
                         click(name+'-options','Language and recognition options…');ui.reach(name+'-remove','Remove language…');capture(name+'-options')
                         click(name+'-close','Close OCR');click(name+'-close-preview','Close Quick Look');unchanged(case)
-                        report['layouts'].append(dict(widthDp=width,heightDp=height,fontScale=font_scale,dark=dark,actualSizePx=list(actual),actualClipboardTextChecked=True,allNamedControlsHaveComplete48DpBounds=True,sourceBytesKept=True))
+                        report['layouts'].append(dict(widthDp=width,heightDp=height,fontScale=font_scale,dark=dark,previewDocument=filename,actualSizePx=list(actual),actualClipboardTextChecked=True,allNamedControlsHaveComplete48DpBounds=True,sourceBytesKept=True,recognizedPassageActuallyVisible=True,systemFont=font_proof))
                         checked(name)
+            groups={}
+            for row in report['layouts']:groups.setdefault((row['widthDp'],row['heightDp'],row['dark']),{})[row['fontScale']]=row['systemFont']
+            report['systemFontGroups']=[]
+            for (width,height,dark),samples in groups.items():
+                for key in ('textHeight','textWidth','rasterGlyphHeight','rasterGlyphWidth'):assert samples[2.0][key]>samples[1.0][key]*1.2
+                report['systemFontGroups'].append(dict(widthDp=width,heightDp=height,dark=dark,actualTextAndGlyphGrowth=True))
         report['acceptanceComplete']=True
     finally:
         try:
@@ -264,7 +339,7 @@ def run(a):
                 assert installed('dev.findroid.test')==original_build['files'][PAIR[1]]['sha256']
             else:d.call('install','-r','-d',public)
         finally:
-            report['controlProofs']=ui.proofs;report['hierarchyRetries']=d.retries
+            report['controlProofs']=report.get('controlProofs',[])+ui.proofs;report['hierarchyRetries']=d.retries
             (a.output/'result.json').write_text(json.dumps(report,indent=2)+'\n');d.close()
     print(json.dumps({k:report[k] for k in ('serial','acceptanceComplete','restorationComplete')}),flush=True)
 
@@ -274,6 +349,7 @@ def main():
     p.add_argument('--serial',required=True,choices=('emulator-5602','emulator-5582'))
     p.add_argument('--apk',required=True,type=Path);p.add_argument('--build-receipt',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path);p.add_argument('--section',choices=('core','layouts','all'),default='all')
+    p.add_argument('--resume-layouts-from',type=Path)
     a=p.parse_args()
     with (ORIGINAL/('.'+a.serial+'-acceptance.lock')).open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);run(a)
