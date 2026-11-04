@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "passed": 9,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "keyboardClipboardAndSharedUndoFollowTheActivePane",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "twoPaneWindowProtectsFilenameSpaceAndDividerResizesWithinMinimums",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "queuedCrossPaneCopyKeepsOriginalDestinationAndSourceSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "rightClickInPassivePaneActivatesItAcrossAllViews",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "informationalFeedbackDoesNotBlockPassiveGalleryContextMenus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "moveAndUndoRemapTheOtherPanesNavigationAndMetadata",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "narrowWorkspaceSwitchesPanesAndKeepsResizeSwapAndNavigation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "comparisonDistinguishesUnverifiedAndEqualContentsAndUsesNormalCopyQueue",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.WorkspaceWorkflowTest",
+      "test": "panesShareOperationsButNavigateSearchAndSelectIndependently",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 50.2,
+  "timedOut": false
+}

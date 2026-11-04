@@ -1,37 +1,43 @@
 # Recovery inbox
 
-Proposal 44 is in progress. This draft is not included in the public 0.46 preview. Final release, optimized restart/layout checks and public OTA acceptance remain pending.
+Open **More → Recovery inbox…**, or search for **Recovery inbox** in the action launcher. The inbox brings interrupted work and preserved originals together, with a named next step for each record.
 
-Open **More → Recovery inbox…**, or search for “recovery” in **Find an action…**. The inbox brings saved evidence into one place and explains the next step for each item. Opening or refreshing it never resumes a transfer, restores an original, adopts a changed file or removes working data.
+## What you can review
 
-## What appears
+| Recorded situation | Next step |
+|---|---|
+| A failed, cancelled or interrupted transfer | **Review transfer** opens that transfer first, with its details expanded. Check completed files, errors and the destination before deciding what to do. |
+| A saved partial copy | **Review saved copy** opens the existing saved-byte checks. Resuming and discarding each require their own review. |
+| A folder merge that kept its source | Review the transfer and the recorded locations. Read the per-item results before retrying. |
+| An original preserved during replacement | **Review Trash** opens the preserved originals. Restoring remains a separate action. |
+| An interrupted folder synchronization | **Review synchronization records** opens its saved intent, source and destination. Review the published files and any prepared copies manually. |
+| An earlier operation notice | **Review destination** opens its recorded folder. **Review transfers** opens the transfer center when transfer records are available. |
+| Damaged transfer or Undo history | Open the existing history review or **Review storage access**, as offered by the record. Other readable sources remain available. |
 
-- Interrupted, failed and cancelled transfers, including uncertain in-flight sources and saved partial-copy checkpoints. **Review transfer** opens the chosen existing job and its details. **Review saved copy** opens the separate source/working-file checks before any resume or discard decision.
-- Originals preserved in Findroid Trash, including copies saved before replacement. **Review Trash** opens the existing reviewed restore flow. An occupied original name stays protected.
-- Immutable synchronization intents, with their recorded source, destination, working folder and manual journal. An intent does not prove that a run finished. **Review synchronization records** opens the read-only records screen.
-- Damaged transfer or saved Undo histories, with links to the existing reviewed reset screens. These resets preserve their old journals and remain separate decisions.
-- Earlier operation notices, including operations without a transfer job. **Review destination** opens the recorded location after checking allowed storage access. A recorded path does not prove that its files still exist or that an operation completed.
+Use the filters for transfers, preserved originals, synchronization, or records needing attention. **Show recorded locations** reveals complete paths so identically named folders are easier to distinguish. **Refresh records** reads the available sources again.
 
-Use the filters to focus on transfers, preserved originals, synchronization or records needing attention. Recorded locations expand only when requested and can be selected as text. **Review storage access** opens the storage screen when a location needs reconnecting. A missing job or busy saved-copy review keeps the inbox open and explains what needs to be refreshed.
+Opening or refreshing the inbox reads records. Starting a transfer, resuming a saved copy, restoring an original and removing saved bytes each remain separate actions. A missing transfer or an expired saved-copy link leaves the inbox open with an explanation.
 
-## Notices stay available after dismissal
+## Returning after an interruption
 
-The startup notice is preserved byte for byte in app-private recovery storage before it is acknowledged. Its acknowledgment identifies the exact notice shown; it cannot suppress a later operation. Dismissed notices remain discoverable in the inbox after reopening. A new operation preserves the previous marker before replacing it. A failed operation keeps its marker and an immutable copy; a successful operation removes only its own unchanged marker.
+A startup notice offers **Review files**, **Open recovery inbox**, and **Later**. Acknowledging it preserves its exact recorded contents before dismissing it. It remains discoverable in the inbox after restart, and a later successful operation keeps the earlier notice.
 
-If a notice cannot be preserved safely, the old marker stays and a new operation stops before changing documents. The foreground service still closes. The startup screen offers **Review without acknowledging** so the user can inspect the available evidence. No acknowledgment is saved by that choice. Linked, special, oversized, changed or damaged records stay in place for manual review. This increment does not automatically repair app-private records.
+If the notice cannot be preserved safely, the app explains the problem. **Review without acknowledging** opens the inbox while keeping the notice available on the next start. A new document operation stops if it cannot preserve the previous notice first.
 
-## Storage and tablet limits
+Review the recorded destination before retrying an interrupted operation. Completed documents and hidden `.findroid-*` working data may both be present. Findroid leaves the decision to retry, resume, restore or remove saved data to you.
 
-The inbox reads the existing transfer/Undo histories, Findroid Trash, synchronization records and operation notices. It does not search every destination for untracked working files or scan remote providers. While an operation is active, it defers Trash and synchronization listing; refresh after the operation settles. A running operation's marker is excluded from interrupted-operation notices.
+## Storage and scope
 
-A notice is at most 64 KiB. A notice scan stops at 10,000 entries or 8 MiB of record bytes, explains that limit and leaves every remaining file untouched. A source that cannot be listed produces its own notice; other available sources remain visible. Records are never automatically pruned.
+Recorded locations can refer to disconnected storage. **Review storage access** opens the connection controls. The inbox reads saved app records; it does not search every destination for untracked working files or scan remote providers. While an operation is busy, it defers the Trash and synchronization scans and explains that they can be refreshed afterward. An actively running operation's marker is excluded from interruption notices.
 
-The whole inbox and startup notice scroll, including their named controls. Filters and actions wrap at enlarged text sizes, with at least 48 dp control heights. No permanent toolbar button is added. The strict primary pane owns recovery state and actions even when pane order is reversed.
+Notice records are limited to 64 KiB each. A notice scan stops at 10,000 entries or 8 MiB of record bytes, explains the limit and keeps the remaining records. Linked, changed, special or damaged records stay available for manual review. Records are never automatically pruned.
 
-## Draft verification
+The inbox does not turn every interrupted copy into a resumable transfer. Saved-copy resumption retains its documented [local-file and destination limits](PARTIAL-COPY-RESUME.md). Folder synchronization retains its [supported-storage and manual recovery limits](REVIEWED-FOLDER-SYNC.md).
 
-The current draft passes **894 JVM cases**, with zero failures, errors or skips; 43 focused recovery cases are a subset. Both assigned API30/API36 tablets pass **27 focused Android cases**, with zero failures or skips. These include exact marker preservation, primary ownership, safe existing-job/saved-copy links, independent source failures, service closure after a preservation failure and measurable Compose title enlargement. All four selected dialog images were actually inspected. These composition-font tests do not substitute for actual Android system-font acceptance.
+## Validation status
 
-The first draft run retained 21 passing cases and two failures per tablet: hard-link creation returned EACCES before app review, and the title did not enlarge. A measurement recheck retained 22 passing cases and confirmed that the dialog needed to carry the inherited density. Both recovery dialogs now do so, matching the established synchronization dialog. The final focused run passes all 27 cases. Each attempt retained its results and restored original managed files, Workspace trees, URI grants and settings, leaving the exact public 0.46 installed. Actual app hard-link refusal is covered by the JVM fixture where links can be created. On the assigned tablets Android refuses fixture link creation; the Android check verifies either that platform refusal or the app's guarded refusal according to capability.
+The frozen 0.47 candidate passes 894 JVM cases with zero failures, errors or skips, and the same 532 distinct native cases in 57 fresh-process batches on each assigned API30/API36 tablet. Its 43 focused JVM and 27 focused Android recovery cases are subsets of those totals.
 
-The complete native regression, optimized cold-process/restart and actual system-font/layout acceptance, public OTA and independently verified immutable archive remain pending. Proposal 44 remains open.
+Both exact optimized previews pass direct public 0.46→0.47 upgrade, cold-start notice retention, retention after a later successful operation, and refusal to start document work when the earlier notice cannot be preserved. Each tablet passes 12 size/font/theme layouts, actual 240/300 dpi changes, complete 48 dp controls, and independently measured native text and raster-glyph enlargement. All 89 selected local image paths were actually inspected, including the separately checked README duplicate.
+
+Android denies fixture hard-link creation on both tablets. Native acceptance verifies platform refusal or reader refusal according to that capability; actual multiple-link reader refusal is demonstrated by JVM fixtures. Actual public 0.46→0.47 download and Android installation pass on both tablets. Synthetic file bytes, Favorite and unrelated preference survive, and neither tablet offers the update again. Original data, Workspace and grants are restored with the exact public 0.47 APK. Independent immutable-archive acceptance remains pending; proposal 44 stays open until that final check finishes. [Validation](../VALIDATION.md) separates accepted results from rejected attempts and device/provider limits.

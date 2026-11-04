@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "passed": 8,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "largeTextKeepsChoicesConfirmationsAndApplyReachableInAScrollingReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "secondaryPaneRequestsUseTheStrictPrimaryOwnerEvenAfterPanesSwap",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "staleReviewStopsBeforeChangingAnOriginalAndLeavesAVisibleManualResult",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "staleSavedUndoIsCaughtBeforeAnySyncPreparationOrOriginalMove",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "namedCompareEntryOpensTheDefaultReviewAndAppliesOnlyAdditions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "changingDirectionDiscardsChoicesAndUsesTheDisplayedSourceAndDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "replacementsAndTrashNeedIndependentConfirmationAndUndoRestoresBothOriginals",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "additionsCarrySourceTagsAndFolderAppearance",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 55.6,
+  "timedOut": false
+}

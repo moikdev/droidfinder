@@ -1,0 +1,27 @@
+{
+  "actualScreenshotsInspected": true,
+  "scope": "All four selected API30 optimized core Surfaces, inspected at their actual pixels.",
+  "images": [
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-core-2/legacy-startup-surface.png",
+      "sha256": "cbde8932dda10330be4522452bf5db268a70b381198b6b41d8b0cee449cdd945",
+      "actuallyViewed": true
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-core-2/cold-inbox-record-surface.png",
+      "sha256": "431b381a757076aed22c743118d683eb62ec9e209b0f7965277bb1e26fed395f",
+      "actuallyViewed": true
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-core-2/after-successful-operation-surface.png",
+      "sha256": "e36b28960ec49b33422b55e8f2ceba393d406d6acd6f853dede429c3fde1c731",
+      "actuallyViewed": true
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-core-2/preservation-failure-review-surface.png",
+      "sha256": "4a4a1f448b6750984851b2fbdcd549e63310ecddf905b577e6f2950b5da3e16b",
+      "actuallyViewed": true
+    }
+  ],
+  "findings": "Startup and inbox text are readable; actions have named labels. Recorded synthetic destination wraps fully. The later successful operation keeps the earlier notice. Damaged notice storage is explained while other sources remain available. Public crops exclude the browser and private original names."
+}

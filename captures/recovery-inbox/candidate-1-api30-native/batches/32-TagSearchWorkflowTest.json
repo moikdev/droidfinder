@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "passed": 8,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "everyModeLoadsFromPersistedSmartFoldersInAFreshSession",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "tagChangesRefreshMembershipWithoutManuallyReloading",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "criteriaAreDraftedUntilApplyAndSurviveActivityRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "providerSearchUsesTheSameBooleanTagRules",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "legacyAndUnavailableSelectionsStayVisibleUntilExplicitlyCleared",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "editingSharedSmartRulesRefreshesTheOtherPane",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "savedSmartFolderPersistsItsModeAndFollowsTagRenameUndoRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TagSearchWorkflowTest",
+      "test": "allAnyAndNoneSearchRecursivelyWithoutIncludingFolders",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 46.5,
+  "timedOut": false
+}

@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "passed": 6,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "limitsKeepSelectionAndBlockOversizedPreviewAndExtraction",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "integrityCheckDistinguishesValidCorruptAndZip64",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "archiveSearchOwnsSpaceAndMouseContextActionsWork",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "memberPeekSupportsMarkdownCsvPdfImagesVideoAndSpaceClose",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "providerArchiveSelectedMembersPublishAndUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ArchiveWorkflowTest",
+      "test": "searchSelectionExtractionAndUndoPreserveArchiveAndFolders",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 47.3,
+  "timedOut": false
+}

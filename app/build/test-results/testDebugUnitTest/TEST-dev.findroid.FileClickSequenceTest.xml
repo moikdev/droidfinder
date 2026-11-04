@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FileClickSequenceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:05.851Z" hostname="MacBook-Pro-2.local" time="0.001">
+<testsuite name="dev.findroid.FileClickSequenceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:18.504Z" hostname="MacBook-Pro-2.local" time="0.0">
   <properties/>
-  <testcase name="touchOrModifierSelectionResetsTheSequence" classname="dev.findroid.FileClickSequenceTest" time="0.001"/>
+  <testcase name="touchOrModifierSelectionResetsTheSequence" classname="dev.findroid.FileClickSequenceTest" time="0.0"/>
   <testcase name="InterveningBackgroundPressOrCancelledDragCannotOpenAnItem" classname="dev.findroid.FileClickSequenceTest" time="0.0"/>
   <testcase name="anotherFileOrPaneBreaksTheSequence" classname="dev.findroid.FileClickSequenceTest" time="0.0"/>
   <testcase name="onlyTheSecondConsecutiveClickActivates" classname="dev.findroid.FileClickSequenceTest" time="0.0"/>

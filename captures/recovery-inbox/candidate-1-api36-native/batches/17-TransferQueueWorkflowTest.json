@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "passed": 2,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.TransferQueueWorkflowTest",
+      "test": "pausedCopyKeepsUiResponsiveAndQueuedJobsCanReorderCancelAndRun",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferQueueWorkflowTest",
+      "test": "retryOnlyRetriesFailedItemsAndCompletedHistorySurvivesReload",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 24.1,
+  "timedOut": false
+}

@@ -1,0 +1,54 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-light-startup-surface.png",
+      "sha256": "0d8ffaa63c0f7ab34a4d88fc75d66c27e83f5c8d9325de77f4663984d991c6e1",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-landscape-font1.0.png",
+      "contactSheetSha256": "41c5bfbdad1f54b08f7639d2e92320b3563f38c58799f2f12ac5973dadc67713"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-light-inbox-surface.png",
+      "sha256": "c6f369ebd364cbd6fbd1b78860583d22ea126cba02fc7b4f0ed834b4180b5766",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-landscape-font1.0.png",
+      "contactSheetSha256": "41c5bfbdad1f54b08f7639d2e92320b3563f38c58799f2f12ac5973dadc67713"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-startup-surface.png",
+      "sha256": "fd722d80348b5c661bfda741f1925a29795c3f43b80ad5c74f29c22e019f30ca",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-landscape-font1.0.png",
+      "contactSheetSha256": "41c5bfbdad1f54b08f7639d2e92320b3563f38c58799f2f12ac5973dadc67713"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-inbox-surface.png",
+      "sha256": "bdc395be7273fd4b27a0fbcff7ee6592719c23464e34625a5d29ff239c202ea2",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-landscape-font1.0.png",
+      "contactSheetSha256": "41c5bfbdad1f54b08f7639d2e92320b3563f38c58799f2f12ac5973dadc67713"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-light-startup-surface.png",
+      "sha256": "d1b5038d160f922bf597766f60db59b54385056749559ab03f9a463086716061",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-landscape-font2.0.png",
+      "contactSheetSha256": "98295151b6d14c3845b5bb0686315383dae4583b6b17b6030556d8d7e69a9bad"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-light-inbox-surface.png",
+      "sha256": "d99efe6891fa0514ec4be488e5aee0fca4a1fffb80d02b3923a06d6c1a3dd8a9",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-landscape-font2.0.png",
+      "contactSheetSha256": "98295151b6d14c3845b5bb0686315383dae4583b6b17b6030556d8d7e69a9bad"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-startup-surface.png",
+      "sha256": "627804a1e8b311267700c7142509ff0d1a02cf655e325f4d2e944839347a5ac6",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-landscape-font2.0.png",
+      "contactSheetSha256": "98295151b6d14c3845b5bb0686315383dae4583b6b17b6030556d8d7e69a9bad"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-inbox-surface.png",
+      "sha256": "4cfb44e52aa70193271fe809335ded4098161840ce05521b3aba1cb527d70c65",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-landscape-font2.0.png",
+      "contactSheetSha256": "98295151b6d14c3845b5bb0686315383dae4583b6b17b6030556d8d7e69a9bad"
+    }
+  ],
+  "findings": "Both themes and both actual system-font sizes are readable. Paths wrap; named actions remain complete. The large-text inbox is scrolled to its actions, so the earlier header is outside the viewport."
+}

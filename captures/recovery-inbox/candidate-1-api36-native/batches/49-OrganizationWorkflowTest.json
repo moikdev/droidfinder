@@ -1,0 +1,104 @@
+{
+  "success": true,
+  "passed": 18,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "corruptedLibraryBlocksMetadataWritesWithoutBlockingFileRecovery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "providerFolderRenameRemapsDescendantsAndReadOnlyItemsCanReceiveTags",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "noSelectionExportUsesReviewedJsonKeepsCollisionsAndSurvivesRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "protectedTagUndoRefusesAnUnrelatedLaterMetadataEdit",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "fullPreviewReachesPastTenRowsAndExclusionChangesOnlyReviewedItems",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "closingOrganizationRestoresExplorerKeyboardFocus",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "stoppedProviderReviewDoesNotWriteMetadataOrLoseTheCatalog",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "providerExportFailureCleansStagingAndAllowsTargetedRetry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "nativeTagAndCollectionEditorsSaveRenameAndDeleteWithUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "removingReferencesAndDeletingCollectionsAreUndoableAndKeepOriginalFiles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "destinationPickerKeepsReadOnlyLocationVisibleUntilAnotherRootIsChosen",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "staleTagDeletionConfirmationCannotEraseNewAssignments",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "changedSourcesAndSelectedAssignmentsAreRejectedButUnrelatedTagsArePreserved",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "unavailableReferencesStayInTheLibraryAndCanBeRemovedWithoutFileDeletion",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "frozenReviewAndDraftSurviveRecreationWithoutWritingTags",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "mixedAssignmentsAreReviewedAndFilteredRowsRemainInTheApplyScope",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "collectionsBrowseAcrossRootsIncludingReadOnlyProviderItemsAndOpenInNewWindows",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OrganizationWorkflowTest",
+      "test": "localRenamesAndUndoRedoMoveReferencesWhileCopiesDoNotJoinTheCollection",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 116.5,
+  "timedOut": false
+}

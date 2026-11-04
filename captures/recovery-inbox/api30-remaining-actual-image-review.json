@@ -1,0 +1,186 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-startup-surface.png",
+      "sha256": "19d69c6fd9ea198ccdccbba6323d0e68e6f4f398d1090af5ed6387938ab79b2f",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font1.0.png",
+      "contactSheetSha256": "fc638beae7e24e5e08ca73cae512f16f3b3035e45d6952c473f5fe1a85dc63c3"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-inbox-surface.png",
+      "sha256": "35a591221e8e552313c7c56fa75b24d2bf93fb432b3dcb6196de233be968ebea",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font1.0.png",
+      "contactSheetSha256": "fc638beae7e24e5e08ca73cae512f16f3b3035e45d6952c473f5fe1a85dc63c3"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-startup-surface.png",
+      "sha256": "8d11959a42479c23a19ff573957bf0939a4568da28ac2b1cbd82bc8abaa340a6",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font1.0.png",
+      "contactSheetSha256": "fc638beae7e24e5e08ca73cae512f16f3b3035e45d6952c473f5fe1a85dc63c3"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-inbox-surface.png",
+      "sha256": "41ff78dc856f476a19abb36629de572367cea03031eadd6e51be07cad23eb58b",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font1.0.png",
+      "contactSheetSha256": "fc638beae7e24e5e08ca73cae512f16f3b3035e45d6952c473f5fe1a85dc63c3"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-startup-surface.png",
+      "sha256": "e5621f31a0f06f136c77a1a89b2634877f2dd54e6994a30279f4cee8ff586247",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font2.0.png",
+      "contactSheetSha256": "a51a75f749264b3feb49a8869bd2499cfb0f1518189d43e056567261576bc62d"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-inbox-surface.png",
+      "sha256": "b744dd15757ca609b65e6179d2b472bffffe7ab9d0268ce5b24406a7f5aaba92",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font2.0.png",
+      "contactSheetSha256": "a51a75f749264b3feb49a8869bd2499cfb0f1518189d43e056567261576bc62d"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-startup-surface.png",
+      "sha256": "329f8ff774e64e699cc9f19f799359dc41d597be9d2d232ec3f8edf7e4be2180",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font2.0.png",
+      "contactSheetSha256": "a51a75f749264b3feb49a8869bd2499cfb0f1518189d43e056567261576bc62d"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-inbox-surface.png",
+      "sha256": "9d2d45b777b6ade6b5267ba8a7f14efd418ef04713ea1f5c2a17868b91f95cbf",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-800x1280-font2.0.png",
+      "contactSheetSha256": "a51a75f749264b3feb49a8869bd2499cfb0f1518189d43e056567261576bc62d"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-startup-surface.png",
+      "sha256": "ecf793a6b70bb91c2dea25a8ff5fdd34dd80260daf1dbeda1c565455df67fb94",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font1.0.png",
+      "contactSheetSha256": "624369bea23e9a3df93d40807de9ef15847554e154c76dc737b85d93a1b89847"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-inbox-surface.png",
+      "sha256": "283577655f7fc6e4e17b4b9a083ef8dc63aa9902400b8619fd78c35e66af826c",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font1.0.png",
+      "contactSheetSha256": "624369bea23e9a3df93d40807de9ef15847554e154c76dc737b85d93a1b89847"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-startup-surface.png",
+      "sha256": "d12c2c1ca1323dbd77614c8aa7767e8eeefe6674ff2c9f654c04f523a2ba4fd7",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font1.0.png",
+      "contactSheetSha256": "624369bea23e9a3df93d40807de9ef15847554e154c76dc737b85d93a1b89847"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-inbox-surface.png",
+      "sha256": "963566ab3f2eb5fbfa4c484334eb3473d0f36b5d81817ed58af5835ca1df3037",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font1.0.png",
+      "contactSheetSha256": "624369bea23e9a3df93d40807de9ef15847554e154c76dc737b85d93a1b89847"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-startup-surface.png",
+      "sha256": "a73f93db00f8178b3e4f6b48035a1f0393a5b5761b67f74ad04b73bc55dba08f",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font2.0.png",
+      "contactSheetSha256": "7880fc712440608a92fb8f0a7a9200d22ca3b226a4f9ccb73a1394f593305efc"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-inbox-surface.png",
+      "sha256": "5fe7f1457ba8356b666014cfb357c7ba71d88e67403a934e6ee9d5831a78f260",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font2.0.png",
+      "contactSheetSha256": "7880fc712440608a92fb8f0a7a9200d22ca3b226a4f9ccb73a1394f593305efc"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-startup-surface.png",
+      "sha256": "b1265dd9468e7c676c43b06c83131f319eb4143cfc06f9c7360e1e3584a48494",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font2.0.png",
+      "contactSheetSha256": "7880fc712440608a92fb8f0a7a9200d22ca3b226a4f9ccb73a1394f593305efc"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-inbox-surface.png",
+      "sha256": "3db1e43dc05fcc34b32b6e17abc736c702b0bd3359424b7c3fe851cf3fc7570c",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-600x800-font2.0.png",
+      "contactSheetSha256": "7880fc712440608a92fb8f0a7a9200d22ca3b226a4f9ccb73a1394f593305efc"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/density-240-inbox-surface.png",
+      "sha256": "47dd5712b5fbd9a24ac1cb1f1c093a4d1ede7953039ba578867310f3ace3493b",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-density.png",
+      "contactSheetSha256": "514ed33912ecab66956828b2fa41038cde923989d1c4886641f73e7a169a7cfb"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/density-300-inbox-surface.png",
+      "sha256": "4bcf6be95bf66326c02b975d1342c0125b9232f3dd3b91b2b02a7daa5d4d6c87",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-density.png",
+      "contactSheetSha256": "514ed33912ecab66956828b2fa41038cde923989d1c4886641f73e7a169a7cfb"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-close-glyph.png",
+      "sha256": "332d62b81c62486fdd1306057eb0d13ac5155ff8ff3dc77fcf0457341fa4e952",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-light-close-glyph.png",
+      "sha256": "a4c4af8a326d47909f196fc813dd91b0d192402be428e8da68e45d3e965733f5",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-light-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-close-glyph.png",
+      "sha256": "332d62b81c62486fdd1306057eb0d13ac5155ff8ff3dc77fcf0457341fa4e952",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-close-glyph.png",
+      "sha256": "a4c4af8a326d47909f196fc813dd91b0d192402be428e8da68e45d3e965733f5",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-close-glyph.png",
+      "sha256": "bc6fe7109fa4ab80305a8dce41bd2fa98109f105fb88d15f335b0865b3a20941",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-close-glyph.png",
+      "sha256": "774cee239e05908b3e35ba8bb08a1f57e42bf693d6fc14ffa8c105ebe2138358",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api30-glyphs.png",
+      "contactSheetSha256": "96d413aaf0f69ab32f0a30bdfb4ea721334955a4803b9dcba95921344d81e0a0"
+    }
+  ],
+  "findings": "All portrait, narrow-window, density and glyph images inspected. Actions wrap and remain complete at 200% Android system text. Long paths wrap within their Surface. The narrow large-text inbox is intentionally scrolled; surrounding earlier content is outside its viewport. Both density crops show readable complete actions. Glyph crops contain the actual Close raster."
+}

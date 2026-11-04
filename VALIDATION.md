@@ -1,5 +1,22 @@
 # Android preview verification
 
+## Findroid 0.47.0 — recovery inbox
+
+Local and actual public OTA acceptance pass on November 4, 2026. Independent immutable-archive verification remains pending; proposal 44 is still open.
+
+- **894 JVM cases pass**, zero failures/errors/skips. Lint: **0 errors / 148 warnings / 12 hints**. The frozen candidate pins **388 source inputs and 102 build/report outputs**. `BUILDINFO.json` honestly keeps its generated-report dirty flag; the complete source-binding receipt proves every frozen source matches public commit `3a713b36158f761f918ea26d9efd3fbf8a66ded0`, including declared Windows-wrapper checkout line endings.
+- Both assigned tablets pass the same **532 distinct native cases in 57 fresh-process batches**, zero failures or skips. The 43 focused JVM and 27 focused native recovery cases are subsets. Android denies fixture hard-link creation; native acceptance proves platform refusal or app refusal according to capability, while actual multiple-link reader refusal is demonstrated in JVM fixtures.
+- Both exact optimized previews pass direct public **0.46/code48 → 0.47/code49** upgrade with exact legacy-notice acknowledgment, force-stop/cold-start retention without a repeat startup, retention after a later successful folder creation, and preservation-failure refusal before document work with read-only review available.
+- Each tablet passes **12 layouts** across 1280×800, 800×1280 and 600×800 dp, Android system fonts 1.0/2.0 and light/dark. Both pass actual **240/300 dpi** readbacks and 14 screen-size readbacks. All interacted named controls have complete **48 dp** bounds. Native Close TextView dimensions and raster-glyph dimensions enlarge in all six size/theme groups per API.
+- **89 local image paths were actually inspected:** 8 optimized core Surfaces, 52 layout/density Surfaces, 24 glyph crops, 4 focused composition-font crops and the byte-identical README duplicate. Large-text inbox crops deliberately show the scroll position containing the controls. Public crops exclude the original browser locations.
+- Every completed controller restores the original **495 API30 / 443 API36** managed files and recorded absences, original Workspace trees, URI grants, storage mode, fonts, display and size overrides, and the exact public 0.46 APK. The API30 first core attempt failed at a screenshot collector class assumption; the queued API36 counterpart was cancelled before acquiring the device reservation. The corrected checker accepts the supported View/ScrollView classes and retains strict Surface bounds. Application and frozen build bytes were unchanged.
+- Signing matches public 0.46. Preview and unsigned native libraries pass **16 KiB** load-segment and ZIP alignment on all four included ABIs. Preview: **8,892,204 bytes**, SHA-256 `5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09`.
+
+Both tablets pass actual public-feed **48→49** download and Android installation with installer completion confirmed before relaunch. Installed bytes match the anonymous public APK; synthetic original bytes, Favorite and sentinel preference survive, and there is no repeat offer. The API36 first attempt timed out before opening More; a complete unchanged OTA-checker retry passes and the failed attempt remains excluded. Its retry controller verifies the exact public 0.47 APK restored by the first attempt before independently starting the tested 48→49 upgrade. All 12 accepted OTA images were actually inspected. Final restoration rechecks original managed bytes/absences, Workspace, grants, storage/font/display/size settings and the exact public 0.47 APK on both tablets.
+
+Opening the inbox reads saved records; resuming, restoring, discarding and retrying remain explicit choices. Limits and manual recovery behavior are explained in the [guide](docs/RECOVERY-INBOX.md). [Release notes](docs/releases/0.47.0.md).
+
+
 
 ## Findroid 0.46.0 — review before synchronizing
 

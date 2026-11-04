@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "passed": 8,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "malformedFlagCanBeExplicitlyRepairedWithoutEnablingRecording",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "allCriteriaRoundTripExactlyWithoutEntriesOrSnippets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "utf8BudgetEvictsOldestSearchesAndRejectsOneOversizedEntry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "futureOrUnknownFieldsAndCoercedTypesCannotSilentlyChangeRules",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "corruptAndFuturePreferencesKeepTheirExactBytesUntilClear",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "durablePauseClearAndRemovalSurviveNewStoreInstances",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "duplicatesInvalidRootsBoundsAndUnboundedListsAreRejected",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecentSearchCodecTest",
+      "test": "setupPreferenceAllowlistCannotExportOrRestoreSearchHistory",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 2.6,
+  "timedOut": false
+}

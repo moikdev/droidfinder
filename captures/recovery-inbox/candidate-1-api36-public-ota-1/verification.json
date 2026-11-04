@@ -1,0 +1,31 @@
+{
+  "serial": "emulator-5582",
+  "expectedVersionCode": 49,
+  "fromVersionCode": 48,
+  "apkSha256": "5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09",
+  "sourceCommit": "3a713b36158f761f918ea26d9efd3fbf8a66ded0",
+  "controllerSha256": "2e718b98fadd1e68ad5f18bee003c7fdfa58c29eea66dfe20caeea88bd86cbd0",
+  "publicAnonymousApkBytesMatch": true,
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "originalDataRestored": true,
+  "originalUriGrantsKept": true,
+  "error": "AssertionError: Public OTA stopped; inspect the retained driver and screenshots",
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  }
+}

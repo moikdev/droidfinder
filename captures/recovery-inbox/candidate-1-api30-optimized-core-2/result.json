@@ -1,0 +1,351 @@
+{
+  "serial": "emulator-5602",
+  "section": "core",
+  "sourceCommit": "3a713b36158f761f918ea26d9efd3fbf8a66ded0",
+  "checkerSha256": "e20a6b76e7344c2b6e6eae4da7091a3ed71bd68c7001473f2343db1dec15d30b",
+  "checkerDependencies": {
+    "scripts/check-reviewed-folder-sync.py": "82fcfd46b08c64ae73d13400f7954a57eb8a1a2a36316c387d6cfc55c59320dd",
+    "scripts/check-local-search-index.py": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+    "scripts/android/acceptance.py": "58413d03fa96c29c1146bae2ca3a5b4c87dba9a1c2f1b777707697bf381bc016"
+  },
+  "apkSha256": "5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09",
+  "previousApkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "fromVersionCode": 48,
+  "toVersionCode": 49,
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "checks": [
+    {
+      "name": "direct-public48-to49-and-exact-legacy-acknowledgment",
+      "previousMarkerKept": true,
+      "immutableArchiveBytesMatch": true,
+      "preferenceSentinelKept": true,
+      "originalFileBytesKept": true
+    },
+    {
+      "name": "cold-start-keeps-acknowledged-notice-without-repeating-startup",
+      "actualForceStop": true,
+      "noAutomaticResume": true,
+      "noticeAndArchiveBytesUnchanged": true
+    },
+    {
+      "name": "later-success-keeps-the-earlier-notice",
+      "newFolderCreated": true,
+      "onlyNewSuccessfulMarkerRemoved": true,
+      "olderNoticeStillDiscoverable": true,
+      "originalFileBytesKept": true
+    },
+    {
+      "name": "notice-preservation-failure-stops-before-document-work",
+      "priorMarkerAndDamagedArchiveKept": true,
+      "noNewFolderPublished": true,
+      "originalFileBytesKept": true
+    }
+  ],
+  "layouts": [],
+  "captures": [
+    {
+      "path": "legacy-startup-surface.png",
+      "sha256": "cbde8932dda10330be4522452bf5db268a70b381198b6b41d8b0cee449cdd945",
+      "surfaceBoundsPx": [
+        24,
+        360,
+        984,
+        804
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "0457e9133ccfa99cf84b27dbeae6c8c9241a3a7012a6a3636c6ed8141223522a",
+      "privateRawHierarchySha256": "53555048aff543218cd6061634c59051c91f76ecf43cf44f10de9d651432e2e0"
+    },
+    {
+      "path": "cold-inbox-record-surface.png",
+      "sha256": "431b381a757076aed22c743118d683eb62ec9e209b0f7965277bb1e26fed395f",
+      "surfaceBoundsPx": [
+        24,
+        195,
+        1164,
+        969
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "d02e094c0b12be65cede08b51f79e9402686163d4e90fbbbbab82452056ea1db",
+      "privateRawHierarchySha256": "00c78eb1a2410b4c85b326eda7abf1f1dfa3d5d0f3b2ea77b845f5705714a41d"
+    },
+    {
+      "path": "after-successful-operation-surface.png",
+      "sha256": "e36b28960ec49b33422b55e8f2ceba393d406d6acd6f853dede429c3fde1c731",
+      "surfaceBoundsPx": [
+        24,
+        237,
+        1164,
+        927
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "a3234c6ecea3b696fce41111a62f5749171a7d12be4038299aa2c2ad1dd002b8",
+      "privateRawHierarchySha256": "f1d9d5cc1f0853c690148525bafdf2f28c53dae2c5eb23933fe49694eb2ccdaa"
+    },
+    {
+      "path": "preservation-failure-review-surface.png",
+      "sha256": "4a4a1f448b6750984851b2fbdcd549e63310ecddf905b577e6f2950b5da3e16b",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1164,
+        1104
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "021934e07441e341543ffa7968d278988542cb82be89b25aa5d7ea2ee7dd0dc3",
+      "privateRawHierarchySha256": "60635259e59372a180a26277ccf2c97743b16dc0eb656446449cfb8f58297a04"
+    }
+  ],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalManagedFileCount": 495,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "controlProofs": [
+    {
+      "name": "acknowledge-legacy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        445,
+        708,
+        532,
+        780
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "cold-inbox-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "cold-inbox-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        678,
+        1902,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "cold-inbox-transfers-filter",
+      "text": "",
+      "description": "",
+      "bounds": [
+        187,
+        210,
+        500,
+        282
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "expand-recorded-locations",
+      "text": "",
+      "description": "",
+      "bounds": [
+        493,
+        723,
+        761,
+        795
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-cold-inbox",
+      "text": "",
+      "description": "",
+      "bounds": [
+        505,
+        873,
+        594,
+        945
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "create-after-notice-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "create-after-notice-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        705,
+        1902,
+        777
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "create-after-notice-create",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1247,
+        358,
+        1344,
+        430
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "after-new-operation-inbox-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "after-new-operation-inbox-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        678,
+        1902,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "after-new-operation-inbox-transfers-filter",
+      "text": "",
+      "description": "",
+      "bounds": [
+        187,
+        210,
+        500,
+        282
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-after-new-operation",
+      "text": "",
+      "description": "",
+      "bounds": [
+        505,
+        831,
+        594,
+        903
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "blocked-acknowledgment",
+      "text": "",
+      "description": "",
+      "bounds": [
+        445,
+        708,
+        532,
+        780
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "review-without-acknowledgment",
+      "text": "",
+      "description": "",
+      "bounds": [
+        544,
+        735,
+        869,
+        807
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-blocked-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        505,
+        1008,
+        594,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "blocked-new-operation-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "blocked-new-operation-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        640,
+        1902,
+        712
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "blocked-new-operation-create",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1247,
+        358,
+        1344,
+        430
+      ],
+      "density": 1.5
+    }
+  ],
+  "hierarchyRetries": []
+}

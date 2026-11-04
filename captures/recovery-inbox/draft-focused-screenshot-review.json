@@ -1,0 +1,23 @@
+{
+  "actuallyViewed": true,
+  "imagePaths": [
+    {
+      "path": "captures/recovery-inbox/integrated-api30-3/normal-review.png",
+      "sha256": "3c21a21c9b70bfaab9837e04511c78d1eb71153796bbb099f4be31c863ba7f41"
+    },
+    {
+      "path": "captures/recovery-inbox/integrated-api30-3/large-text-review.png",
+      "sha256": "5c45416fa8af6b854541c655fae170a409d6138fce56b9c5a977f0d7d9e2556f"
+    },
+    {
+      "path": "captures/recovery-inbox/integrated-api36-3/normal-review.png",
+      "sha256": "94d035e214932404b593eafaa92f4b5bbf2bcaf10be8005666938b08563cacb9"
+    },
+    {
+      "path": "captures/recovery-inbox/integrated-api36-3/large-text-review.png",
+      "sha256": "84cbe860a363c2d69667f2886af6d89fe1179aa5bc22b50fead8f66bd0336b5c"
+    }
+  ],
+  "imagePathCount": 4,
+  "observations": "Synthetic dialog crops inspected; enlarged Compose text and complete named controls are visible. Scrolled surrounding content may be partial. Actual system-font acceptance remains pending."
+}

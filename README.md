@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.46.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.47.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.46.0 release](https://github.com/moikdev/findroid/releases/tag/v0.46.0-preview) and download **`Findroid-0.46.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.47.0 release](https://github.com/moikdev/findroid/releases/tag/v0.47.0-preview) and download **`Findroid-0.47.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -200,6 +200,16 @@ Trash gives you a way back, and many operations support Undo during the current 
 
 ![A transfer showing recent speed, the amount copied, and time remaining in the current phase](docs/screenshots/transfer-recent-rate.png)
 
+### Find interrupted work in one place
+
+**More → Recovery inbox…** brings failed transfers, saved partial copies, preserved originals, synchronization records and earlier operation notices together. Each record offers a named next step, such as **Review transfer**, **Review saved copy**, or **Review Trash**.
+
+Opening the inbox reads the records. Resuming a transfer or restoring an original stays a separate decision, and complete recorded paths help you check the right destination. Acknowledging a startup notice keeps it available here after restart. [Recovery inbox guide](docs/RECOVERY-INBOX.md).
+
+![Review an earlier operation notice in the Recovery inbox, with named destination, transfer and storage controls](docs/screenshots/recovery-inbox-tablet.png)
+
+*Actual optimized Android tablet dialog with a synthetic operation notice. The browser backdrop is excluded. Available in the public 0.47 preview. Local and actual public OTA acceptance pass; independent immutable-archive acceptance is in progress.*
+
 ### Organize a project without rearranging every folder
 
 Use **tags** to label files, **collections** to bring related files from different locations into one view, and **Smart Folders** to save searches that update when you open them.
@@ -292,4 +302,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, nested search rules, optional local search snapshots, per-document action explanations, copy verification, saved-copy recovery, and persistent local Undo have shipped in verified increments. **33 of 72 are implemented; 39 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, nested search rules, optional local search snapshots, per-document action explanations, copy verification, saved-copy recovery, and persistent local Undo have shipped in verified increments. **34 of 72 are implemented; 38 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).

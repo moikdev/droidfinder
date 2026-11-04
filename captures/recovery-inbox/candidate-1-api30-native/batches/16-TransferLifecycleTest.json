@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "passed": 3,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.TransferLifecycleTest",
+      "test": "cancellationClosesABlockedProviderStream",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferLifecycleTest",
+      "test": "cancelledProviderCopyRemovesStagingAndKeepsOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferLifecycleTest",
+      "test": "transferContinuesAfterActivityCloses",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 10.0,
+  "timedOut": false
+}

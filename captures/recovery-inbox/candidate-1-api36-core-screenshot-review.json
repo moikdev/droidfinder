@@ -1,0 +1,30 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/recovery-inbox/candidate-1-api36-optimized-core-2/after-successful-operation-surface.png",
+      "sha256": "296a0c0497850b68a14a72c71b2a5caf92ab235a67a5600a44ea2226088a43bb",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api36-core.png",
+      "contactSheetSha256": "24505893affbff95018f5e04c24eabfedb177c489f7ae766295b34a7de4bba1a"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api36-optimized-core-2/cold-inbox-record-surface.png",
+      "sha256": "9825fc7dce6ecc98abc981a73ebff27d384ba14a6a3022c016b8245dfa9f1892",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api36-core.png",
+      "contactSheetSha256": "24505893affbff95018f5e04c24eabfedb177c489f7ae766295b34a7de4bba1a"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api36-optimized-core-2/legacy-startup-surface.png",
+      "sha256": "ce56162b701ab1140c0598f54a7d1e804cd0046fa0d7ee6a3bb4206eaaa08f91",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api36-core.png",
+      "contactSheetSha256": "24505893affbff95018f5e04c24eabfedb177c489f7ae766295b34a7de4bba1a"
+    },
+    {
+      "path": "captures/recovery-inbox/candidate-1-api36-optimized-core-2/preservation-failure-review-surface.png",
+      "sha256": "0f07896f24fb48c00c0dac1f6ce8ecf641e15b893982f562275c7883b4774ec1",
+      "viewedInContactSheet": "captures/recovery-inbox/review-contact-sheets/api36-core.png",
+      "contactSheetSha256": "24505893affbff95018f5e04c24eabfedb177c489f7ae766295b34a7de4bba1a"
+    }
+  ],
+  "findings": "All four API36 optimized core Surfaces inspected: readable startup, full synthetic destination, retained notice after a successful later operation, and independent-source failure explanation. Named controls remain clear; the browser backdrop and original locations are excluded."
+}
