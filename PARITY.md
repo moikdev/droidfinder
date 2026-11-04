@@ -122,6 +122,16 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 
 See [Office formats, bounds and acceptance](docs/OFFICE-PREVIEWS.md).
 
+## File comparison pass
+
+- [x] Bounded, complete-file UTF-8/BOM-marked UTF-16 differences, aligned line numbers, explicit line endings, difference navigation, side swapping and copied reports (0.52.0).
+- [x] Side-by-side Android raster previews, EXIF orientation, linked zoom/normalized pan, shared Fit and named controls.
+- [x] Entry points in selection menus, the action launcher and paired nested folder-comparison rows.
+- [x] Fresh provider reads/names, temporary-copy cleanup, cancellable preparation and explicit unsupported/oversized/error states.
+- [ ] Pixel-perfect/color-managed image comparison, metadata comparison, document/PDF differences and file merging.
+
+See [comparison bounds and acceptance](docs/FILE-COMPARISON.md).
+
 ## Verification
 
 See [the current verification record](VALIDATION.md) for local test coverage, optimized APK checks and remaining device/provider coverage. [VALIDATION.md](VALIDATION.md) preserves earlier native integration results. Tests use the isolated API 36 tablet emulator. The broader improvement roadmap remains active; the platform boundaries below remain explicit.

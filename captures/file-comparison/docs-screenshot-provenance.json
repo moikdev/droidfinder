@@ -1,0 +1,24 @@
+[
+  {
+    "source": "captures/file-comparison/candidate-2-api30-optimized-3/core-text-result-preview.png",
+    "destination": "docs/screenshots/file-comparison-tablet.png",
+    "sha256": "c08097bc0983eece975bd85aac0288bee5b970ed9f12155a613c23b766d8fa28",
+    "actualOptimizedAndroidUi": true,
+    "syntheticFilesOnly": true,
+    "inspected": true,
+    "apkSha256": "5a44dfb8d00a862f8fb6e589ee88fb04552221f90daec8cde32e8e51c5a77c2b",
+    "originalCapturedSource": "captures/file-comparison/candidate-2-api30-optimized-2/core-text-result-preview.png",
+    "selectedResumeBytesIdentical": true
+  },
+  {
+    "source": "captures/file-comparison/candidate-2-api30-optimized-3/core-image-result-preview.png",
+    "destination": "docs/screenshots/image-comparison-tablet.png",
+    "sha256": "19d788b2574d5ebe309feb015b4f0ab42a22c48c0b5cbc64042044832603466f",
+    "actualOptimizedAndroidUi": true,
+    "syntheticFilesOnly": true,
+    "inspected": true,
+    "apkSha256": "5a44dfb8d00a862f8fb6e589ee88fb04552221f90daec8cde32e8e51c5a77c2b",
+    "originalCapturedSource": "captures/file-comparison/candidate-2-api30-optimized-2/core-image-result-preview.png",
+    "selectedResumeBytesIdentical": true
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "excludedFromFinalTotals": true,
+  "attempts": [
+    {
+      "name": "build-attempt-1",
+      "reason": "Native helper used a nonexistent selection argument; compilation stopped."
+    },
+    {
+      "name": "draft-1-native",
+      "reason": "Reset helper syntax stopped before native cases; both controllers restored exact original state."
+    },
+    {
+      "name": "draft-2-native",
+      "reason": "A fixture used a tree URI where DocumentAccess requires a document URI; four cases passed and one failed per API; both original states restored."
+    },
+    {
+      "name": "draft-3-native and candidate-1-native",
+      "reason": "Passing drafts superseded by proportional 4x image dragging and fresh names/cancellable metadata."
+    },
+    {
+      "name": "optimized-attempt-1",
+      "reason": "Checker waited for off-screen Select all; no core/layout completion counted; both original states restored."
+    },
+    {
+      "name": "optimized-attempt-2",
+      "reason": "Two core workflows and nine complete layouts per API retained. Body was loaded at compact font 2.0; a scrolled-out Copy control stopped readiness. Both original states restored. Exact source/APK, fixture generator, case receipts and copied image hashes are explicitly checked by the successful continuation."
+    }
+  ]
+}

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.ZipMetadataTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:12.037Z" hostname="MacBook-Pro-2.local" time="0.573">
+<testsuite name="dev.findroid.ZipMetadataTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:23:03.050Z" hostname="MacBook-Pro-2.local" time="0.524">
   <properties/>
   <testcase name="malformedExtraFieldsAreRejectedWithoutIndexing" classname="dev.findroid.ZipMetadataTest" time="0.002"/>
-  <testcase name="configuredEntryLimitRejectsBeforeReaderIndexingOrOutputCreation" classname="dev.findroid.ZipMetadataTest" time="0.032"/>
-  <testcase name="oversizedNamesAreRejectedBeforeDecoding" classname="dev.findroid.ZipMetadataTest" time="0.003"/>
-  <testcase name="cancelledMetadataReadNeverOpensTheReader" classname="dev.findroid.ZipMetadataTest" time="0.003"/>
-  <testcase name="cancellationDuringMetadataCaptureClosesTheSource" classname="dev.findroid.ZipMetadataTest" time="0.013"/>
-  <testcase name="longArchiveCommentRemainsReadable" classname="dev.findroid.ZipMetadataTest" time="0.019"/>
-  <testcase name="inconsistentCountIsRejectedEvenWhenBelowResourceLimits" classname="dev.findroid.ZipMetadataTest" time="0.002"/>
-  <testcase name="excessiveLocalExtraFieldsAreRejectedWhenCentralFieldsAreSmall" classname="dev.findroid.ZipMetadataTest" time="0.008"/>
-  <testcase name="excessiveCentralExtraFieldsAreRejected" classname="dev.findroid.ZipMetadataTest" time="0.004"/>
+  <testcase name="configuredEntryLimitRejectsBeforeReaderIndexingOrOutputCreation" classname="dev.findroid.ZipMetadataTest" time="0.049"/>
+  <testcase name="oversizedNamesAreRejectedBeforeDecoding" classname="dev.findroid.ZipMetadataTest" time="0.001"/>
+  <testcase name="cancelledMetadataReadNeverOpensTheReader" classname="dev.findroid.ZipMetadataTest" time="0.001"/>
+  <testcase name="cancellationDuringMetadataCaptureClosesTheSource" classname="dev.findroid.ZipMetadataTest" time="0.009"/>
+  <testcase name="longArchiveCommentRemainsReadable" classname="dev.findroid.ZipMetadataTest" time="0.05"/>
+  <testcase name="inconsistentCountIsRejectedEvenWhenBelowResourceLimits" classname="dev.findroid.ZipMetadataTest" time="0.001"/>
+  <testcase name="excessiveLocalExtraFieldsAreRejectedWhenCentralFieldsAreSmall" classname="dev.findroid.ZipMetadataTest" time="0.026"/>
+  <testcase name="excessiveCentralExtraFieldsAreRejected" classname="dev.findroid.ZipMetadataTest" time="0.003"/>
   <testcase name="emptyZip64SelfExtractorCanHaveALargePrefix" classname="dev.findroid.ZipMetadataTest" time="0.001"/>
-  <testcase name="aggregateExtraFieldsAreBoundedAcrossBothHeaderCopies" classname="dev.findroid.ZipMetadataTest" time="0.368"/>
-  <testcase name="selfExtractingPrefixAndArchiveCommentsRemainReadable" classname="dev.findroid.ZipMetadataTest" time="0.006"/>
-  <testcase name="truncatedDirectoryAndImpossibleZip64LocatorsFailCleanly" classname="dev.findroid.ZipMetadataTest" time="0.003"/>
+  <testcase name="aggregateExtraFieldsAreBoundedAcrossBothHeaderCopies" classname="dev.findroid.ZipMetadataTest" time="0.299"/>
+  <testcase name="selfExtractingPrefixAndArchiveCommentsRemainReadable" classname="dev.findroid.ZipMetadataTest" time="0.005"/>
+  <testcase name="truncatedDirectoryAndImpossibleZip64LocatorsFailCleanly" classname="dev.findroid.ZipMetadataTest" time="0.002"/>
   <testcase name="largeAggregateCommentsAreRejectedBeforeReaderAllocations" classname="dev.findroid.ZipMetadataTest" time="0.045"/>
-  <testcase name="readerIndexesSnapshotsWhenTheSourceIsRewrittenAfterValidation" classname="dev.findroid.ZipMetadataTest" time="0.006"/>
-  <testcase name="actualDirectoryCountCannotBypassLimitWithAForgedEndRecord" classname="dev.findroid.ZipMetadataTest" time="0.058"/>
+  <testcase name="readerIndexesSnapshotsWhenTheSourceIsRewrittenAfterValidation" classname="dev.findroid.ZipMetadataTest" time="0.002"/>
+  <testcase name="actualDirectoryCountCannotBypassLimitWithAForgedEndRecord" classname="dev.findroid.ZipMetadataTest" time="0.026"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

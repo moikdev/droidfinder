@@ -1,0 +1,2986 @@
+{
+  "serial": "emulator-5582",
+  "section": "all",
+  "sourceCommit": "fe7e3f1ba532d23c92dbc4d7c8e225410270eddc",
+  "checkerSha256": "640b72227dee1c8d6d5a0d7d7881654d77f561fbc6890a16582984485474248d",
+  "buildReceiptSha256": "c1d6b031661bb27b2f38259107ac61b00720ce76b7ed3caec70b8efa0c55d33d",
+  "apkSha256": "5a44dfb8d00a862f8fb6e589ee88fb04552221f90daec8cde32e8e51c5a77c2b",
+  "previousApkSha256": "00e77e12c1d9641753653bf88139a507fec20d5bd063abd001937963e46a8900",
+  "checks": [
+    {
+      "name": "core-text",
+      "directPublic53To54Upgrade": true,
+      "sourceBytesKept": true,
+      "limitsReviewed": true
+    },
+    {
+      "name": "core-image",
+      "directPublic53To54Upgrade": true,
+      "sourceBytesKept": true,
+      "limitsReviewed": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-light"
+    },
+    {
+      "name": "layout-1280x800-font2.0-light"
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark"
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark"
+    },
+    {
+      "name": "layout-800x1280-font1.0-light"
+    },
+    {
+      "name": "layout-800x1280-font2.0-light"
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark"
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark"
+    },
+    {
+      "name": "layout-600x800-font1.0-light"
+    },
+    {
+      "name": "layout-600x800-font2.0-light"
+    },
+    {
+      "name": "layout-600x800-font1.0-dark"
+    },
+    {
+      "name": "layout-600x800-font2.0-dark"
+    }
+  ],
+  "layouts": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "kind": "text",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "bothImagesActuallyVisible": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": {
+        "name": "layout-1280x800-font1.0-light",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          978,
+          666,
+          1077,
+          696
+        ],
+        "rasterGlyphHeight": 15,
+        "rasterGlyphWidth": 98,
+        "image": "layout-1280x800-font1.0-light-glyph.png",
+        "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "kind": "text",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "bothImagesActuallyVisible": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": {
+        "name": "layout-1280x800-font2.0-light",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          978,
+          715,
+          1176,
+          773
+        ],
+        "rasterGlyphHeight": 29,
+        "rasterGlyphWidth": 195,
+        "image": "layout-1280x800-font2.0-light-glyph.png",
+        "sha256": "7fdf3834dc24ab78bea2efa81792ec2a7ec3c67b01c97f297b917286c916ca5e",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "kind": "image",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": false,
+      "bothImagesActuallyVisible": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": null
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "kind": "image",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": false,
+      "bothImagesActuallyVisible": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": null
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": false,
+      "kind": "image",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": false,
+      "bothImagesActuallyVisible": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": null
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": false,
+      "kind": "image",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": false,
+      "bothImagesActuallyVisible": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": null
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": true,
+      "kind": "text",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "bothImagesActuallyVisible": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": {
+        "name": "layout-800x1280-font1.0-dark",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          618,
+          666,
+          717,
+          696
+        ],
+        "rasterGlyphHeight": 15,
+        "rasterGlyphWidth": 98,
+        "image": "layout-800x1280-font1.0-dark-glyph.png",
+        "sha256": "3a5d576b1589ce245cb57b5edf73a114cb683faedeaee463d3e9704e24e828ab",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": true,
+      "kind": "text",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "bothImagesActuallyVisible": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": {
+        "name": "layout-800x1280-font2.0-dark",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          618,
+          1131,
+          816,
+          1189
+        ],
+        "rasterGlyphHeight": 29,
+        "rasterGlyphWidth": 195,
+        "image": "layout-800x1280-font2.0-dark-glyph.png",
+        "sha256": "ebd074517b36c456d676b6d49a126a17fd12e83a97be0e78a5d9debcf2e06b2a",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "kind": "text",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "bothImagesActuallyVisible": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": {
+        "name": "layout-600x800-font1.0-light",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          468,
+          666,
+          567,
+          696
+        ],
+        "rasterGlyphHeight": 15,
+        "rasterGlyphWidth": 98,
+        "image": "layout-600x800-font1.0-light-glyph.png",
+        "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "kind": "text",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "bothImagesActuallyVisible": false,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": {
+        "name": "layout-600x800-font2.0-light",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          468,
+          715,
+          666,
+          773
+        ],
+        "rasterGlyphHeight": 29,
+        "rasterGlyphWidth": 195,
+        "image": "layout-600x800-font2.0-light-glyph.png",
+        "sha256": "7fdf3834dc24ab78bea2efa81792ec2a7ec3c67b01c97f297b917286c916ca5e",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "kind": "image",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": false,
+      "bothImagesActuallyVisible": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": null
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "kind": "image",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": false,
+      "bothImagesActuallyVisible": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "systemFont": null
+    }
+  ],
+  "captures": [
+    {
+      "path": "core-text-second-difference-preview.png",
+      "sha256": "aaf133484bec23926164eea52225052b800fe1b613d668d6adef6a434058ffe1",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1920,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-text-result-preview.png",
+      "sha256": "3a98355e3881063eff6392c2d490c7ef5b637d549b8a6995e60d63da49e96520",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1920,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-image-zoomed-preview.png",
+      "sha256": "8f4efc85812a6626d18bbb9de50a5f54f2b9b697f92d0b30f4947941fba253b5",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1920,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-image-result-preview.png",
+      "sha256": "398e67ca8d9c4de4b2a7053dab055e2102c8af2b57cf076d99bac438967aa371",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1920,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "e027d64b9452790315acd495ee9929dc591a5faf69d82cd155b0e4e2a3c9e5c1",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1920,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+      "surfaceBoundsPx": [
+        978,
+        666,
+        1077,
+        696
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "d8d6d8f6073283b9f3a4cecd3e7e1e96d55e3f8b7770d95db215989891d71f19",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1920,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "7fdf3834dc24ab78bea2efa81792ec2a7ec3c67b01c97f297b917286c916ca5e",
+      "surfaceBoundsPx": [
+        978,
+        715,
+        1176,
+        773
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "acf2bf3525fcdc8d61a048afc3d5a3392dfba2ef48f684003fc78a7c601d5095",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1920,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "aa5f1dcf23ae1331bdbba1d6b7b460e68b12563f61e89d2fcb21f3f9bc9087e2",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1920,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "995dd56f61a2bb3a4d5d590b8fec0533fd061d2c0f26b453a7ad853e174dc1ee",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1199,
+        1871
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "bef4a4bf54ce7c8c558f29151aaaf3350f80ca3feaca85f23cfa6ab22b1d24dd",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1199,
+        1871
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "b5adcd74e08350171d25d85bf5ecb32a54cda534ecb2769bfd9faaea52ad7c42",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1199,
+        1871
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "3a5d576b1589ce245cb57b5edf73a114cb683faedeaee463d3e9704e24e828ab",
+      "surfaceBoundsPx": [
+        618,
+        666,
+        717,
+        696
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "805c4535b83a940b2c1c8f2d8d1cf1c7be88fa31c8e2fdd2354a20dda71a5b63",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        1199,
+        1871
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "ebd074517b36c456d676b6d49a126a17fd12e83a97be0e78a5d9debcf2e06b2a",
+      "surfaceBoundsPx": [
+        618,
+        1131,
+        816,
+        1189
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "e418cf45d851f24b90df053fc2ce1b2d712caa63a3009c095d0773de804d7a54",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        900,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-light-glyph.png",
+      "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+      "surfaceBoundsPx": [
+        468,
+        666,
+        567,
+        696
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "c6234072d57485412113f135a3d8e91c859c56dc6867c0b6bd98229080a4c373",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        900,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-600x800-font2.0-light-glyph.png",
+      "sha256": "7fdf3834dc24ab78bea2efa81792ec2a7ec3c67b01c97f297b917286c916ca5e",
+      "surfaceBoundsPx": [
+        468,
+        715,
+        666,
+        773
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "04713cccf9f2b98caeb3744ee7961e7611971c509f5f2358e316378ea7920e06",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        900,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "4ed0d14c1281106e678694aaf3d69489ccc2d7538683ec7a45673f0a79d0044a",
+      "surfaceBoundsPx": [
+        0,
+        36,
+        900,
+        1152
+      ],
+      "syntheticSetupOnly": true
+    }
+  ],
+  "clipboardProofs": [
+    {
+      "name": "core-text",
+      "actualSyntheticText": "Left: After.txt \u00b7 UTF-8\nRight: Before.txt \u00b7 UTF-8\n2 difference groups \u00b7 2 removed \u00b7 2 added\n\u2212 L2 [LF] New route\n+ R2 [LF] Old route\n\u2212 L4 [LF] Pack a camera\n+ R4 [LF] Pack a light\n",
+      "sha256": "0092e63e67fb036110d53708194713ce71e31834259b23ca5250e7149675637d",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "core-text-swapped",
+      "actualSyntheticText": "Left: Before.txt \u00b7 UTF-8\nRight: After.txt \u00b7 UTF-8\n2 difference groups \u00b7 2 removed \u00b7 2 added\n\u2212 L2 [LF] Old route\n+ R2 [LF] New route\n\u2212 L4 [LF] Pack a light\n+ R4 [LF] Pack a camera\n",
+      "sha256": "ccb1f62caf58b21bb2c440a46a669c192ea2d31b0e67c0d7eec7c2bdad4d9d53",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "actualSyntheticText": "Left: After.txt \u00b7 UTF-8\nRight: Before.txt \u00b7 UTF-8\n2 difference groups \u00b7 2 removed \u00b7 2 added\n\u2212 L2 [LF] New route\n+ R2 [LF] Old route\n\u2212 L4 [LF] Pack a camera\n+ R4 [LF] Pack a light\n",
+      "sha256": "0092e63e67fb036110d53708194713ce71e31834259b23ca5250e7149675637d",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "actualSyntheticText": "Left: After.txt \u00b7 UTF-8\nRight: Before.txt \u00b7 UTF-8\n2 difference groups \u00b7 2 removed \u00b7 2 added\n\u2212 L2 [LF] New route\n+ R2 [LF] Old route\n\u2212 L4 [LF] Pack a camera\n+ R4 [LF] Pack a light\n",
+      "sha256": "0092e63e67fb036110d53708194713ce71e31834259b23ca5250e7149675637d",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "actualSyntheticText": "Left: After.txt \u00b7 UTF-8\nRight: Before.txt \u00b7 UTF-8\n2 difference groups \u00b7 2 removed \u00b7 2 added\n\u2212 L2 [LF] New route\n+ R2 [LF] Old route\n\u2212 L4 [LF] Pack a camera\n+ R4 [LF] Pack a light\n",
+      "sha256": "0092e63e67fb036110d53708194713ce71e31834259b23ca5250e7149675637d",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "actualSyntheticText": "Left: After.txt \u00b7 UTF-8\nRight: Before.txt \u00b7 UTF-8\n2 difference groups \u00b7 2 removed \u00b7 2 added\n\u2212 L2 [LF] New route\n+ R2 [LF] Old route\n\u2212 L4 [LF] Pack a camera\n+ R4 [LF] Pack a light\n",
+      "sha256": "0092e63e67fb036110d53708194713ce71e31834259b23ca5250e7149675637d",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "actualSyntheticText": "Left: After.txt \u00b7 UTF-8\nRight: Before.txt \u00b7 UTF-8\n2 difference groups \u00b7 2 removed \u00b7 2 added\n\u2212 L2 [LF] New route\n+ R2 [LF] Old route\n\u2212 L4 [LF] Pack a camera\n+ R4 [LF] Pack a light\n",
+      "sha256": "0092e63e67fb036110d53708194713ce71e31834259b23ca5250e7149675637d",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "actualSyntheticText": "Left: After.txt \u00b7 UTF-8\nRight: Before.txt \u00b7 UTF-8\n2 difference groups \u00b7 2 removed \u00b7 2 added\n\u2212 L2 [LF] New route\n+ R2 [LF] Old route\n\u2212 L4 [LF] Pack a camera\n+ R4 [LF] Pack a light\n",
+      "sha256": "0092e63e67fb036110d53708194713ce71e31834259b23ca5250e7149675637d",
+      "readByForegroundTestOnlyActivity": true
+    }
+  ],
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "operationsUseExactOptimizedApk": true,
+  "textVisibilityProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        978,
+        666,
+        1077,
+        696
+      ],
+      "rasterGlyphHeight": 15,
+      "rasterGlyphWidth": 98,
+      "image": "layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        978,
+        715,
+        1176,
+        773
+      ],
+      "rasterGlyphHeight": 29,
+      "rasterGlyphWidth": 195,
+      "image": "layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "7fdf3834dc24ab78bea2efa81792ec2a7ec3c67b01c97f297b917286c916ca5e",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        618,
+        666,
+        717,
+        696
+      ],
+      "rasterGlyphHeight": 15,
+      "rasterGlyphWidth": 98,
+      "image": "layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "3a5d576b1589ce245cb57b5edf73a114cb683faedeaee463d3e9704e24e828ab",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        618,
+        1131,
+        816,
+        1189
+      ],
+      "rasterGlyphHeight": 29,
+      "rasterGlyphWidth": 195,
+      "image": "layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "ebd074517b36c456d676b6d49a126a17fd12e83a97be0e78a5d9debcf2e06b2a",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        468,
+        666,
+        567,
+        696
+      ],
+      "rasterGlyphHeight": 15,
+      "rasterGlyphWidth": 98,
+      "image": "layout-600x800-font1.0-light-glyph.png",
+      "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        468,
+        715,
+        666,
+        773
+      ],
+      "rasterGlyphHeight": 29,
+      "rasterGlyphWidth": 195,
+      "image": "layout-600x800-font2.0-light-glyph.png",
+      "sha256": "7fdf3834dc24ab78bea2efa81792ec2a7ec3c67b01c97f297b917286c916ca5e",
+      "actualReadableGlyphs": true
+    }
+  ],
+  "controlProofs": [
+    {
+      "name": "core-text-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        1001,
+        1902,
+        1073
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1527,
+        677,
+        1902,
+        749
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        635,
+        410,
+        829,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-next",
+      "text": "",
+      "description": "",
+      "bounds": [
+        348,
+        410,
+        527,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-previous",
+      "text": "",
+      "description": "",
+      "bounds": [
+        132,
+        410,
+        348,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-swap",
+      "text": "",
+      "description": "",
+      "bounds": [
+        359,
+        266,
+        502,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-swapped-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        635,
+        410,
+        829,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        132,
+        266,
+        353,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-close-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1083,
+        852,
+        1344,
+        924
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-text-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        972,
+        1902,
+        1044
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1527,
+        648,
+        1902,
+        720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-zoom",
+      "text": "",
+      "description": "",
+      "bounds": [
+        385,
+        398,
+        457,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-pan",
+      "text": "",
+      "description": "",
+      "bounds": [
+        529,
+        398,
+        601,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-fit",
+      "text": "",
+      "description": "",
+      "bounds": [
+        204,
+        398,
+        385,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-swap",
+      "text": "",
+      "description": "",
+      "bounds": [
+        359,
+        266,
+        502,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        132,
+        266,
+        353,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-close-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1083,
+        852,
+        1344,
+        924
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-image-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        501,
+        1902,
+        573
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1527,
+        177,
+        1902,
+        249
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        132,
+        266,
+        353,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Swap sides",
+      "bounds": [
+        359,
+        266,
+        502,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Compare again",
+      "bounds": [
+        508,
+        266,
+        685,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Close file comparison",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Previous difference",
+      "bounds": [
+        132,
+        410,
+        348,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Next difference",
+      "bounds": [
+        348,
+        410,
+        527,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Copy differences",
+      "bounds": [
+        635,
+        410,
+        829,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        635,
+        410,
+        829,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1780,
+        40,
+        1902,
+        122
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        508,
+        1902,
+        580
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1780,
+        40,
+        1902,
+        122
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        273,
+        1902,
+        345
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        132,
+        366,
+        515,
+        446
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Swap sides",
+      "bounds": [
+        521,
+        366,
+        756,
+        446
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Compare again",
+      "bounds": [
+        762,
+        366,
+        1063,
+        446
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Close file comparison",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Previous difference",
+      "bounds": [
+        132,
+        536,
+        509,
+        616
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Next difference",
+      "bounds": [
+        509,
+        536,
+        816,
+        616
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Copy differences",
+      "bounds": [
+        971,
+        536,
+        1303,
+        616
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        971,
+        536,
+        1303,
+        616
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        507,
+        1902,
+        579
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1527,
+        183,
+        1902,
+        255
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        132,
+        266,
+        353,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Swap sides",
+      "bounds": [
+        359,
+        266,
+        502,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Compare again",
+      "bounds": [
+        508,
+        266,
+        685,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Close file comparison",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Zoom both images in",
+      "bounds": [
+        385,
+        398,
+        457,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Fit both images",
+      "bounds": [
+        204,
+        398,
+        385,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Zoom both images out",
+      "bounds": [
+        132,
+        398,
+        204,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-zoom",
+      "text": "",
+      "description": "",
+      "bounds": [
+        385,
+        398,
+        457,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-fit",
+      "text": "",
+      "description": "",
+      "bounds": [
+        204,
+        398,
+        385,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1780,
+        40,
+        1902,
+        122
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        489,
+        1902,
+        561
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1780,
+        40,
+        1902,
+        122
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        748,
+        1902,
+        820
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        132,
+        366,
+        515,
+        446
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Swap sides",
+      "bounds": [
+        521,
+        366,
+        756,
+        446
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Compare again",
+      "bounds": [
+        762,
+        366,
+        1063,
+        446
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Close file comparison",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Zoom both images in",
+      "bounds": [
+        511,
+        557,
+        583,
+        629
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Fit both images",
+      "bounds": [
+        204,
+        557,
+        511,
+        637
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Zoom both images out",
+      "bounds": [
+        132,
+        557,
+        204,
+        629
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-zoom",
+      "text": "",
+      "description": "",
+      "bounds": [
+        511,
+        557,
+        583,
+        629
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-fit",
+      "text": "",
+      "description": "",
+      "bounds": [
+        204,
+        557,
+        511,
+        637
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1716,
+        60,
+        1788,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1095,
+        45,
+        1182,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        508,
+        1182,
+        580
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1095,
+        45,
+        1182,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        807,
+        184,
+        1182,
+        256
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        36,
+        266,
+        257,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Swap sides",
+      "bounds": [
+        263,
+        266,
+        406,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Compare again",
+      "bounds": [
+        412,
+        266,
+        589,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Close file comparison",
+      "bounds": [
+        1092,
+        60,
+        1164,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Zoom both images in",
+      "bounds": [
+        289,
+        398,
+        361,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Fit both images",
+      "bounds": [
+        108,
+        398,
+        289,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Zoom both images out",
+      "bounds": [
+        36,
+        398,
+        108,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-zoom",
+      "text": "",
+      "description": "",
+      "bounds": [
+        289,
+        398,
+        361,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-fit",
+      "text": "",
+      "description": "",
+      "bounds": [
+        108,
+        398,
+        289,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1092,
+        60,
+        1164,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1060,
+        126,
+        1182,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        466,
+        1182,
+        538
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1060,
+        126,
+        1182,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        993,
+        1182,
+        1065
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        36,
+        462,
+        419,
+        542
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Swap sides",
+      "bounds": [
+        425,
+        462,
+        660,
+        542
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Compare again",
+      "bounds": [
+        666,
+        462,
+        967,
+        542
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Close file comparison",
+      "bounds": [
+        1092,
+        60,
+        1164,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Zoom both images in",
+      "bounds": [
+        415,
+        653,
+        487,
+        725
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Fit both images",
+      "bounds": [
+        108,
+        653,
+        415,
+        733
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Zoom both images out",
+      "bounds": [
+        36,
+        653,
+        108,
+        725
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-zoom",
+      "text": "",
+      "description": "",
+      "bounds": [
+        415,
+        653,
+        487,
+        725
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-fit",
+      "text": "",
+      "description": "",
+      "bounds": [
+        108,
+        653,
+        415,
+        733
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1092,
+        60,
+        1164,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1095,
+        45,
+        1182,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        508,
+        1182,
+        580
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1095,
+        45,
+        1182,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        807,
+        184,
+        1182,
+        256
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        36,
+        266,
+        257,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Swap sides",
+      "bounds": [
+        263,
+        266,
+        406,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Compare again",
+      "bounds": [
+        412,
+        266,
+        589,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Close file comparison",
+      "bounds": [
+        1092,
+        60,
+        1164,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Previous difference",
+      "bounds": [
+        36,
+        410,
+        252,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Next difference",
+      "bounds": [
+        252,
+        410,
+        431,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Copy differences",
+      "bounds": [
+        539,
+        410,
+        733,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        539,
+        410,
+        733,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1092,
+        60,
+        1164,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1060,
+        126,
+        1182,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        481,
+        1182,
+        553
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1060,
+        126,
+        1182,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        1003,
+        1182,
+        1075
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        36,
+        462,
+        419,
+        542
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Swap sides",
+      "bounds": [
+        425,
+        462,
+        660,
+        542
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Compare again",
+      "bounds": [
+        666,
+        462,
+        967,
+        542
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Close file comparison",
+      "bounds": [
+        1092,
+        60,
+        1164,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Previous difference",
+      "bounds": [
+        36,
+        665,
+        413,
+        745
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Next difference",
+      "bounds": [
+        413,
+        665,
+        720,
+        745
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Copy differences",
+      "bounds": [
+        36,
+        776,
+        368,
+        856
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        36,
+        776,
+        368,
+        856
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1092,
+        60,
+        1164,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        795,
+        45,
+        882,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        998,
+        882,
+        1070
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        795,
+        45,
+        882,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        507,
+        674,
+        882,
+        746
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        36,
+        266,
+        257,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Swap sides",
+      "bounds": [
+        263,
+        266,
+        406,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Compare again",
+      "bounds": [
+        412,
+        266,
+        589,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Close file comparison",
+      "bounds": [
+        792,
+        60,
+        864,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Previous difference",
+      "bounds": [
+        36,
+        410,
+        252,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Next difference",
+      "bounds": [
+        252,
+        410,
+        431,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Copy differences",
+      "bounds": [
+        539,
+        410,
+        733,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        539,
+        410,
+        733,
+        482
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        792,
+        60,
+        864,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        760,
+        126,
+        882,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        479,
+        882,
+        551
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        760,
+        126,
+        882,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        245,
+        882,
+        317
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        760,
+        126,
+        882,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        503,
+        882,
+        575
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        760,
+        126,
+        882,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        846,
+        882,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        36,
+        558,
+        419,
+        638
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Swap sides",
+      "bounds": [
+        425,
+        558,
+        660,
+        638
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Compare again",
+      "bounds": [
+        36,
+        257,
+        337,
+        337
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Close file comparison",
+      "bounds": [
+        792,
+        60,
+        864,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Previous difference",
+      "bounds": [
+        36,
+        508,
+        413,
+        588
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Next difference",
+      "bounds": [
+        413,
+        508,
+        720,
+        588
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Copy differences",
+      "bounds": [
+        191,
+        536,
+        523,
+        616
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        191,
+        536,
+        523,
+        616
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        792,
+        60,
+        864,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        795,
+        45,
+        882,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        1013,
+        882,
+        1085
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        795,
+        45,
+        882,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        507,
+        689,
+        882,
+        761
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        36,
+        266,
+        257,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Swap sides",
+      "bounds": [
+        263,
+        266,
+        406,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Compare again",
+      "bounds": [
+        412,
+        266,
+        589,
+        338
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Close file comparison",
+      "bounds": [
+        792,
+        60,
+        864,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Zoom both images in",
+      "bounds": [
+        289,
+        398,
+        361,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Fit both images",
+      "bounds": [
+        108,
+        398,
+        289,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Zoom both images out",
+      "bounds": [
+        36,
+        398,
+        108,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-zoom",
+      "text": "",
+      "description": "",
+      "bounds": [
+        289,
+        398,
+        361,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-fit",
+      "text": "",
+      "description": "",
+      "bounds": [
+        108,
+        398,
+        289,
+        470
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        792,
+        60,
+        864,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        760,
+        126,
+        882,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-select-all",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        483,
+        882,
+        555
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-actions-selected",
+      "text": "",
+      "description": "",
+      "bounds": [
+        760,
+        126,
+        882,
+        208
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-compare",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        281,
+        882,
+        353
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Comparison limits\u2026",
+      "bounds": [
+        36,
+        558,
+        419,
+        638
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Swap sides",
+      "bounds": [
+        425,
+        558,
+        660,
+        638
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Compare again",
+      "bounds": [
+        36,
+        265,
+        337,
+        345
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Close file comparison",
+      "bounds": [
+        792,
+        60,
+        864,
+        132
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Zoom both images in",
+      "bounds": [
+        415,
+        567,
+        487,
+        639
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Fit both images",
+      "bounds": [
+        108,
+        567,
+        415,
+        647
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Zoom both images out",
+      "bounds": [
+        36,
+        567,
+        108,
+        639
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-zoom",
+      "text": "",
+      "description": "",
+      "bounds": [
+        415,
+        567,
+        487,
+        639
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-fit",
+      "text": "",
+      "description": "",
+      "bounds": [
+        108,
+        567,
+        415,
+        647
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        792,
+        60,
+        864,
+        132
+      ],
+      "density": 1.5
+    }
+  ],
+  "explicitLayoutResume": {
+    "previousResult": "captures/file-comparison/candidate-2-api36-optimized-2/result.json",
+    "previousResultSha256": "bf83b4306034cb8da487431d115cffd12197d8f4fc2ba4d8e1ffe2a152fdf935",
+    "previousCheckerSha256": "f4414a2c7559a04b100541290e79babb1750bae26def467f87f52dd6202bc91d",
+    "reusedChecks": [
+      "core-text",
+      "core-image",
+      "layout-1280x800-font1.0-light",
+      "layout-1280x800-font2.0-light",
+      "layout-1280x800-font1.0-dark",
+      "layout-1280x800-font2.0-dark",
+      "layout-800x1280-font1.0-light",
+      "layout-800x1280-font2.0-light",
+      "layout-800x1280-font1.0-dark",
+      "layout-800x1280-font2.0-dark",
+      "layout-600x800-font1.0-light"
+    ],
+    "completedLayoutsReused": 9,
+    "completedCoreWorkflowsReused": 2,
+    "previousOriginalStateRestored": true,
+    "unchangedFixtureGeneratorVerified": true,
+    "sourceAndOptimizedApkIdentical": true
+  },
+  "fixtureSha256": {
+    "Before.txt": "d828dca570547bb328ff162091c34cc9207030430e9146759a99e109e0d91522",
+    "After.txt": "9b70024c71d42dc8de6977ed86c90c93433c4d138dcae92e6d52de94e1ad4bfb",
+    "Morning.png": "ebfaba102480f52d37bb2e07ee5bcdd0aea648c3986fe84255ed38fc97891460",
+    "Evening.png": "bed2a34c36250a6180d153fc6717c4758a7d10935b90a7367827e4a67ab1b28b"
+  },
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "systemFontGroups": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "dark": false,
+      "actualTextAndGlyphGrowth": true
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "dark": true,
+      "actualTextAndGlyphGrowth": true
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "dark": false,
+      "actualTextAndGlyphGrowth": true
+    }
+  ],
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "00e77e12c1d9641753653bf88139a507fec20d5bd063abd001937963e46a8900",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "hierarchyRetries": []
+}

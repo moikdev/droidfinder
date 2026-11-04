@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.BrandCompatibilityTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:10:54.999Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.BrandCompatibilityTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:45.199Z" hostname="MacBook-Pro-2.local" time="0.003">
   <properties/>
   <testcase name="incomingSharesCannotUseEitherGenerationOfWorkingFileNames" classname="dev.findroid.BrandCompatibilityTest" time="0.001"/>
   <testcase name="existingShortcutsStillResolveWithoutRewritingTheFile" classname="dev.findroid.BrandCompatibilityTest" time="0.001"/>

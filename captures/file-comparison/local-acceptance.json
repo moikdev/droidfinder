@@ -1,0 +1,36 @@
+{
+  "sourceCommit": "fe7e3f1ba532d23c92dbc4d7c8e225410270eddc",
+  "jvmCases": 1000,
+  "nativeCasesPerApi": 29,
+  "localAcceptanceComplete": true,
+  "publicOtaComplete": false,
+  "independentPublicArchiveVerificationComplete": false,
+  "apis": {
+    "api30": {
+      "nativeCases": 29,
+      "isolatedBatches": 6,
+      "optimizedCoreWorkflows": 2,
+      "layoutCases": 12,
+      "named48DpTargets": 84,
+      "actualClipboardReads": 8,
+      "actualGlyphCaptures": 6,
+      "actualRasterGrowthPairs": 3,
+      "explicitlyReusedCompletedLayouts": 9,
+      "originalStateRestored": true,
+      "originalWorkspaceKept": true
+    },
+    "api36": {
+      "nativeCases": 29,
+      "isolatedBatches": 6,
+      "optimizedCoreWorkflows": 2,
+      "layoutCases": 12,
+      "named48DpTargets": 84,
+      "actualClipboardReads": 8,
+      "actualGlyphCaptures": 6,
+      "actualRasterGrowthPairs": 3,
+      "explicitlyReusedCompletedLayouts": 9,
+      "originalStateRestored": true,
+      "originalWorkspaceKept": true
+    }
+  }
+}

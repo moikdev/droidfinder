@@ -100,6 +100,34 @@ def run(a):
         checkerSha256=sha(Path(__file__).read_bytes()), buildReceiptSha256=sha(a.build_receipt.read_bytes()),
         apkSha256=expected, previousApkSha256=sha(public.read_bytes()), checks=[], layouts=[], captures=[], clipboardProofs=[],
         acceptanceComplete=False, restorationComplete=False, operationsUseExactOptimizedApk=True, textVisibilityProofs=[])
+    if a.resume_from:
+        import ast
+        import shutil
+        previous_path=a.resume_from.resolve()
+        assert previous_path.is_relative_to(MAIN/'captures/file-comparison') and previous_path.name=='result.json'
+        previous=json.loads(previous_path.read_text())
+        old_checker=MAIN/'captures/file-comparison/checker-optimized-attempt-2.py'
+        assert previous['checkerSha256']==sha(old_checker.read_bytes())
+        def fixture_source(raw):
+            tree=ast.parse(raw)
+            return ast.get_source_segment(raw,next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='fixture_documents'))
+        assert fixture_source(old_checker.read_text())==fixture_source(Path(__file__).read_text())
+        assert a.section==previous['section']=='all' and previous['serial']==a.serial
+        assert previous['sourceCommit']==build['sourceCommit'] and previous['apkSha256']==expected
+        assert previous['restorationComplete'] and previous['originalWorkspaceTreeKept'] and previous['immutableOriginalBytesVerifiedBeforeTests']
+        assert not previous['acceptanceComplete'] and len(previous['layouts'])==9
+        assert all(row['sourceBytesKept'] and row['allNamedControlsHaveComplete48DpBounds'] for row in previous['layouts'])
+        for key in ('checks','layouts','captures','clipboardProofs','textVisibilityProofs','controlProofs'):
+            report[key]=previous[key][:]
+        for row in previous['captures']:
+            source=previous_path.parent/row['path'];assert sha(source.read_bytes())==row['sha256'] and source.name==row['path']
+            target=a.output/row['path'];assert not target.exists();shutil.copy2(source,target)
+            assert sha(target.read_bytes())==row['sha256']
+        report['explicitLayoutResume']=dict(previousResult=str(previous_path.relative_to(MAIN)),previousResultSha256=sha(previous_path.read_bytes()),
+            previousCheckerSha256=previous['checkerSha256'],reusedChecks=[row['name'] for row in previous['checks']],
+            completedLayoutsReused=9,completedCoreWorkflowsReused=2,previousOriginalStateRestored=True,
+            unchangedFixtureGeneratorVerified=True,sourceAndOptimizedApkIdentical=True)
+        report['fixtureSha256']={name:sha(raw) for name,raw in fixtures.items()}
     def installed(package='dev.findroid'):
         path=d.shell('pm','path',package).decode().strip().splitlines()[0].removeprefix('package:')
         return sha(d.call('exec-out','cat',path))
@@ -154,8 +182,7 @@ def run(a):
         except AssertionError:return False
     def wait(name,label):return d.wait(name,lambda tree:ready(tree,label),seconds=50)
     def click(name,label):
-        if label not in ('Comparison limits…','Previous difference','Next difference','Copy differences','Swap sides','Fit both images','Zoom both images in','Zoom both images out','Pan both images right','Close file comparison','Close comparison limits','Compare again'):
-            wait(name+'-ready',label)
+        if label=='Actions':wait(name+'-ready',label)
         ui.click(name,label)
     def launch(name):
         assert installed()==expected
@@ -164,7 +191,7 @@ def run(a):
     def open_comparison(name,kind='text'):
         click(name+'-actions','Actions');click(name+'-select-all','Select all')
         click(name+'-actions-selected','Actions');click(name+'-compare','Compare files…')
-        wait(name+'-loaded','Copy differences' if kind=='text' else 'Zoom both images in')
+        wait(name+'-loaded','Old route' if kind=='text' else 'Left image')
 
     def capture(name):
         d.capture(name);tree=ET.parse(private/(name+'-capture.xml')).getroot();scope=ui.scope(tree)
@@ -210,7 +237,9 @@ def run(a):
         d.call('install','-r',ROOT/PAIR[1]);assert installed('dev.findroid.test')==build['files'][PAIR[1]]['sha256']
         if a.section in ('core','all'):
             for kind in ('text','image'):
-                name='core-'+kind;case=seed(name,kind=kind)
+                name='core-'+kind
+                if any(row['name']==name for row in report['checks']):continue
+                case=seed(name,kind=kind)
                 install(public);install(a.apk);launch(name);open_comparison(name,kind)
                 if kind=='text':
                     ui.text(name+'-summary','2 difference groups · 2 removed · 2 added')
@@ -236,6 +265,7 @@ def run(a):
                     for font_scale in (1.0,2.0):
                         kind='text' if (width==800)==dark else 'image'
                         name=f'layout-{width}x{height}-font{font_scale}-'+('dark' if dark else 'light')
+                        if any(row['name']==name for row in report['checks']):continue
                         case=seed(name,dark,kind);requested=(round(width*ui.density),round(height*ui.density))
                         d.shell('wm','size',f'{requested[0]}x{requested[1]}');d.screen=requested
                         actual=tuple(map(int,re.findall(r'(?:Physical|Override) size: (\d+)x(\d+)',d.shell('wm','size').decode())[-1]));assert actual==requested
@@ -292,6 +322,7 @@ def main():
     p.add_argument('--serial',required=True,choices=('emulator-5602','emulator-5582'))
     p.add_argument('--apk',required=True,type=Path);p.add_argument('--build-receipt',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path);p.add_argument('--section',choices=('core','layouts','all'),default='all')
+    p.add_argument('--resume-from',type=Path,help='Explicitly reuse nine completed, restored, identical-APK layouts and their frozen evidence')
     a=p.parse_args()
     with (ORIGINAL/('.'+a.serial+'-acceptance.lock')).open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);run(a)

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.HousekeepingTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:00.538Z" hostname="MacBook-Pro-2.local" time="0.11">
+<testsuite name="dev.findroid.HousekeepingTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:50.669Z" hostname="MacBook-Pro-2.local" time="0.069">
   <properties/>
-  <testcase name="symlinkedCacheAncestorIsNeverTraversedOrCleaned" classname="dev.findroid.HousekeepingTest" time="0.004"/>
-  <testcase name="stoppedCacheDeletionRemainsDiscoverableForAnotherReview" classname="dev.findroid.HousekeepingTest" time="0.01"/>
-  <testcase name="legacyTrashHasNoInventedAgeAndChangedReviewIsKept" classname="dev.findroid.HousekeepingTest" time="0.006"/>
-  <testcase name="nestedPinsStayProtectedUntilEveryReaderCloses" classname="dev.findroid.HousekeepingTest" time="0.001"/>
-  <testcase name="cacheInventoryOnlyIncludesKnownUnitsAndExcludesEscapingLinks" classname="dev.findroid.HousekeepingTest" time="0.009"/>
+  <testcase name="symlinkedCacheAncestorIsNeverTraversedOrCleaned" classname="dev.findroid.HousekeepingTest" time="0.002"/>
+  <testcase name="stoppedCacheDeletionRemainsDiscoverableForAnotherReview" classname="dev.findroid.HousekeepingTest" time="0.007"/>
+  <testcase name="legacyTrashHasNoInventedAgeAndChangedReviewIsKept" classname="dev.findroid.HousekeepingTest" time="0.003"/>
+  <testcase name="nestedPinsStayProtectedUntilEveryReaderCloses" classname="dev.findroid.HousekeepingTest" time="0.002"/>
+  <testcase name="cacheInventoryOnlyIncludesKnownUnitsAndExcludesEscapingLinks" classname="dev.findroid.HousekeepingTest" time="0.005"/>
   <testcase name="cacheExpiryUsesUnitTimeAndShareGraceRatherThanOldSourceTime" classname="dev.findroid.HousekeepingTest" time="0.002"/>
-  <testcase name="trashAgePersistsIndependentlyOfSourceModificationAndRestore" classname="dev.findroid.HousekeepingTest" time="0.004"/>
-  <testcase name="deepFoldersArePartialAndTotalsNeverOverflow" classname="dev.findroid.HousekeepingTest" time="0.06"/>
+  <testcase name="trashAgePersistsIndependentlyOfSourceModificationAndRestore" classname="dev.findroid.HousekeepingTest" time="0.003"/>
+  <testcase name="deepFoldersArePartialAndTotalsNeverOverflow" classname="dev.findroid.HousekeepingTest" time="0.034"/>
   <testcase name="cacheRemovalCannotTargetOriginalsOrCategoryRoots" classname="dev.findroid.HousekeepingTest" time="0.003"/>
-  <testcase name="changedCacheAndActiveReadersAreSkippedIncludingReadersOpenedAfterReview" classname="dev.findroid.HousekeepingTest" time="0.003"/>
-  <testcase name="inventoryCountsLogicalBytesAndNeverFollowsLinks" classname="dev.findroid.HousekeepingTest" time="0.003"/>
-  <testcase name="incompleteAndCancelledMeasurementsAreExplicit" classname="dev.findroid.HousekeepingTest" time="0.003"/>
+  <testcase name="changedCacheAndActiveReadersAreSkippedIncludingReadersOpenedAfterReview" classname="dev.findroid.HousekeepingTest" time="0.002"/>
+  <testcase name="inventoryCountsLogicalBytesAndNeverFollowsLinks" classname="dev.findroid.HousekeepingTest" time="0.002"/>
+  <testcase name="incompleteAndCancelledMeasurementsAreExplicit" classname="dev.findroid.HousekeepingTest" time="0.002"/>
   <testcase name="trashBucketLinksCannotExposeOtherFolders" classname="dev.findroid.HousekeepingTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

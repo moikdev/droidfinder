@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.TextComparisonTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:23:02.825Z" hostname="MacBook-Pro-2.local" time="0.091">
+  <properties/>
+  <testcase name="utf8BomAndBothUtf16ByteOrdersAreLabelled" classname="dev.findroid.TextComparisonTest" time="0.001"/>
+  <testcase name="additionsAndRemovalsDoNotShiftUnchangedLines" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="replacementsAreAlignedAndSeparatedByContext" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="worstCaseDiffIsBoundedAndCancellable" classname="dev.findroid.TextComparisonTest" time="0.058"/>
+  <testcase name="emptySideCanBeAddedOrRemoved" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="emptyFilesHaveNoInventedLines" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="crLfCrAndLfAreDistinct" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="caseTabsAndSpacesAreNotIgnored" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="cancelledReadStopsBeforeTakingAnotherChunk" classname="dev.findroid.TextComparisonTest" time="0.001"/>
+  <testcase name="missingFinalNewlineIsARealDifference" classname="dev.findroid.TextComparisonTest" time="0.002"/>
+  <testcase name="binaryAndUtf32AreRefused" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="exactLineAndLengthLimitsAreAcceptedAndExcessRefused" classname="dev.findroid.TextComparisonTest" time="0.003"/>
+  <testcase name="humanReportIncludesOnlyChangedLinesAndExplicitEndings" classname="dev.findroid.TextComparisonTest" time="0.001"/>
+  <testcase name="trailingNewlineDoesNotInventAnotherLine" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="identicalUnicodeAndWhitespaceRemainExact" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="invalidEncodingIsNeverReplacedSilently" classname="dev.findroid.TextComparisonTest" time="0.0"/>
+  <testcase name="randomizedDiffReconstructsBothInputsAndHasMinimalEdits" classname="dev.findroid.TextComparisonTest" time="0.023"/>
+  <testcase name="byteLimitReadsAnExtraByteInsteadOfTrustingMetadata" classname="dev.findroid.TextComparisonTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

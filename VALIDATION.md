@@ -1,5 +1,24 @@
 # Android preview verification
 
+## Findroid 0.52.0 — read-only file comparison, local acceptance complete
+
+Public OTA and independent immutable-archive acceptance remain pending. Application/native-test source: `fe7e3f1ba532d23c92dbc4d7c8e225410270eddc`. All 447 recorded build inputs match that commit; 94 outputs are frozen.
+
+- All **1,000 JVM cases** pass, including 18 focused text-comparison cases and two command-availability cases. Randomized differences reconstruct both inputs and match an independent minimal-edit oracle. Complete-read, malformed encoding, binary/control data, line/end-of-file distinctions, size/line limits and cancellation checks pass.
+- Both Android 11 and Android 16 pass the same **29 native cases in six fresh-process batches**: five comparison input/image cases, five comparison workflows and 19 Office, structured-preview and provider-input regressions. Actual clipboard reports, nested paired files, stop/retry, source bytes, MIME-only/unknown-size images, stale-cache bypass, refreshed provider names, EXIF sampling and malformed/oversized images pass.
+- A 64-pixel native drag at 4× moves both actual rasters by **54 pixels** on each API after the touch threshold. The fixture pixels, not just stored viewport values, are checked.
+- The exact optimized APK passes direct public **0.51/code 53 → 0.52/code 54** installation and both core workflows per API. Navigation, side swapping, linked image controls, Fit, read-only limits and unchanged source bytes pass. Each API has two actual foreground clipboard reads for the core text workflow.
+- Each API passes **12 balanced window/font/theme cases**: 1280×800, 800×1280 and 600×800 dp; font scales 1.0/2.0; light/dark. Both text and images appear in both themes. Seven complete named 48 dp controls are checked per case: **84 targets per API**. Each API adds six actual clipboard reads, six readable text/glyph captures and three normal/enlarged raster-growth pairs. Source bytes and visible image pairs pass.
+- App lint: **0 errors / 149 warnings / 12 hints**; interop lint: **0 errors / 18 warnings**. Preview/unsigned packaging, signing continuity, all four ABIs, ZIP alignment and 64-bit 16 KiB ELF load alignment pass. OCR's 32-bit libraries retain their previously disclosed 4 KiB alignment; physical 16 KiB runtime acceptance remains open.
+- All **54 selected local PNG paths** are reviewed: ten native UI captures, 32 optimized result captures and 12 exact glyph subsets of inspected results. The guide images are identical copies of inspected optimized captures. Header context can scroll out of view at large text; controls remain reachable while the document/image body stays visible.
+- Every completed/stopped controller preserves the original **495 API30 / 443 API36** managed files and recorded absences, original Workspace trees, URI grants, storage mode, font/display/size settings and the exact public 0.51 APK. Private recovery payloads and full diagnostic windows are excluded from publication.
+
+Preview: **38,033,380 bytes**, SHA-256 `5a44dfb8d00a862f8fb6e589ee88fb04552221f90daec8cde32e8e51c5a77c2b`.
+
+Earlier attempts are retained and excluded from final totals. They include an incorrect native-test selection argument, a reset-helper syntax error before native cases, and a tree URI passed where a document URI was required by a fixture. Earlier passing drafts were superseded by proportional 4× panning and refreshed/cancellable metadata. The first optimized helper waited for an off-screen Select all item; its second revision completed both core workflows and nine layouts per API before waiting for a scrolled-out Copy differences control. Fresh body-based readiness completes the remaining three cases on each API. The final receipts explicitly bind the nine reused layouts, prior restored receipts, identical APK/source, unchanged fixture generator and every retained image hash. No application rebuild occurred between those optimized attempts.
+
+[Comparison guide](docs/FILE-COMPARISON.md) · [Release notes](docs/releases/0.52.0.md).
+
 ## Findroid 0.51.0 — read-only Office previews, acceptance complete
 
 Local acceptance is complete for candidate 3, application/native-test source `c4b8e26b39f2c3826d4ca45f15a67b10ca6207b3`. All 435 compiled inputs match that commit; 95 outputs are frozen.

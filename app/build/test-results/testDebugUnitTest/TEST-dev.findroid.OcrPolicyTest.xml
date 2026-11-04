@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.OcrPolicyTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:01.301Z" hostname="MacBook-Pro-2.local" time="0.005">
+<testsuite name="dev.findroid.OcrPolicyTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:51.320Z" hostname="MacBook-Pro-2.local" time="0.004">
   <properties/>
   <testcase name="limitedResultDoesNotCutSurrogatePair" classname="dev.findroid.OcrPolicyTest" time="0.001"/>
   <testcase name="unknownLanguageAndPathsAreRefused" classname="dev.findroid.OcrPolicyTest" time="0.0"/>
   <testcase name="copiedResultPreservesPassageAndNewlines" classname="dev.findroid.OcrPolicyTest" time="0.0"/>
   <testcase name="textWindowsRetainEveryCharacterAndBoundTallText" classname="dev.findroid.OcrPolicyTest" time="0.003"/>
   <testcase name="rasterBoundsEvenHugeInputWithoutIntegerOverflow" classname="dev.findroid.OcrPolicyTest" time="0.0"/>
-  <testcase name="catalogHasOnlyPinnedExactLanguageFiles" classname="dev.findroid.OcrPolicyTest" time="0.001"/>
+  <testcase name="catalogHasOnlyPinnedExactLanguageFiles" classname="dev.findroid.OcrPolicyTest" time="0.0"/>
   <testcase name="invalidRasterDimensionsAreRefused" classname="dev.findroid.OcrPolicyTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

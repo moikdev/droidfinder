@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.ExplorerShortcutsTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:10:55.750Z" hostname="MacBook-Pro-2.local" time="0.001">
+<testsuite name="dev.findroid.ExplorerShortcutsTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:46.018Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
   <testcase name="functionAndAddressAliasesAgree" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
   <testcase name="textFieldsKeepEditingShortcutsAndArrows" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
   <testcase name="treeInspectorsAndFittingAreAvailable" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
   <testcase name="ctrlUsesWindowsAndMetaRetainsFinderAliases" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
-  <testcase name="focusAndAdditiveSelectionKeepTheirModifiers" classname="dev.findroid.ExplorerShortcutsTest" time="0.001"/>
+  <testcase name="focusAndAdditiveSelectionKeepTheirModifiers" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
   <testcase name="clipboardInsertAliasesAndPermanentDeleteAreMapped" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
   <testcase name="helpMenusAndFullscreenResolveWithoutPrintableKeys" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
-  <testcase name="ordinaryTypingDoesNotTriggerFileCommands" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
+  <testcase name="ordinaryTypingDoesNotTriggerFileCommands" classname="dev.findroid.ExplorerShortcutsTest" time="0.001"/>
   <testcase name="allNineNumberedTabsAndViewsResolve" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
   <testcase name="windowFolderAndTabCommandsAreDistinct" classname="dev.findroid.ExplorerShortcutsTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>

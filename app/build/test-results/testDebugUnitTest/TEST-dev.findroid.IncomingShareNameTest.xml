@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.IncomingShareNameTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:00.662Z" hostname="MacBook-Pro-2.local" time="0.05">
+<testsuite name="dev.findroid.IncomingShareNameTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:50.746Z" hostname="MacBook-Pro-2.local" time="0.057">
   <properties/>
-  <testcase name="oversizedProviderNamesAreNormalizedWithinABoundedBudget" classname="dev.findroid.IncomingShareNameTest" time="0.05"/>
+  <testcase name="oversizedProviderNamesAreNormalizedWithinABoundedBudget" classname="dev.findroid.IncomingShareNameTest" time="0.056"/>
   <testcase name="preservesOrdinaryNamesAndUnicode" classname="dev.findroid.IncomingShareNameTest" time="0.0"/>
-  <testcase name="removesTraversalControlAndWorkingFileNames" classname="dev.findroid.IncomingShareNameTest" time="0.0"/>
+  <testcase name="removesTraversalControlAndWorkingFileNames" classname="dev.findroid.IncomingShareNameTest" time="0.001"/>
   <testcase name="longUnicodeNamesRespectByteBudgetWithoutSplittingSurrogatePairs" classname="dev.findroid.IncomingShareNameTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

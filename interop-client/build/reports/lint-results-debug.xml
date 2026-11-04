@@ -14,7 +14,7 @@
         errorLine1="        targetSdk = 36"
         errorLine2="        ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/build.gradle.kts"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/build.gradle.kts"
             line="8"
             column="9"/>
     </issue>
@@ -30,7 +30,7 @@
         errorLine1="    compileSdk = 36"
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/build.gradle.kts"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/build.gradle.kts"
             line="4"
             column="5"/>
     </issue>
@@ -48,7 +48,7 @@
         errorLine1="    &lt;application android:label=&quot;Findroid interop QA&quot; android:theme=&quot;@android:style/Theme.Material.Light.NoActionBar&quot; android:allowBackup=&quot;false&quot;>"
         errorLine2="                                                                                                                                          ~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/AndroidManifest.xml"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/AndroidManifest.xml"
             line="3"
             column="139"/>
     </issue>
@@ -66,7 +66,7 @@
         errorLine1="    &lt;application android:label=&quot;Findroid interop QA&quot; android:theme=&quot;@android:style/Theme.Material.Light.NoActionBar&quot; android:allowBackup=&quot;false&quot;>"
         errorLine2="     ~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/AndroidManifest.xml"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/AndroidManifest.xml"
             line="3"
             column="6"/>
     </issue>
@@ -84,7 +84,7 @@
         errorLine1="            text = &quot;Another Android app&quot;"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="35"
             column="21"/>
     </issue>
@@ -102,7 +102,7 @@
         errorLine1="            text = &quot;Drop files here\n\nThe receiver copies the selected files.&quot;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="40"
             column="20"/>
     </issue>
@@ -120,7 +120,7 @@
         errorLine1="            text = &quot;Drop files here\n\nThe receiver copies the selected files.&quot;"
         errorLine2="                    ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="40"
             column="21"/>
     </issue>
@@ -138,7 +138,7 @@
         errorLine1="            text = &quot;Drop files here\n\nThe receiver copies the selected files.&quot;"
         errorLine2="                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="40"
             column="40"/>
     </issue>
@@ -156,7 +156,7 @@
         errorLine1="                DragEvent.ACTION_DRAG_ENTERED -> { zone.text = &quot;Release to copy files&quot;; true }"
         errorLine2="                                                                ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="63"
             column="65"/>
     </issue>
@@ -174,7 +174,7 @@
         errorLine1="                DragEvent.ACTION_DRAG_EXITED -> { zone.text = &quot;Drop files here&quot;; true }"
         errorLine2="                                                               ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="64"
             column="64"/>
     </issue>
@@ -192,7 +192,7 @@
         errorLine1="                    zone.text = &quot;Reading dropped files…&quot;"
         errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="68"
             column="34"/>
     </issue>
@@ -210,7 +210,7 @@
         errorLine1="                            runOnUiThread { zone.text = &quot;Received ${items.length()} file${if (items.length() == 1) &quot;&quot; else &quot;s&quot;}\n\n&quot; +"
         errorLine2="                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="95"
             column="57"/>
     </issue>
@@ -228,7 +228,7 @@
         errorLine1="                            runOnUiThread { zone.text = &quot;Received ${items.length()} file${if (items.length() == 1) &quot;&quot; else &quot;s&quot;}\n\n&quot; +"
         errorLine2="                                                        ^">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="95"
             column="57"/>
     </issue>
@@ -246,7 +246,7 @@
         errorLine1="                            runOnUiThread { zone.text = &quot;Received ${items.length()} file${if (items.length() == 1) &quot;&quot; else &quot;s&quot;}\n\n&quot; +"
         errorLine2="                                                         ~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="95"
             column="58"/>
     </issue>
@@ -264,7 +264,7 @@
         errorLine1="                            runOnUiThread { zone.text = &quot;Received ${items.length()} file${if (items.length() == 1) &quot;&quot; else &quot;s&quot;}\n\n&quot; +"
         errorLine2="                                                                                   ~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="95"
             column="84"/>
     </issue>
@@ -282,7 +282,7 @@
         errorLine1="                            runOnUiThread { zone.text = &quot;Drop failed: ${error.message}&quot; }"
         errorLine2="                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="99"
             column="57"/>
     </issue>
@@ -300,7 +300,7 @@
         errorLine1="                            runOnUiThread { zone.text = &quot;Drop failed: ${error.message}&quot; }"
         errorLine2="                                                         ~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/DropReceiverActivity.kt"
             line="99"
             column="58"/>
     </issue>
@@ -318,7 +318,7 @@
         errorLine1="                text = &quot;Findroid integration QA&quot;"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-office-preview/interop-client/src/main/java/dev/findroid/interop/InteropActivity.kt"
+            file="/Users/LENOVO/.t3/projects/droidfinder/interop-client/src/main/java/dev/findroid/interop/InteropActivity.kt"
             line="48"
             column="25"/>
     </issue>

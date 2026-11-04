@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "passed": 5,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "mimeOnlyUnknownSizeProviderImagesBypassStaleCacheAndRemoveTemporaryCopies",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "corruptAndOversizedImagesRefuseWithoutChangingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "localLoadReopensTextAndRefusesMixedFormats",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "imageDecoderSamplesAndAppliesExifOrientationWithoutWritingSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "missingUnauthorizedAndRepeatedFilesAreRefused",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 3.8,
+  "timedOut": false
+}

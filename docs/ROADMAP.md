@@ -45,6 +45,7 @@ The [prioritized next-improvements list](NEXT-IMPROVEMENTS.md) contains 72 concr
 - [ ] Clear incomplete/offline/inaccessible results and index maintenance controls. Primary scans now expose stopped/capped/provider-pending/read errors and retry details (0.12.0); index maintenance remains open.
 
 ## 5. Peek and archives
+- [x] Read-only text differences and side-by-side image comparison with linked zoom/pan, explicit bounds and nested folder-comparison entry points (0.52.0). See [file comparison](FILE-COMPARISON.md).
 - [x] Optional local OCR for images/PDF pages (0.50.0), and bounded read-only DOCX/XLSX/PPTX text/value previews with documented fidelity limits (0.51.0). See [OCR](LOCAL-OCR.md) and [Office previews](OFFICE-PREVIEWS.md).
 - [ ] PDF text search/selection, thumbnails/bookmarks; richer image metadata and large-image navigation. PDF thumbnails, embedded contents, saved page bookmarks/position, cancellable text-layer search and selectable reading text are implemented in 0.13.0; richer image metadata and region-based large-image navigation are implemented in 0.17.0; direct selection on the rendered PDF page remains open.
 - [x] Video subtitles/speed/resume, structured data/code/Markdown/CSV previews. Media3 playback and subtitles/speed/resume are implemented in 0.14.0. Native Markdown, CSV/TSV, strict JSON formatting and code/text previews with explicit bounds and cancellable streams are implemented in 0.15.0; see docs/STRUCTURED-PEEK.md for supported rendering and limits.

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.DirectoryLoaderTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:10:55.248Z" hostname="MacBook-Pro-2.local" time="0.494">
+<testsuite name="dev.findroid.DirectoryLoaderTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:45.447Z" hostname="MacBook-Pro-2.local" time="0.561">
   <properties/>
-  <testcase name="sizePresetsReportUnknownSizesBeforeContentReads" classname="dev.findroid.DirectoryLoaderTest" time="0.03"/>
+  <testcase name="sizePresetsReportUnknownSizesBeforeContentReads" classname="dev.findroid.DirectoryLoaderTest" time="0.042"/>
   <testcase name="providerPendingErrorAndInformationKeepAvailableFilesVisible" classname="dev.findroid.DirectoryLoaderTest" time="0.003"/>
-  <testcase name="traversalBudgetAndHiddenSymlinkAndProtectedPoliciesAreIndependent" classname="dev.findroid.DirectoryLoaderTest" time="0.003"/>
+  <testcase name="traversalBudgetAndHiddenSymlinkAndProtectedPoliciesAreIndependent" classname="dev.findroid.DirectoryLoaderTest" time="0.004"/>
   <testcase name="unverifiedExactProviderExclusionsSkipContentAndReportIncompleteResults" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
-  <testcase name="oneCalendarReferenceAndOneContentReadSupplyAdmissionAndEvidence" classname="dev.findroid.DirectoryLoaderTest" time="0.007"/>
+  <testcase name="oneCalendarReferenceAndOneContentReadSupplyAdmissionAndEvidence" classname="dev.findroid.DirectoryLoaderTest" time="0.011"/>
   <testcase name="recursiveTraversalKeepsReadableSiblingsAndReportsOfflineLocations" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
-  <testcase name="slowPublicationLeavesTimeToScanBeforeSortingAnotherBatch" classname="dev.findroid.DirectoryLoaderTest" time="0.035"/>
-  <testcase name="unreadableDirectFolderIsAnErrorRatherThanAnEmptySuccess" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
-  <testcase name="limitsAreExplicitAndAHigherBudgetCanReturnTheRemainingItems" classname="dev.findroid.DirectoryLoaderTest" time="0.004"/>
-  <testcase name="recentsKeepsTheNewestTwoHundredAcrossAllRoots" classname="dev.findroid.DirectoryLoaderTest" time="0.047"/>
-  <testcase name="sevenThousandItemsArePublishedProgressivelyWithoutTheOldFiveThousandCap" classname="dev.findroid.DirectoryLoaderTest" time="0.326"/>
+  <testcase name="slowPublicationLeavesTimeToScanBeforeSortingAnotherBatch" classname="dev.findroid.DirectoryLoaderTest" time="0.032"/>
+  <testcase name="unreadableDirectFolderIsAnErrorRatherThanAnEmptySuccess" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
+  <testcase name="limitsAreExplicitAndAHigherBudgetCanReturnTheRemainingItems" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
+  <testcase name="recentsKeepsTheNewestTwoHundredAcrossAllRoots" classname="dev.findroid.DirectoryLoaderTest" time="0.064"/>
+  <testcase name="sevenThousandItemsArePublishedProgressivelyWithoutTheOldFiveThousandCap" classname="dev.findroid.DirectoryLoaderTest" time="0.365"/>
   <testcase name="shallowSearchStillReportsRootProviderFailuresAndPendingResults" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
-  <testcase name="exclusionsPruneEveryMatchingSubtreeWithoutMatchingPrefixesOrFiles" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
+  <testcase name="exclusionsPruneEveryMatchingSubtreeWithoutMatchingPrefixesOrFiles" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
   <testcase name="shallowSearchNeverOpensChildrenEvenWhenRecursiveWasRequested" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
-  <testcase name="issueExamplesAreBoundedAndUnknownSizesAreNotTreatedAsZero" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
-  <testcase name="explicitCollectionsStayNonrecursiveAndOnlyExcludeMatchingFolderEntries" classname="dev.findroid.DirectoryLoaderTest" time="0.002"/>
-  <testcase name="cancellationStopsPublicationAndDoesNotBecomeAnUnreadableFileWarning" classname="dev.findroid.DirectoryLoaderTest" time="0.021"/>
-  <testcase name="exactExclusionsPruneRootsAndSubtreesAndKeepSiblingCacheFolders" classname="dev.findroid.DirectoryLoaderTest" time="0.003"/>
+  <testcase name="issueExamplesAreBoundedAndUnknownSizesAreNotTreatedAsZero" classname="dev.findroid.DirectoryLoaderTest" time="0.003"/>
+  <testcase name="explicitCollectionsStayNonrecursiveAndOnlyExcludeMatchingFolderEntries" classname="dev.findroid.DirectoryLoaderTest" time="0.001"/>
+  <testcase name="cancellationStopsPublicationAndDoesNotBecomeAnUnreadableFileWarning" classname="dev.findroid.DirectoryLoaderTest" time="0.02"/>
+  <testcase name="exactExclusionsPruneRootsAndSubtreesAndKeepSiblingCacheFolders" classname="dev.findroid.DirectoryLoaderTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

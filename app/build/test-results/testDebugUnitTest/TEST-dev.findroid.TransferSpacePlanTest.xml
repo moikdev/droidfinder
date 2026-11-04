@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.TransferSpacePlanTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:12.032Z" hostname="MacBook-Pro-2.local" time="0.001">
+<testsuite name="dev.findroid.TransferSpacePlanTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:23:03.044Z" hostname="MacBook-Pro-2.local" time="0.001">
   <properties/>
-  <testcase name="saturatingTotalsNeverBecomeNegativeOrClaimAnExactFit" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
+  <testcase name="saturatingTotalsNeverBecomeNegativeOrClaimAnExactFit" classname="dev.findroid.TransferSpacePlanTest" time="0.001"/>
   <testcase name="equalContentAndCapacityStillExplainsUncountedOverhead" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="movesBudgetTheirFallbackWithoutCreditingSourceDeletion" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="stagingDoesNotDoubleThePayload" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
@@ -16,7 +16,7 @@
   <testcase name="aKnownLowerBoundCanAlreadyProveAShortfall" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="negativeProviderCapacityIsUnreported" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="incompleteInventoryNeverClaimsTheWholeOperationFits" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
-  <testcase name="provenSharedFilesystemCombinesPayloadAndRecoveryDemand" classname="dev.findroid.TransferSpacePlanTest" time="0.001"/>
+  <testcase name="provenSharedFilesystemCombinesPayloadAndRecoveryDemand" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="duplicateRequirementIdentitiesAreRefused" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="unknownPhysicalRelationshipDoesNotAddTwoCapacities" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="missingObservationOnAProvenSharedVolumeRetainsTheOtherReport" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>

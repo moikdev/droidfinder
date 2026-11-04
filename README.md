@@ -40,6 +40,18 @@ On a touchscreen, tap a file's name to open it, hold its name to start selecting
 
 Select a file for the side preview, or use **Quick Look** for a closer view. With a keyboard, select a file and press **Space**.
 
+### Compare two files
+
+Select two text files or two images, then choose **More → Compare files…**. Text appears in aligned rows with line numbers, added/removed labels, exact whitespace and line endings, and Previous/Next difference controls. Copy the differences as a readable report or swap the sides.
+
+Images share zoom and pan controls so you can inspect corresponding regions side by side. **Fit both images** resets the view. The preview applies EXIF orientation and labels sampling limits. Comparison is read-only; use Checksums when you need byte equality.
+
+You can also open a paired nested file from **Compare folders… → Compare selected files…**. [Supported formats, limits and verification](docs/FILE-COMPARISON.md).
+
+![Read-only file comparison in Findroid on an Android tablet](docs/screenshots/file-comparison-tablet.png)
+
+*Actual optimized Android tablet capture with synthetic text files.*
+
 ### Drop files into another app
 
 Open Findroid beside another app in Android’s split screen. **Hold a file icon**, drag it across, and release it over the other app’s file-drop area. With a mouse, drag the icon directly.

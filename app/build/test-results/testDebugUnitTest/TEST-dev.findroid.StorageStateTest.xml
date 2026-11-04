@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.StorageStateTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:11.682Z" hostname="MacBook-Pro-2.local" time="0.005">
+<testsuite name="dev.findroid.StorageStateTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:23:02.651Z" hostname="MacBook-Pro-2.local" time="0.003">
   <properties/>
-  <testcase name="treeIdentityPreservesOpaqueIdsAndLiteralPlus" classname="dev.findroid.StorageStateTest" time="0.003"/>
+  <testcase name="treeIdentityPreservesOpaqueIdsAndLiteralPlus" classname="dev.findroid.StorageStateTest" time="0.001"/>
   <testcase name="recoveryDoesNotConfuseOfflineWithMissingPermission" classname="dev.findroid.StorageStateTest" time="0.001"/>
-  <testcase name="protectedDirectoriesRespectRootAndPackageBoundaries" classname="dev.findroid.StorageStateTest" time="0.0"/>
+  <testcase name="protectedDirectoriesRespectRootAndPackageBoundaries" classname="dev.findroid.StorageStateTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
