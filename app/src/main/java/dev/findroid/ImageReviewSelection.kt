@@ -1,6 +1,7 @@
 package dev.findroid
 
 /** Session-only decisions. No file, tag, or browser-selection changes happen here. */
+@ConsistentCopyVisibility
 internal data class ImageReviewSelection private constructor(
     val paths: List<String>,
     val active: String,

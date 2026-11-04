@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.*
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.*
@@ -34,6 +35,7 @@ internal fun ImageReviewDialog(model: FinderModel) {
     val entry = state.active ?: return
     var comparison by remember(state) { mutableStateOf<List<FileComparisonTarget>?>(null) }
     val focus = remember { FocusRequester() }
+    var placed by remember { mutableStateOf(false) }
     val keys = remember(entry.path) { PeekKeys() }
     val thumbnails = rememberLazyListState()
     LaunchedEffect(review.active, review.flaggedOnly) { thumbnails.animateScrollToItem(review.index) }
@@ -61,11 +63,11 @@ internal fun ImageReviewDialog(model: FinderModel) {
             if (window != null && callback != null) window.callback = callback
             onDispose { if (window?.callback === callback) window?.callback = previous }
         }
-        LaunchedEffect(Unit) { focus.requestFocus() }
+        LaunchedEffect(placed) { if (placed) focus.requestFocus() }
         BoxWithConstraints(Modifier.fillMaxSize().padding(16.dp), contentAlignment = Alignment.Center) {
             val controlsHeight = maxHeight * .28f
             Surface(Modifier.widthIn(max = 1200.dp).fillMaxSize().testTag("image-review")
-                .semantics { paneTitle = "Review images" }.focusRequester(focus)
+                .semantics { paneTitle = "Review images" }.focusRequester(focus).onGloballyPositioned { placed = true }
                 .onPreviewKeyEvent { handle(it.nativeKeyEvent) }.focusable(),
                 shape = RoundedCornerShape(14.dp), color = CanvasBackground, shadowElevation = 16.dp) {
                 Column {
