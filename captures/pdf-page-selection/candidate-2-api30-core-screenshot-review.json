@@ -1,0 +1,33 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/no-text-layer-surface.png",
+      "sha256": "4895b9a6eee380bc8200bd274f04a83d4049e7f550241753f2fd2781b56acc48"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/retained-selection-pan-mode-surface.png",
+      "sha256": "fa69a22ac51b708dff30e6cc65aadbaf64cdb6ea06fd472e97c86973f2f4dda7"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/two-lines-surface.png",
+      "sha256": "3b1eb6404f09b29f5f979373589582c79f8b41dbe6e839c84cba23381c963b48"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/visible-zoomed-selection-surface.png",
+      "sha256": "4c716948e8853a8017087685fff5b5c458f3e961655305cbda571ac19752081d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/word-and-handles-surface.png",
+      "sha256": "f4558da6343aa39faca6d60346c49d9784ddc0b4b7cc25cd37dc22f76f92ea85"
+    }
+  ],
+  "method": "Opened all three private labeled sheets covering all five optimized API30 core surface captures.",
+  "findings": [
+    "Only the synthetic Field guide PDF and Findroid preview controls are visible.",
+    "Word and two-line highlights and handles are visible with short connecting stems.",
+    "The selected word is fully visible after real zoom/pan; pan mode keeps the highlight and the Copy/Clear actions while hiding adjustment handles.",
+    "The blank page clearly explains the absence of a text layer and disables copy/select-all."
+  ],
+  "fullReleaseAcceptanceComplete": false
+}

@@ -1,0 +1,10 @@
+{
+  "accepted": false,
+  "applicationBuildChanged": false,
+  "originalDataAndPublic048Restored": true,
+  "successfulWordClipboardProofRetained": true,
+  "reason": "Android 16 shell-only helper called InputManager.getInstance without an application context. A retained log records InvocationTargetException caused by NullPointerException at Objects.requireNonNull(ActivityThread.currentApplication()). The helper now uses InputManagerGlobal on that platform.",
+  "source": "Android Open Source Project android16-release core/java/android/hardware/input/InputManagerGlobal.java and InputManager.java",
+  "memoryPressureClaimed": false,
+  "privateDeviceLogsNotPublished": true
+}

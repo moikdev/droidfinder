@@ -79,13 +79,15 @@ def run(a):
     original_size = match.group(1) if match else 'reset'
     original_scale = d.shell('settings', 'get', 'system', 'font_scale').decode().strip()
     ui = sync.NativeControls(d, density)
+    platform_api = int(d.shell('getprop','ro.build.version.sdk'))
+    input_class = 'PdfSelectionInput' if platform_api <= 30 else 'PdfSelectionInputGlobal'
     stamp = str(time.time_ns()); fixture_rel = 'files/Workspace/Pdf-selection-acceptance-'+stamp
     fixture = '/data/user/0/dev.findroid/'+fixture_rel
     pdf_bytes = synthetic_pdf()
     saved = None; workspace = None; verified = False; input_jar = None
     report = dict(serial=a.serial, section=a.section, sourceCommit=candidate['sourceCommit'], checkerSha256=sha(Path(__file__).read_bytes()),
         buildReceiptSha256=sha(a.build_receipt.read_bytes()), apkSha256=expected, previousApkSha256=sha(public.read_bytes()), fromVersionCode=50, toVersionCode=51,
-        checkerDependencies={name:sha((ROOT/name).read_bytes()) for name in ('scripts/check-reviewed-folder-sync.py','scripts/check-local-search-index.py','scripts/android/acceptance.py','scripts/android/PdfSelectionInput.java')},
+        checkerDependencies={name:sha((ROOT/name).read_bytes()) for name in ('scripts/check-reviewed-folder-sync.py','scripts/check-local-search-index.py','scripts/android/acceptance.py','scripts/android/PdfSelectionInput.java','scripts/android/PdfSelectionInputGlobal.java')},
         operationsUseExactOptimizedApk=True, acceptanceComplete=False, restorationComplete=False, checks=[], layouts=[], captures=[], clipboardProofs=[], controlProofs=[], selectionHandleProofs=[], screenChecks=[], densityChecks=[], browserHorizontalScrolls=[])
 
     def prepare_input():
@@ -94,14 +96,14 @@ def run(a):
         library=d.sdk/'platforms/android-36/android.jar'
         with tempfile.TemporaryDirectory(prefix='findroid-pdf-input-') as temporary:
             folder=Path(temporary);classes=folder/'classes';classes.mkdir();dex=folder/'dex';dex.mkdir()
-            subprocess.run([str(java/'bin/javac'),'-source','8','-target','8','-bootclasspath',str(library),'-d',str(classes),str(ROOT/'scripts/android/PdfSelectionInput.java')],check=True)
-            subprocess.run([str(d.sdk/'build-tools/36.0.0/d8'),'--lib',str(library),'--output',str(dex),str(classes/'dev/findroid/qa/PdfSelectionInput.class')],env={**os.environ,'JAVA_HOME':str(java)},check=True)
+            subprocess.run([str(java/'bin/javac'),'-source','8','-target','8','-bootclasspath',str(library),'-d',str(classes),str(ROOT/'scripts/android'/(input_class+'.java'))],check=True)
+            subprocess.run([str(d.sdk/'build-tools/36.0.0/d8'),'--lib',str(library),'--output',str(dex),str(classes/'dev/findroid/qa'/(input_class+'.class'))],env={**os.environ,'JAVA_HOME':str(java)},check=True)
             archive=folder/'input.jar'
             with zipfile.ZipFile(archive,'w') as output:output.write(dex/'classes.dex','classes.dex')
             input_jar='/data/local/tmp/findroid-pdf-input-'+stamp+'.jar';d.call('push',archive,input_jar)
     def native_input(*arguments):
         assert input_jar is not None
-        d.shell('env','CLASSPATH='+input_jar,'app_process','/system/bin','dev.findroid.qa.PdfSelectionInput',*arguments)
+        d.shell('env','CLASSPATH='+input_jar,'app_process','/system/bin','dev.findroid.qa.'+input_class,*arguments)
     def drag(first,last,hold=0,duration=350):native_input('drag',*first,*last,hold,duration)
     def stop(): d.shell('am', 'force-stop', 'dev.findroid')
     def installed(package='dev.findroid'):
@@ -231,6 +233,7 @@ def run(a):
         verified=True;report['immutableOriginalBytesVerifiedBeforeTests']=True
         d.call('install','-r',ROOT/PAIR[1]);assert installed('dev.findroid.test')==candidate['files'][PAIR[1]]['sha256']
         prepare_input()
+        report['inputHelper']=dict(platformApi=platform_api,className=input_class,sourceSha256=sha((ROOT/'scripts/android'/(input_class+'.java')).read_bytes()),shellOnly=True)
         if a.section in ('core','all'):
             relative=seed('Core');install(public,True);optimized('public50-to51')
             selecting('word');word('word');controls('word-controls');copy('word','Ocean');capture('word-and-handles')

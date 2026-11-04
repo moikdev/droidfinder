@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "source": "scripts/check-pdf-page-selection.py",
+      "snapshot": "captures/pdf-page-selection/checker-optimized-attempt-3.py",
+      "sha256": "c812860ab8c7f453122a59b68a7f0056caa6263d8230bc2a58258888540e9bb6"
+    },
+    {
+      "source": "scripts/android/PdfSelectionInput.java",
+      "snapshot": "captures/pdf-page-selection/input-helper-optimized-attempt-3.java",
+      "sha256": "a2d495390acd942aa6c976f8fd0df29cc4bcc7ec66e5ac62e3db6b1df093f7a6"
+    }
+  ],
+  "frozenApplicationBuild": "captures/pdf-page-selection/candidate-build-2.json"
+}

@@ -1,0 +1,534 @@
+{
+  "serial": "emulator-5602",
+  "section": "core",
+  "sourceCommit": "93d36afd3d3caf1c972a3dcd42256978fac468cb",
+  "checkerSha256": "c812860ab8c7f453122a59b68a7f0056caa6263d8230bc2a58258888540e9bb6",
+  "buildReceiptSha256": "3037aa8ee145e3559f7db2383cc5ab20af982d08edcfcbf89f8fae47c9a9326e",
+  "apkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "previousApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+  "fromVersionCode": 50,
+  "toVersionCode": 51,
+  "checkerDependencies": {
+    "scripts/check-reviewed-folder-sync.py": "82fcfd46b08c64ae73d13400f7954a57eb8a1a2a36316c387d6cfc55c59320dd",
+    "scripts/check-local-search-index.py": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+    "scripts/android/acceptance.py": "58413d03fa96c29c1146bae2ca3a5b4c87dba9a1c2f1b777707697bf381bc016",
+    "scripts/android/PdfSelectionInput.java": "a2d495390acd942aa6c976f8fd0df29cc4bcc7ec66e5ac62e3db6b1df093f7a6"
+  },
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "checks": [
+    {
+      "name": "direct-public50-to51-word-and-range",
+      "wordClipboardExact": true,
+      "twoLineClipboardExact": true,
+      "allControlsHave48DpBounds": true
+    },
+    {
+      "name": "zoom-and-pan-retain-selection",
+      "realPageDrag": true,
+      "clipboardStayedExact": true,
+      "handlesReturnWhenAdjusting": true
+    },
+    {
+      "name": "first-long-press-and-page-clear",
+      "firstLongPressClipboardExact": true,
+      "pageChangeClearedSelection": true,
+      "noTextLayerExplained": true,
+      "emptyPageCopyDisabled": true
+    },
+    {
+      "name": "keyboard-and-preview-scope",
+      "keyboardSelectAllPassageAndLineBreaksVerified": true,
+      "escapeLeavesSelection": true,
+      "reopenHasNoStaleSelection": true,
+      "originalPdfBytesKept": true
+    }
+  ],
+  "layouts": [],
+  "captures": [
+    {
+      "path": "word-and-handles-surface.png",
+      "sha256": "f4558da6343aa39faca6d60346c49d9784ddc0b4b7cc25cd37dc22f76f92ea85",
+      "surfaceBoundsPx": [
+        134,
+        90,
+        1785,
+        1073
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "2d1f6a7910b891a9fae716f6b0b58ebb61c7db022cdbcbfd402e232a994f44ca",
+      "privateRawHierarchySha256": "25b626961690939c9643f1d5eb6b5c80c13c369738cbec534ebc33c5fbba3397"
+    },
+    {
+      "path": "two-lines-surface.png",
+      "sha256": "3b1eb6404f09b29f5f979373589582c79f8b41dbe6e839c84cba23381c963b48",
+      "surfaceBoundsPx": [
+        134,
+        90,
+        1785,
+        1073
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "c66705474fc2fa291e4eb5f5a409aa4b3c25f09cbd5c3bbcefd79a509946c000",
+      "privateRawHierarchySha256": "c543bfb56bcda8a644c57015965c5da38c7ead2554ea819b31fe3e0a0955e6ec"
+    },
+    {
+      "path": "retained-selection-pan-mode-surface.png",
+      "sha256": "fa69a22ac51b708dff30e6cc65aadbaf64cdb6ea06fd472e97c86973f2f4dda7",
+      "surfaceBoundsPx": [
+        134,
+        90,
+        1785,
+        1073
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "5d29353bfa691878988de6989e7f17359a763f1b52b00d4d4766e139e1bf8b0b",
+      "privateRawHierarchySha256": "8cf102f8124a0dbb33ce8791bb68a3269b47e17437d68c60aa0c0a514a873970"
+    },
+    {
+      "path": "visible-zoomed-selection-surface.png",
+      "sha256": "4c716948e8853a8017087685fff5b5c458f3e961655305cbda571ac19752081d",
+      "surfaceBoundsPx": [
+        134,
+        90,
+        1785,
+        1073
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "ea8e9e96e3eeac52a7f7888f2bd48fc2a0137171b5c7e179a6adcbea50b53b5b",
+      "privateRawHierarchySha256": "cab3327edd6c8f5f7107833fa571dc2d3adb4bc9cd89e4618e18653ddf4a088c"
+    },
+    {
+      "path": "no-text-layer-surface.png",
+      "sha256": "4895b9a6eee380bc8200bd274f04a83d4049e7f550241753f2fd2781b56acc48",
+      "surfaceBoundsPx": [
+        134,
+        90,
+        1785,
+        1073
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "8b7b4dd0438c3f4fa99c493a2cd75717497af338e7fcc2d8b3ef008f06d29997",
+      "privateRawHierarchySha256": "1de05b6c719f78622f3e1a49099556e15c39da66e4148240e1ec24178783677b"
+    }
+  ],
+  "clipboardProofs": [
+    {
+      "name": "word",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "two-lines",
+      "expectedText": "Ocean light\nFar",
+      "actualTextSha256": "ead4e2676bbbc9417a258dc838a8be2362819b0120c2ce4128d03bf7db7db030",
+      "actualSyntheticText": "Ocean light\nFar",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "pan-kept-word",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "zoom-kept-word",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "first-long-press",
+      "expectedText": "Ocean",
+      "actualTextSha256": "fed12611d2d8c162e34719e368f2b823bd4051762b171196a55fd975745d726f",
+      "actualSyntheticText": "Ocean",
+      "pageEndLineBreaksAllowed": false,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    },
+    {
+      "name": "keyboard-all",
+      "expectedText": "Ocean light\nFar shore",
+      "actualTextSha256": "850e498809acf4e0b56107a004cb7e9550b6b1388eae271bf757ab365f93d03f",
+      "actualSyntheticText": "Ocean light\nFar shore\n",
+      "pageEndLineBreaksAllowed": true,
+      "readByForegroundTestOnlyActivity": true,
+      "operationsUsedOptimizedApp": true
+    }
+  ],
+  "controlProofs": [
+    {
+      "name": "public50-to51-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        285,
+        1902,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "public50-to51-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        168,
+        1830,
+        240
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "word-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        834,
+        353,
+        906
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "word-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        343,
+        714,
+        517,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "clear-word",
+      "text": "",
+      "description": "",
+      "bounds": [
+        741,
+        714,
+        915,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "two-lines-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        343,
+        714,
+        517,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "clear-range",
+      "text": "",
+      "description": "",
+      "bounds": [
+        741,
+        714,
+        915,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "zoom",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1680,
+        907,
+        1752,
+        979
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "pan-mode",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        714,
+        337,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "pan-kept-word-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        359,
+        714,
+        533,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "resume-selection",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        714,
+        353,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "zoom-kept-word-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        343,
+        714,
+        517,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "fit",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1593,
+        907,
+        1680,
+        979
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "long-press-pan-mode",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        714,
+        337,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "clear-before-long-press",
+      "text": "",
+      "description": "",
+      "bounds": [
+        757,
+        714,
+        931,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "first-long-press-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        343,
+        714,
+        517,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "next-page",
+      "text": "",
+      "description": "",
+      "bounds": [
+        437,
+        907,
+        509,
+        979
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "blank-page",
+      "text": "",
+      "description": "",
+      "bounds": [
+        509,
+        907,
+        581,
+        979
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "no-text-layer-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        834,
+        353,
+        906
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "first-page",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        907,
+        239,
+        979
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "keyboard-select-page-text",
+      "text": "",
+      "description": "",
+      "bounds": [
+        167,
+        834,
+        353,
+        906
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "keyboard-all-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        343,
+        714,
+        517,
+        786
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-preview",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        96,
+        227,
+        168
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "reopen-file-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        453,
+        1902,
+        525
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "reopen-quick-look",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        168,
+        1830,
+        240
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-reopened",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        96,
+        227,
+        168
+      ],
+      "density": 1.5
+    }
+  ],
+  "selectionHandleProofs": [
+    {
+      "name": "word-controls",
+      "label": "Start of PDF text selection",
+      "boundsPx": [
+        939,
+        330,
+        1011,
+        402
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    },
+    {
+      "name": "word-controls",
+      "label": "End of PDF text selection",
+      "boundsPx": [
+        1011,
+        330,
+        1083,
+        402
+      ],
+      "density": 1.5,
+      "complete48DpTarget": true
+    }
+  ],
+  "screenChecks": [],
+  "densityChecks": [],
+  "browserHorizontalScrolls": [],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "hierarchyRetries": []
+}
