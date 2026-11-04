@@ -218,13 +218,17 @@ def main():
         capture=ROOT/row['capturePath'];document=ROOT/row['documentPath']
         assert capture.is_relative_to(PROOF) and sha(capture)==sha(document)==row['sha256'];files.append(document)
     assert read(PROOF/'signing-continuity.json')['sameSigningCertificate']
-    for name in ('public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','docs-screenshot-provenance.json','signing-continuity.json','public-privacy-review.json','local-acceptance.json'):
+    for name in ('public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','docs-screenshot-provenance.json','signing-continuity.json','public-privacy-review.json','publication-allowlist.json','local-acceptance.json'):
         files.append(PROOF/name)
     files=sorted(set(files));relative=[str(path.relative_to(ROOT)) for path in files]
     for path in files:
         assert path.is_file() and not any('PRIVATE' in part or 'private-native-screenshots' in part or part in ('private-native-state','candidate-build','candidate-build-2','candidate-build-3','candidate-build-4','candidate-build-5','candidate-build-6','accepted-build','private-native-screenshots') for part in path.parts)
         assert path.suffix not in ('.apk','.tar','.db','.sqlite','.keystore','.jks','.bin')
     if a.list_files:print(json.dumps(relative,indent=2));return
+    allowlist=PROOF/'publication-allowlist.json';privacy=read(PROOF/'public-privacy-review.json')
+    assert read(allowlist)==relative
+    assert privacy['explicitAllowlistChecked'] and privacy['privateRecoveryFilesExcluded'] and privacy['literalIdentifierMatches']==0
+    assert privacy['publicationAllowlistSha256']==sha(allowlist) and privacy['publishedFilesChecked']==len(relative)
     assert a.output is not None and not a.output.exists(), 'Never overwrite an immutable archive'
     assert not git('status','--porcelain').strip(), 'Commit the exact source and evidence snapshot first'
     commit=git('rev-parse','HEAD').decode().strip()
