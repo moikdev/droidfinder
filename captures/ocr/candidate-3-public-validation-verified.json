@@ -1,0 +1,21 @@
+{
+  "release": "v0.50.0-preview",
+  "archive": "Findroid-0.50.0-validation.zip",
+  "bytes": 12827712,
+  "sha256": "56388fe5ef928b9e06f3653b92dcd3c7750b81f5f4c5e8d08bf47776565d0560",
+  "entries": 833,
+  "anonymousDownloadMatchesLocal": true,
+  "githubDigestMatches": true,
+  "allManifestEntriesVerified": true,
+  "archivedSourcesMatchPublicCommit": true,
+  "evidenceSnapshotMatchesPublicCommit": true,
+  "nativeSourcesIdenticalAcrossRecordedCommits": true,
+  "recordedJvmAndNativeTotalsVerified": true,
+  "applicationSourceCommit": "688bf25972fa93cd40d29403088ce8c6b38a61f8",
+  "nativeTestSourceCommit": "688bf25972fa93cd40d29403088ce8c6b38a61f8",
+  "evidenceCommit": "34b3e905e0ec1293936767b2f3b5cf11ec2d4edc",
+  "verificationScript": "scripts/verify-release-validation.py",
+  "githubApiClient": "gh",
+  "releaseAssetsDownloadedAnonymously": true,
+  "verificationScriptSha256": "45cd76f54988fce992f33704384fe682ea927a9e5b10e886252e0eb006199657"
+}
