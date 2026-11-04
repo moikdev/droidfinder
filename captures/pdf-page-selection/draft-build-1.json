@@ -1,0 +1,59 @@
+{
+  "sourceCommit": "1ee1332e569f3ff2891b717f34a8a2852c35deb6",
+  "draftOnly": true,
+  "androidExecutionPerformed": false,
+  "jvm": {
+    "tests": 948,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reportFiles": 77,
+  "allDebugAndInstrumentationCompile": true,
+  "files": {
+    "app/src/main/java/dev/findroid/PdfPageSelection.kt": {
+      "bytes": 8652,
+      "sha256": "18c4fa2043cbec8f6346f4b022c3a62bed4fe6d01d926f4d993ed548771d7ef6"
+    },
+    "app/src/main/java/dev/findroid/PdfPageSelectionGeometry.kt": {
+      "bytes": 852,
+      "sha256": "8115945b23486ada836f7e2a5a6005330827173098bc4ea46b9ebdc527716e87"
+    },
+    "app/src/main/java/dev/findroid/PdfPageSelectionLayer.kt": {
+      "bytes": 7629,
+      "sha256": "83f8bcda1211c6096d2792ab499be1c5c6e9f518b88f35b2dfcd8f71d0de6c4e"
+    },
+    "app/src/main/java/dev/findroid/QuickLookMedia.kt": {
+      "bytes": 5463,
+      "sha256": "c9783064cae5d5351f0055e324af4c8b826ce179cfc832aa80d87c8425f6a05d"
+    },
+    "app/src/main/java/dev/findroid/PdfQuickLook.kt": {
+      "bytes": 43644,
+      "sha256": "65088e585ab8fae2a37870cfc1772a13f7726969e2690a792596b635a30bc9f7"
+    },
+    "app/src/test/java/dev/findroid/PdfPageSelectionTest.kt": {
+      "bytes": 6797,
+      "sha256": "289ef470100954458c5913134a19afa1c3a39078ec1e1d181d93ee3cc84b5efc"
+    },
+    "app/src/androidTest/java/dev/findroid/PdfPageSelectionNativeTest.kt": {
+      "bytes": 5598,
+      "sha256": "4c09b235663693bffa3875033a1783ed777d52e506655c4441603cba49ac1f44"
+    },
+    "app/src/androidTest/java/dev/findroid/PdfPageSelectionWorkflowTest.kt": {
+      "bytes": 8778,
+      "sha256": "6dd1e5c43644bf59d19d3e3a4fba0946cf92b42c6f69e7d01210c825204d2cc5"
+    },
+    "app/build/outputs/apk/debug/app-debug.apk": {
+      "bytes": 88745182,
+      "sha256": "bd7e2af10f606772380de46279b80aaeebecc93ca040867574a8bd3010d5c1bb"
+    },
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": {
+      "bytes": 5221860,
+      "sha256": "e85f657edec6c1ce5edbb2826ac4e0177909975a13be4c7872d6603d50cd87c2"
+    },
+    "captures/pdf-page-selection/draft-build-1.txt": {
+      "bytes": 4717,
+      "sha256": "4e77b13a41124e0783274e7795869a5849730215ec802c40dc0810fcd4bde1a5"
+    }
+  }
+}
