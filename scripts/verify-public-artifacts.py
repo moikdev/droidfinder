@@ -9,6 +9,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 from urllib.request import Request, urlopen
 
 parser = argparse.ArgumentParser(description=__doc__)
@@ -16,17 +17,26 @@ parser.add_argument('--version', required=True)
 parser.add_argument('--directory', required=True, type=Path)
 parser.add_argument('--output', required=True, type=Path)
 parser.add_argument('--include-validation', action='store_true')
+parser.add_argument('--github-api-client', choices=('anonymous', 'gh'), default='anonymous',
+    help='Use configured gh credentials for public API metadata only; release asset bytes remain anonymous downloads')
 a = parser.parse_args()
 assert re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+',a.version)
 assert not a.output.exists(), 'Preserve existing public receipts'
 
 
 def fetch(url, maximum):
+    if a.github_api_client == 'gh' and url.startswith('https://api.github.com/'):
+        data = subprocess.check_output(['gh', 'api', '--hostname', 'github.com', url.removeprefix('https://api.github.com/')], timeout=180)
+        assert len(data) <= maximum, 'Public API response exceeds its expected bound'
+        return data
     with urlopen(Request(url,headers={'User-Agent':'Findroid-public-artifact-verification'}),timeout=180) as response:
         data = response.read(maximum+1)
     assert len(data) <= maximum, 'Public response exceeds its expected bound'
     return data
 
+
+if a.github_api_client == 'gh':
+    assert json.loads(fetch('https://api.github.com/repos/moikdev/findroid', 2*1024*1024))['private'] is False
 
 tag = 'v'+a.version+'-preview'
 release = json.loads(fetch('https://api.github.com/repos/moikdev/findroid/releases/tags/'+tag, 2*1024*1024))
@@ -52,7 +62,8 @@ assert manifest['bytes'] == next(r['bytes'] for r in rows if r['name'].endswith(
 reference = json.loads(fetch('https://api.github.com/repos/moikdev/findroid/git/ref/tags/'+tag,1024*1024))
 assert reference['object']['type'] == 'commit' and reference['object']['sha'] == info['source_commit']
 report = dict(release=tag,sourceCommit=info['source_commit'],allSelectedPublicBytesAndDigestsMatch=True,
-    publicTagMatchesBuildInfo=True,artifacts=rows,checkerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
+    publicTagMatchesBuildInfo=True,artifacts=rows,githubApiClient=a.github_api_client,
+    releaseAssetsDownloadedAnonymously=True,checkerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
 a.output.parent.mkdir(parents=True,exist_ok=True)
 a.output.write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(dict(release=tag,verifiedArtifacts=len(rows),allSelectedPublicBytesAndDigestsMatch=True)))

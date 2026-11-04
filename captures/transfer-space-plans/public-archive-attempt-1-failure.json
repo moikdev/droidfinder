@@ -1,0 +1,10 @@
+{
+  "archive": "Findroid-0.48.0-validation.zip",
+  "archiveSha256": "568379eadc4786a1ca9e0c086068e5262834934b21e1fdc443cf6d7c32d09d21",
+  "verificationComplete": false,
+  "reason": "GitHub anonymous API returned HTTP 403 rate limit exceeded while reading the evidence commit tree. No archive assertion failed before that transport error.",
+  "stoppedAt": "source_tree(manifest.evidenceCommit)",
+  "originalVerifierSha256": "aa374484e1714ce2c818992869e0abfe5638a27eb55a5eaa3db3620882c4ddb4",
+  "archiveAndReleaseAssetsUnchanged": true,
+  "remedy": "Use the configured GitHub CLI for public API metadata only, assert the repository is public, and continue anonymous download and exact-byte verification of the same immutable release assets."
+}

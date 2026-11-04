@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.47.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.48.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.47.0 release](https://github.com/moikdev/findroid/releases/tag/v0.47.0-preview) and download **`Findroid-0.47.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.48.0 release](https://github.com/moikdev/findroid/releases/tag/v0.48.0-preview) and download **`Findroid-0.48.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -172,6 +172,12 @@ Two panes make a simple job feel simple: keep Downloads on one side and your pro
 
 Save a named layout for a recurring task. Compare two folders when you need to see what differs, with optional file-content verification. [More about panes and layouts](docs/WORKSPACES.md).
 
+### Review space before copying or moving
+
+In **Copy to…** or **Move to…**, choose **Review space and alternatives…** to see the incoming file sizes, room that may be needed to preserve existing destination files, and reported free space. A known shortfall disables the transfer action. If a storage provider cannot report an amount, the review explains what is unknown.
+
+Choose another destination or refresh the estimate before confirming **Copy to destination** or **Move to destination**. Opening or closing the review leaves files in place. [Space review guide](docs/TRANSFER-SPACE-REVIEW.md).
+
 ### Review folder synchronization before it runs
 
 Keep a source folder in one pane and its destination in the other. Open **More → Compare folders… → Review synchronization…** to choose a direction and see additions, changed files, conflicts and destination-only items separately.
@@ -302,4 +308,4 @@ Found a problem? [Open an issue](https://github.com/moikdev/findroid/issues) wit
 
 ## What should improve next?
 
-The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, nested search rules, optional local search snapshots, per-document action explanations, copy verification, saved-copy recovery, persistent local Undo, reviewed folder synchronization, and the recovery inbox have shipped in verified increments. **35 of 72 are implemented; 37 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
+The [72 next-improvement proposals](docs/NEXT-IMPROVEMENTS.md) cover sidebar management, clearer actions, search, network storage, transfers, previews, accessibility, and reliability. Favorite ordering, folder navigation, setup backup, saved-workspace recovery, clearer commands, search explanations, recent-search history, chosen search folders, nested search rules, optional local search snapshots, per-document action explanations, copy verification, saved-copy recovery, persistent local Undo, reviewed folder synchronization, the recovery inbox, and detailed transfer-space reviews have shipped in verified increments. **36 of 72 are implemented; 36 remain open or partial.** Work continues on storage connections, transfers, accessibility, and the remaining items. Follow each proposal in the [improvement tracker](docs/IMPROVEMENT-TRACKER.md).
