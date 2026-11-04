@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "passed": 5,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "platformCancellationClosesTheReadWithoutChangingThePackage",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "independentlyGeneratedWordWorkbookAndSlidesUseRealPackageStructures",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "excessPackageMetadataIsRejectedOnThePlatformBeforeXmlParsing",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "platformRefusesExternalEntitiesBeforeReadingTheirTargets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "platformXmlParserReadsAllThreeFormatsAndKeepsSourceBytes",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 2.8,
+  "timedOut": false
+}

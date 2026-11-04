@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncApplyTest" tests="32" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:20.948Z" hostname="MacBook-Pro-2.local" time="3.115">
+<testsuite name="dev.findroid.FolderSyncApplyTest" tests="32" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:10:56.223Z" hostname="MacBook-Pro-2.local" time="2.718">
   <properties/>
-  <testcase name="reverseDirectionUsesTheReviewedSourceRatherThanInventingAWinningTimestamp" classname="dev.findroid.FolderSyncApplyTest" time="0.146"/>
-  <testcase name="failureOfTheFinalMetadataFlushNeverWritesARunCompletionOrRollsBackFiles" classname="dev.findroid.FolderSyncApplyTest" time="0.12"/>
-  <testcase name="theApplyJournalCannotBeCreatedInsideTheSource" classname="dev.findroid.FolderSyncApplyTest" time="0.045"/>
-  <testcase name="aLaterKernelCollisionKeepsTheArrivalAndTheRemainingPreparedSubtree" classname="dev.findroid.FolderSyncApplyTest" time="0.124"/>
-  <testcase name="aMixedRunPreservesEachReviewedOriginalBeforePublishingAndNeverTouchesUnselectedFiles" classname="dev.findroid.FolderSyncApplyTest" time="0.226"/>
-  <testcase name="recoveryInsideAReviewedTreeIsRefusedBeforeCreatingABucket" classname="dev.findroid.FolderSyncApplyTest" time="0.038"/>
-  <testcase name="sourceEditingDuringTheDurablePublicationIntentStopsTheNativeMove" classname="dev.findroid.FolderSyncApplyTest" time="0.071"/>
-  <testcase name="aFailedIntentWriteKeepsThePreparedAndDestinationTrees" classname="dev.findroid.FolderSyncApplyTest" time="0.06"/>
-  <testcase name="editedWorkingCopiesNeverBecomeANewBaseline" classname="dev.findroid.FolderSyncApplyTest" time="0.055"/>
-  <testcase name="mixedPlanAtRecordLimitCannotAddAnotherPublication" classname="dev.findroid.FolderSyncApplyTest" time="0.254"/>
-  <testcase name="defaultRunPublishesOnlyDisclosedAdditionsAndKeepsBothOriginalTrees" classname="dev.findroid.FolderSyncApplyTest" time="0.116"/>
-  <testcase name="aTrashOnlyRunHasNoPublicationAndKeepsTheOriginalSubtreeInItsNativeRecoveryBucket" classname="dev.findroid.FolderSyncApplyTest" time="0.081"/>
-  <testcase name="anArrivalDuringThePreservationIntentCannotJoinTheDestinationBaseline" classname="dev.findroid.FolderSyncApplyTest" time="0.056"/>
-  <testcase name="journalRecordLimitIncludesBothMovesForEveryReplacement" classname="dev.findroid.FolderSyncApplyTest" time="0.167"/>
-  <testcase name="anEditedRemainingStageStopsTheNextPublication" classname="dev.findroid.FolderSyncApplyTest" time="0.098"/>
-  <testcase name="changedOnDiskRecoveryMappingsStopBeforeTheReplacementAndKeepThoseChangedBytes" classname="dev.findroid.FolderSyncApplyTest" time="0.083"/>
-  <testcase name="cancellationBeforeTheApplyCreatesNoJournalAndMovesNoOriginal" classname="dev.findroid.FolderSyncApplyTest" time="0.046"/>
-  <testcase name="anUnselectedDestinationEditBetweenOperationsIsNotAdopted" classname="dev.findroid.FolderSyncApplyTest" time="0.117"/>
+  <testcase name="reverseDirectionUsesTheReviewedSourceRatherThanInventingAWinningTimestamp" classname="dev.findroid.FolderSyncApplyTest" time="0.138"/>
+  <testcase name="failureOfTheFinalMetadataFlushNeverWritesARunCompletionOrRollsBackFiles" classname="dev.findroid.FolderSyncApplyTest" time="0.097"/>
+  <testcase name="theApplyJournalCannotBeCreatedInsideTheSource" classname="dev.findroid.FolderSyncApplyTest" time="0.037"/>
+  <testcase name="aLaterKernelCollisionKeepsTheArrivalAndTheRemainingPreparedSubtree" classname="dev.findroid.FolderSyncApplyTest" time="0.08"/>
+  <testcase name="aMixedRunPreservesEachReviewedOriginalBeforePublishingAndNeverTouchesUnselectedFiles" classname="dev.findroid.FolderSyncApplyTest" time="0.205"/>
+  <testcase name="recoveryInsideAReviewedTreeIsRefusedBeforeCreatingABucket" classname="dev.findroid.FolderSyncApplyTest" time="0.039"/>
+  <testcase name="sourceEditingDuringTheDurablePublicationIntentStopsTheNativeMove" classname="dev.findroid.FolderSyncApplyTest" time="0.058"/>
+  <testcase name="aFailedIntentWriteKeepsThePreparedAndDestinationTrees" classname="dev.findroid.FolderSyncApplyTest" time="0.049"/>
+  <testcase name="editedWorkingCopiesNeverBecomeANewBaseline" classname="dev.findroid.FolderSyncApplyTest" time="0.033"/>
+  <testcase name="mixedPlanAtRecordLimitCannotAddAnotherPublication" classname="dev.findroid.FolderSyncApplyTest" time="0.142"/>
+  <testcase name="defaultRunPublishesOnlyDisclosedAdditionsAndKeepsBothOriginalTrees" classname="dev.findroid.FolderSyncApplyTest" time="0.108"/>
+  <testcase name="aTrashOnlyRunHasNoPublicationAndKeepsTheOriginalSubtreeInItsNativeRecoveryBucket" classname="dev.findroid.FolderSyncApplyTest" time="0.07"/>
+  <testcase name="anArrivalDuringThePreservationIntentCannotJoinTheDestinationBaseline" classname="dev.findroid.FolderSyncApplyTest" time="0.1"/>
+  <testcase name="journalRecordLimitIncludesBothMovesForEveryReplacement" classname="dev.findroid.FolderSyncApplyTest" time="0.138"/>
+  <testcase name="anEditedRemainingStageStopsTheNextPublication" classname="dev.findroid.FolderSyncApplyTest" time="0.125"/>
+  <testcase name="changedOnDiskRecoveryMappingsStopBeforeTheReplacementAndKeepThoseChangedBytes" classname="dev.findroid.FolderSyncApplyTest" time="0.086"/>
+  <testcase name="cancellationBeforeTheApplyCreatesNoJournalAndMovesNoOriginal" classname="dev.findroid.FolderSyncApplyTest" time="0.036"/>
+  <testcase name="anUnselectedDestinationEditBetweenOperationsIsNotAdopted" classname="dev.findroid.FolderSyncApplyTest" time="0.091"/>
   <testcase name="sourceChangesAfterPreparationStopBeforeCreatingAnApplyJournal" classname="dev.findroid.FolderSyncApplyTest" time="0.034"/>
-  <testcase name="journalRecordLimitIncludesCreationAndCompletionForAdditionsAndTrash" classname="dev.findroid.FolderSyncApplyTest" time="0.254"/>
-  <testcase name="destinationArrivalsAfterPreparationKeepTheirBytesAndStopTheWholePlan" classname="dev.findroid.FolderSyncApplyTest" time="0.037"/>
-  <testcase name="aPublicationMetadataFailureExposesTheKnownPublicationWithoutMovingAnotherItem" classname="dev.findroid.FolderSyncApplyTest" time="0.076"/>
-  <testcase name="totalJournalByteLimitStopsLongPlansBeforeTheRecordLimit" classname="dev.findroid.FolderSyncApplyTest" time="0.179"/>
-  <testcase name="perRecordBudgetCountsEncodedUtf8BytesAndJsonEscapes" classname="dev.findroid.FolderSyncApplyTest" time="0.128"/>
-  <testcase name="aSyncFaultAfterOriginalPreservationKeepsItsRecoveryPointer" classname="dev.findroid.FolderSyncApplyTest" time="0.067"/>
-  <testcase name="cancellationAfterOnePublicationKeepsItAndTheRemainingWorkingData" classname="dev.findroid.FolderSyncApplyTest" time="0.068"/>
-  <testcase name="aPreservationMetadataFailureExposesTheOriginalAndKeepsThePreparedReplacement" classname="dev.findroid.FolderSyncApplyTest" time="0.118"/>
-  <testcase name="oversizedInitialJournalRecordIsRejectedWithoutAnyMoves" classname="dev.findroid.FolderSyncApplyTest" time="0.039"/>
-  <testcase name="accessLossRefusesEveryOriginalAndPublication" classname="dev.findroid.FolderSyncApplyTest" time="0.031"/>
-  <testcase name="aSourceEditBetweenOperationsStopsTheRemainingPlan" classname="dev.findroid.FolderSyncApplyTest" time="0.067"/>
-  <testcase name="aSyncFaultAfterNativePublicationKeepsItsVisibleResultAndManualIntent" classname="dev.findroid.FolderSyncApplyTest" time="0.055"/>
-  <testcase name="sourceEditingDuringTheDurablePreservationIntentKeepsTheOriginalInPlace" classname="dev.findroid.FolderSyncApplyTest" time="0.057"/>
+  <testcase name="journalRecordLimitIncludesCreationAndCompletionForAdditionsAndTrash" classname="dev.findroid.FolderSyncApplyTest" time="0.208"/>
+  <testcase name="destinationArrivalsAfterPreparationKeepTheirBytesAndStopTheWholePlan" classname="dev.findroid.FolderSyncApplyTest" time="0.033"/>
+  <testcase name="aPublicationMetadataFailureExposesTheKnownPublicationWithoutMovingAnotherItem" classname="dev.findroid.FolderSyncApplyTest" time="0.064"/>
+  <testcase name="totalJournalByteLimitStopsLongPlansBeforeTheRecordLimit" classname="dev.findroid.FolderSyncApplyTest" time="0.168"/>
+  <testcase name="perRecordBudgetCountsEncodedUtf8BytesAndJsonEscapes" classname="dev.findroid.FolderSyncApplyTest" time="0.105"/>
+  <testcase name="aSyncFaultAfterOriginalPreservationKeepsItsRecoveryPointer" classname="dev.findroid.FolderSyncApplyTest" time="0.056"/>
+  <testcase name="cancellationAfterOnePublicationKeepsItAndTheRemainingWorkingData" classname="dev.findroid.FolderSyncApplyTest" time="0.071"/>
+  <testcase name="aPreservationMetadataFailureExposesTheOriginalAndKeepsThePreparedReplacement" classname="dev.findroid.FolderSyncApplyTest" time="0.082"/>
+  <testcase name="oversizedInitialJournalRecordIsRejectedWithoutAnyMoves" classname="dev.findroid.FolderSyncApplyTest" time="0.038"/>
+  <testcase name="accessLossRefusesEveryOriginalAndPublication" classname="dev.findroid.FolderSyncApplyTest" time="0.034"/>
+  <testcase name="aSourceEditBetweenOperationsStopsTheRemainingPlan" classname="dev.findroid.FolderSyncApplyTest" time="0.073"/>
+  <testcase name="aSyncFaultAfterNativePublicationKeepsItsVisibleResultAndManualIntent" classname="dev.findroid.FolderSyncApplyTest" time="0.065"/>
+  <testcase name="sourceEditingDuringTheDurablePreservationIntentKeepsTheOriginalInPlace" classname="dev.findroid.FolderSyncApplyTest" time="0.054"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

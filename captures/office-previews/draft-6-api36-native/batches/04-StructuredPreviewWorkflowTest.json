@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "passed": 6,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "mimeOnlyProviderTextAndBlockedReadCancellation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "jsonFormatsAndMalformedJsonKeepsReadableSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "searchOwnsSpacesAndEscapeReturnsToPeek",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "csvQuotedCellsCanBeInspectedAndCopied",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "markdownReadSourceAndLiteralHtmlDoNotExecute",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "encodingRecoveryAndLargerExplicitBudget",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 42.5,
+  "timedOut": false
+}

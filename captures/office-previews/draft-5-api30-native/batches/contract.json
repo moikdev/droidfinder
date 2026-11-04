@@ -1,0 +1,13 @@
+{
+  "serial": "emulator-5602",
+  "selectors": [
+    "dev.findroid.OfficeNativeTest",
+    "dev.findroid.OfficeWorkflowTest",
+    "dev.findroid.DocumentPreviewInputTest",
+    "dev.findroid.StructuredPreviewWorkflowTest"
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "71368a40dd9b10f43e3ae79b0e97840821d9a3c9475cf67c4b8e426f579cf5c1",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "28ba3fbb7f6a0d44e2577adf3b8f56c533a33ebf022d01b9bc5c82020cee7789"
+  }
+}

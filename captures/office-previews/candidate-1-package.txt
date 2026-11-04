@@ -1,0 +1,30 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v3.2 scheme (APK Signature Scheme v3.2): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+{
+  "directory": "/private/tmp/findroid-office-preview/captures/release/0.51.0",
+  "version": "0.51.0-preview",
+  "version_code": "53",
+  "application_id": "dev.findroid",
+  "source_commit": "9c11a8721d5bf1dd870ddc631073e2965457147b",
+  "working_tree_dirty": true,
+  "signing": "development-preview; release APK is unsigned",
+  "artifacts": [
+    {
+      "name": "Findroid-0.51.0-preview.apk",
+      "bytes": 38000612,
+      "sha256": "45d0c4025639f53cd20afd4bbbf69305b13a23b88ebdab01fda7330e85534012"
+    },
+    {
+      "name": "Findroid-0.51.0-unsigned.apk",
+      "bytes": 37992408,
+      "sha256": "b3058a9bf895686b4034ded2eabb8bb58e794b0b284b204f9954a5a0f60fadb3"
+    }
+  ]
+}

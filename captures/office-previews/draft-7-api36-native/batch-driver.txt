@@ -1,0 +1,67 @@
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 5 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-office-preview/captures/office-previews/draft-7-api36-native/batches/01-OfficeNativeTest.txt
+Accepted batch 1/4: dev.findroid.OfficeNativeTest (5 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 4 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-office-preview/captures/office-previews/draft-7-api36-native/batches/02-OfficeWorkflowTest.txt
+Accepted batch 2/4: dev.findroid.OfficeWorkflowTest (4 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 4 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-office-preview/captures/office-previews/draft-7-api36-native/batches/03-DocumentPreviewInputTest.txt
+Accepted batch 3/4: dev.findroid.DocumentPreviewInputTest (4 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 6 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-office-preview/captures/office-previews/draft-7-api36-native/batches/04-StructuredPreviewWorkflowTest.txt
+Accepted batch 4/4: dev.findroid.StructuredPreviewWorkflowTest (6 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+emulator-5582: 19 passed in 4 isolated batches; zero failures/skips.

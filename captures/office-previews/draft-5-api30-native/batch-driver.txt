@@ -1,0 +1,46 @@
+[
+  {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5602: 4 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-office-preview/captures/office-previews/draft-5-api30-native/batches/01-OfficeNativeTest.txt
+Accepted batch 1/4: dev.findroid.OfficeNativeTest (4 cases)
+[
+  {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5602: 3 passed, 0 skipped, 1 failed; runner complete: True
+dev.findroid.OfficeWorkflowTest#slideNavigationUpdatesFindAndReopeningClearsTheQuery: java.lang.AssertionError: Assert failed: The component is not displayed!
+Log: /private/tmp/findroid-office-preview/captures/office-previews/draft-5-api30-native/batches/02-OfficeWorkflowTest.txt
+[
+  {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Traceback (most recent call last):
+  File "/private/tmp/findroid-office-preview/scripts/check-device-batches.py", line 105, in <module>
+    if __name__=='__main__': main()
+                             ~~~~^^
+  File "/private/tmp/findroid-office-preview/scripts/check-device-batches.py", line 80, in main
+    assert result.returncode==0, f'Batch failed; inspect {report_path}. It is not accepted.'
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: Batch failed; inspect /private/tmp/findroid-office-preview/captures/office-previews/draft-5-api30-native/batches/02-OfficeWorkflowTest.json. It is not accepted.

@@ -1,0 +1,260 @@
+> Task :app:verifyOcrEngine
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDebugUnitTestBuild
+> Task :app:compileDebugUnitTestKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :app:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :app:testDebugUnitTest UP-TO-DATE
+> Task :interop-client:preBuild UP-TO-DATE
+> Task :interop-client:preDebugBuild UP-TO-DATE
+> Task :interop-client:generateDebugResources UP-TO-DATE
+> Task :interop-client:packageDebugResources UP-TO-DATE
+> Task :interop-client:processDebugNavigationResources UP-TO-DATE
+> Task :interop-client:parseDebugLocalResources UP-TO-DATE
+> Task :interop-client:generateDebugRFile UP-TO-DATE
+> Task :interop-client:compileDebugKotlin UP-TO-DATE
+> Task :interop-client:javaPreCompileDebug UP-TO-DATE
+> Task :interop-client:compileDebugJavaWithJavac NO-SOURCE
+> Task :interop-client:checkDebugAarMetadata UP-TO-DATE
+> Task :interop-client:mapDebugSourceSetPaths UP-TO-DATE
+> Task :interop-client:compileDebugNavigationResources UP-TO-DATE
+> Task :interop-client:mergeDebugResources UP-TO-DATE
+> Task :interop-client:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :interop-client:extractDeepLinksDebug UP-TO-DATE
+> Task :interop-client:processDebugMainManifest UP-TO-DATE
+> Task :interop-client:processDebugManifest UP-TO-DATE
+> Task :interop-client:processDebugManifestForPackage UP-TO-DATE
+> Task :interop-client:processDebugResources UP-TO-DATE
+> Task :interop-client:bundleDebugClassesToRuntimeJar UP-TO-DATE
+> Task :interop-client:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :interop-client:preDebugUnitTestBuild UP-TO-DATE
+> Task :interop-client:compileDebugUnitTestKotlin NO-SOURCE
+> Task :interop-client:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :interop-client:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :interop-client:processDebugJavaRes UP-TO-DATE
+> Task :interop-client:processDebugUnitTestJavaRes NO-SOURCE
+> Task :interop-client:testDebugUnitTest NO-SOURCE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:generateUpdateFixtures UP-TO-DATE
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:generateDebugLintReportModel UP-TO-DATE
+> Task :app:generateDebugUnitTestLintModel UP-TO-DATE
+> Task :app:lintAnalyzeDebug UP-TO-DATE
+> Task :app:lintAnalyzeDebugUnitTest UP-TO-DATE
+> Task :interop-client:preDebugAndroidTestBuild SKIPPED
+> Task :interop-client:generateDebugAndroidTestLintModel UP-TO-DATE
+> Task :interop-client:extractProguardFiles UP-TO-DATE
+> Task :interop-client:generateDebugLintReportModel UP-TO-DATE
+> Task :interop-client:generateDebugUnitTestLintModel UP-TO-DATE
+> Task :interop-client:lintAnalyzeDebug UP-TO-DATE
+> Task :interop-client:lintAnalyzeDebugAndroidTest UP-TO-DATE
+> Task :interop-client:lintAnalyzeDebugUnitTest UP-TO-DATE
+> Task :interop-client:lintReportDebug UP-TO-DATE
+> Task :interop-client:lintDebug
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :app:mergeProjectDexDebug UP-TO-DATE
+> Task :app:configureCMakeDebug[arm64-v8a]
+> Task :app:buildCMakeDebug[arm64-v8a]
+> Task :app:configureCMakeDebug[armeabi-v7a]
+> Task :app:buildCMakeDebug[armeabi-v7a]
+> Task :app:configureCMakeDebug[x86]
+> Task :app:buildCMakeDebug[x86]
+> Task :app:configureCMakeDebug[x86_64]
+> Task :app:buildCMakeDebug[x86_64]
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:packageDebug UP-TO-DATE
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug UP-TO-DATE
+> Task :app:processDebugAndroidTestManifest UP-TO-DATE
+> Task :app:generateDebugAndroidTestBuildConfig UP-TO-DATE
+> Task :app:generateDebugAndroidTestResources UP-TO-DATE
+> Task :app:packageDebugAndroidTestResources UP-TO-DATE
+> Task :app:processDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:parseDebugAndroidTestLocalResources UP-TO-DATE
+> Task :app:generateDebugAndroidTestRFile UP-TO-DATE
+> Task :app:javaPreCompileDebugAndroidTest UP-TO-DATE
+> Task :app:generateDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeDebugAndroidTestAssets UP-TO-DATE
+> Task :app:compressDebugAndroidTestAssets UP-TO-DATE
+> Task :app:generateDebugAndroidTestGlobalSynthetics UP-TO-DATE
+> Task :app:checkDebugAndroidTestDuplicateClasses UP-TO-DATE
+> Task :app:desugarDebugAndroidTestFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexDebugAndroidTest UP-TO-DATE
+> Task :app:mergeLibDexDebugAndroidTest UP-TO-DATE
+> Task :app:checkDebugAndroidTestAarMetadata UP-TO-DATE
+> Task :app:mapDebugAndroidTestSourceSetPaths UP-TO-DATE
+> Task :app:compileDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:mergeDebugAndroidTestResources UP-TO-DATE
+> Task :app:processDebugAndroidTestResources UP-TO-DATE
+> Task :app:mergeDebugAndroidTestJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebugAndroidTest UP-TO-DATE
+> Task :app:writeDebugAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :app:prePreviewBuild
+> Task :app:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :app:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :app:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :app:buildCMakeRelWithDebInfo[armeabi-v7a]
+> Task :app:configureCMakeRelWithDebInfo[x86]
+> Task :app:buildCMakeRelWithDebInfo[x86]
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+> Task :app:buildCMakeRelWithDebInfo[x86_64]
+> Task :app:mergePreviewJniLibFolders UP-TO-DATE
+> Task :app:mergePreviewNativeLibs UP-TO-DATE
+> Task :app:stripPreviewDebugSymbols UP-TO-DATE
+> Task :app:extractPreviewNativeSymbolTables UP-TO-DATE
+> Task :app:mergePreviewNativeDebugMetadata UP-TO-DATE
+> Task :app:checkPreviewDuplicateClasses UP-TO-DATE
+> Task :app:generatePreviewBuildConfig UP-TO-DATE
+> Task :app:generatePreviewResources UP-TO-DATE
+> Task :app:packagePreviewResources UP-TO-DATE
+> Task :app:processPreviewNavigationResources UP-TO-DATE
+> Task :app:parsePreviewLocalResources UP-TO-DATE
+> Task :app:generatePreviewRFile UP-TO-DATE
+> Task :app:compilePreviewKotlin UP-TO-DATE
+> Task :app:javaPreCompilePreview UP-TO-DATE
+> Task :app:compilePreviewJavaWithJavac UP-TO-DATE
+> Task :app:mergePreviewArtProfile UP-TO-DATE
+> Task :app:checkPreviewAarMetadata UP-TO-DATE
+> Task :app:mapPreviewSourceSetPaths UP-TO-DATE
+> Task :app:compilePreviewNavigationResources UP-TO-DATE
+> Task :app:mergePreviewResources UP-TO-DATE
+> Task :app:createPreviewCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksPreview UP-TO-DATE
+> Task :app:processPreviewMainManifest UP-TO-DATE
+> Task :app:processPreviewManifest UP-TO-DATE
+> Task :app:processPreviewManifestForPackage UP-TO-DATE
+> Task :app:processPreviewResources UP-TO-DATE
+> Task :app:expandPreviewArtProfileWildcards UP-TO-DATE
+> Task :app:mergePreviewGeneratedProguardFiles UP-TO-DATE
+> Task :app:processPreviewJavaRes UP-TO-DATE
+> Task :app:mergePreviewJavaResource UP-TO-DATE
+> Task :app:mergePreviewStartupProfile UP-TO-DATE
+> Task :app:minifyPreviewWithR8 UP-TO-DATE
+> Task :app:compilePreviewArtProfile UP-TO-DATE
+> Task :app:generatePreviewAssets UP-TO-DATE
+> Task :app:mergePreviewAssets UP-TO-DATE
+> Task :app:compressPreviewAssets UP-TO-DATE
+> Task :app:extractPreviewVersionControlInfo UP-TO-DATE
+> Task :app:generatePreviewLintVitalReportModel UP-TO-DATE
+> Task :app:lintVitalAnalyzePreview UP-TO-DATE
+> Task :app:lintVitalReportPreview UP-TO-DATE
+> Task :app:lintVitalPreview
+> Task :app:convertShrunkResourcesToBinaryPreview UP-TO-DATE
+> Task :app:optimizePreviewResources UP-TO-DATE
+> Task :app:collectPreviewDependencies UP-TO-DATE
+> Task :app:sdkPreviewDependencyData UP-TO-DATE
+> Task :app:validateSigningPreview UP-TO-DATE
+> Task :app:writePreviewAppMetadata UP-TO-DATE
+> Task :app:writePreviewSigningConfigVersions UP-TO-DATE
+> Task :app:packagePreview UP-TO-DATE
+> Task :app:createPreviewApkListingFileRedirect UP-TO-DATE
+> Task :app:assemblePreview UP-TO-DATE
+> Task :app:preReleaseBuild
+> Task :app:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :app:mergeReleaseNativeLibs UP-TO-DATE
+> Task :app:stripReleaseDebugSymbols UP-TO-DATE
+> Task :app:extractReleaseNativeSymbolTables UP-TO-DATE
+> Task :app:mergeReleaseNativeDebugMetadata UP-TO-DATE
+> Task :app:checkReleaseDuplicateClasses UP-TO-DATE
+> Task :app:generateReleaseBuildConfig UP-TO-DATE
+> Task :app:generateReleaseResources UP-TO-DATE
+> Task :app:packageReleaseResources UP-TO-DATE
+> Task :app:processReleaseNavigationResources UP-TO-DATE
+> Task :app:parseReleaseLocalResources UP-TO-DATE
+> Task :app:generateReleaseRFile UP-TO-DATE
+> Task :app:compileReleaseKotlin UP-TO-DATE
+> Task :app:javaPreCompileRelease UP-TO-DATE
+> Task :app:compileReleaseJavaWithJavac UP-TO-DATE
+> Task :app:mergeReleaseArtProfile UP-TO-DATE
+> Task :app:checkReleaseAarMetadata UP-TO-DATE
+> Task :app:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :app:compileReleaseNavigationResources UP-TO-DATE
+> Task :app:mergeReleaseResources UP-TO-DATE
+> Task :app:createReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksRelease UP-TO-DATE
+> Task :app:processReleaseMainManifest UP-TO-DATE
+> Task :app:processReleaseManifest UP-TO-DATE
+> Task :app:processReleaseManifestForPackage UP-TO-DATE
+> Task :app:processReleaseResources UP-TO-DATE
+> Task :app:expandReleaseArtProfileWildcards UP-TO-DATE
+> Task :app:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :app:processReleaseJavaRes UP-TO-DATE
+> Task :app:mergeReleaseJavaResource UP-TO-DATE
+> Task :app:mergeReleaseStartupProfile UP-TO-DATE
+> Task :app:minifyReleaseWithR8 UP-TO-DATE
+> Task :app:compileReleaseArtProfile UP-TO-DATE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets UP-TO-DATE
+> Task :app:compressReleaseAssets UP-TO-DATE
+> Task :app:extractReleaseVersionControlInfo UP-TO-DATE
+> Task :app:generateReleaseLintVitalReportModel UP-TO-DATE
+> Task :app:lintVitalAnalyzeRelease UP-TO-DATE
+> Task :app:lintVitalReportRelease UP-TO-DATE
+> Task :app:lintVitalRelease
+> Task :app:convertShrunkResourcesToBinaryRelease UP-TO-DATE
+> Task :app:optimizeReleaseResources UP-TO-DATE
+> Task :app:collectReleaseDependencies UP-TO-DATE
+> Task :app:sdkReleaseDependencyData UP-TO-DATE
+> Task :app:writeReleaseAppMetadata UP-TO-DATE
+> Task :app:writeReleaseSigningConfigVersions UP-TO-DATE
+> Task :app:packageRelease UP-TO-DATE
+> Task :app:createReleaseApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleRelease UP-TO-DATE
+> Task :app:compileDebugAndroidTestKotlin
+> Task :app:compileDebugAndroidTestJavaWithJavac UP-TO-DATE
+> Task :app:processDebugAndroidTestJavaRes UP-TO-DATE
+> Task :app:mergeDebugAndroidTestJavaResource UP-TO-DATE
+> Task :app:dexBuilderDebugAndroidTest
+> Task :app:mergeProjectDexDebugAndroidTest
+> Task :app:packageDebugAndroidTest
+> Task :app:createDebugAndroidTestApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebugAndroidTest
+> Task :app:lintAnalyzeDebugAndroidTest
+> Task :app:lintReportDebug UP-TO-DATE
+> Task :app:lintDebug
+
+BUILD SUCCESSFUL in 18s
+229 actionable tasks: 27 executed, 202 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html

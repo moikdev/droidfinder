@@ -1,0 +1,8 @@
+{
+  "compiledInputReceipt": "captures/office-previews/draft-build-7.json",
+  "shippingApks": {
+    "app/build/outputs/apk/preview/app-preview.apk": "cb6149eb5cfbb1700fc33a1f60dfc5772ae983cbcab2ba1d007001f54837f9fa",
+    "app/build/outputs/apk/release/app-release-unsigned.apk": "e9ee9d562b63c14885f4fb67440e6b432ddc019b81baaeda1b53301823f8134a"
+  },
+  "reason": "Only the existing structured-preview test readiness wait is being changed; production code and build inputs are retained."
+}

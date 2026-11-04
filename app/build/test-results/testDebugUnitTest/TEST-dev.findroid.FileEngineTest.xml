@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FileEngineTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:20.514Z" hostname="MacBook-Pro-2.local" time="0.167">
+<testsuite name="dev.findroid.FileEngineTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:10:55.775Z" hostname="MacBook-Pro-2.local" time="0.179">
   <properties/>
-  <testcase name="symbolicLinkCopyIsRejected" classname="dev.findroid.FileEngineTest" time="0.002"/>
-  <testcase name="compressionRejectsDestinationInsideSelectedFolderBeforeWriting" classname="dev.findroid.FileEngineTest" time="0.003"/>
-  <testcase name="damagedTrashRecordsCannotPreventStartupOrDestroyRecoveryFiles" classname="dev.findroid.FileEngineTest" time="0.007"/>
-  <testcase name="deepCopyStopsWithSourceKeptAndStagingRemoved" classname="dev.findroid.FileEngineTest" time="0.077"/>
+  <testcase name="symbolicLinkCopyIsRejected" classname="dev.findroid.FileEngineTest" time="0.003"/>
+  <testcase name="compressionRejectsDestinationInsideSelectedFolderBeforeWriting" classname="dev.findroid.FileEngineTest" time="0.009"/>
+  <testcase name="damagedTrashRecordsCannotPreventStartupOrDestroyRecoveryFiles" classname="dev.findroid.FileEngineTest" time="0.008"/>
+  <testcase name="deepCopyStopsWithSourceKeptAndStagingRemoved" classname="dev.findroid.FileEngineTest" time="0.081"/>
   <testcase name="trashCanBeRestoredAfterRestart" classname="dev.findroid.FileEngineTest" time="0.005"/>
   <testcase name="moveReservesDanglingLinkNamesInsteadOfReplacingThem" classname="dev.findroid.FileEngineTest" time="0.002"/>
-  <testcase name="copiesDirectoryTree" classname="dev.findroid.FileEngineTest" time="0.004"/>
+  <testcase name="copiesDirectoryTree" classname="dev.findroid.FileEngineTest" time="0.003"/>
   <testcase name="rejectsCopyIntoOwnDescendant" classname="dev.findroid.FileEngineTest" time="0.002"/>
-  <testcase name="failedRenameCycleRestoresDanglingLinksWithoutRecoveryAliases" classname="dev.findroid.FileEngineTest" time="0.004"/>
-  <testcase name="exactCopyAndRelocationKeepDanglingDestinationLinks" classname="dev.findroid.FileEngineTest" time="0.003"/>
-  <testcase name="renameDoesNotOverwrite" classname="dev.findroid.FileEngineTest" time="0.003"/>
-  <testcase name="deleteForeverRejectsNonTrashFile" classname="dev.findroid.FileEngineTest" time="0.002"/>
+  <testcase name="failedRenameCycleRestoresDanglingLinksWithoutRecoveryAliases" classname="dev.findroid.FileEngineTest" time="0.007"/>
+  <testcase name="exactCopyAndRelocationKeepDanglingDestinationLinks" classname="dev.findroid.FileEngineTest" time="0.002"/>
+  <testcase name="renameDoesNotOverwrite" classname="dev.findroid.FileEngineTest" time="0.002"/>
+  <testcase name="deleteForeverRejectsNonTrashFile" classname="dev.findroid.FileEngineTest" time="0.001"/>
   <testcase name="fileAddedDuringFolderCopyCannotBeSilentlyOmitted" classname="dev.findroid.FileEngineTest" time="0.003"/>
-  <testcase name="damagedPrimaryTrashIndexUsesValidBackupAndPreservesTheBadBytes" classname="dev.findroid.FileEngineTest" time="0.004"/>
+  <testcase name="damagedPrimaryTrashIndexUsesValidBackupAndPreservesTheBadBytes" classname="dev.findroid.FileEngineTest" time="0.006"/>
   <testcase name="moveKeepsExistingDestination" classname="dev.findroid.FileEngineTest" time="0.003"/>
-  <testcase name="sameSizeSourceEditDuringCopyIsDetectedBeforePublication" classname="dev.findroid.FileEngineTest" time="0.003"/>
-  <testcase name="destinationCreatedImmediatelyBeforeMoveIsKept" classname="dev.findroid.FileEngineTest" time="0.003"/>
+  <testcase name="sameSizeSourceEditDuringCopyIsDetectedBeforePublication" classname="dev.findroid.FileEngineTest" time="0.004"/>
+  <testcase name="destinationCreatedImmediatelyBeforeMoveIsKept" classname="dev.findroid.FileEngineTest" time="0.002"/>
   <testcase name="rejectsTraversalNames" classname="dev.findroid.FileEngineTest" time="0.001"/>
-  <testcase name="zipRoundTripPreservesContents" classname="dev.findroid.FileEngineTest" time="0.008"/>
-  <testcase name="createsFolderAndRejectsDuplicate" classname="dev.findroid.FileEngineTest" time="0.003"/>
-  <testcase name="restoreDoesNotOverwriteNewFileAtOriginalPath" classname="dev.findroid.FileEngineTest" time="0.003"/>
+  <testcase name="zipRoundTripPreservesContents" classname="dev.findroid.FileEngineTest" time="0.006"/>
+  <testcase name="createsFolderAndRejectsDuplicate" classname="dev.findroid.FileEngineTest" time="0.002"/>
+  <testcase name="restoreDoesNotOverwriteNewFileAtOriginalPath" classname="dev.findroid.FileEngineTest" time="0.004"/>
   <testcase name="duplicateCanonicalArchiveEntryIsRejected" classname="dev.findroid.FileEngineTest" time="0.003"/>
   <testcase name="sameFolderMoveIsRejected" classname="dev.findroid.FileEngineTest" time="0.002"/>
-  <testcase name="failedRecursiveCopyCleansStagingAndKeepsSource" classname="dev.findroid.FileEngineTest" time="0.003"/>
-  <testcase name="zipTraversalIsRejectedAndStagingCleaned" classname="dev.findroid.FileEngineTest" time="0.002"/>
-  <testcase name="copyUsesUniqueNameAndKeepsExtension" classname="dev.findroid.FileEngineTest" time="0.003"/>
+  <testcase name="failedRecursiveCopyCleansStagingAndKeepsSource" classname="dev.findroid.FileEngineTest" time="0.002"/>
+  <testcase name="zipTraversalIsRejectedAndStagingCleaned" classname="dev.findroid.FileEngineTest" time="0.003"/>
+  <testcase name="copyUsesUniqueNameAndKeepsExtension" classname="dev.findroid.FileEngineTest" time="0.002"/>
   <testcase name="deleteForeverOnlyRemovesRequestedTrashItem" classname="dev.findroid.FileEngineTest" time="0.005"/>
-  <testcase name="deletingTrashedFolderNeverFollowsSymbolicLinks" classname="dev.findroid.FileEngineTest" time="0.004"/>
+  <testcase name="deletingTrashedFolderNeverFollowsSymbolicLinks" classname="dev.findroid.FileEngineTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

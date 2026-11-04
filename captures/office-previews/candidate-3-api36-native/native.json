@@ -1,0 +1,152 @@
+{
+  "success": true,
+  "passed": 19,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "platformCancellationClosesTheReadWithoutChangingThePackage",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "independentlyGeneratedWordWorkbookAndSlidesUseRealPackageStructures",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "excessPackageMetadataIsRejectedOnThePlatformBeforeXmlParsing",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "platformRefusesExternalEntitiesBeforeReadingTheirTargets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeNativeTest",
+      "test": "platformXmlParserReadsAllThreeFormatsAndKeepsSourceBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeWorkflowTest",
+      "test": "providerMimeOnlyDocumentAndBlockedPreparationCanStopAndRetry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeWorkflowTest",
+      "test": "wordPreviewFindsCopiesUnicodeAndExplainsReadOnlyLimits",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeWorkflowTest",
+      "test": "slideNavigationUpdatesFindAndReopeningClearsTheQuery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeWorkflowTest",
+      "test": "workbookUsesStoredValuesAndCopiesOnlyTheSelectedWorksheet",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "cancellationEndsAnIdlePipeReadBeforeTheWriterCloses",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "declaredAssetOffsetAndLengthDoNotExposeSurroundingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "cancelingACacheWaitReleasesOnlyThatReader",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "unknownLengthPipeReadsChunksAndFinishesAtEof",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "mimeOnlyProviderTextAndBlockedReadCancellation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "jsonFormatsAndMalformedJsonKeepsReadableSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "searchOwnsSpacesAndEscapeReturnsToPeek",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "csvQuotedCellsCanBeInspectedAndCopied",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "markdownReadSourceAndLiteralHtmlDoNotExecute",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "encodingRecoveryAndLargerExplicitBudget",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 116.8,
+  "wallSecondsThisInvocation": 130.6,
+  "timedOut": false,
+  "isolatedBatches": [
+    {
+      "selector": "dev.findroid.OfficeNativeTest",
+      "report": "captures/office-previews/candidate-3-api36-native/batches/01-OfficeNativeTest.json",
+      "log": "captures/office-previews/candidate-3-api36-native/batches/01-OfficeNativeTest.txt",
+      "reportSha256": "9b717a4bc059d7aee64914de0e24f081e39e408325ed7f96c1619dffb95d2c92",
+      "logSha256": "1a501d4d7ff8034eaf07efd5195b2d223f3a0e3bed31efb589cb1cc527cc9457",
+      "passed": 5
+    },
+    {
+      "selector": "dev.findroid.OfficeWorkflowTest",
+      "report": "captures/office-previews/candidate-3-api36-native/batches/02-OfficeWorkflowTest.json",
+      "log": "captures/office-previews/candidate-3-api36-native/batches/02-OfficeWorkflowTest.txt",
+      "reportSha256": "77db79b7adfa81887244cc762ca0af3d7e0e91aafce527687fd90e8f837429c2",
+      "logSha256": "aaaf7f0fdb6cece01c1a234a8b081910233e7f826c18f7b5e2d1d68155fc5a1f",
+      "passed": 4
+    },
+    {
+      "selector": "dev.findroid.DocumentPreviewInputTest",
+      "report": "captures/office-previews/candidate-3-api36-native/batches/03-DocumentPreviewInputTest.json",
+      "log": "captures/office-previews/candidate-3-api36-native/batches/03-DocumentPreviewInputTest.txt",
+      "reportSha256": "b023048002d59ff7516c667f605ecfcf1cbb09067c17f5597bdc7263c1c147be",
+      "logSha256": "6649cc8ce99d49a9833d2165c55244387b6b19b0cbf0947cc468ca0bdf9f1fd9",
+      "passed": 4
+    },
+    {
+      "selector": "dev.findroid.StructuredPreviewWorkflowTest",
+      "report": "captures/office-previews/candidate-3-api36-native/batches/04-StructuredPreviewWorkflowTest.json",
+      "log": "captures/office-previews/candidate-3-api36-native/batches/04-StructuredPreviewWorkflowTest.txt",
+      "reportSha256": "9c442b7431a657d2bf76424e03a81659d5ad1a092cf498b29b2ca0baf1b3f42a",
+      "logSha256": "0a04b115a513938ca271d4f3d7d9e2b2777029904e33a4a0dfd93773347a44a4",
+      "passed": 6
+    }
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "b441c6d10a92084ed0c820a97ec6b1183f64e58c64f6207be4f7c8cdd16f1f5a",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "cdd159330c2b07a53578872925d750e6a8bae59560563b2edc831884030dbdce"
+  },
+  "installedApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "b441c6d10a92084ed0c820a97ec6b1183f64e58c64f6207be4f7c8cdd16f1f5a",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "cdd159330c2b07a53578872925d750e6a8bae59560563b2edc831884030dbdce"
+  }
+}

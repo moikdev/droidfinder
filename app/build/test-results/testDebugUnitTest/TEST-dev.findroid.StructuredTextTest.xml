@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.StructuredTextTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:38.136Z" hostname="MacBook-Pro-2.local" time="0.144">
+<testsuite name="dev.findroid.StructuredTextTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:11.732Z" hostname="MacBook-Pro-2.local" time="0.151">
   <properties/>
-  <testcase name="markdownSupportsNestedListsTablesTasksAndLiteralHtml" classname="dev.findroid.StructuredTextTest" time="0.023"/>
-  <testcase name="incompleteAndMalformedCsvDoNotInventCompleteRows" classname="dev.findroid.StructuredTextTest" time="0.004"/>
-  <testcase name="processingHonorsCancellationCheckpoints" classname="dev.findroid.StructuredTextTest" time="0.002"/>
-  <testcase name="oversizedMarkdownTableOmitsTheRecordInsteadOfPublishingPartialCells" classname="dev.findroid.StructuredTextTest" time="0.004"/>
-  <testcase name="quotedMultilineCsvAndTrailingFields" classname="dev.findroid.StructuredTextTest" time="0.001"/>
+  <testcase name="markdownSupportsNestedListsTablesTasksAndLiteralHtml" classname="dev.findroid.StructuredTextTest" time="0.038"/>
+  <testcase name="incompleteAndMalformedCsvDoNotInventCompleteRows" classname="dev.findroid.StructuredTextTest" time="0.002"/>
+  <testcase name="processingHonorsCancellationCheckpoints" classname="dev.findroid.StructuredTextTest" time="0.001"/>
+  <testcase name="oversizedMarkdownTableOmitsTheRecordInsteadOfPublishingPartialCells" classname="dev.findroid.StructuredTextTest" time="0.003"/>
+  <testcase name="quotedMultilineCsvAndTrailingFields" classname="dev.findroid.StructuredTextTest" time="0.0"/>
   <testcase name="encodingsBomAndTruncatedCodePoints" classname="dev.findroid.StructuredTextTest" time="0.005"/>
-  <testcase name="pathologicalMarkdownRemainsBoundedAndSignalsItsLimit" classname="dev.findroid.StructuredTextTest" time="0.099"/>
-  <testcase name="strictJsonPreservesDuplicateKeysAndNumberSpelling" classname="dev.findroid.StructuredTextTest" time="0.006"/>
+  <testcase name="pathologicalMarkdownRemainsBoundedAndSignalsItsLimit" classname="dev.findroid.StructuredTextTest" time="0.1"/>
+  <testcase name="strictJsonPreservesDuplicateKeysAndNumberSpelling" classname="dev.findroid.StructuredTextTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.DesktopArchiveTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:19.829Z" hostname="MacBook-Pro-2.local" time="0.09">
+<testsuite name="dev.findroid.DesktopArchiveTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:10:55.196Z" hostname="MacBook-Pro-2.local" time="0.05">
   <properties/>
-  <testcase name="namedCompressionKeepsSourceAndAvoidsOverwrites" classname="dev.findroid.DesktopArchiveTest" time="0.005"/>
-  <testcase name="timestampsSurviveRoundTrip" classname="dev.findroid.DesktopArchiveTest" time="0.006"/>
-  <testcase name="dottedFolderNameIsPreserved" classname="dev.findroid.DesktopArchiveTest" time="0.006"/>
-  <testcase name="browserInfersFoldersWithoutInflatingFiles" classname="dev.findroid.DesktopArchiveTest" time="0.007"/>
-  <testcase name="invalidAndUnsafeArchivesLeaveNoOutput" classname="dev.findroid.DesktopArchiveTest" time="0.028"/>
-  <testcase name="emptyZipIsValidAndInvalidNamesAreRejected" classname="dev.findroid.DesktopArchiveTest" time="0.006"/>
-  <testcase name="compressionLevelsProduceReadableArchives" classname="dev.findroid.DesktopArchiveTest" time="0.028"/>
-  <testcase name="equalNamesFromDifferentFoldersKeepBothContents" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
+  <testcase name="namedCompressionKeepsSourceAndAvoidsOverwrites" classname="dev.findroid.DesktopArchiveTest" time="0.004"/>
+  <testcase name="timestampsSurviveRoundTrip" classname="dev.findroid.DesktopArchiveTest" time="0.005"/>
+  <testcase name="dottedFolderNameIsPreserved" classname="dev.findroid.DesktopArchiveTest" time="0.002"/>
+  <testcase name="browserInfersFoldersWithoutInflatingFiles" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
+  <testcase name="invalidAndUnsafeArchivesLeaveNoOutput" classname="dev.findroid.DesktopArchiveTest" time="0.007"/>
+  <testcase name="emptyZipIsValidAndInvalidNamesAreRejected" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
+  <testcase name="compressionLevelsProduceReadableArchives" classname="dev.findroid.DesktopArchiveTest" time="0.021"/>
+  <testcase name="equalNamesFromDifferentFoldersKeepBothContents" classname="dev.findroid.DesktopArchiveTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

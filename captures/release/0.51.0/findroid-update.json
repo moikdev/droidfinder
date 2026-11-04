@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 53,
+  "versionName": "0.51.0-preview",
+  "apkName": "Findroid-0.51.0-preview.apk",
+  "bytes": 38000612,
+  "sha256": "00e77e12c1d9641753653bf88139a507fec20d5bd063abd001937963e46a8900",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.51.0-preview/Findroid-0.51.0-preview.apk",
+  "notes": "Preview stored text in DOCX, XLSX and PPTX. Browse worksheets and slides, copy the loaded section, and find matching rows. XLSX uses stored values; formulas aren't recalculated. Read-only previews can differ in layout and formatting. Your documents stay unchanged. See the release notes for supported formats and preview limits.\n"
+}

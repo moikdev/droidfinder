@@ -1,0 +1,16 @@
+{
+  "stoppedResult": "captures/office-previews/candidate-2-api30-optimized-layouts-1/result.json",
+  "stoppedResultSha256": "f6b213812b6b01db0422a07e438d327a81f9cbe783cb3c8aba501be7c0cea64c",
+  "api30OwnedFixtureNamesTruncatedAt100ByteTarNameField": true,
+  "observedBasenames": [
+    "LibraryNotes.doc",
+    "LibraryBudget.xl",
+    "LibraryJourney.p"
+  ],
+  "shortenedFixtureRootAndExplicit100ByteNameGuard": true,
+  "additionalNamedRowReadinessWait": true,
+  "api36OriginalCheckerContinuesWithIntactFixtureNames": true,
+  "originalStateRestored": true,
+  "applicationAndTestApksUnchanged": true,
+  "earlierStopRetainedAndExcluded": true
+}

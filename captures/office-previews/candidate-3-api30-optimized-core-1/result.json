@@ -1,0 +1,453 @@
+{
+  "serial": "emulator-5602",
+  "section": "core",
+  "sourceCommit": "c4b8e26b39f2c3826d4ca45f15a67b10ca6207b3",
+  "checkerSha256": "4b4982c5d5491cf85ca6735155b2dd5d8e31a7819f603c4667619e769ea560aa",
+  "buildReceiptSha256": "555696bf47f683471c3e63de0cc7c998f0a8eac45cb9d4bebc1ab8e2913bbe3b",
+  "apkSha256": "00e77e12c1d9641753653bf88139a507fec20d5bd063abd001937963e46a8900",
+  "previousApkSha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+  "checks": [
+    {
+      "name": "core-DOCX",
+      "format": "DOCX",
+      "public52To53DirectUpgrade": true,
+      "actualClipboardRead": true,
+      "sourceBytesKept": true,
+      "sectionNavigation": false,
+      "findMatch": true,
+      "limitsReviewed": true
+    },
+    {
+      "name": "core-XLSX",
+      "format": "XLSX",
+      "public52To53DirectUpgrade": true,
+      "actualClipboardRead": true,
+      "sourceBytesKept": true,
+      "sectionNavigation": true,
+      "findMatch": false,
+      "limitsReviewed": true
+    },
+    {
+      "name": "core-PPTX",
+      "format": "PPTX",
+      "public52To53DirectUpgrade": true,
+      "actualClipboardRead": true,
+      "sourceBytesKept": true,
+      "sectionNavigation": true,
+      "findMatch": false,
+      "limitsReviewed": true
+    }
+  ],
+  "layouts": [],
+  "captures": [
+    {
+      "path": "core-DOCX-first-section-preview.png",
+      "sha256": "d2a04ad697edbf885562a4482042abcfd725a88054bd0c0b024b3ba0148dca5f",
+      "surfaceBoundsPx": [
+        0,
+        90,
+        1920,
+        1073
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-DOCX-limits-preview.png",
+      "sha256": "39d6e3ba39c327b023fb1e4c504b7545d310890303adbcd198b8663d5b6502e2",
+      "surfaceBoundsPx": [
+        540,
+        291,
+        1380,
+        873
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-XLSX-first-section-preview.png",
+      "sha256": "697ef9e131ba7765748a7811859536e32b2d44d82edb18f88dfc21f0f70cc0d8",
+      "surfaceBoundsPx": [
+        0,
+        90,
+        1920,
+        1073
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-XLSX-second-section-preview.png",
+      "sha256": "1510ac6552dcebcba989c614956c930b501bbd47463802a77a3a6a99417c938f",
+      "surfaceBoundsPx": [
+        0,
+        90,
+        1920,
+        1073
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-XLSX-limits-preview.png",
+      "sha256": "03d2fc5581ab44c5814248043240b30bcd599abca56578e4774017014f1ab8f7",
+      "surfaceBoundsPx": [
+        540,
+        291,
+        1380,
+        873
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-PPTX-first-section-preview.png",
+      "sha256": "924d3a39c89a6b3af66093e0591a8e03a8cc6387ff5a8894e94c222a27d5bfa4",
+      "surfaceBoundsPx": [
+        0,
+        90,
+        1920,
+        1073
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-PPTX-second-section-preview.png",
+      "sha256": "2aa5228a553d83bcc8c3edbbac571057468a2149c051c88513c46e7ce5780631",
+      "surfaceBoundsPx": [
+        0,
+        90,
+        1920,
+        1073
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "core-PPTX-limits-preview.png",
+      "sha256": "39d6e3ba39c327b023fb1e4c504b7545d310890303adbcd198b8663d5b6502e2",
+      "surfaceBoundsPx": [
+        540,
+        291,
+        1380,
+        873
+      ],
+      "syntheticSetupOnly": true
+    }
+  ],
+  "clipboardProofs": [
+    {
+      "name": "core-DOCX",
+      "actualSyntheticText": "Ocean light\nFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\nMorning\n\tSea\n\t",
+      "sha256": "e6d6a22c8c535eb394ea67c633a530afb47eb14bf57562685cce5acf5f4012c8",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "core-XLSX",
+      "actualSyntheticText": "Row\tA\tB\tC\tD\n1\tOcean light\tFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\t\t\n2\t2\t[No cached formula result]\t\t\n3\t\t\t\t\n4\t\t\t\tTRUE",
+      "sha256": "2760ebc860760f4c9121e1bfb6cefd76c355444ba2f737cc7ff83d253be7e25f",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "core-XLSX-next",
+      "actualSyntheticText": "Row\tA\n1\tMorning sea",
+      "sha256": "becc9774dc99c09a22cc17f537059668d1fd213e666ca8b7ee88e69790f59888",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "core-PPTX",
+      "actualSyntheticText": "Far shore \u65e5\u672c\u8a9e \ud83c\udf0a\n",
+      "sha256": "a3ebb5806936af37d881fb394123d0717a04afd47dd361f09f68395664f2d499",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "core-PPTX-next",
+      "actualSyntheticText": "Ocean light\n",
+      "sha256": "c7fe039cc0572da63ffda0fa44b4012f2378c5c07075704e32ea7376e10814a1",
+      "readByForegroundTestOnlyActivity": true
+    }
+  ],
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "operationsUseExactOptimizedApk": true,
+  "textVisibilityProofs": [],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "controlProofs": [
+    {
+      "name": "core-DOCX-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        168,
+        1830,
+        240
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-DOCX-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        872,
+        196,
+        1098,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-DOCX-search",
+      "text": "",
+      "description": "",
+      "bounds": [
+        173,
+        376,
+        1746,
+        472
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-DOCX-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        311,
+        196,
+        491,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-DOCX-dismiss-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1122,
+        765,
+        1344,
+        837
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-DOCX-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        96,
+        227,
+        168
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-XLSX-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        168,
+        1830,
+        240
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-XLSX-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        955,
+        196,
+        1181,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-XLSX-next",
+      "text": "",
+      "description": "",
+      "bounds": [
+        789,
+        196,
+        943,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-XLSX-next-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        955,
+        196,
+        1181,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-XLSX-previous",
+      "text": "",
+      "description": "",
+      "bounds": [
+        586,
+        196,
+        777,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-XLSX-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        394,
+        196,
+        574,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-XLSX-dismiss-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1122,
+        765,
+        1344,
+        837
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-XLSX-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        96,
+        227,
+        168
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-PPTX-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        168,
+        1830,
+        240
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-PPTX-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        869,
+        196,
+        1095,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-PPTX-next",
+      "text": "",
+      "description": "",
+      "bounds": [
+        703,
+        196,
+        857,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-PPTX-next-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        869,
+        196,
+        1095,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-PPTX-previous",
+      "text": "",
+      "description": "",
+      "bounds": [
+        500,
+        196,
+        691,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-PPTX-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        308,
+        196,
+        488,
+        268
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-PPTX-dismiss-limits",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1122,
+        765,
+        1344,
+        837
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "core-PPTX-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        96,
+        227,
+        168
+      ],
+      "density": 1.5
+    }
+  ],
+  "hierarchyRetries": []
+}

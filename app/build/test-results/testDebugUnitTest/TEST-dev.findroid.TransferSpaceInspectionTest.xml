@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.TransferSpaceInspectionTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:38.434Z" hostname="MacBook-Pro-2.local" time="0.006">
+<testsuite name="dev.findroid.TransferSpaceInspectionTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:12.028Z" hostname="MacBook-Pro-2.local" time="0.003">
   <properties/>
-  <testcase name="unknownSourceNamesMakeEveryDestinationNameAPossibleConflict" classname="dev.findroid.TransferSpaceInspectionTest" time="0.004"/>
-  <testcase name="copyingAnItemIntoItsOwnParentDoesNotBackUpItself" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
+  <testcase name="unknownSourceNamesMakeEveryDestinationNameAPossibleConflict" classname="dev.findroid.TransferSpaceInspectionTest" time="0.001"/>
+  <testcase name="copyingAnItemIntoItsOwnParentDoesNotBackUpItself" classname="dev.findroid.TransferSpaceInspectionTest" time="0.001"/>
   <testcase name="skipAndKeepBothDoNotInventReplacementBackups" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="repeatedIncomingNamesBudgetForLaterReplacementOfEarlierCopies" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="emptySourceSelectionIsRefused" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="cancellationStopsBeforeTheFirstMetadataRead" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="aDifferentSourceWithTheSameNameCanReplaceAnAlsoSelectedDestination" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
-  <testcase name="unknownCapacityStillReportsKnownContentAndRecoveryDemand" classname="dev.findroid.TransferSpaceInspectionTest" time="0.001"/>
+  <testcase name="unknownCapacityStillReportsKnownContentAndRecoveryDemand" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="nonconflictingCopyNeedsOnlyOnePayloadAndStartsNoOperation" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="unknownRecoveryFileSizeNeverBecomesACompleteZeroByteAllowance" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="askingAndMergingKeepConservativeOriginalAllowance" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
-  <testcase name="readOnlyDestinationCannotOfferTransferConfirmation" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
+  <testcase name="readOnlyDestinationCannotOfferTransferConfirmation" classname="dev.findroid.TransferSpaceInspectionTest" time="0.001"/>
   <testcase name="duplicatePathsAreRefusedBeforeInventory" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="possibleReplacementsIncludePreservingTheExistingOriginal" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <testcase name="aFileCannotBeReviewedAsADestinationFolder" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
-  <testcase name="missingDestinationListingKeepsTheBackupRequirementUnknown" classname="dev.findroid.TransferSpaceInspectionTest" time="0.001"/>
+  <testcase name="missingDestinationListingKeepsTheBackupRequirementUnknown" classname="dev.findroid.TransferSpaceInspectionTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

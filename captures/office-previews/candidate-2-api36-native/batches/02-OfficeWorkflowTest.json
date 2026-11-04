@@ -1,0 +1,34 @@
+{
+  "success": true,
+  "passed": 4,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.OfficeWorkflowTest",
+      "test": "providerMimeOnlyDocumentAndBlockedPreparationCanStopAndRetry",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeWorkflowTest",
+      "test": "wordPreviewFindsCopiesUnicodeAndExplainsReadOnlyLimits",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeWorkflowTest",
+      "test": "slideNavigationUpdatesFindAndReopeningClearsTheQuery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OfficeWorkflowTest",
+      "test": "workbookUsesStoredValuesAndCopiesOnlyTheSelectedWorksheet",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 49.1,
+  "timedOut": false
+}

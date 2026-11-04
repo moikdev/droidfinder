@@ -1,0 +1,54 @@
+{
+  "images": [
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-DOCX-first-section-preview.png",
+      "sha256": "d114c748b87325865565936dc3c5d8a3aedc6fbd999d29e7b6c608e8f9c11741",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-DOCX-limits-preview.png",
+      "sha256": "d01065621eec18afbd3e4eb68aff6c493bc44c652f04145d242a39fa07e277f4",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-PPTX-first-section-preview.png",
+      "sha256": "963c419db57d72510f069a8ccf9bd428c15f2352fa5a8347d67d3c7e4f09107a",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-PPTX-limits-preview.png",
+      "sha256": "d01065621eec18afbd3e4eb68aff6c493bc44c652f04145d242a39fa07e277f4",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-PPTX-second-section-preview.png",
+      "sha256": "22c70bb57d817a52a0588500bb85921720e5af13955e886b5ec4e44cb557c274",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-XLSX-first-section-preview.png",
+      "sha256": "e41e8e925297dfa41d461263b7a4ecb600aacc020a4de006813cec44819a2c8f",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-XLSX-limits-preview.png",
+      "sha256": "857b24b21042d3f2457dc89ef25c33dc3c99089395638ab915ddc6d86c7d560a",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-XLSX-second-section-preview.png",
+      "sha256": "e4b7e8fbf57111b7e092dcdd8e7e99a22cab937ee57fbdd9c6bd4dfa9d742e34",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    }
+  ],
+  "inspectionBasis": "Exact PNG matches inherit completed inspection; other images require direct inspection.",
+  "allSelectedCoreImagesInspected": true
+}

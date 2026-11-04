@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.StorageCapabilitiesTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:38.060Z" hostname="MacBook-Pro-2.local" time="0.013">
+<testsuite name="dev.findroid.StorageCapabilitiesTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:11.659Z" hostname="MacBook-Pro-2.local" time="0.022">
   <properties/>
-  <testcase name="trashItemsExplainRestoreBeforeEditing" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
-  <testcase name="missingFlagsStayUnknownEvenWhenLegacyBooleansAreTrue" classname="dev.findroid.StorageCapabilitiesTest" time="0.001"/>
+  <testcase name="trashItemsExplainRestoreBeforeEditing" classname="dev.findroid.StorageCapabilitiesTest" time="0.001"/>
+  <testcase name="missingFlagsStayUnknownEvenWhenLegacyBooleansAreTrue" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
   <testcase name="unknownSavedPermissionDoesNotClaimRevocation" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
   <testcase name="advertisedSupportDoesNotOverrideLoadedDenial" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
   <testcase name="renameSupportDoesNotImplyDeleteOrWrite" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
@@ -15,12 +15,12 @@
   <testcase name="aProtectedRootCanStillBeReadAndReceiveChildren" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
   <testcase name="knownReadOnlyPermissionRemainsUsefulWhenFlagsAreMissing" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
   <testcase name="providerTrashNeverPromisesRecoveryWithoutDeleteSupport" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
-  <testcase name="mixedSelectionCountsAreCompleteAndExamplesPrioritizeDeniedItems" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
+  <testcase name="mixedSelectionCountsAreCompleteAndExamplesPrioritizeDeniedItems" classname="dev.findroid.StorageCapabilitiesTest" time="0.001"/>
   <testcase name="rootEvidenceNeverSubstitutesForAChildsEvidence" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
   <testcase name="providerTrashExplainsLocalRecoveryAndChangedAddresses" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
   <testcase name="unreadableOriginalOffersStorageRecoveryInsteadOfCopy" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
   <testcase name="unloadedInformationDoesNotMeanReadOnly" classname="dev.findroid.StorageCapabilitiesTest" time="0.0"/>
-  <testcase name="largeSelectionsKeepOnlyThreeNamedExamples" classname="dev.findroid.StorageCapabilitiesTest" time="0.012"/>
+  <testcase name="largeSelectionsKeepOnlyThreeNamedExamples" classname="dev.findroid.StorageCapabilitiesTest" time="0.02"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

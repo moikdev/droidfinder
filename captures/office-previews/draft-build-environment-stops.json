@@ -1,0 +1,5 @@
+{
+  "attempt3": "SDK path was not set; no compilation completed.",
+  "attempt4": "Default JDK 26 rejected the existing 65,535-character ZIP comment fixture before the parser ran. The project documents JDK 17; retry selects that exact toolchain.",
+  "failedReceiptsKept": true
+}

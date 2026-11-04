@@ -1,0 +1,127 @@
+{
+  "images": [
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "dccd719ce40871a3e4d20329c779fef40b0311b434950efe595a8b56e8a05f25",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font1.0-light-glyph.png",
+      "sha256": "a85b5bcdc34cf2364e023b92ea8c65e7b11977f89057001415556f1c88181802",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "6b89f0e259681ba7ed3463708ce93f8410bee213cbb4b153dcd7995796417650",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font1.0-dark-glyph.png",
+      "sha256": "2ddeb48dfde00e99741547aac45a5af1b6a207fd2a790d15f6ed828a0690a6c4",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "13295ac974f8cb26b3aed9d847e3ce5560cd0db71cd835b19d2983a7277dd47e",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font2.0-light-glyph.png",
+      "sha256": "975cceefcdf523b70cba0248f41821c0c4035de2cd23c2361bbf5e346f2c1468",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "7e97039a7432c7aea9960e8c04bf0c936ff442b89a1e3e661e5cb4bcb8506da3",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font2.0-dark-glyph.png",
+      "sha256": "548a208c8cae3ae5840de3800e62dd56702d41b9261b21148bf1aa4e2d0d99c2",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "41a1b435a20ee3ee204b99e9321ea0c795ce33afda9ff768958fe9d2c7521f05",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "677b421f943b2b80e9c435c7a3642381d33664513f48b1dd6f8b0033415a738b",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "03f43327b4ccc10b40c622ad221bbeade59531c4950a5671bf95912928d989d5",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font1.0-dark-glyph.png",
+      "sha256": "ede174adab9d40c979d66abb218a8bc39b70865a35b30c1a8d929182affdb747",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "728d30d3086a1598e31324d0a85013e797572b8e5c6946b455ab8de589195ba8",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "b77d433b964265597d0a589b23dab32418b9d559ada305618e15d60a94c2ebf5",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "6d9e75faaac50143d6fb6f522e0d0ab5790216d6aae634de7a63da3db1a5bd83",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font2.0-dark-glyph.png",
+      "sha256": "d0047c61a88afdf1a722cd0878cf91d6b9a1f48b08b7675c6d8e4c32119a7990",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "6aa4837a66c7b771f52d2b7e8902de13ff14bf8ba625d4e008b438cda6f6653c",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font1.0-light-glyph.png",
+      "sha256": "469a02c86b69ae9ab4923d935368ff75257d0258d188680681d4ac95691c21e8",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "4341fa697a9028e584005a5283b028594d65c8cd6bec37dd830cf804b1a674f4",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "a67f87400963dff9ccd6d3747228cebe23c69b9419287c666061318fa647fcde",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "88494767c9ce41421185b0b39d99021d522c0c10ff42f0f7d3c151f077499ad4",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font2.0-light-glyph.png",
+      "sha256": "defdab50985e33e2977cfcce2b15255fac3947df9f7495261c2202e979cf3365",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "2ea53104b81d63968bfb018a82c8f230e5d39a37c38977b4ac9f9cabe9d2ae3f",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "6cd005b0df16463ca9b4f18dd0752f270eb91c0e54083f72147acb7f19c2462e",
+      "inspected": true
+    }
+  ],
+  "selectedResultSurfacesInspected": 12,
+  "glyphCropsVerifiedAsExactResultSubsets": 12,
+  "findings": "All six font pairs inspected. Body text is readable in all twelve cases. Compact controls scroll independently and can clip their own context until scrolled; the worksheet data stays visible. Synthetic setup only."
+}

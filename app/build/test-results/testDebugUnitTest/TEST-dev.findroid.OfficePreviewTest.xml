@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.OfficePreviewTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:26.556Z" hostname="MacBook-Pro-2.local" time="0.796">
+<testsuite name="dev.findroid.OfficePreviewTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T16:11:01.307Z" hostname="MacBook-Pro-2.local" time="0.787">
   <properties/>
-  <testcase name="wrongDocumentTypeAndEncryptedBinaryContainerAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.021"/>
-  <testcase name="dtdEntityAndUnsafePartNamesAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.017"/>
-  <testcase name="sparseAndWideSheetsAreBoundedAndMarkedPartial" classname="dev.findroid.OfficePreviewTest" time="0.052"/>
-  <testcase name="duplicateZipPartNamesAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.003"/>
+  <testcase name="wrongDocumentTypeAndEncryptedBinaryContainerAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.025"/>
+  <testcase name="dtdEntityAndUnsafePartNamesAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.004"/>
+  <testcase name="sparseAndWideSheetsAreBoundedAndMarkedPartial" classname="dev.findroid.OfficePreviewTest" time="0.01"/>
+  <testcase name="duplicateZipPartNamesAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.005"/>
   <testcase name="deletedAndExplicitlyHiddenWordRunsAreOmitted" classname="dev.findroid.OfficePreviewTest" time="0.003"/>
-  <testcase name="excessPackagePartsAreRejectedBeforeTheReaderBuildsItsIndex" classname="dev.findroid.OfficePreviewTest" time="0.59"/>
-  <testcase name="slideTextFollowsPresentationRelationshipsRatherThanZipEntryOrder" classname="dev.findroid.OfficePreviewTest" time="0.007"/>
-  <testcase name="spreadsheetUsesSharedAndInlineTextBooleansCachedValuesAndSparseCoordinates" classname="dev.findroid.OfficePreviewTest" time="0.011"/>
+  <testcase name="excessPackagePartsAreRejectedBeforeTheReaderBuildsItsIndex" classname="dev.findroid.OfficePreviewTest" time="0.661"/>
+  <testcase name="slideTextFollowsPresentationRelationshipsRatherThanZipEntryOrder" classname="dev.findroid.OfficePreviewTest" time="0.012"/>
+  <testcase name="spreadsheetUsesSharedAndInlineTextBooleansCachedValuesAndSparseCoordinates" classname="dev.findroid.OfficePreviewTest" time="0.005"/>
   <testcase name="externalOrEscapingSheetTargetsAreNeverRead" classname="dev.findroid.OfficePreviewTest" time="0.016"/>
   <testcase name="cancellationClosesThePackageAndPreservesSource" classname="dev.findroid.OfficePreviewTest" time="0.002"/>
-  <testcase name="oversizedXmlAndExcessiveDepthAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.041"/>
-  <testcase name="wordReadsUnicodeParagraphsTabsAndBreaksWithoutChangingSource" classname="dev.findroid.OfficePreviewTest" time="0.004"/>
-  <testcase name="longValuesAreMarkedPartialAndNeverSplitASurrogatePair" classname="dev.findroid.OfficePreviewTest" time="0.014"/>
+  <testcase name="oversizedXmlAndExcessiveDepthAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.026"/>
+  <testcase name="wordReadsUnicodeParagraphsTabsAndBreaksWithoutChangingSource" classname="dev.findroid.OfficePreviewTest" time="0.002"/>
+  <testcase name="longValuesAreMarkedPartialAndNeverSplitASurrogatePair" classname="dev.findroid.OfficePreviewTest" time="0.004"/>
   <testcase name="unavailableSharedStringIsExplainedAndPartial" classname="dev.findroid.OfficePreviewTest" time="0.005"/>
-  <testcase name="inconsistentSpreadsheetCoordinatesAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.008"/>
-  <testcase name="exactFormatSetAndProviderMimeAreRecognized" classname="dev.findroid.OfficePreviewTest" time="0.001"/>
+  <testcase name="inconsistentSpreadsheetCoordinatesAreRefused" classname="dev.findroid.OfficePreviewTest" time="0.005"/>
+  <testcase name="exactFormatSetAndProviderMimeAreRecognized" classname="dev.findroid.OfficePreviewTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

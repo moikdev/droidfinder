@@ -1,0 +1,22 @@
+{
+  "attempts": [
+    {
+      "api": "api30",
+      "retainedResult": "captures/office-previews/candidate-2-api30-optimized-layouts-2/result.json",
+      "completeLayouts": 11,
+      "failedLayout": "600x800 dp / system font 2.0 / dark XLSX",
+      "worksheetBodyClippedByUnboundedControls": true,
+      "originalStateRestored": true
+    },
+    {
+      "api": "api36",
+      "retainedResult": "captures/office-previews/candidate-2-api36-optimized-layouts-1/result.json",
+      "completeLayouts": 11,
+      "failedLayout": "600x800 dp / system font 2.0 / dark XLSX",
+      "worksheetBodyClippedByUnboundedControls": true,
+      "originalStateRestored": true
+    }
+  ],
+  "sourceFix": "Office controls scroll within at most 60% of the preview; loaded content keeps the remaining area.",
+  "earlierCandidateExcludedFromCompleteAcceptance": true
+}

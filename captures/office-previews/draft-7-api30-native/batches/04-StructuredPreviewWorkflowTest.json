@@ -1,0 +1,45 @@
+{
+  "success": false,
+  "passed": 5,
+  "skipped": 0,
+  "failed": 1,
+  "runnerCompleted": true,
+  "runnerSucceeded": false,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "mimeOnlyProviderTextAndBlockedReadCancellation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "jsonFormatsAndMalformedJsonKeepsReadableSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "searchOwnsSpacesAndEscapeReturnsToPeek",
+      "code": -2,
+      "error": "java.lang.AssertionError: Failed to perform text input."
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "csvQuotedCellsCanBeInspectedAndCopied",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "markdownReadSourceAndLiteralHtmlDoNotExecute",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.StructuredPreviewWorkflowTest",
+      "test": "encodingRecoveryAndLargerExplicitBudget",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 33.3,
+  "timedOut": false
+}

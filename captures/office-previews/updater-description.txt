@@ -1,0 +1,1 @@
+Preview stored text in DOCX, XLSX and PPTX. Browse worksheets and slides, copy the loaded section, and find matching rows. XLSX uses stored values; formulas aren't recalculated. Read-only previews can differ in layout and formatting. Your documents stay unchanged. See the release notes for supported formats and preview limits.

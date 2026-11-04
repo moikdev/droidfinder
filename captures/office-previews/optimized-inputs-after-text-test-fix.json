@@ -1,0 +1,8 @@
+{
+  "productionInputsUnchanged": true,
+  "optimizedApkBytesUnchanged": true,
+  "changedCompiledInputs": [
+    "app/src/androidTest/java/dev/findroid/StructuredPreviewWorkflowTest.kt"
+  ],
+  "beforeReceiptSha256": "5e8e86b86faa0a014c441c0291731e2efd0a60474a3f018f8d9cdc3d02bd7555"
+}

@@ -1,0 +1,56 @@
+{
+  "images": [
+    {
+      "path": "captures/office-previews/candidate-3-api30-native/images/after-batch-002/office-qa/provider-stopped.png",
+      "sha256": "f882b330e0a2a98633d2ef6d09a2359347f06597e12e3dd12e4c5ac4d6dbe3a3",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-native/images/after-batch-002/office-qa/slide-section-and-find.png",
+      "sha256": "f23f4736a6b6708c8b311cb4f5cd974411735b15e76a51e878e3621a4e177b55",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-native/images/after-batch-002/office-qa/word-find-and-copy.png",
+      "sha256": "84406fe8f1b6b8bc002668e2ef98b36239c1f6fe376bb1ff1e7ca93fcf9bfb82",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-native/images/after-batch-002/office-qa/workbook-stored-values.png",
+      "sha256": "b612dae8ac1b6cea12053d2481d702fb26352102c3cd27dd0ae092cf98aba621",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-native/images/after-batch-002/office-qa/provider-stopped.png",
+      "sha256": "096bf75112d6cab44d5d8b6a0d4e85f10b84ed854750e218bf36ba28ea43e97d",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-native/images/after-batch-002/office-qa/slide-section-and-find.png",
+      "sha256": "fd63ee4f7e20fc8b46d9f58cfff8371d6c1651bf71e9c5239f2098da4a488452",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": false,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-native/images/after-batch-002/office-qa/word-find-and-copy.png",
+      "sha256": "bce4aae52d3b24bf4b939f1753817928d12af8c26d179dd1292927517b49c538",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-native/images/after-batch-002/office-qa/workbook-stored-values.png",
+      "sha256": "5b0d8c3eac4ff2d4870446b6be89cd2162489c210974c2420d2fd76bf5db3485",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    }
+  ],
+  "inspectionBasis": "Only exact PNG byte matches inherit the completed candidate-2 inspection. Other images await direct inspection.",
+  "allSelectedNativeImagesInspected": true,
+  "findings": "Seven exact inspected PNG matches; the remaining Android 16 slide screenshot is directly inspected. Body text and controls are readable; synthetic content only."
+}

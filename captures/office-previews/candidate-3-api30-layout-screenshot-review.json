@@ -1,0 +1,127 @@
+{
+  "images": [
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "86e9c161aa4e7e9f0bf2bf8ffc22ab11841a03749f8b1212c9e2e7467040a5e8",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font1.0-light-glyph.png",
+      "sha256": "21b7ad7c628f0b5c9433b1406c632e7813a8d63bd463812537b1c214f3473efa",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "c3a1d9b5aff4425ae8008ebb261bb264cb360554e140b2461d75ddd37ac815f6",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font1.0-dark-glyph.png",
+      "sha256": "216a8a7735de9a018cc969d3a16818c1fc7844d3ce7d7ef78ed3b797b8a24bd1",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "1767d000f8b6e11b2b78f5972f24eb02420d55a0534242654ae470c7c9246d27",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font2.0-light-glyph.png",
+      "sha256": "2cd1897b49e9c6432633fa9d582f8c791575f25d698b065a6f2c01df94c0a78a",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "97f644ba16ced16eb7ec7863141252f4f9b7dea1aaf0e5ca7e7f7de662436ffd",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font2.0-dark-glyph.png",
+      "sha256": "607424759891fd3483b84d81f57b49203fec66deea0876091a1d8860f45b838d",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "ccf2932335dc41d3954e0d592b119c26dfd6dd720104030a5185ff6da0c261f8",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "957bb0c7d7baf427d08cfb0634cb4c3d335f3b5d8ae48318ae5e92e818667866",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "0790ec0f309194eb1e353ed674a6c3a44f6de44978279b7e39260c39e32ab01b",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-glyph.png",
+      "sha256": "694b6e8e0e2e661128e415676e0e65f66337c160e9ac99930aa7b17c68fef8ed",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "b59b2daa4437d34438576266ba68b01a36f776868b6354c2485e7f11f668e8a3",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "6ae4f5622d968c4c45780b2fb270fdc3ec59fb05d2574e6eefbb419859854ded",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "66cd8d4d9eff45136dc6466c949df00cfe3b37fbaa606176b848e5ccb43f38ba",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-glyph.png",
+      "sha256": "de80504bad365ca4a019196d4b92e5ca24ef97653b5be3854066451e745469b7",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "5b32c84a79ee31470cd4ad5f2ad1a6329d8b948dcf47a30d1523531b1ec5ceb1",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font1.0-light-glyph.png",
+      "sha256": "533660f03e98e31a991eee7f1c064d91f9e3b83263bcaf202a854253f6c38937",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "76b936a5d5e00e4cd552d6f1dc88776cabffb9cfb8b6c09bd8d4f02b93216ee7",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "49ac6a5d543c4c0f4aaa8e301a1422b857bd505ef1c7091d4e174bc641a4e912",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "792563b9bb1af1fe801d3af4080cf00b2bb43304cc3e28084030a1d43c3b02e4",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font2.0-light-glyph.png",
+      "sha256": "1f039c0b74dd72e0d75b20e8bc3b8f26c6174f8df0bb5711871d613808991ffd",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "c4b42f7dac27fa6f503661e8654c2fc669acb8a3a0b960bfda955a3ec3dc982f",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "f02126969cd6b7a436b2c54a500125762155ddb40688032a80b1aa1213d243b1",
+      "inspected": true
+    }
+  ],
+  "selectedResultSurfacesInspected": 12,
+  "glyphCropsVerifiedAsExactResultSubsets": 12,
+  "findings": "All six normal/enlarged-font pairs inspected. The body passage is readable in all twelve cases. Compact large-text controls scroll independently; header context can be clipped until scrolled, while worksheet row 1 remains visible. Synthetic setup only."
+}

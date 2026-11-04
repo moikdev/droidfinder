@@ -1,0 +1,153 @@
+{
+  "apkSha256": "00e77e12c1d9641753653bf88139a507fec20d5bd063abd001937963e46a8900",
+  "libraries": [
+    "lib/arm64-v8a/libfindroid_files.so",
+    "lib/armeabi-v7a/libfindroid_files.so",
+    "lib/x86/libfindroid_files.so",
+    "lib/x86_64/libfindroid_files.so"
+  ],
+  "allPackagedLibraries": [
+    "lib/arm64-v8a/libandroidx.graphics.path.so",
+    "lib/arm64-v8a/libfindroid_files.so",
+    "lib/arm64-v8a/libjpeg.so",
+    "lib/arm64-v8a/libleptonica.so",
+    "lib/arm64-v8a/libpngx.so",
+    "lib/arm64-v8a/libtesseract.so",
+    "lib/armeabi-v7a/libandroidx.graphics.path.so",
+    "lib/armeabi-v7a/libfindroid_files.so",
+    "lib/armeabi-v7a/libjpeg.so",
+    "lib/armeabi-v7a/libleptonica.so",
+    "lib/armeabi-v7a/libpngx.so",
+    "lib/armeabi-v7a/libtesseract.so",
+    "lib/x86/libandroidx.graphics.path.so",
+    "lib/x86/libfindroid_files.so",
+    "lib/x86/libjpeg.so",
+    "lib/x86/libleptonica.so",
+    "lib/x86/libpngx.so",
+    "lib/x86/libtesseract.so",
+    "lib/x86_64/libandroidx.graphics.path.so",
+    "lib/x86_64/libfindroid_files.so",
+    "lib/x86_64/libjpeg.so",
+    "lib/x86_64/libleptonica.so",
+    "lib/x86_64/libpngx.so",
+    "lib/x86_64/libtesseract.so"
+  ],
+  "loadSegmentAlignments": {
+    "lib/arm64-v8a/libandroidx.graphics.path.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/arm64-v8a/libfindroid_files.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/arm64-v8a/libjpeg.so": [
+      16384,
+      16384
+    ],
+    "lib/arm64-v8a/libleptonica.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/arm64-v8a/libpngx.so": [
+      16384,
+      16384
+    ],
+    "lib/arm64-v8a/libtesseract.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/armeabi-v7a/libandroidx.graphics.path.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/armeabi-v7a/libfindroid_files.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/armeabi-v7a/libjpeg.so": [
+      4096,
+      4096
+    ],
+    "lib/armeabi-v7a/libleptonica.so": [
+      4096,
+      4096,
+      4096
+    ],
+    "lib/armeabi-v7a/libpngx.so": [
+      4096,
+      4096
+    ],
+    "lib/armeabi-v7a/libtesseract.so": [
+      4096,
+      4096,
+      4096
+    ],
+    "lib/x86/libandroidx.graphics.path.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86/libfindroid_files.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86/libjpeg.so": [
+      4096,
+      4096
+    ],
+    "lib/x86/libleptonica.so": [
+      4096,
+      4096,
+      4096
+    ],
+    "lib/x86/libpngx.so": [
+      4096,
+      4096
+    ],
+    "lib/x86/libtesseract.so": [
+      4096,
+      4096,
+      4096
+    ],
+    "lib/x86_64/libandroidx.graphics.path.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86_64/libfindroid_files.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86_64/libjpeg.so": [
+      16384,
+      16384
+    ],
+    "lib/x86_64/libleptonica.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86_64/libpngx.so": [
+      16384,
+      16384
+    ],
+    "lib/x86_64/libtesseract.so": [
+      16384,
+      16384,
+      16384
+    ]
+  },
+  "all64BitLoadSegmentsAlignedAtLeast16384": true,
+  "languageModelsNotBundled": true,
+  "zipAlignmentPassed": true,
+  "zipAlignmentLogSha256": "6390e0c242c96ad394fcae8389d575154a5e0f6e0ccbaf3c0e10b381e27c60f2"
+}

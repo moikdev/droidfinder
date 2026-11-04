@@ -1,0 +1,2156 @@
+{
+  "serial": "emulator-5582",
+  "section": "layouts",
+  "sourceCommit": "3e5069a0d582f4098d505506ae29e343e18e62fa",
+  "checkerSha256": "2f1e6b9f42cf75ee1e3595923548604e9e20c3772b01c579b965004ca56394b6",
+  "buildReceiptSha256": "e8e8ab7bcf23aee6c23e191859a0adc7b28586fa753681dc9e1cacb5a353573d",
+  "apkSha256": "cb6149eb5cfbb1700fc33a1f60dfc5772ae983cbcab2ba1d007001f54837f9fa",
+  "previousApkSha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+  "checks": [
+    {
+      "name": "layout-1280x800-font1.0-light"
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark"
+    },
+    {
+      "name": "layout-1280x800-font2.0-light"
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark"
+    },
+    {
+      "name": "layout-800x1280-font1.0-light"
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark"
+    },
+    {
+      "name": "layout-800x1280-font2.0-light"
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark"
+    },
+    {
+      "name": "layout-600x800-font1.0-light"
+    },
+    {
+      "name": "layout-600x800-font1.0-dark"
+    },
+    {
+      "name": "layout-600x800-font2.0-light"
+    }
+  ],
+  "layouts": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "previewDocument": "LibraryNotes.docx",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-1280x800-font1.0-light",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          230,
+          549,
+          1740,
+          579
+        ],
+        "rasterGlyphHeight": 20,
+        "rasterGlyphWidth": 119,
+        "image": "layout-1280x800-font1.0-light-glyph.png",
+        "sha256": "677b421f943b2b80e9c435c7a3642381d33664513f48b1dd6f8b0033415a738b",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "previewDocument": "LibraryJourney.pptx",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-1280x800-font1.0-dark",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          230,
+          549,
+          1740,
+          579
+        ],
+        "rasterGlyphHeight": 20,
+        "rasterGlyphWidth": 119,
+        "image": "layout-1280x800-font1.0-dark-glyph.png",
+        "sha256": "ede174adab9d40c979d66abb218a8bc39b70865a35b30c1a8d929182affdb747",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "previewDocument": "LibraryNotes.docx",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-1280x800-font2.0-light",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          230,
+          692,
+          1740,
+          750
+        ],
+        "rasterGlyphHeight": 38,
+        "rasterGlyphWidth": 237,
+        "image": "layout-1280x800-font2.0-light-glyph.png",
+        "sha256": "b77d433b964265597d0a589b23dab32418b9d559ada305618e15d60a94c2ebf5",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "previewDocument": "LibraryJourney.pptx",
+      "actualSizePx": [
+        1920,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-1280x800-font2.0-dark",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          230,
+          692,
+          1740,
+          750
+        ],
+        "rasterGlyphHeight": 38,
+        "rasterGlyphWidth": 237,
+        "image": "layout-1280x800-font2.0-dark-glyph.png",
+        "sha256": "d0047c61a88afdf1a722cd0878cf91d6b9a1f48b08b7675c6d8e4c32119a7990",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": false,
+      "previewDocument": "LibraryBudget.xlsx",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-800x1280-font1.0-light",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          363,
+          750,
+          452,
+          777
+        ],
+        "rasterGlyphHeight": 17,
+        "rasterGlyphWidth": 87,
+        "image": "layout-800x1280-font1.0-light-glyph.png",
+        "sha256": "469a02c86b69ae9ab4923d935368ff75257d0258d188680681d4ac95691c21e8",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": true,
+      "previewDocument": "LibraryNotes.docx",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-800x1280-font1.0-dark",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          180,
+          585,
+          1071,
+          615
+        ],
+        "rasterGlyphHeight": 20,
+        "rasterGlyphWidth": 119,
+        "image": "layout-800x1280-font1.0-dark-glyph.png",
+        "sha256": "a67f87400963dff9ccd6d3747228cebe23c69b9419287c666061318fa647fcde",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": false,
+      "previewDocument": "LibraryBudget.xlsx",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-800x1280-font2.0-light",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          363,
+          1023,
+          545,
+          1077
+        ],
+        "rasterGlyphHeight": 34,
+        "rasterGlyphWidth": 179,
+        "image": "layout-800x1280-font2.0-light-glyph.png",
+        "sha256": "defdab50985e33e2977cfcce2b15255fac3947df9f7495261c2202e979cf3365",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": true,
+      "previewDocument": "LibraryNotes.docx",
+      "actualSizePx": [
+        1200,
+        1920
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-800x1280-font2.0-dark",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          180,
+          808,
+          1071,
+          866
+        ],
+        "rasterGlyphHeight": 38,
+        "rasterGlyphWidth": 237,
+        "image": "layout-800x1280-font2.0-dark-glyph.png",
+        "sha256": "6cd005b0df16463ca9b4f18dd0752f270eb91c0e54083f72147acb7f19c2462e",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "previewDocument": "LibraryJourney.pptx",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-600x800-font1.0-light",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          114,
+          621,
+          837,
+          651
+        ],
+        "rasterGlyphHeight": 20,
+        "rasterGlyphWidth": 119,
+        "image": "layout-600x800-font1.0-light-glyph.png",
+        "sha256": "a85b5bcdc34cf2364e023b92ea8c65e7b11977f89057001415556f1c88181802",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "previewDocument": "LibraryBudget.xlsx",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-600x800-font1.0-dark",
+        "systemFontScale": 1.0,
+        "textBoundsPx": [
+          297,
+          714,
+          386,
+          741
+        ],
+        "rasterGlyphHeight": 18,
+        "rasterGlyphWidth": 87,
+        "image": "layout-600x800-font1.0-dark-glyph.png",
+        "sha256": "2ddeb48dfde00e99741547aac45a5af1b6a207fd2a790d15f6ed828a0690a6c4",
+        "actualReadableGlyphs": true
+      }
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "previewDocument": "LibraryJourney.pptx",
+      "actualSizePx": [
+        900,
+        1200
+      ],
+      "actualClipboardTextChecked": true,
+      "allNamedControlsHaveComplete48DpBounds": true,
+      "sourceBytesKept": true,
+      "bodyPassageActuallyVisible": true,
+      "systemFont": {
+        "name": "layout-600x800-font2.0-light",
+        "systemFontScale": 2.0,
+        "textBoundsPx": [
+          114,
+          900,
+          837,
+          958
+        ],
+        "rasterGlyphHeight": 38,
+        "rasterGlyphWidth": 237,
+        "image": "layout-600x800-font2.0-light-glyph.png",
+        "sha256": "4c32306e957ba80b6955f235467428ad656b26f953a6041727d545f9b5b3d48a",
+        "actualReadableGlyphs": true
+      }
+    }
+  ],
+  "captures": [
+    {
+      "path": "layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "41a1b435a20ee3ee204b99e9321ea0c795ce33afda9ff768958fe9d2c7521f05",
+      "surfaceBoundsPx": [
+        0,
+        92,
+        1920,
+        1096
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "677b421f943b2b80e9c435c7a3642381d33664513f48b1dd6f8b0033415a738b",
+      "surfaceBoundsPx": [
+        230,
+        549,
+        1740,
+        579
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "03f43327b4ccc10b40c622ad221bbeade59531c4950a5671bf95912928d989d5",
+      "surfaceBoundsPx": [
+        0,
+        92,
+        1920,
+        1096
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-1280x800-font1.0-dark-glyph.png",
+      "sha256": "ede174adab9d40c979d66abb218a8bc39b70865a35b30c1a8d929182affdb747",
+      "surfaceBoundsPx": [
+        230,
+        549,
+        1740,
+        579
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "728d30d3086a1598e31324d0a85013e797572b8e5c6946b455ab8de589195ba8",
+      "surfaceBoundsPx": [
+        0,
+        92,
+        1920,
+        1096
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "b77d433b964265597d0a589b23dab32418b9d559ada305618e15d60a94c2ebf5",
+      "surfaceBoundsPx": [
+        230,
+        692,
+        1740,
+        750
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "6d9e75faaac50143d6fb6f522e0d0ab5790216d6aae634de7a63da3db1a5bd83",
+      "surfaceBoundsPx": [
+        0,
+        92,
+        1920,
+        1096
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-1280x800-font2.0-dark-glyph.png",
+      "sha256": "d0047c61a88afdf1a722cd0878cf91d6b9a1f48b08b7675c6d8e4c32119a7990",
+      "surfaceBoundsPx": [
+        230,
+        692,
+        1740,
+        750
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "6aa4837a66c7b771f52d2b7e8902de13ff14bf8ba625d4e008b438cda6f6653c",
+      "surfaceBoundsPx": [
+        0,
+        127,
+        1199,
+        1780
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-light-glyph.png",
+      "sha256": "469a02c86b69ae9ab4923d935368ff75257d0258d188680681d4ac95691c21e8",
+      "surfaceBoundsPx": [
+        363,
+        750,
+        452,
+        777
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "4341fa697a9028e584005a5283b028594d65c8cd6bec37dd830cf804b1a674f4",
+      "surfaceBoundsPx": [
+        0,
+        127,
+        1199,
+        1780
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "a67f87400963dff9ccd6d3747228cebe23c69b9419287c666061318fa647fcde",
+      "surfaceBoundsPx": [
+        180,
+        585,
+        1071,
+        615
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "88494767c9ce41421185b0b39d99021d522c0c10ff42f0f7d3c151f077499ad4",
+      "surfaceBoundsPx": [
+        0,
+        127,
+        1199,
+        1780
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-light-glyph.png",
+      "sha256": "defdab50985e33e2977cfcce2b15255fac3947df9f7495261c2202e979cf3365",
+      "surfaceBoundsPx": [
+        363,
+        1023,
+        545,
+        1077
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "2ea53104b81d63968bfb018a82c8f230e5d39a37c38977b4ac9f9cabe9d2ae3f",
+      "surfaceBoundsPx": [
+        0,
+        127,
+        1199,
+        1780
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "6cd005b0df16463ca9b4f18dd0752f270eb91c0e54083f72147acb7f19c2462e",
+      "surfaceBoundsPx": [
+        180,
+        808,
+        1071,
+        866
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "dccd719ce40871a3e4d20329c779fef40b0311b434950efe595a8b56e8a05f25",
+      "surfaceBoundsPx": [
+        0,
+        92,
+        900,
+        1096
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-light-glyph.png",
+      "sha256": "a85b5bcdc34cf2364e023b92ea8c65e7b11977f89057001415556f1c88181802",
+      "surfaceBoundsPx": [
+        114,
+        621,
+        837,
+        651
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "6b89f0e259681ba7ed3463708ce93f8410bee213cbb4b153dcd7995796417650",
+      "surfaceBoundsPx": [
+        0,
+        92,
+        900,
+        1096
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-600x800-font1.0-dark-glyph.png",
+      "sha256": "2ddeb48dfde00e99741547aac45a5af1b6a207fd2a790d15f6ed828a0690a6c4",
+      "surfaceBoundsPx": [
+        297,
+        714,
+        386,
+        741
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    },
+    {
+      "path": "layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "8c2291282cb3f43db62abd1d2a901341bfc31631fa984ef5674e38995841c3f0",
+      "surfaceBoundsPx": [
+        0,
+        92,
+        900,
+        1096
+      ],
+      "syntheticSetupOnly": true
+    },
+    {
+      "path": "layout-600x800-font2.0-light-glyph.png",
+      "sha256": "4c32306e957ba80b6955f235467428ad656b26f953a6041727d545f9b5b3d48a",
+      "surfaceBoundsPx": [
+        114,
+        900,
+        837,
+        958
+      ],
+      "syntheticSetupOnly": true,
+      "visibleTextOnly": true
+    }
+  ],
+  "clipboardProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "actualSyntheticText": "Ocean light\nFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\nMorning\n\tSea\n\t",
+      "sha256": "e6d6a22c8c535eb394ea67c633a530afb47eb14bf57562685cce5acf5f4012c8",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "actualSyntheticText": "Ocean light\n",
+      "sha256": "c7fe039cc0572da63ffda0fa44b4012f2378c5c07075704e32ea7376e10814a1",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "actualSyntheticText": "Ocean light\nFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\nMorning\n\tSea\n\t",
+      "sha256": "e6d6a22c8c535eb394ea67c633a530afb47eb14bf57562685cce5acf5f4012c8",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "actualSyntheticText": "Ocean light\n",
+      "sha256": "c7fe039cc0572da63ffda0fa44b4012f2378c5c07075704e32ea7376e10814a1",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "actualSyntheticText": "Row\tA\tB\tC\tD\n1\tOcean light\tFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\t\t\n2\t2\t[No cached formula result]\t\t\n3\t\t\t\t\n4\t\t\t\tTRUE",
+      "sha256": "2760ebc860760f4c9121e1bfb6cefd76c355444ba2f737cc7ff83d253be7e25f",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "actualSyntheticText": "Ocean light\nFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\nMorning\n\tSea\n\t",
+      "sha256": "e6d6a22c8c535eb394ea67c633a530afb47eb14bf57562685cce5acf5f4012c8",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "actualSyntheticText": "Row\tA\tB\tC\tD\n1\tOcean light\tFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\t\t\n2\t2\t[No cached formula result]\t\t\n3\t\t\t\t\n4\t\t\t\tTRUE",
+      "sha256": "2760ebc860760f4c9121e1bfb6cefd76c355444ba2f737cc7ff83d253be7e25f",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "actualSyntheticText": "Ocean light\nFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\nMorning\n\tSea\n\t",
+      "sha256": "e6d6a22c8c535eb394ea67c633a530afb47eb14bf57562685cce5acf5f4012c8",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "actualSyntheticText": "Ocean light\n",
+      "sha256": "c7fe039cc0572da63ffda0fa44b4012f2378c5c07075704e32ea7376e10814a1",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "actualSyntheticText": "Row\tA\tB\tC\tD\n1\tOcean light\tFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\t\t\n2\t2\t[No cached formula result]\t\t\n3\t\t\t\t\n4\t\t\t\tTRUE",
+      "sha256": "2760ebc860760f4c9121e1bfb6cefd76c355444ba2f737cc7ff83d253be7e25f",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "actualSyntheticText": "Ocean light\n",
+      "sha256": "c7fe039cc0572da63ffda0fa44b4012f2378c5c07075704e32ea7376e10814a1",
+      "readByForegroundTestOnlyActivity": true
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "actualSyntheticText": "Row\tA\tB\tC\tD\n1\tOcean light\tFar shore \u65e5\u672c\u8a9e \ud83c\udf0a\t\t\n2\t2\t[No cached formula result]\t\t\n3\t\t\t\t\n4\t\t\t\tTRUE",
+      "sha256": "2760ebc860760f4c9121e1bfb6cefd76c355444ba2f737cc7ff83d253be7e25f",
+      "readByForegroundTestOnlyActivity": true
+    }
+  ],
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "operationsUseExactOptimizedApk": true,
+  "textVisibilityProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        230,
+        549,
+        1740,
+        579
+      ],
+      "rasterGlyphHeight": 20,
+      "rasterGlyphWidth": 119,
+      "image": "layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "677b421f943b2b80e9c435c7a3642381d33664513f48b1dd6f8b0033415a738b",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        230,
+        549,
+        1740,
+        579
+      ],
+      "rasterGlyphHeight": 20,
+      "rasterGlyphWidth": 119,
+      "image": "layout-1280x800-font1.0-dark-glyph.png",
+      "sha256": "ede174adab9d40c979d66abb218a8bc39b70865a35b30c1a8d929182affdb747",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        230,
+        692,
+        1740,
+        750
+      ],
+      "rasterGlyphHeight": 38,
+      "rasterGlyphWidth": 237,
+      "image": "layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "b77d433b964265597d0a589b23dab32418b9d559ada305618e15d60a94c2ebf5",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        230,
+        692,
+        1740,
+        750
+      ],
+      "rasterGlyphHeight": 38,
+      "rasterGlyphWidth": 237,
+      "image": "layout-1280x800-font2.0-dark-glyph.png",
+      "sha256": "d0047c61a88afdf1a722cd0878cf91d6b9a1f48b08b7675c6d8e4c32119a7990",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        363,
+        750,
+        452,
+        777
+      ],
+      "rasterGlyphHeight": 17,
+      "rasterGlyphWidth": 87,
+      "image": "layout-800x1280-font1.0-light-glyph.png",
+      "sha256": "469a02c86b69ae9ab4923d935368ff75257d0258d188680681d4ac95691c21e8",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        180,
+        585,
+        1071,
+        615
+      ],
+      "rasterGlyphHeight": 20,
+      "rasterGlyphWidth": 119,
+      "image": "layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "a67f87400963dff9ccd6d3747228cebe23c69b9419287c666061318fa647fcde",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        363,
+        1023,
+        545,
+        1077
+      ],
+      "rasterGlyphHeight": 34,
+      "rasterGlyphWidth": 179,
+      "image": "layout-800x1280-font2.0-light-glyph.png",
+      "sha256": "defdab50985e33e2977cfcce2b15255fac3947df9f7495261c2202e979cf3365",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        180,
+        808,
+        1071,
+        866
+      ],
+      "rasterGlyphHeight": 38,
+      "rasterGlyphWidth": 237,
+      "image": "layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "6cd005b0df16463ca9b4f18dd0752f270eb91c0e54083f72147acb7f19c2462e",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        114,
+        621,
+        837,
+        651
+      ],
+      "rasterGlyphHeight": 20,
+      "rasterGlyphWidth": 119,
+      "image": "layout-600x800-font1.0-light-glyph.png",
+      "sha256": "a85b5bcdc34cf2364e023b92ea8c65e7b11977f89057001415556f1c88181802",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "systemFontScale": 1.0,
+      "textBoundsPx": [
+        297,
+        714,
+        386,
+        741
+      ],
+      "rasterGlyphHeight": 18,
+      "rasterGlyphWidth": 87,
+      "image": "layout-600x800-font1.0-dark-glyph.png",
+      "sha256": "2ddeb48dfde00e99741547aac45a5af1b6a207fd2a790d15f6ed828a0690a6c4",
+      "actualReadableGlyphs": true
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "systemFontScale": 2.0,
+      "textBoundsPx": [
+        114,
+        900,
+        837,
+        958
+      ],
+      "rasterGlyphHeight": 38,
+      "rasterGlyphWidth": 237,
+      "image": "layout-600x800-font2.0-light-glyph.png",
+      "sha256": "4c32306e957ba80b6955f235467428ad656b26f953a6041727d545f9b5b3d48a",
+      "actualReadableGlyphs": true
+    }
+  ],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "controlProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        310,
+        198,
+        490,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Previous section",
+      "bounds": [
+        502,
+        198,
+        693,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Next section",
+      "bounds": [
+        705,
+        198,
+        859,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Copy loaded section",
+      "bounds": [
+        871,
+        198,
+        1097,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Find in loaded section",
+      "bounds": [
+        173,
+        378,
+        1746,
+        474
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "label": "Close Quick Look",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        871,
+        198,
+        1097,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-slide-two",
+      "text": "",
+      "description": "",
+      "bounds": [
+        703,
+        198,
+        857,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        308,
+        198,
+        488,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Previous section",
+      "bounds": [
+        500,
+        198,
+        691,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Next section",
+      "bounds": [
+        703,
+        198,
+        857,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Copy loaded section",
+      "bounds": [
+        869,
+        198,
+        1095,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Find in loaded section",
+      "bounds": [
+        173,
+        378,
+        1746,
+        474
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "label": "Close Quick Look",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        869,
+        198,
+        1095,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        390,
+        198,
+        700,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Previous section",
+      "bounds": [
+        712,
+        198,
+        1039,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Next section",
+      "bounds": [
+        1051,
+        198,
+        1307,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Copy loaded section",
+      "bounds": [
+        1319,
+        198,
+        1709,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Find in loaded section",
+      "bounds": [
+        173,
+        455,
+        1746,
+        590
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "label": "Close Quick Look",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1319,
+        198,
+        1709,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        116,
+        1830,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-slide-two",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1047,
+        198,
+        1303,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        386,
+        198,
+        696,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Previous section",
+      "bounds": [
+        708,
+        198,
+        1035,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Next section",
+      "bounds": [
+        1047,
+        198,
+        1303,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Copy loaded section",
+      "bounds": [
+        1315,
+        198,
+        1705,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Find in loaded section",
+      "bounds": [
+        173,
+        455,
+        1746,
+        590
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "label": "Close Quick Look",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1315,
+        198,
+        1705,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        155,
+        98,
+        227,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        437,
+        1110,
+        509
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        343,
+        234,
+        523,
+        306
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Previous section",
+      "bounds": [
+        535,
+        234,
+        726,
+        306
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Next section",
+      "bounds": [
+        738,
+        234,
+        892,
+        306
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Copy loaded section",
+      "bounds": [
+        105,
+        306,
+        331,
+        378
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Find in loaded section",
+      "bounds": [
+        123,
+        510,
+        1077,
+        606
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "label": "Close Quick Look",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        306,
+        331,
+        378
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        520,
+        1110,
+        592
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        260,
+        234,
+        440,
+        306
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Previous section",
+      "bounds": [
+        452,
+        234,
+        643,
+        306
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Next section",
+      "bounds": [
+        655,
+        234,
+        809,
+        306
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Copy loaded section",
+      "bounds": [
+        821,
+        234,
+        1047,
+        306
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Find in loaded section",
+      "bounds": [
+        123,
+        414,
+        1077,
+        510
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "label": "Close Quick Look",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        821,
+        234,
+        1047,
+        306
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        520,
+        1110,
+        592
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        487,
+        234,
+        797,
+        314
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Previous section",
+      "bounds": [
+        105,
+        333,
+        432,
+        413
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Next section",
+      "bounds": [
+        444,
+        333,
+        700,
+        413
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Copy loaded section",
+      "bounds": [
+        105,
+        413,
+        495,
+        493
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Find in loaded section",
+      "bounds": [
+        123,
+        699,
+        1077,
+        834
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "label": "Close Quick Look",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        413,
+        495,
+        493
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        735,
+        520,
+        1110,
+        592
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        340,
+        234,
+        650,
+        314
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Previous section",
+      "bounds": [
+        662,
+        234,
+        989,
+        314
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Next section",
+      "bounds": [
+        105,
+        333,
+        361,
+        413
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Copy loaded section",
+      "bounds": [
+        373,
+        333,
+        763,
+        413
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Find in loaded section",
+      "bounds": [
+        123,
+        571,
+        1077,
+        706
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "label": "Close Quick Look",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        373,
+        333,
+        763,
+        413
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        105,
+        134,
+        177,
+        206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        435,
+        116,
+        810,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-slide-two",
+      "text": "",
+      "description": "",
+      "bounds": [
+        587,
+        198,
+        741,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        192,
+        198,
+        372,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Previous section",
+      "bounds": [
+        384,
+        198,
+        575,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Next section",
+      "bounds": [
+        587,
+        198,
+        741,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Copy loaded section",
+      "bounds": [
+        39,
+        270,
+        265,
+        342
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Find in loaded section",
+      "bounds": [
+        57,
+        450,
+        843,
+        546
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "label": "Close Quick Look",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        270,
+        265,
+        342
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        435,
+        116,
+        810,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        277,
+        198,
+        457,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Previous section",
+      "bounds": [
+        469,
+        198,
+        660,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Next section",
+      "bounds": [
+        672,
+        198,
+        826,
+        270
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Copy loaded section",
+      "bounds": [
+        39,
+        270,
+        265,
+        342
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Find in loaded section",
+      "bounds": [
+        57,
+        474,
+        843,
+        570
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "label": "Close Quick Look",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        270,
+        265,
+        342
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        435,
+        116,
+        810,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-slide-two",
+      "text": "",
+      "description": "",
+      "bounds": [
+        378,
+        297,
+        634,
+        377
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        270,
+        198,
+        580,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Previous section",
+      "bounds": [
+        39,
+        297,
+        366,
+        377
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Next section",
+      "bounds": [
+        378,
+        297,
+        634,
+        377
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Copy loaded section",
+      "bounds": [
+        39,
+        377,
+        429,
+        457
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Find in loaded section",
+      "bounds": [
+        57,
+        663,
+        843,
+        798
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "label": "Close Quick Look",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        377,
+        429,
+        457
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-peek",
+      "text": "",
+      "description": "",
+      "bounds": [
+        435,
+        116,
+        810,
+        188
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Preview limits\u2026",
+      "bounds": [
+        421,
+        198,
+        731,
+        278
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Previous section",
+      "bounds": [
+        39,
+        297,
+        366,
+        377
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Next section",
+      "bounds": [
+        378,
+        297,
+        634,
+        377
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Copy loaded section",
+      "bounds": [
+        39,
+        377,
+        429,
+        457
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Find in loaded section",
+      "bounds": [
+        57,
+        711,
+        843,
+        846
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "label": "Close Quick Look",
+      "bounds": [
+        39,
+        98,
+        111,
+        170
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        39,
+        377,
+        429,
+        457
+      ],
+      "density": 1.5
+    }
+  ],
+  "hierarchyRetries": []
+}
