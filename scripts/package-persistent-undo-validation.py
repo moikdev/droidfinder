@@ -212,7 +212,7 @@ def main():
     assert all(r['publicDownloadMatchesLocal'] and r['githubDigestMatches'] for r in public['assets'])
     live=read(PROOF/'api36-live-feed.json');successful(live);assert live['passed']==1 and live['downloadedVersionCode']==47 and live['downloadedApkSha256']==expected
     restored=read(PROOF/'restored-public-tablets.json');assert len(restored)==2
-    assert all(r['originalManagedMetadataDatabasesAndCacheRestored'] and r['originalFileAbsencesRestored'] and r['installedPublicApkSha256']==expected and r['originalEnvironmentMatchesPersistedBaseline'] for r in restored)
+    assert all(r['originalManagedMetadataDatabasesAndCacheRestored'] and r['originalFileAbsencesRestored'] and r['installedPublicApkSha256']==expected and r['originalEnvironmentMatchesPersistedBaseline'] and r['originalScreenSizeRestored'] and r['originalSizeOverrideRestored'] and r['restorationCheckerSha256']==sha(PROOF/'restore-public-tablets.py') for r in restored)
     provenance=read(PROOF/'docs-screenshot-provenance.json');assert provenance['actualOptimizedScreenshots']
     for row in provenance['images']:
         capture=ROOT/row['capturePath'];document=ROOT/row['documentPath']
