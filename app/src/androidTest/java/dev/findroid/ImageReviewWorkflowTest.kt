@@ -46,7 +46,11 @@ class ImageReviewWorkflowTest {
     }
     private fun currentHashes() = folder.listFiles()!!.associate { it.name to MessageDigest.getInstance("SHA-256").digest(it.readBytes()).toList() }
     private fun photos() = model.entries.filter { it.reviewableImage }
-    private fun click(label: String) = compose.onNodeWithText(label, substring=false).performScrollTo().performClick()
+    private fun click(label: String) {
+        val node = compose.onNodeWithText(label, substring=false)
+        if (!node.isDisplayed()) node.performScrollTo()
+        node.performClick()
+    }
     private fun ready() = compose.waitUntil(20_000) { compose.onAllNodesWithTag("image-viewport").fetchSemanticsNodes().isNotEmpty() }
     private fun open() {
         compose.runOnIdle { model.clearSelection(); photos().forEach { model.select(it, multiple=true) } }
@@ -140,6 +144,15 @@ class ImageReviewWorkflowTest {
         open(); assertTrue(state.selection!!.flagged.isEmpty()); assertNull(state.selection!!.reference)
         compose.onNodeWithText("Previous image", substring=false).performScrollTo().assertIsNotEnabled()
         click("Next image"); click("Next image"); compose.onNodeWithText("Next image", substring=false).performScrollTo().assertIsNotEnabled()
+    }
+    @Test fun unreadableImageCanBeSkippedWithoutLosingTheReview() {
+        val broken = File(folder, "00 Broken.png").apply { writeText("not an image") }
+        try {
+            compose.runOnIdle { state.open(listOf(Entry(broken), photos().first())) }
+            compose.waitUntil(15_000) { compose.onAllNodesWithText("Couldn't read the image header.", substring=false).fetchSemanticsNodes().isNotEmpty() }
+            capture("unreadable-review")
+            click("Next image"); ready(); assertEquals(photos().first().path, state.selection!!.active)
+        } finally { compose.runOnIdle { state.close() }; check(broken.delete()) }
     }
     @Test fun removedCandidateCannotAcquireTagsFromAStaleReview() {
         open(); click("Flag image"); click("Tag flagged…"); organizeReady()

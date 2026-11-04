@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise the exact optimized file comparison APK with native controls and synthetic documents.
+"""Exercise the exact optimized image review APK with native controls and synthetic photos.
 
 Uses only the reserved Findroid tablets. Original private bytes, Workspace, grants,
 and display settings are preserved and checked through the existing restoration helper.
