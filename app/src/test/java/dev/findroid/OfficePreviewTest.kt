@@ -113,4 +113,10 @@ class OfficePreviewTest {
         val encrypted=File(temporary.root,"encrypted.docx").apply { writeBytes(byteArrayOf(0xd0.toByte(),0xcf.toByte(),0x11,0xe0.toByte(),0,0,0,0)) }
         assertThrows(IllegalArgumentException::class.java) { readOfficeDocument(encrypted,OfficeFormat.DOCX) }
     }
+    @Test fun excessPackagePartsAreRejectedBeforeTheReaderBuildsItsIndex() {
+        val file=zip(*(0..OfficePolicy.maximumEntries).map { "parts/part$it.xml" to "<part/>" }.toTypedArray())
+        val before=file.readBytes()
+        val error=assertThrows(ZipLimitException::class.java) { readOfficeDocument(file,OfficeFormat.DOCX) }
+        assertTrue(error.message.orEmpty().contains("entry limit"));assertArrayEquals(before,file.readBytes())
+    }
 }

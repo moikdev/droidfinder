@@ -53,4 +53,11 @@ class OfficeNativeTest {
         val slides=read("LibraryJourney.pptx",OfficeFormat.PPTX)
         assertEquals(listOf("Far shore 日本語 🌊\n","Ocean light\n"),slides.sections.map { it.text })
     }
+    @Test fun excessPackageMetadataIsRejectedOnThePlatformBeforeXmlParsing() {
+        val file=File(folder,"TooManyParts.docx")
+        OfficeFixtures.write(file,(0..OfficePolicy.maximumEntries).associate { "parts/part$it.xml" to "<part/>" })
+        val before=file.readBytes()
+        assertThrows(ZipLimitException::class.java) { readOfficeDocument(file,OfficeFormat.DOCX) }
+        assertArrayEquals(before,file.readBytes());assertTrue(file.delete())
+    }
 }

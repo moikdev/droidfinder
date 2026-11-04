@@ -4,14 +4,17 @@ import java.io.File
 import java.io.StringReader
 import java.nio.ByteBuffer
 import java.nio.charset.CodingErrorAction
+import java.nio.channels.SeekableByteChannel
+import java.nio.file.Files
+import java.nio.file.StandardOpenOption
 import java.util.zip.CRC32
-import java.util.zip.ZipFile
 import javax.xml.XMLConstants
 import javax.xml.parsers.SAXParserFactory
 import org.xml.sax.Attributes
 import org.xml.sax.InputSource
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry
 
 internal enum class OfficeFormat(val label: String) {
     DOCX("Word text"), XLSX("Workbook values"), PPTX("Slide text")
@@ -74,9 +77,16 @@ internal fun readOfficeDocument(file: File, format: OfficeFormat, check: () -> U
         check()
         require(System.nanoTime() - started < 10_000_000_000L) { "Office preview reached its ten-second parsing limit. Open the document in another app." }
     }
-    ZipFile(file).use { zip ->
-        val entries = HashMap<String, java.util.zip.ZipEntry>()
-        val enumeration = zip.entries()
+    // Reject oversized metadata before the ZIP reader allocates its entry index.
+    // The shared reader indexes the checked headers from the same open channel.
+    val channel=Files.newByteChannel(file.toPath(),StandardOpenOption.READ)
+    val checkedChannel=object : SeekableByteChannel by channel {
+        override fun read(buffer: ByteBuffer): Int { checkpoint();return channel.read(buffer) }
+        override fun position(position: Long): SeekableByteChannel { checkpoint();channel.position(position);return this }
+    }
+    openZip(checkedChannel,ZipLimits(entries=OfficePolicy.maximumEntries),TransferControl()).use { zip ->
+        val entries = HashMap<String, ZipArchiveEntry>()
+        val enumeration = zip.entries
         while (enumeration.hasMoreElements()) {
             checkpoint()
             val entry = enumeration.nextElement()
