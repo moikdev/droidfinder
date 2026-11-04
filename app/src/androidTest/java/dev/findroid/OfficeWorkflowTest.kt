@@ -49,8 +49,16 @@ class OfficeWorkflowTest {
     private fun close() {
         if(compose.onAllNodesWithTag("peek-window").fetchSemanticsNodes().isNotEmpty())compose.onNodeWithContentDescription("Close Quick Look").performClick()
     }
-    private fun hideKeyboard()=compose.runOnIdle {
-        compose.activity.getSystemService(android.view.inputmethod.InputMethodManager::class.java).hideSoftInputFromWindow(compose.activity.window.decorView.windowToken,0)
+    private fun hideKeyboard() {
+        compose.runOnIdle {
+            android.view.inspector.WindowInspector.getGlobalWindowViews().firstOrNull { it.hasWindowFocus() }?.let { view ->
+                view.context.getSystemService(android.view.inputmethod.InputMethodManager::class.java).hideSoftInputFromWindow(view.windowToken,0)
+            }
+        }
+        compose.waitUntil(5000) {
+            android.view.inspector.WindowInspector.getGlobalWindowViews().filter { it.hasWindowFocus() }
+                .none { it.rootWindowInsets?.isVisible(android.view.WindowInsets.Type.ime())==true }
+        }
     }
     private fun clipboard(): String {
         var value=""
