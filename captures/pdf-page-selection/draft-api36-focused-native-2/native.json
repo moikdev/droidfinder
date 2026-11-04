@@ -1,0 +1,106 @@
+{
+  "success": true,
+  "passed": 13,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "aPageWithoutATextLayerCannotCreateAnInventedSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionRespectsTheDocumentsExistingTextExtractionPermission",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionBoxesFollowActualRenderedGlyphsAcrossPageAndTextRotationsAndCropBoxes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "theFirstLongPressCanContinueIntoADragAfterLoadingTheTextLayer",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "draggingTheEndHandleExtendsTheActualCopiedRange",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "changingPagesAndReopeningThePreviewDoNotReuseThePriorSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "holdingTheRenderedWordOpensSelectionWithoutASeparateModeTap",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "zoomKeepsTheSelectionAnchoredToThePageAndUsesTheSameCopyText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "accessibilityActionsCanExtendAHandleAndClearTheSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "draggingAcrossTwoRenderedLinesKeepsTheirActualLineBreak",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "anEmptyTextLayerExplainsWhyThereIsNothingToCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "touchingAWordOnTheRenderedPageCopiesExactlyItsTextAndShowsNamedHandles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "keyboardSelectAllCopyAndEscapeOperateOnTheCurrentPdfPage",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 72.7,
+  "wallSecondsThisInvocation": 80.6,
+  "timedOut": false,
+  "isolatedBatches": [
+    {
+      "selector": "dev.findroid.PdfPageSelectionNativeTest",
+      "report": "captures/pdf-page-selection/draft-api36-focused-native-2/batches/01-PdfPageSelectionNativeTest.json",
+      "log": "captures/pdf-page-selection/draft-api36-focused-native-2/batches/01-PdfPageSelectionNativeTest.txt",
+      "reportSha256": "072278c71c0ed962157703819c914de6e659ebcc3df5346d21e1b1edc0c9d53a",
+      "logSha256": "9b16e8441771e7f220782c87ce3912b8917fef3a05e09e4ff8cf84dd0ef5c6b4",
+      "passed": 3
+    },
+    {
+      "selector": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "report": "captures/pdf-page-selection/draft-api36-focused-native-2/batches/02-PdfPageSelectionWorkflowTest.json",
+      "log": "captures/pdf-page-selection/draft-api36-focused-native-2/batches/02-PdfPageSelectionWorkflowTest.txt",
+      "reportSha256": "e353cbdddb0d88594b41b3b947eff22ad12cac905da3f6b40af1f857dea37177",
+      "logSha256": "891756df3db6f8b84a0cc33dd3715fc3ad5c726b3dc70b35ae440bccbb366301",
+      "passed": 10
+    }
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "42d500ea00511260f25c94a643a8c5ef5e8089442903407354b31ed9a37739ff",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "de96d8e67415308ebdb2f0795d7d1dcb9f730f6759af776cbc24d23328dac844"
+  },
+  "installedApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "42d500ea00511260f25c94a643a8c5ef5e8089442903407354b31ed9a37739ff",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "de96d8e67415308ebdb2f0795d7d1dcb9f730f6759af776cbc24d23328dac844"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-2/images/after-batch-002/direct-handle-drag.png",
+      "sha256": "966bfac3c002dc6a395121c123e25adaf076a765e75026bd938eb91e41507672"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-2/images/after-batch-002/first-long-press-drag.png",
+      "sha256": "983a1549a71b0742c09ecbb8bd261593825c34800fa08857638be83c30603281"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-2/images/after-batch-002/two-line-selection.png",
+      "sha256": "983a1549a71b0742c09ecbb8bd261593825c34800fa08857638be83c30603281"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-2/images/after-batch-002/word-and-handles.png",
+      "sha256": "f4ed10510772cd57d12d5d09e77bcd763bf69f9c69bfd4b8b8f8212725a59ea1"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api30-focused-native-2/images/after-batch-002/zoomed-selection.png",
+      "sha256": "1fb87ade8e87e33086c49e5406ae1f11afb8d03d06ce0af00d1e05e9346edfd3"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-2/images/after-batch-002/direct-handle-drag.png",
+      "sha256": "9a0a34324ca249b1535f18462e534a40460f92112ec78b272efcf00516df05cb"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-2/images/after-batch-002/first-long-press-drag.png",
+      "sha256": "318bec5a0c6a6517267ff68b9398974c874ac595f063b2346df3542dc45fc264"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-2/images/after-batch-002/two-line-selection.png",
+      "sha256": "9a0a34324ca249b1535f18462e534a40460f92112ec78b272efcf00516df05cb"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-2/images/after-batch-002/word-and-handles.png",
+      "sha256": "647b2f95c5ed1fbaa2dca796e2df444f11b79ebf078ef2fc13654fc1d73118ba"
+    },
+    {
+      "path": "captures/pdf-page-selection/draft-api36-focused-native-2/images/after-batch-002/zoomed-selection.png",
+      "sha256": "8dfef6117799cf0f7bde9ec340f6b1bdea63eb5eeed499e29d618b81b0bc79a2"
+    }
+  ],
+  "method": "Opened all six labeled private sheets covering every one of the ten original draft2 screenshots.",
+  "findings": [
+    "The visible knobs and short stems now sit at the selected glyph edges; the 48 dp touch targets remain available.",
+    "Real two-line, direct handle and first-long-press drags copy the expected passage on both APIs.",
+    "The existing zoom captures clip the selected top word at the viewport edge. They demonstrate neither a fully visible selected word nor panning a retained selection; those acceptance checks remain pending.",
+    "All ten images contain synthetic PDF pages and preview controls."
+  ],
+  "draftOnly": true,
+  "releaseAcceptanceComplete": false
+}

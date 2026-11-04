@@ -1,0 +1,11 @@
+{
+  "serial": "emulator-5582",
+  "selectors": [
+    "dev.findroid.PdfPageSelectionNativeTest",
+    "dev.findroid.PdfPageSelectionWorkflowTest"
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "42d500ea00511260f25c94a643a8c5ef5e8089442903407354b31ed9a37739ff",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "de96d8e67415308ebdb2f0795d7d1dcb9f730f6759af776cbc24d23328dac844"
+  }
+}
