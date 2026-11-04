@@ -1,0 +1,8 @@
+{
+  "archive": "Findroid-0.49.0-validation.zip",
+  "sha256": "55258ff2578f1f5ad0385d5fc4f7ae1c4747a7a5d5f768820829384e789dfd2f",
+  "bytes": 10785892,
+  "files": 1041,
+  "publicOtaIncluded": true,
+  "checkerSha256": "29ed874db1b93a4b9a9cb5aa9c95d780c2ad70ee0b6ac967f362351c14b6ded5"
+}

@@ -14,6 +14,9 @@ All four packaged ABIs pass 16 KiB native load/ZIP alignment and signing continu
 Both tablets complete the actual public 0.48/code50 → 0.49/code51 download and Android installation. Installer completion is confirmed before relaunch; installed bytes match the anonymous public APK, original synthetic file bytes/Favorite/sentinel preferences survive, and there is no repeat offer. All 12 OTA captures were inspected. The final restoration helper initially refused the temporary-worktree APK path before entering its restoration body. The exact public APK was archived at its trusted local path and both explicit restorations completed, preserving the original stopped receipts and without repeating the OTA. Original managed bytes/absences, Workspace, URI grants and environment are verified with public 0.49 installed. The selected local/OTA review contains 136 image/glyph paths. The immutable archive and independent verification are the remaining acceptance steps.
 
 
+
+The [immutable public validation archive](https://github.com/moikdev/findroid/releases/download/v0.49.0-preview/Findroid-0.49.0-validation.zip) is frozen at **10,785,892 bytes**, SHA-256 `55258ff2578f1f5ad0385d5fc4f7ae1c4747a7a5d5f768820829384e789dfd2f`, with **1,041 evidence files plus its manifest** and actual public OTA evidence. Its evidence commit is `2cd37e9e9e690b260214d26d9c4966fa463daacb`; application/native source is `93d36afd3d3caf1c972a3dcd42256978fac468cb`. Independent anonymous verification is pending. The archive keeps the exact committed documentation snapshot from before this digest record.
+
 ## Findroid 0.48.0 — review transfer space
 
 Local, actual public OTA and independent immutable-archive acceptance completed on November 4, 2026. Proposal 45 is implemented; the tracker now records **36/72 implemented**.
