@@ -1,0 +1,626 @@
+{
+  "serial": "emulator-5602",
+  "section": "core",
+  "sourceCommit": "bf1ae1858bb071b92d42ac02f1057a82011cf00c",
+  "checkerSha256": "30bca3188552e404fdb9ac5a47d2781131539c8208f23515938121958aa78503",
+  "checkerDependencies": {
+    "scripts/check-reviewed-folder-sync.py": "82fcfd46b08c64ae73d13400f7954a57eb8a1a2a36316c387d6cfc55c59320dd",
+    "scripts/check-local-search-index.py": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+    "scripts/android/acceptance.py": "58413d03fa96c29c1146bae2ca3a5b4c87dba9a1c2f1b777707697bf381bc016"
+  },
+  "apkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+  "previousApkSha256": "5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09",
+  "fromVersionCode": 49,
+  "toVersionCode": 50,
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "checks": [
+    {
+      "name": "direct-public49-to50-read-only-review",
+      "originalFileBytesKept": true,
+      "preferenceSentinelKept": true,
+      "noTransferSubmitted": true,
+      "coldStartStartsNoWork": true,
+      "replacementAllowanceShown": true,
+      "sameVolumeDemandCombined": true
+    },
+    {
+      "name": "alternative-destination-and-explicit-copy",
+      "chosenAlternativeUsed": true,
+      "sourceBytesKept": true,
+      "priorDestinationOriginalKept": true,
+      "oneCompletedCopy": true
+    },
+    {
+      "name": "known-shortfall-disables-start",
+      "logicalSourceBytes": 1099511627776,
+      "allocatedFixtureBytes": 8192,
+      "disabledComplete48DpStart": true,
+      "noTransferSubmitted": true,
+      "destinationOriginalKept": true
+    },
+    {
+      "name": "move-review-close-and-explicit-start",
+      "closingStartedNoWork": true,
+      "oneCompletedMove": true,
+      "selectedSourceMovedOnlyAfterConfirmation": true,
+      "unrelatedDestinationOriginalKept": true
+    }
+  ],
+  "layouts": [],
+  "captures": [
+    {
+      "path": "read-only-replacement-budget-surface.png",
+      "sha256": "9440f2b4a751220cad9f1f460353ba11952732693479a71173e7fcab9f8c52c4",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1164,
+        1104
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "2354bf887797d71e64bf28816ed78bcbd7bf4f7b19dea4b42fea245fdfefb59e",
+      "privateRawHierarchySha256": "f09d0c567d56e0896838605786832a2c8fd8ef521fcab001adc4ff1bed2e48f7"
+    },
+    {
+      "path": "copy-alternative-destination-picker-surface.png",
+      "sha256": "b47a734ee82bde05045eeb6076712e60190a795f8f92b73023831f86197d5845",
+      "surfaceBoundsPx": [
+        540,
+        264,
+        1380,
+        900
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "e001a4f62c84d20d6199eb0159bda4a106c452aa664a8ebd0d471c029f749fcf",
+      "privateRawHierarchySha256": "b00bbd77746467fd0b265d7794318782fc9124ac2a4ca5e3e426b02062f5dde4"
+    },
+    {
+      "path": "known-shortfall-surface.png",
+      "sha256": "9c1d3c29d5bf7b03d14687f43666748d05abd6c685729d48fceab93179a15227",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1164,
+        1104
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "504dc803d5d8998d5d6861d3a1da6aa39273c1bd19662395950e36f44427e356",
+      "privateRawHierarchySha256": "f5183bff60560584083164a5bdb7e07321999f5f2a77c5c2d91dbdfe814a35ed"
+    },
+    {
+      "path": "move-before-start-surface.png",
+      "sha256": "5ff6d2f9eb9c268e687a71962fc8389f1902fc33e2979917c2d7836c0da78980",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1164,
+        1104
+      ],
+      "browserBackdropExcluded": true,
+      "privateRawCaptureSha256": "3405ea34e4def40f44452a9f4b8def5835e099e0f791b78f0f9380bcfd61582c",
+      "privateRawHierarchySha256": "364ba3b1104b3d90e2b5f4c665a14e1c03fde76fa24531af7465c0c7d7fd260e"
+    }
+  ],
+  "densityChecks": [],
+  "screenChecks": [],
+  "controlProofs": [
+    {
+      "name": "disabled-shortfall-start",
+      "enabled": false,
+      "bounds": [
+        744,
+        1002,
+        998,
+        1074
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "initial-review-source-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        285,
+        1902,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "initial-review-transfer-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        746,
+        1830,
+        818
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "initial-review-parent",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        408,
+        648,
+        480
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "initial-review-destination-row",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        552,
+        1344,
+        624
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "initial-review-review-space",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        480,
+        907,
+        552
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-initial-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        643,
+        1002,
+        732,
+        1074
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-review-source-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        453,
+        1902,
+        525
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-review-transfer-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        746,
+        1830,
+        818
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-review-parent",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        408,
+        648,
+        480
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-review-destination-row",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        552,
+        1344,
+        624
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-review-review-space",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        480,
+        907,
+        552
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-alternative-choose-alternative",
+      "text": "",
+      "description": "",
+      "bounds": [
+        321,
+        1002,
+        631,
+        1074
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-alternative-parent-alternative",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        444,
+        648,
+        516
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-alternative-other-destination",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        588,
+        1344,
+        660
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-alternative-review-other",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1092,
+        792,
+        1344,
+        864
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "explicit-copy",
+      "text": "",
+      "description": "",
+      "bounds": [
+        744,
+        1002,
+        998,
+        1074
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-finished-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-finished-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        606,
+        1902,
+        678
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "copy-finished-close-transfers",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1296,
+        417,
+        1368,
+        489
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "sparse-review-source-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        285,
+        1902,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "sparse-review-transfer-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        746,
+        1830,
+        818
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "sparse-review-parent",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        408,
+        648,
+        480
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "sparse-review-destination-row",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        552,
+        1344,
+        624
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "sparse-review-review-space",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        480,
+        907,
+        552
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-shortfall",
+      "text": "",
+      "description": "",
+      "bounds": [
+        643,
+        1002,
+        732,
+        1074
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-review-source-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        285,
+        1902,
+        357
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-review-transfer-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        818,
+        1830,
+        890
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-review-parent",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        408,
+        648,
+        480
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-review-destination-row",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        624,
+        1344,
+        696
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-review-review-space",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        480,
+        907,
+        552
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-move",
+      "text": "",
+      "description": "",
+      "bounds": [
+        643,
+        1002,
+        732,
+        1074
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-confirmation-review-source-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1830,
+        453,
+        1902,
+        525
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-confirmation-review-transfer-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1455,
+        818,
+        1830,
+        890
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-confirmation-review-parent",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        408,
+        648,
+        480
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-confirmation-review-destination-row",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        624,
+        1344,
+        696
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-confirmation-review-review-space",
+      "text": "",
+      "description": "",
+      "bounds": [
+        576,
+        480,
+        907,
+        552
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "explicit-move",
+      "text": "",
+      "description": "",
+      "bounds": [
+        744,
+        1002,
+        1001,
+        1074
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-finished-actions",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1815,
+        45,
+        1902,
+        117
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-finished-command",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        606,
+        1902,
+        678
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "move-finished-close-transfers",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1296,
+        417,
+        1368,
+        489
+      ],
+      "density": 1.5
+    }
+  ],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalManagedFileCount": 495,
+  "ownedSparseFixtureRemovedBeforeArchiving": {
+    "logicalBytes": 1099511627776,
+    "allocatedBytes": 8192,
+    "payloadNeverArchived": true
+  },
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "hierarchyRetries": []
+}

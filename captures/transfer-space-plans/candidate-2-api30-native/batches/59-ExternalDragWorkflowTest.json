@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "passed": 5,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "mouseIconCopiesWithoutMovingTheSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "connectedProviderFileCanBeDroppedIntoAnotherApp",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "touchHandleCopiesMixedTypesToAnotherApp",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "touchIconCopiesOneFileToAnotherApp",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ExternalDragWorkflowTest",
+      "test": "touchSelectedIconCopiesEntireSelection",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 42.6,
+  "timedOut": false
+}

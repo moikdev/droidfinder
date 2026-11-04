@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "passed": 10,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "quickFolderSearchSupportsKeyboardAndShowsFullDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "filteredEmptyFolderOffersShowHiddenAndThenRevealsFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "searchableCommandRunsWithoutToolbarIcons",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "exactPathCanFindFolderOutsideListedFavorites",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "unavailableActionExplainsItsReasonAndKeepsLauncherOpen",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "selectedScopeSurvivesViewChangesAndKeepsPaneIdentity",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "gestureTipsCanBeDismissedAndReplayedFromHelp",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "noSearchMatchesCanClearFiltersWithoutCreatingAnything",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "staleDestinationExplainsReconnectWithoutNavigatingAway",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.BrowsingClarityWorkflowTest",
+      "test": "browsingPreferencesKeepExpertOptionsInAdvanced",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 40.7,
+  "timedOut": false
+}

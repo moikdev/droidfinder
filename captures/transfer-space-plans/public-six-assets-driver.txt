@@ -1,0 +1,1 @@
+{"release": "v0.48.0-preview", "verifiedArtifacts": 6, "allSelectedPublicBytesAndDigestsMatch": true}

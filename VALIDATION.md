@@ -1,14 +1,22 @@
 # Android preview verification
 
-## Findroid 0.48.0 — review transfer space (candidate)
+## Findroid 0.48.0 — review transfer space
 
-Proposal 45 remains open. Frozen candidate 2 passes **930 JVM cases**, zero failures/errors/skips, with lint **0 errors / 148 warnings / 12 hints**. Its **395 source inputs and 104 build/report outputs** are frozen. Every source input matches public source commit `bf1ae1858bb071b92d42ac02f1057a82011cf00c`, including declared Windows-wrapper checkout line endings. BUILDINFO honestly records the dirty checkout with generated reports and acceptance tooling.
+Local, actual public OTA and independent immutable-archive acceptance completed on November 4, 2026. Proposal 45 is implemented; the tracker now records **36/72 implemented**.
 
-Both assigned tablets pass the **17 focused Android cases**, including provider unknown size/capacity, conservative replacement costs, cancellation, explicit copy, later-selection preservation, secondary-pane isolation, stale-review refusal and complete 48 dp destination rows. These are a subset of the **549-case / 59-batch** full native regression currently running on each API. Exact optimized core/layout checks are queued; actual public OTA and independent immutable-archive acceptance remain pending. This is not a completed proposal or release acceptance claim.
+- **930 JVM cases pass**, zero failures/errors/skips. Lint: **0 errors / 148 warnings / 12 hints**. All **395 source inputs / 104 frozen build outputs** remain unchanged and source-bound to `bf1ae1858bb071b92d42ac02f1057a82011cf00c`, including declared Windows-wrapper line endings. BUILDINFO retains its honest dirty-checkout flag.
+- Both APIs pass the same **549 distinct native cases in 59 isolated batches**, including 17 focused metadata/interaction cases. The API36 final batch was retried unchanged after an Android activity-launch setup timeout; the original failure remains retained and excluded, and the first 58 accepted batch reports were reused byte-for-byte.
+- Both exact optimized previews pass direct public **49→50** read-only replacement budgeting and cold-start no-work checks, alternative-destination copy, known-shortfall refusal and explicit Move. The 1 TiB logical shortfall fixture used less than 1 MiB of allocation and was removed before any fixture archive was read.
+- Both tablets pass **12 layouts** across 1280×800, 800×1280 and 600×800 dp, system fonts 1.0/2.0 and light/dark; actual **240/300 dpi**, full 48 dp named control/folder-row bounds and native TextView/raster-glyph growth in all six size/theme groups. **112 local and 12 public OTA image paths** were actually inspected.
+- Both pass actual public **49→50 OTA** download and Android installation, with installer completion before relaunch, exact public installed bytes, synthetic original/Favorite/preference retention and no repeat offer. API36's first checker stopped before downloading because an automatic available-update dialog covered the browser toolbar; a fresh-hierarchy navigation fix and complete retry pass. Exact old/new helper sources and the excluded attempt remain public.
+- Final controllers restore original managed metadata/databases/cache and recorded absences, original Workspace trees, grants and storage/font/display/size settings, with the exact public 0.48 APK installed. The earlier portrait checker stop and both assigned-AVD incidents retain their separate verified recovery evidence. Candidate 1's safe between-batch stop remains excluded.
+- Preview **8,924,968 bytes**, SHA-256 `3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a`. Signing continues from public 0.47; all four packaged ABIs pass 16 KiB load-segment and ZIP alignment.
 
-Candidate 1 was stopped safely between batches after review found 44 dp rows in the inherited chooser. API30 completed 75 cases in 8 batches; API36 completed 48 in 5 batches. The owners restored all original managed bytes/absences, Workspace, grants and the exact public 0.47 APK. Those partial runs are excluded from final totals, and every frozen candidate-1 source/output byte remains intact in its separate checkout. Candidate 2 adds a scrollable chooser and at least 48 dp folder rows. An earlier host-only controller path error stopped before any adb calls; its retained receipt is separate from actual device attempts.
+The immutable validation archive is **13,443,892 bytes**, SHA-256 `568379eadc4786a1ca9e0c086068e5262834934b21e1fdc443cf6d7c32d09d21`. Its 966 listed files plus EVIDENCE.json match the public source and evidence commits. All six public assets match anonymous downloads and GitHub digests. Public API metadata used the configured GitHub CLI after the anonymous API rate limit; the repository was checked as public, and asset downloads remained anonymous.
 
-[Candidate guide](docs/TRANSFER-SPACE-REVIEW.md) · [Candidate release notes](docs/releases/0.48.0.md).
+The independent verifier checks every archived byte against its manifest and public Git blob, identical application/native sources, all JVM reports, both matching distinct native sets, each batch/report/log hash, complete source bindings, the release tag and the preview digest. Evidence commit: `4c7517d4b8063506ee2488df01b63a9f7f24b215`. The immutable archive keeps the pre-acceptance documentation snapshot; this later acceptance record contains the successful independent receipts.
+
+[Space review guide](docs/TRANSFER-SPACE-REVIEW.md) · [Release notes](docs/releases/0.48.0.md).
 
 
 ## Findroid 0.47.0 — recovery inbox

@@ -14,7 +14,7 @@
         errorLine1="        targetSdk = 36"
         errorLine2="        ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="19"
             column="9"/>
     </issue>
@@ -30,7 +30,7 @@
         errorLine1="distributionUrl=https\://services.gradle.org/distributions/gradle-9.4.1-bin.zip"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/gradle/wrapper/gradle-wrapper.properties"
+            file="/private/tmp/findroid-space-plans-48dp/gradle/wrapper/gradle-wrapper.properties"
             line="3"
             column="17"/>
     </issue>
@@ -46,7 +46,7 @@
         errorLine1="    compileSdk = 36"
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="8"
             column="5"/>
     </issue>
@@ -62,7 +62,7 @@
         errorLine1="    implementation(&quot;androidx.activity:activity-compose:1.10.1&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="59"
             column="20"/>
     </issue>
@@ -78,7 +78,7 @@
         errorLine1="    implementation(&quot;androidx.compose.ui:ui:1.8.3&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="60"
             column="20"/>
     </issue>
@@ -94,7 +94,7 @@
         errorLine1="    implementation(&quot;androidx.compose.ui:ui-tooling-preview:1.8.3&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="61"
             column="20"/>
     </issue>
@@ -110,7 +110,7 @@
         errorLine1="    implementation(&quot;androidx.compose.foundation:foundation:1.8.3&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="62"
             column="20"/>
     </issue>
@@ -126,7 +126,7 @@
         errorLine1="    implementation(&quot;androidx.compose.material3:material3:1.3.1&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="63"
             column="20"/>
     </issue>
@@ -142,7 +142,7 @@
         errorLine1="    implementation(&quot;androidx.compose.material:material-icons-extended:1.7.6&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="64"
             column="20"/>
     </issue>
@@ -158,7 +158,7 @@
         errorLine1="    implementation(&quot;androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="65"
             column="20"/>
     </issue>
@@ -174,7 +174,7 @@
         errorLine1="    implementation(&quot;androidx.lifecycle:lifecycle-runtime-compose:2.8.7&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="66"
             column="20"/>
     </issue>
@@ -190,7 +190,7 @@
         errorLine1="    implementation(&quot;androidx.exifinterface:exifinterface:1.3.7&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="76"
             column="20"/>
     </issue>
@@ -206,7 +206,7 @@
         errorLine1="    implementation(&quot;androidx.core:core-ktx:1.15.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="82"
             column="20"/>
     </issue>
@@ -222,7 +222,7 @@
         errorLine1="    debugImplementation(&quot;androidx.compose.ui:ui-tooling:1.8.3&quot;)"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="84"
             column="25"/>
     </issue>
@@ -238,7 +238,7 @@
         errorLine1="    androidTestImplementation(&quot;androidx.test.ext:junit:1.2.1&quot;)"
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="86"
             column="31"/>
     </issue>
@@ -254,7 +254,7 @@
         errorLine1="    androidTestImplementation(&quot;androidx.test:runner:1.6.2&quot;)"
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="87"
             column="31"/>
     </issue>
@@ -270,7 +270,7 @@
         errorLine1="    androidTestImplementation(&quot;androidx.compose.ui:ui-test-junit4:1.8.3&quot;)"
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="88"
             column="31"/>
     </issue>
@@ -286,7 +286,7 @@
         errorLine1="    debugImplementation(&quot;androidx.compose.ui:ui-test-manifest:1.8.3&quot;)"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="89"
             column="25"/>
     </issue>
@@ -302,7 +302,7 @@
         errorLine1="    implementation(&quot;org.commonmark:commonmark:0.30.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="68"
             column="20"/>
     </issue>
@@ -318,7 +318,7 @@
         errorLine1="    implementation(&quot;org.commonmark:commonmark-ext-gfm-tables:0.30.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="69"
             column="20"/>
     </issue>
@@ -334,7 +334,7 @@
         errorLine1="    implementation(&quot;org.commonmark:commonmark-ext-gfm-strikethrough:0.30.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="70"
             column="20"/>
     </issue>
@@ -350,7 +350,7 @@
         errorLine1="    implementation(&quot;org.commonmark:commonmark-ext-task-list-items:0.30.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="71"
             column="20"/>
     </issue>
@@ -366,7 +366,7 @@
         errorLine1="    implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0&quot;)"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/build.gradle.kts"
+            file="/private/tmp/findroid-space-plans-48dp/app/build.gradle.kts"
             line="83"
             column="20"/>
     </issue>
@@ -382,7 +382,7 @@
         errorLine1="    val narrow = config.screenWidthDp &lt; 850"
         errorLine2="                 ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
             line="38"
             column="18"/>
     </issue>
@@ -398,7 +398,7 @@
         errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(820f).dp)"
         errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
             line="44"
             column="29"/>
     </issue>
@@ -414,7 +414,7 @@
         errorLine1="                .height((config.screenHeightDp * .88f).coerceAtMost(if (narrow) 560f else 520f).dp)"
         errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
             line="45"
             column="26"/>
     </issue>
@@ -430,7 +430,7 @@
         errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(650f).dp)"
         errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
             line="810"
             column="29"/>
     </issue>
@@ -446,7 +446,7 @@
         errorLine1="                    (config.screenHeightDp * .88f)"
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
             line="812"
             column="22"/>
     </issue>
@@ -462,7 +462,7 @@
         errorLine1="        val compact = LocalPhoneLayout.current || configuration.screenWidthDp &lt; 700"
         errorLine2="                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
             line="257"
             column="51"/>
     </issue>
@@ -478,7 +478,7 @@
         errorLine1="        val short = configuration.screenHeightDp &lt; 480"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
             line="258"
             column="21"/>
     </issue>
@@ -494,7 +494,7 @@
         errorLine1="            (configuration.screenHeightDp * if (short) .96f else .86f).coerceAtMost(620f).dp"
         errorLine2="             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ArchiveBrowser.kt"
             line="260"
             column="14"/>
     </issue>
@@ -510,7 +510,7 @@
         errorLine1="    val height = (LocalConfiguration.current.screenHeightDp - 64).coerceAtLeast(160).dp"
         errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DesktopMenus.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DesktopMenus.kt"
             line="101"
             column="19"/>
     </issue>
@@ -526,8 +526,8 @@
         errorLine1="    val phone = configuration.screenWidthDp &lt; 600 || configuration.screenHeightDp &lt; 480"
         errorLine2="                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="107"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="108"
             column="54"/>
     </issue>
 
@@ -542,8 +542,8 @@
         errorLine1="    val phone = configuration.screenWidthDp &lt; 600 || configuration.screenHeightDp &lt; 480"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="107"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="108"
             column="17"/>
     </issue>
 
@@ -558,8 +558,8 @@
         errorLine1="            val screenWidth = LocalConfiguration.current.screenWidthDp"
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="212"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="214"
             column="31"/>
     </issue>
 
@@ -574,8 +574,8 @@
         errorLine1="                        if (!model.dualPane &amp;&amp; (!phone || configuration.screenHeightDp >= 480))"
         errorLine2="                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="707"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="710"
             column="59"/>
     </issue>
 
@@ -590,8 +590,8 @@
         errorLine1="                            .fillMaxHeight(if (configuration.screenHeightDp &lt; 480) 1f else .9f),"
         errorLine2="                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="753"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="756"
             column="48"/>
     </issue>
 
@@ -606,8 +606,8 @@
         errorLine1="    val short = LocalConfiguration.current.screenHeightDp &lt; 480"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1125"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="1129"
             column="17"/>
     </issue>
 
@@ -622,7 +622,7 @@
         errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(720f).dp)"
         errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
             line="50"
             column="29"/>
     </issue>
@@ -638,7 +638,7 @@
         errorLine1="                .height((config.screenHeightDp * .86f).coerceAtMost(510f).dp)"
         errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
             line="51"
             column="26"/>
     </issue>
@@ -654,7 +654,7 @@
         errorLine1="                                if (config.screenWidthDp &lt; 700 || config.fontScale > 1.3f) 1 else 2,"
         errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
             line="307"
             column="37"/>
     </issue>
@@ -670,7 +670,7 @@
         errorLine1="                                        config.screenWidthDp >= 700 &amp;&amp;"
         errorLine2="                                        ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/HousekeepingDialog.kt"
             line="368"
             column="41"/>
     </issue>
@@ -686,7 +686,7 @@
         errorLine1="    val narrow = config.screenWidthDp &lt; 900 || config.fontScale > 1.3f"
         errorLine2="                 ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/OrganizationDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/OrganizationDialog.kt"
             line="42"
             column="18"/>
     </issue>
@@ -702,7 +702,7 @@
         errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(860f).dp)"
         errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/OrganizationDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/OrganizationDialog.kt"
             line="55"
             column="29"/>
     </issue>
@@ -718,7 +718,7 @@
         errorLine1="                .height((config.screenHeightDp * .88f).coerceAtMost(540f).dp)"
         errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/OrganizationDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/OrganizationDialog.kt"
             line="56"
             column="26"/>
     </issue>
@@ -734,7 +734,7 @@
         errorLine1="                if (config.screenHeightDp >= 480)"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/OrganizationDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/OrganizationDialog.kt"
             line="111"
             column="21"/>
     </issue>
@@ -750,7 +750,7 @@
         errorLine1="    val compact = LocalPhoneLayout.current || LocalConfiguration.current.screenWidthDp &lt; 700"
         errorLine2="                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/PeekOverlay.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/PeekOverlay.kt"
             line="44"
             column="47"/>
     </issue>
@@ -766,7 +766,7 @@
         errorLine1="            androidx.compose.ui.platform.LocalConfiguration.current.screenHeightDp &lt; 480"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/PhoneChrome.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/PhoneChrome.kt"
             line="357"
             column="13"/>
     </issue>
@@ -782,7 +782,7 @@
         errorLine1="    val phone = windowConfig.screenWidthDp &lt; 600 || windowConfig.screenHeightDp &lt; 480"
         errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
             line="95"
             column="53"/>
     </issue>
@@ -798,7 +798,7 @@
         errorLine1="    val phone = windowConfig.screenWidthDp &lt; 600 || windowConfig.screenHeightDp &lt; 480"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
             line="95"
             column="17"/>
     </issue>
@@ -814,7 +814,7 @@
         errorLine1="    val short = windowConfig.screenHeightDp &lt; 480"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
             line="96"
             column="17"/>
     </issue>
@@ -830,7 +830,7 @@
         errorLine1="                    val wide = config.screenWidthDp >= 850"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
             line="121"
             column="32"/>
     </issue>
@@ -846,7 +846,7 @@
         errorLine1="                        if (phone) (config.screenHeightDp - 64f).coerceAtLeast(180f)"
         errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
             line="124"
             column="37"/>
     </issue>
@@ -862,7 +862,7 @@
         errorLine1="                            }.coerceAtMost(config.screenHeightDp * .86f)"
         errorLine2="                                           ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ReceiveFilesActivity.kt"
             line="132"
             column="44"/>
     </issue>
@@ -878,7 +878,7 @@
         errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(760f).dp)"
         errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ReferenceRepairDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ReferenceRepairDialog.kt"
             line="463"
             column="29"/>
     </issue>
@@ -894,7 +894,7 @@
         errorLine1="                .height((config.screenHeightDp * .88f).coerceAtMost(540f).dp),"
         errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ReferenceRepairDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ReferenceRepairDialog.kt"
             line="464"
             column="26"/>
     </issue>
@@ -910,7 +910,7 @@
         errorLine1="    val narrow = config.screenWidthDp &lt; 900 || config.fontScale > 1.3f"
         errorLine2="                 ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/RenameDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/RenameDialog.kt"
             line="38"
             column="18"/>
     </issue>
@@ -926,7 +926,7 @@
         errorLine1="            Modifier.width((config.screenWidthDp * .94f).coerceAtMost(860f).dp)"
         errorLine2="                            ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/RenameDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/RenameDialog.kt"
             line="64"
             column="29"/>
     </issue>
@@ -942,7 +942,7 @@
         errorLine1="                .height((config.screenHeightDp * .88f).coerceAtMost(540f).dp)"
         errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/RenameDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/RenameDialog.kt"
             line="65"
             column="26"/>
     </issue>
@@ -958,7 +958,7 @@
         errorLine1="        val narrow = config.screenWidthDp &lt; 800"
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
             line="48"
             column="22"/>
     </issue>
@@ -974,7 +974,7 @@
         errorLine1="                    (config.screenWidthDp * (if (narrow) .96f else .88f)).coerceAtMost(720f).dp,"
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
             line="51"
             column="22"/>
     </issue>
@@ -990,7 +990,7 @@
         errorLine1="                .height((config.screenHeightDp * .86f).coerceAtMost(480f).dp)"
         errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
             line="53"
             column="26"/>
     </issue>
@@ -1006,8 +1006,8 @@
         errorLine1="    modifier: Modifier = Modifier,"
         errorLine2="    ~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1350"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="1354"
             column="5"/>
     </issue>
 
@@ -1022,7 +1022,7 @@
         errorLine1="    modifier: Modifier = Modifier,"
         errorLine2="    ~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/RefinedChrome.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/RefinedChrome.kt"
             line="270"
             column="5"/>
     </issue>
@@ -1038,7 +1038,7 @@
         errorLine1="internal fun Modifier.favoriteDragSource(model: FinderModel, shortcut: FavoriteShortcut): Modifier = composed {"
         errorLine2="                                                                                                     ~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderDragDrop.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderDragDrop.kt"
             line="227"
             column="102"/>
     </issue>
@@ -1068,7 +1068,7 @@
         errorLine1="    var largeBytes by mutableStateOf(prefs.getLong(&quot;large&quot;, 100L * 1024 * 1024))"
         errorLine2="                      ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisController.kt"
             line="141"
             column="23"/>
     </issue>
@@ -1084,7 +1084,7 @@
         errorLine1="    var oldDays by mutableStateOf(prefs.getInt(&quot;oldDays&quot;, 365))"
         errorLine2="                   ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisController.kt"
             line="144"
             column="20"/>
     </issue>
@@ -1100,7 +1100,7 @@
         errorLine1="    var bytes by mutableStateOf(0L)"
         errorLine2="                 ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisController.kt"
             line="381"
             column="18"/>
     </issue>
@@ -1116,7 +1116,7 @@
         errorLine1="    var activeTab by mutableStateOf(panePrefs.getInt(&quot;activeTab&quot;, 0).coerceIn(0, tabs.lastIndex))"
         errorLine2="                     ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="450"
             column="22"/>
     </issue>
@@ -1132,7 +1132,7 @@
         errorLine1="    var iconSize by mutableStateOf(panePrefs.getInt(&quot;iconSize&quot;, 120))"
         errorLine2="                    ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="645"
             column="21"/>
     </issue>
@@ -1148,7 +1148,7 @@
         errorLine1="    var columnWidth by mutableStateOf(panePrefs.getInt(&quot;columnWidth&quot;, 240))"
         errorLine2="                       ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="648"
             column="24"/>
     </issue>
@@ -1164,7 +1164,7 @@
         errorLine1="    var previewWidth by mutableStateOf(panePrefs.getInt(&quot;previewWidth&quot;, 280))"
         errorLine2="                        ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="651"
             column="25"/>
     </issue>
@@ -1180,7 +1180,7 @@
         errorLine1="    var windowsLayout by mutableStateOf(panePrefs.getInt(&quot;windowsLayout&quot;, 0))"
         errorLine2="                         ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="716"
             column="26"/>
     </issue>
@@ -1196,7 +1196,7 @@
         errorLine1="    internal var listingRefreshRevision by mutableStateOf(0L)"
         errorLine2="                                           ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1246"
             column="44"/>
     </issue>
@@ -1212,7 +1212,7 @@
         errorLine1="    val sidebarWidth = mutableStateOf(prefs.getInt(&quot;sidebarWidth&quot;, 206))"
         errorLine2="                       ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderSession.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderSession.kt"
             line="70"
             column="24"/>
     </issue>
@@ -1228,8 +1228,8 @@
         errorLine1="        mutableStateOf("
         errorLine2="        ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderSession.kt"
-            line="239"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderSession.kt"
+            line="240"
             column="9"/>
     </issue>
 
@@ -1244,7 +1244,7 @@
         errorLine1="    var zoom by mutableStateOf(1f)"
         errorLine2="                ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/QuickLookMedia.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/QuickLookMedia.kt"
             line="29"
             column="17"/>
     </issue>
@@ -1260,7 +1260,7 @@
         errorLine1="                        val space = root.usableSpace"
         errorLine2="                                         ~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ArchivePreview.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ArchivePreview.kt"
             line="69"
             column="42"/>
     </issue>
@@ -1276,8 +1276,8 @@
         errorLine1="        if (!isDocumentPath(path)) return runCatching { File(path).usableSpace }.getOrNull()"
         errorLine2="                                                                   ~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
-            line="699"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="736"
             column="68"/>
     </issue>
 
@@ -1292,7 +1292,7 @@
         errorLine1="    private val freeBytes: (File) -> Long? = { runCatching { it.usableSpace }.getOrNull() },"
         errorLine2="                                                                ~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FileEngine.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FileEngine.kt"
             line="18"
             column="65"/>
     </issue>
@@ -1308,7 +1308,7 @@
         errorLine1="    private val freeBytes: (File) -> Long? = { runCatching { it.usableSpace }.getOrNull() },"
         errorLine2="                                                                ~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FileEngine.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FileEngine.kt"
             line="18"
             column="65"/>
     </issue>
@@ -1324,8 +1324,8 @@
         errorLine1="                        root.usableSpace to root.totalSpace"
         errorLine2="                             ~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1266"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="1270"
             column="30"/>
     </issue>
 
@@ -1337,12 +1337,12 @@
         priority="3"
         summary="Using getUsableSpace()"
         explanation="When you need to allocate disk space for large files, consider using the new `allocateBytes(FileDescriptor, long)` API, which will automatically clear cached files belonging to other apps (as needed) to meet your request.&#xA;&#xA;When deciding if the device has enough disk space to hold your new data, call `getAllocatableBytes(UUID)` instead of using `getUsableSpace()`, since the former will consider any cached data that the system is willing to clear on your behalf.&#xA;&#xA;Note that these methods require API level 26. If your app is running on older devices, you will probably need to use both APIs, conditionally switching on `Build.VERSION.SDK_INT`. Lint only looks in the same compilation unit to see if you are already using both APIs, so if it warns even though you are already using the new API, consider moving the calls to the same file or suppressing the warning."
-        errorLine1="                            Root.COLUMN_AVAILABLE_BYTES -> root.usableSpace"
-        errorLine2="                                                                ~~~~~~~~~~~">
+        errorLine1="                            Root.COLUMN_AVAILABLE_BYTES -> if (unreportedCapacity) null else root.usableSpace"
+        errorLine2="                                                                                                  ~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/debug/java/dev/findroid/testing/FixtureDocumentsProvider.kt"
-            line="113"
-            column="65"/>
+            file="/private/tmp/findroid-space-plans-48dp/app/src/debug/java/dev/findroid/testing/FixtureDocumentsProvider.kt"
+            line="114"
+            column="99"/>
     </issue>
 
     <issue
@@ -1356,7 +1356,7 @@
         errorLine1="                        Root.COLUMN_AVAILABLE_BYTES -> root.usableSpace"
         errorLine2="                                                            ~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/WorkspaceDocumentsProvider.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/WorkspaceDocumentsProvider.kt"
             line="133"
             column="61"/>
     </issue>
@@ -1372,7 +1372,7 @@
         errorLine1="        prefs"
         errorLine2="        ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisController.kt"
             line="293"
             column="9"/>
     </issue>
@@ -1388,7 +1388,7 @@
         errorLine1="                if (isDocumentPath(file.node.path)) android.net.Uri.parse(file.node.path) else null,"
         errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AnalysisDialogs.kt"
             line="672"
             column="53"/>
     </issue>
@@ -1404,7 +1404,7 @@
         errorLine1="        prefs.edit().putLong(&quot;remindAfter&quot;, System.currentTimeMillis() + 24 * 60 * 60 * 1000L).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AppUpdateController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AppUpdateController.kt"
             line="101"
             column="9"/>
     </issue>
@@ -1420,7 +1420,7 @@
         errorLine1="        prefs.edit().putBoolean(&quot;automatic&quot;, value).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AppUpdateController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AppUpdateController.kt"
             line="106"
             column="9"/>
     </issue>
@@ -1436,7 +1436,7 @@
         errorLine1="        prefs.edit().putLong(&quot;lastAttempt&quot;, System.currentTimeMillis()).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/AppUpdateController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/AppUpdateController.kt"
             line="119"
             column="9"/>
     </issue>
@@ -1452,7 +1452,7 @@
         errorLine1="        titles[path] ?: Uri.parse(path).lastPathSegment ?: &quot;Document&quot;"
         errorLine2="                        ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="86"
             column="25"/>
     </issue>
@@ -1468,7 +1468,7 @@
         errorLine1="    fun notificationUri(path: String) = notifications[path] ?: Uri.parse(path)"
         errorLine2="                                                               ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="88"
             column="64"/>
     </issue>
@@ -1484,7 +1484,7 @@
         errorLine1="            val document = Uri.parse(path)"
         errorLine2="                           ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="139"
             column="28"/>
     </issue>
@@ -1500,7 +1500,7 @@
         errorLine1="                    resolver.releasePersistableUriPermission(Uri.parse(root.grant), flag)"
         errorLine2="                                                             ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="233"
             column="62"/>
     </issue>
@@ -1516,7 +1516,7 @@
         errorLine1="        prefs"
         errorLine2="        ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="240"
             column="9"/>
     </issue>
@@ -1532,7 +1532,7 @@
         errorLine1="        val uri = Uri.parse(path)"
         errorLine2="                  ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="258"
             column="19"/>
     </issue>
@@ -1548,7 +1548,7 @@
         errorLine1="            val grant = Uri.parse(it.grant)"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="261"
             column="25"/>
     </issue>
@@ -1564,7 +1564,7 @@
         errorLine1="            val uri = Uri.parse(path)"
         errorLine2="                      ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="271"
             column="23"/>
     </issue>
@@ -1580,7 +1580,7 @@
         errorLine1="        val child = Uri.parse(path)"
         errorLine2="                    ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="282"
             column="21"/>
     </issue>
@@ -1596,7 +1596,7 @@
         errorLine1="        val parent = Uri.parse(ancestor)"
         errorLine2="                     ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="283"
             column="22"/>
     </issue>
@@ -1612,7 +1612,7 @@
         errorLine1="        val uri = Uri.parse(path)"
         errorLine2="                  ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="352"
             column="19"/>
     </issue>
@@ -1628,7 +1628,7 @@
         errorLine1="            val uri = Uri.parse(path)"
         errorLine2="                      ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="366"
             column="23"/>
     </issue>
@@ -1644,7 +1644,7 @@
         errorLine1="        val uri = Uri.parse(path)"
         errorLine2="                  ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="391"
             column="19"/>
     </issue>
@@ -1660,7 +1660,7 @@
         errorLine1="                    resolver.openAssetFileDescriptor(Uri.parse(path), &quot;r&quot;, signal)"
         errorLine2="                                                     ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="427"
             column="54"/>
     </issue>
@@ -1676,7 +1676,7 @@
         errorLine1="        val uri = Uri.parse(path)"
         errorLine2="                  ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="477"
             column="19"/>
     </issue>
@@ -1692,7 +1692,7 @@
         errorLine1="            resolver.openInputStream(Uri.parse(path))"
         errorLine2="                                     ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="574"
             column="38"/>
     </issue>
@@ -1708,7 +1708,7 @@
         errorLine1="            resolver.openOutputStream(Uri.parse(path), &quot;wt&quot;)"
         errorLine2="                                      ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="580"
             column="39"/>
     </issue>
@@ -1724,7 +1724,7 @@
         errorLine1="                Uri.parse(parent),"
         errorLine2="                ~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="603"
             column="17"/>
     </issue>
@@ -1740,7 +1740,7 @@
         errorLine1="            DocumentsContract.renameDocument(resolver, Uri.parse(path), name)"
         errorLine2="                                                       ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="622"
             column="56"/>
     </issue>
@@ -1756,7 +1756,7 @@
         errorLine1="        check(DocumentsContract.deleteDocument(resolver, Uri.parse(path))) {"
         errorLine2="                                                         ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="639"
             column="58"/>
     </issue>
@@ -1772,7 +1772,7 @@
         errorLine1="            val a = Uri.parse(source)"
         errorLine2="                    ~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="664"
             column="21"/>
     </issue>
@@ -1788,7 +1788,7 @@
         errorLine1="            val b = Uri.parse(parent)"
         errorLine2="                    ~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
             line="665"
             column="21"/>
     </issue>
@@ -1804,8 +1804,8 @@
         errorLine1="            val uri = Uri.parse(path)"
         errorLine2="                      ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/DocumentAccess.kt"
-            line="701"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/DocumentAccess.kt"
+            line="738"
             column="23"/>
     </issue>
 
@@ -1820,7 +1820,7 @@
         errorLine1="                                                        Bitmap.createBitmap("
         errorLine2="                                                        ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FileVisuals.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FileVisuals.kt"
             line="332"
             column="57"/>
     </issue>
@@ -1836,8 +1836,8 @@
         errorLine1="                                model.connectLocation(Uri.parse(choice.selected))"
         errorLine2="                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="170"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderApp.kt"
+            line="172"
             column="55"/>
     </issue>
 
@@ -1852,7 +1852,7 @@
         errorLine1="        windowState.prefs.edit().putString(&quot;activePane&quot;, paneId).apply()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="179"
             column="9"/>
     </issue>
@@ -1868,7 +1868,7 @@
         errorLine1="        windowState.prefs.edit().putBoolean(&quot;dualPane&quot;, dualPane).apply()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="186"
             column="9"/>
     </issue>
@@ -1884,7 +1884,7 @@
         errorLine1="        windowState.prefs.edit().putBoolean(&quot;panesReversed&quot;, panesReversed).apply()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="195"
             column="9"/>
     </issue>
@@ -1900,7 +1900,7 @@
         errorLine1="        windowState.prefs.edit().putFloat(&quot;paneRatio&quot;, paneRatio).apply()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="201"
             column="9"/>
     </issue>
@@ -1916,7 +1916,7 @@
         errorLine1="        windowState.prefs"
         errorLine2="        ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="386"
             column="9"/>
     </issue>
@@ -1932,7 +1932,7 @@
         errorLine1="        prefs.edit().putString(&quot;density&quot;, value.name).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="642"
             column="9"/>
     </issue>
@@ -1948,7 +1948,7 @@
         errorLine1="        panePrefs.edit().putBoolean(&quot;navigationTree&quot;, false).apply()"
         errorLine2="        ~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="938"
             column="9"/>
     </issue>
@@ -1964,7 +1964,7 @@
         errorLine1="        panePrefs.edit().putBoolean(&quot;navigationTree&quot;, true).apply()"
         errorLine2="        ~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="944"
             column="9"/>
     </issue>
@@ -1980,7 +1980,7 @@
         errorLine1="        prefs.edit().putString(&quot;conflictPolicy&quot;, value.name).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1079"
             column="9"/>
     </issue>
@@ -1996,7 +1996,7 @@
         errorLine1="        prefs.edit().putBoolean(&quot;gestureHintDismissed&quot;, !show).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1152"
             column="9"/>
     </issue>
@@ -2012,7 +2012,7 @@
         errorLine1="        panePrefs"
         errorLine2="        ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1516"
             column="9"/>
     </issue>
@@ -2028,7 +2028,7 @@
         errorLine1="        prefs.edit().putBoolean(&quot;extensions&quot;, showExtensions).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1643"
             column="9"/>
     </issue>
@@ -2044,7 +2044,7 @@
         errorLine1="        prefs.edit().putBoolean(&quot;dark&quot;, darkTheme).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1648"
             column="9"/>
     </issue>
@@ -2060,7 +2060,7 @@
         errorLine1="        prefs.edit().putInt(&quot;sidebarWidth&quot;, sidebarWidth).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1653"
             column="9"/>
     </issue>
@@ -2076,7 +2076,7 @@
         errorLine1="        prefs.edit().putBoolean(&quot;sidebarVisible&quot;, sidebarVisible).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1658"
             column="9"/>
     </issue>
@@ -2092,7 +2092,7 @@
         errorLine1="        prefs.edit().putBoolean(&quot;tagsVisible&quot;, tagsVisible).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1663"
             column="9"/>
     </issue>
@@ -2108,7 +2108,7 @@
         errorLine1="            panePrefs"
         errorLine2="            ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="1759"
             column="13"/>
     </issue>
@@ -2124,7 +2124,7 @@
         errorLine1="            preferences.distinct().forEach { check(it.edit().commit()) { &quot;Couldn&apos;t save preferences after the file operation.&quot; } }"
         errorLine2="                                                   ~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderModel.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderModel.kt"
             line="3719"
             column="52"/>
     </issue>
@@ -2140,7 +2140,7 @@
         errorLine1="        check(prefs.edit().putString(&quot;acknowledgedRecoveryMarker&quot;, id).commit()) {"
         errorLine2="              ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderSession.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderSession.kt"
             line="147"
             column="15"/>
     </issue>
@@ -2156,7 +2156,7 @@
         errorLine1="        check(prefs.edit().putString(SidebarJson.KEY, encoded)"
         errorLine2="              ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FinderSession.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FinderSession.kt"
             line="180"
             column="15"/>
     </issue>
@@ -2172,7 +2172,7 @@
         errorLine1="        isDocumentPath(path) -> android.net.Uri.parse(path).normalizeScheme().toString()"
         errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/FolderViews.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/FolderViews.kt"
             line="48"
             column="33"/>
     </issue>
@@ -2188,7 +2188,7 @@
         errorLine1="        prefs.edit().putInt(&quot;trashDays&quot;, days).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/HousekeepingController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/HousekeepingController.kt"
             line="106"
             column="9"/>
     </issue>
@@ -2204,7 +2204,7 @@
         errorLine1="        prefs.edit().putInt(&quot;cacheDays&quot;, days).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/HousekeepingController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/HousekeepingController.kt"
             line="113"
             column="9"/>
     </issue>
@@ -2220,7 +2220,7 @@
         errorLine1="        save()"
         errorLine2="        ~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ImageQuickLook.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ImageQuickLook.kt"
             line="506"
             column="9"/>
     </issue>
@@ -2236,7 +2236,7 @@
         errorLine1="            prefs.edit().putString(&quot;folder&quot;, destination).apply()"
         errorLine2="            ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/IncomingShare.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/IncomingShare.kt"
             line="467"
             column="13"/>
     </issue>
@@ -2252,7 +2252,7 @@
         errorLine1="                        Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse(&quot;package:$packageName&quot;),"
         errorLine2="                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/MainActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/MainActivity.kt"
             line="80"
             column="69"/>
     </issue>
@@ -2268,7 +2268,7 @@
         errorLine1="            asked.edit().putBoolean(&quot;asked&quot;, true).apply()"
         errorLine2="            ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/MainActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/MainActivity.kt"
             line="120"
             column="13"/>
     </issue>
@@ -2284,7 +2284,7 @@
         errorLine1="                        Uri.parse(&quot;package:${provider.packageName}&quot;),"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/MainActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/MainActivity.kt"
             line="178"
             column="25"/>
     </issue>
@@ -2300,7 +2300,7 @@
         errorLine1="                                Uri.parse(&quot;package:$packageName&quot;),"
         errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/MainActivity.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/MainActivity.kt"
             line="256"
             column="33"/>
     </issue>
@@ -2316,7 +2316,7 @@
         errorLine1="                prefs"
         errorLine2="                ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/MediaPlayback.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/MediaPlayback.kt"
             line="68"
             column="17"/>
     </issue>
@@ -2332,7 +2332,7 @@
         errorLine1="                            MediaItem.SubtitleConfiguration.Builder(Uri.parse(uri))"
         errorLine2="                                                                    ~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/MediaPlayback.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/MediaPlayback.kt"
             line="274"
             column="69"/>
     </issue>
@@ -2348,7 +2348,7 @@
         errorLine1="            val editor = prefs.edit()"
         errorLine2="                         ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/PdfReading.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/PdfReading.kt"
             line="142"
             column="26"/>
     </issue>
@@ -2364,7 +2364,7 @@
         errorLine1="                        Bitmap.createBitmap("
         errorLine2="                        ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/PdfReading.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/PdfReading.kt"
             line="243"
             column="25"/>
     </issue>
@@ -2380,7 +2380,7 @@
         errorLine1="                                    if (isDocumentPath(current)) android.net.Uri.parse(current)"
         errorLine2="                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/RenameController.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/RenameController.kt"
             line="525"
             column="66"/>
     </issue>
@@ -2396,7 +2396,7 @@
         errorLine1="                        Uri.parse(root.uri).authority?.let(providerApp)"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/StorageLocationsDialog.kt"
             line="326"
             column="25"/>
     </issue>
@@ -2412,7 +2412,7 @@
         errorLine1="        prefs.edit().putString(&quot;volumes&quot;, JSONArray(saved.values.toList()).toString()).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/StorageMonitor.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/StorageMonitor.kt"
             line="117"
             column="9"/>
     </issue>
@@ -2428,7 +2428,7 @@
         errorLine1="        val uri = Uri.parse(target.path)"
         errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/StorageMonitor.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/StorageMonitor.kt"
             line="189"
             column="19"/>
     </issue>
@@ -2444,7 +2444,7 @@
         errorLine1="                        Uri.parse(link).scheme?.lowercase() in setOf(&quot;http&quot;, &quot;https&quot;, &quot;mailto&quot;)"
         errorLine2="                        ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/StructuredTextViews.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/StructuredTextViews.kt"
             line="439"
             column="25"/>
     </issue>
@@ -2460,7 +2460,7 @@
         errorLine1="                                        Intent(Intent.ACTION_VIEW, Uri.parse(link)),"
         errorLine2="                                                                   ~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/StructuredTextViews.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/StructuredTextViews.kt"
             line="447"
             column="68"/>
     </issue>
@@ -2476,7 +2476,7 @@
         errorLine1="                                                    Uri.parse(key.path),"
         errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ThumbnailRepository.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ThumbnailRepository.kt"
             line="66"
             column="53"/>
     </issue>
@@ -2492,7 +2492,7 @@
         errorLine1="        db.beginTransaction()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
             line="164"
             column="9"/>
     </issue>
@@ -2508,7 +2508,7 @@
         errorLine1="        db.beginTransaction()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
             line="219"
             column="9"/>
     </issue>
@@ -2524,7 +2524,7 @@
         errorLine1="        db.beginTransaction()"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
             line="250"
             column="9"/>
     </issue>
@@ -2540,7 +2540,7 @@
         errorLine1="        prefs.edit().putBoolean(&quot;workspace-in-picker&quot;, value).apply()"
         errorLine2="        ~~~~~~~~~~~~">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/WorkspaceDocuments.kt"
             line="298"
             column="9"/>
     </issue>
@@ -2556,7 +2556,7 @@
         errorLine1="        prefs"
         errorLine2="        ^">
         <location
-            file="/private/tmp/findroid-recovery-inbox/app/src/main/java/dev/findroid/ZipLimitsDialog.kt"
+            file="/private/tmp/findroid-space-plans-48dp/app/src/main/java/dev/findroid/ZipLimitsDialog.kt"
             line="31"
             column="9"/>
     </issue>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.DesktopArchiveTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:17.185Z" hostname="MacBook-Pro-2.local" time="0.072">
+<testsuite name="dev.findroid.DesktopArchiveTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:08.538Z" hostname="MacBook-Pro-2.local" time="0.091">
   <properties/>
   <testcase name="namedCompressionKeepsSourceAndAvoidsOverwrites" classname="dev.findroid.DesktopArchiveTest" time="0.004"/>
-  <testcase name="timestampsSurviveRoundTrip" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
-  <testcase name="dottedFolderNameIsPreserved" classname="dev.findroid.DesktopArchiveTest" time="0.004"/>
+  <testcase name="timestampsSurviveRoundTrip" classname="dev.findroid.DesktopArchiveTest" time="0.004"/>
+  <testcase name="dottedFolderNameIsPreserved" classname="dev.findroid.DesktopArchiveTest" time="0.003"/>
   <testcase name="browserInfersFoldersWithoutInflatingFiles" classname="dev.findroid.DesktopArchiveTest" time="0.002"/>
-  <testcase name="invalidAndUnsafeArchivesLeaveNoOutput" classname="dev.findroid.DesktopArchiveTest" time="0.007"/>
-  <testcase name="emptyZipIsValidAndInvalidNamesAreRejected" classname="dev.findroid.DesktopArchiveTest" time="0.002"/>
-  <testcase name="compressionLevelsProduceReadableArchives" classname="dev.findroid.DesktopArchiveTest" time="0.041"/>
-  <testcase name="equalNamesFromDifferentFoldersKeepBothContents" classname="dev.findroid.DesktopArchiveTest" time="0.008"/>
+  <testcase name="invalidAndUnsafeArchivesLeaveNoOutput" classname="dev.findroid.DesktopArchiveTest" time="0.021"/>
+  <testcase name="emptyZipIsValidAndInvalidNamesAreRejected" classname="dev.findroid.DesktopArchiveTest" time="0.008"/>
+  <testcase name="compressionLevelsProduceReadableArchives" classname="dev.findroid.DesktopArchiveTest" time="0.038"/>
+  <testcase name="equalNamesFromDifferentFoldersKeepBothContents" classname="dev.findroid.DesktopArchiveTest" time="0.009"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

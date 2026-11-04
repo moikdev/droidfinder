@@ -1,0 +1,14 @@
+{
+  "serial": "emulator-5582",
+  "completedBatch": 4,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-004/recovery-inbox-qa/large-text-review.png",
+      "sha256": "84cbe860a363c2d69667f2886af6d89fe1179aa5bc22b50fead8f66bd0336b5c"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-004/recovery-inbox-qa/normal-review.png",
+      "sha256": "94d035e214932404b593eafaa92f4b5bbf2bcaf10be8005666938b08563cacb9"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "original": "scripts/check-ota-upgrade.py",
+  "sourceSha256": "38778064c41bdbd68b612e7b73859b61837a0791d31ce5929ce2602794263db4",
+  "priorSourceSha256": "df1069fd330f4a8d806d3033ee99850a4822d28425dc902c876ad8d8d15876ca",
+  "change": "Accept an already visible update dialog only when the fresh hierarchy contains both App updates and its Installed label. Download, verified bytes, actual installer completion, sentinel, favorite, original document and no-repeat checks remain required."
+}

@@ -10,14 +10,18 @@ import io
 import json
 from pathlib import Path
 import re
+import subprocess
 from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
 import zipfile
 
 REPOSITORY = 'https://api.github.com/repos/moikdev/findroid'
+API_CLIENT = 'anonymous'
 
 
 def fetch(url):
+    if API_CLIENT == 'gh' and url.startswith('https://api.github.com/'):
+        return subprocess.check_output(['gh', 'api', '--hostname', 'github.com', url.removeprefix('https://api.github.com/')], timeout=180)
     with urlopen(Request(url, headers={'User-Agent': 'Findroid-independent-validation'}), timeout=180) as response:
         return response.read()
 
@@ -34,12 +38,18 @@ def source_tree(commit):
 
 
 def main():
+    global API_CLIENT
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--tag',required=True)
     parser.add_argument('--sha256',required=True,help='The expected ZIP digest from the published validation record')
     parser.add_argument('--archive',type=Path,help='Also compare the anonymous download with this local copy')
     parser.add_argument('--output',type=Path,help='Write a JSON verification receipt')
+    parser.add_argument('--github-api-client', choices=('anonymous', 'gh'), default='anonymous',
+        help='Use configured gh credentials for public API metadata only; release asset bytes remain anonymous downloads')
     args = parser.parse_args()
+    API_CLIENT = args.github_api_client
+    if API_CLIENT == 'gh':
+        assert json.loads(fetch(REPOSITORY))['private'] is False, 'Source repository must be public'
     assert re.fullmatch(r'v[0-9]+\.[0-9]+\.[0-9]+-preview',args.tag)
     assert re.fullmatch(r'[0-9a-f]{64}',args.sha256)
     version = args.tag.removeprefix('v').removesuffix('-preview')
@@ -165,7 +175,8 @@ def main():
         archivedSourcesMatchPublicCommit=True,evidenceSnapshotMatchesPublicCommit=True,nativeSourcesIdenticalAcrossRecordedCommits=True,
         recordedJvmAndNativeTotalsVerified=True,
         **{key:manifest[key] for key in ('applicationSourceCommit','nativeTestSourceCommit','evidenceCommit')},
-        verificationScript='scripts/verify-release-validation.py',
+        verificationScript='scripts/verify-release-validation.py', githubApiClient=API_CLIENT,
+        releaseAssetsDownloadedAnonymously=True,
         verificationScriptSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
     if args.output:
         args.output.parent.mkdir(parents=True,exist_ok=True)

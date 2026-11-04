@@ -1,0 +1,10 @@
+{
+  "serial": "emulator-5582",
+  "completedBatch": 2,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-native/images/after-batch-002/space-plan-qa/normal-review.png",
+      "sha256": "190f2483a8d908b29481de8c9881c4b56616a513f23da4e52df7fa6236621ea1"
+    }
+  ]
+}

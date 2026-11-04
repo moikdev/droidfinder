@@ -21,10 +21,14 @@ Choose **Copy to destination** or **Move to destination** to submit the reviewed
 
 This is a point-in-time review, and it does not reserve space. The transfer engine checks the current files, conflicts and available capacity as it works. Conflict decisions still happen in their existing review, and transfer results remain in **More → Transfers**.
 
-## Development status
+## Validation
 
-Proposal 45 remains in progress. Frozen candidate 2 passes **930 JVM cases**, including 36 focused space-planning cases, with no failures, errors or skips. Lint reports 0 errors, 148 warnings and 12 hints. All 395 source inputs match public commit `bf1ae1858bb071b92d42ac02f1057a82011cf00c`; all 104 frozen build/report outputs are unchanged.
+Proposal 45 is implemented in public **0.48.0-preview**, accepted on November 4, 2026. The frozen build passes **930 JVM cases** with no failures, errors or skips and lint **0 errors / 148 warnings / 12 hints**. Both assigned API30/API36 tablets pass the same **549 distinct native cases in 59 isolated batches**, including 17 focused space-planning cases. Both pass four optimized workflows, 12 size/font/theme layouts, actual 240/300 dpi checks, complete 48 dp named controls and native text/glyph growth in six groups per API.
 
-Both assigned API30/API36 tablets pass the 17 focused metadata and interaction cases on this exact candidate, including the destination row's 48 dp assertion. Those cases are a subset of the running 549-case regression in 59 fresh-process batches per tablet. Exact optimized core and font/theme/size checks are queued behind the same reservations. Public OTA and independent immutable-archive acceptance remain pending.
+Both tablets pass actual public **49→50 OTA**, installer completion, exact installed bytes, original-file/Favorite/preference retention and no repeated offer. All **124 selected local and OTA image paths** were inspected. Original Workspace, managed metadata/databases/cache and recorded absences, URI grants and device settings were restored; public 0.48 remains installed.
 
-The earlier candidate was stopped between batches after code review found 44 dp rows in the existing destination chooser. Its original managed bytes, Workspace, grants and exact public 0.47 APK were restored on both tablets. Its application and frozen output bytes remain intact in a separate checkout; its partial regression is excluded from final accepted totals. Candidate 2 adds a scrolling chooser and complete 48 dp folder rows.
+Candidate 1 was stopped safely to improve inherited chooser rows. Retained candidate-2 attempts include a portrait navigation stop, assigned-AVD disconnect recovery, an API36 native setup timeout with the entire unchanged final batch retried, and an API36 OTA navigation stop when the automatic update dialog covered the toolbar. Partial/failed attempts remain excluded from accepted totals, and verified separate recovery preserves original data. Application and frozen build bytes did not change during acceptance.
+
+The immutable validation archive is **13,443,892 bytes**, SHA-256 `568379eadc4786a1ca9e0c086068e5262834934b21e1fdc443cf6d7c32d09d21`. Its 966 listed files plus EVIDENCE.json match the public source and evidence commits. All six public assets match anonymous downloads and GitHub digests. Public API metadata used the configured GitHub CLI after the anonymous API rate limit; the repository was checked as public, and asset downloads remained anonymous.
+
+[Full validation](../VALIDATION.md) · [Release notes](releases/0.48.0.md).

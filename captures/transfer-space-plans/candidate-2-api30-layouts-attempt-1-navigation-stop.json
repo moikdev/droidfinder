@@ -1,0 +1,13 @@
+{
+  "serial": "emulator-5602",
+  "excludedFromCompleteAcceptance": true,
+  "partialLayouts": 4,
+  "reason": "The file table supports horizontal scrolling, while checker 1 attempted only vertical navigation. The portrait source action was clipped to 64 px at 1.5 density, below the complete 72 px target. No transfer-space dialog failure was reached.",
+  "savedHierarchy": "PRIVATE-space/layout-800x1280-font1.0-light-source-actions.xml",
+  "originalManagedDataWorkspaceGrantsAndSettingsRestored": true,
+  "public047Restored": true,
+  "resultSha256": "5b0dd47957078b741d32129b7a5d754c7dfa9326d03d85e68871bbe1f33e3021",
+  "oldCheckerSha256": "30bca3188552e404fdb9ac5a47d2781131539c8208f23515938121958aa78503",
+  "newCheckerSha256": "e4d645d54dd4b3affe2901fccd6c57167f1f3d9e2a9f46af04bd029272767400",
+  "applicationCandidateUnchanged": true
+}

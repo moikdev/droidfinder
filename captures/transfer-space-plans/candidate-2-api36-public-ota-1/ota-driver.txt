@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/private/tmp/findroid-space-plans-48dp/scripts/check-ota-upgrade.py", line 196, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "/private/tmp/findroid-space-plans-48dp/scripts/check-ota-upgrade.py", line 146, in main
+    updates(); root = wait('available', lambda t: bool(nodes(t, 'Download update'))); capture('available')
+    ~~~~~~~^^
+  File "/private/tmp/findroid-space-plans-48dp/scripts/check-ota-upgrade.py", line 97, in updates
+    launch(); root = wait('browser', lambda t: bool(nodes(t, 'Actions')))
+                     ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/findroid-space-plans-48dp/scripts/check-ota-upgrade.py", line 64, in wait
+    raise AssertionError('Timed out: ' + name)
+AssertionError: Timed out: browser

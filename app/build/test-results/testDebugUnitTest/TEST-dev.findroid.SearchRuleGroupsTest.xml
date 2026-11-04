@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SearchRuleGroupsTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-04T04:33:40.278Z" hostname="MacBook-Pro-2.local" time="0.012">
+<testsuite name="dev.findroid.SearchRuleGroupsTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-04T06:28:29.691Z" hostname="MacBook-Pro-2.local" time="0.007">
   <properties/>
   <testcase name="incomingAndExposedChildListsCannotMutateAnAppliedGroup" classname="dev.findroid.SearchRuleGroupsTest" time="0.001"/>
   <testcase name="noneDoesNotHighlightPositiveNamesFromRejectedChildren" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
   <testcase name="allMergesOnlyItsPassingNameTermsAndReasonsWithoutDuplicates" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
-  <testcase name="nestedTagRenamingKeepsEveryBooleanBranchAndTheOriginalIndependent" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
-  <testcase name="everyGroupShortCircuitsDeterministicallyAndChecksCancellationPerNode" classname="dev.findroid.SearchRuleGroupsTest" time="0.001"/>
-  <testcase name="invalidLeafValuesFailBeforeTheyCanBecomeSavedRules" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
-  <testcase name="constructorsBoundDepthNodesAndCombinedUtf8Text" classname="dev.findroid.SearchRuleGroupsTest" time="0.008"/>
+  <testcase name="nestedTagRenamingKeepsEveryBooleanBranchAndTheOriginalIndependent" classname="dev.findroid.SearchRuleGroupsTest" time="0.001"/>
+  <testcase name="everyGroupShortCircuitsDeterministicallyAndChecksCancellationPerNode" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
+  <testcase name="invalidLeafValuesFailBeforeTheyCanBecomeSavedRules" classname="dev.findroid.SearchRuleGroupsTest" time="0.001"/>
+  <testcase name="constructorsBoundDepthNodesAndCombinedUtf8Text" classname="dev.findroid.SearchRuleGroupsTest" time="0.002"/>
   <testcase name="unknownSizesFollowTheCompleteThreeValuedTruthTable" classname="dev.findroid.SearchRuleGroupsTest" time="0.001"/>
   <testcase name="failedAlternativesDoNotContributeNameOrTagEvidence" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
-  <testcase name="knownTagRulesFollowAllAnyAndNoneTruthTables" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
-  <testcase name="nestedKindAndTagAlternativesDoNotTurnIntoFlatTagRequirements" classname="dev.findroid.SearchRuleGroupsTest" time="0.001"/>
+  <testcase name="knownTagRulesFollowAllAnyAndNoneTruthTables" classname="dev.findroid.SearchRuleGroupsTest" time="0.001"/>
+  <testcase name="nestedKindAndTagAlternativesDoNotTurnIntoFlatTagRequirements" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
   <testcase name="modifiedRulesShareOneCalendarAndSizeRulesRejectFolders" classname="dev.findroid.SearchRuleGroupsTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -1,0 +1,30 @@
+{
+  "serial": "emulator-5602",
+  "controllerSha256": "bcf5e965460800dc046d5bc1d93c3be6492aaa8efeddb880786aec46e4d9d810",
+  "restorationComplete": true,
+  "originalSnapshotsPreserved": true,
+  "scope": "Assigned AVD only; no wipe, uninstall, clear-data, global adb restart, or automatic recovery replay.",
+  "startedExistingAvdProcess": 80565,
+  "existingUserdataPreserved": true,
+  "assignedAvdIdentityAndBootVerified": true,
+  "currentManagedStatePreservedPrivatelyBeforeRestoration": true,
+  "allOriginalWorkspaceBytesVerifiedBeforeCleanup": true,
+  "ownedFixturesPreservedBeforeRemoval": 1,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "5baeb1aaf095d462eadc83071270d5117f34819e751a851bae6b875c09f0ca09",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  }
+}

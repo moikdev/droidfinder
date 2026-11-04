@@ -1,0 +1,5 @@
+emulator-5582: direct-public49-to50-read-only-review
+emulator-5582: alternative-destination-and-explicit-copy
+emulator-5582: known-shortfall-disables-start
+emulator-5582: move-review-close-and-explicit-start
+{"serial": "emulator-5582", "section": "core", "checks": 4, "layouts": 0, "acceptanceComplete": true, "restorationComplete": true}

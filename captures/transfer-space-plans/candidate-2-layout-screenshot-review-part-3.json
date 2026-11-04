@@ -1,0 +1,93 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/density-240-review-surface.png",
+      "sha256": "7eb4cb823f016084a4d5c99673070b983f7b066150a45bb634c711bd8152755d"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/density-300-review-surface.png",
+      "sha256": "29dafa39d5fe34fac584d2079cd15be38ad7770127cf2137e376eabdb6b2399b"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font1.0-dark-destination-picker-surface.png",
+      "sha256": "ffe2300f7d75703082d8bce323dd327be934c20c448a8d7bed05e1f0a24affa0"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font1.0-dark-review-surface.png",
+      "sha256": "062fa6e0df0661995323e7dea5b2e961a007dcd85cf8c44055d321e4318c34da"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font2.0-dark-destination-picker-surface.png",
+      "sha256": "7597f811dea020b1dc78f2f86accaaaf94cf5bfd9d42ceb3a4f4d6346f4cf07d"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font2.0-dark-review-surface.png",
+      "sha256": "67a93b585ea7c5b05afaa936b677088b83b8cea50947d102421e9abad465ea29"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font2.0-light-destination-picker-surface.png",
+      "sha256": "12765f65bb37728b7ba9f8a7eae9cc9dd98b5b2541871cb59fc0989b46fc75b1"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font2.0-light-review-surface.png",
+      "sha256": "b0cf4dd5666dfa89dc1a1046bb7fa32c466b846b38fd02882cfa6261d0ecfa61"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font1.0-dark-close-glyph.png",
+      "sha256": "c3ffc7e3e25e8ad3ab90a1b9023feca25471217dc8a78383bc8b425a7a35ab72"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font1.0-light-close-glyph.png",
+      "sha256": "5374d028da524bfe90d81010e8ffacb2b301c64ffb7a2de0d50e60b1c8729a2a"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font2.0-dark-close-glyph.png",
+      "sha256": "82b853d7685f5611daac7fc8dcb80e00b825f35bd619145e7653a3cc09ec9138"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-1280x800-font2.0-light-close-glyph.png",
+      "sha256": "2f78469cc18c8624251f1717727f70f4c588f1c9c41e8fcd54b1c2c37a7857d8"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font1.0-dark-close-glyph.png",
+      "sha256": "c3ffc7e3e25e8ad3ab90a1b9023feca25471217dc8a78383bc8b425a7a35ab72"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font1.0-light-close-glyph.png",
+      "sha256": "5374d028da524bfe90d81010e8ffacb2b301c64ffb7a2de0d50e60b1c8729a2a"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font2.0-dark-close-glyph.png",
+      "sha256": "82b853d7685f5611daac7fc8dcb80e00b825f35bd619145e7653a3cc09ec9138"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font2.0-light-close-glyph.png",
+      "sha256": "2f78469cc18c8624251f1717727f70f4c588f1c9c41e8fcd54b1c2c37a7857d8"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font1.0-dark-close-glyph.png",
+      "sha256": "c3ffc7e3e25e8ad3ab90a1b9023feca25471217dc8a78383bc8b425a7a35ab72"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font1.0-light-close-glyph.png",
+      "sha256": "5374d028da524bfe90d81010e8ffacb2b301c64ffb7a2de0d50e60b1c8729a2a"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font2.0-dark-close-glyph.png",
+      "sha256": "82b853d7685f5611daac7fc8dcb80e00b825f35bd619145e7653a3cc09ec9138"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font2.0-light-close-glyph.png",
+      "sha256": "2f78469cc18c8624251f1717727f70f4c588f1c9c41e8fcd54b1c2c37a7857d8"
+    }
+  ],
+  "method": "Opened both remaining labeled API36 surface sheets and the complete 12-glyph API36 sheet.",
+  "findings": [
+    "Both actual density settings retain wrapped named actions at system font 2.0.",
+    "Split-width destination pickers preserve readable synthetic folder names and explicit review/cancel actions.",
+    "Close glyphs visibly grow at system font 2.0 in all six width/theme groups.",
+    "All listed dialog crops contain only synthetic acceptance fixture paths."
+  ],
+  "scope": "Completes accepted API36 optimized layout image review."
+}

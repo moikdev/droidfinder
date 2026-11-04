@@ -1,0 +1,5 @@
+emulator-5602: direct-public49-to50-read-only-review
+emulator-5602: alternative-destination-and-explicit-copy
+emulator-5602: known-shortfall-disables-start
+emulator-5602: move-review-close-and-explicit-start
+{"serial": "emulator-5602", "section": "core", "checks": 4, "layouts": 0, "acceptanceComplete": true, "restorationComplete": true}

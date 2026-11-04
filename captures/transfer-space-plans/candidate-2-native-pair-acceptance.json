@@ -1,0 +1,19 @@
+{
+  "sourceCommit": "bf1ae1858bb071b92d42ac02f1057a82011cf00c",
+  "distinctNativeCasesPerApi": 549,
+  "isolatedBatchesPerApi": 59,
+  "sameCasesAndFrozenApkPairVerified": true,
+  "selectedAggregatesHaveZeroFailuresOrSkips": true,
+  "allNativeAcceptanceRestorationsComplete": true,
+  "api36PriorFailure": {
+    "report": "captures/transfer-space-plans/candidate-2-api36-native/batches/59-ExternalDragWorkflowTest-before-retry-1.json",
+    "sha256": "77313f664e51d5b0b4a827134fca91546cf40e787eeb6d8cbf81c8b6c2ad078a",
+    "reason": "Android activity launch reported a 10-second setup timeout before the first external drag was exercised.",
+    "selectedRetry": "The entire unchanged five-case final batch passed after recovering the assigned AVD. The first58 accepted reports were reused without changing a byte.",
+    "retryProvenance": "captures/transfer-space-plans/candidate-2-api36-native-resume-2/build-provenance.json"
+  },
+  "originalDisconnectsWereRestoredSeparately": true,
+  "optimizedLayoutsPending": true,
+  "publicOtaPending": true,
+  "proposal45Accepted": false
+}

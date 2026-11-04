@@ -1,0 +1,20 @@
+[
+  "PARITY.md",
+  "README.md",
+  "VALIDATION.md",
+  "captures/release/0.48.0/Findroid-0.48.0-validation.json",
+  "captures/transfer-space-plans/final-acceptance-publication-files.json",
+  "captures/transfer-space-plans/final-acceptance.json",
+  "captures/transfer-space-plans/independent-attempt-1-verify-public-artifacts.py",
+  "captures/transfer-space-plans/independent-attempt-1-verify-release-validation.py",
+  "captures/transfer-space-plans/public-archive-attempt-1-failure.json",
+  "captures/transfer-space-plans/public-six-assets-driver.txt",
+  "captures/transfer-space-plans/public-six-assets-verification.json",
+  "captures/transfer-space-plans/public-validation-attempt-2-driver.txt",
+  "captures/transfer-space-plans/public-validation-verification.json",
+  "docs/IMPROVEMENT-TRACKER.md",
+  "docs/TRANSFER-SPACE-REVIEW.md",
+  "docs/releases/0.48.0.md",
+  "scripts/verify-public-artifacts.py",
+  "scripts/verify-release-validation.py"
+]

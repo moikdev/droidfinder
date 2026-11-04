@@ -1,0 +1,142 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/density-240-review-surface.png",
+      "sha256": "f4c9c2756cf78b25bf03603e9d622e1249325ff273b6cd3531728e713c41f7c2"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/density-300-review-surface.png",
+      "sha256": "b367e216338ac82651b34aefeeb9d99c994a9ed0c2fca8eb94598fd6fcc35311"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font2.0-dark-destination-picker-surface.png",
+      "sha256": "ab09e0811e8d27eb23ec156dafe87115d37c577592fedcfff6cc6f7d2b5ebaa5"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font2.0-dark-review-surface.png",
+      "sha256": "cc6147f84ffeb85814778baed1ca25687f15e68f44d4c0f91e70520bfc1c2564"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font2.0-light-destination-picker-surface.png",
+      "sha256": "0faa7ab1ffa1f670250ae731e6bb7071df782ffa29e6dd5ef0f27b4c0c5b10b1"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font2.0-light-review-surface.png",
+      "sha256": "29fe5f85a5807e2e3061de132e51ef6e0474c963c89c78b9de80528558e3e088"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-core-2/copy-alternative-destination-picker-surface.png",
+      "sha256": "c8b261b05cb6e2871f5e6aad0935de9a838ceface4587cf3ede401ceb15416cc"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-core-2/known-shortfall-surface.png",
+      "sha256": "6474ca03bb6999db1d49c842c6db68cb8fb92d283ab7558d45bf516680798118"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-core-2/move-before-start-surface.png",
+      "sha256": "a2bb8a5830242254fc3aa5a9ca0fc40708dcaad4edfdee347ddce8d842c1cb71"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-core-2/read-only-replacement-budget-surface.png",
+      "sha256": "4030541b8455ee178fc71d01852be9293699efef3a84ff2e038024dacc2fc922"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font1.0-light-destination-picker-surface.png",
+      "sha256": "6de771424dc12ea245f6a3611057699a97a63ae8b5cbad03a85792bcdac25fd0"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-600x800-font1.0-light-review-surface.png",
+      "sha256": "fad923b4b9e3ef5c3ef72925df56c788c9019fe8de36d695c6ae61883c342de1"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font1.0-dark-destination-picker-surface.png",
+      "sha256": "ac96a3f0957efb205bdb0d1394cb2362d193b023f46dbdaaf6b0427c16cbe596"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font1.0-dark-review-surface.png",
+      "sha256": "4adeba4b08d7feb56771da050bd447efe0909ab7fb4e279d8387978f5e50dd51"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font1.0-light-destination-picker-surface.png",
+      "sha256": "27d3f3dcb2427b54ac74d46dce34a98726440ff1d1af03d13016a1e20c194671"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font1.0-light-review-surface.png",
+      "sha256": "c02d77177c99a18f517baa125872ef5573e2301381bd01c6d2dee9cfeec10585"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font2.0-dark-destination-picker-surface.png",
+      "sha256": "906b5dbb569f3015a93c5e59ca71df1999977618e6eeb59c49468093900d3fef"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font2.0-dark-review-surface.png",
+      "sha256": "5e014948fe3e212c3543e6b52910e0726eceddf1be0cfd584033192213f67d2c"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font2.0-light-destination-picker-surface.png",
+      "sha256": "72fb2631c04f3f441fe43b3f01d8573072d6d85fb81f28ffe13087b082a24a3a"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-optimized-layouts-2/layout-800x1280-font2.0-light-review-surface.png",
+      "sha256": "74dc903d870ee96c3472c79f17a017dd0fe051a725f2234be7b9066c901f58f7"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font1.0-dark-close-glyph.png",
+      "sha256": "332d62b81c62486fdd1306057eb0d13ac5155ff8ff3dc77fcf0457341fa4e952"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font1.0-light-close-glyph.png",
+      "sha256": "a4c4af8a326d47909f196fc813dd91b0d192402be428e8da68e45d3e965733f5"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font2.0-dark-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-1280x800-font2.0-light-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font1.0-dark-close-glyph.png",
+      "sha256": "332d62b81c62486fdd1306057eb0d13ac5155ff8ff3dc77fcf0457341fa4e952"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font1.0-light-close-glyph.png",
+      "sha256": "a4c4af8a326d47909f196fc813dd91b0d192402be428e8da68e45d3e965733f5"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font2.0-dark-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-600x800-font2.0-light-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font1.0-dark-close-glyph.png",
+      "sha256": "d781a0ec841c4552518d538ad72b38f1d505c926227ad25f95d249055590b695"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font1.0-light-close-glyph.png",
+      "sha256": "4d9019c7453c05d893e27aeaf65327374148019d76340ea2a09719f82623b3b0"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font2.0-dark-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api30-optimized-layouts-3/layout-800x1280-font2.0-light-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25"
+    }
+  ],
+  "method": "Opened all six labeled surface sheets and the corrected complete 12-glyph API30 sheet; every listed original image path is hash-bound here.",
+  "findings": [
+    "API30 controls remain visible at both actual 240 and 300 dpi with system font scale 2.0.",
+    "All 12 API30 native Close glyph images visibly increase with the actual system font setting, in both themes.",
+    "API36 core captures show explicit Copy and Move actions and a disabled Copy for the known shortfall.",
+    "Further portrait and split-dialog captures retain readable wrapped actions and the alternative picker.",
+    "Dialog crops show only synthetic acceptance paths; scrolled portions are intentional."
+  ],
+  "scope": "Completes API30 optimized image review and API36 core; API36 layout run remains in progress."
+}

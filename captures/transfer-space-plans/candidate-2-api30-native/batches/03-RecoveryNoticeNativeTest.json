@@ -1,0 +1,74 @@
+{
+  "success": true,
+  "passed": 12,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "acknowledgmentRetainsTheExactNativeMarkerIdentity",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "anUnreadableArchiveDoesNotHideASeparateValidRecord",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "liveMarkerIsOnlyAnInterruptedNoticeInAFreshStore",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "identicalReplacementInodeIsKeptForReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "nextOperationPreservesEarlierBytesBeforeReplacingItsMarker",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "openingAndListingExistingRecordsDoNotRewriteThem",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "finalSymlinkCannotReadOrChangeItsTarget",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "hardLinksAreRefusedByThePlatformOrByTheNoticeReader",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "changedMarkerRefusesCompletionAndAStaleAcknowledgment",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "fifoMarkerIsRefusedWithoutBlockingOrOpeningIt",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "redirectedArchiveDirectoryIsRefusedWithoutWritingOutsideIt",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.RecoveryNoticeNativeTest",
+      "test": "durableFailedMarkerAndArchiveSurviveFreshStoreConstruction",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 2.7,
+  "timedOut": false
+}

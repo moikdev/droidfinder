@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-1.py", line 300, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-1.py", line 299, in main
+    run(a)
+    ~~~^^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-1.py", line 241, in run
+    optimized(name+'-launch');open_space(name);ready_controls(name+'-controls')
+                              ~~~~~~~~~~^^^^^^
+  File "/private/tmp/findroid-space-plans-48dp/captures/transfer-space-plans/checker-optimized-attempt-1.py", line 143, in open_space
+    ui.click(name+'-source-actions','Actions for Report.txt')
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/findroid-space-plans-48dp/scripts/check-reviewed-folder-sync.py", line 140, in click
+    tree, node = self.reach(name, label)
+                 ~~~~~~~~~~^^^^^^^^^^^^^
+  File "/private/tmp/findroid-space-plans-48dp/scripts/check-reviewed-folder-sync.py", line 137, in reach
+    raise AssertionError((name, str(label), 'complete named 48 dp control unavailable'))
+AssertionError: ('layout-800x1280-font1.0-light-source-actions', 'Actions for Report.txt', 'complete named 48 dp control unavailable')
