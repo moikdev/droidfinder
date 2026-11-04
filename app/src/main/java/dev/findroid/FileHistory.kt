@@ -351,6 +351,17 @@ class FileHistory(private val engine: FileEngine, private val clock: () -> Long 
         return SavedUndoHistory(nextId, savedUndo, savedRedo, proofs).also(UndoHistoryJson::validate)
     }
 
+    /** Save current references durably while retaining the operation marker until final acceptance. */
+    @Synchronized internal fun checkpointOperation() {
+        check(recoveryProblem == null) { recoveryProblem ?: "Saved Undo needs manual review." }
+        if (persistence == null) return
+        check(operationActive) { "No Undo operation is in progress." }
+        files!!.sync(changedPaths)
+        val state = snapshot()
+        persistence!!.checkpoint(state)
+        durable = state
+    }
+
     @Synchronized internal fun finishOperation(success: Boolean) {
         if (!operationActive) return
         try {

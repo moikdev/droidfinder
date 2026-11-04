@@ -115,6 +115,13 @@ class FinderSession(
     internal var partialCopyReviewJob: kotlinx.coroutines.Job? = null
     internal var partialCopyReviewControl: TransferControl? = null
 
+    internal val folderSyncReview = mutableStateOf<FolderSyncReviewState?>(null)
+    internal var folderSyncReviewJob: kotlinx.coroutines.Job? = null
+    internal var folderSyncReviewControl: TransferControl? = null
+    internal val folderSyncRecords = mutableStateOf<FolderSyncRecordsState?>(null)
+    internal val folderSyncJournalParent = File(app.filesDir, ".folder-sync-journals")
+    internal val folderSyncRunRecords = FolderSyncRunRecords(File(app.filesDir, ".folder-sync-runs"), folderSyncJournalParent)
+
     val fileConflict = mutableStateOf<FileConflict?>(null)
 
     @Volatile var conflictAnswer: CompletableDeferred<ConflictDecision>? = null

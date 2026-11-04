@@ -2,6 +2,8 @@ package dev.findroid
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -95,7 +97,7 @@ fun FolderComparisonDialog(left: FinderModel, right: FinderModel, dismiss: () ->
                 color = CanvasBackground,
                 shadowElevation = 16.dp,
             ) {
-                Column {
+                Column(Modifier.heightIn(max = maxHeight).verticalScroll(rememberScrollState())) {
                     Row(
                         Modifier.fillMaxWidth()
                             .padding(start = 20.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
@@ -239,10 +241,18 @@ fun FolderComparisonDialog(left: FinderModel, right: FinderModel, dismiss: () ->
                             }
                         }
                     }
-                    Row(
+                    @OptIn(ExperimentalLayoutApi::class)
+                    FlowRow(
                         Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 6.dp),
-                        horizontalArrangement = Arrangement.End,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
+                        TextButton(onClick = {
+                            left.primaryPane.reviewFolderSynchronization(leftPath!!, rightPath!!)
+                            dismiss()
+                        }, enabled = !scanning && leftPath != null && rightPath != null && left.busy == null,
+                            modifier = Modifier.heightIn(min = 48.dp).testTag("review-folder-sync")) { Text("Review synchronization…") }
+                        TextButton(onClick = { left.primaryPane.showFolderSyncRecords(); dismiss() },
+                            modifier = Modifier.heightIn(min = 48.dp)) { Text("Synchronization records") }
                         if (scanning) TextButton(onClick = { token?.cancel() }) { Text("Stop") }
                         else TextButton(onClick = { generation++ }) { Text("Compare again") }
                     }

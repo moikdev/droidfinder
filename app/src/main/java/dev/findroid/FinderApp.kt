@@ -311,6 +311,7 @@ fun FinderApp(
                         model.focused?.takeIf { it.folder }?.let { model.favoritePath(it.path) }
                     "tab" -> model.focused?.takeIf { it.folder }?.let { model.newTab(it.path) }
                     "transfers" -> dialog = "transfers"
+                    "syncRecords" -> { dialog = null; model.primaryPane.showFolderSyncRecords() }
                     "recentActions" -> dialog = "recentActions"
                     "tabs" -> dialog = "tabs"
                     "workspaces" -> dialog = "workspaces"
@@ -1078,6 +1079,8 @@ fun FinderApp(
                         },
                     )
             }
+            FolderSyncReviewDialog(model)
+            FolderSyncRecordsDialog(model)
             model.fileConflict?.let { FileConflictDialog(model, it) }
             cursorMenu?.let { request ->
                 FileContextMenu(request, model, action) { cursorMenu = null }
@@ -1440,6 +1443,7 @@ internal fun ActionMenu(
         MenuAction("Keyboard shortcuts", Icons.Outlined.Keyboard) { action("shortcuts") }
         MenuSection("Panes and transfers")
         MenuAction("Transfers", Icons.Outlined.SyncAlt) { action("transfers") }
+        MenuAction("Synchronization records…", Icons.Outlined.History) { action("syncRecords") }
         MenuAction(
             if (model.dualPane) "Hide dual panes" else "Show dual panes",
             Icons.Outlined.VerticalSplit,

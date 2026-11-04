@@ -1,0 +1,114 @@
+{
+  "success": true,
+  "passed": 20,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.FolderSyncDraftNativeTest",
+      "test": "anActualKernelNameCollisionKeepsTheArrivalAndTheEntirePreparedTree",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncDraftNativeTest",
+      "test": "anOriginalEditedDuringDurableIntentRecordingStaysInPlaceAndStopsTheNativeMove",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncDraftNativeTest",
+      "test": "replacementKeepsTheNativeOriginalAndItsDurableMappingBeforePublishingPreparedBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncDraftNativeTest",
+      "test": "disclosedSubtreesPublishWithNativeIdentitiesAndKeepTheSourceAndOtherDestinationFiles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncApplyNativeTest",
+      "test": "metadataFailureRetainsVerifiedNativePublicationAndBlocksFurtherChanges",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncApplyNativeTest",
+      "test": "finalMetadataFlushFailureKeepsEveryPublishedResultAndManualJournal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncApplyNativeTest",
+      "test": "selectedReplacementAndDeletionKeepNativeOriginalsAndDurableMappings",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncApplyNativeTest",
+      "test": "staleDestinationStopsTheCompletePlanBeforeAnyNativeMove",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncApplyNativeTest",
+      "test": "actualKernelCollisionKeepsTheArrivalAndTheCompleteStagedTree",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncApplyNativeTest",
+      "test": "stopBetweenRootsKeepsThePublishedItemAndNeverStartsTheNextMove",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncApplyNativeTest",
+      "test": "nativeRunRecordSurvivesAReopenWithoutStartingAnyWork",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncApplyNativeTest",
+      "test": "completeDefaultPlanPublishesNestedAndEmptyFoldersWithoutChangingEitherOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "largeTextKeepsChoicesConfirmationsAndApplyReachableInAScrollingReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "secondaryPaneRequestsUseTheStrictPrimaryOwnerEvenAfterPanesSwap",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "staleReviewStopsBeforeChangingAnOriginalAndLeavesAVisibleManualResult",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "staleSavedUndoIsCaughtBeforeAnySyncPreparationOrOriginalMove",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "namedCompareEntryOpensTheDefaultReviewAndAppliesOnlyAdditions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "changingDirectionDiscardsChoicesAndUsesTheDisplayedSourceAndDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "replacementsAndTrashNeedIndependentConfirmationAndUndoRestoresBothOriginals",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FolderSyncWorkflowTest",
+      "test": "additionsCarrySourceTagsAndFolderAppearance",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 58.1,
+  "timedOut": false
+}

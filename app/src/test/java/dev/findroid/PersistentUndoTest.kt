@@ -36,6 +36,33 @@ class PersistentUndoTest {
     private fun callback() = FileStep.Callback(check = {}, perform = { emptyList() })
     private fun saved() = UndoHistoryJson.decode(journal.readText())
 
+    @Test fun checkpointKeepsThePendingBarrierAndNeverReplaysAfterAReopen() {
+        val history = open(); history.beginOperation("Reviewed sync")
+        val value = file(); history.record("Reviewed sync", listOf(FileStep.Created(value)))
+        history.checkpointOperation()
+        assertTrue(marker.exists()); assertEquals("Reviewed sync", saved().undo.single().label)
+        val reopened = open()
+        assertNotNull(reopened.recoveryProblem); assertNull(reopened.undoLabel)
+        assertEquals("original", value.readText()); assertTrue(marker.exists())
+    }
+    @Test fun failedCheckpointRetainsItsMarkerAndCannotBeFinalized() {
+        var stop = false
+        val history = open(beforeWrite = { if (stop && it == "history.json") error("Synthetic checkpoint failure") })
+        history.beginOperation("Reviewed sync"); val value = file()
+        history.record("Reviewed sync", listOf(FileStep.Created(value))); stop = true
+        fails { history.checkpointOperation() }; stop = false
+        fails { history.finishOperation(true) }
+        assertTrue(marker.exists()); assertNotNull(open().recoveryProblem); assertEquals("original", value.readText())
+    }
+
+    @Test fun checkpointCanBeFinalizedOnlyAfterTheEnclosingOperationSucceeds() {
+        val history = open(); history.beginOperation("Reviewed sync")
+        val value = file(); history.record("Reviewed sync", listOf(FileStep.Created(value)))
+        history.checkpointOperation(); history.finishOperation(true)
+        assertFalse(marker.exists()); assertNull(open().recoveryProblem)
+        open().undo(); assertFalse(value.exists())
+    }
+
     @Test fun restartNeverReplaysAndUndoRedoSurviveSeparateReopens() {
         val value = create(open())
         val reopened = open(); assertTrue(value.isFile); assertEquals("Create Draft.txt", reopened.undoLabel)

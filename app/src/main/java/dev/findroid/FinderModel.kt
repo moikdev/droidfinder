@@ -2851,6 +2851,7 @@ constructor(
     private fun relocateMetadataPaths(
         names: List<Pair<String, String>>,
         relocateWorkspaceDocuments: Boolean = true,
+        strict: Boolean = false,
     ) {
         if (names.isEmpty()) return
         if (relocateWorkspaceDocuments)
@@ -2870,7 +2871,7 @@ constructor(
             }
         }
         recentSearchHistory.remap(names)
-        relocateOrganization(names)
+        relocateOrganization(names, strict = strict)
         syncTags()
         styleStore.relocate(names)
         folderStyles = styleStore.styles
@@ -2934,11 +2935,12 @@ constructor(
         session.panes.forEach { it.refresh() }
     }
 
-    private fun relocateOrganization(routes: List<Pair<String, String>>, copy: Boolean = false) {
+    private fun relocateOrganization(routes: List<Pair<String, String>>, copy: Boolean = false, strict: Boolean = false) {
         runCatching { tagStore.relocate(routes, copy) }
             .onFailure {
                 libraryNotice =
                     "Files were kept, but organization metadata couldn't follow this change: ${it.message}. Review affected references in Organize. The original library was preserved."
+                if (strict) throw it
             }
     }
 
@@ -2950,9 +2952,9 @@ constructor(
         folderStyles = styleStore.styles
     }
 
-    private fun copyMetadataPaths(pairs: List<Pair<String, String>>) {
+    private fun copyMetadataPaths(pairs: List<Pair<String, String>>, strict: Boolean = false) {
         folderViews.relocate(pairs, copy = true)
-        relocateOrganization(pairs, copy = true)
+        relocateOrganization(pairs, copy = true, strict = strict)
         syncTags()
         styleStore.relocate(pairs, copy = true)
         folderStyles = styleStore.styles
@@ -3308,6 +3310,168 @@ constructor(
         syncHistory()
     }
 
+    internal val folderSyncReview get() = session.folderSyncReview.value
+    internal val folderSyncRecords get() = session.folderSyncRecords.value
+
+    internal fun reviewFolderSynchronization(left: String, right: String,
+        direction: FolderSyncDirection = FolderSyncDirection.PRIMARY_TO_SECONDARY) {
+        if (paneId != "primary") { primaryPane.reviewFolderSynchronization(left, right, direction); return }
+        if (folderSyncReview?.applying == true) {
+            session.folderSyncReview.value = folderSyncReview!!.copy(visible = true); return
+        }
+        session.folderSyncReviewControl?.cancel(); session.folderSyncReviewJob?.cancel()
+        val id = java.util.UUID.randomUUID().toString()
+        session.folderSyncReview.value = FolderSyncReviewState(id, left, right, direction)
+        val control = TransferControl { progress -> TransferRuntime.scope.launch {
+            folderSyncReview?.takeIf { it.token == id }?.let { session.folderSyncReview.value = it.copy(progress = progress) }
+        } }
+        session.folderSyncReviewControl = control
+        session.folderSyncReviewJob = TransferRuntime.scope.launch {
+            try {
+                val inspection = withContext(Dispatchers.IO) {
+                    val storage = AndroidPartialCopyStorage()
+                    fun node(path: String): ComparisonNode {
+                        val stamp = storage.stat(path) ?: error("A compared item is unavailable. Reconnect and compare again.")
+                        return ComparisonNode(path, File(path).name, stamp.directory, stamp.size.takeIf { stamp.regular },
+                            stamp.modifiedSeconds * 1000 + stamp.modifiedNanos / 1_000_000, !stamp.directory && !stamp.regular)
+                    }
+                    inspectFolderSync(left, right, direction, ::allowedPath, ::node,
+                        { path -> java.nio.file.Files.newDirectoryStream(File(path).toPath()).use { it.map { child -> node(child.toString()) } } },
+                        { path, stamp, token -> folderSyncDigest(path, stamp, token, storage) }, session.undoFiles, control)
+                }
+                folderSyncReview?.takeIf { it.token == id }?.let {
+                    session.folderSyncReview.value = it.copy(checking = false, inspection = inspection, selected = inspection.preview.initialSelection)
+                }
+            } catch (error: Exception) {
+                folderSyncReview?.takeIf { it.token == id }?.let {
+                    session.folderSyncReview.value = it.copy(checking = false,
+                        error = if (control.cancelled) "Synchronization review stopped. No files were changed." else error.message ?: "Couldn't review these folders.")
+                }
+            }
+        }
+    }
+
+    internal fun selectFolderSyncItem(relative: String, selected: Boolean) {
+        val state = folderSyncReview?.takeIf { !it.checking && !it.applying && !it.finished && !it.confirming } ?: return
+        check(state.inspection?.preview?.entries?.any { it.relative == relative && it.selectable } == true)
+        session.folderSyncReview.value = state.copy(selected = if (selected) state.selected + relative else state.selected - relative,
+            updatesConfirmed = false, trashConfirmed = false)
+    }
+
+    internal fun confirmFolderSyncReview(confirming: Boolean) {
+        val state = folderSyncReview?.takeIf { !it.checking && !it.applying && !it.finished } ?: return
+        if (confirming && (state.inspection == null || state.selected.isEmpty())) return
+        session.folderSyncReview.value = state.copy(confirming = confirming, updatesConfirmed = false, trashConfirmed = false)
+    }
+
+    internal fun confirmFolderSyncUpdates(confirmed: Boolean) {
+        folderSyncReview?.takeIf { it.confirming && !it.applying && !it.finished }?.let {
+            session.folderSyncReview.value = it.copy(updatesConfirmed = confirmed)
+        }
+    }
+    internal fun confirmFolderSyncTrash(confirmed: Boolean) {
+        folderSyncReview?.takeIf { it.confirming && !it.applying && !it.finished }?.let {
+            session.folderSyncReview.value = it.copy(trashConfirmed = confirmed)
+        }
+    }
+    internal fun closeFolderSyncReview() {
+        val state = folderSyncReview ?: return
+        if (state.checking) session.folderSyncReviewControl?.cancel()
+        session.folderSyncReview.value = state.copy(visible = false)
+    }
+    internal fun stopFolderSynchronization() {
+        if (folderSyncReview?.applying == true) cancelTransfer() else session.folderSyncReviewControl?.cancel()
+    }
+    internal fun showFolderSyncRecords() {
+        folderSyncReview?.let { session.folderSyncReview.value = it.copy(visible = false) }
+        session.folderSyncRecords.value = FolderSyncRecordsState()
+        TransferRuntime.scope.launch {
+            try {
+                val records = withContext(Dispatchers.IO) { session.folderSyncRunRecords.load() }
+                if (folderSyncRecords != null) session.folderSyncRecords.value = FolderSyncRecordsState(records, checking = false)
+            } catch (error: Exception) {
+                if (folderSyncRecords != null) session.folderSyncRecords.value = FolderSyncRecordsState(checking = false,
+                    error = "Synchronization records were kept, but could not be listed safely. ${error.message}")
+            }
+        }
+    }
+    internal fun closeFolderSyncRecords() { session.folderSyncRecords.value = null }
+
+    internal fun applyFolderSynchronization() {
+        if (paneId != "primary") { primaryPane.applyFolderSynchronization(); return }
+        val state = folderSyncReview?.takeIf { it.confirming && !it.checking && !it.applying && !it.finished } ?: return
+        if (busy != null || session.historyRecoveryProblem.value != null) {
+            session.folderSyncReview.value = state.copy(error = "Finish the current operation and review saved Undo before synchronizing."); return
+        }
+        val inspection = state.inspection ?: return
+        val review = try { reviewFolderSync(inspection.preview, state.selected, state.updatesConfirmed, state.trashConfirmed) }
+        catch (error: Exception) { session.folderSyncReview.value = state.copy(error = error.message); return }
+        val id = java.util.UUID.randomUUID().toString()
+        val working = File(File(review.preview.destinationRoot).parentFile, ".findroid-sync-$id").path
+        val journal = File(session.folderSyncJournalParent, "sync-$id").path
+        val access = folderSyncRunAccess(review.preview.destinationRoot, working, workspace.path, ::organizationScopeAllowed)
+        val steps = mutableListOf<FileStep>()
+        var outcome: FolderSyncApplyState? = null
+        session.folderSyncReview.value = state.copy(applying = true, error = null, workingDirectory = working, journalDirectory = journal)
+        operation("Synchronizing reviewed folders…", destination = review.preview.destinationRoot, clearOriginSelection = false,
+            onRejected = { folderSyncReview?.takeIf { it.token == state.token }?.let {
+                session.folderSyncReview.value = it.copy(applying = false, error = "Another file operation is in progress. Review again when it finishes.")
+            } },
+            onFinished = { failure ->
+                if (failure != null && outcome?.let { it.renameAttempted || it.preservation != null || it.publication != null } == true)
+                    withContext(Dispatchers.IO) { history.clear() }
+            },
+            onSettled = { failure -> folderSyncReview?.takeIf { it.token == state.token }?.let {
+                session.folderSyncReview.value = it.copy(applying = false, finished = true, applied = outcome,
+                    error = failure?.message, progress = transferControl.snapshot)
+            } },
+        ) {
+            val ownerContext = kotlinx.coroutines.currentCoroutineContext().minusKey(Job)
+            fun owner(work: suspend () -> Unit) = kotlinx.coroutines.runBlocking { withContext(ownerContext) { work() } }
+            try {
+                withContext(Dispatchers.IO) {
+                    check(history.recoveryProblem == null) { history.recoveryProblem ?: "Review saved Undo before synchronizing." }
+                    session.folderSyncRunRecords.save(FolderSyncRunRecord(id, review.preview.sourceRoot, review.preview.destinationRoot,
+                        working, journal, review.operations.size, System.currentTimeMillis()), control = transferControl)
+                    val parent = session.folderSyncJournalParent
+                    if (!parent.exists()) {
+                        check(parent.mkdir()) { "Couldn't create the synchronization journal folder." }
+                        session.undoFiles.syncDirectory(parent.parentFile!!)
+                    }
+                    val prepared = prepareFolderSync(inspection, review, access, session.undoFiles, control = transferControl, owner = { id })
+                    outcome = applyPreparedFolderSync(prepared, engine, parent.path, access,
+                        preserved = { operation, saved ->
+                            val step = if (operation.category == FolderSyncCategory.DELETION)
+                                documents.trashedStep(Entry(File(operation.destinationPath), folder = operation.destination!!.folder), saved, relocateMetadata = true) else null
+                            owner {
+                                relocateMetadataPaths(listOf(operation.destinationPath to saved.path), strict = true)
+                                step?.let(steps::add)
+                            }
+                        },
+                        published = { operation, saved ->
+                            val step = if (saved == null) FileStep.Created(File(operation.destinationPath))
+                                else replacementStep(documents, Entry(File(operation.destinationPath), folder = operation.destination!!.folder),
+                                    saved, Entry(File(operation.source!!.path), folder = operation.source.folder), operation.destinationPath, move = false)
+                            owner { copyMetadataPaths(listOf(operation.source!!.path to operation.destinationPath), strict = true); steps += step }
+                        },
+                        finishMetadata = { owner {
+                            rememberOperation("Synchronize folders", steps)
+                            flushUndoMetadata()
+                            withContext(Dispatchers.IO) { history.checkpointOperation() }
+                        } }, files = session.undoFiles, control = transferControl, journalOwner = { id })
+                }
+            } catch (error: Exception) {
+                outcome = when (error) {
+                    is FolderSyncApplyFailure -> error.state
+                    is FolderSyncApplyCancelled -> error.state
+                    else -> outcome
+                }
+                throw error
+            }
+            "${outcome!!.completed.size} reviewed changes applied. Originals and synchronization records were kept."
+        }
+    }
+
     fun cancelTransfer() {
         transferControl.cancel()
         conflictAnswer?.complete(ConflictDecision(ConflictAction.CANCEL))
@@ -3321,6 +3485,7 @@ constructor(
         onFinished: suspend (Exception?) -> Unit = {},
         onRejected: () -> Unit = {},
         onStarted: (TransferControl) -> Unit = {},
+        onSettled: (Exception?) -> Unit = {},
         work: suspend () -> String,
     ) {
         if (busy != null) {
@@ -3400,6 +3565,7 @@ constructor(
                         withContext(Dispatchers.IO) { history.finishOperation(failure == null) }
                     } catch (error: Exception) {
                         withContext(Dispatchers.IO) { runCatching { history.finishOperation(false) } }
+                        failure = error
                         message = "Files were kept. Saved Undo needs review: ${error.message}"
                     }
                     marker.delete()
@@ -3415,12 +3581,14 @@ constructor(
                     session.searchIndex.noteChanged()
                     session.panes.forEach { it.refresh() }
                 } catch (error: Exception) {
+                    failure = error
                     message = "Files were kept, but operation cleanup failed: ${error.message}"
                 } finally {
                     busy = null
                     WorkspaceMutationGate.endApp()
                     getApplication<FinderApplication>().workspaceDocuments.changed()
                 }
+                onSettled(failure)
                 startNextTransfer()
             }
         }

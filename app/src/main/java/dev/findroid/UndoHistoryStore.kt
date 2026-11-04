@@ -10,6 +10,7 @@ internal data class LoadedUndoHistory(val state: SavedUndoHistory?, val problem:
 internal interface UndoHistoryPersistence {
     fun load(): LoadedUndoHistory
     fun begin(label: String)
+    fun checkpoint(state: SavedUndoHistory)
     fun save(state: SavedUndoHistory, complete: Boolean)
     fun reset(): String?
 }
@@ -87,6 +88,12 @@ internal class UndoHistoryStore(
         prepare()
         check(!exists(pending)) { "An earlier saved Undo operation needs review." }
         try { write(pending, "Saved Undo operation in progress\n" + label.take(512) + "\n") }
+        catch (error: Exception) { blocked = true; throw error }
+    }
+    /** Only the live writer may checkpoint. A reopen still treats its pending marker as blocked. */
+    override fun checkpoint(state: SavedUndoHistory) {
+        prepare(); check(exists(pending)) { "The saved Undo operation marker is missing." }
+        try { write(journal, UndoHistoryJson.encode(state)) }
         catch (error: Exception) { blocked = true; throw error }
     }
     override fun save(state: SavedUndoHistory, complete: Boolean) {
