@@ -420,6 +420,7 @@ class FileEngine(
         storage: PartialCopyStorage = AndroidPartialCopyStorage(),
         control: TransferControl = TransferControl(),
         recovery: FolderSyncTrashLocation? = null,
+        recordIntent: (FolderSyncPreservationIntent) -> Unit = {},
     ): File {
         var preserved: File? = null
         var moveAttempted = false
@@ -456,11 +457,13 @@ class FileEngine(
             saveIndex()
             files.syncDirectory(stateDir)
             control.check()
+            val target = File(bucket, source.name)
+            recordIntent(FolderSyncPreservationIntent(source.path, target.path))
+            control.check()
             check(storage.stat(trashDir.path)?.sameObject(trashIdentity) == true && storage.canonical(trashDir.path) == resolvedTrash &&
                 storage.stat(bucket.path)?.sameObject(bucketIdentity) == true && files.observe(expected.path) == expected) {
                 "The reviewed original or its recovery location changed. Original files were kept."
             }
-            val target = File(bucket, source.name)
             moveAttempted = true
             files.moveNoReplace(source, target)
             preserved = target

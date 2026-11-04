@@ -19,7 +19,8 @@ class FolderSyncTrashTest {
         val engine=FileEngine(state)
         val expected=files.observe(source.path)
         val hashes=expected.entries.filterValues {it.regular}.keys.associateWith {digest(File(it))}
-        fun move(control:TransferControl=TransferControl())=engine.trashReviewedByRename(expected,hashes,files,storage,control)
+        fun move(control:TransferControl=TransferControl(),recordIntent:(FolderSyncPreservationIntent)->Unit={})=
+            engine.trashReviewedByRename(expected,hashes,files,storage,control,recordIntent=recordIntent)
     }
     private fun stopped(work:()->Unit):FolderSyncRecoveryFailure {
         try{work();fail("Expected recovery refusal")}catch(error:FolderSyncRecoveryFailure){return error}
@@ -74,6 +75,31 @@ class FolderSyncTrashTest {
         stopped { f.engine.trashReviewedByRename(proof, mapOf(original.path to digest(original)), f.files, f.storage) }
         assertEquals("keep recovery bytes", original.readText()); assertEquals(listOf(original), trash.listFiles()!!.toList())
         assertFalse(File(f.state, "trash.properties").exists())
+    }
+    @Test fun theExactRecoveryIntentIsRecordedAfterTheDurableMappingAndBeforeTheOriginalMoves() {
+        val f = Fixture(); var intent: FolderSyncPreservationIntent? = null
+        f.files.beforeRename = { source, target -> assertEquals(FolderSyncPreservationIntent(source.path, target.path), intent) }
+        val saved = f.move(recordIntent = { value ->
+            assertTrue(f.source.exists()); assertFalse(File(value.recovery).exists())
+            assertEquals(f.source.path, FileEngine(f.state).originalPath(File(value.recovery)))
+            intent = value
+        })
+        assertEquals(FolderSyncPreservationIntent(f.source.path, saved.path), intent)
+        assertEquals("reviewed original", saved.readText())
+    }
+    @Test fun aFailedPreservationIntentLeavesTheOriginalAndItsRecordedRecoveryLocationForReview() {
+        val f = Fixture(); var intent: FolderSyncPreservationIntent? = null
+        val error = stopped { f.move(recordIntent = { value -> intent = value; error("Synthetic journal write failure") }) }
+        assertFalse(error.moveAttempted); assertNull(error.recovery)
+        assertEquals("reviewed original", f.source.readText()); assertFalse(File(intent!!.recovery).exists())
+        assertEquals(f.source.path, FileEngine(f.state).originalPath(File(intent!!.recovery)))
+        assertTrue(File(intent!!.recovery).parentFile!!.isDirectory)
+    }
+    @Test fun anOriginalEditedWhileItsIntentIsSavedIsRecheckedBeforeTheNativeMove() {
+        val f = Fixture()
+        val error = stopped { f.move(recordIntent = { f.source.writeText("last edit before native move") }) }
+        assertFalse(error.moveAttempted); assertNull(error.recovery)
+        assertEquals("last edit before native move", f.source.readText()); assertTrue(f.engine.trashItems().isEmpty())
     }
     @Test fun cancellationBeforeTheMoveLeavesTheReviewedOriginalInPlace() {
         val f=Fixture();val error=stopped{f.move(TransferControl().apply {cancel()})}

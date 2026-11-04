@@ -5,6 +5,8 @@ import java.io.File
 import java.security.MessageDigest
 import java.util.UUID
 
+internal data class FolderSyncPreservationIntent(val original: String, val recovery: String)
+
 /** Append-only manual evidence. No loading, replay, rollback, pruning or deletion is provided. */
 internal class FolderSyncPublicationLog private constructor(
     val directory: String,
@@ -14,7 +16,8 @@ internal class FolderSyncPublicationLog private constructor(
     private val storage: PartialCopyStorage,
 ) {
     private val records = linkedMapOf<String, PartialFileStamp>()
-    private var pending: FolderSyncPublicationIntent? = null
+    private data class Pending(val kind: String, val from: String, val to: String)
+    private var pending: Pending? = null
     private var blocked = false
     private var finished = false
     private var bytesWritten = 0L
@@ -67,27 +70,37 @@ internal class FolderSyncPublicationLog private constructor(
         }
     }
 
-    @Synchronized
-    fun begin(intent: FolderSyncPublicationIntent) {
-        check(pending == null) { "The previous publication needs manual review before another can start." }
-        check(listOf(intent.working, intent.destination).all { File(it).isAbsolute && File(it).toPath().normalize().toString() == it } &&
-            intent.working != intent.destination) { "The publication intent is invalid." }
-        append(JsonObject().apply {
-            addProperty("schema", 1); addProperty("event", "publication-intent")
-            addProperty("working", intent.working); addProperty("destination", intent.destination)
-        })
-        pending = intent
+    private fun mutationRecord(value: Pending, status: String) = JsonObject().apply {
+        addProperty("schema", 1); addProperty("event", value.kind + "-" + status)
+        addProperty(if (value.kind == "preservation") "original" else "working", value.from)
+        addProperty(if (value.kind == "preservation") "recovery" else "destination", value.to)
+    }
+
+    private fun beginMutation(value: Pending) {
+        check(pending == null) { "The previous move needs manual review before another can start." }
+        check(listOf(value.from, value.to).all { File(it).isAbsolute && File(it).toPath().normalize().toString() == it } &&
+            value.from != value.to) { "The synchronization move intent is invalid." }
+        append(mutationRecord(value, "intent"))
+        pending = value
+    }
+
+    private fun completeMutation(value: Pending) {
+        check(pending == value) { "The completed move does not match its recorded intent." }
+        append(mutationRecord(value, "complete"))
+        pending = null
     }
 
     @Synchronized
-    fun complete(intent: FolderSyncPublicationIntent) {
-        check(pending == intent) { "The completed publication does not match its recorded intent." }
-        append(JsonObject().apply {
-            addProperty("schema", 1); addProperty("event", "publication-complete")
-            addProperty("working", intent.working); addProperty("destination", intent.destination)
-        })
-        pending = null
-    }
+    fun begin(intent: FolderSyncPublicationIntent) = beginMutation(Pending("publication", intent.working, intent.destination))
+
+    @Synchronized
+    fun complete(intent: FolderSyncPublicationIntent) = completeMutation(Pending("publication", intent.working, intent.destination))
+
+    @Synchronized
+    fun beginPreservation(intent: FolderSyncPreservationIntent) = beginMutation(Pending("preservation", intent.original, intent.recovery))
+
+    @Synchronized
+    fun completePreservation(intent: FolderSyncPreservationIntent) = completeMutation(Pending("preservation", intent.original, intent.recovery))
 
     @Synchronized
     fun finish() {

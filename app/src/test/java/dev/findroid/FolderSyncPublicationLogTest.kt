@@ -85,6 +85,22 @@ class FolderSyncPublicationLogTest {
         refused { FolderSyncPublicationLog.create(f.destination.path, f.working.path, f.destination.path, f.storage) }
         assertTrue(f.parent.listFiles()!!.isEmpty()); assertTrue(f.destination.listFiles()!!.isEmpty())
     }
+    @Test fun originalPreservationRecordsTheExactOriginalAndRecoveryPathsWithoutMovingAnything() {
+        val f = Fixture(); val log = f.create(); val intent = FolderSyncPreservationIntent(f.intent.destination, File(f.parent, "Trash/Original.txt").path)
+        log.beginPreservation(intent); log.completePreservation(intent); log.finish()
+        assertEquals(listOf("created", "preservation-intent", "preservation-complete", "finished"), f.events(log))
+        val saved = JsonParser.parseString(File(log.directory, "00001.json").readText()).asJsonObject
+        assertEquals(intent.original, saved.get("original").asString); assertEquals(intent.recovery, saved.get("recovery").asString)
+        assertFalse(File(intent.recovery).exists()); assertEquals("prepared", File(f.intent.working).readText())
+    }
+    @Test fun aPreservationCannotBeCompletedAsAPublicationOrInterleavedWithAnotherMove() {
+        val f = Fixture(); val log = f.create(); val intent = FolderSyncPreservationIntent(f.intent.working, f.intent.destination)
+        log.beginPreservation(intent)
+        refused { log.complete(f.intent) }; refused { log.begin(f.intent) }; refused { log.finish() }
+        assertEquals(listOf("created", "preservation-intent"), f.events(log))
+        log.completePreservation(intent); log.begin(f.intent); log.complete(f.intent); log.finish()
+        assertEquals(6, f.events(log).size)
+    }
     @Test fun invalidOwnersAndRelativeMutationPathsAreRefusedWithoutInventingRecords() {
         val f = Fixture(); refused { f.create { "../old" } }; assertTrue(f.parent.listFiles()!!.isEmpty())
         val log = f.create(); refused { log.begin(f.intent.copy(working = "relative")) }
