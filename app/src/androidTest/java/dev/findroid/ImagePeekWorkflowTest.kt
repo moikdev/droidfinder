@@ -104,6 +104,8 @@ class ImagePeekWorkflowTest {
     }
 
     private fun open(name: String, ready: Boolean = true) {
+        // A refreshed item may be beyond the composed rows of the lazy table.
+        compose.onNodeWithTag("browser-list").performScrollToNode(hasText(name) and hasClickAction())
         compose.onNode(hasText(name) and hasClickAction()).performMouseInput { click() }
         compose.waitUntil(5000) { model.focused?.name == name }
         key(KeyEvent.KEYCODE_SPACE)
