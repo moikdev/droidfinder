@@ -106,7 +106,8 @@ class TransferSpaceWorkflowTest {
         val before = model.transferJobs; open()
         button("Choose another destination…").performClick()
         compose.onNodeWithContentDescription("Parent destination folder").performClick()
-        compose.onNode(hasText("Other") and hasAnyAncestor(hasTestTag("destination-picker")), useUnmergedTree = true).performClick()
+        compose.onNode(hasText("Other") and hasClickAction() and hasAnyAncestor(hasTestTag("destination-picker")))
+            .performScrollTo().assertHeightIsAtLeast(48.dp).performClick()
         compose.onNodeWithText("Review this destination").performClick()
         compose.waitUntil(20_000) { model.transferSpaceReview?.destination == other.path && compose.onAllNodesWithText("Working copies and recovery").fetchSemanticsNodes().size == 1 }
         assertEquals(listOf(source.path), model.transferSpaceReview!!.paths)

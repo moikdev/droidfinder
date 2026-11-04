@@ -127,7 +127,7 @@ fun DestinationDialog(
             )
         },
         text = {
-            Column(Modifier.widthIn(min = 350.dp)) {
+            Column(Modifier.widthIn(min = 350.dp).verticalScroll(rememberScrollState())) {
                 Row(
                     Modifier.horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.spacedBy(5.dp),
@@ -190,6 +190,7 @@ fun DestinationDialog(
                     items(children, key = { it.path }) { entry ->
                         Row(
                             Modifier.fillMaxWidth()
+                                .heightIn(min = 48.dp)
                                 .clickable { folder = entry.path }
                                 .padding(vertical = 6.dp),
                             verticalAlignment = Alignment.CenterVertically,

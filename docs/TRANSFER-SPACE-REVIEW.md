@@ -2,7 +2,7 @@
 
 In **Copy to…** or **Move to…**, choose a destination and select **Review space and alternatives…**. The review reads file metadata and reported free capacity before you start a transfer.
 
-The destination path, selected count and conflict policy stay visible. **Choose another destination…** opens the folder chooser and recalculates the plan for that location. **Refresh space estimate** checks again. **Close** leaves the documents in place.
+The destination path, selected count and conflict policy stay visible. **Choose another destination…** opens the folder chooser and recalculates the plan for that location. **Refresh space estimate** checks again. **Close** leaves the documents in place. The destination chooser scrolls its content, and folder rows have at least 48 dp touch targets.
 
 ## Read the budget
 
