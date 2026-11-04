@@ -268,7 +268,12 @@ class InteropActivity : Activity() {
         val flags =
             data.flags and
                 (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        runCatching { contentResolver.takePersistableUriPermission(uri, flags) }
+        if (flags and Intent.FLAG_GRANT_READ_URI_PERMISSION != 0) {
+            runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
+        }
+        if (flags and Intent.FLAG_GRANT_WRITE_URI_PERMISSION != 0) {
+            runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
+        }
         if (requestCode == 12) {
             prefs.edit().putString("tree", uri.toString()).apply()
             val doc =

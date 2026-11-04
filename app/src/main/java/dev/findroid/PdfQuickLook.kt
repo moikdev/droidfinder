@@ -92,6 +92,7 @@ private fun PdfQuickLookContent(
     var sidebar by remember(session) { mutableStateOf(!compactNavigation) }
     var rail by remember(session) { mutableStateOf("pages") }
     var readText by remember(session) { mutableStateOf(false) }
+    var showOcr by remember(session, page) { mutableStateOf(false) }
     var pageJump by remember { mutableStateOf(false) }
     var searchOpen by remember(session) { mutableStateOf(false) }
     var query by remember(session) { mutableStateOf("") }
@@ -686,6 +687,7 @@ private fun PdfQuickLookContent(
                 }, modifier = Modifier.heightIn(min = 48.dp)) {
                     Text(if (selectionMode) "Pan and zoom" else "Select page text")
                 }
+                TextButton(onClick = { showOcr = true }, modifier = Modifier.heightIn(min = 48.dp)) { Text("Recognize page text…") }
                 if (selectionActive) {
                     TextButton(onClick = ::copyPageSelection, enabled = pageSelection != null && selectionMap != null,
                         modifier = Modifier.heightIn(min = 48.dp)) { Text("Copy selection") }
@@ -756,6 +758,7 @@ private fun PdfQuickLookContent(
             BitmapZoomButtons(zoomState)
         }
     }
+    if (showOcr) OcrDialog("${entry.name} · page ${page + 1}", { session.ocrRaster(page) }) { showOcr = false }
     if (showIssues)
         AlertDialog(
             onDismissRequest = { showIssues = false },

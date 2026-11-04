@@ -102,6 +102,34 @@ private constructor(
         }
     }
 
+    suspend fun ocrRaster(turns: Int): Bitmap {
+        var produced: Bitmap? = null
+        try {
+            val result = imageDecodeGate.withLock {
+                withContext(Dispatchers.IO) {
+                    synchronized(lock) {
+                        check(!closed.get() && stamp == (file.length() to file.lastModified())) { "The image changed or its preview closed. Reload before recognition." }
+                        val sample = imageSample(width, height, pixels = OcrPolicy.maximumPixels, maxEdge = OcrPolicy.maximumEdge)
+                        val raw = BitmapFactory.decodeFile(file.path, options(sample)) ?: error("Couldn't read the image for recognition.")
+                        try {
+                            check(raw.width.toLong() * raw.height <= OcrPolicy.maximumPixels && raw.width <= OcrPolicy.maximumEdge && raw.height <= OcrPolicy.maximumEdge) { "The image exceeds the OCR pixel budget." }
+                            check(!closed.get() && stamp == (file.length() to file.lastModified())) { "The image changed. Reload before recognition." }
+                            val t = ImageGeometry(raw.width, raw.height, orientation, turns).transform
+                            val matrix = Matrix().apply { setValues(floatArrayOf(t.a.toFloat(), t.b.toFloat(), t.x.toFloat(), t.c.toFloat(), t.d.toFloat(), t.y.toFloat(), 0f, 0f, 1f)) }
+                            val oriented = Bitmap.createBitmap(raw, 0, 0, raw.width, raw.height, matrix, true)
+                            if (oriented !== raw) raw.recycle()
+                            produced = oriented
+                            oriented
+                        } catch (error: Throwable) { raw.recycle(); throw error }
+                    }
+                }
+            }
+            currentCoroutineContext().ensureActive()
+            produced = null
+            return result
+        } catch (error: Throwable) { produced?.recycle(); throw error }
+    }
+
     companion object {
         suspend fun open(file: File, control: ListingControl): ImageSource {
             var prepared: ImageSource? = null

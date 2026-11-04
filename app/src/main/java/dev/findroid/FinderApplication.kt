@@ -14,7 +14,8 @@ class FinderApplication : Application(), ViewModelStoreOwner {
 
     override fun onCreate() {
         super.onCreate()
-        recoverSetup()
+        // The private recognition worker never opens or replays explorer setup recovery.
+        if (getProcessName() == packageName) recoverSetup()
     }
 
     internal fun recoverSetup() {

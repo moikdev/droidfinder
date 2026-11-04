@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
@@ -17,8 +19,8 @@ android {
         applicationId = "dev.findroid"
         minSdk = 30
         targetSdk = 36
-        versionCode = 51
-        versionName = "0.49.0"
+        versionCode = 52
+        versionName = "0.50.0"
         buildConfigField("String", "UPDATE_REPOSITORY", "\"moikdev/findroid\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild { cmake { arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON" } }
@@ -75,6 +77,7 @@ dependencies {
     implementation("androidx.media3:media3-ui:1.11.1")
     implementation("androidx.exifinterface:exifinterface:1.3.7")
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
+    implementation("cz.adaptech.tesseract4android:tesseract4android:4.9.0")
     // Keep the PDF reader's cryptographic dependencies aligned with the maintained release.
     implementation("org.bouncycastle:bcprov-jdk15to18:1.86")
     implementation("org.bouncycastle:bcpkix-jdk15to18:1.86")
@@ -108,3 +111,22 @@ tasks.configureEach {
     if (name in setOf("mergeDebugAndroidTestAssets", "generateDebugAndroidTestLintModel", "lintAnalyzeDebugAndroidTest"))
         dependsOn(generateUpdateFixtures)
 }
+
+// The optional OCR engine is a fixed reviewed artifact. Model data is separately opt-in.
+val ocrVerifiedEngine by configurations.creating {
+    isCanBeConsumed = false
+    isTransitive = false
+}
+dependencies.add(ocrVerifiedEngine.name, "cz.adaptech.tesseract4android:tesseract4android:4.9.0@aar")
+val verifyOcrEngine by tasks.registering {
+    inputs.files(ocrVerifiedEngine)
+    doLast {
+        val engine = ocrVerifiedEngine.singleFile
+        val hash = MessageDigest.getInstance("SHA-256").digest(engine.readBytes())
+            .joinToString("") { "%02x".format(it) }
+        check(hash == "bce5d6413a1a5ae3d7240033fbbc851ba3217d0a08d9769400e17a077f42cb2a") {
+            "The OCR engine differs from the reviewed artifact. Preserve it for review; do not update its checksum automatically."
+        }
+    }
+}
+tasks.named("preBuild") { dependsOn(verifyOcrEngine) }

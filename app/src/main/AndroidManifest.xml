@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <queries><intent><action android:name="android.content.action.DOCUMENTS_PROVIDER" /></intent></queries>
     <application android:usesCleartextTraffic="false" android:name=".FinderApplication" android:allowBackup="false" android:fullBackupContent="false" android:dataExtractionRules="@xml/data_extraction_rules" android:label="Findroid" android:icon="@drawable/ic_launcher" android:theme="@style/Theme.Findroid" android:supportsRtl="true">
+        <service android:name=".OcrService" android:exported="false" android:process=":ocr" />
         <service android:name=".TransferService" android:exported="false" android:foregroundServiceType="dataSync" />
         <activity android:name=".ReceiveFilesActivity" android:exported="true" android:label="Save to Findroid" android:windowSoftInputMode="adjustResize">
             <intent-filter><action android:name="android.intent.action.SEND"/><category android:name="android.intent.category.DEFAULT"/><data android:mimeType="*/*"/></intent-filter>

@@ -263,6 +263,31 @@ internal class PdfReadingSession(private val context: Context, private val entry
             }
         }
 
+    suspend fun ocrRaster(page: Int): Bitmap {
+        var produced: Bitmap? = null
+        try {
+            val result = withContext(Dispatchers.IO) {
+                // Keep the owned raster in this context until its delivery is confirmed.
+                // A raster must not provide a route around extraction permission.
+                textLock.withLock {
+                    checkOpen()
+                    check(textDocument().currentAccessPermission.canExtractContent()) {
+                        "This PDF does not allow text extraction."
+                    }
+                }
+                val rendered = render(page)
+                produced = rendered
+                boundedOcrRaster(rendered).also { produced = it }
+            }
+            currentCoroutineContext().ensureActive()
+            produced = null
+            return result
+        } catch (error: Throwable) {
+            produced?.recycle()
+            throw error
+        }
+    }
+
     suspend fun text(page: Int): PdfPageText =
         withContext(Dispatchers.IO) {
             val job = currentCoroutineContext()

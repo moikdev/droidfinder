@@ -113,6 +113,7 @@ private fun ImageReader(source: ImageSource, entry: Entry, modifier: Modifier, r
     var cy by rememberSaveable(*savedIdentity.toTypedArray()) { mutableDoubleStateOf(.5) }
     var turns by rememberSaveable(*savedIdentity.toTypedArray()) { mutableIntStateOf(0) }
     var showInfo by rememberSaveable(*savedIdentity.toTypedArray()) { mutableStateOf(false) }
+    var showOcr by remember(source) { mutableStateOf(false) }
     var revealLocation by remember(source) { mutableStateOf(false) }
     var viewport by remember { mutableStateOf(IntSize(1, 1)) }
     var menu by remember { mutableStateOf(false) }
@@ -449,6 +450,7 @@ private fun ImageReader(source: ImageSource, entry: Entry, modifier: Modifier, r
                         if (detailError != null)
                             TextButton(onClick = reload) { Text("Reload", fontSize = 10.sp) }
                     }
+                    TextButton(onClick = { showOcr = true }, modifier = Modifier.heightIn(min = 48.dp)) { Text("Recognize image text…") }
                 }
             }
             if (showInfo && sideInfo) {
@@ -463,6 +465,7 @@ private fun ImageReader(source: ImageSource, entry: Entry, modifier: Modifier, r
                 )
             }
         }
+        if (showOcr) OcrDialog(entry.name, { source.ocrRaster(turns) }) { showOcr = false }
         if (showInfo && !sideInfo)
             AlertDialog(
                 onDismissRequest = { showInfo = false },

@@ -1,0 +1,19 @@
+Findroid local OCR notices
+
+Tesseract4Android 4.9.0, source commit 15c534717b1cb58261b58d4e4c1200c7f81f668c.
+Distributed under the Apache License 2.0; see Tesseract4Android-LICENSE.txt.
+Includes Tesseract OCR 5.5.1 (Apache License 2.0), Leptonica 1.85.0
+(BSD-style license), libpng 1.6.48 (PNG Reference Library License),
+and Independent JPEG Group libjpeg 9f. Their complete upstream licenses
+and copyright notices are included alongside this file.
+
+This software is based in part on the work of the Independent JPEG Group.
+
+Optional English and Japanese recognition models are from tessdata_fast
+commit 65727574dfcd264acbb0c3e07860e4e9e9b22185 (release 4.1.0).
+The shipping app does not bundle these models; the user explicitly downloads
+or imports the exact reviewed bytes. See tessdata-fast-LICENSE.txt for the
+Apache License 2.0. Both models in the Android test assets are test-only.
+
+Findroid's recognition code accepts bounded Android-decoded raster images;
+it does not expose the upstream engine's arbitrary image-file readers.
