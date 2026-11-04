@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/tmp/findroid-recovery-inbox/scripts/check-ota-upgrade.py", line 185, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "/tmp/findroid-recovery-inbox/scripts/check-ota-upgrade.py", line 135, in main
+    updates(); root = wait('available', lambda t: bool(nodes(t, 'Download update'))); capture('available')
+    ~~~~~~~^^
+  File "/tmp/findroid-recovery-inbox/scripts/check-ota-upgrade.py", line 98, in updates
+    wait('more', lambda t: bool(nodes(t, 'App updates')))
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/findroid-recovery-inbox/scripts/check-ota-upgrade.py", line 64, in wait
+    raise AssertionError('Timed out: ' + name)
+AssertionError: Timed out: more
