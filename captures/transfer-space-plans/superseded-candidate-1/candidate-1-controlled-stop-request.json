@@ -1,0 +1,10 @@
+{
+  "candidate": 1,
+  "reason": "Code review found 44 dp destination-picker rows inherited from the earlier chooser. Refresh the candidate with explicit 48 dp folder rows.",
+  "matrixAcceptanceClaimed": false,
+  "originalResetSha256": "4c60a877029d0171e0095629d6fd6086daa93232ac71a3abebc4032c6ec3e6a6",
+  "controlledStopResetSha256": "954533a480ee1ae457a85b5c5bdceac7e12a60deb424c5b8637735dfc95f7f58",
+  "stopOnlyAfterCompletedBatchAndOriginalMetadataRestoration": true,
+  "noDirectDeviceCommands": true,
+  "applicationAndFrozenBuildBytesKept": true
+}

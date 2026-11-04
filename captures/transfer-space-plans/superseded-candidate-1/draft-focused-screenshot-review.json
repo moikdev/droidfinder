@@ -1,0 +1,14 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/integrated-api30-3/normal-review.png",
+      "sha256": "555fa234d0cb680986c3b2e144e38fe32b78e4b76ac5cbc77e3b8cd1061ad3ff"
+    },
+    {
+      "path": "captures/transfer-space-plans/integrated-api36-1/normal-review.png",
+      "sha256": "5f414cff210a598aaeab24a492f589594ee242e070045b45986e35b314a9d98c"
+    }
+  ],
+  "findings": "Both focused draft Surface crops were actually inspected. Space allowance, destination, staging explanation and named controls are readable. These images precede a small count-label text polish and are retained as draft evidence; final optimized system-font/layout acceptance remains separate."
+}

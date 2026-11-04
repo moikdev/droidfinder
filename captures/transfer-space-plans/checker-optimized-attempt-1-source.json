@@ -1,0 +1,8 @@
+{
+  "source": "captures/transfer-space-plans/checker-optimized-attempt-1.py",
+  "sha256": "30bca3188552e404fdb9ac5a47d2781131539c8208f23515938121958aa78503",
+  "canonicalSourceSha256": "30bca3188552e404fdb9ac5a47d2781131539c8208f23515938121958aa78503",
+  "candidateManifest": "captures/transfer-space-plans/candidate-build-2.json",
+  "immutableCheckerSnapshot": true,
+  "coreMustPassBeforeLayouts": true
+}

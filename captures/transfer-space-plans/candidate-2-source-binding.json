@@ -1,0 +1,2383 @@
+{
+  "sourceCommit": "bf1ae1858bb071b92d42ac02f1057a82011cf00c",
+  "frozenManifestSha256": "df1543de44dc61727df23a99e20e6ce987aa6c5a4ba5353c29754249b60adcbe",
+  "frozenSourceCount": 395,
+  "allFrozenSourceInputsMatchCommittedGitObjectsAndCheckoutRules": true,
+  "allAppSourcesByteIdenticalToGit": true,
+  "allAppSourcesIncluded": true,
+  "additionalProguardAndAttributesBindingsVerified": true,
+  "allFrozenOutputsUnchanged": true,
+  "buildInfoDirtyFlagPreserved": true,
+  "bindings": [
+    {
+      "path": ".gitattributes",
+      "sha256": "02c4d9e006deb91568beb1433f0bca183721862a180af4d6159759f21ec27b0d",
+      "gitBlob": "3f39e855eb441c1343bcfe85c97c4b362219a5da",
+      "bytes": 32
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "fb99320712af873ddb35f0a93d040be81964f0d770d54cf1f6cf580568d6a766",
+      "gitBlob": "569b49f45220902fc33bca75f23d725128cd5ee9",
+      "bytes": 4971
+    },
+    {
+      "path": "app/proguard-rules.pro",
+      "sha256": "0fde7fd746b26d4a90f0b4522fb1c1bc993ba3a0dbf27319f5bf0ec601aa5254",
+      "gitBlob": "4851d866fd02deaecf77165b1d2109f59178e43d",
+      "bytes": 795
+    },
+    {
+      "path": "app/src/androidTest/assets/media-study.mp4",
+      "sha256": "46c61c7cea4e42038d5d2600df69eff57aee7f0e3b1178d6b645bd4407a768d2",
+      "gitBlob": "78a14c1aaef77892527c31f6e3d89b39dc4d75b1",
+      "bytes": 233685
+    },
+    {
+      "path": "app/src/androidTest/assets/peek-sample.mp4",
+      "sha256": "dea459ccc650384e0d08085b8403876c07b26311cddd18fe5b4d2440c3bde471",
+      "gitBlob": "b4ac9546622edc4ddd1fd0c0710e95cd9048af8a",
+      "bytes": 3617
+    },
+    {
+      "path": "app/src/androidTest/assets/zip64-empty-sfx.zip",
+      "sha256": "35acbf3a0dfffaf292be1e6bf0d5a18296efd08ddc96d596f1c0bd3c8309561d",
+      "gitBlob": "4c4c1c03308f6b665a9e1a2cd01969bfb9f51f1b",
+      "bytes": 70098
+    },
+    {
+      "path": "app/src/androidTest/assets/zip64-large-metadata.zip",
+      "sha256": "e4c3aa9e941f50d9ab9d28656816d2cd00ee73105fad1a3cc7eb59f10f683436",
+      "gitBlob": "a5b6702642569ddb32ff874124eef069197b9957",
+      "bytes": 264
+    },
+    {
+      "path": "app/src/androidTest/assets/zip64-small.zip",
+      "sha256": "62c5576e7279c0100a27b7f3e996fc8fa7a3a10202cc0adc84f843a4e1ee88d0",
+      "gitBlob": "30a37151ee7f29454e4d05ba5eb1f92c4cdfc2c5",
+      "bytes": 264
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/AdvancedWorkflowTest.kt",
+      "sha256": "edfbc08edbf1e9743df451c10f2f401376fe284e88dd4cfabdb64e6d06b75e56",
+      "gitBlob": "56bc82712046f4b1395ad576d5ffb1810813baf5",
+      "bytes": 10834
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/AnalysisWorkflowTest.kt",
+      "sha256": "7b1463597437d18bdb79ec52796454de1464c4082e19b3de64ee9605b28a5155",
+      "gitBlob": "55521166371df220b73d2ce23412f8db670b3e46",
+      "bytes": 15148
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/AppUpdateInstallerSmokeTest.kt",
+      "sha256": "2d92205d033678e4cfa5d41e3588c22602e3eb48fb1b2d540e1fef88e62eecc9",
+      "gitBlob": "5241e0c77e5f1d2b6db234687060a0fd390980c8",
+      "bytes": 1566
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/AppUpdateLiveFeedTest.kt",
+      "sha256": "fca6a6cbbdb8ac4e494461368b60088264688e1ddede4c2e0fee801f83af465b",
+      "gitBlob": "e38bab3785a5449d5670f76729d17e9e0b86e6b7",
+      "bytes": 2554
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/AppUpdateWorkflowTest.kt",
+      "sha256": "e7e85c175a70a4dfc419ce005e96d1dacefa7ae356dbb9c63fa766ea5841ba98",
+      "gitBlob": "ff797c49eb5e62518b197590dbf76ad0af99dfe5",
+      "bytes": 10293
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/ArchiveWorkflowTest.kt",
+      "sha256": "34ac26a0881ca13db63cfe97b95cc2665d5f560ceb777c78f6a11a365793c95e",
+      "gitBlob": "30c7a34a7fb11aa6f878b46a672766b816112f39",
+      "bytes": 15583
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/BrowsingClarityWorkflowTest.kt",
+      "sha256": "36c3b75db2aa79fd31c316c705730f2b0671ef1baf52bb19e99390cdfacc489b",
+      "gitBlob": "9ddc00fb40427422a9777dee9bead546c4dfc594",
+      "bytes": 9025
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/CommandClarityWorkflowTest.kt",
+      "sha256": "5b7c75cd48f61106ff114b5d3448678af4997ba5c6e6e4fe813c7a3542181d40",
+      "gitBlob": "0dbb5ae1cc3bfc7c9a2e90dea0e8341064a7678d",
+      "bytes": 21256
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/CopyVerificationWorkflowTest.kt",
+      "sha256": "0bec4aaba30fe7dafc5d2aa5c6aebbd8b910d4b7c65d6b39bdaa6b2e4d18c999",
+      "gitBlob": "5e4fc84ca9abdd8f608f536d64a6e407028f7902",
+      "bytes": 20596
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/DensityChangeTest.kt",
+      "sha256": "c6f2eca2eadede23b4fc58b9ef9aad1c656285ff6822150f4bf6512a1fb589f3",
+      "gitBlob": "3c78f0d3c9c388792703bdf1313f7b82b4a2f98c",
+      "bytes": 1717
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/DensityWorkflowTest.kt",
+      "sha256": "7a75a404c6d513a8373ebcd9a36db1c9919d6a28a2aff475f4088fda36994523",
+      "gitBlob": "89f75b9b291494e263dc77db2d5a6d38219de679",
+      "bytes": 5808
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/DesktopWorkflowTest.kt",
+      "sha256": "57c5e2b9feb8b9238ff05aa3d0d003b3ac56673b5d07149a6169441249ccc90b",
+      "gitBlob": "c19cf9e64498c625af749d91b9ce60244b664c60",
+      "bytes": 19082
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/DocumentCapabilitiesTest.kt",
+      "sha256": "2147459b70451434e0c11b7107d72353d876fe624ab9774d68efbf8c608e8ccb",
+      "gitBlob": "71afe6f3cf46d72f41816b18fd232fa6ccb537cd",
+      "bytes": 6789
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/DocumentDigestTest.kt",
+      "sha256": "3450e379fe9f7e50c7ee46b6b8ac2342c24d379a9f39e76c808d90c9e56262fc",
+      "gitBlob": "9a789e603b402a767a88da92ae6ffeee5ae409d6",
+      "bytes": 1653
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/DocumentPreviewInputTest.kt",
+      "sha256": "d91fc8d5f5f3874aa3ec9219b282c54b5db40d909234f9e3ab301182d3a9c8a3",
+      "gitBlob": "8927fa3932db9e9a9b9fd7e461976e8fdee42e3f",
+      "bytes": 5716
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/DocumentSafetyTest.kt",
+      "sha256": "719deedbfd67c29db2016c90533a21d39a7303740fe696bdefefd2ee89de691f",
+      "gitBlob": "ceb03e996a4383827552cddfd05ff2e6cd6ad370",
+      "bytes": 7526
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/DragWorkflowTest.kt",
+      "sha256": "e4babcb8c68117d6d63940e77ab993ce8a3ebe55279d6c41efd89bb7119b2521",
+      "gitBlob": "5ebd6509b32869f82a73f3a7bd6d58113c4d1995",
+      "bytes": 25196
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/ExternalDragWorkflowTest.kt",
+      "sha256": "ebaf72c67618210ae49da6e4047a3c967fb41ac25793568f034ac774d0c39fb7",
+      "gitBlob": "a2940d90a56d35f67b5646c039c4d2a1e3417228",
+      "bytes": 12994
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FavoritesDragWorkflowTest.kt",
+      "sha256": "4969fd00a6d7d8b553c1fd4f593726cec5b4b99eb05cfb1838b3e43410691c9c",
+      "gitBlob": "2299c10bf1715980d1f7d5c7cf342c028acd6930",
+      "bytes": 11963
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FileConflictWorkflowTest.kt",
+      "sha256": "c1d26b7d72ee52d004345b77aacbf0f238a34ee0e31f83bf53a50daa3e42bb1b",
+      "gitBlob": "5841b18188bd1113666c864b055220e53e0ed103",
+      "bytes": 10714
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FilenameOrderingWorkflowTest.kt",
+      "sha256": "fab69cd08f5f671369e5dc5070a34ca8d12ac99dfc03cda06e486b1c7a47e839",
+      "gitBlob": "170cb981df45220ac17adf943d6a0c07369297f0",
+      "bytes": 8410
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FinderWorkflowTest.kt",
+      "sha256": "9bac86a7cc6734dd98f9a7c0a1d775576c8c92b0413a2e3cb16f5fca3b3e71a7",
+      "gitBlob": "5d970e66e8a7b0307a3ace2e5fcb9b520ce7ca2d",
+      "bytes": 13909
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FolderMergeTest.kt",
+      "sha256": "09bb183ce7d49d9e0ca10d6ab23cf0d9d06c37d084e0c8a57ba379ceafad48e1",
+      "gitBlob": "feb207dc20df8e2f078ed59abbf91b253ad65d8b",
+      "bytes": 17944
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FolderSyncApplyNativeTest.kt",
+      "sha256": "ee7bac6cdf335b735bb0e573dac097c3b2120a1f00e67369ef8fec475ff2b59b",
+      "gitBlob": "06228a22e65406cbd129b173248352df2f5310d1",
+      "bytes": 9124
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FolderSyncDraftNativeTest.kt",
+      "sha256": "28dc618b057547f808235a7d37de1aa81c81136e5c0520e3e923363ff4744aca",
+      "gitBlob": "b22c214552192a1b7a50cbb7afde98b89befce0c",
+      "bytes": 9521
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FolderSyncWorkflowTest.kt",
+      "sha256": "87b3c07688cc2d4f38b2a6d0387727d27ad2701105fe9fef2c7f534a9080d226",
+      "gitBlob": "8bcc9a76913e1a7d6c89501fe40aebe03d7c370d",
+      "bytes": 15035
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FolderViewStoreTest.kt",
+      "sha256": "bd8e6c2b63207c68f69b5832e07706ba54da31a81f8e3702f8e037fe8d027ddd",
+      "gitBlob": "1ca5326bc138599dcbe136b107f29bb4f7c7b0af",
+      "bytes": 9303
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/FolderViewWorkflowTest.kt",
+      "sha256": "26ff2948e2615537e68700248be061a3b8164189333e2bace3bd5858071a997f",
+      "gitBlob": "55f5945f9b522290747fe20b64738eb1d3370e72",
+      "bytes": 17468
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/HousekeepingWorkflowTest.kt",
+      "sha256": "001df1c9d1e6d5ddcee1239ff9e58929ac9e0f80170694b4a4edd6900174ebdf",
+      "gitBlob": "69d3c824c35219a4f0029b36cdf56602399137cf",
+      "bytes": 9069
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/ImagePeekWorkflowTest.kt",
+      "sha256": "11164195eda574ab2dd84d5381189f4226d6a6e75d48ec8ada8b90a25a7cecff",
+      "gitBlob": "ed04ce7935c3689262472c576e24d6a99ce021a9",
+      "bytes": 18729
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/IncomingShareWorkflowTest.kt",
+      "sha256": "21b1945658d8da0b8d0b74ce0a49fa2a1492a289af2ab631b0d302de3053a5ab",
+      "gitBlob": "4d1f207e8bb05d061147dd5286565457e36f06a0",
+      "bytes": 15249
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/InputWorkflowTest.kt",
+      "sha256": "397c8d47d508830302b2eb22e102c8e9c9460988ddfca05b1e52830eabf11892",
+      "gitBlob": "cda5fd80ea5d7ba7b7bd7b013c5e5f5c50667ce9",
+      "bytes": 23242
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/LoadingWorkflowTest.kt",
+      "sha256": "103f354ffc7bd27e8f1cccf7f3718ef05c0f00960423a330fa5fbae39ee2ceec",
+      "gitBlob": "7c3fa3db31c336577f10ab37b81e58b4bf0b7d3e",
+      "bytes": 14491
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/LocalIndexBenchmarkTest.kt",
+      "sha256": "8a717f72f668ce1d846aa44dbfccbd04438930e6ad2714df4ebdd075a7e890f2",
+      "gitBlob": "6b24aa8e54318a83fce26471d8318778d3f4fa35",
+      "bytes": 5575
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/LocalIndexStoreTest.kt",
+      "sha256": "8306eb67f442ca253a8672e6c578536abe03042730dc3e1fb1e760bd68d1b01c",
+      "gitBlob": "afa5d0581adb32314ef488f34f816c8334ac6fe1",
+      "bytes": 19207
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/LocalIndexWorkflowTest.kt",
+      "sha256": "8a82a8601b888a0b88bb09aa36b8292f27990a255b6b40404be5ea2f13b4f3f5",
+      "gitBlob": "a9fa14e6d7d0cd831942bc8a1e257c9e42193321",
+      "bytes": 12924
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/MediaPlaybackWorkflowTest.kt",
+      "sha256": "904850e24fc9b3f2f792c9c36224b4844773a98f29d322c653e2393d9691fbf0",
+      "gitBlob": "38cfaf8a77e79eecddb04971069d7aa4e48a97a9",
+      "bytes": 10454
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/MultiRootCodecTest.kt",
+      "sha256": "b17a8ae83a840f9f82559c3a0dc3f86e5d12c004025c43c22d3a201c3989f4e8",
+      "gitBlob": "ae01b85de665c71c7d25e8439d7638da49e470dc",
+      "bytes": 4567
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/MultiRootSearchWorkflowTest.kt",
+      "sha256": "0631b5c74da98c7dec4d6535a1ab612b7da29967341395743b6db2d2286b1d1e",
+      "gitBlob": "bd03eb32bb24cbc48b0040be992a96dc44f7fe8d",
+      "bytes": 18772
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/NativeMouse.kt",
+      "sha256": "eba1f43e14a34fe6324b698465a730c18414f623b44317a0b15f5164b291db3b",
+      "gitBlob": "c62d862503b9723f336f79469c0599843fa99602",
+      "bytes": 3582
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/NavigationCodecTest.kt",
+      "sha256": "e1552fd0eeb672cde23520ed607fa5ec030d44f4b3e699d5b67ca49bfb47e4d2",
+      "gitBlob": "18d8a8820dc9a30e05ac8a8967fc983c36153752",
+      "bytes": 6848
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/NavigationWorkflowTest.kt",
+      "sha256": "48ecf73e80927218e7825a48000baa553c440961396e4c616109b596c6863d6a",
+      "gitBlob": "35f205577d6c037907a7363e3549a0acb4b51dba",
+      "bytes": 18322
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/NestedSearchWorkflowTest.kt",
+      "sha256": "a15942ee4c50a4a6923767d90ec617ff2eec474ebf64c6f953df707c7470e7f3",
+      "gitBlob": "e7f76328fb273cceb3232e5d688d155eea0ea9d8",
+      "bytes": 18635
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/OrganizationWorkflowTest.kt",
+      "sha256": "c61a71c729d9d915b18363aed065f01394838b39bb78f5542f9fc7e4175f56f6",
+      "gitBlob": "25dc44288e8a9fcf0e4f867112706242c3b0b298",
+      "bytes": 30891
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/OutgoingDragTest.kt",
+      "sha256": "3fc0736e92fd4b040bef5bd79c9ec928a09ea99b8709221efc04173a7f6d343c",
+      "gitBlob": "030ae21c9f5a432bfb69fe00297466ba823a7243",
+      "bytes": 3812
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/OwnedUndoFixture.kt",
+      "sha256": "c0f71789994c2ff5dd46124666785e20435dca741d3e3436c10ac1daf667342d",
+      "gitBlob": "49e2dd1516e573139e9cb4c1b4e616534af4c726",
+      "bytes": 803
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/PartialCopyRecoveryTest.kt",
+      "sha256": "031425e65b0c6fb10b77cbff9a5e2bc6f269dca66875a3e3461738816edf6683",
+      "gitBlob": "5b0341a4974b3a930254770a47da40ef2fce3174",
+      "bytes": 10875
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/PartialCopyWorkflowTest.kt",
+      "sha256": "621898d4e8c70158e764fbfa26f98edec0a9d4214be13390685e7ce922f44af8",
+      "gitBlob": "36171a1c2cc41a59e29c9fe8af819223db0e7b13",
+      "bytes": 10216
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/PdfGeometryTest.kt",
+      "sha256": "669099a5e9d8539bff6ca6aabb72c8954ae887192262940620dae34b717804c1",
+      "gitBlob": "abea11021d4559d4b1adf714c10f5abc49a6a409",
+      "bytes": 4058
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/PdfReadingWorkflowTest.kt",
+      "sha256": "7ef51e86d25bca7886b43cd084ba3986b4a7bb5c03ae1bc927c1d28723e7018d",
+      "gitBlob": "eed83d7ff755eb73110bca535f43b3fbbe6b0180",
+      "bytes": 23397
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/PeekWorkflowTest.kt",
+      "sha256": "2f1e369f4a124c9dffa58db6e0ecfa24c0e8b9dbeb56bb98b23e9ca335689cb0",
+      "gitBlob": "ba41a7624a390ce796f1aff1adae5c19883e2100",
+      "bytes": 10216
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/PersistentUndoNativeTest.kt",
+      "sha256": "7ef9b9bb93fbcb21cf5b3fd773d020bd20dd57fb066b94ddb2259d69b8e43c43",
+      "gitBlob": "d24d121e6370bad293bb7c549236a8a41583da4b",
+      "bytes": 10146
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/PersistentUndoWorkflowTest.kt",
+      "sha256": "971cbcc6f5f9d1df30a5021f126b34773d696d912de49320b71e7d3478d2eba2",
+      "gitBlob": "a6907ea5db35f9396806e9788ddfd3e82e671366",
+      "bytes": 8724
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/ProviderWorkflowTest.kt",
+      "sha256": "3a2196edb658dae09738b1dcf420e3ae93ee9c438908a30c7cb3a3ed6a41a9e0",
+      "gitBlob": "3872197b2cf64f426919f9ce5648a85e73a0836e",
+      "bytes": 9404
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/RecentSearchCodecTest.kt",
+      "sha256": "b192519a01b9ed8f0eea7d887f70cde6c5546f156cd01fcf3e2cd0f4f59e062c",
+      "gitBlob": "5b203e60151b5a9af318c21a0fb4eed85ec5df80",
+      "bytes": 7966
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/RecentSearchWorkflowTest.kt",
+      "sha256": "cfa93be344bc4e294346bb482718cc5e684e91c82de9280ee6ff0101eea68027",
+      "gitBlob": "b81e9c0360463a30fd29108e831926665a200262",
+      "bytes": 22003
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/RecoveryInboxWorkflowTest.kt",
+      "sha256": "5036f019a0aa48964714a0800026c73ee3d1e678f658f974147bb2c00d00b207",
+      "gitBlob": "6020b026a3c840479eda8ee4a102af1bb9aa8acf",
+      "bytes": 18485
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/RecoveryNoticeNativeTest.kt",
+      "sha256": "a18b1dc72febd1036f171a377b6d881fedeae378124f48bf3ea358c9cbc1d289",
+      "gitBlob": "0a9df687020bb204f4e4e689a37b9e3a908b8485",
+      "bytes": 6236
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/ReferenceRepairWorkflowTest.kt",
+      "sha256": "dd74090d75529a2a64f5c2414cdd5dfbc872f2806f0580416dbe6e24d831c28e",
+      "gitBlob": "60339bb5ee9dd1bcdd2a360a49c387396245c2bc",
+      "bytes": 22076
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/RenameWorkflowTest.kt",
+      "sha256": "4e170adbdeb71269705cadddfba927474ad1ce917121ebbbd23e2f98e6d4cce3",
+      "gitBlob": "dd81e87d8d9b10ccdf21c34fadfbe61f2962e329",
+      "bytes": 20781
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/SearchExperienceWorkflowTest.kt",
+      "sha256": "2259c9cffe0ef41a6f85efb392458cbbf6ecf0fabfa3911e10c630c96fca6306",
+      "gitBlob": "d143fcc5158c189db67e8409af32feec57751386",
+      "bytes": 15862
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/SearchRuleGroupCodecTest.kt",
+      "sha256": "0c4eb4465ae974f9ebd85f1e14404888fc7f46068824e204075ad49d938a5c49",
+      "gitBlob": "bfd33484673cb41c2709ad3895c4bf22c7653075",
+      "bytes": 11899
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/SearchScopeWorkflowTest.kt",
+      "sha256": "faf0b687ae70fae5258a3814b0ac8059bd80d9d6e2af19bdc21eb72c8f304beb",
+      "gitBlob": "4c26b49ac33b10e5358aa9e50d353b1ddc50fa65",
+      "bytes": 11331
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/SearchSourceCodecTest.kt",
+      "sha256": "5a354f222defd3e98c8cafe0b546fb93815440544ec555d30354ed9173be6b3c",
+      "gitBlob": "7f82733080d21d668ad1378bf683ca522f6e96f4",
+      "bytes": 4525
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/SetupCodecTest.kt",
+      "sha256": "c99e9b4f9b1ca131291578b07fbd9e7c5af55ec3c02ad4886d679f6c23f25bdf",
+      "gitBlob": "532fce484bfefdab6155be9af98ce540d0fcccb4",
+      "bytes": 9899
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/SetupWorkflowTest.kt",
+      "sha256": "db92e5726b1e9e3ef6565db47644f74b9dde32c276a1f18613036f015dc652cf",
+      "gitBlob": "ef5cf91ad419af84634be449dbe658d1710adc6c",
+      "bytes": 20753
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/SidebarWorkflowTest.kt",
+      "sha256": "1a1c478ea4c8d405130cd2f7977b19a093c9e29b3961a55b75d3bf6984fc13fe",
+      "gitBlob": "e95f4f3d4a271b144fbba77e8f34a163b582fd76",
+      "bytes": 13503
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/SqliteTransferStoreTest.kt",
+      "sha256": "4051f60c016e07d43f63d6bfca57e857d80ffc6db8d059318afdc35735ca1054",
+      "gitBlob": "fbbe983278abdcdc8abca0772979e448ebcefc4a",
+      "bytes": 17748
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/StorageCapabilitiesWorkflowTest.kt",
+      "sha256": "d457e21415a696e241996e3616f35ece6733ef4a0af76fd22f80d4c4f0e607e1",
+      "gitBlob": "f9840d135b6c1bb286beefd4015d741363643c02",
+      "bytes": 11057
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/StorageGrantRecoveryTest.kt",
+      "sha256": "796858cfc0cf095eb50569cc46484981b4bf4927ffd4426d394143cb80421d01",
+      "gitBlob": "3de1e75f38894787d6d30a3f3f8c00b4de2619a5",
+      "bytes": 7320
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/StoragePreflightTest.kt",
+      "sha256": "aa4262618c14315476eff6baed563b6bda7d7f6e6e0b5f3fca9d459ff4ef90c0",
+      "gitBlob": "29480f84a09f96ab4e5aa26252e77e4ac29f3b2b",
+      "bytes": 4745
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/StorageWorkflowTest.kt",
+      "sha256": "cc91e2056d59e9898b44ad45850c5682187d953155b365d0c48231e1eec6e353",
+      "gitBlob": "ca391e17aa5bb9fa101361ac68b34fb94419a3e4",
+      "bytes": 11032
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/StructuredPreviewWorkflowTest.kt",
+      "sha256": "d302299f8a381cf9df07d525acb406555c14709455c65aa0e9fe6b2e10c7d8a0",
+      "gitBlob": "a4a67219b54a93a8ed60c673137b45c3e19c893d",
+      "bytes": 12163
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/TagSearchWorkflowTest.kt",
+      "sha256": "0a17d6906b39ae7c44503e6984365b4dde869ea851e6e01f392fe2e2e93311cf",
+      "gitBlob": "bbd571d2e7cd214b6cc003aaf17f66b6f5765c87",
+      "bytes": 12927
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/ThumbnailRepositoryTest.kt",
+      "sha256": "cf0bff2c0e6db2fbe7dbb0c53ebed1ce66e223d7650c2d9fa824933b798d2430",
+      "gitBlob": "8dc1f5cd4a9c92c886b9b2e57fea3e3bc4ec9c77",
+      "bytes": 4838
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/ThumbnailVisualWorkflowTest.kt",
+      "sha256": "09baab60b98665a457d83e21c9771f2a40e7939702a4380a13a60b742b1b026d",
+      "gitBlob": "0f67c7a2b2d258bfd3588fe65e65773d7437b527",
+      "bytes": 1918
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/TransferLifecycleTest.kt",
+      "sha256": "d8e5ded5294c0ceffe27d05f69c1ff76e86bbd21da34822cf880ef8bf27f1509",
+      "gitBlob": "fcb6322625e1c8af6bbc36bfb95bfa48ab57bb18",
+      "bytes": 4862
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/TransferPlanningWorkflowTest.kt",
+      "sha256": "460e4c0e2595d9eba97d13a338b734017fa1d9dc49497292e104da8f67a01657",
+      "gitBlob": "d988299d4f4f7d878cf83775abe1ae682006a1b3",
+      "bytes": 7727
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/TransferProgressWorkflowTest.kt",
+      "sha256": "67cf3bd7e02272191431238a36b6f67b50f5129e3c2d590d7b24b5cc21225b02",
+      "gitBlob": "edbf313f06374ea7c4e456b89c4d37474d70d37b",
+      "bytes": 6846
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/TransferQueueWorkflowTest.kt",
+      "sha256": "4e62a02ada5863a0b96a0f7c6e8427e16a7ef43d78a2d4ac7355d679046bf0a8",
+      "gitBlob": "a646fa3ecc0ed552834cb0af0f5038d24b65af86",
+      "bytes": 8159
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/TransferSpaceInspectionNativeTest.kt",
+      "sha256": "87931db293bc77deafb414fddcf92fd63b1315f741a13e1fbf79e0f073511005",
+      "gitBlob": "4196f48b8bd2692da7d3f82c381988d109ecc25b",
+      "bytes": 5706
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/TransferSpaceWorkflowTest.kt",
+      "sha256": "a5b1f44d80739c0cb93f2bcd2b0f4e397fbfbf1fb2ad742f3d5b1b12ed12fbe3",
+      "gitBlob": "5143be56d5ab0983651113c8a43cebeb1b9a16a6",
+      "bytes": 10510
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/WindowLifecycleWorkflowTest.kt",
+      "sha256": "37934fe4a5d2c15fa69a4a2a52a596b30acebd599a3e650d9b452dd8dc216860",
+      "gitBlob": "473ffb23655320437b444f2a70b4aa41b1b8ac1c",
+      "bytes": 6786
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/WindowsShortcutWorkflowTest.kt",
+      "sha256": "d521d8c4c37c3f33192af9e8aca7842cbba3be8b475869c7ec532c296ef7e272",
+      "gitBlob": "6bee44dcee2bb186104795ada0cd20b5674923be",
+      "bytes": 24687
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/WorkspaceProviderWorkflowTest.kt",
+      "sha256": "e8235b315f87cbea669b5f408e1c4fce3e27cb87cdb4371163443c489e4ddfc2",
+      "gitBlob": "21a7f5e5ac1d72310d785f9176c2e11904ec6a87",
+      "bytes": 11895
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/WorkspaceRecoveryPersistenceTest.kt",
+      "sha256": "5aba0a6bfba51fe7696d39211c82907d22da0ec4aa0e354ade93a7d0e50c659a",
+      "gitBlob": "238119c6956ae15948fceceb59aba32b6e5c81ed",
+      "bytes": 8471
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/WorkspaceRecoveryWorkflowTest.kt",
+      "sha256": "383a6bc0659a0895b03efaf347b751c005b4fc4c0b4c17cdd1f92d01ed289789",
+      "gitBlob": "ce1b46ff00ec93d525275e550268a76cf1a86928",
+      "bytes": 17895
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/WorkspaceSaveFailureTest.kt",
+      "sha256": "41e0f27374595007e533763faf9611057bf43d9efff042c91b6b1c839863f341",
+      "gitBlob": "b7eb92dd4c5e0cdf00635e1cf593388170d51d05",
+      "bytes": 3688
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/WorkspaceWorkflowTest.kt",
+      "sha256": "0ed531e49028b4d149a49b23689faa53a9719f979674d0e333be508fb56a7716",
+      "gitBlob": "dfacc4d949565ab79e320f8f85f57ba407ee90ba",
+      "bytes": 24029
+    },
+    {
+      "path": "app/src/androidTest/java/dev/findroid/ZipPlatformTest.kt",
+      "sha256": "664fa011a8861332d619c46df0cd9f6c30da11b4d0daa3875d4935063b908c0c",
+      "gitBlob": "5d2dfd246f635853b7c19ff09b3921e4d0b41c7f",
+      "bytes": 5211
+    },
+    {
+      "path": "app/src/debug/AndroidManifest.xml",
+      "sha256": "36410cf8d8d78ede250a1a2aefdb50214136e8113bcdf2a0a57565f444a51ea7",
+      "gitBlob": "c5f641e1e8ea9181a6610f7e96b3898a4495d3f7",
+      "bytes": 482
+    },
+    {
+      "path": "app/src/debug/java/dev/findroid/testing/FixtureDocumentsProvider.kt",
+      "sha256": "e1fac60fd045ed74f8aad0b783a7008db8d8404c928049021e84d550a1645a0b",
+      "gitBlob": "366a84102451c091611fca95d7e2ac9769ed57f8",
+      "bytes": 15851
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "sha256": "b422e84ae580dff9f1377c5779963e4b5a74486e0d6b92dc064ff12a839974c1",
+      "gitBlob": "5b89d282084ea2e1fa3ae9a9b84b5963471d4cf7",
+      "bytes": 2715
+    },
+    {
+      "path": "app/src/main/assets/licenses/BouncyCastle-LICENSE.html",
+      "sha256": "afaf5bd0b0d869dc86b71711e1b775b204948634c9710a35a9a70d1613a2ab14",
+      "gitBlob": "a2253d7c69443c24ad6c5af81dfa2678cae72cd9",
+      "bytes": 1259
+    },
+    {
+      "path": "app/src/main/assets/licenses/CommonMark-LICENSE.txt",
+      "sha256": "db0ca9fbe898f07ba8a637e6f7b53ce7f8669c67673a8edcf30562e62935e8bb",
+      "gitBlob": "604b777d32c7f9c3b5b905a99ebc4665a5c5add3",
+      "bytes": 1296
+    },
+    {
+      "path": "app/src/main/assets/licenses/Gson-LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358
+    },
+    {
+      "path": "app/src/main/assets/licenses/Media3-LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358
+    },
+    {
+      "path": "app/src/main/assets/licenses/PDFBox-Android-LICENSE.txt",
+      "sha256": "8ceed6051cbd7f6d5d56bad8ca5e73f0414fb13cbe0c4170f7c4c9beaa1a7679",
+      "gitBlob": "6786924e6b90f058e228abda5c33c4dd1cff3b34",
+      "bytes": 16295
+    },
+    {
+      "path": "app/src/main/assets/licenses/PDFBox-Android-NOTICE.txt",
+      "sha256": "8191c60848b9e5666a1ee50a65a7f6eab7339dc1ea20b52092f3eac5ef10d0cd",
+      "gitBlob": "81e3b72e1758bcad3bd3997cb84f3963d420dd83",
+      "bytes": 652
+    },
+    {
+      "path": "app/src/main/assets/licenses/RE2J-LICENSE.txt",
+      "sha256": "26a6133577cc8e48d7c002ac4d4a554786e7c0e1732e10f2db205e5e494c411b",
+      "gitBlob": "b620ae68fe332112e50d1fc5da4a32cd6191681a",
+      "bytes": 1617
+    },
+    {
+      "path": "app/src/main/assets/licenses/commons-codec-LICENSE.txt",
+      "sha256": "b1d2870f1a00e4d7f56576e5f0870cba109e041f8af66866cf5b499478e654e7",
+      "gitBlob": "ff9ad4530f5716304e042cbac72cecd7c40f0e0e",
+      "bytes": 11359
+    },
+    {
+      "path": "app/src/main/assets/licenses/commons-codec-NOTICE.txt",
+      "sha256": "b64933ee1d36d14659156223a2604edadb60bffdd465d5368ff422d7689db5fb",
+      "gitBlob": "d3b64e9e3008ab61bb1ad3e155bf514773a7b08d",
+      "bytes": 175
+    },
+    {
+      "path": "app/src/main/assets/licenses/commons-compress-LICENSE.txt",
+      "sha256": "51b88fd3e9e24edcdce1dd145a4fca2dcd12911407f00b06dfa6ff600f9733c1",
+      "gitBlob": "b447376016c314574ee4d4b3d3ebd6eaf2972f07",
+      "bytes": 11358
+    },
+    {
+      "path": "app/src/main/assets/licenses/commons-compress-NOTICE.txt",
+      "sha256": "0d98967f0ab328af8d9d536aa9a5c684b5dd665657245f6ee6b5915affe811c0",
+      "gitBlob": "fa969b3ce6ca657974f25411dbe3b273950121dc",
+      "bytes": 178
+    },
+    {
+      "path": "app/src/main/assets/licenses/commons-io-LICENSE.txt",
+      "sha256": "c1d1a38c99c48ccad170890ade6066e2e240bb6ce59861d4eb7f672eddd2a4c6",
+      "gitBlob": "c8118641cddd58f5b8f175c4ec91b8e69b65e97c",
+      "bytes": 11360
+    },
+    {
+      "path": "app/src/main/assets/licenses/commons-io-NOTICE.txt",
+      "sha256": "b54b0db6c617273efff79ba193bb01b05eadcddfff55c24063b38b2acef714c3",
+      "gitBlob": "2a4682551b1f9b07147b82f7435661396f5267b8",
+      "bytes": 172
+    },
+    {
+      "path": "app/src/main/assets/licenses/commons-lang3-LICENSE.txt",
+      "sha256": "b1d2870f1a00e4d7f56576e5f0870cba109e041f8af66866cf5b499478e654e7",
+      "gitBlob": "ff9ad4530f5716304e042cbac72cecd7c40f0e0e",
+      "bytes": 11359
+    },
+    {
+      "path": "app/src/main/assets/licenses/commons-lang3-NOTICE.txt",
+      "sha256": "64bc8696af3f6c770521412b85d3a733fa44b2ef5b0f4bd739e0c4d02eca492a",
+      "gitBlob": "9c0ea0be638b9b0ea11598bd6b20f42a23856434",
+      "bytes": 174
+    },
+    {
+      "path": "app/src/main/assets/licenses/failureaccess-LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358
+    },
+    {
+      "path": "app/src/main/assets/licenses/guava-LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358
+    },
+    {
+      "path": "app/src/main/cpp/CMakeLists.txt",
+      "sha256": "3709484ac64dd7b87a1657d74a867e5de6f7fc6c424576f8288b0d7ca318fb49",
+      "gitBlob": "bfebf2c7a112ff52146a3129ece2f17801b7fd5c",
+      "bytes": 371
+    },
+    {
+      "path": "app/src/main/cpp/file_publication.c",
+      "sha256": "86c71e7e41252094f69eb197ca749010b6672e8893f80d19aff8dc9362c4f362",
+      "gitBlob": "67e44840ed3ee0081572cacb544aac6c4590c67c",
+      "bytes": 1696
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/AnalysisController.kt",
+      "sha256": "70308931cfc10e196c805dbbb832f1b84f37e1c26f7c7a543f6a3a25005aea70",
+      "gitBlob": "d295f9f503e248ac247f230117401a4a9c645f04",
+      "bytes": 14827
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/AnalysisDialogs.kt",
+      "sha256": "f3924a1d780d714a6f11c33f00f223acbd9ce52092fd1d1702ab719f270c3dd1",
+      "gitBlob": "236bd5b33e8c6ef78f0c566cc982977d94418c21",
+      "bytes": 43003
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/AndroidPartialCopyStorage.kt",
+      "sha256": "6f97cbf7d61fb24754bb3761b563b542db4ee61478169762cb9ae28a73250e8f",
+      "gitBlob": "ffa41bf61a20614162b26e1c3085d8956802220f",
+      "bytes": 2826
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/AppUpdate.kt",
+      "sha256": "8f5b06317ba29738e179bf8ed25ccf7e3e12ad9c22416071a1a8bb417bf01714",
+      "gitBlob": "9ba3ca860508e85ef2b973a449fdfe7fddf74144",
+      "bytes": 9018
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/AppUpdateController.kt",
+      "sha256": "a8dc6ff35a3c96fc90ffe7d89a5d0d3a90520dc3fc2716837699816f27db2bf3",
+      "gitBlob": "995778d435d20a1aa7443ea89c668883eb82dcee",
+      "bytes": 9725
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/AppUpdateDialog.kt",
+      "sha256": "e71d081bb712dd7af4cf8840dd72d13cab1c3bd89ec3e90ebb7835504b48e48f",
+      "gitBlob": "58e49a18a03d413a9f9b78c06df297382927bc8b",
+      "bytes": 3650
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ArchiveBrowser.kt",
+      "sha256": "fd4f50dfda8b0c8a8bd09ad65dedb70f8d59f69e0ddd9649ae64d2a9b745db1e",
+      "gitBlob": "b528bf5a3f81c3d4251b0267605f572e3fa5049a",
+      "bytes": 49015
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ArchiveDialogs.kt",
+      "sha256": "fa48a450fb81de2d3f3af3f92ff9eb7be1701a094c982ade78a2a7ccbd2f1ddc",
+      "gitBlob": "fb99d464e09eea9fd2cac3f6126502edb9d99300",
+      "bytes": 3523
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ArchivePreview.kt",
+      "sha256": "458302da7b61ed8f7cc8edbf5e32b7c2ed17b62b2da9cf44f22a02e80f77ed0d",
+      "gitBlob": "47b32777dcb08a03541d81cdcd64ccafa3782454",
+      "bytes": 6656
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/AvailableActionsDialog.kt",
+      "sha256": "e77aefd808965a6519e6c87ebba908eeaa283da8821cdb89b6d5ea636653e1af",
+      "gitBlob": "27ac3a60d8e0c577b47f93022a8ca3c27881efa5",
+      "bytes": 6421
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/BatchRename.kt",
+      "sha256": "0ba27b01b0a2cbf368eb63b70181f21b5843a34ede36b6d5a55ea88723b15983",
+      "gitBlob": "fc9c22bdd13666779e7ac166087586b9dc475f2f",
+      "bytes": 4896
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/BrowsingGuidance.kt",
+      "sha256": "115e7441caa7d6f51b74c770376d8cfe029c90cd73917a5e73d3c5f01d524b63",
+      "gitBlob": "f31be228784e5c34e4afdd8a0c2bc39088104291",
+      "bytes": 3082
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/CommandAvailability.kt",
+      "sha256": "ea9bf931ea6995cf66152ab55e8686b47cd223cff71bd8b4e305623200cdd041",
+      "gitBlob": "9d47ae5f9a101ca8dffa22f11c673e4c5ee439d6",
+      "bytes": 9324
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/CommandExplanationDialog.kt",
+      "sha256": "8f75944a7c34619cd20d3f52980167bf20e194cc35494225ee10f8c5252fc79f",
+      "gitBlob": "2f90845991f39a011b736109e420a1ac7938661e",
+      "bytes": 2090
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/CopyVerification.kt",
+      "sha256": "ee8d264145418ea1a3eb6e1d3e7ff82dcabf2fa2092a46f63fbb1f2c4db162c6",
+      "gitBlob": "7e220523ad65d2c6ca83600029b303954e0312b3",
+      "bytes": 7426
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/DesktopMenus.kt",
+      "sha256": "3cab805a81a931e3f1015b7a0031a076187b30912dde25914a209ee722363079",
+      "gitBlob": "69a3903a104e2b96a7d54121e980499cec43ab09",
+      "bytes": 18002
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/DesktopTabs.kt",
+      "sha256": "5a6235f6f64f8cc1712dec14a754a809b7eafefbc339ed6296f5ad8622cb62eb",
+      "gitBlob": "11bf4fabd1659b47d92a71c5cc860fb298f6c76c",
+      "bytes": 16198
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/DirectoryLoading.kt",
+      "sha256": "3eef7a314745e2df98d68d7178a18b8947d371ccb1fb42419fd170bc347b54f8",
+      "gitBlob": "ddaff7f41d17c6538e135b59fff530432dfa5d84",
+      "bytes": 24874
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/DocumentAccess.kt",
+      "sha256": "f15e05834993043e4a96cc843a813eafd8a10555495e2b2e532c9b5747b2d715",
+      "gitBlob": "a99df5b50ebabb2c4a041a5e1f38f3e750576f67",
+      "bytes": 62014
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/DocumentPreviewInput.kt",
+      "sha256": "d36eaee665bd758cdb61170ba62bdaf86e4db0c7de9f0a0b4b5b608a5a4ca27c",
+      "gitBlob": "144e322b0d67f38d6a9d750a2c51e48c6662945d",
+      "bytes": 3190
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/DragPrecision.kt",
+      "sha256": "618393fa6ee423cbab5a176971dc37991d83cf571d7e4da7d206496abde30011",
+      "gitBlob": "b5bbdee719aaaf026e98390ed33a7b57bdbed02b",
+      "bytes": 891
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/EntryGestures.kt",
+      "sha256": "73bfe168722c8f172ff9762660431689731e66f964ebd92691ab54bd79eab3b5",
+      "gitBlob": "3758fba16f6e332f87cb88553c44c9ae8ed616ee",
+      "bytes": 5561
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ExplorerLauncher.kt",
+      "sha256": "4f6352d813591bb47ab53a61f2e7611928e91c3e7038579ea4e87da450d5f8f3",
+      "gitBlob": "b6d67c39f8ea3260d1a06c6934db2117b4397cda",
+      "bytes": 13884
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ExplorerShortcuts.kt",
+      "sha256": "45757f30fc92ca0aebecd0c1b72fdf17fea496280c4233629bb46c93d3c8d82f",
+      "gitBlob": "0f68b0fbfe4fd8262ed1bcc0b2f85d924718b1cb",
+      "bytes": 7362
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FileActivation.kt",
+      "sha256": "104401bc77ca7138478c57ca0ca6f7e1c7e20dfb8501c8a7b7db228cdc19aefd",
+      "gitBlob": "769de620a07f73cecd33d2c6e176a55e5f1544dc",
+      "bytes": 1173
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FileAnalysis.kt",
+      "sha256": "c499624d6d933e1e31a7f2d6d25cf366b228618e29b4fb14924d6e42f797ac88",
+      "gitBlob": "b89493d2709281c3e9bf2ca9b08d6453348e0e6b",
+      "bytes": 19439
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FileConflictDialog.kt",
+      "sha256": "a3712b055d183031faa56ed730de754cab4b6356d29fb498232d76b8e2705cdb",
+      "gitBlob": "643344e459e2ea7d9970086d7d450d7e31e12e5c",
+      "bytes": 5576
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FileConflicts.kt",
+      "sha256": "a003ae1ab759d561309416eae71ade7d7de3e3252c251f3601c969fa1d1faa49",
+      "gitBlob": "4c7e284ac76b642d88637e5d0be2222601baf049",
+      "bytes": 5711
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FileEngine.kt",
+      "sha256": "8f228ccc1b8206f8087857253fd14a8fe6830e2a7919a09bd7da9907c64bfa5f",
+      "gitBlob": "1a26b45aa1dfd41b4c83aa3b2b71cbdc568f8996",
+      "bytes": 38662
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FileHistory.kt",
+      "sha256": "f23605eb9bbefb2ed36956ddd2c5203635c54fcdad5744f4f12767104af5abf1",
+      "gitBlob": "2cd0ffecb7cb686d9ace57061fb62650ff253c6a",
+      "bytes": 25131
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FileType.kt",
+      "sha256": "dc1aee3c6f407d661494c7f407a0558ca42605f3dcd2d06a1cd27166dd67cf87",
+      "gitBlob": "9be3dddf6fb52137831b5d1ff7a43237547dcf49",
+      "bytes": 4488
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FileVisuals.kt",
+      "sha256": "8c954bdceb7bf87e14e47692137c3402d5d793c4a38cdd9ac96639b0a6b49a41",
+      "gitBlob": "517d66dfceb51847f3af3e7e5fe9ade76e61f3b5",
+      "bytes": 25641
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FilenameOrdering.kt",
+      "sha256": "647e7b80e53e462fdc520911737c37e3be9001f78be6d293bf5dbae788bba318",
+      "gitBlob": "40f5023c863d3aa2018832447510cba1a01f4d56",
+      "bytes": 4118
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderApp.kt",
+      "sha256": "347d648965e0f3c9c612c40e992eb61dfd823d5355ca6a57ff4a1fac17671112",
+      "gitBlob": "6f21e7c56acc16b57772dcd101818c82e5ec2138",
+      "bytes": 85630
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderApplication.kt",
+      "sha256": "df246ed9cccbb7349b335c7a8d019a023c58f3639813e64f29a7e8e294063d60",
+      "gitBlob": "3d23b711a726bcdea473dd3fd43410c8ce96aeb2",
+      "bytes": 4810
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderDensity.kt",
+      "sha256": "3b00e22542f11dfe52a27304d69da0866c14504ce8c5ec7fde79459d16394aa0",
+      "gitBlob": "91b74ee0dd384a2d10c7cda614bfb5f132634b37",
+      "bytes": 646
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderDialogs.kt",
+      "sha256": "53e40e9e66ad94e7ac175c6933f012f07904aa811e944c0a1471c5c961f6da47",
+      "gitBlob": "0309b27f783587217e6d2bfbbbee3ecde2529c5f",
+      "bytes": 46122
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderDragController.kt",
+      "sha256": "6f82aa0060f04790d3740a653d7169de382746d3d95b169d765a2f5575a3d68b",
+      "gitBlob": "65d8969526cd9a356bd59ed60c41c1cd1270c219",
+      "bytes": 20353
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderDragDrop.kt",
+      "sha256": "d26e0ca15f25c6fc2ab500fdd4e6c2add13424250ee6571310d2027153b0d646",
+      "gitBlob": "bc342d4e7a694c764cf25b2c3dc1d31e7d89c13b",
+      "bytes": 13247
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderFeedback.kt",
+      "sha256": "4eb419e993c0f7bb3d0e97a7437cd91d87d7b2f310e46e86bd1a66c0df2e8b4c",
+      "gitBlob": "b95bdef1e23df4bbaa2f5f264cecfda35120b961",
+      "bytes": 2409
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderModel.kt",
+      "sha256": "ed185f5eb7b11e3ffbda92364cdd1cf4d2ce2929e06bcda9dab928c7fb38c2f4",
+      "gitBlob": "dc9e7a64442de49981e29f2920a5d02e4f3d4e35",
+      "bytes": 222339
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderSession.kt",
+      "sha256": "7492b49459c7c72b5dfa5fee59f69f62ff80e51262ce15d2498153f0ce801420",
+      "gitBlob": "3a53ccf06e9e4dc23f0ad4f225c1e31cbc871bc5",
+      "bytes": 10595
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderTheme.kt",
+      "sha256": "7c2f30b567039e570cc263f357ee319ee98e9f29da061216bdb24d4e354fcd20",
+      "gitBlob": "4ff1f56ee02195206de17e5cbb293ed5e535eb06",
+      "bytes": 1380
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderViews.kt",
+      "sha256": "4bf3a18b71c86f455df6d8b47b4154c6ba6f962ec3ac75bcdb22923738977fb3",
+      "gitBlob": "048cd3e752affbf1eb7c5379f8cd53cc423763ed",
+      "bytes": 54413
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FinderWorkspace.kt",
+      "sha256": "acbef7d3b7208cceb970e62d45184c414bc8f87010562056f1ce34cf0c139cb8",
+      "gitBlob": "c054aa8f340322d205392981ba1633cc5e35f869",
+      "bytes": 16659
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderComparison.kt",
+      "sha256": "f7c09c7c4cbdd9cb43aec9737d7b4b6b0905c304fd2f43676f3820d49e4fae38",
+      "gitBlob": "171f1f3a1ac292af6088192e7dd1472c0416e43e",
+      "bytes": 6724
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderComparisonDialog.kt",
+      "sha256": "460f5d81c3383fa1cc87aa31f24c351b8cc9388d11f489e66f5d513a4df456de",
+      "gitBlob": "be3ef94fd1a716de9acafb65089eeebffa0c934e",
+      "bytes": 13396
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderStyleStore.kt",
+      "sha256": "3958457b0593248ee693d5b5901b4fcfef78939f6ed024304562f5bee1504927",
+      "gitBlob": "78ff14be97a9684968da267255e8955fdf36adfd",
+      "bytes": 3389
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncApply.kt",
+      "sha256": "dd1bc3e6589ab15301d824663a306c5d478d4a2c2c938ebb2f2de1d00dfbd5e3",
+      "gitBlob": "293b2e514ef7574e311fd51d1ffcbd839c9ddd5d",
+      "bytes": 12702
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncDigest.kt",
+      "sha256": "c0fa7288c4d0a44bada80b712bcede2fd623c688ccd3f39cdd050a56617a2d36",
+      "gitBlob": "636974c41dddce4d26548212b49e4447826b573c",
+      "bytes": 1872
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncInspection.kt",
+      "sha256": "2fe6f7333463a1dc701b5ed0c86930658075f42168e1372067904d1cb539158b",
+      "gitBlob": "08d0a620cf2390b4f020165c6e2a486f51bd822a",
+      "bytes": 6297
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncPlan.kt",
+      "sha256": "44da6de0cd6709b309bb2f6ad7bc317ff636b4095cb9881eb7a397c932785794",
+      "gitBlob": "e2d089297ec0f13db25ab7e07e2aa18153c1bade",
+      "bytes": 11314
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncPreparation.kt",
+      "sha256": "7457d1717048443372f8ac5bd60aabf559c2b0e3e103796aa32b592d9f11fc67",
+      "gitBlob": "966311423fc9bebf1fc1bb1973e44f30c3a3c76d",
+      "bytes": 16745
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncPublication.kt",
+      "sha256": "a480b77d081cfc89ad108955ebf5d06ab902c610d20e449f2f9ae7cc264acc99",
+      "gitBlob": "9f2d14e9c312fc57a0c9c74216684e8c5eac9589",
+      "bytes": 5723
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncPublicationLog.kt",
+      "sha256": "1c0b07124b39da63ebf882003fc05fcb7e44a4d0a8142e27612822692a235574",
+      "gitBlob": "6307e7c2f3acee6b32eddfb28809c871d3cbffaa",
+      "bytes": 8002
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncReviewDialog.kt",
+      "sha256": "61f95d47f8a7c0e221a433ab697280a853972a5ade52cc376f1f7f4c63e6ec59",
+      "gitBlob": "0dc9c6ed344463036619f341659361111c6db626",
+      "bytes": 20120
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncReviewState.kt",
+      "sha256": "c09daec1dce5bf56158385081b819ae3d154680f400fe1a5c2ea469889fb951e",
+      "gitBlob": "1eb75685a55edb872a5ec08d10944fa0840580bc",
+      "bytes": 2245
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncRunRecords.kt",
+      "sha256": "73d025523a7a939c4eb485159a11394af228aec2d5ce1c6ca8b5090e41eb814d",
+      "gitBlob": "cc2ee2740ee85adc0ff48ef744232467db03f3e3",
+      "bytes": 6658
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncStaging.kt",
+      "sha256": "0398c44866cdc5e61542149c90dbf199f2f9e74622e338fb1326d4e7c4bf71e4",
+      "gitBlob": "f25b590828e021363516e01f02fd6b771ab7182a",
+      "bytes": 7406
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderSyncTreeChange.kt",
+      "sha256": "09fd37656c6a27997ef35463b7a879015d889d00f9476cefdfc45a440347e044",
+      "gitBlob": "4f0dd554a9cc199a8b9f9c6216725d9966294f7e",
+      "bytes": 5194
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderViewDialog.kt",
+      "sha256": "1a2f65be1ca878a6f58de8a8a52e897964f6c7f8e8ebcaa8d92d685abcbfc1fa",
+      "gitBlob": "a0f19efef43dbfc9db7b491246f70eb72489fe31",
+      "bytes": 12782
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/FolderViews.kt",
+      "sha256": "24d508458c2890a8707871164700c1123846b4b8d4d4acb6f68bd4078377d1dd",
+      "gitBlob": "0a2144cf81839cd3d72b3f118c02536505567404",
+      "bytes": 12363
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/Housekeeping.kt",
+      "sha256": "92b08f3ae00a42c2be5529c17645fc19ef0692668ff33480f65d4a7e0c45aa4f",
+      "gitBlob": "0a263f2a0c6cdcbb84bc47a79e52ae2e37452232",
+      "bytes": 11902
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/HousekeepingController.kt",
+      "sha256": "ff1905d981433c23a5f252a2fa04d6693326583367dd1a95f6465b707208a9a7",
+      "gitBlob": "35f8ee24a8141c2a12c5e92c89e43fc21e11ab68",
+      "bytes": 7890
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/HousekeepingDialog.kt",
+      "sha256": "8e775f59e77535d046d26bc5b3353776b06b0d0729fb8f5225e29eeefc0c76da",
+      "gitBlob": "a104dc14810e349d67a8d7d04a2e1a80c8df8c20",
+      "bytes": 29783
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ImageGeometry.kt",
+      "sha256": "28191c945931cebeb5c63e006a0438186ff2b2625066fe908c343f26a695ac9c",
+      "gitBlob": "e1f981cb92c750a10ec4d74f1018527811925168",
+      "bytes": 7168
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ImageQuickLook.kt",
+      "sha256": "e592c7bca952edd9fc1448fa3dad9bd529d060f4e925978d1bbf295d66820e2c",
+      "gitBlob": "95ad2835c7257569ca8fa4485c32c57973a72eaa",
+      "bytes": 29276
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ImageSource.kt",
+      "sha256": "f12c38151d1a83a908641c0d92b3b386a6816b80989d8653abd8fd463e2d4fc6",
+      "gitBlob": "362147bef4df0ee31321ac7983f1cf9a7f8ed23d",
+      "bytes": 10290
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/IncomingShare.kt",
+      "sha256": "487b2efc535e44545169fe6e0097572fbc5db15e1531aefb7a3fd5d5742a96ec",
+      "gitBlob": "dcdd78cebbd94cefe61c55762099db66ed3a073f",
+      "bytes": 20232
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/IndexedLocalInput.kt",
+      "sha256": "902f64235d580f0c225dfc9f2866361f6c12776426567b390226baf7b8a4196c",
+      "gitBlob": "2cbbaa62c2c5c3f8bc86408a9956634b33e3def8",
+      "bytes": 1407
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/KeyboardScrolling.kt",
+      "sha256": "98e8141847881b71cd9d7585c8da8d4353300cc8ddbf72f71c2205fa1bbfd87c",
+      "gitBlob": "a77ae16e6d1f9a86910da694d8c4564fe83577c9",
+      "bytes": 10996
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ListingStatus.kt",
+      "sha256": "f91b8ee7757294420a4b43e4f8f2fe7504844d27fb62c23967b4ee74562cea6c",
+      "gitBlob": "384ef4bb3bd306b6614af88cb5c3bd997c48fb40",
+      "bytes": 17586
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/LocalFileSafety.kt",
+      "sha256": "94d41480d45305a802486084adebf7b26d28f7f85e9e15bab84632bd0b08d5a9",
+      "gitBlob": "19a09f1e3c3b0776c72709aea18eb0f3414b567c",
+      "bytes": 1748
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/LocalIndexDialog.kt",
+      "sha256": "c4cba9ed6dfb19370f5e8bbced3141d7afaff97d11c8fbbee4649ccc7571853c",
+      "gitBlob": "76aabeb9bbbe3f2d51d2d2e63252f524bb2a9618",
+      "bytes": 15005
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/LocalIndexScanner.kt",
+      "sha256": "fb23e4d42b78974233bae3fb58d4671a26d523948952c99bb16912f0385d5850",
+      "gitBlob": "d1208c96094cd6e8bc4ed4409619563dd5dd2a65",
+      "bytes": 5469
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/LocalIndexState.kt",
+      "sha256": "7deba99b5dac73723dbb70b47c1b87392279dcbb6ef5f5af9c4111a6ffffc02b",
+      "gitBlob": "e532fa650f03cd354a8206d49e7ad2af36a1d1c2",
+      "bytes": 8635
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/LocalSearchIndex.kt",
+      "sha256": "590b3514cf15a5c16d283527f868dddd1f2c8d67375dcf204ac865833ee799cf",
+      "gitBlob": "602f1d1b5e9c72614ada81bb33fe88fbf3716a70",
+      "bytes": 10703
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/MainActivity.kt",
+      "sha256": "ebeaa7923ecb37c2fc2ba45f2f6a477c1d9ee442ab8b0f6f01c0b60ac76bf709",
+      "gitBlob": "19a234e8b3acae6b0f65f4934885f894a488a394",
+      "bytes": 14434
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/MarkdownDocument.kt",
+      "sha256": "8bbfe1ab806f0947bdd8d95f35dd53098b34919cead745bb60cb8331bff39752",
+      "gitBlob": "0924ff8d6e61978734f99cd09cc49f13d3c54eaf",
+      "bytes": 8573
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/MarqueeSelection.kt",
+      "sha256": "86afba5459dc0b0822e39a9d2a9047fba8d493c0e72de93003a67322152c591d",
+      "gitBlob": "bbecb7d4b912fcd01044903aae41c390694574ff",
+      "bytes": 4183
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/MediaPlayback.kt",
+      "sha256": "da92293680b698e65f41e27e210e4cfeba83fc015af8b6ba3d340063fa5c180d",
+      "gitBlob": "d2b19b5e3776bfb3b85c2d2a7959d1e66d77c642",
+      "bytes": 15449
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/MediaQuickLook.kt",
+      "sha256": "7ee237b50d78bba1fb8be30e7e6afff85e89c2d9f8f1ae6f2ef19812db3a089f",
+      "gitBlob": "83d317a4ff3811a9267e1a0441ba638f13e84d6d",
+      "bytes": 15964
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/MergePlan.kt",
+      "sha256": "ce24a298230fa4afc17e5044e27989c17fda2ac142447101262684ec5ea7d06a",
+      "gitBlob": "e2204c5285c36a0ef0b7d928328d2bf9a17b0890",
+      "bytes": 1047
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/MergePlanner.kt",
+      "sha256": "2593a4be0cea48b6db1bbdb7b9e52b4a800c4935ab27855ca1b45089829ff905",
+      "gitBlob": "6bd2855cc2e1392393ac4b0b71667871891d80a5",
+      "bytes": 2352
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/NativeFilePublication.kt",
+      "sha256": "6da2ca94664af705299822b7547190f2e6824e64965726e942968681ede1bd90",
+      "gitBlob": "6687f8603b3e9b7f14edfe7becda9084fa8217ce",
+      "bytes": 829
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/NavigationState.kt",
+      "sha256": "f769fbe7bc1021e692fb124d66ab95bb6e823ce02c18596f76cc59ef6387df4b",
+      "gitBlob": "c13bc9266431bb8e354cd7a31d50257e3fb1533d",
+      "bytes": 13319
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/NavigationTree.kt",
+      "sha256": "da9bac5d0d126cd0e715e43d0a713142b29795a6b548b5db048f4ab3e5894523",
+      "gitBlob": "c43f1686530501f9d49f79f7b7c9eba39db4bef5",
+      "bytes": 3337
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/OrganizationController.kt",
+      "sha256": "fd8ea6223daa07bc03b92ebe3dee616675115520af8fc73624fabadb2a234892",
+      "gitBlob": "7b71f181d9dc15e98e460b4088d9633a0be3222f",
+      "bytes": 14217
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/OrganizationDialog.kt",
+      "sha256": "6a117c1a9507d22728d42a841147ea0684da1ef8d613bd4d6c2f071e542dd25d",
+      "gitBlob": "2b6c9e4e47e651b7ee0e4dd153d39a5715ce0427",
+      "bytes": 55612
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/OrganizationIdentity.kt",
+      "sha256": "7ff8547fa3f5a2ee6a55e2ed4f6fdeaffcdbfec2bccaff1ec608758c7a2a43c2",
+      "gitBlob": "11af62cc6d2e34d9940b2af36ac647abc7d6b77b",
+      "bytes": 3117
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/OrganizationLibrary.kt",
+      "sha256": "2f540860588b18cffc0ddc47965cdc0fd16342684191e04d9b36f9a55aa817bb",
+      "gitBlob": "68beae8ddc596b5b9cf90a28e93fae8ca30f30ad",
+      "bytes": 5602
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PartialCopyActions.kt",
+      "sha256": "c27f88530d86b1724b0d40c2d30109b91225bca7f55436420f921573fb2e9bc5",
+      "gitBlob": "d9de79f081534c3295b67272cccc192af08b2263",
+      "bytes": 1854
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PartialCopyPersistence.kt",
+      "sha256": "81e8007d7c1f445cf06d904c8cbf879c2d5f961b35e0dd1d3be368cc8ab22128",
+      "gitBlob": "bf861e085443fb508fcf57b7bf4cce740ff42f6a",
+      "bytes": 6095
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PartialCopyRecovery.kt",
+      "sha256": "f2a3bc52ffcb921e38713a329c9454c7b136187965d31b4a25bd1400a4009212",
+      "gitBlob": "a64072904d707980d37bf502636643a2421646f3",
+      "bytes": 20759
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PartialCopyReviewDialog.kt",
+      "sha256": "90a0e4b29afa94371ca725709561981c4fc4a743632d63e43bbdd378f24496ed",
+      "gitBlob": "b876782c7f9f83fe8b5889af3551e549b038754a",
+      "bytes": 7948
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PartialCopySession.kt",
+      "sha256": "d95e9535a531ab335a1e2262d61349a2c00d288ef4f6dbb0d13c079c2484e7aa",
+      "gitBlob": "4f2ae30e6720362a2820edc89d19513d5719cac6",
+      "bytes": 9020
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PdfQuickLook.kt",
+      "sha256": "0f4fb1704085617aa2d07075f9a6cedf1be998bdc75b400866f751826db33da2",
+      "gitBlob": "cfeab237a41b4492fcdb774044110da71e7dd003",
+      "bytes": 38000
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PdfReading.kt",
+      "sha256": "c5b646311fcfd5fe7075b98872a9c4d349eff4b7f55002b64c8c705efef22d0b",
+      "gitBlob": "b8d62b145e790aeb9ed60239b12d3ff35db0ea1c",
+      "bytes": 22327
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PdfSearch.kt",
+      "sha256": "77674867cdae9bc00ff5cc68efdd0123ee936caed5c49c0512b217319b2e6cbd",
+      "gitBlob": "6cae50f4bcb8be3bade08d3e2d467f92beb07860",
+      "bytes": 2088
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PeekKeys.kt",
+      "sha256": "37a696a28c81ddb4871bb8d3281477514725a2c515584ff9fd40f359bad59e31",
+      "gitBlob": "91c0d465729fa1bb8c0577b8bea7ed2643ddc4b9",
+      "bytes": 385
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PeekOverlay.kt",
+      "sha256": "39df56ec300f9aae579a2ea338edc89e34dfb948e2218e5ac161c29164664ef5",
+      "gitBlob": "cca022a2e049308304a9608e630299d59bcbbbe0",
+      "bytes": 9036
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PhoneChrome.kt",
+      "sha256": "1f8151971b70f3713f39b39c6dad2238805a56a4d8cebf89363768beae91ce2e",
+      "gitBlob": "f763f7dfca0e3103c38d96f4f792d065757222a8",
+      "bytes": 15264
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PhoneFileList.kt",
+      "sha256": "5cc46c8edb5531d636fcce8bb9d262a957c12ab6fb8edca952331c48404569a4",
+      "gitBlob": "c1b2fa05943f963fe2516a4b7478ef064de9d787",
+      "bytes": 4084
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PreviewCacheProtection.kt",
+      "sha256": "d20602bce4b598f353a9e191c7ff2d0ebad23e37dd9370b51c06bedeff639f79",
+      "gitBlob": "e65ffabeefde64a58d6650a9b529b845cfe2aa66",
+      "bytes": 632
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/PreviewClipboard.kt",
+      "sha256": "10ac79fcebe8d2251c07b5a3d30010ac2cb1f4a6b24ddcd71d5d00f4cbde6e2c",
+      "gitBlob": "5e24ffb5fabd596f0fc27380e87e21b9d7badebf",
+      "bytes": 2552
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/QuickLookMedia.kt",
+      "sha256": "28465a7c8ae18a3261d79eae5af9e20fc4195e453f7cf945a8216d00b543c084",
+      "gitBlob": "8aae716964c76f7602415e754ec9e6ebc6aff851",
+      "bytes": 5378
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ReceiveFilesActivity.kt",
+      "sha256": "e56a7a599aa10832e310d4892ac6d71f68e3d02b60a46b871d181528ebc92b84",
+      "gitBlob": "c5b51cac28d46729890831055a75c9a0777866b1",
+      "bytes": 31730
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RecentActionsDialog.kt",
+      "sha256": "c2422143990c1f10c0a338ba0ee21eef520d9ba87ee8ed338c29fe00b2bb7129",
+      "gitBlob": "3062be3eb168b0b7436aba05f98d810e170fde70",
+      "bytes": 9192
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RecentSearchPersistence.kt",
+      "sha256": "efabf865899664964bac631486d2937015ee1877bc4dbe4de809be9d2fa2a18a",
+      "gitBlob": "c536a73ffaee661ae2a7e9d157f59da890bbf44c",
+      "bytes": 6490
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RecentSearchViews.kt",
+      "sha256": "03259a41aafe130336029f863895657ec9cfcfa07f5f33934ef8ed9f7f38e507",
+      "gitBlob": "a679dc26a763ffb15a393616d2c357f225fb58f2",
+      "bytes": 14326
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RecentSearches.kt",
+      "sha256": "434d5fd4e91067587a9ad2482958a955ca669c5ae6c8a3676842d0f9b403f8ca",
+      "gitBlob": "7f2b6c4d34ea952e2286b484329054ebfbdf717e",
+      "bytes": 9429
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RecoveryInbox.kt",
+      "sha256": "fc352c6f6a80c6f65b35530091149e61a165a8bc7baf2540be90adb28e28ceb8",
+      "gitBlob": "4a7bdbb1dcf6d0ff123dbc2c1e0cf786d1e0844d",
+      "bytes": 8467
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RecoveryInboxDialog.kt",
+      "sha256": "c83575d37f1cc165f0ffe036472419ec9a4a9dc98a1aa498d64d754b13b26262",
+      "gitBlob": "25a111313fa6941a48f01907ad387a046b3ac330",
+      "bytes": 7287
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RecoveryNoticeStore.kt",
+      "sha256": "562ee9ba9e1f34c517b643940149e898b817e543a8086ed2662e07eba69f2c82",
+      "gitBlob": "12273a2d5b94aaa8b3c95a370c2dd8801dc89a71",
+      "bytes": 12154
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RecoveryStartupDialog.kt",
+      "sha256": "0e7165d2daac2497a589faab524a497c2908a7281e4d50e028d23a512ccd3c51",
+      "gitBlob": "c804b5ba76c5acae23e5fc6cd8e656e81f48c2b4",
+      "bytes": 4339
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ReferenceRepairController.kt",
+      "sha256": "86d040dc7a4d988811bc57475bcd0c3fbc1938e56b6e858d593ddfd6c08ef508",
+      "gitBlob": "9ccccfff8a96fd21261e4cc716632708ec111543",
+      "bytes": 10773
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ReferenceRepairDialog.kt",
+      "sha256": "f576b1e93c882c3d3a540764bea9f098201b3b57b0dcbf29406f744773e7587f",
+      "gitBlob": "62d94a7cbf5e507077725057fbe2303f1b02a1fb",
+      "bytes": 21900
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RefinedChrome.kt",
+      "sha256": "f87d457684062a37812f8d0643649ea5d4eb738414b5af10f463136cb3d5287f",
+      "gitBlob": "c8aff66e162a62292a635f7e551fefd42e67d225",
+      "bytes": 13893
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RenameController.kt",
+      "sha256": "df44c6d114a38a4e5c364f6b5462eb6c5ca07634b4959048f1c861b9e3e51f8a",
+      "gitBlob": "aef917946d46f997c1f5c477bf3c0bf00a6fc1e7",
+      "bytes": 22682
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RenameDialog.kt",
+      "sha256": "1e009ea43ec1822337f692eed237abb8cb373fed4a8b2aff87b1fb0c5071bb10",
+      "gitBlob": "005066e97ece297d339f6e4482a2669d56f64a7a",
+      "bytes": 43845
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RenamePresets.kt",
+      "sha256": "0163f4929f9980bf872c027af9f07970e2981c6a916f71a99562c5ef23268f0a",
+      "gitBlob": "2f14ca4f4e9fbf89edb24258eaa062cd66a6d38f",
+      "bytes": 7350
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/RenameRecipes.kt",
+      "sha256": "7483e9e8bb9ae5dbd7e0bdbf44b7d2eaa3f1a85cd1a5102a18730e04b8f42206",
+      "gitBlob": "504defaad031037f74845c0951b053ebd793fa4b",
+      "bytes": 17219
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SavedLocationsController.kt",
+      "sha256": "3db22cb4a9d1ee3ed3bafd2a7559147de8df6686502d8c38f279cd517113925c",
+      "gitBlob": "adab5d283f6707677977430eb92235e8148a3852",
+      "bytes": 5707
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SavedWorkspaces.kt",
+      "sha256": "7458d87ff9ef5d828f6fc246aba5dde4e903036c783260cb0f05cf8675051113",
+      "gitBlob": "7daf48f739b50df7f14d8eabede021f760edbf98",
+      "bytes": 6243
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchExclusions.kt",
+      "sha256": "fdd8194800ff1a80cba576b8b74df1b7c9769e3b284165cd57b2a3a7e42782b9",
+      "gitBlob": "dabadaf34d686750bf1d9071f8db6b9e72724d99",
+      "bytes": 2751
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchLocations.kt",
+      "sha256": "1478c87016d4bfb55efa536393af2b24c505f4f1b0fb304d65cc08609aedd454",
+      "gitBlob": "e1058b4c11ca25e1b9dd56e101fcdbdf40268634",
+      "bytes": 888
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchLocationsDialog.kt",
+      "sha256": "21c5151c739a61529ed97cdc672f1754379b97edf639bdaa422a29bb6458ce81",
+      "gitBlob": "93b682170d7673aa3ac7ed0b0d7dae12cfca5db3",
+      "bytes": 4848
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchMatchViews.kt",
+      "sha256": "17868613aa325c28981126e869a7fa8f5d10371140d83d16eee486961c5655de",
+      "gitBlob": "2e5a7fe068dfd326119a0e703b59fc41b428f31f",
+      "bytes": 2689
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchOptions.kt",
+      "sha256": "e238fd9965b655b566be07f4112c25d052b48468d71e33b496dd46c1d5aeecfd",
+      "gitBlob": "2fa4cc19cced8d0d7315e53a17a187e72109036b",
+      "bytes": 4189
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchRuleDrafts.kt",
+      "sha256": "231b2acf1da3b2407bf450f790866edacc049a32b789a69ca3b1b562509f8fd2",
+      "gitBlob": "f78eb40f06e22993a485a02fc698108227a83d59",
+      "bytes": 3033
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchRuleGroupJson.kt",
+      "sha256": "4481bb7d5a2e1197ee8817c2f90cfbe83afedbd5d39e8ec80c542e5515e94aa9",
+      "gitBlob": "9844cc9571f693fe5fb14483214e4473db1fb842",
+      "bytes": 3942
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchRuleGroups.kt",
+      "sha256": "b1a776573b2f4344aaad962d19b2ff4cb926e3488c60005690cb02b5c76f245b",
+      "gitBlob": "04c9c1f7ab0a3d1bb1e74a8eead90ad01f96b89e",
+      "bytes": 7971
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchRuleGroupsDialog.kt",
+      "sha256": "5aa9919296a3ff34e83be780b4ea7c358ed33845b9b783f3bc115a090655ff1a",
+      "gitBlob": "f9f215e73a4850b405e0b5a5de2a9bdad3e9e231",
+      "bytes": 16584
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SearchRules.kt",
+      "sha256": "45ae160bf28cebbd575aa59831a4bde00203c0185dcd4d53c7eb502ba026465c",
+      "gitBlob": "f2d559b3d2c29e37edbd703b5f20aae55a22e621",
+      "bytes": 11357
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SetupBackup.kt",
+      "sha256": "6417d0be5540dcf621eef5b3fb1a1c0224baf8822e227b35ae0da8325e1ccebf",
+      "gitBlob": "7df83e2c0b3ffe53ef65d1539bd88c8be5b74282",
+      "bytes": 19607
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SetupController.kt",
+      "sha256": "b7f606e7a07dccaeb5a4658f3163581afd8de0b02af6ed00b7126dbb2fe760c4",
+      "gitBlob": "8f9386ff3b71eb79ca8351e4e49696e39775c046",
+      "bytes": 12428
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SetupDialog.kt",
+      "sha256": "c120f6750ffa8fe967292621d411914d9b5a36a6c86578a733901fc6ecc8dd7c",
+      "gitBlob": "e08d58881b9761ea2ae2d16443d3c8c0e87a1509",
+      "bytes": 16867
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SetupJson.kt",
+      "sha256": "9037166dabb016632d9acfafc15e16e877bd3ba5c85d8099114b4a93e92f8311",
+      "gitBlob": "ddc64abcaf4ce15b2ab52bffbf98192d18d691ad",
+      "bytes": 20162
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SetupPortability.kt",
+      "sha256": "55118326d4d44dc48467a4743bc7971412f7631302c457ee713d17d0365addf5",
+      "gitBlob": "b12407faa24498ad1ae914d2e4e14b007905c32a",
+      "bytes": 9642
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SetupStorage.kt",
+      "sha256": "3987b0572b24c0020e8f17c3222f2817ed31403507caee7d7dfe6787eaa81a96",
+      "gitBlob": "3cb72267c4585fccbfeb3821a3bcd6687c28b093",
+      "bytes": 7971
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SetupTransaction.kt",
+      "sha256": "955d564592058319566228cf0f730da891dc2fd4f6be1ec9b1ec975c2b4da9a8",
+      "gitBlob": "4f4a2849dac68838aae5d4009edfb045cdb62194",
+      "bytes": 9607
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ShortcutGuideDialog.kt",
+      "sha256": "5ec5b3e360d1826dd3ec7b1d0a0273d41b156b4186695b956d3450696bf7ae34",
+      "gitBlob": "a9a3c5be131bb2631ef4360029d24b18eeca86c5",
+      "bytes": 8810
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SidebarFavorites.kt",
+      "sha256": "6a9b4ed574d1a4439e5a7bb15ed3b86a866339032a53045d6cd7d5b023ce6ccd",
+      "gitBlob": "83f2710a8147de4bd646927f52a6afa61b002d0b",
+      "bytes": 18989
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SidebarLayout.kt",
+      "sha256": "ddbc4a7e059826d396ba38ddfcd04f4b0ea9bea18e8cce9add8a4c7a748206a3",
+      "gitBlob": "54dd0a2b06d6921e8c061ea07a96c69abe96f64a",
+      "bytes": 6235
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SmartFolderPersistence.kt",
+      "sha256": "33b58e7c729f6dad14347ca2faec739ba7b64b6cb9380d913cdfe3a377adacb9",
+      "gitBlob": "4f61962ec8d1624223be9b293998c6ef69e8b444",
+      "bytes": 1494
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SqliteLocalIndexStore.kt",
+      "sha256": "bf064785017567cdde27144ebda4f0e11bf2bd3a6d83fc4082548f8464ef8e54",
+      "gitBlob": "dff52997e129dc3096e27346ad83b83780243ab4",
+      "bytes": 19062
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/SqliteTransferStore.kt",
+      "sha256": "cc003d4975d3456e126a1047c8c1a95a6e71d89bf8ff66f412b14868c1ae781e",
+      "gitBlob": "991099c931827a6fa050f26dff97dae7752db26d",
+      "bytes": 25226
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StorageAccessPresentation.kt",
+      "sha256": "f78fbcce34dd1ec419b43d1a231a42931629c65e0a70c5646df81a91d45b7c54",
+      "gitBlob": "09d02b8f71a2546fbf541771c09b56e09ca10438",
+      "bytes": 2833
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StorageCapabilities.kt",
+      "sha256": "fd9f3fe0209b8d5aa9f72bb74d2537357599f9cc21805666c2790995c01a982a",
+      "gitBlob": "bf080edbedbb27bb026a7900e56616e132e625c5",
+      "bytes": 9398
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StorageLocationsDialog.kt",
+      "sha256": "23c4df6b5a5de01270f443de2555bc78aebf19be7cd17a5c915904b1aca9b071",
+      "gitBlob": "29b55b2358c99d67eee61c0ccdc8e2365d72521f",
+      "bytes": 17132
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StorageMonitor.kt",
+      "sha256": "7d0222d752113c99d4f70c19aca44d12a21c2aef2f665cea921b52bd77cc90fb",
+      "gitBlob": "39b3be3acd32f46272dc35b310eca09d16b4c52d",
+      "bytes": 12175
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StorageState.kt",
+      "sha256": "9dd60b2208c2d378b573fff8e31e6faeda94cd126bf14e63a607ac4cb534b690",
+      "gitBlob": "0396de8c81d7cf8b3b01719e8cc6401eb41f8e9b",
+      "bytes": 3213
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StreamingText.kt",
+      "sha256": "c81673989691ff41cfde88a236594a9c2381cd6f46295425c4ea4fba3a6a1a06",
+      "gitBlob": "c13f093db6db90c9cfbd5da7724ed706c5829604",
+      "bytes": 3487
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StructuredQuickLook.kt",
+      "sha256": "20fb815ba8a885408f0171fe986b962202bf259dc8ebbf8edb6b6ab058e78575",
+      "gitBlob": "4f6cf31cbfe891c0d51085bf781c7f2192f59046",
+      "bytes": 23605
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StructuredText.kt",
+      "sha256": "63405f68b71bc572af430723f5ec36f94bd16cae8cb4f0997fcf7ebd065e03d9",
+      "gitBlob": "24bdfad83deb57c33cf8edd87bef39f690f50204",
+      "bytes": 8395
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/StructuredTextViews.kt",
+      "sha256": "41bb44fb459282ff4bfb4b5a5e2896ed6e0625770e48635a15fc2ec95b232411",
+      "gitBlob": "1dc73f6dd3b318deb75a3610e894c03c5c5c2458",
+      "bytes": 19308
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TagStore.kt",
+      "sha256": "9759f4fcf5c807b8ffe0a17b16d1108143f9880301ea536912a09700f77b8940",
+      "gitBlob": "ef358191a574344e8f3e9d1248b112c4251876e7",
+      "bytes": 21739
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ThumbnailRepository.kt",
+      "sha256": "9d3638d7fe3d8ac81bc313102e851cab2f4d9f4f05c3a84e95d42cdb6b80f6f3",
+      "gitBlob": "46a420308511214adcd4c13f0bcb1e7c748210f7",
+      "bytes": 5254
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferCenterDialog.kt",
+      "sha256": "ae35e970ddc7fc0092295fb9e79c3998e1245828d9b60ddba25e1cf2b75bbde6",
+      "gitBlob": "c40e16c16a829d0713b4ce3aabe15e6b45174c7c",
+      "bytes": 26222
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferControl.kt",
+      "sha256": "f380caf290ff5966251ed466c43ae927c62901dee0437211d3ea189d7e56b4ad",
+      "gitBlob": "c2dda847c6d6b79462a3ae40ffd4ce6e11fc2cd0",
+      "bytes": 8207
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferEstimate.kt",
+      "sha256": "6da95dc48c573ef7c99c32cd26677a79ed169790dabbf8657fc6dbd05727b2ee",
+      "gitBlob": "8db18706b1153eb32a2f84d54548d1ff2b5e1a05",
+      "bytes": 4512
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferPresentation.kt",
+      "sha256": "b9dc563224db0b700a461f08d2f646aa38a850acbfe3c78a121441519a52034f",
+      "gitBlob": "dc290d2b323b5832dbca079924e1a6b371ee1b40",
+      "bytes": 2781
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferProgress.kt",
+      "sha256": "4ef2f8b3d6e5588e169b0133b119651f19669e4f6863fd26155d59566fd46218",
+      "gitBlob": "93ce1ee5d857eb873800aa2d88ca32110d7b8b6e",
+      "bytes": 3770
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferQueue.kt",
+      "sha256": "67a214fc1172fd1f81bc47c461e3d957af48d928f4858f3768d0a97e2d5d5f8c",
+      "gitBlob": "063eaa09ecf3263e2f573491f0648ce403259705",
+      "bytes": 11257
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferService.kt",
+      "sha256": "f1f3abd5d8eaeb9daab2bd0ffdb950afd6a1a142bf8c7815b27297ddeaf22eea",
+      "gitBlob": "d97891e6b3cc800be0fe5f946e45096849cf65d6",
+      "bytes": 6796
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferSpaceInspection.kt",
+      "sha256": "0e31f76c0910ba262121cf062e6829328ea20407512a9d3937581933c6097241",
+      "gitBlob": "653887c1513b359f0b05e16be7351c6aa1d5d123",
+      "bytes": 4791
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferSpacePlan.kt",
+      "sha256": "28b785ba028f0b2a351698d8f078c4eda7c6d2ef0d3976420f94e35617e7b94f",
+      "gitBlob": "b30a1fb79a8e981328492db072e89154d51815c1",
+      "bytes": 5602
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferSpacePlanDialog.kt",
+      "sha256": "e77a85ee71f1c332e39efd0eca6a29bca6c4cee696609d0ca05c18092057222e",
+      "gitBlob": "514f88885dfb5f38371e7ffeb4a91695b0227b18",
+      "bytes": 8816
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferStrip.kt",
+      "sha256": "0a9c5825ed13e2d56e205b69cf49991e017ef444b0e1506a05fbf8834cbe4fe7",
+      "gitBlob": "1b0a59829fc8e6fba4b4f74aaf51c1971e5470d3",
+      "bytes": 4530
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/TransferWorker.kt",
+      "sha256": "ee5fb6eec13b5919c5645b88e86cceeefed06a3cb28c8c67ba69357e6a606c83",
+      "gitBlob": "c9e4fdff0fe7cd7cb876ae014f4562404873cf6b",
+      "bytes": 22308
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/UndoHistoryFiles.kt",
+      "sha256": "057f14822a11ddd17f5dcbd9e1b03032138788cee7b239571a18852e7b43d30a",
+      "gitBlob": "2dbdc511c292667f3f16b03a5df834e659da2787",
+      "bytes": 4250
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/UndoHistoryState.kt",
+      "sha256": "d68a1c4c62992d4a955f512a6de21c5a1e04bfec2b27fa0ef17e9ed8322734ba",
+      "gitBlob": "93bd1e212ea3b822f0b70518300506b0ac5ef473",
+      "bytes": 11418
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/UndoHistoryStore.kt",
+      "sha256": "68f2897d59acb284feab82930a84cfa3f69f700c98dbab3052e11d3059a5dff7",
+      "gitBlob": "93a12738f1e5d1e4b347ccf89f6c19832d5e7ba9",
+      "bytes": 6482
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/VerifiedCopyReviewDialog.kt",
+      "sha256": "c96f12c405cb001be6051368323377056d8df5c4e8a21ace84627d96f25b52cb",
+      "gitBlob": "bf6261839561d4bebcd7269675256cbcc1e1ab3b",
+      "bytes": 3791
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ViewModeSelector.kt",
+      "sha256": "5a3837c739f6011e3915f1ec26c6361f21e6e06c2f79029ab1f3961f3cc32419",
+      "gitBlob": "85fe67ab30ad0d6db86e61582a06ba6f99661643",
+      "bytes": 6325
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/WorkingFiles.kt",
+      "sha256": "cccbcf62fc826d31a493e9b7428ebc1c20eabe4c3f6be9bc60cabed1254a5470",
+      "gitBlob": "94fd7bcd7a440608406ab96e8ca4dfa137135038",
+      "bytes": 240
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/WorkspaceDialogs.kt",
+      "sha256": "61cf684a1d6e34699c6b61d61143863c68495237c3a53f0b900aa45036424b57",
+      "gitBlob": "26ae516a183ff3fdc7e04facf6afb05b71fe0e1f",
+      "bytes": 17344
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/WorkspaceDocuments.kt",
+      "sha256": "66839e7d7174a77b37f0e284b68fcce6bc99756034065b7bc83c04e7ea46fbab",
+      "gitBlob": "e564d416c22151c94bf87b7378edea04683fee22",
+      "bytes": 11045
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/WorkspaceDocumentsProvider.kt",
+      "sha256": "e1a740007b1872a15060eed61db572773f8d479b5d48488d9fb6a4d4188ed5fb",
+      "gitBlob": "01394a11537edb52c44bdd32f7baf6695942c9e4",
+      "bytes": 15894
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/WorkspaceRecovery.kt",
+      "sha256": "25bc7f36bde762b60f2ae69b7fdc44888092d0a747b18739b62297472e542c4d",
+      "gitBlob": "75ab0d1340985863e4eda04a951891bebc504d30",
+      "bytes": 4054
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/WorkspaceRecoveryController.kt",
+      "sha256": "781ef830fe505454844e199363936e5380cc62e3cf26cafd348cbe917383f494",
+      "gitBlob": "896ffc953573a46ba06a007e2d9a2265745576b6",
+      "bytes": 10279
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/WorkspaceRecoveryDialog.kt",
+      "sha256": "61429f5c5d2b46df60ff169e3f7e470fc498af47e2f96ce40c2a97fdbf547486",
+      "gitBlob": "7602b51fee38154c5d44d904cc7e799214e0178d",
+      "bytes": 9733
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ZipArchive.kt",
+      "sha256": "8ed679384c3d808f7abbf0b1df04f2519671286c7725a6dfc73eaa225219eaa5",
+      "gitBlob": "a703ec5a83d058f994110a73685afb877e3585f3",
+      "bytes": 11147
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ZipLimitsDialog.kt",
+      "sha256": "47f8603fec8e6ad136940331ab7767db44d919bb05b6d84c4a37351a08bdd212",
+      "gitBlob": "b63eeda29aec828e21ff6699c4f68f2cff19e265",
+      "bytes": 5723
+    },
+    {
+      "path": "app/src/main/java/dev/findroid/ZipMetadataGuard.kt",
+      "sha256": "ab5568ecacb57b40f834286fcbbde19bd28f443097f3a639083014d54fdd46f6",
+      "gitBlob": "5a70c73859542c9f05ab2bb2c697b3ca866c2ef0",
+      "bytes": 13825
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_launcher.xml",
+      "sha256": "a5bb18e91294c7fc6b585b2dea59dcb34fc94fb9e9f4a550902ac89446a0058c",
+      "gitBlob": "10854c7d134dbf160d35dc7e7d285b482ee2ff7a",
+      "bytes": 618
+    },
+    {
+      "path": "app/src/main/res/values/styles.xml",
+      "sha256": "703ffc57cf96c90a4ad2277bac5967434e5e45caacc7f33af5e6a3efe6401383",
+      "gitBlob": "133ae0d3037ab8fab0c4644f072f8a39179cf775",
+      "bytes": 551
+    },
+    {
+      "path": "app/src/main/res/xml/data_extraction_rules.xml",
+      "sha256": "823d8546a1cd7be379eb0c151f6afe2e6eca11a769cdae0d013ed49da821645e",
+      "gitBlob": "e04ac961069f80688a1910058b14d585f23b7d28",
+      "bytes": 1149
+    },
+    {
+      "path": "app/src/main/res/xml/file_paths.xml",
+      "sha256": "9fbb408871aa9db1ea92e877fa59bd72d21fbcd266bd8ba2f27b62113f3aae5f",
+      "gitBlob": "4706d09b11101b00e07d5e42e62ea46d3762bc3d",
+      "bytes": 279
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/AppUpdateTest.kt",
+      "sha256": "d1cf1e393a99a5b3be835f286a19a49aea980da0c33a14e462ad745ca56cc44c",
+      "gitBlob": "ebae684f5ac20c5c41763417244f7df3ed24205e",
+      "bytes": 4412
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/ArchiveWorkflowTest.kt",
+      "sha256": "f88ea2167f7c7f54a95c156e4e788fae186c9ba694610fa1d4840575af48208a",
+      "gitBlob": "c864a820cac85c374eee35d7bcde5a2548252b04",
+      "bytes": 9612
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/BrandCompatibilityTest.kt",
+      "sha256": "44e6ce657b9ec6522b55ac2f2918fbd5c7ab3cd2832ef7a9a81ab10fd712d234",
+      "gitBlob": "9930280cf7c8e296d19943a0d8c20f9ad7f13bec",
+      "bytes": 1713
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/CommandAvailabilityTest.kt",
+      "sha256": "24ba93cc18867f7b1a81168673780fbf7e18c4842e2d1567df2d84a8ae103795",
+      "gitBlob": "00e9fe87ccbfaa6c0156abd79b9c688950c299dd",
+      "bytes": 7954
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/CopyVerificationTest.kt",
+      "sha256": "c3e72b065ccb39336b1406e3cc83747c3bd2634c669b515a254357687f416bdf",
+      "gitBlob": "249cb6e405f826824fd5e46ffdef7f05f3435503",
+      "bytes": 15324
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/DesktopArchiveTest.kt",
+      "sha256": "abc5936f0d2fb254531227b80eec5ca782798abe7a4d08c58cc0eb919f86e967",
+      "gitBlob": "b2758659d6aa38c840daeab51d087e114c6e8f81",
+      "bytes": 5543
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/DirectoryLoaderTest.kt",
+      "sha256": "1bf4d38c039b43c1b7e8223df14b3e66581ecc75f7c023eb6b394bbf023a658b",
+      "gitBlob": "15e9a53070e75a55e59a81f47b8096bbabbd9b20",
+      "bytes": 17853
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/DragPrecisionTest.kt",
+      "sha256": "3123c4fdb555937f0072a79b776125db91ae33cfbf2024eb31ce8264eb7cced6",
+      "gitBlob": "164da5d6271846a9c29c97b48afd7aca1897360d",
+      "bytes": 1662
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/ExplorerLauncherTest.kt",
+      "sha256": "c223f2c2afe5c28ed043f79a43272cb86d7e464d33e6ee9241f6bb9e39fcca8b",
+      "gitBlob": "f79a3ee8acad57054257a80989099f4491515e30",
+      "bytes": 1039
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/ExplorerShortcutsTest.kt",
+      "sha256": "547e9583da38ab95b5d78e7688809727e079fe88f7e44d313659127abb37b233",
+      "gitBlob": "99b86ab09e60563de0695198b96d4f5e0a5dba08",
+      "bytes": 5706
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FileAnalysisTest.kt",
+      "sha256": "1f1840deed3258cc3841ac8d5a91b273670afd942704865580def93410479554",
+      "gitBlob": "c4ac25d90775b50db729866bbff80eca46ad8f8a",
+      "bytes": 15180
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FileClickSequenceTest.kt",
+      "sha256": "7d9f6dfe2c534f90161abd02b1dbd69957128e13b6bf0519c8e3165623b25b76",
+      "gitBlob": "76baa2a8d0e4a373a74f61f6d2b66abfc6fe35a4",
+      "bytes": 1483
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FileEngineTest.kt",
+      "sha256": "da7f7838fff3c63976489ad987deb6bd745c45cf0861971c72ad19a6421dcd0e",
+      "gitBlob": "14ebb0d2c691df22bf9d0b6ef252b7924a30bdb8",
+      "bytes": 14273
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FileTypeTest.kt",
+      "sha256": "0607305efce67aecd4334fabf62d7cd46278120596550ce9918f07b1b52b72aa",
+      "gitBlob": "3def889fbddc0249e662f3c7e6ca14fe609262d0",
+      "bytes": 2271
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FilenameOrderingTest.kt",
+      "sha256": "104153db3ce48a9137b187926581a24bbf2ed3ce2921a38cf4f55b4721795c03",
+      "gitBlob": "79661cbf7dbf4624fe4204652b4453c6e8dc849b",
+      "bytes": 5903
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderComparisonTest.kt",
+      "sha256": "f7c9783dffc5a161bf972bb3ace00cd9822ebc4411ccfd3b6da76528c64c616f",
+      "gitBlob": "b628efe308612b5a2e3b518134c7ab27169726a7",
+      "bytes": 5410
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncAccessTest.kt",
+      "sha256": "3a9908c36f394fc72895ebb5dc12ccd5d89d4bde4f48f875231b4c9c80adab52",
+      "gitBlob": "d65756c672a22a0ef7847605bb777d30342ecdd1",
+      "bytes": 2591
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncApplyTest.kt",
+      "sha256": "7679d6751e7ccb57e1f300776801d634ef34bada4bdb65b3dff79bba2624579d",
+      "gitBlob": "22b5328ada790865f84ce1f3e3ff3939c6139e20",
+      "bytes": 22288
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncDigestTest.kt",
+      "sha256": "5c8b9a6699ae814ccfcb6facb9c42aae8d0971d979028a737b13fb2d9a515f82",
+      "gitBlob": "cf082ce4bfd4bfb54f4323b7ed6427e53fedd9c1",
+      "bytes": 5875
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncInspectionTest.kt",
+      "sha256": "2a9fd5d3f73209325df3a7c821734863a1972f777821b3bf586432a8d8bc001d",
+      "gitBlob": "7be1bbd86b53120cc907ab1348254c8e41b0d1a5",
+      "bytes": 6543
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncNioTestFiles.kt",
+      "sha256": "7b69ce6f91ec6bcb6e2e6d12557fe21ba6b10dbdfdc634b420f03b0f334f1b03",
+      "gitBlob": "c90a3dbd30ae46de9aa166004cc23c09ece482cb",
+      "bytes": 4057
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncPlanTest.kt",
+      "sha256": "7c880e8acb1e7ea435fc8b0ea374ee3bac524b67ac62bb64342b593d8f2abc62",
+      "gitBlob": "b3006d459b66c0642f9fd3892f38dcd4ed73dc80",
+      "bytes": 11807
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncPreparationTest.kt",
+      "sha256": "7abaad688ab9dfa42d196cef33beacd2ac418a3280b78c58dc623a8d1426790c",
+      "gitBlob": "7f81ee3fd66188f295f04cac82407c2391f630f3",
+      "bytes": 10903
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncPublicationLogTest.kt",
+      "sha256": "6af7c9e27f9dd559c9ade4db6f362ffd1b5b9dab15706da7920c50f4b67b48a7",
+      "gitBlob": "d1c56f7d3ae38ab1938ff1c72404fe0ee83e6eea",
+      "bytes": 7642
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncPublicationTest.kt",
+      "sha256": "0327c4c629e6b36697d9cf83c272adf9b7f2c0bc245be646a07d201cbc959f7b",
+      "gitBlob": "47036a60a05e874a72756123c0749a53e8c9536e",
+      "bytes": 6764
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncRecoveryPreflightTest.kt",
+      "sha256": "b30324a4869c1a6209d6c42852adb052252bc2b015c90b1dd8352aedfbdd507f",
+      "gitBlob": "6d2722922804bc90ebe1d895aad733f2393ba1c3",
+      "bytes": 4958
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncRunRecordsTest.kt",
+      "sha256": "afe8e0752c2b73468280bc4c90469031de625373b4137a9bf349b6bffe8ac8da",
+      "gitBlob": "f2f4edb23e807c7803d2a5059a73725d74628538",
+      "bytes": 5089
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncStagingTest.kt",
+      "sha256": "7b9e273d8251c53e29dc219708bea243622790222371bfa4e406763caba9b8bc",
+      "gitBlob": "0e3d83696ed1563c7ac22896e04dc8f7d3a07746",
+      "bytes": 9488
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncTrashTest.kt",
+      "sha256": "b5a6b7c36c5040800f9c1ab9bca3d3dcb2175174a569edb8a56b1501da2ddf1c",
+      "gitBlob": "c6e4bb34c446824c70730c45275345a2a879da09",
+      "bytes": 7132
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/FolderSyncTreeChangeTest.kt",
+      "sha256": "9b9a4b4e5f0a36f9cceee426915ba62bef50f0573044fd7f7e43da6736c8a0c0",
+      "gitBlob": "85aeb2cbac6b50695c6c360d78532a48d8e098e8",
+      "bytes": 5936
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/HousekeepingTest.kt",
+      "sha256": "a45499991d55bbacb4363c32e4827738b1df9f7993a227e9fa1e4f3d2f3d87ca",
+      "gitBlob": "1984b2ecbd9fc192e5fcb6630dbb60317f2e69b9",
+      "bytes": 10561
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/ImageGeometryTest.kt",
+      "sha256": "8fd4a3de992cc0f8634c777a27c2266c1eb17bf4f5f737f0c22a5aa4695a96db",
+      "gitBlob": "ac4d1b822454ce778a814a221bcb67460f17539b",
+      "bytes": 6993
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/IncomingShareNameTest.kt",
+      "sha256": "218c6f857903d0365d6fc583cfa817c081019e02dda896e6eb0d744c4bfeae45",
+      "gitBlob": "277707b1af5ad0b02ce5702aa9b1c138a4b068b8",
+      "bytes": 1925
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/IndexedDirectoryLoaderTest.kt",
+      "sha256": "f230847611548613d97b9205df6af2b8acdeb030a7f9df82672cd25ad524df9e",
+      "gitBlob": "a7d3990dda0d7a207ffa46a452c61a68099cf8a3",
+      "bytes": 11966
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/LocalFileSafetyTest.kt",
+      "sha256": "3b57d8bf38af945a718ba3254a00db358070b7c1e3f4b76b7e68a5362be3ac64",
+      "gitBlob": "559ae2421db0e48e96df61ea5cb9b6bd007d6a35",
+      "bytes": 2198
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/LocalIndexScannerTest.kt",
+      "sha256": "783286784282b124be1294bfffb98ddf82b41c09cd006ec5097c4676bea6d286",
+      "gitBlob": "a96ab38589e2b47934b1d5272a1d60d0efcc6393",
+      "bytes": 7676
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/LocalIndexTestStore.kt",
+      "sha256": "e4f841af15c78fea33e16b6311958c1c2671ca08410daca1e385f667dca25281",
+      "gitBlob": "2ea27ac3359227f784ba28cae2fa3bec69781acc",
+      "bytes": 2949
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/MergePlannerTest.kt",
+      "sha256": "656d0e1252ae2ee926d843bba897f2f74b6c1cedbdf9b233164fb7ee7423006d",
+      "gitBlob": "b08bbe3d58efb3cd83e30719f1c76f2a9fa1acdc",
+      "bytes": 4048
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/MultiRootLoaderTest.kt",
+      "sha256": "153883698880fd974ede3c08d7157bf1aad8af51c6ac8d80c72411b44c996105",
+      "gitBlob": "c41d6d450fc8e262b52dd09f79481d2bff102ee0",
+      "bytes": 14183
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/MultiRootPersistenceTest.kt",
+      "sha256": "496285a68128ebf982993322726bda6a5d0c95744113622db4a33974eddd9706",
+      "gitBlob": "2f9bb9e9f7bfdc099f5f2387b9ac498cf1d4a9c5",
+      "bytes": 4571
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/NavigationStateTest.kt",
+      "sha256": "af1af82becddc1a03ff85d1a545bc8e1a054ba8071f562de9e2a48850a0659f6",
+      "gitBlob": "0819a385ce5651592344e617aa7ebe53432090bd",
+      "bytes": 4485
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/OrganizationIdentityTest.kt",
+      "sha256": "572a69de849ce785ffd0118a1a72912acd163095337d213f4f903e77cfe0b744",
+      "gitBlob": "91c6b932e75737216af9215ecde4446152311668",
+      "bytes": 11048
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/OrganizationLibraryTest.kt",
+      "sha256": "1059cbb84174b00db57c771220897e721a5a33cbaf97324d1ea397e9bb5d470b",
+      "gitBlob": "5e70ab7b5080cf5da05a430c068f535518e6f71d",
+      "bytes": 14875
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/ParityEngineTest.kt",
+      "sha256": "294f849690a0327349d25a4a319412ffca8b4dba5e4778809c1734a8c9b66300",
+      "gitBlob": "3ca9f6e610e9963abc13c39659b34764825f9d00",
+      "bytes": 10488
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/PartialCopyPersistenceTest.kt",
+      "sha256": "dc577e7b7b5bed4f405cde034f59c1c1ccb1835724b52aa6e9a06c9b234cf238",
+      "gitBlob": "9c51ffc5fbb9922890b9edbe39151f285f0f9a5b",
+      "bytes": 9011
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/PartialCopyRecoveryTest.kt",
+      "sha256": "67721c10a0f36eb26104249bfee4957c8719484b4f7c87cb0dba266e296db34e",
+      "gitBlob": "88166b80591a9517b45c3542f11ae0bec7320ce8",
+      "bytes": 29144
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/PdfSearchTest.kt",
+      "sha256": "ce9921ffffebe63e2e44537e0086fe255d5c6426d0d5d9fb936bbee592496ca7",
+      "gitBlob": "87259879f877ed79287ba2eb09ffd7bbec499d5e",
+      "bytes": 1927
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/PdfSearchWorkflowTest.kt",
+      "sha256": "b1b90e5221222bf6c19c55a5d176c0cf02d567ca26c7fdabb3b1aa5deb8eab38",
+      "gitBlob": "9b1dc4baf753bed84051fc6eaa49d60dfa515455",
+      "bytes": 2623
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/PersistentUndoTest.kt",
+      "sha256": "0685dd2ea44d8d49698de5606498379258a9b4c79e6e6b567d432a6fdd7e23eb",
+      "gitBlob": "28087241a15dbe932eeb345cfac38cdad1a3e5e6",
+      "bytes": 27164
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/RecentFileActionsTest.kt",
+      "sha256": "8d14262a206645811d866d160739c8e82aff175cb933ff1e14a9b8cdbd1c643f",
+      "gitBlob": "097a0c5c784ec6972f46a8d9947cef80a466a1e4",
+      "bytes": 6610
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/RecentSearchesTest.kt",
+      "sha256": "534cd1d1ebeace9c85a42855872c3726e8520ad1d82f392ed8ec7c6b4bfed678",
+      "gitBlob": "5570978f676bad5921a01db1dec880635e2e43ff",
+      "bytes": 12207
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/RecoveryInboxTest.kt",
+      "sha256": "0e9ed8f1b263e25a6d819f1cb48bf997b8f8c8bea161c2c740f5c86e0ede89ab",
+      "gitBlob": "3121d7ce8eb7acf1fe44db77c9534984e846d7bb",
+      "bytes": 6288
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/RecoveryMarkerLifecycleTest.kt",
+      "sha256": "f7c91b3ac848958e0eff228fad0d031f05dfadb39c74936033d1250de5f3a476",
+      "gitBlob": "73da53eaa0eacec27faf81a961708ed82c714922",
+      "bytes": 8377
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/RecoveryNoticeStoreTest.kt",
+      "sha256": "09f4279b92c710b96376f5a4accad732429f72dd2bb4ef54e7187a1cf079e20e",
+      "gitBlob": "0f9385bc7e9cd0f934e5e958e200293810d000ec",
+      "bytes": 6028
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/RenameRecipesTest.kt",
+      "sha256": "a857496fca8ba89eccbd974d7fe59fd96c96bc76b32bbb4f4f045f190bafb9d4",
+      "gitBlob": "1ff4c3f34b02605ee057b9acb160782ee5dfe3af",
+      "bytes": 21205
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SearchEvidenceTest.kt",
+      "sha256": "d5f54d28194253f9ab70944e5ec4a8fad7bdbf90b829c68700040c4a04ecc64e",
+      "gitBlob": "704a97df2c0d45b07d369880881bbf8e8d84e159",
+      "bytes": 3723
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SearchExclusionsTest.kt",
+      "sha256": "aa292e5a21d7332db2faa163fae36493d73ca2f0207fb98834ffb982f3f77e5c",
+      "gitBlob": "2256f158db3578cc3c36fa4b5ed3d3f6e8d3a662",
+      "bytes": 5089
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SearchLocationsTest.kt",
+      "sha256": "227a77f5192c0cb937ea42b3b3a213506afefeec67291fc536218744296e871e",
+      "gitBlob": "8fcdf5d9c442d305cb0f55d0f5db5a568c5e000f",
+      "bytes": 1920
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SearchOptionsTest.kt",
+      "sha256": "bf6ded91878256f2eccacaa59572d03be5281c39e3f9f27ff74bfa262e0c6bcf",
+      "gitBlob": "640f3194ed8c8ae9ca5f1c85aba7ac49acb3dd99",
+      "bytes": 4322
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SearchRuleGroupsTest.kt",
+      "sha256": "8b56f84951ddfc27a652a2568a70090b2f42a79a63da5ae68a516b518c7cbbee",
+      "gitBlob": "18c6278ea3ec1c105ff395b712193d92744e9d8d",
+      "bytes": 9804
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SearchRuleIntegrationTest.kt",
+      "sha256": "5cea4994321f3ae7b5c3eaf17ff76c9a4345abe5b958e94b552a2dfe2fdb0e31",
+      "gitBlob": "8e73a2a5d72fc6be41b7eb8b5cc6cf36f4f2bd40",
+      "bytes": 7308
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SearchRulesTest.kt",
+      "sha256": "bf05d00049834301c3a0f6a34353ec7cedc1c0a48ad52fc11b0079c4ec7c551b",
+      "gitBlob": "e31402ee43cca70dcaee4a6fd7cea231bbacc366",
+      "bytes": 5469
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SetupBackupTest.kt",
+      "sha256": "fd34fa33e16c14e88e52a136fbe20470e7ea8ef832d99802bacffdea346707f7",
+      "gitBlob": "b585abbe76644ee800943e2ddc0e2e626e8b6fca",
+      "bytes": 17565
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SetupJsonTreeTest.kt",
+      "sha256": "549dbac5f4bfd4df4457fcd1b897008a08e8fd86f8c91fefc0e4d1d5c01e4ae6",
+      "gitBlob": "050660c6f0373975243b71e75bd7da4846c54412",
+      "bytes": 1516
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SetupTransactionTest.kt",
+      "sha256": "8c4703d8f8f3f015d96cfcfd6196d8452c702180c9cede83d68fd3157d99183e",
+      "gitBlob": "9e5d1b3458c68309ce63beacef3bafac50769d36",
+      "bytes": 8093
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/SidebarLayoutTest.kt",
+      "sha256": "990e5560d1f08d4340d754a1f1664de80a491109b755b2f1df64fbc378351abb",
+      "gitBlob": "cceee691942190fe9b623d135b302c4544106148",
+      "bytes": 3464
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/StorageCapabilitiesTest.kt",
+      "sha256": "c29e4bffeca9ee00e6016036a9c0b1339ca80e718af95ec1ab4c4f22de7662a0",
+      "gitBlob": "98909a5f9c0be65bc6606730848ebb9ea78e7fda",
+      "bytes": 10007
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/StorageStateTest.kt",
+      "sha256": "144b2fd0078bc5e14625cd07ec95aab77347c68490082467d368312ac8463a8c",
+      "gitBlob": "d26076458d9aa121a6f954211bc18be97a359c0e",
+      "bytes": 3341
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/StreamingTextTest.kt",
+      "sha256": "37fb552643be5816477a53b2e7e2d5ecf14ad30a5cb925e5c8ea85a3a6f3e026",
+      "gitBlob": "767391e45c4783ed5d2605b35874e8fa4f263be3",
+      "bytes": 2075
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/StructuredTextTest.kt",
+      "sha256": "fadc04e61eee4d0f0bcf769421f58b9b30d52caee6f65d5730075621dca50d64",
+      "gitBlob": "4c01e00cf8a1259f8e855b25ce237d8c24d44247",
+      "bytes": 5135
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/TransferByteCountTest.kt",
+      "sha256": "c063844099b30889a2a61569ee7cc91fb70844f6dc1c08338a99d34c9f95f5fc",
+      "gitBlob": "304ce3159710fd8438dd070cdd41816ee91505c0",
+      "bytes": 2078
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/TransferPlanningTest.kt",
+      "sha256": "537357ad228b8386a552645884320d8d0806dff0868db28161216a8eebaa3645",
+      "gitBlob": "dd0b3319f43f060c94cab80d60c19e8a0c64ba84",
+      "bytes": 7824
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/TransferProgressTest.kt",
+      "sha256": "7f905ef3b196df301639c8d7278a5b0f68e5a27b734a21cded888c3df9e91f19",
+      "gitBlob": "5253030c95f1eb0594d5927dbce7c2cd3c6bc4f9",
+      "bytes": 9101
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/TransferQueueTest.kt",
+      "sha256": "c9f335091db3e8251c586d9a391228314716a5eaf3700a78e60d57323b3ad733",
+      "gitBlob": "3f7b662c697960694e3daa297b7be9d4d7767bad",
+      "bytes": 9060
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/TransferSpaceInspectionTest.kt",
+      "sha256": "0885f2fcc70661290ce499eb6a41985107e1f87e1dbec1d12d306ab9b275373b",
+      "gitBlob": "1c10655cce8a50af2b1dd8e74991b2567909671a",
+      "bytes": 6792
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/TransferSpacePlanTest.kt",
+      "sha256": "4c8c5f6318d793c1a6581976db6cb8aa695933cb6ea3c77cdb7c6aa06571cdc1",
+      "gitBlob": "1d5e677fd940a49e0651cce1f06645f57ccaca28",
+      "bytes": 6691
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/WorkspaceRecoveryTest.kt",
+      "sha256": "8c80635926c789ebca905b05a50402663aa964fdecc2ce01154df5eb599cd253",
+      "gitBlob": "38719a8747f7ab794c5602b5e533b980a959d6ce",
+      "bytes": 7166
+    },
+    {
+      "path": "app/src/test/java/dev/findroid/ZipMetadataTest.kt",
+      "sha256": "5b824c6022d354bc5af93c47d4dfec4d0ea645373289071e5db0b7c905b61039",
+      "gitBlob": "1d2b2b86051835ca3c8f70a98abfde2297c0c8a7",
+      "bytes": 10034
+    },
+    {
+      "path": "app/src/test/resources/zip64-large-metadata.zip",
+      "sha256": "e4c3aa9e941f50d9ab9d28656816d2cd00ee73105fad1a3cc7eb59f10f683436",
+      "gitBlob": "a5b6702642569ddb32ff874124eef069197b9957",
+      "bytes": 264
+    },
+    {
+      "path": "app/src/test/resources/zip64-small.zip",
+      "sha256": "62c5576e7279c0100a27b7f3e996fc8fa7a3a10202cc0adc84f843a4e1ee88d0",
+      "gitBlob": "30a37151ee7f29454e4d05ba5eb1f92c4cdfc2c5",
+      "bytes": 264
+    },
+    {
+      "path": "build.gradle.kts",
+      "sha256": "780d597cbe0f80d0103221a566db7574d1e07b17adca5bdbe7d6c728d77df12a",
+      "gitBlob": "a5af807478ca1a4d751c2747b21d642943c36c68",
+      "bytes": 149
+    },
+    {
+      "path": "gradle.properties",
+      "sha256": "e43a00491832254a35cf5a979ef6de17f78c4e159d446be39319d2e3d3e46325",
+      "gitBlob": "2430f7ad2eea8cb2f5f18dc918246e09626d8687",
+      "bytes": 100
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "sha256": "70fa201501995e6f45c0c475def71093f8115849344c48322ca997cfddba8534",
+      "gitBlob": "c61a118f7ddb21223f1a2fdd05f6aec1b9863aec",
+      "bytes": 252
+    },
+    {
+      "path": "gradlew",
+      "sha256": "aed171fb114f82e6eaea4970a245a200e0582a7dcc8ec0891ca41b6e4a62b754",
+      "gitBlob": "739907dfd15937f032b5a46390e9d63709e87f7a",
+      "bytes": 8654
+    },
+    {
+      "path": "gradlew.bat",
+      "sha256": "fedad02c18e266ec094995a5751b7fe1eb6e74f66bf75db64fae2e50eb22c234",
+      "gitBlob": "c4bdd3ab8e3ccd2ac3a2bc0db0f856f16b79ef39",
+      "bytes": 2896
+    },
+    {
+      "path": "settings.gradle.kts",
+      "sha256": "51cabf60b946879ee104b361de2a2394e394b6642fa10a69ed0292914cd797c3",
+      "gitBlob": "10f43bcf98728d650d3fb13e224001129261ec9b",
+      "bytes": 444
+    }
+  ]
+}

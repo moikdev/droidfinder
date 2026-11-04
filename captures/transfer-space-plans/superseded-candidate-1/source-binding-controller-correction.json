@@ -1,0 +1,6 @@
+{
+  "previousCheckerSha256": "1edf6cd4ce8bbda1c0b1faf0d3f03e7bd7ba2f17f5b1312ba2f17a78ac710562",
+  "reason": "Copied checker still pointed to the previous 0.47 manifest and correctly refused mismatching 0.48 inputs before writing any receipt. Updated manifest and release paths for 0.48.",
+  "applicationAndFrozenOutputsUnchanged": true,
+  "noDeviceCalls": true
+}

@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "passed": 9,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "secondaryPaneReviewKeepsThePrimaryPaneLocationAndSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "aDismissedReviewCannotConfirmANewerReviewOfTheSamePaths",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "sparseLogicalSizeShowsShortfallAndDisablesStartWithoutAllocatingPayload",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "refreshRecomputesMatchingOriginalsWithoutCreatingRecoveryCopies",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "copyDestinationOffersNamedSpaceReviewAndOpeningStartsNoTransfer",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "alternativeDestinationRetainsTheReviewedSourcesAndStartsNoWork",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "explicitConfirmationCopiesTheReviewedSourceAndKeepsOriginalBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "scrollableReviewKeepsCompleteNamedControlsAndProducesASurfaceCapture",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceWorkflowTest",
+      "test": "aNewBackgroundSelectionIsKeptWhenTheReviewedCopyFinishes",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 58.6,
+  "timedOut": false
+}

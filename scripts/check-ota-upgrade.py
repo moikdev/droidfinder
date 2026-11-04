@@ -94,8 +94,19 @@ def main():
             '--es', 'finderWindowId', 'ota-sidebar-' + stamp, '--es', 'finderLocation', full)
     def updates():
         nonlocal menu_tap_retries
-        launch(); root = wait('browser', lambda t: bool(nodes(t, 'Actions'))); tap(one(root, 'Actions'))
-        wait('more', lambda t: bool(nodes(t, 'App updates')))
+        launch(); root = wait('browser', lambda t: bool(nodes(t, 'Actions')))
+        for menu_attempt in range(5):
+            root = dump('more-before-tap')
+            if nodes(root, 'App updates'): break
+            tap(one(root, 'Actions'))
+            if menu_attempt: menu_tap_retries += 1
+            try:
+                wait('more', lambda t: bool(nodes(t, 'App updates')), 8)
+                break
+            except AssertionError:
+                # Read a new hierarchy before deciding whether another toolbar tap is needed.
+                if menu_attempt == 4: raise
+        wait('more-ready', lambda t: bool(nodes(t, 'App updates')))
         for attempt in range(5):
             root = dump('open-updates')
             if any(n.get('text', '').startswith('Installed: ') for n in root.iter('node')): return

@@ -23,4 +23,8 @@ This is a point-in-time review, and it does not reserve space. The transfer engi
 
 ## Development status
 
-Proposal 45 is in progress in a separate checkout. A development build passed 930 JVM cases, including 36 focused space-planning cases, and 17 focused metadata and interaction cases on each assigned API30/API36 tablet. Both controllers restored original bytes, Workspace, grants and the exact public 0.46 APK. Those runs are draft evidence; final source binding, full native regression, exact optimized layouts/upgrades and public release acceptance remain pending. This guide describes the candidate behavior and does not mark the proposal complete.
+Proposal 45 remains in progress. Frozen candidate 2 passes **930 JVM cases**, including 36 focused space-planning cases, with no failures, errors or skips. Lint reports 0 errors, 148 warnings and 12 hints. All 395 source inputs match public commit `bf1ae1858bb071b92d42ac02f1057a82011cf00c`; all 104 frozen build/report outputs are unchanged.
+
+Both assigned API30/API36 tablets pass the 17 focused metadata and interaction cases on this exact candidate, including the destination row's 48 dp assertion. Those cases are a subset of the running 549-case regression in 59 fresh-process batches per tablet. Exact optimized core and font/theme/size checks are queued behind the same reservations. Public OTA and independent immutable-archive acceptance remain pending.
+
+The earlier candidate was stopped between batches after code review found 44 dp rows in the existing destination chooser. Its original managed bytes, Workspace, grants and exact public 0.47 APK were restored on both tablets. Its application and frozen output bytes remain intact in a separate checkout; its partial regression is excluded from final accepted totals. Candidate 2 adds a scrolling chooser and complete 48 dp folder rows.

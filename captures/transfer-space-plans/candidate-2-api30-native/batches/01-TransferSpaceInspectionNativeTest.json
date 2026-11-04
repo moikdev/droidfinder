@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "passed": 8,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.TransferSpaceInspectionNativeTest",
+      "test": "localInspectionKeepsAllBytesAndCreatesNoWorkingOrRecoveryFiles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceInspectionNativeTest",
+      "test": "unknownReportedCapacityPreservesKnownSizes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceInspectionNativeTest",
+      "test": "providerReplacementAndPrivateRecoveryDoNotAssumeIndependentStorage",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceInspectionNativeTest",
+      "test": "replacementReviewIncludesExistingOriginalAndReportsExactKnownShortfall",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceInspectionNativeTest",
+      "test": "zeroReportedFreeSpaceProducesAShortfallWithoutDocumentWork",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceInspectionNativeTest",
+      "test": "providerUnknownSizeStaysIncompleteAndDoesNotOpenOrChangeTheDocument",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceInspectionNativeTest",
+      "test": "cancelledInspectionLeavesEveryOriginalIntact",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.TransferSpaceInspectionNativeTest",
+      "test": "unreportedProviderCapacityIsVisibleRatherThanInferredFromAppStorage",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 2.1,
+  "timedOut": false
+}

@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 50,
+  "versionName": "0.48.0-preview",
+  "apkName": "Findroid-0.48.0-preview.apk",
+  "bytes": 8924968,
+  "sha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.48.0-preview/Findroid-0.48.0-preview.apk",
+  "notes": "Review space before copying or moving. Copy to and Move to now offer a metadata-only space review with destination contents, possible replacement recovery copies, reported free space, known shortfall and unknown-provider explanations. Choose another destination or refresh before starting. Opening or closing the review starts no transfer.\n"
+}

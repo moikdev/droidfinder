@@ -1,0 +1,21 @@
+{
+  "candidate": 1,
+  "fullRegressionAccepted": false,
+  "frozenApplicationAndBuildBytesUnchanged": true,
+  "tablets": [
+    {
+      "api": "api30",
+      "completedBatches": 8,
+      "casesBeforeStop": 75,
+      "originalsRestored": true,
+      "public047Restored": true
+    },
+    {
+      "api": "api36",
+      "completedBatches": 5,
+      "casesBeforeStop": 48,
+      "originalsRestored": true,
+      "public047Restored": true
+    }
+  ]
+}

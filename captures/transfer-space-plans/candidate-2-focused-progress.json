@@ -1,0 +1,78 @@
+{
+  "sourceCommit": "bf1ae1858bb071b92d42ac02f1057a82011cf00c",
+  "frozenManifestSha256": "df1543de44dc61727df23a99e20e6ce987aa6c5a4ba5353c29754249b60adcbe",
+  "focusedSubsetOnly": true,
+  "fullNativeAcceptancePending": true,
+  "optimizedAcceptancePending": true,
+  "publicOtaAcceptancePending": true,
+  "proposal45Accepted": false,
+  "implementedProposals": 35,
+  "totalProposals": 72,
+  "jvm": {
+    "tests": 930,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 148,
+    "hints": 12
+  },
+  "frozenSourceInputs": 395,
+  "frozenOutputs": 104,
+  "allFrozenSourcesAndOutputsUnchanged": true,
+  "tablets": [
+    {
+      "serial": "emulator-5602",
+      "contract": "captures/transfer-space-plans/candidate-2-api30-native/batches/contract.json",
+      "contractSha256": "0581ee369dd3b84de3082af0ca2557514549cf4b30155274b145161e328e5911",
+      "recordedApkHashesMatchFrozenPair": true,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "reports": [
+        {
+          "report": "captures/transfer-space-plans/candidate-2-api30-native/batches/01-TransferSpaceInspectionNativeTest.json",
+          "reportSha256": "19ececc53e6991c403a033c9148f4bd47b46b446e303363b03f1f6351ac996eb",
+          "log": "captures/transfer-space-plans/candidate-2-api30-native/batches/01-TransferSpaceInspectionNativeTest.txt",
+          "logSha256": "8c45d97111c9bdf79406c3e72d7c9a43472e5915c08b2038ba4505f8fb2346f4",
+          "passed": 8
+        },
+        {
+          "report": "captures/transfer-space-plans/candidate-2-api30-native/batches/02-TransferSpaceWorkflowTest.json",
+          "reportSha256": "1555c35d704381b3b108b019e8fe5dc35028642d3b65cb193e3555621e6def3d",
+          "log": "captures/transfer-space-plans/candidate-2-api30-native/batches/02-TransferSpaceWorkflowTest.txt",
+          "logSha256": "39972d45e0e0eae384c4df7a4873ba6af282b5d7387770ef57c3f74fd6d6a914",
+          "passed": 9
+        }
+      ]
+    },
+    {
+      "serial": "emulator-5582",
+      "contract": "captures/transfer-space-plans/candidate-2-api36-native/batches/contract.json",
+      "contractSha256": "a2e1a3a078ac43eb2699bf4e186a7060078cb8e00dc5824c1e44ed65ef1d1ac4",
+      "recordedApkHashesMatchFrozenPair": true,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "reports": [
+        {
+          "report": "captures/transfer-space-plans/candidate-2-api36-native/batches/01-TransferSpaceInspectionNativeTest.json",
+          "reportSha256": "672a5c07611180f6a8b3db705e531f31d33b90ca4080ca22065a3b9f2881090b",
+          "log": "captures/transfer-space-plans/candidate-2-api36-native/batches/01-TransferSpaceInspectionNativeTest.txt",
+          "logSha256": "e5384b2c8d3a01bbcab1b4cb3c07992ac5e458d4b215f06ce2ce689c938ddb97",
+          "passed": 8
+        },
+        {
+          "report": "captures/transfer-space-plans/candidate-2-api36-native/batches/02-TransferSpaceWorkflowTest.json",
+          "reportSha256": "2434e60fec1bb46a1323c00f7ea4deb643e4916631873b597f44ecd18d4f3197",
+          "log": "captures/transfer-space-plans/candidate-2-api36-native/batches/02-TransferSpaceWorkflowTest.txt",
+          "logSha256": "77a4dba8ad7a4b214f3079df3a7b2e7506b915a03812eabaa5a262889cb68a87",
+          "passed": 9
+        }
+      ]
+    }
+  ],
+  "hashScope": "Each tablet batch contract records the exact frozen debug/test pair. Per-batch reports record cases; final native aggregate and controller will verify installed APK hashes and restoration after all batches. No per-batch installed-hash claim."
+}

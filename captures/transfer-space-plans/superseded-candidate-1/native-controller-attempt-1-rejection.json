@@ -1,0 +1,8 @@
+{
+  "controllerSha256": "bc5b65c0c8531a0fac1b7d778100f19ee743a87cf7b4cc0447ce0969cc07663c",
+  "rejectedBeforeDeviceCalls": true,
+  "reservationWasReleased": true,
+  "applicationAndFrozenOutputsUnchanged": true,
+  "reason": "Controller inherited a wrong checkout path and stopped when opening its candidate manifest, before any adb calls. Corrected controller derives its checkout from __file__.",
+  "retainedEmptyOutputRoot": "/tmp/findroid-transfer-space-plans/captures/transfer-space-plans"
+}

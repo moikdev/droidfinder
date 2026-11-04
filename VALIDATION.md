@@ -1,5 +1,16 @@
 # Android preview verification
 
+## Findroid 0.48.0 — review transfer space (candidate)
+
+Proposal 45 remains open. Frozen candidate 2 passes **930 JVM cases**, zero failures/errors/skips, with lint **0 errors / 148 warnings / 12 hints**. Its **395 source inputs and 104 build/report outputs** are frozen. Every source input matches public source commit `bf1ae1858bb071b92d42ac02f1057a82011cf00c`, including declared Windows-wrapper checkout line endings. BUILDINFO honestly records the dirty checkout with generated reports and acceptance tooling.
+
+Both assigned tablets pass the **17 focused Android cases**, including provider unknown size/capacity, conservative replacement costs, cancellation, explicit copy, later-selection preservation, secondary-pane isolation, stale-review refusal and complete 48 dp destination rows. These are a subset of the **549-case / 59-batch** full native regression currently running on each API. Exact optimized core/layout checks are queued; actual public OTA and independent immutable-archive acceptance remain pending. This is not a completed proposal or release acceptance claim.
+
+Candidate 1 was stopped safely between batches after review found 44 dp rows in the inherited chooser. API30 completed 75 cases in 8 batches; API36 completed 48 in 5 batches. The owners restored all original managed bytes/absences, Workspace, grants and the exact public 0.47 APK. Those partial runs are excluded from final totals, and every frozen candidate-1 source/output byte remains intact in its separate checkout. Candidate 2 adds a scrollable chooser and at least 48 dp folder rows. An earlier host-only controller path error stopped before any adb calls; its retained receipt is separate from actual device attempts.
+
+[Candidate guide](docs/TRANSFER-SPACE-REVIEW.md) · [Candidate release notes](docs/releases/0.48.0.md).
+
+
 ## Findroid 0.47.0 — recovery inbox
 
 Local, actual public OTA and independent immutable-archive acceptance completed on November 4, 2026. Proposal 44 is implemented.
