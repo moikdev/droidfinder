@@ -119,6 +119,9 @@ class FinderSession(
     internal var folderSyncReviewJob: kotlinx.coroutines.Job? = null
     internal var folderSyncReviewControl: TransferControl? = null
     internal val folderSyncRecords = mutableStateOf<FolderSyncRecordsState?>(null)
+    internal val recoveryInbox = mutableStateOf<RecoveryInboxState?>(null)
+    internal var recoveryInboxJob: kotlinx.coroutines.Job? = null
+    internal var recoveryInboxControl: TransferControl? = null
     internal val folderSyncJournalParent = File(app.filesDir, ".folder-sync-journals")
     internal val folderSyncRunRecords = FolderSyncRunRecords(File(app.filesDir, ".folder-sync-runs"), folderSyncJournalParent)
 
@@ -134,6 +137,17 @@ class FinderSession(
 
     val message = mutableStateOf<String?>(engine.trashIndexNotice)
 
+    internal val recoveryMarker = File(app.filesDir, "active-transfer.txt")
+    internal val recoveryNoticeStore = RecoveryNoticeStore(File(app.filesDir, ".recovery-notices"))
+    internal val recoveryAcknowledging = mutableStateOf(false)
+    internal val interruptedMarkerId = mutableStateOf<String?>(null)
+    internal val recoveryMarkerProblem = mutableStateOf<String?>(null)
+    internal val acknowledgedRecoveryId get() = prefs.getString("acknowledgedRecoveryMarker", null)
+    internal fun acknowledgeRecovery(id: String) {
+        check(prefs.edit().putString("acknowledgedRecoveryMarker", id).commit()) {
+            "The recovery acknowledgment could not be saved. Its notice remains available."
+        }
+    }
     val interruptedTransfer = mutableStateOf<String?>(null)
 
     val clipboard = mutableStateOf<ClipboardFiles?>(null)

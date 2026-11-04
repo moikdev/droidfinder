@@ -1349,14 +1349,19 @@ constructor(
         paneDefaults = currentFolderView()
         session.panes += this
         windowState.panes += this
-        val marker = File(app.filesDir, "active-transfer.txt")
-        if (
-            windowState.id == "main" &&
-                paneId == "primary" &&
-                marker.exists() &&
-                TransferRuntime.label == null
-        )
-            interruptedTransfer = runCatching { marker.readText() }.getOrNull()
+        if (windowState.id == "main" && paneId == "primary" && TransferRuntime.label == null) {
+            runCatching { session.recoveryNoticeStore.current(session.recoveryMarker) }
+                .onSuccess { notice ->
+                    if (notice != null && notice.id != session.acknowledgedRecoveryId) {
+                        interruptedTransfer = notice.text
+                        session.interruptedMarkerId.value = notice.id
+                    }
+                }
+                .onFailure {
+                    session.recoveryMarkerProblem.value = "The previous operation notice could not be read safely. Its data was kept. Open Recovery inbox to review the available records."
+                    message = session.recoveryMarkerProblem.value
+                }
+        }
         journalError?.let { message = it }
         restoreTabState()
         if (navigationTreeVisible) revealNavigationTree(false)
@@ -1367,9 +1372,33 @@ constructor(
         }
     }
 
-    fun dismissRecovery() {
-        File(getApplication<Application>().filesDir, "active-transfer.txt").delete()
-        interruptedTransfer = null
+    internal val recoveryAcknowledging get() = session.recoveryAcknowledging.value
+    internal val recoveryMarkerProblem get() = session.recoveryMarkerProblem.value
+
+    fun dismissRecovery(onAcknowledged: () -> Unit = {}) {
+        if (paneId != "primary") { primaryPane.dismissRecovery(onAcknowledged); return }
+        if (recoveryAcknowledging) return
+        val expectedId = session.interruptedMarkerId.value ?: return
+        session.recoveryAcknowledging.value = true
+        TransferRuntime.scope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    session.recoveryNoticeStore.acknowledge(session.recoveryMarker, expectedId)
+                    session.acknowledgeRecovery(expectedId)
+                }
+                if (session.interruptedMarkerId.value == expectedId) {
+                    interruptedTransfer = null
+                    session.interruptedMarkerId.value = null
+                }
+                session.recoveryMarkerProblem.value = null
+                onAcknowledged()
+            } catch (error: Exception) {
+                session.recoveryMarkerProblem.value = "The notice was kept for review. ${error.message.orEmpty()}"
+                message = session.recoveryMarkerProblem.value
+            } finally {
+                session.recoveryAcknowledging.value = false
+            }
+        }
     }
 
     private fun rulesJson(r: SearchRules) = NavigationJson.rules(r)
@@ -3313,6 +3342,77 @@ constructor(
     internal val folderSyncReview get() = session.folderSyncReview.value
     internal val folderSyncRecords get() = session.folderSyncRecords.value
 
+    internal val recoveryInbox get() = session.recoveryInbox.value
+
+    internal fun showRecoveryInbox() {
+        if (paneId != "primary") { primaryPane.showRecoveryInbox(); return }
+        session.recoveryInboxControl?.cancel()
+        session.recoveryInboxJob?.cancel()
+        val token = java.util.UUID.randomUUID().toString()
+        val control = TransferControl()
+        session.recoveryInboxControl = control
+        session.recoveryInbox.value = RecoveryInboxState(token)
+        val jobs = transferJobs.toList()
+        val interrupted = interruptedTransfer
+        val interruptedId = session.interruptedMarkerId.value
+        val transferProblem = journalError
+        val undoProblem = historyRecoveryProblem
+        val operationActive = busy != null || activeTransferId != null
+        session.recoveryInboxJob = TransferRuntime.scope.launch {
+            try {
+                val loaded = withContext(Dispatchers.IO) {
+                    val notices = mutableListOf<String>()
+                    fun <T> read(label: String, fallback: T, work: () -> T): T = try { work() }
+                    catch (cancelled: java.util.concurrent.CancellationException) { throw cancelled }
+                    catch (error: Exception) {
+                        notices += "$label could not be listed safely. Its records and files were kept. ${error.message.orEmpty()}"
+                        fallback
+                    }
+                    if (operationActive) notices += "An operation is active. Wait until it settles, then refresh to list synchronization records and preserved originals."
+                    val records = if (operationActive) emptyList() else read("Synchronization records", emptyList()) {
+                        session.folderSyncRunRecords.load(control = control)
+                    }
+                    val originals = if (operationActive) emptyList() else read("Findroid Trash", emptyList()) {
+                        val (files, issues) = engine.trashInventory { control.check() }
+                        notices += issues
+                        files.map { file -> control.check(); RecoveryOriginal(file.path, engine.originalPath(file), engine.trashedAt(file)) }
+                    }
+                    val saved = read("Preserved operation notices", RecoveryNotices(emptyList())) {
+                        session.recoveryNoticeStore.load(checkCancelled = control::check)
+                    }
+                    notices += saved.problems
+                    val current = read<RecoveryNotice?>("Current operation notice", null) {
+                        session.recoveryNoticeStore.currentForReview(session.recoveryMarker)
+                    }
+                    control.check()
+                    val recorded = saved.records + listOfNotNull(current)
+                    RecoveryInboxState(token, recoveryInboxItems(jobs, records, originals,
+                        interrupted.takeUnless { recorded.any { notice -> notice.id == interruptedId } }, transferProblem, undoProblem, recorded),
+                        checking = false, notices = notices)
+                }
+                if (recoveryInbox?.token == token) session.recoveryInbox.value = loaded
+            } catch (cancelled: java.util.concurrent.CancellationException) { throw cancelled }
+            catch (error: Exception) {
+                if (recoveryInbox?.token == token) session.recoveryInbox.value = RecoveryInboxState(token, checking = false,
+                    notices = listOf("Recovery records could not be listed. Their files were kept. ${error.message.orEmpty()}"))
+            }
+        }
+    }
+
+    internal fun recoveryInboxNotice(message: String) {
+        val current = recoveryInbox ?: return
+        session.recoveryInbox.value = current.copy(notices = (current.notices + message).distinct())
+    }
+
+    internal fun closeRecoveryInbox() {
+        if (paneId != "primary") { primaryPane.closeRecoveryInbox(); return }
+        session.recoveryInbox.value = null
+        session.recoveryInboxControl?.cancel()
+        session.recoveryInboxJob?.cancel()
+        session.recoveryInboxControl = null
+        session.recoveryInboxJob = null
+    }
+
     internal fun reviewFolderSynchronization(left: String, right: String,
         direction: FolderSyncDirection = FolderSyncDirection.PRIMARY_TO_SECONDARY) {
         if (paneId != "primary") { primaryPane.reviewFolderSynchronization(left, right, direction); return }
@@ -3529,7 +3629,8 @@ constructor(
         }
         onStarted(transferControl)
         TransferRuntime.scope.launch {
-            val marker = File(getApplication<Application>().filesDir, "active-transfer.txt")
+            val marker = session.recoveryMarker
+            var markerToken: RecoveryMarkerToken? = null
             var failure: Exception? = null
             try {
                 TransferRuntime.begin(
@@ -3539,9 +3640,7 @@ constructor(
                     activeTransferId != null,
                 )
                 withContext(Dispatchers.IO) {
-                    marker.writeText(
-                        "$label\n${destination?:location}\n${System.currentTimeMillis()}",
-                    )
+                    markerToken = session.recoveryNoticeStore.begin(marker, label, destination ?: location, System.currentTimeMillis())
                 }
                 if (beginUndoRecord) withContext(Dispatchers.IO) { history.beginOperation(label) }
                 message = work()
@@ -3568,8 +3667,14 @@ constructor(
                         failure = error
                         message = "Files were kept. Saved Undo needs review: ${error.message}"
                     }
-                    marker.delete()
-                    TransferRuntime.finish(getApplication())
+                    try {
+                        withContext(Dispatchers.IO) {
+                            markerToken?.let { session.recoveryNoticeStore.finish(marker, it, failure == null) }
+                        }
+                    } catch (error: Exception) {
+                        failure = error
+                        message = "Files were kept. The operation notice needs review: ${error.message}"
+                    }
                     if (
                         clearOriginSelection &&
                             tabs[activeTab].id == originTab &&
@@ -3584,6 +3689,12 @@ constructor(
                     failure = error
                     message = "Files were kept, but operation cleanup failed: ${error.message}"
                 } finally {
+                    try {
+                        TransferRuntime.finish(getApplication())
+                    } catch (error: Exception) {
+                        failure = error
+                        message = "The operation stopped, but its background notification could not be closed: ${error.message}"
+                    }
                     busy = null
                     WorkspaceMutationGate.endApp()
                     getApplication<FinderApplication>().workspaceDocuments.changed()

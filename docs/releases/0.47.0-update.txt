@@ -1,0 +1,5 @@
+Recovery inbox brings interrupted transfers, saved partial copies, preserved originals and synchronization records into one place. Open More → Recovery inbox… to see what needs review and the next step for each item.
+
+Review links open existing transfer details, saved-copy checks, Trash, synchronization records, Recent actions or storage access. Opening the inbox never resumes, restores or removes files.
+
+Operation notices now remain available after dismissal and restart. A newer operation preserves the previous marker before replacing it. Named controls scroll and wrap at enlarged text sizes, without another permanent toolbar icon.

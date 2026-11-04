@@ -64,6 +64,7 @@ private fun launcherCommands(model: FinderModel): List<LauncherChoice> {
         command("collections", "Collections…", "Manage cross-folder references", keywords = "library organization"),
         command("recentActions", "Recent actions…", "Undo, Redo and reasons recovery stopped in this session", keywords = "undo redo history recover changed files"),
         command("transfers", "Transfers and recovery…", "Review recent jobs and interrupted operations", keywords = "queue history retry"),
+        command("recoveryInbox", "Recovery inbox…", "Review interrupted transfers, saved copies, originals and run records", keywords = "recover partial backup conflict interrupted journal"),
         command("undo", "Undo ${model.undoLabel ?: "recent action"}", "Recovery checks protect files changed later", if (model.undoLabel == null) "There is no eligible action to undo in this session." else busy),
         command("dualPane", if (model.dualPane) "Close second pane" else "Open second pane", "Compare folders side by side", keywords = "split two panels"),
         command("workspaces", "Saved workspaces…", "Save or restore your tablet layout", keywords = "tabs session"),

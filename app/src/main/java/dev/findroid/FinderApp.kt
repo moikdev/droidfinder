@@ -128,6 +128,7 @@ fun FinderApp(
                 ),
         ) {
             var dialog by remember { mutableStateOf<String?>(null) }
+            var recoveryTransferId by remember { mutableStateOf<String?>(null) }
             var commandExplanation by remember { mutableStateOf<CommandExplanation?>(null) }
             var quickLook by workspaceModel.windowState.peekEntry
             var quickLookCandidates by workspaceModel.windowState.peekCandidates
@@ -312,6 +313,7 @@ fun FinderApp(
                     "tab" -> model.focused?.takeIf { it.folder }?.let { model.newTab(it.path) }
                     "transfers" -> dialog = "transfers"
                     "syncRecords" -> { dialog = null; model.primaryPane.showFolderSyncRecords() }
+                    "recoveryInbox" -> { dialog = null; model.primaryPane.showRecoveryInbox() }
                     "recentActions" -> dialog = "recentActions"
                     "tabs" -> dialog = "tabs"
                     "workspaces" -> dialog = "workspaces"
@@ -756,6 +758,8 @@ fun FinderApp(
             }
             when (dialog) {
                 "recentActions" -> RecentActionsDialog(model, action) { dialog = null }
+                "recoveryRecentActions" -> RecentActionsDialog(model.primaryPane, action) { dialog = null }
+                "recoveryTransfers" -> TransferCenterDialog(model.primaryPane, { dialog = null }, onEnableNotifications, recoveryTransferId)
                 "commandUnavailable" -> commandExplanation?.let { value ->
                     CommandExplanationDialog(value, recover = { command ->
                         commandExplanation = null; dialog = null; action(command)
@@ -799,32 +803,7 @@ fun FinderApp(
                     }
                 "transfers" -> TransferCenterDialog(model, { dialog = null }, onEnableNotifications)
                 "appearance" -> FolderAppearanceDialog(model) { dialog = null }
-                "recovery" ->
-                    AlertDialog(
-                        onDismissRequest = {
-                            model.dismissRecovery()
-                            dialog = null
-                        },
-                        title = { Text("A transfer was interrupted") },
-                        text = {
-                            Text(
-                                "Android stopped the previous session before this operation finished:\n\n${model.interruptedTransfer?.lineSequence()?.firstOrNull().orEmpty()}\n\nCompleted items were kept. Hidden .findroid-* staging files may remain in the destination. Review the destination before retrying; existing files will not be overwritten.",
-                            )
-                        },
-                        confirmButton = {
-                            TextButton(
-                                onClick = {
-                                    val path = model.interruptedTransfer?.lines()?.getOrNull(1)
-                                    model.dismissRecovery()
-                                    dialog = null
-                                    if (path != null && model.allowedPath(path))
-                                        model.navigate(path)
-                                },
-                            ) {
-                                Text("Review files")
-                            }
-                        },
-                    )
+                "recovery" -> RecoveryStartupDialog(model) { dialog = null }
                 "searchLocations" -> SearchLocationsDialog(model) { dialog = null }
                 "filters" -> SearchFiltersDialog(model) { dialog = null }
                 "availableActions" -> AvailableActionsDialog(model, { dialog = "storage" }) { dialog = null }
@@ -1081,6 +1060,32 @@ fun FinderApp(
             }
             FolderSyncReviewDialog(model)
             FolderSyncRecordsDialog(model)
+            RecoveryInboxDialog(model) { link ->
+                val owner = model.primaryPane
+                val job = link.jobId?.let { id -> owner.transferJobs.firstOrNull { it.id == id } }
+                if (link.jobId != null && job == null) {
+                    owner.recoveryInboxNotice("This transfer is no longer in the current list. Its files were kept. Refresh the inbox and review the destination.")
+                } else if (link.route == RecoveryInboxRoute.DESTINATION && (link.path == null || !owner.allowedPath(link.path))) {
+                    owner.recoveryInboxNotice("Reconnect the recorded destination in storage access before opening it. Its files were kept.")
+                } else if (link.route == RecoveryInboxRoute.SAVED_COPY && (owner.busy != null || owner.activeTransferId != null || job?.partialCopy == null)) {
+                    owner.recoveryInboxNotice("Wait for the current operation and refresh the saved-copy record before reviewing it.")
+                } else {
+                    owner.closeRecoveryInbox()
+                    when (link.route) {
+                        RecoveryInboxRoute.TRANSFERS -> { recoveryTransferId = link.jobId; dialog = "recoveryTransfers" }
+                        RecoveryInboxRoute.SAVED_COPY -> {
+                            recoveryTransferId = link.jobId
+                            owner.reviewSavedCopy(link.jobId!!)
+                            dialog = "recoveryTransfers"
+                        }
+                        RecoveryInboxRoute.SYNCHRONIZATION -> { dialog = null; owner.showFolderSyncRecords() }
+                        RecoveryInboxRoute.RECENT_ACTIONS -> dialog = "recoveryRecentActions"
+                        RecoveryInboxRoute.TRASH -> { dialog = null; owner.activatePane(); owner.navigate("@trash") }
+                        RecoveryInboxRoute.STORAGE -> dialog = "storage"
+                        RecoveryInboxRoute.DESTINATION -> { dialog = null; owner.activatePane(); owner.navigate(link.path!!) }
+                    }
+                }
+            }
             model.fileConflict?.let { FileConflictDialog(model, it) }
             cursorMenu?.let { request ->
                 FileContextMenu(request, model, action) { cursorMenu = null }
@@ -1443,6 +1448,7 @@ internal fun ActionMenu(
         MenuAction("Keyboard shortcuts", Icons.Outlined.Keyboard) { action("shortcuts") }
         MenuSection("Panes and transfers")
         MenuAction("Transfers", Icons.Outlined.SyncAlt) { action("transfers") }
+        MenuAction("Recovery inbox…", Icons.Outlined.Inventory2) { action("recoveryInbox") }
         MenuAction("Synchronization records…", Icons.Outlined.History) { action("syncRecords") }
         MenuAction(
             if (model.dualPane) "Hide dual panes" else "Show dual panes",

@@ -28,14 +28,17 @@ fun TransferCenterDialog(
     model: FinderModel,
     onDismiss: () -> Unit,
     onEnableNotifications: () -> Unit = {},
+    initialJobId: String? = null,
 ) {
     var retry by remember { mutableStateOf<TransferJob?>(null) }
     var resetJournal by remember { mutableStateOf(false) }
-    var history by remember { mutableStateOf(false) }
+    var history by remember { mutableStateOf(initialJobId != null) }
     var visibleJobs by remember { mutableIntStateOf(20) }
     val live = model.transferJobs.filter { !it.terminal }
     val past = model.transferJobs.filter { it.terminal }.sortedByDescending { it.finished }
-    val shown = live + if (history || live.isEmpty()) past else emptyList()
+    val allShown = live + if (history || live.isEmpty()) past else emptyList()
+    // A link from Recovery opens the chosen existing record without replaying it.
+    val shown = initialJobId?.let { id -> allShown.sortedBy { if (it.id == id) 0 else 1 } } ?: allShown
     Dialog(onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         BoxWithConstraints(Modifier.padding(24.dp)) {
             val bodyLimit = (maxHeight - 120.dp).coerceIn(80.dp, 420.dp)
@@ -99,7 +102,7 @@ fun TransferCenterDialog(
                                 Text("No transfers yet", color = Muted, fontSize = 13.sp)
                             }
                         shown.take(visibleJobs).forEachIndexed { index, job ->
-                            key(job.id) { TransferJobCard(job, model, { retry = job }, onDismiss) }
+                            key(job.id) { TransferJobCard(job, model, { retry = job }, onDismiss, initiallyExpanded = job.id == initialJobId) }
                             if (index < minOf(shown.size, visibleJobs) - 1)
                                 HorizontalDivider(
                                     Modifier.padding(horizontal = 20.dp),
@@ -210,8 +213,9 @@ private fun TransferJobCard(
     model: FinderModel,
     retry: () -> Unit,
     dismiss: () -> Unit,
+    initiallyExpanded: Boolean = false,
 ) {
-    var expanded by remember(job.id) { mutableStateOf(false) }
+    var expanded by remember(job.id) { mutableStateOf(initiallyExpanded) }
     var visibleMembers by remember(job.id) { mutableIntStateOf(50) }
     var visibleVerifications by remember(job.id) { mutableIntStateOf(20) }
     val active = job.id == model.activeTransferId
