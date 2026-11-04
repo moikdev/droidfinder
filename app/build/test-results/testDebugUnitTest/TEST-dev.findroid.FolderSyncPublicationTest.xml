@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncPublicationTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:39.838Z" hostname="MacBook-Pro-2.local" time="0.054">
+<testsuite name="dev.findroid.FolderSyncPublicationTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:24.795Z" hostname="MacBook-Pro-2.local" time="0.052">
   <properties/>
-  <testcase name="anUnrelatedLastMomentEditStopsFurtherWorkAfterKeepingThePublishedFile" classname="dev.findroid.FolderSyncPublicationTest" time="0.007"/>
-  <testcase name="anUnrelatedDestinationEditCannotBecomeTheNextBaseline" classname="dev.findroid.FolderSyncPublicationTest" time="0.003"/>
-  <testcase name="aPreparedFileIsRenamedOnlyAfterItsIntentIsRecorded" classname="dev.findroid.FolderSyncPublicationTest" time="0.005"/>
+  <testcase name="anUnrelatedLastMomentEditStopsFurtherWorkAfterKeepingThePublishedFile" classname="dev.findroid.FolderSyncPublicationTest" time="0.014"/>
+  <testcase name="anUnrelatedDestinationEditCannotBecomeTheNextBaseline" classname="dev.findroid.FolderSyncPublicationTest" time="0.002"/>
+  <testcase name="aPreparedFileIsRenamedOnlyAfterItsIntentIsRecorded" classname="dev.findroid.FolderSyncPublicationTest" time="0.006"/>
   <testcase name="aFailedDurableIntentWritePreventsTheRename" classname="dev.findroid.FolderSyncPublicationTest" time="0.003"/>
-  <testcase name="anOccupiedNameIsKeptBeforeAnyIntentOrMove" classname="dev.findroid.FolderSyncPublicationTest" time="0.005"/>
-  <testcase name="cancellationAndLostAccessBothStopBeforePublication" classname="dev.findroid.FolderSyncPublicationTest" time="0.003"/>
+  <testcase name="anOccupiedNameIsKeptBeforeAnyIntentOrMove" classname="dev.findroid.FolderSyncPublicationTest" time="0.003"/>
+  <testcase name="cancellationAndLostAccessBothStopBeforePublication" classname="dev.findroid.FolderSyncPublicationTest" time="0.002"/>
   <testcase name="anUnreviewedWorkingFileStopsPublication" classname="dev.findroid.FolderSyncPublicationTest" time="0.003"/>
-  <testcase name="aCompletePreparedSubtreeIsRenamedWithItsOriginalIdentities" classname="dev.findroid.FolderSyncPublicationTest" time="0.007"/>
+  <testcase name="aCompletePreparedSubtreeIsRenamedWithItsOriginalIdentities" classname="dev.findroid.FolderSyncPublicationTest" time="0.005"/>
   <testcase name="aKernelCollisionKeepsTheNewArrivalAndTheWorkingFile" classname="dev.findroid.FolderSyncPublicationTest" time="0.004"/>
-  <testcase name="aChangeDuringIntentRecordingIsRecheckedBeforeTheRename" classname="dev.findroid.FolderSyncPublicationTest" time="0.005"/>
-  <testcase name="aRewrittenPreparedFileCannotBePublished" classname="dev.findroid.FolderSyncPublicationTest" time="0.003"/>
-  <testcase name="aPostMoveSyncFaultKeepsTheCompletedPublicationForManualReview" classname="dev.findroid.FolderSyncPublicationTest" time="0.005"/>
+  <testcase name="aChangeDuringIntentRecordingIsRecheckedBeforeTheRename" classname="dev.findroid.FolderSyncPublicationTest" time="0.003"/>
+  <testcase name="aRewrittenPreparedFileCannotBePublished" classname="dev.findroid.FolderSyncPublicationTest" time="0.004"/>
+  <testcase name="aPostMoveSyncFaultKeepsTheCompletedPublicationForManualReview" classname="dev.findroid.FolderSyncPublicationTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

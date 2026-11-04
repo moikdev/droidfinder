@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncAccessTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:36.330Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.FolderSyncAccessTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:20.935Z" hostname="MacBook-Pro-2.local" time="0.003">
   <properties/>
-  <testcase name="scopedWorkingAccessRejectsTraversalAndRedirectedWorkingChildren" classname="dev.findroid.FolderSyncAccessTest" time="0.002"/>
+  <testcase name="scopedWorkingAccessRejectsTraversalAndRedirectedWorkingChildren" classname="dev.findroid.FolderSyncAccessTest" time="0.003"/>
   <testcase name="laterWorkspacePermissionLossRevokesItsSpecialSiblingGrant" classname="dev.findroid.FolderSyncAccessTest" time="0.0"/>
-  <testcase name="otherDestinationsDoNotAuthorizeAnyPrivateSibling" classname="dev.findroid.FolderSyncAccessTest" time="0.001"/>
+  <testcase name="otherDestinationsDoNotAuthorizeAnyPrivateSibling" classname="dev.findroid.FolderSyncAccessTest" time="0.0"/>
   <testcase name="workspaceRootAllowsOnlyItsExactRunAndParentAlongsideOrdinaryAuthorizedPaths" classname="dev.findroid.FolderSyncAccessTest" time="0.0"/>
   <testcase name="nestedWorkspaceTargetNeedsNoBroaderPrivateParentGrant" classname="dev.findroid.FolderSyncAccessTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>

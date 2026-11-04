@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.WorkspaceRecoveryTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:50.174Z" hostname="MacBook-Pro-2.local" time="0.002">
+<testsuite name="dev.findroid.WorkspaceRecoveryTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:38.449Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
   <testcase name="repairKeepsLayoutGeometryPinnedStateSearchAndTabIdentity" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="sharedDestinationsAreReviewedOnceWithBothVisiblePaneUses" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
@@ -9,7 +9,7 @@
   <testcase name="availableOrUnopenedLocationsCannotBeChangedThroughRepairChoices" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="workingSmartFolderTabsDoNotMaterializeOrChangeTheirFilters" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="repeatedMissingDestinationIsRepairedInBothPanes" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
-  <testcase name="aRepairedSmartFolderKeepsItsIntrinsicFilterAndTheTabsExtraQuery" classname="dev.findroid.WorkspaceRecoveryTest" time="0.002"/>
+  <testcase name="aRepairedSmartFolderKeepsItsIntrinsicFilterAndTheTabsExtraQuery" classname="dev.findroid.WorkspaceRecoveryTest" time="0.001"/>
   <testcase name="aHiddenSecondaryLayoutIsPreservedEvenWhenItSharesTheRepairedPath" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="aVirtualOrBlankDestinationCannotBePassedAsAReplacementFolder" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>
   <testcase name="opaqueProviderIdsAreReplacedExactlyWithoutSuffixGuessing" classname="dev.findroid.WorkspaceRecoveryTest" time="0.0"/>

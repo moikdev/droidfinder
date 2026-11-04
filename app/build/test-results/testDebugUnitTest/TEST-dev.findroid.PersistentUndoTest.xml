@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.PersistentUndoTest" tests="50" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:42.009Z" hostname="MacBook-Pro-2.local" time="6.792">
+<testsuite name="dev.findroid.PersistentUndoTest" tests="50" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:29.142Z" hostname="MacBook-Pro-2.local" time="7.679">
   <properties/>
-  <testcase name="opaqueActionFormsAnUndoBoundaryWithoutSkippingOlderLocalCommands" classname="dev.findroid.PersistentUndoTest" time="0.018"/>
+  <testcase name="opaqueActionFormsAnUndoBoundaryWithoutSkippingOlderLocalCommands" classname="dev.findroid.PersistentUndoTest" time="0.016"/>
   <testcase name="directorySymlinksCannotBeResetByFollowingTheTarget" classname="dev.findroid.PersistentUndoTest" time="0.002"/>
-  <testcase name="changedUnrelatedSavedFilesAreNotBlessedByANewOperation" classname="dev.findroid.PersistentUndoTest" time="0.007"/>
+  <testcase name="changedUnrelatedSavedFilesAreNotBlessedByANewOperation" classname="dev.findroid.PersistentUndoTest" time="0.008"/>
   <testcase name="unsupportedStorageMakesTheCommandSessionOnly" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
   <testcase name="processDeathAfterTheMarkerKeepsTheTimelineReadOnly" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
-  <testcase name="parentRedirectionStopsBeforeChangingEitherDirectory" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
-  <testcase name="finalSymlinkIsRejectedWithoutReadingItsTarget" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
-  <testcase name="actionsHiddenByAnOpaqueBoundaryStaySessionOnlyEvenAfterThatBoundaryIsUndone" classname="dev.findroid.PersistentUndoTest" time="0.017"/>
-  <testcase name="changedBytesStopBeforeAnyUndoMutation" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
-  <testcase name="oversizedUtf8JournalsStopAtTheByteLimitWithoutTruncatingARecord" classname="dev.findroid.PersistentUndoTest" time="0.053"/>
+  <testcase name="parentRedirectionStopsBeforeChangingEitherDirectory" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
+  <testcase name="finalSymlinkIsRejectedWithoutReadingItsTarget" classname="dev.findroid.PersistentUndoTest" time="0.023"/>
+  <testcase name="actionsHiddenByAnOpaqueBoundaryStaySessionOnlyEvenAfterThatBoundaryIsUndone" classname="dev.findroid.PersistentUndoTest" time="0.034"/>
+  <testcase name="changedBytesStopBeforeAnyUndoMutation" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
+  <testcase name="oversizedUtf8JournalsStopAtTheByteLimitWithoutTruncatingARecord" classname="dev.findroid.PersistentUndoTest" time="0.086"/>
   <testcase name="opaqueRedoBoundaryNeverExposesCommandsBeyondIt" classname="dev.findroid.PersistentUndoTest" time="0.011"/>
   <testcase name="anOccupiedOriginalNameIsKeptOnUndo" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
-  <testcase name="resetPreservesTheWholeOldJournalAndEveryTrashDocument" classname="dev.findroid.PersistentUndoTest" time="0.008"/>
+  <testcase name="resetPreservesTheWholeOldJournalAndEveryTrashDocument" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
   <testcase name="sameByteReplacementWithTheSameTimeStillHasTheWrongIdentity" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
-  <testcase name="aMixedLocalAndCallbackCommandStaysEntirelyInTheSession" classname="dev.findroid.PersistentUndoTest" time="0.003"/>
-  <testcase name="createRenameTrashChainCanBeUndoneAndRedoneAcrossRestarts" classname="dev.findroid.PersistentUndoTest" time="0.038"/>
-  <testcase name="unexpectedWriteStagingIsEvidenceOfAnInterruptedSave" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
+  <testcase name="aMixedLocalAndCallbackCommandStaysEntirelyInTheSession" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
+  <testcase name="createRenameTrashChainCanBeUndoneAndRedoneAcrossRestarts" classname="dev.findroid.PersistentUndoTest" time="0.034"/>
+  <testcase name="unexpectedWriteStagingIsEvidenceOfAnInterruptedSave" classname="dev.findroid.PersistentUndoTest" time="0.003"/>
   <testcase name="failedCheckpointRetainsItsMarkerAndCannotBeFinalized" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
-  <testcase name="checkpointKeepsThePendingBarrierAndNeverReplaysAfterAReopen" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
+  <testcase name="checkpointKeepsThePendingBarrierAndNeverReplaysAfterAReopen" classname="dev.findroid.PersistentUndoTest" time="0.003"/>
   <testcase name="missingFilesAreDecodedWithoutFingerprintingOrAutomaticRecovery" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
-  <testcase name="partialMultiStepUndoRemainsReadOnlyAfterFailure" classname="dev.findroid.PersistentUndoTest" time="0.011"/>
-  <testcase name="restoreActionKeepsRedoLocationThroughItsOwnedTrashBucket" classname="dev.findroid.PersistentUndoTest" time="0.014"/>
-  <testcase name="clearingReferencesNeverDeletesTrashItems" classname="dev.findroid.PersistentUndoTest" time="0.008"/>
+  <testcase name="partialMultiStepUndoRemainsReadOnlyAfterFailure" classname="dev.findroid.PersistentUndoTest" time="0.013"/>
+  <testcase name="restoreActionKeepsRedoLocationThroughItsOwnedTrashBucket" classname="dev.findroid.PersistentUndoTest" time="0.013"/>
+  <testcase name="clearingReferencesNeverDeletesTrashItems" classname="dev.findroid.PersistentUndoTest" time="0.009"/>
   <testcase name="journalSymlinksNeverReadOrOverwriteAnOutsideFile" classname="dev.findroid.PersistentUndoTest" time="0.002"/>
-  <testcase name="metadataFailureAfterUndoRemainsManualOnRestart" classname="dev.findroid.PersistentUndoTest" time="0.007"/>
+  <testcase name="metadataFailureAfterUndoRemainsManualOnRestart" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
   <testcase name="deferredUndoKeepsTheMarkerUntilMetadataHasFinished" classname="dev.findroid.PersistentUndoTest" time="0.008"/>
-  <testcase name="resetDoesNotReuseIdsInTheSameProcess" classname="dev.findroid.PersistentUndoTest" time="0.007"/>
-  <testcase name="groupedFolderAndItsPrivateEmptyRecoverySurviveReopen" classname="dev.findroid.PersistentUndoTest" time="0.02"/>
+  <testcase name="resetDoesNotReuseIdsInTheSameProcess" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
+  <testcase name="groupedFolderAndItsPrivateEmptyRecoverySurviveReopen" classname="dev.findroid.PersistentUndoTest" time="0.018"/>
   <testcase name="undoingACallbackDoesNotInventNewIdentityProofsForAnOlderAction" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
-  <testcase name="moveUsesItsOriginalParentAfterReopen" classname="dev.findroid.PersistentUndoTest" time="0.01"/>
+  <testcase name="moveUsesItsOriginalParentAfterReopen" classname="dev.findroid.PersistentUndoTest" time="0.012"/>
   <testcase name="unknownFieldsAndRoundedOrNonCanonicalNumbersAreRejected" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
-  <testcase name="completionFailureCannotExposeRedoOnRestart" classname="dev.findroid.PersistentUndoTest" time="0.007"/>
+  <testcase name="completionFailureCannotExposeRedoOnRestart" classname="dev.findroid.PersistentUndoTest" time="0.008"/>
   <testcase name="modifiedThenRestoredBytesAndMtimeDoNotEraseTheChangeTimeGuard" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
   <testcase name="failedValidationLeavesTheReadyJournalByteForByteUnchanged" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
-  <testcase name="decimalStringsPreserveIdentitiesAboveTheJsonIntegerPrecisionLimit" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
-  <testcase name="parentAndChildActionsStayOrderedAcrossReopen" classname="dev.findroid.PersistentUndoTest" time="0.026"/>
-  <testcase name="anOversizedLocalCommandStaysUsableInTheSessionWithoutBlockingSavedUndo" classname="dev.findroid.PersistentUndoTest" time="0.055"/>
+  <testcase name="decimalStringsPreserveIdentitiesAboveTheJsonIntegerPrecisionLimit" classname="dev.findroid.PersistentUndoTest" time="0.003"/>
+  <testcase name="parentAndChildActionsStayOrderedAcrossReopen" classname="dev.findroid.PersistentUndoTest" time="0.019"/>
+  <testcase name="anOversizedLocalCommandStaysUsableInTheSessionWithoutBlockingSavedUndo" classname="dev.findroid.PersistentUndoTest" time="0.063"/>
   <testcase name="traversalAndInvalidNativeIdentitiesAreRejected" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
-  <testcase name="thePersistedPathBudgetRetiresOnlyTheOldestReferences" classname="dev.findroid.PersistentUndoTest" time="6.011"/>
-  <testcase name="restartNeverReplaysAndUndoRedoSurviveSeparateReopens" classname="dev.findroid.PersistentUndoTest" time="0.017"/>
-  <testcase name="aFailedReviewSnapshotStillMakesTheLiveTimelineReadOnly" classname="dev.findroid.PersistentUndoTest" time="0.008"/>
-  <testcase name="wrongCursorAndMissingRecoveryStateAreRejectedBeforeLoadingSteps" classname="dev.findroid.PersistentUndoTest" time="0.008"/>
-  <testcase name="corruptedSnapshotIsKeptAndNeverReplacedByAnOlderBackup" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
-  <testcase name="recreatedDestinationParentCannotAcquireAnOldUndoPromise" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
-  <testcase name="prewriteFailurePreventsTheFileMutation" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
-  <testcase name="snapshotWriteFailureRetainsThePendingMarkerAndRecoveryFile" classname="dev.findroid.PersistentUndoTest" time="0.007"/>
-  <testcase name="renamedCyclesRestoreWithoutFingerprintingVacantOriginalNamesDuringLoad" classname="dev.findroid.PersistentUndoTest" time="0.012"/>
-  <testcase name="duplicateFieldsTrailingValuesAndUnknownSchemasAreRejected" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
-  <testcase name="retainingFiftyActionsDoesNotPurgeOldRecoveryDocuments" classname="dev.findroid.PersistentUndoTest" time="0.286"/>
-  <testcase name="checkpointCanBeFinalizedOnlyAfterTheEnclosingOperationSucceeds" classname="dev.findroid.PersistentUndoTest" time="0.007"/>
+  <testcase name="thePersistedPathBudgetRetiresOnlyTheOldestReferences" classname="dev.findroid.PersistentUndoTest" time="6.782"/>
+  <testcase name="restartNeverReplaysAndUndoRedoSurviveSeparateReopens" classname="dev.findroid.PersistentUndoTest" time="0.011"/>
+  <testcase name="aFailedReviewSnapshotStillMakesTheLiveTimelineReadOnly" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
+  <testcase name="wrongCursorAndMissingRecoveryStateAreRejectedBeforeLoadingSteps" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
+  <testcase name="corruptedSnapshotIsKeptAndNeverReplacedByAnOlderBackup" classname="dev.findroid.PersistentUndoTest" time="0.004"/>
+  <testcase name="recreatedDestinationParentCannotAcquireAnOldUndoPromise" classname="dev.findroid.PersistentUndoTest" time="0.005"/>
+  <testcase name="prewriteFailurePreventsTheFileMutation" classname="dev.findroid.PersistentUndoTest" time="0.003"/>
+  <testcase name="snapshotWriteFailureRetainsThePendingMarkerAndRecoveryFile" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
+  <testcase name="renamedCyclesRestoreWithoutFingerprintingVacantOriginalNamesDuringLoad" classname="dev.findroid.PersistentUndoTest" time="0.01"/>
+  <testcase name="duplicateFieldsTrailingValuesAndUnknownSchemasAreRejected" classname="dev.findroid.PersistentUndoTest" time="0.003"/>
+  <testcase name="retainingFiftyActionsDoesNotPurgeOldRecoveryDocuments" classname="dev.findroid.PersistentUndoTest" time="0.367"/>
+  <testcase name="checkpointCanBeFinalizedOnlyAfterTheEnclosingOperationSucceeds" classname="dev.findroid.PersistentUndoTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

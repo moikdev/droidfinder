@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FileAnalysisTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:35.872Z" hostname="MacBook-Pro-2.local" time="0.021">
+<testsuite name="dev.findroid.FileAnalysisTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:20.489Z" hostname="MacBook-Pro-2.local" time="0.021">
   <properties/>
-  <testcase name="changingFileAndIncompleteProviderStreamFailInsteadOfReturningAHash" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
+  <testcase name="changingFileAndIncompleteProviderStreamFailInsteadOfReturningAHash" classname="dev.findroid.FileAnalysisTest" time="0.002"/>
   <testcase name="repeatedDocumentPathsAreNotCountedTwiceButDistinctHardlinkPathsRemainVisible" classname="dev.findroid.FileAnalysisTest" time="0.003"/>
-  <testcase name="cancelledIoDoesNotBecomeAnOrdinaryErrorAndManifestPasteMustBeSingleEntry" classname="dev.findroid.FileAnalysisTest" time="0.002"/>
+  <testcase name="cancelledIoDoesNotBecomeAnOrdinaryErrorAndManifestPasteMustBeSingleEntry" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
   <testcase name="metadataScanMeasuresCategoriesFoldersAndUnknownSizesWithoutOpeningFiles" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
-  <testcase name="saturatingTotalsDoNotWrapNegativeAndCategoryFallbacksAreStable" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
-  <testcase name="entryLimitAndProviderLoadingAreExplicitPartialResults" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
-  <testcase name="checksumMatchesKnownVectorsAndReportsActualUnknownSizeBytes" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
-  <testcase name="scanSkipsLinksHiddenAndWorkingFilesAndReportsCycles" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
+  <testcase name="saturatingTotalsDoNotWrapNegativeAndCategoryFallbacksAreStable" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
+  <testcase name="entryLimitAndProviderLoadingAreExplicitPartialResults" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
+  <testcase name="checksumMatchesKnownVectorsAndReportsActualUnknownSizeBytes" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
+  <testcase name="scanSkipsLinksHiddenAndWorkingFilesAndReportsCycles" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
   <testcase name="readBudgetNeverPublishesAPartialChecksumAsADuplicate" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
   <testcase name="duplicatesReadUnknownSizesAndIgnoreHardlinkAliasesAndEmptyFiles" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
   <testcase name="unavailableEntryDoesNotDiscardReadableSiblingsAndScopeRemainsPartial" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
   <testcase name="recheckingObservedUnknownSizesDoesNotTreatThemAsNewProviderMetadata" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
   <testcase name="expectedValuesAcceptHexColonPairsAndCoreutilsLinesButRejectWrongLength" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
-  <testcase name="stoppedScanRetainsOnlyCompletedMetadataAndIsNeverComplete" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
-  <testcase name="cancellationDuringHashingClosesInputAndDoesNotReturnAHash" classname="dev.findroid.FileAnalysisTest" time="0.002"/>
-  <testcase name="checksumManifestEscapesAmbiguousNamesAndSidecarKeepsItsExtension" classname="dev.findroid.FileAnalysisTest" time="0.006"/>
-  <testcase name="unknownSizeCanMatchAKnownSizeSingletonWithinTheReadBudget" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
+  <testcase name="stoppedScanRetainsOnlyCompletedMetadataAndIsNeverComplete" classname="dev.findroid.FileAnalysisTest" time="0.0"/>
+  <testcase name="cancellationDuringHashingClosesInputAndDoesNotReturnAHash" classname="dev.findroid.FileAnalysisTest" time="0.003"/>
+  <testcase name="checksumManifestEscapesAmbiguousNamesAndSidecarKeepsItsExtension" classname="dev.findroid.FileAnalysisTest" time="0.005"/>
+  <testcase name="unknownSizeCanMatchAKnownSizeSingletonWithinTheReadBudget" classname="dev.findroid.FileAnalysisTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

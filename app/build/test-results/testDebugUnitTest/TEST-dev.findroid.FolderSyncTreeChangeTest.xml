@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncTreeChangeTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:40.472Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.FolderSyncTreeChangeTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:25.564Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
-  <testcase name="aSameSizeRewriteOfAnUnrelatedFileCannotBecomeTheNewBaseline" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
-  <testcase name="aRelocationChecksBothCompleteMembershipAndEveryFileChecksum" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.001"/>
+  <testcase name="aSameSizeRewriteOfAnUnrelatedFileCannotBecomeTheNewBaseline" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.001"/>
+  <testcase name="aRelocationChecksBothCompleteMembershipAndEveryFileChecksum" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="changingARelocatedFileThenRestoringItsMtimeStillRequiresItsOriginalBytes" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="removingAnEntireDisclosedSubtreePermitsOnlyItsOwnAncestorMetadataChanges" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="anOccupiedDestinationCannotBeTreatedAsAnAddition" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="aRootDirectoryReplacementCannotBeAcceptedAsItsOwnChildCreation" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="aDifferentParentOrResolvedRootStopsTheTransition" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
-  <testcase name="anUnrelatedDirectoryMetadataChangeAlsoStopsPublicationAcceptance" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
+  <testcase name="anUnrelatedDirectoryMetadataChangeAlsoStopsPublicationAcceptance" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.001"/>
   <testcase name="changingAStagedDescendantDoesNotGetTheRootRenameCtimeException" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="aWholeRootReusesItsOriginalCompleteProof" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="newFilesOutsideTheDeclaredPublicationInvalidateTheWholeTransition" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="subtreeProofsRetainReviewedIdentitiesWithoutInspectingNewFiles" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="aRootOrOutsideTargetCannotBeApproved" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
-  <testcase name="missingOutsideOrUnnormalizedSubtreesCannotInventProofs" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.001"/>
+  <testcase name="missingOutsideOrUnnormalizedSubtreesCannotInventProofs" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <testcase name="onlyTheDeclaredPublicationAndItsAncestorMetadataCanAdvanceTheDestinationProof" classname="dev.findroid.FolderSyncTreeChangeTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.TransferSpacePlanTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:50.172Z" hostname="MacBook-Pro-2.local" time="0.001">
+<testsuite name="dev.findroid.TransferSpacePlanTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-11-04T15:25:38.444Z" hostname="MacBook-Pro-2.local" time="0.001">
   <properties/>
   <testcase name="saturatingTotalsNeverBecomeNegativeOrClaimAnExactFit" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="equalContentAndCapacityStillExplainsUncountedOverhead" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="movesBudgetTheirFallbackWithoutCreditingSourceDeletion" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="stagingDoesNotDoubleThePayload" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="sharedFilesystemUsesTheLowerReportedCapacity" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
-  <testcase name="distinctProvenStorageVolumesHaveSeparateBudgets" classname="dev.findroid.TransferSpacePlanTest" time="0.001"/>
+  <testcase name="distinctProvenStorageVolumesHaveSeparateBudgets" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="identicalUnknownLocationCombinesItsDemand" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="zeroFreeBytesAreARealReportedCapacity" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
   <testcase name="unreadableOrLimitedInventoriesRemainLowerBounds" classname="dev.findroid.TransferSpacePlanTest" time="0.0"/>
