@@ -10,9 +10,10 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 
-internal data class FileComparisonTarget(val path: String, val name: String)
+internal data class FileComparisonTarget(val path: String, val name: String, val location: String = path)
 internal data class ComparisonImage(val bitmap: Bitmap, val width: Int, val height: Int, val sampled: Boolean)
-internal data class FileComparisonResult(val text: TextComparison? = null, val images: List<ComparisonImage> = emptyList())
+internal data class FileComparisonResult(val text: TextComparison? = null, val images: List<ComparisonImage> = emptyList(),
+    val targets: List<FileComparisonTarget> = emptyList())
 
 internal val Entry.comparisonType: String?
     get() = when {
@@ -66,13 +67,14 @@ internal suspend fun loadFileComparison(
     fun check() { control.check(); job.ensureActive() }
     require(targets.size == 2 && targets.map { it.path }.distinct().size == 2) { "Select exactly two different text files or two images to compare." }
     require(targets.all { allowed(it.path) }) { "Reconnect both file locations before comparing." }
-    val entries = targets.map { gateway.read(it.path).also { check() } }
+    val entries = targets.map { gateway.read(it.path, control).also { check() } }
+    val snapshots = targets.zip(entries) { target, entry -> target.copy(name = entry.name) }
     val type = entries.first().comparisonType
     require(type != null && entries.all { it.comparisonType == type }) { "Choose two plain text/code files, or two images. Office documents, PDFs, folders and mixed formats need another comparison tool." }
     fun unchanged() {
         check()
         entries.forEach { entry ->
-            val now = gateway.read(entry.path)
+            val now = gateway.read(entry.path, control)
             require(now.name == entry.name && now.folder == entry.folder && now.size == entry.size &&
                 now.sizeKnown == entry.sizeKnown && now.modified == entry.modified && now.mime == entry.mime) {
                 "A file changed while it was read. Compare again."
@@ -84,7 +86,7 @@ internal suspend fun loadFileComparison(
         val texts = entries.map { entry -> gateway.input(entry.path, control).use { readComparisonText(it, ::check) } }
         val result = compareText(texts[0], texts[1], ::check)
         unchanged()
-        FileComparisonResult(text = result)
+        FileComparisonResult(text = result, targets = snapshots)
     } else {
         val images = ArrayList<ComparisonImage>()
         try {
@@ -112,7 +114,7 @@ internal suspend fun loadFileComparison(
                 }
             }
             unchanged()
-            FileComparisonResult(images = images)
+            FileComparisonResult(images = images, targets = snapshots)
         } catch (error: Throwable) { images.forEach { it.bitmap.recycle() }; throw error }
     }
 }

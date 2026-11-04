@@ -355,7 +355,7 @@ fun FinderApp(
                     "copyOtherPane" -> model.transferToOtherPane(false)
                     "moveOtherPane" -> model.transferToOtherPane(true)
                     "comparePanes" -> dialog = "comparePanes"
-                    "compareFiles" -> fileComparison = model.selectedEntries.map { FileComparisonTarget(it.path, it.name) }
+                    "compareFiles" -> fileComparison = model.selectedEntries.map { FileComparisonTarget(it.path, it.name, model.displayPath(it.parentPath ?: it.path)) }
                     "shortcuts" -> dialog = "shortcuts"
                     "launcher" -> dialog = "launcher"
                     "quickJump" -> dialog = "quickJump"

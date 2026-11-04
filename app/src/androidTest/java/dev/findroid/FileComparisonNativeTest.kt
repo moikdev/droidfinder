@@ -81,12 +81,14 @@ class FileComparisonNativeTest {
             val oldModified=a.lastModified()
             val replacement=Bitmap.createBitmap(120,80,Bitmap.Config.ARGB_8888).apply { eraseColor(Color.RED) }
             a.outputStream().use { replacement.compress(Bitmap.CompressFormat.JPEG,90,it) };replacement.recycle();check(a.setLastModified(oldModified))
+            FixtureDocumentsProvider.displayNameOverrides=mapOf(a.canonicalPath to "Renamed first")
             val next=loadFileComparison(targets,gateway,{true},ListingControl())
-            try { assertTrue(Color.red(next.images[0].bitmap.getPixel(20,20))>240);assertTrue(Color.blue(next.images[0].bitmap.getPixel(20,20))<20) }
+            try { assertEquals("Renamed first",next.targets[0].name);assertTrue(Color.red(next.images[0].bitmap.getPixel(20,20))>240);assertTrue(Color.blue(next.images[0].bitmap.getPixel(20,20))<20) }
             finally { next.images.forEach { it.bitmap.recycle() } }
             entries.forEach { entry -> assertFalse(entry.file.parentFile!!.listFiles().orEmpty().any { it.name.startsWith("comparison-") }) }
         } finally {
             FixtureDocumentsProvider.mimeOverrides=emptyMap();FixtureDocumentsProvider.unknownSizePaths=emptySet()
+            FixtureDocumentsProvider.displayNameOverrides=emptyMap()
             check(provider.deleteTreeWithoutLinks())
         }
     }

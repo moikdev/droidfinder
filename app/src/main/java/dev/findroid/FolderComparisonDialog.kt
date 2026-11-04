@@ -206,7 +206,10 @@ internal fun FolderComparisonDialog(left: FinderModel, right: FinderModel,
                         }
                         selected?.takeIf { it.left?.folder == false && it.right?.folder == false }?.let { row ->
                             TextButton(onClick = {
-                                onCompareFiles(listOf(FileComparisonTarget(row.left!!.path, row.left.name), FileComparisonTarget(row.right!!.path, row.right.name)))
+                                val parent = row.relative.substringBeforeLast('/', "").replace("/", " / ")
+                                fun location(model: FinderModel, root: String) = model.displayPath(root) + if (parent.isBlank()) "" else " / $parent"
+                                onCompareFiles(listOf(FileComparisonTarget(row.left!!.path, row.left.name, location(left, leftPath!!)),
+                                    FileComparisonTarget(row.right!!.path, row.right.name, location(right, rightPath!!))))
                                 dismiss()
                             }, modifier = Modifier.padding(horizontal = 12.dp).heightIn(min = 48.dp).testTag("compare-row-files")) {
                                 Text("Compare selected files…")

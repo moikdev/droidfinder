@@ -71,6 +71,7 @@ internal fun FileComparisonDialog(
         finally { timeout.cancel(); loading = false }
     }
     val text = result?.text
+    val shownTargets = result?.targets?.takeIf { it.size == targets.size } ?: targets
     LaunchedEffect(control, active, text) { text?.changes?.getOrNull(active)?.let { list.scrollToItem(it) } }
     Dialog(dismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         BoxWithConstraints(Modifier.fillMaxSize().padding(16.dp), contentAlignment = Alignment.Center) {
@@ -84,10 +85,10 @@ internal fun FileComparisonDialog(
                     }
                     HorizontalDivider(color = Border)
                     Column(Modifier.fillMaxWidth().heightIn(max = controlsHeight).verticalScroll(rememberScrollState()).testTag("file-comparison-controls")) {
-                        targets.forEachIndexed { index, target ->
+                        shownTargets.forEachIndexed { index, target ->
                             Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
                                 Text("${if (index == 0) "Left" else "Right"} · ${target.name}", style = MaterialTheme.typography.titleSmall, color = Ink)
-                                Text(target.path, style = MaterialTheme.typography.bodySmall, color = Muted)
+                                Text(target.location, style = MaterialTheme.typography.bodySmall, color = Muted)
                             }
                         }
                         FlowRow(Modifier.padding(horizontal = 8.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -112,7 +113,7 @@ internal fun FileComparisonDialog(
                                     scope.launch {
                                         copying = true
                                         try {
-                                            val report = withContext(Dispatchers.Default) { text.report(targets[0].name, targets[1].name) }
+                                            val report = withContext(Dispatchers.Default) { text.report(shownTargets[0].name, shownTargets[1].name) }
                                             copyPreviewText(context, "File comparison", report); copied = true
                                         } catch (failure: CancellationException) { throw failure }
                                         catch (_: Exception) { error = "Couldn't copy the comparison report." }
