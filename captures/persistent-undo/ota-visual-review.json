@@ -1,0 +1,54 @@
+{
+  "actualScreenshotsInspected": true,
+  "scope": "All six actual public OTA images per tablet inspected in contact sheets; installer completion and ready-to-install also inspected at full resolution. Only synthetic acceptance files and platform screens appear.",
+  "images": [
+    {
+      "path": "api30-ota/available.png",
+      "sha256": "625823b1d065f856a0d987b894ee84f7140251626b330cc1c7b3eddf6200dae5"
+    },
+    {
+      "path": "api30-ota/installer-complete.png",
+      "sha256": "e14c72964ea744aa3be7642cd19164da3a38484bc143a7480e5e51d35872d93a"
+    },
+    {
+      "path": "api30-ota/installer.png",
+      "sha256": "eb995fe628d3459b5f3ead90dc2fb31f035318bc0217d30147f751555c297673"
+    },
+    {
+      "path": "api30-ota/ready.png",
+      "sha256": "a82dd20b1324323bb15ee8eda05e71cc5315adfc93403f78874990efa6390fd6"
+    },
+    {
+      "path": "api30-ota/up-to-date.png",
+      "sha256": "40b9d5b0beac82f0d98a9dd901ece6081bd326cbfc67f7ad1128e1d2a3d2ca13"
+    },
+    {
+      "path": "api30-ota/upgraded-sidebar.png",
+      "sha256": "b018a0d13071bfda1827a147c607f91a733226b2ec1ea38370f653652a2c740a"
+    },
+    {
+      "path": "api36-ota/available.png",
+      "sha256": "e9cbe904c1d6545ec61c4f4b6344fe00b426d9985ad0e636768fcf0938d6d065"
+    },
+    {
+      "path": "api36-ota/installer-complete.png",
+      "sha256": "361a0a6f5922315745f135a8ab38d9efd3ab11503b6fe30d86fe1622a87c34ab"
+    },
+    {
+      "path": "api36-ota/installer.png",
+      "sha256": "71fa28326a310758932eb2c52adb763f969b499d7908bf41a00b18c9250bde3c"
+    },
+    {
+      "path": "api36-ota/ready.png",
+      "sha256": "845e273aa109186baf19fd65d63445631b79d7ff0fad3e1f4b4c3cc3fc458adf"
+    },
+    {
+      "path": "api36-ota/up-to-date.png",
+      "sha256": "63831b547898f61336937ec69ad0eaeb52fbda687482188252ad1db985a1e357"
+    },
+    {
+      "path": "api36-ota/upgraded-sidebar.png",
+      "sha256": "715fcd069edeb5ebd743961f0e4578b0f2f8fae1ff9bb221aa4757bf88390db2"
+    }
+  ]
+}

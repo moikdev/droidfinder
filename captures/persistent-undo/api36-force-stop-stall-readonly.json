@@ -1,0 +1,16 @@
+{
+  "transport": {
+    "exitCode": 0,
+    "output": "device",
+    "error": ""
+  },
+  "boot": {
+    "timedOut": true
+  },
+  "systemPid": {
+    "timedOut": true
+  },
+  "appPid": {
+    "timedOut": true
+  }
+}

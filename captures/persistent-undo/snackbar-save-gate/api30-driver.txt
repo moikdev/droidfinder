@@ -1,0 +1,45 @@
+Performing Streamed Install
+Success
+Performing Streamed Install
+Success
+[
+  {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5602: 0 passed, 0 skipped, 1 failed; runner complete: True
+dev.findroid.FinderWorkflowTest#snackbarUndoRestoresTrashedFile: java.lang.AssertionError: Failed to assert count of nodes.
+Log: /Users/LENOVO/.t3/projects/droidfinder/captures/persistent-undo/snackbar-save-gate/api30-old.txt
+Performing Streamed Install
+Success
+[
+  {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5602: 1 passed, 0 skipped, 0 failed; runner complete: True
+Log: /Users/LENOVO/.t3/projects/droidfinder/captures/persistent-undo/snackbar-save-gate/api30-new.txt
+[
+  {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Performing Streamed Install
+Success

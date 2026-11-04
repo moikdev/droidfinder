@@ -1,12 +1,14 @@
 # Undo after reopening Findroid
 
-Persistent Undo is under development for **0.45.0-preview**. The public download remains 0.44 until the next release completes native, optimized-build and public OTA acceptance. Proposal 42 remains in progress.
+Persistent Undo is available in **0.45.0-preview**. Native, optimized-build and actual public OTA acceptance pass on both assigned tablets. Immutable validation archive verification remains pending, so proposal 42 stays in progress until that final check completes.
 
 Open **More → Recent actions…**, a file menu, or the action launcher. The next eligible Undo and Redo have named buttons. Actions run in order. Nothing runs automatically when the app reopens.
 
 Supported local actions show **Saved for restart** after their files and recovery record have been saved. The initial scope includes new files and folders, copies, moves, renames, grouping into a folder, Trash and restoration from Findroid's own Trash. The storage must support the required file and directory checks. Actual execution uses an atomic no-replace rename; an occupied destination is kept.
 
 Provider actions, replacements, organization callbacks, links, special files and unsupported or oversized operations stay **This session only**. An action hidden behind one of those boundaries stays in that session even if the boundary action is later undone. A restart never skips an intervening action to reach an older one.
+
+![Recent actions after reopening the optimized app](screenshots/persistent-undo-tablet.png)
 
 ## When a check stops Undo
 
@@ -21,6 +23,8 @@ The list keeps the reason visible. If a check stopped before any mutation, revie
 Choose **Reset Undo list…** to review the reset. **Keep Undo list** leaves the exact record alone. **Reset Undo list** removes the current Undo and Redo references while preserving the complete old journal directory separately in app-private storage. Your documents and every item in Trash stay in place. New supported actions can start a new saved list.
 
 The entire dialog scrolls, including its named action and confirmation controls, for narrow tablet windows and enlarged text. No permanent toolbar icon is added.
+
+![Reset review at twice the Android system font scale in a narrow tablet window](screenshots/persistent-undo-reset-large-text.png)
 
 ## What is saved
 

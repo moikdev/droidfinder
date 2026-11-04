@@ -179,6 +179,15 @@ def local():
     for label,row in zip(('previous','preview'),signing['artifacts']):
         log=PROOF/(label+'-apksigner.txt');assert sha(log)==row['signatureLogSha256'];files.append(log)
     files.append(PROOF/'signing-continuity.json')
+    attempts=read(PROOF/'acceptance-attempts.json');assert attempts['canonicalCountsExcludeRejectedAttempts']
+    for row in [attempts['archiveFirstAttempt'],attempts['unchangedAcceptedArchiveRetry'],*attempts['api36DeviceRecovery']['records'],*attempts['canonical']]:
+        assert sha(ROOT/row['path'])==row['sha256']
+    assert attempts['api36DeviceRecovery']['noDataWipeOrSnapshotLoad'] and not attempts['api36DeviceRecovery']['forcedHostStopRequired']
+    for name in ('native-visual-review.json','acceptance-attempts.json','api36-force-stop-stall-readonly.json',
+                 'api36-controller-recovery-2.json','api36-controller-recovery-3.json','local-restored-public-tablets.json',
+                 'after-local-display-restoration.txt','api36-native-batches/06-ArchiveWorkflowTest-before-retry-1.json',
+                 'api36-native-batches/06-ArchiveWorkflowTest-before-retry-1.txt'):
+        files.append(PROOF/name)
     return files,expected
 
 
@@ -229,6 +238,8 @@ def main():
     assert read(allowlist)==relative
     assert privacy['explicitAllowlistChecked'] and privacy['privateRecoveryFilesExcluded'] and privacy['literalIdentifierMatches']==0
     assert privacy['publicationAllowlistSha256']==sha(allowlist) and privacy['publishedFilesChecked']==len(relative)
+    assert privacy['privacyCheckerSha256']==sha(PROOF/'check-public-privacy.py')
+    assert privacy['publishedTextFilesChecked']==sum(path.suffix.lower() not in ('.png','.jpg','.jpeg','.webp','.gif') for path in files)
     assert a.output is not None and not a.output.exists(), 'Never overwrite an immutable archive'
     assert not git('status','--porcelain').strip(), 'Commit the exact source and evidence snapshot first'
     commit=git('rev-parse','HEAD').decode().strip()

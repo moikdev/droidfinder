@@ -1,0 +1,33 @@
+{
+  "serial": "emulator-5582",
+  "installedApkSha256": {
+    "dev.findroid": "0ff23029143741e7cf0f2570674af526bcf31737281e8bc79a409bf8aaa0ba3f",
+    "dev.findroid.test": "d53071c341082062798fa058845868fbec909c83feb51c0efeb511e6472cc20e"
+  },
+  "images": [
+    {
+      "path": "changed-file.png",
+      "sha256": "7350be297e2e35031b6a3cef3bea45a6d87120b92a5a96c750879de130b9b9b8"
+    },
+    {
+      "path": "interrupted-review.png",
+      "sha256": "068e7ae6c3871f986eb5496a65577caaef9a1f010e1be7d5ddc35af499033f82"
+    },
+    {
+      "path": "large-text-reset.png",
+      "sha256": "fd714bb6f1b5761a712791a54a0a8ac1ade0f9a2cb710d18e9220d1ad776f2f4"
+    },
+    {
+      "path": "reset-review.png",
+      "sha256": "fd714bb6f1b5761a712791a54a0a8ac1ade0f9a2cb710d18e9220d1ad776f2f4"
+    },
+    {
+      "path": "saved.png",
+      "sha256": "51446a5adeefb3d26c1b271ef6cacfbfb92ce86cf550ec810716104661fc5d19"
+    },
+    {
+      "path": "session-boundary.png",
+      "sha256": "c868e93a0eb8f36493fc7b1e7b834f9835b0412559b207c4c52dbdf9f884aaae"
+    }
+  ]
+}

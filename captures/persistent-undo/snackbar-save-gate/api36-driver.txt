@@ -1,0 +1,29 @@
+Performing Streamed Install
+Success
+Performing Streamed Install
+Success
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 1 passed, 0 skipped, 0 failed; runner complete: True
+Log: /Users/LENOVO/.t3/projects/droidfinder/captures/persistent-undo/snackbar-save-gate/api36-new.txt
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Performing Streamed Install
+Success

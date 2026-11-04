@@ -1,0 +1,464 @@
+{
+  "serial": "emulator-5602",
+  "checkerSha256": "92e4cee1cc7d6d33813ac304f164d08490bb1dc5b442ab08ecf664d3db150a72",
+  "actualRasterGlyphsLarger": true,
+  "evidence": "Actual named TextView bounds and thresholded raster glyph dimensions increase at system font scales 1.0, 1.5 and 2.0 for all six size/theme groups. No native filename or composition override is used as font evidence.",
+  "groups": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "theme": "light",
+      "samples": [
+        {
+          "fontScale": 1.0,
+          "image": "api30-optimized/review-1280x800-font1.0-light-Close.png",
+          "sha256": "35f4f61803590f77e393a66ac4b96b2d502d7a667aa920d7855e5e5d80a20016",
+          "captureXml": "api30-optimized/review-1280x800-font1.0-light-Close-capture.xml",
+          "captureXmlSha256": "8636780c670ebf7ed1b14210dff3742b085cbd08a8ec56f1077a41891a7f4e5e",
+          "textBounds": [
+            436,
+            1041,
+            489,
+            1071
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17
+        },
+        {
+          "fontScale": 1.5,
+          "image": "api30-optimized/review-1280x800-font1.5-light-Close.png",
+          "sha256": "49102f26187231fa730ba4d3b3ad07d54898226c6eb962f831b001d02e4c55f8",
+          "captureXml": "api30-optimized/review-1280x800-font1.5-light-Close-capture.xml",
+          "captureXmlSha256": "40fd06d189d85ba7713582e752409c836e1f2edc27465bf9e6a2ea13f6027bc7",
+          "textBounds": [
+            436,
+            1032,
+            520,
+            1080
+          ],
+          "textWidth": 84,
+          "textHeight": 48,
+          "rasterGlyphBounds": [
+            1,
+            10,
+            83,
+            36
+          ],
+          "rasterGlyphWidth": 82,
+          "rasterGlyphHeight": 26
+        },
+        {
+          "fontScale": 2.0,
+          "image": "api30-optimized/review-1280x800-font2.0-light-Close.png",
+          "sha256": "309d738d555d987109ee9c886638f5ecd230b5f04cbc5c360ade09f889a63d9c",
+          "captureXml": "api30-optimized/review-1280x800-font2.0-light-Close-capture.xml",
+          "captureXmlSha256": "dc97a74ebcdfce88fdd695100ffc88cc59bef07c66d29de0d214889c0469d3c8",
+          "textBounds": [
+            436,
+            1024,
+            534,
+            1080
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "theme": "dark",
+      "samples": [
+        {
+          "fontScale": 1.0,
+          "image": "api30-optimized/review-1280x800-font1.0-dark-Close.png",
+          "sha256": "f6783df0a8197e02908d1ec2bdedcd85f61643f3f87906785a751a0958a04ad8",
+          "captureXml": "api30-optimized/review-1280x800-font1.0-dark-Close-capture.xml",
+          "captureXmlSha256": "86233f207e80d48125d5a5d84d941227ced6a0b9bb7be7e164b2178420cf48fb",
+          "textBounds": [
+            436,
+            1041,
+            489,
+            1071
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17
+        },
+        {
+          "fontScale": 1.5,
+          "image": "api30-optimized/review-1280x800-font1.5-dark-Close.png",
+          "sha256": "b6b84eed856322d28642a6abacbdf5933d18c2d66d6086334deac1175ae99587",
+          "captureXml": "api30-optimized/review-1280x800-font1.5-dark-Close-capture.xml",
+          "captureXmlSha256": "fd1c663e42bbe1e1e990516a7e1340a1bc463dbe3d57c1a1966c7e1c2a1768c5",
+          "textBounds": [
+            436,
+            1032,
+            520,
+            1080
+          ],
+          "textWidth": 84,
+          "textHeight": 48,
+          "rasterGlyphBounds": [
+            1,
+            10,
+            83,
+            36
+          ],
+          "rasterGlyphWidth": 82,
+          "rasterGlyphHeight": 26
+        },
+        {
+          "fontScale": 2.0,
+          "image": "api30-optimized/review-1280x800-font2.0-dark-Close.png",
+          "sha256": "6944b9f4e536a723475d3a67262f34b9ba317f4db5e1701fd386e69f23939bab",
+          "captureXml": "api30-optimized/review-1280x800-font2.0-dark-Close-capture.xml",
+          "captureXmlSha256": "cb28593d1afd941161a7a4e8e32e0c7b1ac297470128606cd6c602a6183b66dc",
+          "textBounds": [
+            436,
+            1024,
+            534,
+            1080
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "theme": "light",
+      "samples": [
+        {
+          "fontScale": 1.0,
+          "image": "api30-optimized/review-800x1280-font1.0-light-Close.png",
+          "sha256": "ad81e0097a26e2fd111d916be0d71f83ca2e6770e1e91c326abdb74e29e97a6f",
+          "captureXml": "api30-optimized/review-800x1280-font1.0-light-Close-capture.xml",
+          "captureXmlSha256": "dd5f65f2fbee3e6a5a113f844a7bfcc1d47fa094c7ee3c407afd83d4fef31d3a",
+          "textBounds": [
+            90,
+            1554,
+            143,
+            1584
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17
+        },
+        {
+          "fontScale": 1.5,
+          "image": "api30-optimized/review-800x1280-font1.5-light-Close.png",
+          "sha256": "e119912adc9ecdadb2d22f425327728dfc651b8ff0c45b71c607c44a0bc4bc79",
+          "captureXml": "api30-optimized/review-800x1280-font1.5-light-Close-capture.xml",
+          "captureXmlSha256": "2e28d87b4fcb61b7149fae671bc056257f53b3fc9c1802f63855934d26b77d39",
+          "textBounds": [
+            90,
+            1752,
+            174,
+            1800
+          ],
+          "textWidth": 84,
+          "textHeight": 48,
+          "rasterGlyphBounds": [
+            1,
+            10,
+            83,
+            36
+          ],
+          "rasterGlyphWidth": 82,
+          "rasterGlyphHeight": 26
+        },
+        {
+          "fontScale": 2.0,
+          "image": "api30-optimized/review-800x1280-font2.0-light-Close.png",
+          "sha256": "6ccb565f45992a267ab67ec4ef100ecb5d3c3327783ab954db851e922410fdfa",
+          "captureXml": "api30-optimized/review-800x1280-font2.0-light-Close-capture.xml",
+          "captureXmlSha256": "d9c934a4dc3055033e3fe8a5bdd00d185ade9adfd6c3cdf92d7e00569935c13c",
+          "textBounds": [
+            90,
+            1744,
+            188,
+            1800
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "theme": "dark",
+      "samples": [
+        {
+          "fontScale": 1.0,
+          "image": "api30-optimized/review-800x1280-font1.0-dark-Close.png",
+          "sha256": "2cb71cce5417f048b0e2459962ab1ab6fb81f4e3f35fe847809c59b3908e9ec6",
+          "captureXml": "api30-optimized/review-800x1280-font1.0-dark-Close-capture.xml",
+          "captureXmlSha256": "8f608198b61baa51149e2012b5863812217ee22da3226ae9bff3fee7455e1c7e",
+          "textBounds": [
+            90,
+            1554,
+            143,
+            1584
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17
+        },
+        {
+          "fontScale": 1.5,
+          "image": "api30-optimized/review-800x1280-font1.5-dark-Close.png",
+          "sha256": "4be93bc6b6865e5d982f26b6126f9b257c7e3183012c606cf2c79f53011f3bab",
+          "captureXml": "api30-optimized/review-800x1280-font1.5-dark-Close-capture.xml",
+          "captureXmlSha256": "c01661f4007564a5a637a950c6573f69ed3ccd4db7eb3a60b0464faf26ce4c7e",
+          "textBounds": [
+            90,
+            1752,
+            174,
+            1800
+          ],
+          "textWidth": 84,
+          "textHeight": 48,
+          "rasterGlyphBounds": [
+            1,
+            10,
+            83,
+            36
+          ],
+          "rasterGlyphWidth": 82,
+          "rasterGlyphHeight": 26
+        },
+        {
+          "fontScale": 2.0,
+          "image": "api30-optimized/review-800x1280-font2.0-dark-Close.png",
+          "sha256": "003d7e05080ddc6de2cd0dc6cd295066fed676f4b5505beae7000a343fb6ac0b",
+          "captureXml": "api30-optimized/review-800x1280-font2.0-dark-Close-capture.xml",
+          "captureXmlSha256": "fd00738d95a9553541b89a0b27055da516937eec3729163d98323bef1d1597b5",
+          "textBounds": [
+            90,
+            1744,
+            188,
+            1800
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "theme": "light",
+      "samples": [
+        {
+          "fontScale": 1.0,
+          "image": "api30-optimized/review-600x800-font1.0-light-Close.png",
+          "sha256": "4d93084002927d6a9bcc6a625eb9aca0bef6c0f8fc6f91d57611a85bf3535d6a",
+          "captureXml": "api30-optimized/review-600x800-font1.0-light-Close-capture.xml",
+          "captureXmlSha256": "0cbc57e3d228aed3bf9b76af546cf0e08ec7ceb8e070631218ea7337e8a2f675",
+          "textBounds": [
+            81,
+            1041,
+            134,
+            1071
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17
+        },
+        {
+          "fontScale": 1.5,
+          "image": "api30-optimized/review-600x800-font1.5-light-Close.png",
+          "sha256": "934d5cca1b3803bdf214fdf734b15147e69001805a9a6d882f281cc8738c9b7f",
+          "captureXml": "api30-optimized/review-600x800-font1.5-light-Close-capture.xml",
+          "captureXmlSha256": "d5c27c799d3798da684b6ab16aab20d76895bcc9c9188a44cc5d8849fab3c81e",
+          "textBounds": [
+            81,
+            1064,
+            165,
+            1112
+          ],
+          "textWidth": 84,
+          "textHeight": 48,
+          "rasterGlyphBounds": [
+            1,
+            10,
+            83,
+            36
+          ],
+          "rasterGlyphWidth": 82,
+          "rasterGlyphHeight": 26
+        },
+        {
+          "fontScale": 2.0,
+          "image": "api30-optimized/review-600x800-font2.0-light-Close.png",
+          "sha256": "95933e12572a637de5be9bd65319b14284da43ecd3a5296c5363c86a67961b38",
+          "captureXml": "api30-optimized/review-600x800-font2.0-light-Close-capture.xml",
+          "captureXmlSha256": "0ddb6a8dfb4ca820773495c1bed696d1995f32ee53ed05c1aabeb3e76a0d89b5",
+          "textBounds": [
+            81,
+            1024,
+            179,
+            1080
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "theme": "dark",
+      "samples": [
+        {
+          "fontScale": 1.0,
+          "image": "api30-optimized/review-600x800-font1.0-dark-Close.png",
+          "sha256": "ef68acac3c80e8044e890ecd49faf916e555e9ca74b5e700d3310bc3e8ad7a3e",
+          "captureXml": "api30-optimized/review-600x800-font1.0-dark-Close-capture.xml",
+          "captureXmlSha256": "066728fd2950a4056eb237930dd65bd4412b58f8b40bb3b9bb4b6f98759a03c3",
+          "textBounds": [
+            81,
+            1041,
+            134,
+            1071
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17
+        },
+        {
+          "fontScale": 1.5,
+          "image": "api30-optimized/review-600x800-font1.5-dark-Close.png",
+          "sha256": "ae8c7d2801a2101e625c19ab74fab815e0d095fde65afdbd48afd756b846baa6",
+          "captureXml": "api30-optimized/review-600x800-font1.5-dark-Close-capture.xml",
+          "captureXmlSha256": "1bbc0d2b184efd0d2b9ebaa3369ab689075e8daa1d7cf1ede2d87e43ab4875fd",
+          "textBounds": [
+            81,
+            1032,
+            165,
+            1080
+          ],
+          "textWidth": 84,
+          "textHeight": 48,
+          "rasterGlyphBounds": [
+            1,
+            10,
+            83,
+            36
+          ],
+          "rasterGlyphWidth": 82,
+          "rasterGlyphHeight": 26
+        },
+        {
+          "fontScale": 2.0,
+          "image": "api30-optimized/review-600x800-font2.0-dark-Close.png",
+          "sha256": "f377b8f0ca8a9c44971d7837327e7cdaf766df3a01545eb2ad522ba987f9baa4",
+          "captureXml": "api30-optimized/review-600x800-font2.0-dark-Close-capture.xml",
+          "captureXmlSha256": "4cd7948993b80af7e78172dc07f43c8d370a13acb8a7b60eb12bab482535aebd",
+          "textBounds": [
+            81,
+            1024,
+            179,
+            1080
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31
+        }
+      ]
+    }
+  ]
+}

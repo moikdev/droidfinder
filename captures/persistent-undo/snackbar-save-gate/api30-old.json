@@ -1,0 +1,20 @@
+{
+  "success": false,
+  "passed": 0,
+  "skipped": 0,
+  "failed": 1,
+  "runnerCompleted": true,
+  "runnerSucceeded": false,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.FinderWorkflowTest",
+      "test": "snackbarUndoRestoresTrashedFile",
+      "code": -2,
+      "error": "java.lang.AssertionError: Failed to assert count of nodes."
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 12.9,
+  "timedOut": false
+}

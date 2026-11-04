@@ -1,0 +1,13 @@
+{
+  "serial": "emulator-5582",
+  "originalReservationOwner": 34822,
+  "controllerPaused": true,
+  "booted": true,
+  "originalControllerResumed": true,
+  "nativeAndOptimizedAccepted": true,
+  "priorAttempt": 2,
+  "newEmulatorPid": 83938,
+  "officialLauncherUsed": true,
+  "sameExistingAvdAndOptions": true,
+  "noDataWipeOrSnapshotLoad": true
+}

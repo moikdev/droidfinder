@@ -37,7 +37,7 @@ for serial in ('emulator-5602','emulator-5582'):
 # These fixed owned test-provider roots are public fixture identifiers, not account locations.
 tokens={v for v in tokens if not v.startswith(('content://dev.findroid.fixtures/','content://dev.findroid.transferqa.documents/','content://dev.findroid.documents/'))}
 assert tokens, 'The private original identifier extraction must inspect actual saved locations'
-texts=[path for path in paths if path.suffix in ('.json','.txt','.xml','.py','.kt','.kts','.md','.java','.properties','.c','.pro') or path.name=='SHA256SUMS']
+texts=[path for path in paths if path.suffix.lower() not in ('.png','.jpg','.jpeg','.webp','.gif')]
 matches=[]
 for path in texts:
     data=path.read_text(errors='replace')
@@ -45,6 +45,7 @@ for path in texts:
 assert not matches, 'Private original location identifiers need review in: '+', '.join(matches)
 report=dict(explicitAllowlistChecked=True,privateRecoveryFilesExcluded=True,
     publicationAllowlistSha256=hashlib.sha256(a.file_list.read_bytes()).hexdigest(),publishedFilesChecked=len(paths),
+    privacyCheckerSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     originalLocationPathAndUniqueLabelCount=len(tokens),publishedTextFilesChecked=len(texts),literalIdentifierMatches=0,
     screenshotInspectionRecordedSeparately=True,scope='Exact original location paths and timestamp/account-like labels. No claim of automated image or universal content sanitization.')
 (PROOF/'public-privacy-review.json').write_text(json.dumps(report,indent=2)+'\n')

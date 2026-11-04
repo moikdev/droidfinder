@@ -1,0 +1,561 @@
+{
+  "serial": "emulator-5602",
+  "checkerSha256": "5df1de998c8764ae3f745025993c234fbb5b275d58a1f544415b5d5d4c9b8398",
+  "helpersSha256": "48061f85f5fa3dce686d733abf8b0e930171d9071da1ff7e9e8aea538758f501",
+  "nativeInspectionSha256": "58413d03fa96c29c1146bae2ca3a5b4c87dba9a1c2f1b777707697bf381bc016",
+  "apkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+  "previousApkSha256": "d38539603eb639fa96d41c529675ce9d2af4c513f9f175a2e59b3542fafad1d2",
+  "debugInspectionApkSha256": "0ff23029143741e7cf0f2570674af526bcf31737281e8bc79a409bf8aaa0ba3f",
+  "fromVersionCode": 46,
+  "toVersionCode": 47,
+  "operationsUseExactOptimizedApk": true,
+  "freshAndroidHierarchies": true,
+  "originalEnvironmentPersistedBeforeMutation": true,
+  "directPreviousPublicUpgrade": true,
+  "actualOptimizedProcessDeath": true,
+  "restartStartsNoAction": true,
+  "copyRenameTrashSaved": true,
+  "layoutChecks": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-1280x800-font1.0-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-1280x800-font1.0-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-1280x800-font1.0-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-1280x800-font1.0-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-1280x800-font1.0-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-1280x800-font1.0-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-1280x800-font1.0-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-1280x800-font1.0-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-1280x800-font1.0-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-1280x800-font1.0-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.5,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-1280x800-font1.5-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-1280x800-font1.5-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-1280x800-font1.5-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-1280x800-font1.5-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-1280x800-font1.5-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 1.5,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-1280x800-font1.5-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-1280x800-font1.5-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-1280x800-font1.5-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-1280x800-font1.5-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-1280x800-font1.5-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-1280x800-font2.0-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-1280x800-font2.0-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-1280x800-font2.0-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-1280x800-font2.0-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-1280x800-font2.0-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-1280x800-font2.0-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-1280x800-font2.0-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-1280x800-font2.0-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-1280x800-font2.0-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-1280x800-font2.0-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-800x1280-font1.0-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-800x1280-font1.0-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-800x1280-font1.0-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-800x1280-font1.0-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-800x1280-font1.0-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-800x1280-font1.0-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-800x1280-font1.0-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-800x1280-font1.0-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-800x1280-font1.0-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-800x1280-font1.0-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.5,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-800x1280-font1.5-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-800x1280-font1.5-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-800x1280-font1.5-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-800x1280-font1.5-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-800x1280-font1.5-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 1.5,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-800x1280-font1.5-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-800x1280-font1.5-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-800x1280-font1.5-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-800x1280-font1.5-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-800x1280-font1.5-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-800x1280-font2.0-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-800x1280-font2.0-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-800x1280-font2.0-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-800x1280-font2.0-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-800x1280-font2.0-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "fontScale": 2.0,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-800x1280-font2.0-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-800x1280-font2.0-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-800x1280-font2.0-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-800x1280-font2.0-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-800x1280-font2.0-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-600x800-font1.0-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-600x800-font1.0-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-600x800-font1.0-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-600x800-font1.0-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-600x800-font1.0-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.0,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-600x800-font1.0-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-600x800-font1.0-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-600x800-font1.0-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-600x800-font1.0-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-600x800-font1.0-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.5,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-600x800-font1.5-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-600x800-font1.5-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-600x800-font1.5-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-600x800-font1.5-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-600x800-font1.5-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 1.5,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-600x800-font1.5-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-600x800-font1.5-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-600x800-font1.5-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-600x800-font1.5-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-600x800-font1.5-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": false,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-600x800-font2.0-light-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-600x800-font2.0-light-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-600x800-font2.0-light-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-600x800-font2.0-light-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-600x800-font2.0-light-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "fontScale": 2.0,
+      "dark": true,
+      "allNamedControlsReachable": true,
+      "controls": [
+        {
+          "image": "review-600x800-font2.0-dark-Undo.png",
+          "label": "Undo Move to Trash"
+        },
+        {
+          "image": "review-600x800-font2.0-dark-Reset.png",
+          "label": "Reset Undo list\u2026"
+        },
+        {
+          "image": "review-600x800-font2.0-dark-Close.png",
+          "label": "Close"
+        },
+        {
+          "image": "review-600x800-font2.0-dark-Keep.png",
+          "label": "Keep Undo list"
+        },
+        {
+          "image": "review-600x800-font2.0-dark-Confirm.png",
+          "label": "Reset Undo list"
+        }
+      ]
+    }
+  ],
+  "controllerPreflightOnly": false,
+  "coldProcessUndoAndRedoAllThreeActions": true,
+  "originalSourceBytesVerified": true,
+  "occupiedDestinationKeptAndJournalUnchanged": true,
+  "corruptHistoryReadOnly": true,
+  "cancelledResetKeepsExactJournal": true,
+  "manualResetPreservesRecordAndDocuments": true,
+  "legacyFavoritePreserved": true,
+  "sentinelPreferencePreserved": true,
+  "unrelatedUriGrantsUnchanged": true,
+  "restoredOriginalUriGrants": true,
+  "restoredOriginalManagedFiles": true,
+  "restoredOriginalFileAbsences": true,
+  "restoredOriginalDirectoryAbsences": true,
+  "restoredManagedFileCount": 495,
+  "restoredOriginalStorageAccess": true,
+  "restoredApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+  "cleanupErrors": [],
+  "success": true
+}
