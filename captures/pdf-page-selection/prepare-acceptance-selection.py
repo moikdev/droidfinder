@@ -30,6 +30,7 @@ support.update(relative(path) for path in PROOF.glob('checker-optimized-attempt-
 support.update(relative(path) for path in PROOF.glob('input-*-optimized-attempt-*.java'))
 support.update(['scripts/check-device.py','scripts/check-device-batches.py','scripts/check-ota-upgrade.py',
     'scripts/check-sync-public-privacy.py','scripts/check-pdf-page-selection.py','scripts/package-pdf-selection-validation.py',
+    'captures/persistent-undo/restore-public-tablets.py','captures/persistent-undo/private-native-state.py',
     'scripts/verify-public-artifacts.py','scripts/verify-release-validation.py',
     'docs/releases/0.49.0.md','docs/PDF-PAGE-SELECTION.md','docs/IMPROVEMENT-TRACKER.md','VALIDATION.md'])
 for api,row in tablets.items():

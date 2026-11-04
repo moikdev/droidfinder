@@ -22,7 +22,7 @@ assert not a.output.exists(), 'Preserve earlier OTA attempts'
 adb = str(Path.home()/'Library/Android/sdk/platform-tools/adb')
 old = MAIN/'captures/release/0.48.0/Findroid-0.48.0-preview.apk'
 new = ROOT/'captures/release/0.49.0/Findroid-0.49.0-preview.apk'
-restored_public = ROOT/'captures/release/0.49.0/Findroid-0.49.0-preview.apk'
+restored_public = MAIN/'captures/release/0.49.0/Findroid-0.49.0-preview.apk'
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 assert sha(new) == sha(restored_public)
 

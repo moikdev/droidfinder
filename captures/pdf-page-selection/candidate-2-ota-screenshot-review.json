@@ -1,0 +1,563 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/direct-handle-drag.png",
+      "sha256": "25cebcba2e7bf9125f209bc2f87e51927870badca474e43a5b3326dfe69e6657"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/first-long-press-drag.png",
+      "sha256": "25cebcba2e7bf9125f209bc2f87e51927870badca474e43a5b3326dfe69e6657"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/two-line-selection.png",
+      "sha256": "25cebcba2e7bf9125f209bc2f87e51927870badca474e43a5b3326dfe69e6657"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/word-and-handles.png",
+      "sha256": "825c96e4ec995b2a98965ca19f42b6ea8f4b25badc6aef45430a93223fc996eb"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-002/pdf-page-selection-qa/zoomed-selection.png",
+      "sha256": "826b56ed4f82fc39c4b30e6ee37b1cee12de8ecc54a1e43a48d20a0f0a207dd4"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-004/space-plan-qa/normal-review.png",
+      "sha256": "641f01642ef47c2c4e37e04670dc8a553b47620aedec13adafa8830ccb8a07e2"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-006/recovery-inbox-qa/large-text-review.png",
+      "sha256": "5c45416fa8af6b854541c655fae170a409d6138fce56b9c5a977f0d7d9e2556f"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-006/recovery-inbox-qa/normal-review.png",
+      "sha256": "9c7d209cf93b79f79f3b751ed5c42d8dca20055faf74da2b7fb2ace8b35068f1"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/completed-addition.png",
+      "sha256": "1d7acb291201138a9299b4cc13670bcb1b38e733bd90277b3349a1768b08cf0b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/confirmed-replacement-and-trash.png",
+      "sha256": "ba888ce7b6d2ee7314cf8f2140186ca6d6ba0304ca6345e7c37b88e56c6e0c52"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/default-choices.png",
+      "sha256": "d84040be01868c33897b842fb3d837d7be61b6e5af4958b497b2ec9383b28ad3"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/large-text-confirmation.png",
+      "sha256": "f121325bcc37976b0d0882dc2cf5a46b96e7ed032c91cdb8463a8801a2696074"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-009/folder-sync-qa/stale-review-stopped.png",
+      "sha256": "e2c31a5e2ffe91488ceb1eb4cf8d0d359e58a3e93bfb4e5a292ae8f0fd17a777"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/changed-file.png",
+      "sha256": "8cc55d98248964b2b1cb47056cf22e98979b7ed9184714d405180f0d2ccf6173"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/interrupted-review.png",
+      "sha256": "f371bafde025a12fbdf1d7957d1aad56a0601794e8d8023880332adb98b47e10"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/large-text-reset.png",
+      "sha256": "b2691b1ab6c53be22bbca3a8ce938c7c71166daecbe78dba3c5b1a93f28bddf5"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/reset-review.png",
+      "sha256": "b2691b1ab6c53be22bbca3a8ce938c7c71166daecbe78dba3c5b1a93f28bddf5"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/saved.png",
+      "sha256": "22f77cc089bdea53902370e6f2f66766e736f4b2bacec44952e5565c2cf2bb62"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-native/images/after-batch-012/persistent-undo-qa/session-boundary.png",
+      "sha256": "5ab4253a9681ea8ae9e24dbc778b1d5c4f03f3bd2e78fe34c67ea799706aea83"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/no-text-layer-surface.png",
+      "sha256": "4895b9a6eee380bc8200bd274f04a83d4049e7f550241753f2fd2781b56acc48"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/retained-selection-pan-mode-surface.png",
+      "sha256": "fa69a22ac51b708dff30e6cc65aadbaf64cdb6ea06fd472e97c86973f2f4dda7"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/two-lines-surface.png",
+      "sha256": "3b1eb6404f09b29f5f979373589582c79f8b41dbe6e839c84cba23381c963b48"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/visible-zoomed-selection-surface.png",
+      "sha256": "4c716948e8853a8017087685fff5b5c458f3e961655305cbda571ac19752081d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-core-1/word-and-handles-surface.png",
+      "sha256": "f4558da6343aa39faca6d60346c49d9784ddc0b4b7cc25cd37dc22f76f92ea85"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/density-240-selection-surface.png",
+      "sha256": "3ad1a9b76968bb465006d47849d411e079fb554f63b227e07f8188ff89ee3ea0"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/density-300-selection-surface.png",
+      "sha256": "8586856345a6fb9f602c1f87b0bd10f81e450e5e2b09eb631ff8d47e888eb531"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-copy-glyph.png",
+      "sha256": "8a83810f007d643fd36125ae3e2d46ae0b3c1fd944dae6bc8309a174ebf3d742"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-pan-surface.png",
+      "sha256": "38a0f8d24cb6b23d4f2379b07853c6429a7dbe265cb4fb24e20490b22f690a4b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-selection-surface.png",
+      "sha256": "278cc3fe36572766d5a12a769e7531a57c0fff52e43fa09e60ef0dca5438b213"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-light-copy-glyph.png",
+      "sha256": "1e44006efaf18cc85877a009df249a9803b5e3a1f0ec4e6e0dc2cb36c87cb5cd"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-light-pan-surface.png",
+      "sha256": "37a4f0b72a961a5139195268000ea7b91ce2fc8356913221720fd884a882c5ca"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font1.0-light-selection-surface.png",
+      "sha256": "fef987270fb563e87de7262fa1af672f735aad1a6f4bb89a70819ffa413a6a40"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-copy-glyph.png",
+      "sha256": "271988183758f414d80d3fb035e4411738c2b4c60701e2a7e5e449e94cd410a7"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-pan-surface.png",
+      "sha256": "1b7517dc46d5509a70a600c7ada9eb1f7e8d407bd048a958df7ea6af4ba574cf"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-selection-surface.png",
+      "sha256": "faa01438ddfb029dbf4400dd45ebdac2a08f9c24dfe8f82216fa3783bbe5c31b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-light-copy-glyph.png",
+      "sha256": "c153fd6c0bc696c175a20120fcf38494f9c808ebb078d65f61434d517e4c317c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-light-pan-surface.png",
+      "sha256": "934771a6f64f1ab2d24381a96f07bee813ba6bfe30474e16b5f4eb28ce4a549d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-1280x800-font2.0-light-selection-surface.png",
+      "sha256": "31722e3bc3c3c7392782b26d06f2b8828df5a0f4738b01cad48c0b059f9cad88"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-dark-copy-glyph.png",
+      "sha256": "ba405028645b4ada346fd186da5da91620e1a249fec58c1c65b62f382c7d9714"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-dark-pan-surface.png",
+      "sha256": "88eb0e3ddeb1d83e90048145e5919b1367c6d3b48049c6112f6d7541dfff4e90"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-dark-selection-surface.png",
+      "sha256": "81f2e051ca314024921057f9feb1b70e24a33d8d6f95c41a2b9c03c2ec1bb462"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-light-copy-glyph.png",
+      "sha256": "fb5b930c817913d33734943457229751301dc482b7cb5ca965bd6ef45757b6be"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-light-pan-surface.png",
+      "sha256": "6e0027b3a71649b34a19e68e0caeec8dc226ea88880be0768f9e52d8d90d11ed"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font1.0-light-selection-surface.png",
+      "sha256": "7fd76cb239f1ba79ed41e93ff16b901eeac060efed98f5f4da516a864c5e4a35"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-dark-copy-glyph.png",
+      "sha256": "530b385b9b495240612e491e1102d5af4e8ca3a6fe525ec72a84d150168dc639"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-dark-pan-surface.png",
+      "sha256": "ccfd3ce36bbbadaac7c91cda830aac9718306cebb71b0303dccbed59d317c080"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-dark-selection-surface.png",
+      "sha256": "e5420e87f2ef6aa36894923dfa741c5dbebe670995f23e37bcde7f97784a058a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-light-copy-glyph.png",
+      "sha256": "582df3f30c948f64805b99baad91c13f9a710f8ca7d73b3c76cfa320d6c7e978"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-light-pan-surface.png",
+      "sha256": "031bef9b57f6d640c62480a529835309adda41e400ea4bfe22aae7c198bef776"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-600x800-font2.0-light-selection-surface.png",
+      "sha256": "1c147bc3533860b8bc6d3696644bbe79d2c3f32e3cb1fcb0017a6134e8e13826"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-copy-glyph.png",
+      "sha256": "b95b38909c7315d1f619cff7e2599c3c5a4af35dd842b561696f4f52fb5521c9"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-pan-surface.png",
+      "sha256": "083de5af958433200223d4796b8379adfebb5205431d6fe6416d55922b42cd92"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-selection-surface.png",
+      "sha256": "5af5f306963fb9640aeb39af7466483f8606ac3c37d4431df1795510443762e4"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-light-copy-glyph.png",
+      "sha256": "dc9dc15f7fc4d93f79a29c253877b8bd28d23fcedfc0665846f4f15e81c554c9"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-light-pan-surface.png",
+      "sha256": "8be7695927ce99d6878c05cfc6c68d8a403ce5852a8a9f81b3a13aae8d71d579"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font1.0-light-selection-surface.png",
+      "sha256": "ca6d7aca3094e6f906e1c4a736123885834e57f6620dd7cfde0caaf1cb038e9b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-copy-glyph.png",
+      "sha256": "2e4cd68deea5ea9a6bc44617f96a45748b7b58399c00b24b08aee0158d28c260"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-pan-surface.png",
+      "sha256": "f8146c9d91058ef33f0a76cab5af951a0920654c337a5da8412a04702f5e6096"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-selection-surface.png",
+      "sha256": "158c8b8f72c5a281f8588453cd905f57f3d3c18791de5ba829110b0233d0cc8b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-light-copy-glyph.png",
+      "sha256": "dc7f1de4f944c45fa85fbdb8bd1341cc47ec38fdb33954bac8fc242ce668ad37"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-light-pan-surface.png",
+      "sha256": "27853d2aa1a64786b0b924b00e2cbcb3435f029f4cdd52e9b16f767963c8321c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-optimized-layouts-1/layout-800x1280-font2.0-light-selection-surface.png",
+      "sha256": "3ad1a9b76968bb465006d47849d411e079fb554f63b227e07f8188ff89ee3ea0"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/direct-handle-drag.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/first-long-press-drag.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/two-line-selection.png",
+      "sha256": "b6d050789d4fedd5d675224a1b17dd68cb65339a086d22ca59ed2414bc5a264a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/word-and-handles.png",
+      "sha256": "c9876e2689f9254fcd82cee1f2341112cd84b66db08d8d4eca00f5bbebe35f7c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-002/pdf-page-selection-qa/zoomed-selection.png",
+      "sha256": "7746fd1d620401039b675d6c34d1c1d5220ed94cf96f4fdf0219f0a6c5a2b78a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-004/space-plan-qa/normal-review.png",
+      "sha256": "4bda17f598d525d0c90f74f4c2f9ee061cb314af1b21007680afa54f4ba62dc3"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-006/recovery-inbox-qa/large-text-review.png",
+      "sha256": "84cbe860a363c2d69667f2886af6d89fe1179aa5bc22b50fead8f66bd0336b5c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-006/recovery-inbox-qa/normal-review.png",
+      "sha256": "bc1de54c1dad6766be34292a9da99c56b57206a3d348564da414f23267424705"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/completed-addition.png",
+      "sha256": "6ba3bf87df5a35e84d66f195f58570fa4a8ca01e8d63c3c002a149102601f874"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/confirmed-replacement-and-trash.png",
+      "sha256": "31036d36ac4bc89c093a6ed5ecaebca7a14734aa8879ddb08f3e6142f8f31de2"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/default-choices.png",
+      "sha256": "e8587eb89e7ce867752bcf95f317b6894a2574a4de65ad337d53e1b4e508334c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/large-text-confirmation.png",
+      "sha256": "8fbaf15b5763fc5ab4e294105d26dc4609c084d28c8a58a7331a2c8400434dde"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-009/folder-sync-qa/stale-review-stopped.png",
+      "sha256": "8bb91dbdf57ade76f0fb3766d89fa730ac1c449ba5f975f5df66ad4f2b83a68f"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/changed-file.png",
+      "sha256": "bec99bf8b21e8d754932133697725134c185fd28b0fc2bc6769800dd86148a54"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/interrupted-review.png",
+      "sha256": "d409b827e5c6d4e536c2c45fbced7ec4971e2de2efc67fb7ff6bfda7659283aa"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/large-text-reset.png",
+      "sha256": "8cdc122c6717d15d8e8e9d6c844c91677c1fc58ec04b13ccf2f9a5fce99b02fd"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/reset-review.png",
+      "sha256": "8cdc122c6717d15d8e8e9d6c844c91677c1fc58ec04b13ccf2f9a5fce99b02fd"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/saved.png",
+      "sha256": "3075f0ede097cc2ea479ddf14698947195f7f93af59c668162d20c834c93cd62"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-native/images/after-batch-012/persistent-undo-qa/session-boundary.png",
+      "sha256": "8b4655c4c16ed7b40c35690bb2f33d150f43c15ec2436e623f42588eb20535c9"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/no-text-layer-surface.png",
+      "sha256": "3d33b7e148e7f6c5fd0d00a173a2625817db8ca00917d1afbd9026d6849d1942"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/retained-selection-pan-mode-surface.png",
+      "sha256": "1548960572c2e1db1252dd4de163e2dbbb33f9bbcee757e2c8af1c48e3b96174"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/two-lines-surface.png",
+      "sha256": "4bc282192a495ec2297711b926449cc8ee10ed222147506827805a790731ba71"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/visible-zoomed-selection-surface.png",
+      "sha256": "890e80d576fa2d8c9ff263e0f488432ea106956278af1d46637954a09ba3eacf"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-core-2/word-and-handles-surface.png",
+      "sha256": "bcf35b092e2b2e50d21b7fae9df6a3d966f24f7ef3231dcf55e4c0e36ff0f4d5"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/density-240-selection-surface.png",
+      "sha256": "0a9f9b2ed5ecafb31cc2ac92f836f5370a69b0c91d6b1f603c9ca1e0898b0767"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/density-300-selection-surface.png",
+      "sha256": "db01ab4204f087941f29ab9d667053db9a8aeed21104a7030d100b85e8daade8"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font1.0-dark-copy-glyph.png",
+      "sha256": "6266a845f14c4340cc08f933bbd6d2aeafb049c282cb1b7583dbcb7a4464efd0"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font1.0-dark-pan-surface.png",
+      "sha256": "41af335b057e94611288d33c1298ea3de899ea16278a148f4db263ffdc5e1349"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font1.0-dark-selection-surface.png",
+      "sha256": "f98866c50ef60dd9567820ff28d581a9baec7911e2d831dc786e9a99279c46d6"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font1.0-light-copy-glyph.png",
+      "sha256": "9523d0c4eb913dcdeca1c9bd79e9cdfc12fb5b5fc1c0b932321951fe221b36b0"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font1.0-light-pan-surface.png",
+      "sha256": "f4dda220442546f269e9c43267730b2092614ab9df76299c0b751ea88b7ce467"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font1.0-light-selection-surface.png",
+      "sha256": "007afa1cfe894ae6e65594c01035bc82c6fb8287d9333b007717e75c510e23f9"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font2.0-dark-copy-glyph.png",
+      "sha256": "e436d7a49c8a2e87e34234c8087ebeaebd128e869f4b8a6e1db6b667c4066433"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font2.0-dark-pan-surface.png",
+      "sha256": "9cdff2d6293636c75e68271a5a497ae890e363533d5a26594b4676edbb5b6ec4"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font2.0-dark-selection-surface.png",
+      "sha256": "35487535faa4229211e7faf3dac60357ba216812597dbb4cdb42acdee1f0ceea"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font2.0-light-copy-glyph.png",
+      "sha256": "7d7e22027db8d45ac45776a5422d71de864af9df26e6b8277ef5e693dff85f8c"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font2.0-light-pan-surface.png",
+      "sha256": "318b14ad83fe011277fc3a90e1772cece2765879951295053d823584092637e7"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-1280x800-font2.0-light-selection-surface.png",
+      "sha256": "c1c28a6b1b1a649ec07fc974cba3b0d1932c9a1b819d815f6cd175107b2c69db"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font1.0-dark-copy-glyph.png",
+      "sha256": "2a2df95bf6e0e3b906111be41a7f99855feabecba4d8a730fdb17f43ac2181fa"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font1.0-dark-pan-surface.png",
+      "sha256": "2b94b75fc89701402ba8509aafd8d943377580dc27566e6f0fe4f2ecef703708"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font1.0-dark-selection-surface.png",
+      "sha256": "8dfecdfd8059f49ae715e46aba575322c49d46e8c8ed5e9996afe11c5a61a90d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font1.0-light-copy-glyph.png",
+      "sha256": "5f83b9ea36a1c51976dee78096a04fb97e374dc0bf239c2fd8156d798844f1fd"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font1.0-light-pan-surface.png",
+      "sha256": "f41694d286ab184c10c303524c4b7309418bcc2ca2d680960d46c8663f1b21cb"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font1.0-light-selection-surface.png",
+      "sha256": "e7cbf95a0664566f7914ab28909d3650e5643d3152da3b763556d81a36ee8f0f"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font2.0-dark-copy-glyph.png",
+      "sha256": "423a0fcd955d0cbe87d443a2e9a20f1d962a896730c028a8968f8715408cecb6"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font2.0-dark-pan-surface.png",
+      "sha256": "9d3b442d86123aa7fc2d3c26853ca7fcb5ad3ed2422b44920a1906ee85a2fec5"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font2.0-dark-selection-surface.png",
+      "sha256": "f66eb65f61f6b82d1a689e6a51e2c82c2e90efa6b2586619dc8294ad1eee454b"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font2.0-light-copy-glyph.png",
+      "sha256": "1f082381531db0f671668bb24af858c775c2a30535f8eb64ea93b38e16ab61db"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font2.0-light-pan-surface.png",
+      "sha256": "d6a980eba2cafd55e80f0458656945c2308d8883f76e0d2b29373d16126f058f"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-600x800-font2.0-light-selection-surface.png",
+      "sha256": "c41477609b8825c0e788911a2e3dadedcd3418b29712c792040364a4f7de3477"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font1.0-dark-copy-glyph.png",
+      "sha256": "b8dbbd33c53d411e955d468bb845dad5150151b5000e42b2bd0558a829cf94b7"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font1.0-dark-pan-surface.png",
+      "sha256": "c8d03dfefa7fabd106bbffefa1ec3170aea4f2340b5a9cb736781c2787f03b70"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font1.0-dark-selection-surface.png",
+      "sha256": "3c1690c6c23e70c1b5976bfc93fe8ba88cb072cfe01a4c4bdf73c40f01b4cfb6"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font1.0-light-copy-glyph.png",
+      "sha256": "7d266a45cc770e0f84060fa34848e830a9b807f2eeb1a13fb438a5e40c6c003f"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font1.0-light-pan-surface.png",
+      "sha256": "a702cb889b11b14e6687ad026bc4df7175d04cdef800472c1c035d35e5e35ad3"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font1.0-light-selection-surface.png",
+      "sha256": "c51c84c728147be0bc2920c1eaeeea3a73274cdf74104a33bd7b53c7cc546117"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font2.0-dark-copy-glyph.png",
+      "sha256": "a6b2889d8411d9cc268dc7613b07dde9568bebfa8793828732439f45e5e48d47"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font2.0-dark-pan-surface.png",
+      "sha256": "a2e4f7d148c8c6b3bb45d48f2566534c6ec4402995080c1b387210b4623c1a00"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font2.0-dark-selection-surface.png",
+      "sha256": "37c4eeee80dd927e67fa991a61a46c142ed7cc61dae2f5cbd2626b01de2807f2"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font2.0-light-copy-glyph.png",
+      "sha256": "89b8546c692d3d7dbb0caa1dfcbea0173276d9a4ac07a5eeded87098f214fb0e"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font2.0-light-pan-surface.png",
+      "sha256": "cf605ef3a5707cd2f57a6e67627d0a1c8a47fbbdb9dd02a9d86f431bd3161e76"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-optimized-layouts-3/layout-800x1280-font2.0-light-selection-surface.png",
+      "sha256": "0a9f9b2ed5ecafb31cc2ac92f836f5370a69b0c91d6b1f603c9ca1e0898b0767"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/available.png",
+      "sha256": "6ae5d1a88dc65f7e0f86ac3c921c51a74015f216e00ad6b1287a28a3ff8606ea"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/installer-complete.png",
+      "sha256": "45ae2e9f56d75f4b482c12fb71467382c2b4a0d9a6e80b44fca388ed9ff9a34e"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/installer.png",
+      "sha256": "528912782ab75b12af495092c6a0f3e3b87b457dd02534649a259f1f8b872e66"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/ready.png",
+      "sha256": "00f2566cd95f9adbc6d575b15a3b52a7cf939e3cf4e3dc859227fe11f3d2b70a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/up-to-date.png",
+      "sha256": "7534407f9c00c8f34422d3215620f145ea8c8765139067b691572ff9132c714d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/upgraded-sidebar.png",
+      "sha256": "477a635ce337a15aaa10d4e0e8efcc939ac9ca87be6e5fbc62a6710dde0f9515"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/available.png",
+      "sha256": "37267bf2fbb797a849cb1b7e1470cee0c1b91e0f27d64f88c57be462f9fcccae"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/installer-complete.png",
+      "sha256": "de6b628ed06347216495f244bb8acf13bee3b81fd8a12e0a1709b13dd821ce3d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/installer.png",
+      "sha256": "f5e88669d513ef3c1825602b0187f28e9aeaefe0bf4289fdef1e1994c283d870"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/ready.png",
+      "sha256": "2854bd30f5fcbc10c1a00446fc2c58bb1e9e772eeb0527fcbac463d8ea218c11"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/up-to-date.png",
+      "sha256": "f07030edd706d751784902f6713b24970272e2256f50249acaad1a259e54454a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/upgraded-sidebar.png",
+      "sha256": "5faea3bed535d287d4141a9bd1efbd6e18b975463d7216fc68e5c3180fe8ab09"
+    }
+  ],
+  "reviewReceipts": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-local-screenshot-review.json",
+      "sha256": "480cdf005445d75c4b47c80764e56f54500912338cc0e064beac938bc093dc04"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-public-ota-screenshot-review.json",
+      "sha256": "a28bbfc5adea86ae0680bcfc110e0c7dcafefb778792236cb04d821b912a6515"
+    }
+  ],
+  "method": "Combined the 124 actually inspected local image/glyph paths and 12 actually inspected public OTA captures.",
+  "actualPublicOtaComplete": true,
+  "fullReleaseAcceptanceComplete": false,
+  "independentArchiveAcceptancePending": true
+}

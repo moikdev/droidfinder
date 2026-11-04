@@ -1,0 +1,17 @@
+{
+  "attempt": "captures/pdf-page-selection/candidate-2-api30-public-ota-1",
+  "originalVerificationSha256": "8c73cc11d012bbaaabcf17b3c92798fdd4cc969af65cb21276d1aae6751759b1",
+  "actualPublicUpgradeComplete": true,
+  "restorationComplete": false,
+  "cause": "The trusted original-restoration helper refuses an APK path outside the main captures directory. Its assertion happens before its restoration body.",
+  "facts": [
+    "Both public 50-to51 downloads/installations and installer completion pass.",
+    "Synthetic source bytes, Favorite, sentinel preference and no-repeat offer pass.",
+    "The OTA checker restored its setup and the outer controller verified the original Workspace, then installed the original 0.45 app/test pair before the trusted-path assertion.",
+    "No completed restoration is claimed for this stopped receipt."
+  ],
+  "explicitManualRestorationSelected": true,
+  "verifiedPublicApkArchivedAtTrustedPath": true,
+  "publicApkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "originalAttemptPreserved": true
+}

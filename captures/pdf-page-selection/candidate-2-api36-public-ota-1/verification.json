@@ -1,0 +1,19 @@
+{
+  "serial": "emulator-5582",
+  "expectedVersionCode": 51,
+  "fromVersionCode": 50,
+  "apkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "sourceCommit": "93d36afd3d3caf1c972a3dcd42256978fac468cb",
+  "controllerSha256": "8892381185c406f528db91dd48dd545d58cdcf19bebec32658d0623742952fd8",
+  "publicAnonymousApkBytesMatch": true,
+  "acceptanceComplete": true,
+  "restorationComplete": false,
+  "originalDataRestored": false,
+  "originalUriGrantsKept": false,
+  "startingInstalledApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+  "publicFeedUpdateVerified": true,
+  "installedApkSha256": "c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3",
+  "actualInstallerCompletionConfirmed": true,
+  "originalWorkspaceTreeKept": true,
+  "restorationError": "AssertionError: "
+}

@@ -1,0 +1,61 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/available.png",
+      "sha256": "6ae5d1a88dc65f7e0f86ac3c921c51a74015f216e00ad6b1287a28a3ff8606ea"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/installer-complete.png",
+      "sha256": "45ae2e9f56d75f4b482c12fb71467382c2b4a0d9a6e80b44fca388ed9ff9a34e"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/installer.png",
+      "sha256": "528912782ab75b12af495092c6a0f3e3b87b457dd02534649a259f1f8b872e66"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/ready.png",
+      "sha256": "00f2566cd95f9adbc6d575b15a3b52a7cf939e3cf4e3dc859227fe11f3d2b70a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/up-to-date.png",
+      "sha256": "7534407f9c00c8f34422d3215620f145ea8c8765139067b691572ff9132c714d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api30-public-ota-1/public-ota/upgraded-sidebar.png",
+      "sha256": "477a635ce337a15aaa10d4e0e8efcc939ac9ca87be6e5fbc62a6710dde0f9515"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/available.png",
+      "sha256": "37267bf2fbb797a849cb1b7e1470cee0c1b91e0f27d64f88c57be462f9fcccae"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/installer-complete.png",
+      "sha256": "de6b628ed06347216495f244bb8acf13bee3b81fd8a12e0a1709b13dd821ce3d"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/installer.png",
+      "sha256": "f5e88669d513ef3c1825602b0187f28e9aeaefe0bf4289fdef1e1994c283d870"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/ready.png",
+      "sha256": "2854bd30f5fcbc10c1a00446fc2c58bb1e9e772eeb0527fcbac463d8ea218c11"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/up-to-date.png",
+      "sha256": "f07030edd706d751784902f6713b24970272e2256f50249acaad1a259e54454a"
+    },
+    {
+      "path": "captures/pdf-page-selection/candidate-2-api36-public-ota-1/public-ota/upgraded-sidebar.png",
+      "sha256": "5faea3bed535d287d4141a9bd1efbd6e18b975463d7216fc68e5c3180fe8ab09"
+    }
+  ],
+  "method": "Opened all four labeled private sheets covering six full OTA captures on each API.",
+  "findings": [
+    "Both tablets show the public 0.48 installed version, the 0.49 update description and the downloaded/ready-to-install state.",
+    "Android installer prompts and actual App installed completion are visible on both APIs.",
+    "The reopened app reports 0.49 and no repeat update offer. The synthetic Original.txt and Favorite remain visible.",
+    "Only synthetic OTA fixture names, standard launcher controls and an empty synthetic Field guide.pdf viewer backdrop appear. No original document contents or account names are visible."
+  ],
+  "fullReleaseAcceptanceComplete": false
+}
