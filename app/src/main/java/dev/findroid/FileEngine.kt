@@ -368,13 +368,54 @@ class FileEngine(
         }
     }
 
+    /** A stale in-memory Trash map must never overwrite changed on-disk recovery records. */
+    @Synchronized
+    internal fun checkSyncRecoveryIndex(
+        storage: PartialCopyStorage = AndroidPartialCopyStorage(),
+        control: TransferControl = TransferControl(),
+    ) {
+        check(indexWritable && trashIndexNotice == null) { "Review Trash recovery records before synchronizing originals." }
+        control.check()
+        val expected = storage.stat(indexFile.path)
+        if (expected == null) {
+            check(index.isEmpty() && storage.stat(indexBackup.path) == null) { "Trash recovery records changed. Keep their bytes and review them before synchronizing." }
+            return
+        }
+        check(expected.regular && !expected.directory && expected.links == 1L && expected.size in 0..(16L * 1024 * 1024) &&
+            storage.canonical(indexFile.path) == File(stateDir.canonicalFile, indexFile.name).path) {
+            "Trash recovery records are linked, oversized or redirected. Keep them for manual review."
+        }
+        val bytes = ByteArray(expected.size.toInt())
+        storage.open(indexFile.path).use { handle ->
+            control.guard(handle) {
+                check(handle.stamp() == expected) { "Trash recovery records changed before they could be checked." }
+                var offset = 0
+                while (offset < bytes.size) {
+                    control.check()
+                    val count = handle.read(bytes, offset, minOf(64 * 1024, bytes.size - offset))
+                    check(count in 1..minOf(64 * 1024, bytes.size - offset)) { "Trash recovery records ended before their reviewed size." }
+                    offset += count
+                }
+                check(handle.read(ByteArray(1), 0, 1) in -1..0 && handle.stamp() == expected && storage.stat(indexFile.path) == expected) {
+                    "Trash recovery records changed while they were checked."
+                }
+            }
+        }
+        val actual = Properties().apply { bytes.inputStream().use(::load) }
+        check(actual == index && storage.stat(indexFile.path) == expected) {
+            "Trash recovery records changed. Their bytes were kept; review them before synchronizing."
+        }
+    }
+
     /** Checks every reviewed original before the apply worker can change its first destination. */
     @Synchronized
     internal fun reviewSyncTrash(
         originals: Collection<UndoPathProof>,
         files: UndoHistoryFiles,
         storage: PartialCopyStorage = AndroidPartialCopyStorage(),
+        control: TransferControl = TransferControl(),
     ): FolderSyncTrashLocation {
+        checkSyncRecoveryIndex(storage, control)
         check(indexWritable && trashIndexNotice == null) { "Review Trash recovery records before synchronizing replacements or destination-only items." }
         check(originals.isNotEmpty() && originals.size <= 10_000 && originals.map { it.path }.toSet().size == originals.size) {
             "The original recovery plan is empty, duplicated or too large. Review it again."
@@ -408,6 +449,7 @@ class FileEngine(
         check(available != null && available >= reserve) { "There is not enough verified recovery space for this complete plan. Original files were kept." }
         check(storage.stat(trashDir.path)?.sameObject(identity) == true && storage.canonical(trashDir.path) == resolved &&
             originals.all { files.observe(it.path) == it }) { "The recovery location or a reviewed original changed during preflight." }
+        checkSyncRecoveryIndex(storage, control)
         return FolderSyncTrashLocation(trashDir.path, resolved, identity)
     }
 
@@ -426,6 +468,7 @@ class FileEngine(
         var moveAttempted = false
         try {
             check(indexWritable && trashIndexNotice == null) { "Review Trash recovery records before moving synchronization originals." }
+            checkSyncRecoveryIndex(storage, control)
             val source = File(expected.path)
             val identity = expected.entries[expected.path] ?: error("The reviewed original is unavailable.")
             val trashIdentity = storage.stat(trashDir.path) ?: error("Trash is unavailable.")
@@ -447,6 +490,7 @@ class FileEngine(
                 check(folderSyncDigest(path, expected.entries.getValue(path), control, storage) == hash) { "The reviewed original contents changed. Compare again." }
             }
             check(files.observe(expected.path) == expected) { "The reviewed original changed while it was checked. Compare again." }
+            checkSyncRecoveryIndex(storage, control)
             val id = UUID.randomUUID().toString()
             val bucket = File(trashDir, id)
             storage.createDirectory(bucket.path)
@@ -460,6 +504,7 @@ class FileEngine(
             val target = File(bucket, source.name)
             recordIntent(FolderSyncPreservationIntent(source.path, target.path))
             control.check()
+            checkSyncRecoveryIndex(storage, control)
             check(storage.stat(trashDir.path)?.sameObject(trashIdentity) == true && storage.canonical(trashDir.path) == resolvedTrash &&
                 storage.stat(bucket.path)?.sameObject(bucketIdentity) == true && files.observe(expected.path) == expected) {
                 "The reviewed original or its recovery location changed. Original files were kept."
@@ -472,6 +517,7 @@ class FileEngine(
                 folderSyncDigest(path, stamp, control, storage)
             }
             files.sync(setOf(target.path, source.path))
+            checkSyncRecoveryIndex(storage, control)
             return target
         } catch (error: Exception) {
             throw FolderSyncRecoveryFailure(preserved, error, moveAttempted)
