@@ -1,0 +1,468 @@
+{
+  "images": [
+    {
+      "path": "captures/office-previews/candidate-3-api30-native/images/after-batch-002/office-qa/provider-stopped.png",
+      "sha256": "f882b330e0a2a98633d2ef6d09a2359347f06597e12e3dd12e4c5ac4d6dbe3a3",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-native/images/after-batch-002/office-qa/slide-section-and-find.png",
+      "sha256": "f23f4736a6b6708c8b311cb4f5cd974411735b15e76a51e878e3621a4e177b55",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-native/images/after-batch-002/office-qa/word-find-and-copy.png",
+      "sha256": "84406fe8f1b6b8bc002668e2ef98b36239c1f6fe376bb1ff1e7ca93fcf9bfb82",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-native/images/after-batch-002/office-qa/workbook-stored-values.png",
+      "sha256": "b612dae8ac1b6cea12053d2481d702fb26352102c3cd27dd0ae092cf98aba621",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-native/images/after-batch-002/office-qa/provider-stopped.png",
+      "sha256": "096bf75112d6cab44d5d8b6a0d4e85f10b84ed854750e218bf36ba28ea43e97d",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-native/images/after-batch-002/office-qa/slide-section-and-find.png",
+      "sha256": "fd63ee4f7e20fc8b46d9f58cfff8371d6c1651bf71e9c5239f2098da4a488452",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": false,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-native/images/after-batch-002/office-qa/word-find-and-copy.png",
+      "sha256": "bce4aae52d3b24bf4b939f1753817928d12af8c26d179dd1292927517b49c538",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-native/images/after-batch-002/office-qa/workbook-stored-values.png",
+      "sha256": "5b0d8c3eac4ff2d4870446b6be89cd2162489c210974c2420d2fd76bf5db3485",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-core-1/core-DOCX-first-section-preview.png",
+      "sha256": "d2a04ad697edbf885562a4482042abcfd725a88054bd0c0b024b3ba0148dca5f",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": false,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-core-1/core-DOCX-limits-preview.png",
+      "sha256": "39d6e3ba39c327b023fb1e4c504b7545d310890303adbcd198b8663d5b6502e2",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-core-1/core-PPTX-first-section-preview.png",
+      "sha256": "924d3a39c89a6b3af66093e0591a8e03a8cc6387ff5a8894e94c222a27d5bfa4",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-core-1/core-PPTX-limits-preview.png",
+      "sha256": "39d6e3ba39c327b023fb1e4c504b7545d310890303adbcd198b8663d5b6502e2",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-core-1/core-PPTX-second-section-preview.png",
+      "sha256": "2aa5228a553d83bcc8c3edbbac571057468a2149c051c88513c46e7ce5780631",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-core-1/core-XLSX-first-section-preview.png",
+      "sha256": "697ef9e131ba7765748a7811859536e32b2d44d82edb18f88dfc21f0f70cc0d8",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-core-1/core-XLSX-limits-preview.png",
+      "sha256": "03d2fc5581ab44c5814248043240b30bcd599abca56578e4774017014f1ab8f7",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-core-1/core-XLSX-second-section-preview.png",
+      "sha256": "1510ac6552dcebcba989c614956c930b501bbd47463802a77a3a6a99417c938f",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-DOCX-first-section-preview.png",
+      "sha256": "d114c748b87325865565936dc3c5d8a3aedc6fbd999d29e7b6c608e8f9c11741",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-DOCX-limits-preview.png",
+      "sha256": "d01065621eec18afbd3e4eb68aff6c493bc44c652f04145d242a39fa07e277f4",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-PPTX-first-section-preview.png",
+      "sha256": "963c419db57d72510f069a8ccf9bd428c15f2352fa5a8347d67d3c7e4f09107a",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-PPTX-limits-preview.png",
+      "sha256": "d01065621eec18afbd3e4eb68aff6c493bc44c652f04145d242a39fa07e277f4",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-PPTX-second-section-preview.png",
+      "sha256": "22c70bb57d817a52a0588500bb85921720e5af13955e886b5ec4e44cb557c274",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-XLSX-first-section-preview.png",
+      "sha256": "e41e8e925297dfa41d461263b7a4ecb600aacc020a4de006813cec44819a2c8f",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-XLSX-limits-preview.png",
+      "sha256": "857b24b21042d3f2457dc89ef25c33dc3c99089395638ab915ddc6d86c7d560a",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-core-1/core-XLSX-second-section-preview.png",
+      "sha256": "e4b7e8fbf57111b7e092dcdd8e7e99a22cab937ee57fbdd9c6bd4dfa9d742e34",
+      "inspected": true,
+      "exactlyMatchesInspectedCandidate2Png": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "86e9c161aa4e7e9f0bf2bf8ffc22ab11841a03749f8b1212c9e2e7467040a5e8",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font1.0-light-glyph.png",
+      "sha256": "21b7ad7c628f0b5c9433b1406c632e7813a8d63bd463812537b1c214f3473efa",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "c3a1d9b5aff4425ae8008ebb261bb264cb360554e140b2461d75ddd37ac815f6",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font1.0-dark-glyph.png",
+      "sha256": "216a8a7735de9a018cc969d3a16818c1fc7844d3ce7d7ef78ed3b797b8a24bd1",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "1767d000f8b6e11b2b78f5972f24eb02420d55a0534242654ae470c7c9246d27",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font2.0-light-glyph.png",
+      "sha256": "2cd1897b49e9c6432633fa9d582f8c791575f25d698b065a6f2c01df94c0a78a",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "97f644ba16ced16eb7ec7863141252f4f9b7dea1aaf0e5ca7e7f7de662436ffd",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-600x800-font2.0-dark-glyph.png",
+      "sha256": "607424759891fd3483b84d81f57b49203fec66deea0876091a1d8860f45b838d",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "ccf2932335dc41d3954e0d592b119c26dfd6dd720104030a5185ff6da0c261f8",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "957bb0c7d7baf427d08cfb0634cb4c3d335f3b5d8ae48318ae5e92e818667866",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "0790ec0f309194eb1e353ed674a6c3a44f6de44978279b7e39260c39e32ab01b",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-glyph.png",
+      "sha256": "694b6e8e0e2e661128e415676e0e65f66337c160e9ac99930aa7b17c68fef8ed",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "b59b2daa4437d34438576266ba68b01a36f776868b6354c2485e7f11f668e8a3",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "6ae4f5622d968c4c45780b2fb270fdc3ec59fb05d2574e6eefbb419859854ded",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "66cd8d4d9eff45136dc6466c949df00cfe3b37fbaa606176b848e5ccb43f38ba",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-glyph.png",
+      "sha256": "de80504bad365ca4a019196d4b92e5ca24ef97653b5be3854066451e745469b7",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "5b32c84a79ee31470cd4ad5f2ad1a6329d8b948dcf47a30d1523531b1ec5ceb1",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font1.0-light-glyph.png",
+      "sha256": "533660f03e98e31a991eee7f1c064d91f9e3b83263bcaf202a854253f6c38937",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "76b936a5d5e00e4cd552d6f1dc88776cabffb9cfb8b6c09bd8d4f02b93216ee7",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "49ac6a5d543c4c0f4aaa8e301a1422b857bd505ef1c7091d4e174bc641a4e912",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "792563b9bb1af1fe801d3af4080cf00b2bb43304cc3e28084030a1d43c3b02e4",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font2.0-light-glyph.png",
+      "sha256": "1f039c0b74dd72e0d75b20e8bc3b8f26c6174f8df0bb5711871d613808991ffd",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "c4b42f7dac27fa6f503661e8654c2fc669acb8a3a0b960bfda955a3ec3dc982f",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "f02126969cd6b7a436b2c54a500125762155ddb40688032a80b1aa1213d243b1",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "dccd719ce40871a3e4d20329c779fef40b0311b434950efe595a8b56e8a05f25",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font1.0-light-glyph.png",
+      "sha256": "a85b5bcdc34cf2364e023b92ea8c65e7b11977f89057001415556f1c88181802",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "6b89f0e259681ba7ed3463708ce93f8410bee213cbb4b153dcd7995796417650",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font1.0-dark-glyph.png",
+      "sha256": "2ddeb48dfde00e99741547aac45a5af1b6a207fd2a790d15f6ed828a0690a6c4",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "13295ac974f8cb26b3aed9d847e3ce5560cd0db71cd835b19d2983a7277dd47e",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font2.0-light-glyph.png",
+      "sha256": "975cceefcdf523b70cba0248f41821c0c4035de2cd23c2361bbf5e346f2c1468",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "7e97039a7432c7aea9960e8c04bf0c936ff442b89a1e3e661e5cb4bcb8506da3",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-600x800-font2.0-dark-glyph.png",
+      "sha256": "548a208c8cae3ae5840de3800e62dd56702d41b9261b21148bf1aa4e2d0d99c2",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "41a1b435a20ee3ee204b99e9321ea0c795ce33afda9ff768958fe9d2c7521f05",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "677b421f943b2b80e9c435c7a3642381d33664513f48b1dd6f8b0033415a738b",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "03f43327b4ccc10b40c622ad221bbeade59531c4950a5671bf95912928d989d5",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font1.0-dark-glyph.png",
+      "sha256": "ede174adab9d40c979d66abb218a8bc39b70865a35b30c1a8d929182affdb747",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "728d30d3086a1598e31324d0a85013e797572b8e5c6946b455ab8de589195ba8",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "b77d433b964265597d0a589b23dab32418b9d559ada305618e15d60a94c2ebf5",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "6d9e75faaac50143d6fb6f522e0d0ab5790216d6aae634de7a63da3db1a5bd83",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-1280x800-font2.0-dark-glyph.png",
+      "sha256": "d0047c61a88afdf1a722cd0878cf91d6b9a1f48b08b7675c6d8e4c32119a7990",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "6aa4837a66c7b771f52d2b7e8902de13ff14bf8ba625d4e008b438cda6f6653c",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font1.0-light-glyph.png",
+      "sha256": "469a02c86b69ae9ab4923d935368ff75257d0258d188680681d4ac95691c21e8",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "4341fa697a9028e584005a5283b028594d65c8cd6bec37dd830cf804b1a674f4",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "a67f87400963dff9ccd6d3747228cebe23c69b9419287c666061318fa647fcde",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "88494767c9ce41421185b0b39d99021d522c0c10ff42f0f7d3c151f077499ad4",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font2.0-light-glyph.png",
+      "sha256": "defdab50985e33e2977cfcce2b15255fac3947df9f7495261c2202e979cf3365",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "2ea53104b81d63968bfb018a82c8f230e5d39a37c38977b4ac9f9cabe9d2ae3f",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-optimized-layouts-1/layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "6cd005b0df16463ca9b4f18dd0752f270eb91c0e54083f72147acb7f19c2462e",
+      "inspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-public-ota-1/public-ota/available.png",
+      "sha256": "8f24701ff897b40d885ca785ff18ee02b67ca9ffbfc2190b9bd187717d2da7fa",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-public-ota-1/public-ota/installer-complete.png",
+      "sha256": "aa5c1bf7561d574f26d6a3332f94034ba8fd7d0c74c9039dcc82aecb73c32cc9",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-public-ota-1/public-ota/installer.png",
+      "sha256": "b154198efe2802c5fd14997e23473d55ed02890dec4e0a6e2c35e7d79957e1a8",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-public-ota-1/public-ota/ready.png",
+      "sha256": "66d732a9953c0988dd1deb50edb0e5cafaeae074800e94c3405c3c2e80d2e050",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-public-ota-1/public-ota/up-to-date.png",
+      "sha256": "a6e29752e6cbec8e6ecd42398883030333c26d13f85990c4b8b4e11670176823",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api30-public-ota-1/public-ota/upgraded-sidebar.png",
+      "sha256": "0126f5dfe3e252fc22d51b82f8d9f4207af3556a9540f08e51a418f257805794",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-public-ota-1/public-ota/available.png",
+      "sha256": "0f3db5bce3c02eb5547be36df0fbd41b0746df575417e902ea5cca6273c156d4",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-public-ota-1/public-ota/installer-complete.png",
+      "sha256": "5a57ba016bfcea3d1848eebc7777ea1056541a67b40fb85b120593f8fdfbac2d",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-public-ota-1/public-ota/installer.png",
+      "sha256": "e2ff9da3cfa5f9e4f272011c4a8a72829e268a8b52312c990c27f46f38336ad8",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-public-ota-1/public-ota/ready.png",
+      "sha256": "9fd740c40b78dbe219209a5f0b58883165532c670956a30893a38eb516e1258c",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-public-ota-1/public-ota/up-to-date.png",
+      "sha256": "870455d44aa94a96265c91511d85e8b2a6cafaaa254be928e37e615eadddec7f",
+      "inspected": true,
+      "directlyInspected": true
+    },
+    {
+      "path": "captures/office-previews/candidate-3-api36-public-ota-1/public-ota/upgraded-sidebar.png",
+      "sha256": "66b7b7dfad34fe91616017b673c846ac5934a3196877a33eeba8cd87d9730d7f",
+      "inspected": true,
+      "directlyInspected": true
+    }
+  ],
+  "allSelectedImagesInspected": true,
+  "selectedImagePaths": 84,
+  "glyphSubsetsVerified": 24,
+  "exactPreviouslyInspectedPngMatches": 22,
+  "findings": "All selected surfaces inspected directly or by exact PNG byte match, with glyph crops checked as exact subsets. The body passage is readable in every layout. Compact controls scroll independently and can clip their own context until scrolled. All data is synthetic.",
+  "publicOtaScreenshotsInspected": 12
+}

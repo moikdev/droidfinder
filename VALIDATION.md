@@ -15,7 +15,7 @@ The preview is **38,000,612 bytes**, SHA-256 `00e77e12c1d9641753653bf88139a507fe
 
 Earlier receipts remain intact and excluded from final acceptance. They include an unset SDK path, the unsupported default JDK 26 ZIP-fixture failure, the focused-window IME helper correction, and the existing structured-preview helper's missing-Find-field stop. The final helpers wait for enabled/visible controls. Candidate 1 is superseded by ZIP metadata checks before indexing. A long fixture path exposed Android 11 tar's 100-byte name truncation; short owned paths and a length assertion correct the checker. Both candidate-2 matrices then exposed clipped worksheet data at compact size/font 2.0; candidate 3 bounds and scrolls controls to preserve the body viewport. A brief implicit-receiver compilation stop is retained before the successful build. Every final layout is repeated with the revised APK.
 
-Actual public OTA and independent immutable-archive acceptance remain pending. Proposal 48 stays open and **38/72** proposals are implemented.
+Actual public **52→53 OTA passes on both tablets**, including public-feed download, Android installer completion, installed-byte identity, retained synthetic original/favorite/preference, no repeat offer and exact original restoration with public 0.51 installed. All 12 OTA PNGs were inspected, bringing the selected image paths to **84**. Independent immutable-archive acceptance remains pending. Proposal 48 stays open and **38/72** proposals are implemented.
 
 [Office guide](docs/OFFICE-PREVIEWS.md) · [Release notes](docs/releases/0.51.0.md).
 
