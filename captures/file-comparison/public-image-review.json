@@ -1,0 +1,534 @@
+{
+  "images": [
+    {
+      "path": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/linked-images.png",
+      "sha256": "4f6521b7521b925f1ff937483542150212119fd762355c030460b3f8e97d3cf2",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/linked-images.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/nested-file-comparison.png",
+      "sha256": "5f939f74d5c525a2988f0cad19b6e0d9bbcf66adc78a5f9911f5a5b39baed647",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/nested-file-comparison.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/provider-stopped.png",
+      "sha256": "58b10049a65494ebcbe6f58cc62468ace55df1bddbaf96462ea2e906b826efb3",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/provider-stopped.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/text-differences.png",
+      "sha256": "2a2882d1f4642f0f41575930e9272a7ff05508b9fe14b1f3784426149a161d8d",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/text-differences.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/unsupported-pair.png",
+      "sha256": "4115125b25cbd91781db4bc684f1ddd43e980b2c49e8970a37362c0fb05c52df",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-native/images/after-batch-001/file-comparison-qa/unsupported-pair.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/core-image-result-preview.png",
+      "sha256": "19d788b2574d5ebe309feb015b4f0ab42a22c48c0b5cbc64042044832603466f",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-2/core-image-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/core-image-zoomed-preview.png",
+      "sha256": "b12c9576731f35879d55525e5b1aae6afee5d0b15b03720748c8f5543b330606",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/core-image-zoomed-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/core-text-result-preview.png",
+      "sha256": "c08097bc0983eece975bd85aac0288bee5b970ed9f12155a613c23b766d8fa28",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-2/core-text-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/core-text-second-difference-preview.png",
+      "sha256": "6331c60a34448a467e91a2eda5da7ad9fd2baa9799eb3f04b24acadfe28c2ffd",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/core-text-second-difference-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "46a201449ed24a921138b2a203795facfa504bab4bbc91fe317e3bb12e8db4b1",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-2/layout-1280x800-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        978,
+        630,
+        1077,
+        660
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "889d8fade242194835fc1971aba24b9af47c08d49e89ce9aba7409246949a81d",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "81698ed3725a2346a43172907ae643c85a0bc8669ea54468bf88108b15c45616",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-2/layout-1280x800-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "6ee3c3e51f2f8a342fd6d0f4cee0d989449631c06e7773198461fcb86596607e",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        978,
+        667,
+        1176,
+        725
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "464fff6d1823af27fcd517df9b76c57f2f5a331d04059975f4597ca0f87dba94",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-2/layout-1280x800-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "389b5da57e7f5dc389e5924e044997e2c601cba7c2d817b9efb658d963a66092",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font1.0-light-glyph.png",
+      "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        468,
+        630,
+        567,
+        660
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "ee97ce41cdeae2a357b42b82f53ceb7fbdc2cb19a63289277017bb08dc1e67cb",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "5519ca6fa6a4d35c1f3a8f40ddf73030997b4148b8e50a0591ef10692f00942a",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font2.0-light-glyph.png",
+      "sha256": "6ee3c3e51f2f8a342fd6d0f4cee0d989449631c06e7773198461fcb86596607e",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        468,
+        667,
+        666,
+        725
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "c2fa99f8f5b793d5878dc6fc3018208fb2c74943ef5048c1cb296ad9ef08349d",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/layout-600x800-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "3a5d576b1589ce245cb57b5edf73a114cb683faedeaee463d3e9704e24e828ab",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font1.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        618,
+        630,
+        717,
+        660
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "26805136410f9c22b0cb7694b958ed3a22f4f7c77dc8d2100cadfc65df6bfa54",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-2/layout-800x1280-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "0847ffb8d51d7539b132c3b584986921cd2de540a437b789751d69079d25fdf1",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "78a2b0b77a850b99646ff909deb3e377c7d17a57fa4da382ef80895d5c8fb2b9",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font2.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        618,
+        1095,
+        816,
+        1153
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "1092a516486dfd7c450cc38061468e6c374541218687ccbc87da4981a91b810a",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-optimized-3/layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "601e1f450caccd1e20b52b0f7f17f270269e3a2584af0a46910514515c3be5fa",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api30-optimized-2/layout-800x1280-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/linked-images.png",
+      "sha256": "d63debcccb8bbfdba58bf26d7bf4229fb9e4a368bc0bf53a6e1360c1bcbed33e",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/linked-images.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/nested-file-comparison.png",
+      "sha256": "05dd32e4e3cd04eafa21d22161bac80e28afcdd5095ffce7b9fc490d3866a6ae",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/nested-file-comparison.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/provider-stopped.png",
+      "sha256": "15764ec2afbe7b99499658890465c19d6b23b6b3ae511caacea10b3d241eb271",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/provider-stopped.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/text-differences.png",
+      "sha256": "062fa3ee7a105740c481cb224907c95899aaf7e270418e73751b398a5488a770",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/text-differences.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/unsupported-pair.png",
+      "sha256": "3019203850c0055b0213faed555ca581dd36845b00ebc9ee589ef3adcfee47a4",
+      "inspected": true,
+      "basis": "Direct actual Android UI inspection",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-native/images/after-batch-001/file-comparison-qa/unsupported-pair.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/core-image-result-preview.png",
+      "sha256": "398e67ca8d9c4de4b2a7053dab055e2102c8af2b57cf076d99bac438967aa371",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/core-image-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/core-image-zoomed-preview.png",
+      "sha256": "8f4efc85812a6626d18bbb9de50a5f54f2b9b697f92d0b30f4947941fba253b5",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/core-image-zoomed-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/core-text-result-preview.png",
+      "sha256": "3a98355e3881063eff6392c2d490c7ef5b637d549b8a6995e60d63da49e96520",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/core-text-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/core-text-second-difference-preview.png",
+      "sha256": "aaf133484bec23926164eea52225052b800fe1b613d668d6adef6a434058ffe1",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/core-text-second-difference-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font1.0-dark-result-preview.png",
+      "sha256": "acf2bf3525fcdc8d61a048afc3d5a3392dfba2ef48f684003fc78a7c601d5095",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font1.0-light-glyph.png",
+      "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        978,
+        630,
+        1077,
+        660
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font1.0-light-result-preview.png",
+      "sha256": "e027d64b9452790315acd495ee9929dc591a5faf69d82cd155b0e4e2a3c9e5c1",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font2.0-dark-result-preview.png",
+      "sha256": "aa5f1dcf23ae1331bdbba1d6b7b460e68b12563f61e89d2fcb21f3f9bc9087e2",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font2.0-light-glyph.png",
+      "sha256": "7fdf3834dc24ab78bea2efa81792ec2a7ec3c67b01c97f297b917286c916ca5e",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        978,
+        679,
+        1176,
+        737
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font2.0-light-result-preview.png",
+      "sha256": "d8d6d8f6073283b9f3a4cecd3e7e1e96d55e3f8b7770d95db215989891d71f19",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-1280x800-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font1.0-dark-result-preview.png",
+      "sha256": "04713cccf9f2b98caeb3744ee7961e7611971c509f5f2358e316378ea7920e06",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font1.0-light-glyph.png",
+      "sha256": "e1b918b9525ca7c0c738218a1c462a893bafc5e9254d91c3d342ae20bc18f3e1",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font1.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        468,
+        630,
+        567,
+        660
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font1.0-light-result-preview.png",
+      "sha256": "e418cf45d851f24b90df053fc2ce1b2d712caa63a3009c095d0773de804d7a54",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font2.0-dark-result-preview.png",
+      "sha256": "4ed0d14c1281106e678694aaf3d69489ccc2d7538683ec7a45673f0a79d0044a",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font2.0-light-glyph.png",
+      "sha256": "7fdf3834dc24ab78bea2efa81792ec2a7ec3c67b01c97f297b917286c916ca5e",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font2.0-light-result-preview.png",
+      "cropBoundsWithinParent": [
+        468,
+        679,
+        666,
+        737
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font2.0-light-result-preview.png",
+      "sha256": "c6234072d57485412113f135a3d8e91c859c56dc6867c0b6bd98229080a4c373",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-600x800-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font1.0-dark-glyph.png",
+      "sha256": "3a5d576b1589ce245cb57b5edf73a114cb683faedeaee463d3e9704e24e828ab",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font1.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        618,
+        630,
+        717,
+        660
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font1.0-dark-result-preview.png",
+      "sha256": "b5adcd74e08350171d25d85bf5ecb32a54cda534ecb2769bfd9faaea52ad7c42",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font1.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font1.0-light-result-preview.png",
+      "sha256": "995dd56f61a2bb3a4d5d590b8fec0533fd061d2c0f26b453a7ad853e174dc1ee",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font1.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font2.0-dark-glyph.png",
+      "sha256": "ebd074517b36c456d676b6d49a126a17fd12e83a97be0e78a5d9debcf2e06b2a",
+      "inspected": true,
+      "basis": "Exact pixel subset of directly inspected Android result",
+      "inspectedParent": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font2.0-dark-result-preview.png",
+      "cropBoundsWithinParent": [
+        618,
+        1095,
+        816,
+        1153
+      ]
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font2.0-dark-result-preview.png",
+      "sha256": "805c4535b83a940b2c1c8f2d8d1cf1c7be88fa31c8e2fdd2354a20dda71a5b63",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font2.0-dark-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font2.0-light-result-preview.png",
+      "sha256": "bef4a4bf54ce7c8c558f29151aaaf3350f80ca3feaca85f23cfa6ab22b1d24dd",
+      "inspected": true,
+      "basis": "Direct inspection or byte-identical retained inspected PNG",
+      "inspectedSource": "captures/file-comparison/candidate-2-api36-optimized-3/layout-800x1280-font2.0-light-result-preview.png"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-public-ota/public-ota/available.png",
+      "sha256": "4192daee21a0d41eeb7b07fce2b1e2a19b2691935f8fcd8634d1d1b4cd356185",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-public-ota/public-ota/ready.png",
+      "sha256": "8bdab92b8737b87b8497eed0dd714aa62e13c1de3dc17efdaa910bc022d44581",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-public-ota/public-ota/installer.png",
+      "sha256": "92c54a7e21bb6d0086990222fe1555af53712ccc6eef2d9d3e9e0d2fa0a350f1",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-public-ota/public-ota/installer-complete.png",
+      "sha256": "f8050e6858471066fe4bf8662b10166cfb88430638ee804c6bd9efe0630dcc54",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-public-ota/public-ota/upgraded-sidebar.png",
+      "sha256": "f349efe7a9b35983bcae34d0dced44dfd0cfc9f724afe95e080c074d9067ef6b",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-public-ota/public-ota/up-to-date.png",
+      "sha256": "bcfc647810b4889de5751e55994ab1f6e6c31ab0c16ee0706d4b9578705f274b",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-public-ota/public-ota/available.png",
+      "sha256": "0bc676b88daf0e925c7c539c2f168031874837329d5ac82e19fda40a37a935a9",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-public-ota/public-ota/ready.png",
+      "sha256": "5575809dad77c13426b15dcb26d85d0596ffdd18e6309d3060aeda37d937d637",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-public-ota/public-ota/installer.png",
+      "sha256": "7a4ff7d28c231c657c62a6506414e443b059b5c4b568902028257dba5562da96",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-public-ota/public-ota/installer-complete.png",
+      "sha256": "867a90ba3ce475816010b5e7e502e5ceef269acc08801e31f842cbd10ca8a750",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-public-ota/public-ota/upgraded-sidebar.png",
+      "sha256": "fb88f8610fd41de66e3d63e2067bb66786499ef15fc63de819b13dc76510251c",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-public-ota/public-ota/up-to-date.png",
+      "sha256": "9789c6583a65d8d14884e21db220b0e297fc1b0d9a4d9696620cb4d778bdee9e",
+      "inspected": true,
+      "basis": "Direct actual public-download/Android-installer/retention screen inspection"
+    }
+  ],
+  "nativeAndOptimizedUiImages": 54,
+  "headerContextMayScrollOutOfViewAtLargeText": true,
+  "allTextBodiesAndImagePairsReviewed": true,
+  "allNamedTouchTargetAndGlyphProofsRetained": true,
+  "scope": "Synthetic comparison UI only; full private recovery/window payloads excluded.",
+  "nativeOptimizedAndPublicOtaUiImages": 66,
+  "actualInstallerCompletionImagesInspected": true,
+  "publicFixtureBackdropNote": "Android 11 installer completion has only the title of the public synthetic Field guide.pdf fixture behind the installer; no document contents are visible. Android 16 has the unconfigured launcher behind the installer."
+}

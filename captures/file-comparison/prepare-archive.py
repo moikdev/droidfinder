@@ -75,6 +75,10 @@ for name in selected['supportingFiles']:files.add(owned(name))
 names=sorted(str(p.relative_to(ROOT)) for p in files)
 if a.prepare_list:
  assert not a.prepare_list.exists();a.prepare_list.write_text(json.dumps(names,indent=2)+'\n');print(len(names));raise SystemExit
+privacy_path=owned(selected['privacyReview']);allowlist_path=owned(selected['publicationAllowlist']);privacy=read(privacy_path)
+assert privacy['explicitAllowlistChecked'] and privacy['privateRecoveryFilesExcluded'] and privacy['literalIdentifierMatches']==0
+assert privacy['publicationAllowlistSha256']==sha(allowlist_path) and read(allowlist_path)==names
+files|={privacy_path,allowlist_path}
 assert not a.output.exists()
 commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
 for path in files:

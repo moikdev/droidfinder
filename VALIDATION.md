@@ -1,8 +1,8 @@
 # Android preview verification
 
-## Findroid 0.52.0 — read-only file comparison, local acceptance complete
+## Findroid 0.52.0 — read-only file comparison, local and public OTA acceptance complete
 
-Public OTA and independent immutable-archive acceptance remain pending. Application/native-test source: `fe7e3f1ba532d23c92dbc4d7c8e225410270eddc`. All 447 recorded build inputs match that commit; 94 outputs are frozen.
+Independent immutable-archive acceptance remains pending. Actual public OTA acceptance passes on both tablets. Application/native-test source: `fe7e3f1ba532d23c92dbc4d7c8e225410270eddc`. All 447 recorded build inputs match that commit; 94 outputs are frozen.
 
 - All **1,000 JVM cases** pass, including 18 focused text-comparison cases and two command-availability cases. Randomized differences reconstruct both inputs and match an independent minimal-edit oracle. Complete-read, malformed encoding, binary/control data, line/end-of-file distinctions, size/line limits and cancellation checks pass.
 - Both Android 11 and Android 16 pass the same **29 native cases in six fresh-process batches**: five comparison input/image cases, five comparison workflows and 19 Office, structured-preview and provider-input regressions. Actual clipboard reports, nested paired files, stop/retry, source bytes, MIME-only/unknown-size images, stale-cache bypass, refreshed provider names, EXIF sampling and malformed/oversized images pass.
@@ -16,6 +16,8 @@ Public OTA and independent immutable-archive acceptance remain pending. Applicat
 Preview: **38,033,380 bytes**, SHA-256 `5a44dfb8d00a862f8fb6e589ee88fb04552221f90daec8cde32e8e51c5a77c2b`.
 
 Earlier attempts are retained and excluded from final totals. They include an incorrect native-test selection argument, a reset-helper syntax error before native cases, and a tree URI passed where a document URI was required by a fixture. Earlier passing drafts were superseded by proportional 4× panning and refreshed/cancellable metadata. The first optimized helper waited for an off-screen Select all item; its second revision completed both core workflows and nine layouts per API before waiting for a scrolled-out Copy differences control. Fresh body-based readiness completes the remaining three cases on each API. The final receipts explicitly bind the nine reused layouts, prior restored receipts, identical APK/source, unchanged fixture generator and every retained image hash. No application rebuild occurred between those optimized attempts.
+
+Actual public **53→54 OTA passes on both tablets**: public feed/download, Android installer completion before relaunch, installed APK bytes, retained synthetic original/Favorite/preference, no repeat offer and exact original restoration with public 0.52 installed. All 12 OTA PNGs are inspected, bringing selected UI capture paths to **66**. All five initial public assets match anonymous downloads and GitHub digests. The immutable archive and independent verification follow without rebuilding the application.
 
 [Comparison guide](docs/FILE-COMPARISON.md) · [Release notes](docs/releases/0.52.0.md).
 
