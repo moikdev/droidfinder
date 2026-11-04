@@ -1,6 +1,6 @@
 # Android preview verification
 
-## Findroid 0.51.0 — read-only Office previews, public acceptance pending
+## Findroid 0.51.0 — read-only Office previews, acceptance complete
 
 Local acceptance is complete for candidate 3, application/native-test source `c4b8e26b39f2c3826d4ca45f15a67b10ca6207b3`. All 435 compiled inputs match that commit; 95 outputs are frozen.
 
@@ -15,9 +15,9 @@ The preview is **38,000,612 bytes**, SHA-256 `00e77e12c1d9641753653bf88139a507fe
 
 Earlier receipts remain intact and excluded from final acceptance. They include an unset SDK path, the unsupported default JDK 26 ZIP-fixture failure, the focused-window IME helper correction, and the existing structured-preview helper's missing-Find-field stop. The final helpers wait for enabled/visible controls. Candidate 1 is superseded by ZIP metadata checks before indexing. A long fixture path exposed Android 11 tar's 100-byte name truncation; short owned paths and a length assertion correct the checker. Both candidate-2 matrices then exposed clipped worksheet data at compact size/font 2.0; candidate 3 bounds and scrolls controls to preserve the body viewport. A brief implicit-receiver compilation stop is retained before the successful build. Every final layout is repeated with the revised APK.
 
-Actual public **52→53 OTA passes on both tablets**, including public-feed download, Android installer completion, installed-byte identity, retained synthetic original/favorite/preference, no repeat offer and exact original restoration with public 0.51 installed. All 12 OTA PNGs were inspected, bringing the selected image paths to **84**. Independent immutable-archive acceptance remains pending. Proposal 48 stays open and **38/72** proposals are implemented.
+Actual public **52→53 OTA passes on both tablets**, including public-feed download, Android installer completion, installed-byte identity, retained synthetic original/favorite/preference, no repeat offer and exact original restoration with public 0.51 installed. All 12 OTA PNGs were inspected, bringing the selected image paths to **84**. Independent immutable-archive acceptance passes. Proposal 48 is implemented and **39/72** proposals are complete.
 
-The [immutable public validation archive](https://github.com/moikdev/findroid/releases/download/v0.51.0-preview/Findroid-0.51.0-validation.zip) contains **835 evidence files plus its manifest**, **12,044,210 bytes**, SHA-256 `61ee6e22b89d55bf20187f995f275beb9a868cdc1ab8a1a8835823942fda6282`. Application/native source: `c4b8e26b39f2c3826d4ca45f15a67b10ca6207b3`; archived evidence: `f08724d78ee3f590b440723dab41acbc31d3caff`. Independent public verification remains pending. The archive preserves its earlier committed pending-acceptance documentation as an immutable snapshot.
+The [immutable public validation archive](https://github.com/moikdev/findroid/releases/download/v0.51.0-preview/Findroid-0.51.0-validation.zip) contains **835 evidence files plus its manifest**, **12,044,210 bytes**, SHA-256 `61ee6e22b89d55bf20187f995f275beb9a868cdc1ab8a1a8835823942fda6282`. Application/native source: `c4b8e26b39f2c3826d4ca45f15a67b10ca6207b3`; archived evidence: `f08724d78ee3f590b440723dab41acbc31d3caff`. Independent anonymous verification confirms all 836 entries, public source/evidence bindings, JVM/native totals and the GitHub digest. All six release assets match local bytes and digests. The archive preserves its earlier committed pending-acceptance documentation as an immutable snapshot; later verification receipts complete acceptance without repackaging it.
 
 [Office guide](docs/OFFICE-PREVIEWS.md) · [Release notes](docs/releases/0.51.0.md).
 

@@ -14,9 +14,13 @@ This is a text preview. Page layout, fonts, images, drawings, charts, headers, f
 
 Preparation is bounded to a 64 MiB file, 2,048 ZIP parts, 4 MiB per XML part / 16 MiB read, ten seconds of parsing, XML depth 96 and 100,000 elements per part. Display limits are 200,000 UTF-16 text characters, 8,192 characters per stored text value, 64 sections, 1,000 worksheet rows, 32 data columns and 10,000 displayed grid cells across the workbook. Text clipping preserves surrogate pairs. Workbook labels/separators have a reserved budget within the text ceiling. A display limit marks the preview partial; Copy and Find cover loaded content only.
 
+![Read-only worksheet preview in Findroid on an Android tablet](screenshots/office-tablet.png)
+
+*Actual Android 11 capture with a synthetic workbook. Stored values are shown; formulas are not recalculated.*
+
 ## Acceptance status
 
-Local acceptance is complete for candidate 3, application/native-test source `c4b8e26b39f2c3826d4ca45f15a67b10ca6207b3`. All 435 compiled inputs match that commit; 95 outputs are frozen.
+Local, actual public OTA and independent archive acceptance are complete for candidate 3, application/native-test source `c4b8e26b39f2c3826d4ca45f15a67b10ca6207b3`. All 435 compiled inputs match that commit; 95 outputs are frozen.
 
 - All **980 JVM cases** pass, including 16 focused Office cases. App lint: 0 errors / 149 warnings / 12 hints; interop lint: 0 errors / 18 warnings.
 - Both Android 11 and Android 16 pass the same **19 distinct native cases in four batches**: five Office parser cases, four Office workflows, four shared provider-input cases and six existing structured-preview workflows. No failures or skips occur in the final runs.
@@ -29,4 +33,4 @@ The preview is **38,000,612 bytes**, SHA-256 `00e77e12c1d9641753653bf88139a507fe
 
 Earlier receipts remain intact and excluded from final acceptance. They include an unset SDK path, the unsupported default JDK 26 ZIP-fixture failure, the focused-window IME helper correction, and the existing structured-preview helper's missing-Find-field stop. The final helpers wait for enabled/visible controls. Candidate 1 is superseded by ZIP metadata checks before indexing. A long fixture path exposed Android 11 tar's 100-byte name truncation; short owned paths and a length assertion correct the checker. Both candidate-2 matrices then exposed clipped worksheet data at compact size/font 2.0; candidate 3 bounds and scrolls controls to preserve the body viewport. A brief implicit-receiver compilation stop is retained before the successful build. Every final layout is repeated with the revised APK.
 
-Actual public **52→53 OTA passes on both tablets**, including public-feed download, Android installer completion, installed-byte identity, retained synthetic original/favorite/preference, no repeat offer and exact original restoration with public 0.51 installed. All 12 OTA PNGs were inspected, bringing the selected image paths to **84**. Independent immutable-archive acceptance remains pending. Proposal 48 stays open and **38/72** proposals are implemented.
+Actual public **52→53 OTA passes on both tablets**, including public-feed download, Android installer completion, installed-byte identity, retained synthetic original/favorite/preference, no repeat offer and exact original restoration with public 0.51 installed. All 12 OTA PNGs were inspected, bringing the selected image paths to **84**. Independent anonymous verification passes all 836 archive entries, public source/evidence bindings, JVM/native totals and the GitHub digest. All six public release assets match local bytes and digests. Proposal 48 is implemented and **39/72** proposals are complete.
