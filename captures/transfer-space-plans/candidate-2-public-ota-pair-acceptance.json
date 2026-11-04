@@ -1,0 +1,15 @@
+{
+  "actualPublic49To50UpgradeOnBothApis": true,
+  "acceptedAttempts": {
+    "api30": 1,
+    "api36": 2
+  },
+  "allOriginalDataWorkspaceGrantsAndSettingsRestored": true,
+  "all12AcceptedScreenshotsInspected": true,
+  "previewApkSha256": "3e624f98fcbe354d45d3581cd066cb0f2d02e0d6b2c44a66d79b6955e3a8653a",
+  "excludedApi36FirstAttempt": "Automatic available-update dialog appeared before the browser Actions toolbar; the checker timed out before downloading. Its finally restoration completed, including exact public 0.48.",
+  "newDialogClassifierAcceptsSavedPriorHierarchy": true,
+  "priorHierarchySha256": "07c0f731cb3d86c0bab01572d9bba7a2441ba087021ce94755922eb3e9c31711",
+  "applicationAndFrozenBuildBytesUnchanged": true,
+  "independentArchiveAcceptancePending": true
+}

@@ -1,0 +1,37 @@
+{
+  "actualScreenshotsInspected": true,
+  "images": [
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-public-ota-2/public-ota/available.png",
+      "sha256": "fdbb0d4e6ca81297e8b1227e1a281ab5b52cf02cdb143fd20f0c925afe4d1666"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-public-ota-2/public-ota/installer-complete.png",
+      "sha256": "eddd6556cf5f862e1f57eee1ebdccbae2c9b318ae95b4564e02adfa087d3b6b7"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-public-ota-2/public-ota/installer.png",
+      "sha256": "b3456bc8de1bcfc47ead8256abce6f0deb27828a27b9e2e96ee45c01f7b7425d"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-public-ota-2/public-ota/ready.png",
+      "sha256": "8570b2c47b2bce46e97fd901673a00a70a8c8dc2001972f43a0c5d4e49e91ed4"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-public-ota-2/public-ota/up-to-date.png",
+      "sha256": "ad7d5cfda78eb817860c08ea0273f0a476b22c0bf812d8b0169dabd7ead0f1c3"
+    },
+    {
+      "path": "captures/transfer-space-plans/candidate-2-api36-public-ota-2/public-ota/upgraded-sidebar.png",
+      "sha256": "acf74a7f54f7224cdde8a957bf477d01896c782e96a96577af322e0ad6e53b2b"
+    }
+  ],
+  "method": "Opened three labeled sheets containing all six accepted API36 second-attempt public OTA screenshots.",
+  "findings": [
+    "Actual public 0.48 is offered to public 0.47, downloaded, and passed to the Android update installer.",
+    "Android reports App installed before the browser is reopened.",
+    "The upgraded browser retains the synthetic original file and Favorite; the update dialog reports Installed 0.48 and up to date.",
+    "Only synthetic fixture data and standard system UI appear in the selected screenshots."
+  ],
+  "excluded": "The first API36 attempt stopped before downloading at a navigation assumption; it is separately retained and not counted."
+}

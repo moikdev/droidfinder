@@ -1,0 +1,11 @@
+{
+  "excludedFromAcceptance": true,
+  "serial": "emulator-5582",
+  "reason": "Automatic update check opened the valid available-update dialog before the checker found the underlying Actions toolbar. No OTA download or installer interaction was exercised before this checker stopped. The controller separately restored the exact public 0.48 build afterward.",
+  "privateSavedHierarchySha256": "07c0f731cb3d86c0bab01572d9bba7a2441ba087021ce94755922eb3e9c31711",
+  "exactPriorHelperSha256": "df1069fd330f4a8d806d3033ee99850a4822d28425dc902c876ad8d8d15876ca",
+  "originalDataGrantsWorkspaceAndSettingsRestored": true,
+  "public048Restored": true,
+  "applicationAndFrozenApkBytesUnchanged": true,
+  "remedy": "Recognize an already visible App updates dialog with its Installed label, then continue the same download/install and retention assertions in a complete new attempt."
+}

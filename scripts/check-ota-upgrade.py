@@ -23,6 +23,7 @@ def main():
     args.output.mkdir(parents=True)
     qa_xml = '/sdcard/findroid-ota-qa-'+str(time.time_ns())+'.xml'
     menu_tap_retries = 0
+    update_dialog_visible_on_launch = 0
     adb = str(Path.home() / 'Library/Android/sdk/platform-tools/adb')
     debug = ROOT / 'app/build/outputs/apk/debug/app-debug.apk'
     def call(*parts, data=None):
@@ -93,8 +94,15 @@ def main():
         shell('am', 'start', '-W', '-f', '0x10008000', '--windowingMode', 1, '-n', 'dev.findroid/.MainActivity',
             '--es', 'finderWindowId', 'ota-sidebar-' + stamp, '--es', 'finderLocation', full)
     def updates():
-        nonlocal menu_tap_retries
-        launch(); root = wait('browser', lambda t: bool(nodes(t, 'Actions')))
+        nonlocal menu_tap_retries, update_dialog_visible_on_launch
+        launch()
+        def update_dialog_open(tree):
+            return bool(nodes(tree, 'App updates')) and any(
+                n.get('text', '').startswith('Installed: ') for n in tree.iter('node'))
+        root = wait('browser-or-update-dialog', lambda t: bool(nodes(t, 'Actions')) or update_dialog_open(t))
+        if update_dialog_open(root):
+            update_dialog_visible_on_launch += 1
+            return
         for menu_attempt in range(5):
             root = dump('more-before-tap')
             if nodes(root, 'App updates'): break
@@ -181,7 +189,8 @@ def main():
             'sentinelPreferencePreserved': True, 'updatedSidebarVisible': True, 'noRepeatOffer': True,
             'restoredApkSha256': hashlib.sha256(args.to_apk.read_bytes()).hexdigest(),
             'checkerSha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-            'freshAndroidHierarchies': True, 'verifiedUpdateDialogOpened': True, 'menuTapRetries': menu_tap_retries}
+            'freshAndroidHierarchies': True, 'verifiedUpdateDialogOpened': True, 'menuTapRetries': menu_tap_retries,
+            'updateDialogAlreadyVisibleOnLaunchCount': update_dialog_visible_on_launch}
     finally:
         stop()
         if original_setup is not None:

@@ -29,6 +29,8 @@ support = set(json.loads((PROOF / 'progress-publication-files.json').read_text()
 support.update(str(f.relative_to(ROOT)) for f in PROOF.glob('*.py'))
 support.update(str(f.relative_to(ROOT)) for f in PROOF.glob('driver-candidate-2-*.txt'))
 support.update(str(f.relative_to(ROOT)) for f in PROOF.glob('checker-optimized-*-source.json'))
+support.update(str(f.relative_to(ROOT)) for f in PROOF.glob('ota-helper-*-source.json'))
+support.update(str(f.relative_to(ROOT)) for f in PROOF.glob('candidate-2-*-public-ota-*-failure-review.json'))
 support.update(str(f.relative_to(ROOT)) for f in PROOF.glob('candidate-2-*-screenshot-review*.json'))
 support.update(relative(name) for name in ['candidate-2-native-pair-acceptance.json',
     'candidate-2-api30-layouts-attempt-1-navigation-stop.json', 'progress-privacy-review.json'])
@@ -51,11 +53,16 @@ for api, row in tablets.items():
     row['earlierAttempts'] = [relative(name) for name in row['earlierAttempts']]
     row['optimized'] = {section: relative(row.pop(section) + '/result.json') for section in ('core', 'layouts')}
     if a.stage == 'ota':
-        row['ota'] = relative('candidate-2-' + api + '-public-ota-1/verification.json')
+        ota_folder = 'candidate-2-' + api + '-public-ota-' + ('2' if api == 'api36' else '1')
+        row['ota'] = relative(ota_folder + '/verification.json')
+        if api == 'api36':
+            row['earlierAttempts'] += [relative('candidate-2-api36-public-ota-1/' + name) for name in ('verification.json', 'ota-driver.txt')]
         receipt = json.loads((ROOT / row['ota']).read_text())
         assert receipt['acceptanceComplete'] and receipt['restorationComplete']
-        support.add(relative('candidate-2-' + api + '-public-ota-1/public-ota/verification.json'))
-        support.add(relative('candidate-2-' + api + '-public-ota-1/ota-driver.txt'))
+        support.add(relative(ota_folder + '/public-ota/verification.json'))
+        support.add(relative(ota_folder + '/ota-driver.txt'))
+if a.stage == 'ota':
+    support.update(relative(name) for name in ('public-five-assets-verification.json', 'candidate-2-public-ota-pair-acceptance.json'))
 for name in support:
     assert (ROOT / name).is_file(), name
 review = relative(stem + '-screenshot-review.json')

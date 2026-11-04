@@ -1,0 +1,5 @@
+{
+  "original": "scripts/check-ota-upgrade.py",
+  "sourceSha256": "df1069fd330f4a8d806d3033ee99850a4822d28425dc902c876ad8d8d15876ca",
+  "scope": "Exact helper used by accepted API30 public OTA and the excluded API36 first navigation attempt."
+}
