@@ -147,11 +147,12 @@ class ImageReviewWorkflowTest {
     }
     @Test fun unreadableImageCanBeSkippedWithoutLosingTheReview() {
         val broken = File(folder, "00 Broken.png").apply { writeText("not an image") }
+        val valid = Entry(File(folder, "01 Morning.png"))
         try {
-            compose.runOnIdle { state.open(listOf(Entry(broken), photos().first())) }
+            compose.runOnIdle { state.open(listOf(Entry(broken), valid)) }
             compose.waitUntil(15_000) { compose.onAllNodesWithText("Couldn't read the image header.", substring=false).fetchSemanticsNodes().isNotEmpty() }
             capture("unreadable-review")
-            click("Next image"); ready(); assertEquals(photos().first().path, state.selection!!.active)
+            click("Next image"); ready(); assertEquals(valid.path, state.selection!!.active)
         } finally { compose.runOnIdle { state.close() }; check(broken.delete()) }
     }
     @Test fun removedCandidateCannotAcquireTagsFromAStaleReview() {
