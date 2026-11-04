@@ -19,8 +19,8 @@ android {
         applicationId = "dev.findroid"
         minSdk = 30
         targetSdk = 36
-        versionCode = 52
-        versionName = "0.50.0"
+        versionCode = 53
+        versionName = "0.51.0"
         buildConfigField("String", "UPDATE_REPOSITORY", "\"moikdev/findroid\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild { cmake { arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON" } }

@@ -273,6 +273,10 @@ private sealed interface Preview {
 @Composable
 fun PreviewContent(entry: Entry, modifier: Modifier = Modifier, large: Boolean = false) {
     ProtectPreviewCache(entry)
+    if (large && entry.officeFormat != null) {
+        OfficeQuickLook(entry, modifier)
+        return
+    }
     if (
         large && !entry.folder && fileType(entry.extension, entry.mime).group == FileTypeGroup.IMAGE
     ) {

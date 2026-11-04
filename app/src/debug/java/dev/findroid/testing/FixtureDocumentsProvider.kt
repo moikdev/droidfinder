@@ -251,7 +251,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
             return pipe[0]
         }
         if (
-            (file.name in listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt", "Gate.pdf", "Gate.jpg") ||
+            (file.name in listOf("Slow.bin", "Gate.bin", "Slow.txt", "Gate.txt", "Gate.pdf", "Gate.jpg", "Gate.docx") ||
                 readDelayMillis.containsKey(file.canonicalPath)) && mode == "r"
         ) {
             val pipe = ParcelFileDescriptor.createPipe()
@@ -259,14 +259,14 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                 streamCancellation?.countDown()
                 runCatching { pipe[1].close() }
                 runCatching { pipe[0].close() }
-                if (file.name in listOf("Gate.txt", "Gate.pdf", "Gate.jpg"))
+                if (file.name in listOf("Gate.txt", "Gate.pdf", "Gate.jpg", "Gate.docx"))
                     transferGate?.countDown()
             }
             Thread(
                     {
                         runCatching {
                             if (
-                                file.name in listOf("Gate.bin", "Gate.txt", "Gate.pdf", "Gate.jpg")
+                                file.name in listOf("Gate.bin", "Gate.txt", "Gate.pdf", "Gate.jpg", "Gate.docx")
                             ) {
                                 gateOpened?.countDown()
                                 transferGate?.await(15, java.util.concurrent.TimeUnit.SECONDS)

@@ -1,0 +1,27 @@
+{
+  "producers": {
+    "python-docx": "1.2.0",
+    "openpyxl": "3.1.5",
+    "python-pptx": "1.0.2"
+  },
+  "syntheticContentOnly": true,
+  "zipTimestampsNormalized": true,
+  "notMicrosoftApplicationOutput": true,
+  "files": [
+    {
+      "name": "LibraryBudget.xlsx",
+      "bytes": 5422,
+      "sha256": "77d78a259286353196bb546da37b02211709b3bbe46ff205a4b72589f44dcb78"
+    },
+    {
+      "name": "LibraryJourney.pptx",
+      "bytes": 29170,
+      "sha256": "3e70895ef7dd4f3f626e0aa3ef7cf07d6077f20ca7cd398ca9699410624a096d"
+    },
+    {
+      "name": "LibraryNotes.docx",
+      "bytes": 36796,
+      "sha256": "881f9aec4a936938a3d1ef66ac55c7384845d26b2f12c8507e59f69a62973911"
+    }
+  ]
+}
