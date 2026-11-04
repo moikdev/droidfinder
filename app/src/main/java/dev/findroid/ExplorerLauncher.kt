@@ -56,6 +56,7 @@ private fun launcherCommands(model: FinderModel): List<LauncherChoice> {
         command("moveTo", "Move to folder…", "Choose the full destination", keywords = "transfer cut"),
         command("info", "Get file information", "Review the selected files", selection, "properties size metadata"),
         command("compareFiles", "Compare files…", "Read-only text differences or linked side-by-side images", keywords = "diff changes photos pictures compare text"),
+        command("imageReview", "Review images…", "Browse selected photos, flag candidates, compare a reference and review tags", keywords = "photos pictures shortlist flag candidates tags"),
         command("hidden", if (model.showHidden) "Hide hidden files" else "Show hidden files", "Change the current view", keywords = "dot files visibility"),
         command("filters", "Search filters…", "Names, types, dates, sizes and tags", keywords = "find criteria"),
         command("searchIndex", "Search index…", "Manage optional local snapshots, freshness and cache storage", keywords = "find metadata index refresh pause rebuild delete"),

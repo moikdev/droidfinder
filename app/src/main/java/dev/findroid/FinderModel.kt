@@ -2141,6 +2141,8 @@ constructor(
     internal val organization
         get() = organizationState.value
 
+    internal val imageReview = ImageReviewController()
+
     internal fun stopAnalysisForBackground() {
         if (organizationState.isInitialized() && organization.hasReads) organization.stop()
         if (analysisState.isInitialized() && analysis.running) analysis.stop()
@@ -5297,6 +5299,7 @@ constructor(
         if (housekeepingState.isInitialized()) housekeeping.close()
         if (batchRenameState.isInitialized()) batchRename.close()
         if (organizationState.isInitialized()) organization.close()
+        imageReview.close()
         listingControl?.cancel()
         listingJob?.cancel()
         viewportReaders.clear()

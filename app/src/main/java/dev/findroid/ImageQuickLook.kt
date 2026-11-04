@@ -104,7 +104,7 @@ internal fun ImageQuickLook(entry: Entry, modifier: Modifier = Modifier) {
     key(identity) { ImageReader(source, entry, modifier) { retry++ } }
 }
 
-@OptIn(kotlinx.coroutines.FlowPreview::class)
+@OptIn(kotlinx.coroutines.FlowPreview::class, ExperimentalLayoutApi::class)
 @Composable
 private fun ImageReader(source: ImageSource, entry: Entry, modifier: Modifier, reload: () -> Unit) {
     val savedIdentity = listOf(entry.path, entry.name, entry.modified, entry.size)
@@ -257,6 +257,7 @@ private fun ImageReader(source: ImageSource, entry: Entry, modifier: Modifier, r
     val clipboard = LocalClipboardManager.current
     BoxWithConstraints(modifier) {
         val sideInfo = maxWidth >= 800.dp
+        val controlsHeight = (maxHeight * .4f).coerceAtLeast(48.dp)
         Row(Modifier.fillMaxSize()) {
             Column(Modifier.weight(1f).fillMaxHeight()) {
                 Box(Modifier.weight(1f).fillMaxWidth().clipToBounds().background(AppBackground)) {
@@ -348,12 +349,11 @@ private fun ImageReader(source: ImageSource, entry: Entry, modifier: Modifier, r
                             Modifier.align(Alignment.TopCenter).fillMaxWidth().height(2.dp),
                         )
                 }
-                Column(Modifier.fillMaxWidth().background(ToolbarSurface)) {
-                    Row(
+                Column(Modifier.fillMaxWidth().heightIn(max = controlsHeight)
+                    .background(ToolbarSurface).verticalScroll(rememberScrollState())) {
+                    FlowRow(
                         Modifier.fillMaxWidth()
-                            .height(LocalFinderDensity.current.rowHeight)
                             .padding(horizontal = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         ToolButton(
                             Icons.Outlined.Remove,
@@ -364,7 +364,7 @@ private fun ImageReader(source: ImageSource, entry: Entry, modifier: Modifier, r
                         Box {
                             TextButton(
                                 onClick = { menu = true },
-                                modifier = Modifier.widthIn(min = 64.dp),
+                                modifier = Modifier.widthIn(min = 64.dp).heightIn(min = 48.dp),
                             ) {
                                 Text("${imageZoomPercent(view.scale)}", fontSize = 12.sp)
                             }
@@ -395,17 +395,16 @@ private fun ImageReader(source: ImageSource, entry: Entry, modifier: Modifier, r
                         )
                         TextButton(
                             onClick = { fit() },
-                            modifier = Modifier.semantics { contentDescription = "Fit image" },
+                            modifier = Modifier.heightIn(min = 48.dp).semantics { contentDescription = "Fit image" },
                         ) {
                             Text("Fit", fontSize = 12.sp)
                         }
                         TextButton(
                             onClick = { zoom(1.0) },
-                            modifier = Modifier.semantics { contentDescription = "Actual pixels" },
+                            modifier = Modifier.heightIn(min = 48.dp).semantics { contentDescription = "Actual pixels" },
                         ) {
                             Text("1:1", fontSize = 12.sp)
                         }
-                        Spacer(Modifier.weight(1f))
                         ToolButton(
                             Icons.Outlined.RotateRight,
                             "Rotate view clockwise",

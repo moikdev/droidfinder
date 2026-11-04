@@ -15,6 +15,7 @@ internal data class CommandExplanation(val title: String, val problem: CommandPr
 /** Facts already known by the browser; asking about a command never starts provider I/O. */
 internal data class CommandContext(
     val selected: Int = 0,
+    val selectedImages: Int = 0,
     val renameAllowed: Boolean = true,
     val removeAllowed: Boolean = true,
     val createAllowed: Boolean = true,
@@ -55,13 +56,16 @@ internal fun commandProblem(command: String, context: CommandContext): CommandPr
     if (original != command) return commandProblem(original, context)
     fun problem(reason: String, recovery: CommandRecovery? = null) = CommandProblem(reason, recovery)
     if (command == "compareFiles" && context.selected != 2) return problem("Select exactly two text files or two images to compare.")
+    if (command == "imageReview" && (context.selected !in 1..ImageReviewSelection.LIMIT || context.selectedImages != context.selected))
+        return problem("Select 1–200 images, without folders or other file types, to start a review.")
+    if (command == "imageReview" && context.trash) return problem("Restore the images from Trash before reviewing candidates and tags.")
     if (command == "undo" && !context.undo) return problem("There is no action to undo in this session.")
     if (command == "redo" && !context.redo) return problem("There is no action to redo in this session.")
     if (command in selectedCommands && context.selected == 0) return problem("Select a file or folder first.")
     if (command in setOf("paste", "pasteInto") && !context.clipboard) return problem("Copy or cut files first, then choose where to paste them.")
     if (command in serialCommands && context.busy != null)
         return problem("Wait for the current operation to finish: ${context.busy}", CommandRecovery.TRANSFERS)
-    if (context.disconnected && command in (selectedCommands - setOf("copy", "copyPath", "info") + createCommands))
+    if (context.disconnected && command in (selectedCommands - setOf("copy", "copyPath", "info") + createCommands + "imageReview"))
         return problem("This storage location is unavailable. Reconnect it before continuing.", CommandRecovery.STORAGE)
     if (context.trash && command in setOf("rename", "batchRename", "cut", "moveTo", "moveOtherPane", "trash", "duplicate", "compress", "groupSelection", "shortcut"))
         return problem("Restore the selected items from Trash before changing them.")
@@ -109,6 +113,7 @@ internal fun FinderModel.commandProblem(command: String): CommandProblem? {
         ?.let { storageCommandProblem(it, StorageAction.CREATE) } else null
     return commandProblem(command, CommandContext(
         selected = entries.size,
+        selectedImages = if (command == "imageReview") entries.count { it.reviewableImage } else 0,
         renameAllowed = renameDenied == null, removeAllowed = removeDenied == null,
         createAllowed = canCreate, virtual = folderPath == null, disconnected = folderStorageIssue != null || (listingError != null && !loading),
         loading = loading, busy = busy, clipboard = clipboard != null, trash = isTrash,
@@ -133,6 +138,7 @@ internal fun commandTitle(command: String): String = when (command) {
     "compress" -> "Compress"; "extract", "extractHere", "extractTo" -> "Extract"; "groupSelection" -> "New folder with selection"
     "tags" -> "Tags"; "collections" -> "Collections"; "appearance" -> "Customize folder"
     "compareFiles" -> "Compare files"
+    "imageReview" -> "Review images"
     "availableActions" -> "Available actions"; "shortcut" -> "Make shortcut"; "undo" -> "Undo"; "redo" -> "Redo"; "share" -> "Share"
     else -> "This command"
 }
