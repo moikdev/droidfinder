@@ -1,6 +1,6 @@
 # Undo after reopening Findroid
 
-Persistent Undo is available in **0.45.0-preview**. Native, optimized-build and actual public OTA acceptance pass on both assigned tablets. Immutable validation archive verification remains pending, so proposal 42 stays in progress until that final check completes.
+Persistent Undo is available in **0.45.0-preview**. Native, optimized-build and actual public OTA acceptance pass on both assigned tablets. The immutable public validation archive also passes independent digest, entry and source-commit verification. Proposal 42 is implemented.
 
 Open **More → Recent actions…**, a file menu, or the action launcher. The next eligible Undo and Redo have named buttons. Actions run in order. Nothing runs automatically when the app reopens.
 

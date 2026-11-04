@@ -66,7 +66,7 @@ The [prioritized next-improvements list](NEXT-IMPROVEMENTS.md) contains 72 concr
 
 ## 8. Recovery, privacy and accessibility
 - [x] Transactional transfer database, legacy migration, merge member outcomes and corruption preservation (0.6.0).
-- [ ] Safely reconstructable persistent Undo and expanded partial-failure recovery.
+- [ ] Expanded partial-failure recovery. Supported local persistent Undo ships in 0.45.0 with native identity/content checks, manual interrupted-record review/reset and public OTA acceptance; provider/replacement persistence and broader recovery remain open.
 - [x] Settings/favorites/tags/workspace backup and reviewed restore with explicit root mapping, selected-section Merge/Replace and startup recovery (0.33.0). See [SETUP-BACKUP.md](SETUP-BACKUP.md).
 - [ ] Per-location preview/index/cache controls.
 - [ ] Optional encrypted vault with explicit recovery, opt-in diagnostics without document disclosure.

@@ -1,9 +1,9 @@
 # Android preview verification
 
 
-## Findroid 0.45.0 — Undo after reopening (release acceptance in progress)
+## Findroid 0.45.0 — Undo after reopening
 
-Local and actual public OTA acceptance completed on November 4, 2026. Immutable archive verification remains pending; proposal 42 stays in progress.
+Local, actual public OTA and independent immutable archive acceptance completed on November 4, 2026. Proposal 42 is implemented.
 
 - **660 JVM cases pass**, with zero failures, errors or skips. Lint reports **0 errors / 147 warnings / 12 hints**. The exact candidate has 65 frozen build/report outputs and 322 pinned source hashes.
 - **485 matching native cases pass per API30/API36 tablet in 52 isolated batches**, with zero failures or skips in the canonical accepted batches. The **46 focused cases are a subset** of those 485, derived from the same receipts. Native checks cover reopened local actions, native descriptor identities, FIFO/symlink refusal, Unicode names, no-replace collisions, changed files, interrupted/corrupt records, exact reset preservation and shared Recent actions controls.
@@ -14,6 +14,8 @@ Local and actual public OTA acceptance completed on November 4, 2026. Immutable 
 - Both optimized native library sets contain four ABIs, with at least 16 KiB load-segment alignment and ZIP alignment. Preview signing matches the public 0.44 development key. Preview: **8,728,364 bytes**, SHA-256 `5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06`. Frozen application/native source: `bbdf2b8ca4463a42d01f24c1000853dd36aa8f66`.
 
 Rejected attempts are retained and excluded from canonical results. The first API36 `ArchiveWorkflowTest` run had one case exceed its existing 10-second UI wait; all six passed on an unchanged retry. Its cause is undetermined. After 51 accepted native batches, the API36 device stopped answering shell/console requests while a force-stop command was pending. Its assigned AVD was restarted gracefully with the same existing data and launch options, without a wipe or snapshot load; only the outstanding batch was resumed. An initial direct invocation of the internal emulator binary failed to load a launcher library; the official SDK launcher then booted successfully. No app, renderer or hardware cause is inferred. The displaced wrappers returned nonzero; the resumed canonical receipts and optimized acceptance passed. Original bytes and grants were checked after native acceptance, and the final restoration separately verifies the persisted original size override and effective screen dimensions.
+
+The immutable [validation ZIP](https://github.com/moikdev/findroid/releases/download/v0.45.0-preview/Findroid-0.45.0-validation.zip) passes independent anonymous verification: **34,794,382 bytes / 1,803 entries**, SHA-256 `55c45a85fe24104ca5416ba980c4a4ddaa061fd13e47f90b92d25e7d9f89eef0`. All manifest entries also match the public evidence commit `a53e405ee111651103f46a8769b47643ca712fcf`; application and native test sources match `bbdf2b8ca4463a42d01f24c1000853dd36aa8f66`. Later documentation and this verification receipt do not regenerate the archive. Repeat with `python3 scripts/verify-release-validation.py --tag v0.45.0-preview --sha256 55c45a85fe24104ca5416ba980c4a4ddaa061fd13e47f90b92d25e7d9f89eef0`.
 
 Physical/OEM tablets, physical TalkBack/trackpad/stylus use, removable storage and third-party provider recovery remain separate acceptance work. [Undo guide](docs/PERSISTENT-UNDO.md) · [Release notes](docs/releases/0.45.0.md).
 

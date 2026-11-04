@@ -27,13 +27,13 @@ The organization library also adapts to short tablet windows and the software ke
 
 Open **More → Recent actions…**, choose it from a file menu, or find it in the action launcher. The list shows the most recent eligible operations, affected names/locations, their time and whether they are completed or undone. Tap an entry to expand its details. The next action to Undo or Redo is identified; actions run in order.
 
-Recent actions is shared across panes and app windows. It keeps up to 50 actions **for the current app process**. It survives screen/activity recreation but resets when the process ends. It is not a persistent operation journal; [Transfers](TRANSFER-CENTER.md) has separate restart/recovery behavior.
+Recent actions is shared across panes and app windows and keeps up to 50 actions. Since 0.45, supported local actions marked **Saved for restart** survive process restart; provider, replacement, organization and unsupported actions stay **This session only**. Reopening starts no operation. [Persistent Undo](PERSISTENT-UNDO.md) explains saved scope and manual review/reset; [Transfers](TRANSFER-CENTER.md) has separate restart/recovery behavior.
 
-Findroid checks affected items before Undo or Redo. If a file was edited, a destination became occupied, storage disappeared, or another check fails, the operation stops and Recent actions keeps the reason visible. Review the changed files before retrying. There is no force-overwrite control. A partly completed Undo or Redo retains its progress so retrying does not apply a completed step twice.
+Findroid checks affected items before Undo or Redo. If a file was edited, a destination became occupied, storage disappeared, or another check fails, the operation stops and Recent actions keeps the reason visible. Review the changed files before retrying. There is no force-overwrite control. A partly completed session Undo or Redo retains its progress so retrying does not apply a completed step twice. An ambiguous saved mutation or metadata completion instead makes the saved list read-only for manual review.
 
 ![Recent actions preserves the reason a guarded Undo stopped](screenshots/recent-actions-tablet.png)
 
-An empty list explains its session lifetime and which actions can appear. Permanent deletion and other irreversible work do not acquire an Undo promise by appearing elsewhere in the app. Restoring a setup clears the session history because the saved references may have changed.
+An empty list explains which actions can appear and that reopening runs nothing automatically. Permanent deletion and other irreversible work do not acquire an Undo promise by appearing elsewhere in the app. Restoring a setup clears the session history because the saved references may have changed.
 
 ## Repeat the checks
 
