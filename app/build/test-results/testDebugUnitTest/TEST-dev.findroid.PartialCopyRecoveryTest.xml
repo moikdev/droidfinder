@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.PartialCopyRecoveryTest" tests="48" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:12.942Z" hostname="MacBook-Pro-2.local" time="0.023">
+<testsuite name="dev.findroid.PartialCopyRecoveryTest" tests="48" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:11.152Z" hostname="MacBook-Pro-2.local" time="0.025">
   <properties/>
-  <testcase name="staleDestinationApprovalCannotBeginAResumeOrOverwriteTheNewFile" classname="dev.findroid.PartialCopyRecoveryTest" time="0.003"/>
+  <testcase name="staleDestinationApprovalCannotBeginAResumeOrOverwriteTheNewFile" classname="dev.findroid.PartialCopyRecoveryTest" time="0.005"/>
   <testcase name="cancellingDuringRemainingWritesRemovesOnlyOwnedUnpublishedWork" classname="dev.findroid.PartialCopyRecoveryTest" time="0.002"/>
   <testcase name="cleanupRefusesAFileReplacedAfterItsReview" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="cleanupFailureKeepsTheKnownPublishedDestinationAndItsOwnershipRecord" classname="dev.findroid.PartialCopyRecoveryTest" time="0.002"/>
   <testcase name="rejectsSameLengthSavedPrefixCorruption" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="sourceMutationWhileRemainingBytesAreWrittenCannotPublishAMixedFile" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="resumedVerificationUsesTheCompleteFileWithoutInflatingCopiedBytes" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
-  <testcase name="sourceMutationDuringReviewCannotProduceAnApproval" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
+  <testcase name="sourceMutationDuringReviewCannotProduceAnApproval" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="journalCallbacksNeverRunAfterTheAtomicPublication" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="interruptedPrivateCleanupCanBeReviewedAndCompletedAgain" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
-  <testcase name="anExistingDestinationIsNeverDeletedByPreparation" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="anExistingDestinationIsNeverDeletedByPreparation" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="changedSourceBlocksResumeButAllowsExplicitOwnedStageDiscard" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="publicationAmbiguityRequiresDestinationReview" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="aCollisionAfterPublicationPreparationCannotReplaceTheDestination" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="reviewedCleanupNeverRecursivelyDeletesUnexpectedPrivateFiles" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="ownsPrivateStagingOutsideTheDestinationAndSyncsItsDirectories" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="initialStablePlatformAliasesAreStoredAndLaterRedirectionIsRejected" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
-  <testcase name="readsTheFullSourceAndReusesOnlyTheDurablePrefix" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
-  <testcase name="aReplacedDestinationFolderBlocksResume" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="readsTheFullSourceAndReusesOnlyTheDurablePrefix" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="aReplacedDestinationFolderBlocksResume" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="externallyLinkedStagingIsNeverResumedOrDiscarded" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="cleanupDoesNotFollowARedirectedPrivateRoot" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
-  <testcase name="cancellingAReviewKeepsSourceAndStagingUntouched" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="cancellingAReviewKeepsSourceAndStagingUntouched" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="evenARequiredDestinationReadbackDoesNotCountSavedBytesAsNewWrites" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="cleanupRefusesAnEditMadeAfterItsReview" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="replacingTheSourceWithIdenticalBytesIsStillDetected" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="aShortenedSavedFileIsKeptForReview" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="nanosecondChangeInformationRejectsASameLengthSourceEdit" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
-  <testcase name="aReplacedPrivateFolderBlocksBothResumeAndCleanup" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
-  <testcase name="reviewedResumePublishesExactBytesAndCountsOnlyNewWrites" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="aReplacedPrivateFolderBlocksBothResumeAndCleanup" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="reviewedResumePublishesExactBytesAndCountsOnlyNewWrites" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="journalFailureBeforePublicationKeepsTheSourceAndARecoverableSavedPrefix" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
-  <testcase name="replacingStagingWithIdenticalBytesDoesNotTransferOwnership" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
+  <testcase name="replacingStagingWithIdenticalBytesDoesNotTransferOwnership" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="aCrashAfterAllPrivateCleanupCanClearOnlyTheStaleRecoveryRecord" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="malformedCheckpointDoesNotReadOrDeleteFiles" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
-  <testcase name="discardRemovesOnlyItsOwnedFileAndEmptyDirectory" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
-  <testcase name="aForgedStagingPathCannotDeleteASourceDocument" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="discardRemovesOnlyItsOwnedFileAndEmptyDirectory" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
+  <testcase name="aForgedStagingPathCannotDeleteASourceDocument" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="approvalRechecksTheWholeSourceEvenIfReportedTimesWerePreserved" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="stagingLargerThanTheSourceCannotBeReused" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="canonicalLocationChangesCannotRedirectResume" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
@@ -43,11 +43,11 @@
   <testcase name="checkpointCannotMoveBackwardOrBeyondTheSource" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="reviewedCleanupKeepsAPublishedDestinationAndItsExactBytes" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="unsupportedPublicationLeavesTheOriginalAndNoOwnedProbe" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
-  <testcase name="stagingMutationDuringSourceReadIsDetected" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
-  <testcase name="reviewedPublicationCleanupDoesNotRemoveADifferentDestination" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="stagingMutationDuringSourceReadIsDetected" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
+  <testcase name="reviewedPublicationCleanupDoesNotRemoveADifferentDestination" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
   <testcase name="approvalCannotSilentlyAcceptAModifiedUncheckpointedTail" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="failedSyncCannotAdvanceTheDurableOffset" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
-  <testcase name="checkpointIsReturnedOnlyAfterItsFileWasSynced" classname="dev.findroid.PartialCopyRecoveryTest" time="0.001"/>
+  <testcase name="checkpointIsReturnedOnlyAfterItsFileWasSynced" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <testcase name="aNewDestinationIsPreservedAndBlocksResume" classname="dev.findroid.PartialCopyRecoveryTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

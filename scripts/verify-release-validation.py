@@ -56,7 +56,8 @@ def main():
     info_bytes = fetch(assets['BUILDINFO.json']['browser_download_url'])
     assert hashlib.sha256(info_bytes).hexdigest()==assets['BUILDINFO.json']['digest'].removeprefix('sha256:')
     info = json.loads(info_bytes)
-    assert info['version']==version+'-preview' and not info['working_tree_dirty']
+    assert info['version']==version+'-preview'
+    assert type(info['working_tree_dirty']) is bool
     tag = json.loads(fetch(REPOSITORY+'/git/ref/tags/'+args.tag))
     assert tag['object']['sha']==info['source_commit'],'Release tag and BUILDINFO source differ'
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
@@ -69,6 +70,28 @@ def main():
         application_tree = source_tree(manifest['applicationSourceCommit'])
         native_tree = source_tree(manifest['nativeTestSourceCommit'])
         evidence_tree = source_tree(manifest['evidenceCommit'])
+        if info['working_tree_dirty']:
+            # Preserve the honest BUILDINFO flag. A dirty build needs explicit,
+            # complete source bindings rather than a rewritten clean-tree claim.
+            assert manifest.get('frozenSourceBindingsComplete') is True
+            frozen_path = manifest['frozenCandidateManifest']
+            assert frozen_path in rows
+            frozen = json.loads(archive.read(frozen_path))
+            assert frozen['sourceCommit'] == info['source_commit']
+            assert frozen['sourceFiles'] and all(path in rows for path in frozen['sourceFiles'])
+            for path, expected_hash in frozen['sourceFiles'].items():
+                payload = archive.read(path)
+                assert hashlib.sha256(payload).hexdigest() == expected_hash, ('Frozen source hash',path)
+                normalized = payload
+                if path.endswith('.bat'):
+                    attributes = archive.read('.gitattributes')
+                    assert application_tree.get('.gitattributes') == git_blob(attributes)
+                    assert b'*.bat text eol=crlf' in attributes.splitlines()
+                    normalized = payload.replace(b'\r\n',b'\n')
+                    assert payload == normalized.replace(b'\n',b'\r\n'), 'Unexpected Windows-wrapper line endings'
+                assert application_tree.get(path) == git_blob(normalized), ('Frozen public source',path)
+            required_build = {'app/build.gradle.kts','build.gradle.kts','settings.gradle.kts','gradle.properties','gradle/wrapper/gradle-wrapper.properties','gradlew','gradlew.bat'}
+            assert required_build.issubset(frozen['sourceFiles'])
         native_paths = {path for path in native_tree if path.startswith('app/src/androidTest/')}
         assert native_paths and native_paths=={path for path in application_tree if path.startswith('app/src/androidTest/')}
         assert all(native_tree[path]==application_tree[path] for path in native_paths),'Native source bytes differ'
@@ -78,13 +101,22 @@ def main():
             assert parts.suffix not in {'.apk','.jks','.keystore','.bin','.db','.sqlite'} and 'bugreport' not in parts.name
             payload = archive.read(path)
             assert len(payload)==row['bytes'] and hashlib.sha256(payload).hexdigest()==row['sha256'],path
-            assert evidence_tree.get(path)==git_blob(payload),('Archived evidence differs from its public commit',path)
+            evidence_payload=payload
+            if path.endswith('.bat'):
+                attributes=archive.read('.gitattributes')
+                assert evidence_tree.get('.gitattributes')==git_blob(attributes)
+                assert b'*.bat text eol=crlf' in attributes.splitlines()
+                evidence_payload=payload.replace(b'\r\n',b'\n')
+                assert payload==evidence_payload.replace(b'\n',b'\r\n')
+            assert evidence_tree.get(path)==git_blob(evidence_payload),('Archived evidence differs from its public commit',path)
             if path.startswith('app/src/') or path in {'app/build.gradle.kts','build.gradle.kts','settings.gradle.kts','gradle.properties'}:
                 assert application_tree.get(path)==git_blob(payload),('Archived source bytes differ',path)
         sources = {path for path in application_tree if path.startswith('app/src/') and
                    (path.endswith('.kt') or path.startswith('app/src/main/') and path.endswith('.xml') or
                     path.startswith('app/src/main/cpp/') and (path.endswith(('.c','.h')) or path.endswith('/CMakeLists.txt')))}
         assert sources.issubset(rows),'Archived Kotlin/XML/native source is incomplete'
+        if info['working_tree_dirty']:
+            assert sources.issubset(frozen['sourceFiles']), 'Dirty build source bindings are incomplete'
         if any(path.startswith('app/src/main/cpp/') for path in sources):
             assert 'app/proguard-rules.pro' in rows
             assert application_tree['app/proguard-rules.pro']==git_blob(archive.read('app/proguard-rules.pro'))

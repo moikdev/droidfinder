@@ -1,0 +1,64 @@
+{
+  "apkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "libraries": [
+    "lib/arm64-v8a/libfindroid_files.so",
+    "lib/armeabi-v7a/libfindroid_files.so",
+    "lib/x86/libfindroid_files.so",
+    "lib/x86_64/libfindroid_files.so"
+  ],
+  "allPackagedLibraries": [
+    "lib/arm64-v8a/libandroidx.graphics.path.so",
+    "lib/arm64-v8a/libfindroid_files.so",
+    "lib/armeabi-v7a/libandroidx.graphics.path.so",
+    "lib/armeabi-v7a/libfindroid_files.so",
+    "lib/x86/libandroidx.graphics.path.so",
+    "lib/x86/libfindroid_files.so",
+    "lib/x86_64/libandroidx.graphics.path.so",
+    "lib/x86_64/libfindroid_files.so"
+  ],
+  "loadSegmentAlignments": {
+    "lib/arm64-v8a/libandroidx.graphics.path.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/arm64-v8a/libfindroid_files.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/armeabi-v7a/libandroidx.graphics.path.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/armeabi-v7a/libfindroid_files.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86/libandroidx.graphics.path.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86/libfindroid_files.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86_64/libandroidx.graphics.path.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/x86_64/libfindroid_files.so": [
+      16384,
+      16384,
+      16384
+    ]
+  },
+  "allLoadSegmentsAlignedAtLeast16384": true,
+  "zipAlignmentPassed": true,
+  "zipAlignmentLogSha256": "ad789229fdb6927910c3dcd69f77d9ec046692189d9b4dd86bb6979375bb28d1"
+}

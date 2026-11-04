@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.CopyVerificationTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:10.696Z" hostname="MacBook-Pro-2.local" time="0.211">
+<testsuite name="dev.findroid.CopyVerificationTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:04.919Z" hostname="MacBook-Pro-2.local" time="0.163">
   <properties/>
   <testcase name="detectsSameLengthCorruption" classname="dev.findroid.CopyVerificationTest" time="0.003"/>
-  <testcase name="preVerificationLegacyRecordsDefaultToNotRequested" classname="dev.findroid.CopyVerificationTest" time="0.02"/>
-  <testcase name="verifiesEmptyFiles" classname="dev.findroid.CopyVerificationTest" time="0.003"/>
+  <testcase name="preVerificationLegacyRecordsDefaultToNotRequested" classname="dev.findroid.CopyVerificationTest" time="0.008"/>
+  <testcase name="verifiesEmptyFiles" classname="dev.findroid.CopyVerificationTest" time="0.001"/>
   <testcase name="detectsShortReadback" classname="dev.findroid.CopyVerificationTest" time="0.001"/>
-  <testcase name="localReadbackOpenFailureRemovesOnlyUnpublishedContents" classname="dev.findroid.CopyVerificationTest" time="0.037"/>
-  <testcase name="restartRetainsVerificationChoiceButDoesNotReplayTheJob" classname="dev.findroid.CopyVerificationTest" time="0.001"/>
+  <testcase name="localReadbackOpenFailureRemovesOnlyUnpublishedContents" classname="dev.findroid.CopyVerificationTest" time="0.004"/>
+  <testcase name="restartRetainsVerificationChoiceButDoesNotReplayTheJob" classname="dev.findroid.CopyVerificationTest" time="0.0"/>
   <testcase name="cancellationBeforeReadbackKeepsTheOriginalAndCleansStaging" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
-  <testcase name="boundsResultsWithoutSilentlyDroppingFiles" classname="dev.findroid.CopyVerificationTest" time="0.0"/>
-  <testcase name="boundsReadbackWhenTheDestinationKeepsGrowing" classname="dev.findroid.CopyVerificationTest" time="0.004"/>
-  <testcase name="verifiedLocalCopyPublishesTheMatchingBytesAndFinalResultPath" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
+  <testcase name="boundsResultsWithoutSilentlyDroppingFiles" classname="dev.findroid.CopyVerificationTest" time="0.001"/>
+  <testcase name="boundsReadbackWhenTheDestinationKeepsGrowing" classname="dev.findroid.CopyVerificationTest" time="0.003"/>
+  <testcase name="verifiedLocalCopyPublishesTheMatchingBytesAndFinalResultPath" classname="dev.findroid.CopyVerificationTest" time="0.003"/>
   <testcase name="verifiesTheKnownSha256VectorWithoutInflatingCopiedBytes" classname="dev.findroid.CopyVerificationTest" time="0.001"/>
   <testcase name="localSameLengthCorruptionIsRemovedBeforePublication" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
   <testcase name="sourceChangesDuringVerificationPreventPublication" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
@@ -18,12 +18,12 @@
   <testcase name="cancellationClosesAnActualBlockedReadbackStream" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
   <testcase name="refusesRepeatedSourceIdentities" classname="dev.findroid.CopyVerificationTest" time="0.001"/>
   <testcase name="completedReadbackIsCheckpointedBeforeAnyPublishedDestinationIsReported" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
-  <testcase name="partialReadFailureIsUnreadableEvenAfterMatchingPrefix" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
+  <testcase name="partialReadFailureIsUnreadableEvenAfterMatchingPrefix" classname="dev.findroid.CopyVerificationTest" time="0.001"/>
   <testcase name="unreadableDestinationNeverClaimsVerification" classname="dev.findroid.CopyVerificationTest" time="0.001"/>
-  <testcase name="explicitPauseStopsReadbackUntilResumed" classname="dev.findroid.CopyVerificationTest" time="0.109"/>
+  <testcase name="explicitPauseStopsReadbackUntilResumed" classname="dev.findroid.CopyVerificationTest" time="0.101"/>
   <testcase name="recursivelyChecksEveryFileAndKeepsEmptyDirectories" classname="dev.findroid.CopyVerificationTest" time="0.008"/>
-  <testcase name="summarySeparatesUnpublishedVerifiedBytesFromSuccessfulCopies" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
-  <testcase name="aFailedVerificationCheckpointPreventsPublicationAndKeepsTheSource" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
+  <testcase name="summarySeparatesUnpublishedVerifiedBytesFromSuccessfulCopies" classname="dev.findroid.CopyVerificationTest" time="0.009"/>
+  <testcase name="aFailedVerificationCheckpointPreventsPublicationAndKeepsTheSource" classname="dev.findroid.CopyVerificationTest" time="0.003"/>
   <testcase name="legacyJournalRoundTripsTheChoiceAndPerFileResults" classname="dev.findroid.CopyVerificationTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

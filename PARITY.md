@@ -41,6 +41,8 @@ Reference behaviors: [Finder organization](https://support.apple.com/guide/mac-h
 - [x] Expanded safety and workflow tests, tablet landscape/portrait/small-window checks.
 - [x] GitHub source, build instructions, [installable preview release](https://github.com/moikdev/findroid/releases/tag/v0.4.0-preview) and final verification.
 
+- [x] Reviewed one-way folder synchronization (0.46): complete content comparison, disclosed additions, independent replacement/Trash confirmations, preserved originals, guarded publication and manual run records. Requires supported local storage; Android 11 shared storage on the assigned emulator refuses safe publication, while Workspace passes. See [supported storage and recovery](docs/REVIEWED-FOLDER-SYNC.md).
+
 ## Desktop workflow pass
 
 - [x] Cursor-positioned file/folder/background menus across all four views; touch action buttons and keyboard equivalents.

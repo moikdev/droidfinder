@@ -1,0 +1,119 @@
+{
+  "serial": "emulator-5602",
+  "section": "core",
+  "checkerSha256": "77d4372a85bc813672ec36da357742444b96c426dabd1dadce159444408c7ab8",
+  "apkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "previousApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+  "sourceCommit": "e09fb0282ce348d373da7f96fe5a7eb12df005aa",
+  "fromVersionCode": 47,
+  "toVersionCode": 48,
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "checks": [
+    {
+      "name": "direct-public-47-to-48-upgrade",
+      "exactOptimizedApk": true
+    },
+    {
+      "name": "default-additions-keep-originals",
+      "sourceAndDestinationBytesVerified": true
+    }
+  ],
+  "layouts": [],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalManagedFileCount": 495,
+  "error": "AssertionError: ('confirmed-originals-ready', '<function run.<locals>.review.<locals>.<lambda> at 0x1066133d0>', 'complete named 48 dp control unavailable')",
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "controlProofs": [
+    {
+      "name": "default-addition-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        966,
+        1902,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "default-addition-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        787,
+        710,
+        859
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "default-addition-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1017,
+        524,
+        1089
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "default-addition-apply",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        832,
+        511,
+        904
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "confirmed-originals-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        966,
+        1902,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "confirmed-originals-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        787,
+        710,
+        859
+      ],
+      "density": 1.5
+    }
+  ],
+  "hierarchyRetries": []
+}

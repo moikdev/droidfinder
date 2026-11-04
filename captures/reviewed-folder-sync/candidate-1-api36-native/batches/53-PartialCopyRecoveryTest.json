@@ -1,0 +1,104 @@
+{
+  "success": true,
+  "passed": 18,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "replacedSourceWithTheSameBytesCannotResume",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "aNewDestinationCannotBeOverwrittenByAnApprovedResume",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "corruptedPrefixCannotResumeEvenAtTheSameLength",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "directoryAndFifoTypesAreRejectedWithoutBlocking",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "resumedOptionalVerificationRecordsTheFullPublishedCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "noReplacePublicationPreservesAnExistingDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "nativePublicationPreservesNonBmpUnicodeFilenames",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "reviewedPublicationCleanupKeepsTheRenamedDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "aRealUncheckpointedTailIsReviewedThenRecopied",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "createNewNeverTruncatesACollidingFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "opensRealRegularDescriptorsAndSyncsPrivateDirectories",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "descriptorIdentityDoesNotFollowAReplacedPath",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "staleCleanupApprovalCannotDeleteAReplacedPrivateFile",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "cancellingAReviewKeepsAllPrivateBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "realResumeReadsBackAndPublishesOnlyTheRemainingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "changedSourceCannotReuseAnOldReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "kernelNoReplaceRenameKeepsBothFilesOnCollision",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyRecoveryTest",
+      "test": "aFinalSymlinkCannotBeOpenedAsASourceOrWorkingFile",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 1.5,
+  "timedOut": false
+}

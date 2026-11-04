@@ -1,0 +1,86 @@
+{
+  "serial": "emulator-5602",
+  "section": "interruptions",
+  "checkerSha256": "5521f1fb4dd872816bd0bd831f4e11d7bc486484617c121ff9a43fe37e9784e9",
+  "apkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "previousApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+  "sourceCommit": "e09fb0282ce348d373da7f96fe5a7eb12df005aa",
+  "fromVersionCode": 47,
+  "toVersionCode": 48,
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": false,
+  "restorationComplete": true,
+  "checks": [],
+  "layouts": [],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalManagedFileCount": 495,
+  "error": "AssertionError: UI did not settle: browser-ready",
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "controlProofs": [
+    {
+      "name": "preparation-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        966,
+        1902,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "preparation-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        1003,
+        710,
+        1075
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "preparation-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1008,
+        548,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "preparation-apply",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1008,
+        535,
+        1080
+      ],
+      "density": 1.5
+    }
+  ],
+  "hierarchyRetries": []
+}

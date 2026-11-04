@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.CommandAvailabilityTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:10.688Z" hostname="MacBook-Pro-2.local" time="0.005">
+<testsuite name="dev.findroid.CommandAvailabilityTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:04.913Z" hostname="MacBook-Pro-2.local" time="0.003">
   <properties/>
   <testcase name="preciseCreationAndSelectedDestinationReasonsHaveSeparateScopes" classname="dev.findroid.CommandAvailabilityTest" time="0.001"/>
   <testcase name="cachedActionDetailsRemainAvailableWhileAnotherOperationIsBusy" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="pasteExplainsAnEmptyClipboardBeforeDestinationAccess" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
-  <testcase name="permanentDeletionNeedsTheRemovalCapabilityEvenInTrash" classname="dev.findroid.CommandAvailabilityTest" time="0.001"/>
+  <testcase name="permanentDeletionNeedsTheRemovalCapabilityEvenInTrash" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="aLoadingFolderExplainsWhyItsCapabilitiesAreNotReady" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
-  <testcase name="pasteIntoUsesTheSelectedFolderRatherThanItsReadOnlyParent" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
-  <testcase name="anEmptySelectionDoesNotDisableFolderCreationOrBrowsing" classname="dev.findroid.CommandAvailabilityTest" time="0.002"/>
+  <testcase name="pasteIntoUsesTheSelectedFolderRatherThanItsReadOnlyParent" classname="dev.findroid.CommandAvailabilityTest" time="0.001"/>
+  <testcase name="anEmptySelectionDoesNotDisableFolderCreationOrBrowsing" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="renameAndRemovePermissionsCanVaryIndependentlyWithinAProvider" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="preciseStorageReasonsKeepTheirRecoveryAndBusyPrecedence" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="undoAndRedoDescribeTheSessionAndIgnoreAnUnrelatedOfflineBrowseRoot" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="onlyOperationsThatNeedTheMutationSlotWaitForBusyWork" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="anUnavailableOtherPaneOffersThatPaneRatherThanChangingTheSource" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
-  <testcase name="extractingHereDoesNotGuessTheRootOfSearchResults" classname="dev.findroid.CommandAvailabilityTest" time="0.001"/>
+  <testcase name="extractingHereDoesNotGuessTheRootOfSearchResults" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="trashItemsMustBeRestoredBeforeRenamingOrMoving" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="readOnlyArchivesCanChooseAnExtractionDestination" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
-  <testcase name="renamingUsesTheRenameCapabilityWithoutBlockingReadOnlyCopies" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
+  <testcase name="renamingUsesTheRenameCapabilityWithoutBlockingReadOnlyCopies" classname="dev.findroid.CommandAvailabilityTest" time="0.001"/>
   <testcase name="disconnectedStorageOffersReconnectionWithoutHidingPathInformation" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="virtualViewsNeedARealCreationDestinationButCanRenameTheirResults" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>
   <testcase name="removingOriginalsNeedsItsOwnCapability" classname="dev.findroid.CommandAvailabilityTest" time="0.0"/>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.RecentSearchesTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:18.462Z" hostname="MacBook-Pro-2.local" time="0.012">
+<testsuite name="dev.findroid.RecentSearchesTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:17.453Z" hostname="MacBook-Pro-2.local" time="0.013">
   <properties/>
   <testcase name="suggestionsMatchUnicodeAndAllWordsAndDeduplicateRulesAcrossRoots" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
   <testcase name="clearAndRemovePersistImmediatelyAndInvalidateStaleDrafts" classname="dev.findroid.RecentSearchesTest" time="0.009"/>
-  <testcase name="corruptRecordingFlagDoesNotSilentlyEnableRecording" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
+  <testcase name="corruptRecordingFlagDoesNotSilentlyEnableRecording" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
   <testcase name="supportedRootsIncludeOnlyRealFoldersAndKnownLibraryKinds" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="repeatedSearchMovesToFrontWithStableIdentityAndNewUseTime" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
-  <testcase name="historyKeepsOnlyTwentyMostRecentlyUsedSearches" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
+  <testcase name="historyKeepsOnlyTwentyMostRecentlyUsedSearches" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="failedWritesRetainTheAcceptedStateAndExplainTheFailure" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
-  <testcase name="storedRulesOwnTheirCollectionSnapshotsAndPreserveLiteralWhitespace" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
+  <testcase name="storedRulesOwnTheirCollectionSnapshotsAndPreserveLiteralWhitespace" classname="dev.findroid.RecentSearchesTest" time="0.001"/>
   <testcase name="damagedHistoryIsPreservedUntilAnExplicitSuccessfulClear" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="anOversizedQueryReportsFailureWithoutLosingEarlierEntries" classname="dev.findroid.RecentSearchesTest" time="0.0"/>
   <testcase name="settingTheSameRecordingPreferenceDoesNotInvalidatePendingDrafts" classname="dev.findroid.RecentSearchesTest" time="0.0"/>

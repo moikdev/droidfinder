@@ -1,0 +1,12 @@
+{
+  "explicitAllowlistChecked": true,
+  "privateRecoveryFilesExcluded": true,
+  "publicationAllowlistSha256": "be42d1d6177da7bd759b9cda75f6071e788cfe8148e725f476742c22691d346b",
+  "publishedFilesChecked": 890,
+  "privacyCheckerSha256": "08c39a52e6ff7c31d739febf788d3e9c496a1a35835fafd448fb1489ec85a487",
+  "originalLocationPathAndUniqueLabelCount": 112,
+  "publishedTextFilesChecked": 786,
+  "literalIdentifierMatches": 0,
+  "screenshotInspectionRecordedSeparately": true,
+  "scope": "Exact original location paths and timestamp/account-like labels. No claim of automated image or universal content sanitization."
+}

@@ -1,0 +1,242 @@
+{
+  "explicitSyntheticImages": 18,
+  "surfaceHierarchyVerified": true,
+  "actualImageInspectionRequired": true,
+  "checkerSha256": "2301c6dc1dbb914a7a2fb172e361560d62de570bf471b95efd9b0081254f0511",
+  "images": [
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-light-apply-surface.png",
+      "sha256": "fca6b39dac6edd36bed7863aa233444f78a01bdfc7976f2142017f51ce9b255a",
+      "surfaceBoundsPx": [
+        240,
+        60,
+        1680,
+        1104
+      ],
+      "privateRawCaptureSha256": "2ef149d7e29c0cf8c88f9a56e78daac186d8838775c7a69068188a636ecb9812",
+      "privateRawHierarchySha256": "de526bab86942a0db3706828ba9561f0350ec5ed9bc8839cc773c92ea5e4265e",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-apply-surface.png",
+      "sha256": "55211b24a75a31cc9a5b7fccb190d27764ab50f43d1d54047c076ab1df96cf50",
+      "surfaceBoundsPx": [
+        240,
+        60,
+        1680,
+        1104
+      ],
+      "privateRawCaptureSha256": "794edb51a3455065345b1e4d7d1faf00648175f6960d79f245cf3142cb134a42",
+      "privateRawHierarchySha256": "f9e56e884f4108dff9c519b7a90055c5820e8fe210d1dc4c6ead120181ba8803",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-light-apply-surface.png",
+      "sha256": "1fad45d26b9b91afb42fc617e054d1b43e526ad34165d6b1275fbf661efdeb64",
+      "surfaceBoundsPx": [
+        240,
+        60,
+        1680,
+        1104
+      ],
+      "privateRawCaptureSha256": "43768d0c6dd24a63c4781406268899bed8a034d1723ee9f745f6530241d4e5cd",
+      "privateRawHierarchySha256": "444e0c5270ff871e7d3f67f2156cb67bb9ca32031c7d4079472dc2b080a5246a",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-apply-surface.png",
+      "sha256": "89107b6d5912d2c312e05457bcf5a1ad1eb3c603dcc6b06e77188035c00ec980",
+      "surfaceBoundsPx": [
+        240,
+        60,
+        1680,
+        1104
+      ],
+      "privateRawCaptureSha256": "269808f1013746c9fcd0b8aeec99552ad012fd9c50e7831e4392726ea246566a",
+      "privateRawHierarchySha256": "31bc3de6b13e7ac1ced46c8d88b04f37a56b957074c8d9ed4ba47c2ce888887a",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-apply-surface.png",
+      "sha256": "6903a7470e8f35a34b6b80a0dff4556940906aaa19fc2eee4332249cb285949b",
+      "surfaceBoundsPx": [
+        24,
+        289,
+        1176,
+        1594
+      ],
+      "privateRawCaptureSha256": "9d92857e5146c31381ba47e9a7bbc7ed916aeb88f6e68a88d7eb70c574de6b9b",
+      "privateRawHierarchySha256": "899d9252d707f4f44d11771bf73799e941ae8e5c406fedf0e4d6de9774b0a25d",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-apply-surface.png",
+      "sha256": "44e3a861d1f54f5324d919da701cbc5f5532201c4770dde7bf73b711a4f130f4",
+      "surfaceBoundsPx": [
+        24,
+        289,
+        1176,
+        1594
+      ],
+      "privateRawCaptureSha256": "840c6c88fd884f4b5ab5917a2a18f6f2c1fbea2842dc222e7bc8ea80f7b2ab82",
+      "privateRawHierarchySha256": "b66f97b06a50115e7ec9d5983c924cb4ac24df6d26538d408e59fc0ab71784f6",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-apply-surface.png",
+      "sha256": "70a8ec27fa29573c15ac6473904e8431557709f09cc6c58ae9d7f8f1f280ccd8",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1176,
+        1824
+      ],
+      "privateRawCaptureSha256": "c3b26257f624f735d3461bd16693a1c32087b043b0708dfd6c01042ee0ea0074",
+      "privateRawHierarchySha256": "b91c25998e07d8e0fd53bd94ad33a3fc8c8f84c38fdc99180c3152eda59639a4",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-apply-surface.png",
+      "sha256": "521fe960b56ba0b0f4ac19ee42a08ce7b76f631744be2cd98a6d13d543863521",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1176,
+        1824
+      ],
+      "privateRawCaptureSha256": "0743594238d96568a08725549bb2201a45f88af500c0902be4e21b59add72171",
+      "privateRawHierarchySha256": "1e87dace1da512e7398da7128c638787bedb50508bcc38ef34b20b9ae353cf44",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-apply-surface.png",
+      "sha256": "148a5f166c24008d4e8628162c4c2e42a9510ccfec10b4e576426ce959bb4b21",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        876,
+        1104
+      ],
+      "privateRawCaptureSha256": "281d6b750c6a6478cd62078cc2847a59df8211fcdb1229ae0cbe80992d969c41",
+      "privateRawHierarchySha256": "bbdd620d056c0a03fa571b4582113d70e784253423571ae040e1877a4a13b4f2",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-apply-surface.png",
+      "sha256": "9bd6adece5981bf7ea21cb7203a2bc6c44ff6c0065a75c3d5919f1246c8309d0",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        876,
+        1104
+      ],
+      "privateRawCaptureSha256": "4d5aeae042ad97b92c7af7c563ef593faeb87c8444a4977d835581e6592243f4",
+      "privateRawHierarchySha256": "71b53cdaa3f8cab13ec7e78e0e276b332b866b7d1ee9eeb51efda058aaa2af4e",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-apply-surface.png",
+      "sha256": "4bdeb6ad4495c706ed16afd752ae65e47dd14adf2e0dcf88e47aaa98fdb7fb69",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        876,
+        1104
+      ],
+      "privateRawCaptureSha256": "265fccc3e3ee8669d2edfdaf6919d2b58cb17e6de4a0037e97c6580541f18f67",
+      "privateRawHierarchySha256": "6c8e91ba3a48e8a9fc605316732e2b379d330c05fc8efb2b067a14c55291b663",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-apply-surface.png",
+      "sha256": "6837822613946b382987ad9db2064568fa641bde6915c1975185e8419db3cc03",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        876,
+        1104
+      ],
+      "privateRawCaptureSha256": "3c94f67eec5013d57b4aac90ddcc223ebc4fe7235367f7cc43ccbf63a095b59e",
+      "privateRawHierarchySha256": "da636dc46310bd516dbc35ff0152f29e4a8ab9855cc8c7142b0d60352c1b20c2",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/display-density-240-apply-surface.png",
+      "sha256": "8c26d2aadf485cd298bb694d087e3af3a0a08a761f1b8ca9900ae23f91c31bb3",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1176,
+        1404
+      ],
+      "privateRawCaptureSha256": "33d857dfee6661530d40c62f9baedcc6db9809e8c23c0fda3822fd3b1851a3cf",
+      "privateRawHierarchySha256": "4d900c68afd1af3e3996e8305d90a94e9588ab3e8b2f51d63d39a7c42c6cb639",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/display-density-300-apply-surface.png",
+      "sha256": "797ab8da2cc388a028c02d0623d1aadcb9c4fa51c1347eddf4b8f82120ed2667",
+      "surfaceBoundsPx": [
+        30,
+        75,
+        1470,
+        1755
+      ],
+      "privateRawCaptureSha256": "29ce108a38c771c89588f0f85ce525d670fadea964eefcc4d3e09c804e68abee",
+      "privateRawHierarchySha256": "c327e1ac59f325c68f6f2176d5580b8f9f69d3ddb38465fa44f8fbfd53a628b0",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-replace-surface.png",
+      "sha256": "d6f2445eabf22e47655fd69b6f20db9de7c268b1d66ecbf1ee87ab2506e1d0bb",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        876,
+        1104
+      ],
+      "privateRawCaptureSha256": "ae723d4bde88154305935194751b6828db527073de99fdd54185cd239c85608a",
+      "privateRawHierarchySha256": "8ae30c29824547b94caa4fa09bd8d4b8ab2662229e91a1faa520886e79f28b5c",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-trash-surface.png",
+      "sha256": "b5765ee9c6bcc1e20730d3eb3f860ac245ebf3531202028ac4f7c9f803c5117d",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        876,
+        1104
+      ],
+      "privateRawCaptureSha256": "5922e619de711f2c1ca3d84967684aa77a65a1e35f494c828872f9ec32303075",
+      "privateRawHierarchySha256": "1ab4cee674f13ee0959ffc8f0ae212f43b901be1e21d7166cb1606b0bd3fbf56",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-replace-surface.png",
+      "sha256": "53278880cc5db2a3e5a38e512f398cd79d935584e641216bb2cfbc8ebf6c22cb",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1176,
+        1824
+      ],
+      "privateRawCaptureSha256": "5966063c883e865eb9fd68c5f851da9be64f8b789e4111afc3d43d8e8f2590f5",
+      "privateRawHierarchySha256": "23dbcccdd081ac203bc28b71784e3e5862082b223486775a80c0c021e6e36b27",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-trash-surface.png",
+      "sha256": "521fe960b56ba0b0f4ac19ee42a08ce7b76f631744be2cd98a6d13d543863521",
+      "surfaceBoundsPx": [
+        24,
+        60,
+        1176,
+        1824
+      ],
+      "privateRawCaptureSha256": "0743594238d96568a08725549bb2201a45f88af500c0902be4e21b59add72171",
+      "privateRawHierarchySha256": "1a9405163c327f847d4336fcc31413ced4ced3b20a23a95e2afaf622ee22a864",
+      "browserBackdropExcluded": true
+    }
+  ]
+}

@@ -1,0 +1,2140 @@
+{
+  "serial": "emulator-5602",
+  "section": "layouts",
+  "checkerSha256": "5521f1fb4dd872816bd0bd831f4e11d7bc486484617c121ff9a43fe37e9784e9",
+  "apkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "previousApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+  "sourceCommit": "e09fb0282ce348d373da7f96fe5a7eb12df005aa",
+  "fromVersionCode": 47,
+  "toVersionCode": 48,
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "checks": [
+    {
+      "name": "layout-1280x800-font1.0-light",
+      "actualAndroidFontScale": 1.0
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark",
+      "actualAndroidFontScale": 1.0
+    },
+    {
+      "name": "layout-1280x800-font2.0-light",
+      "actualAndroidFontScale": 2.0
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark",
+      "actualAndroidFontScale": 2.0
+    },
+    {
+      "name": "layout-800x1280-font1.0-light",
+      "actualAndroidFontScale": 1.0
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark",
+      "actualAndroidFontScale": 1.0
+    },
+    {
+      "name": "layout-800x1280-font2.0-light",
+      "actualAndroidFontScale": 2.0
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark",
+      "actualAndroidFontScale": 2.0
+    },
+    {
+      "name": "layout-600x800-font1.0-light",
+      "actualAndroidFontScale": 1.0
+    },
+    {
+      "name": "layout-600x800-font1.0-dark",
+      "actualAndroidFontScale": 1.0
+    },
+    {
+      "name": "layout-600x800-font2.0-light",
+      "actualAndroidFontScale": 2.0
+    },
+    {
+      "name": "layout-600x800-font2.0-dark",
+      "actualAndroidFontScale": 2.0
+    },
+    {
+      "name": "display-density-240",
+      "actualDensityDpi": 240,
+      "systemFontScale": 2.0,
+      "namedControlsCompleteAnd48Dp": true
+    },
+    {
+      "name": "display-density-300",
+      "actualDensityDpi": 300,
+      "systemFontScale": 2.0,
+      "namedControlsCompleteAnd48Dp": true
+    }
+  ],
+  "layouts": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "systemFontScale": 1.0,
+      "dark": false,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            318,
+            909,
+            1638,
+            945
+          ],
+          "textHeightPx": 36
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            318,
+            999,
+            1638,
+            1035
+          ],
+          "textHeightPx": 36
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "systemFontScale": 1.0,
+      "dark": true,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            318,
+            909,
+            1638,
+            945
+          ],
+          "textHeightPx": 36
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            318,
+            999,
+            1638,
+            1035
+          ],
+          "textHeightPx": 36
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "systemFontScale": 2.0,
+      "dark": false,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            318,
+            908,
+            1638,
+            975
+          ],
+          "textHeightPx": 67
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            318,
+            1017,
+            1638,
+            1084
+          ],
+          "textHeightPx": 67
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "systemFontScale": 2.0,
+      "dark": true,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            318,
+            780,
+            1638,
+            847
+          ],
+          "textHeightPx": 67
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            318,
+            889,
+            1638,
+            956
+          ],
+          "textHeightPx": 67
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "systemFontScale": 1.0,
+      "dark": false,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            102,
+            1174,
+            1134,
+            1210
+          ],
+          "textHeightPx": 36
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            102,
+            1264,
+            1134,
+            1300
+          ],
+          "textHeightPx": 36
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "systemFontScale": 1.0,
+      "dark": true,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            102,
+            1174,
+            1134,
+            1210
+          ],
+          "textHeightPx": 36
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            102,
+            1264,
+            1134,
+            1300
+          ],
+          "textHeightPx": 36
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "systemFontScale": 2.0,
+      "dark": false,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            102,
+            856,
+            1134,
+            990
+          ],
+          "textHeightPx": 134
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            102,
+            1032,
+            1134,
+            1166
+          ],
+          "textHeightPx": 134
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "systemFontScale": 2.0,
+      "dark": true,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            102,
+            856,
+            1134,
+            990
+          ],
+          "textHeightPx": 134
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            102,
+            1032,
+            1134,
+            1166
+          ],
+          "textHeightPx": 134
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "systemFontScale": 1.0,
+      "dark": false,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            102,
+            576,
+            834,
+            612
+          ],
+          "textHeightPx": 36
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            102,
+            666,
+            834,
+            702
+          ],
+          "textHeightPx": 36
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "systemFontScale": 1.0,
+      "dark": true,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            102,
+            576,
+            834,
+            612
+          ],
+          "textHeightPx": 36
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            102,
+            666,
+            834,
+            702
+          ],
+          "textHeightPx": 36
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "systemFontScale": 2.0,
+      "dark": false,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            102,
+            429,
+            834,
+            563
+          ],
+          "textHeightPx": 134
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            102,
+            605,
+            834,
+            739
+          ],
+          "textHeightPx": 134
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "systemFontScale": 2.0,
+      "dark": true,
+      "namedControlsCompleteAnd48Dp": true,
+      "noFileOperationApplied": true,
+      "confirmationLabels": [
+        {
+          "label": "Replace 1 destination item; preserve the original copies in Trash first.",
+          "textBoundsPx": [
+            102,
+            432,
+            834,
+            566
+          ],
+          "textHeightPx": 134
+        },
+        {
+          "label": "Move 1 destination-only item to Trash. Keep the original copies there.",
+          "textBoundsPx": [
+            102,
+            608,
+            834,
+            742
+          ],
+          "textHeightPx": 134
+        }
+      ]
+    }
+  ],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalManagedFileCount": 495,
+  "actualSystemFontEnlargementMeasured": true,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5602",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 495,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "controlProofs": [
+    {
+      "name": "layout-1280x800-font1.0-light-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        966,
+        1902,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        787,
+        710,
+        859
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        747,
+        1650,
+        837
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        909,
+        1650,
+        999
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1017,
+        524,
+        1089
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        891,
+        1650,
+        963
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        981,
+        1650,
+        1053
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        523,
+        1008,
+        707,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1001,
+        1008,
+        1090,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        678,
+        1902,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-light-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        711,
+        639,
+        800,
+        711
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        966,
+        1902,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        787,
+        710,
+        859
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        747,
+        1650,
+        837
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        909,
+        1650,
+        999
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1017,
+        524,
+        1089
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        891,
+        1650,
+        963
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        981,
+        1650,
+        1053
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        523,
+        1008,
+        707,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1001,
+        1008,
+        1090,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        678,
+        1902,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font1.0-dark-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        711,
+        639,
+        800,
+        711
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        114,
+        1902,
+        186
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        864,
+        915,
+        944
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        421,
+        1650,
+        650
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        753,
+        1650,
+        982
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1000,
+        684,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        896,
+        1650,
+        987
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1005,
+        1650,
+        1096
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        671,
+        920,
+        983,
+        1000
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        1000,
+        1616,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        513,
+        1902,
+        633
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-light-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        970,
+        730,
+        1104,
+        810
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        106,
+        1902,
+        178
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        864,
+        915,
+        944
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        421,
+        1650,
+        650
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        753,
+        1650,
+        982
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1000,
+        684,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        768,
+        1650,
+        859
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        877,
+        1650,
+        968
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        671,
+        921,
+        983,
+        1001
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        1000,
+        1616,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        426,
+        1902,
+        546
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-1280x800-font2.0-dark-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        970,
+        730,
+        1104,
+        810
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        966,
+        1182,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        78,
+        1147,
+        350,
+        1219
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1120,
+        1146,
+        1210
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1282,
+        1146,
+        1372
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1390,
+        308,
+        1462
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1156,
+        1146,
+        1228
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1246,
+        1146,
+        1318
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        307,
+        1498,
+        491,
+        1570
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        785,
+        1390,
+        874,
+        1462
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        678,
+        1182,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-light-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        450,
+        999,
+        539,
+        1071
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        966,
+        1182,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        78,
+        1147,
+        350,
+        1219
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1120,
+        1146,
+        1210
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1282,
+        1146,
+        1372
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1390,
+        308,
+        1462
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1156,
+        1146,
+        1228
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1246,
+        1146,
+        1318
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        307,
+        1498,
+        491,
+        1570
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        785,
+        1390,
+        874,
+        1462
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        678,
+        1182,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font1.0-dark-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        450,
+        999,
+        539,
+        1071
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        1134,
+        1182,
+        1206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        78,
+        1224,
+        555,
+        1304
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1061,
+        1146,
+        1290
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1393,
+        1146,
+        1622
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1640,
+        468,
+        1720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        844,
+        1146,
+        1002
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1020,
+        1146,
+        1178
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        455,
+        1640,
+        767,
+        1720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        527,
+        1720,
+        661,
+        1800
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        798,
+        1182,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-light-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        709,
+        1125,
+        843,
+        1205
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        1134,
+        1182,
+        1206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        78,
+        1224,
+        555,
+        1304
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1061,
+        1146,
+        1290
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1393,
+        1146,
+        1622
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1640,
+        468,
+        1720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        844,
+        1146,
+        1002
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1020,
+        1146,
+        1178
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        455,
+        1640,
+        767,
+        1720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        527,
+        1720,
+        661,
+        1800
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        798,
+        1182,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-800x1280-font2.0-dark-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        709,
+        1125,
+        843,
+        1205
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        966,
+        882,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        787,
+        326,
+        859
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        594,
+        846,
+        720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        792,
+        846,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        936,
+        308,
+        1008
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        558,
+        846,
+        630
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        648,
+        846,
+        720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        307,
+        936,
+        491,
+        1008
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1008,
+        143,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        678,
+        882,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-light-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        450,
+        657,
+        539,
+        729
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        966,
+        882,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        787,
+        326,
+        859
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        594,
+        846,
+        720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        792,
+        846,
+        918
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        936,
+        308,
+        1008
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        558,
+        846,
+        630
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        648,
+        846,
+        720
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        307,
+        936,
+        491,
+        1008
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1008,
+        143,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        678,
+        882,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font1.0-dark-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        450,
+        657,
+        539,
+        729
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        156,
+        882,
+        228
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        900,
+        531,
+        980
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        130,
+        846,
+        431
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        601,
+        846,
+        902
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        920,
+        468,
+        1000
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        417,
+        846,
+        575
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        593,
+        846,
+        751
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        455,
+        840,
+        767,
+        920
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        527,
+        1000,
+        661,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        525,
+        882,
+        645
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-light-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        709,
+        832,
+        843,
+        912
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        137,
+        882,
+        209
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        900,
+        531,
+        980
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-select-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        130,
+        846,
+        431
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-select-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        601,
+        846,
+        902
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        920,
+        468,
+        1000
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-replace",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        420,
+        846,
+        578
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        596,
+        846,
+        754
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-back",
+      "text": "",
+      "description": "",
+      "bounds": [
+        455,
+        840,
+        767,
+        920
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        527,
+        1000,
+        661,
+        1080
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        462,
+        482,
+        882,
+        602
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "layout-600x800-font2.0-dark-records-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        709,
+        832,
+        843,
+        912
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "display-density-240-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        762,
+        1134,
+        1182,
+        1206
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "display-density-240-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        78,
+        912,
+        555,
+        992
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "display-density-240-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        54,
+        1220,
+        468,
+        1300
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "display-density-240-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        527,
+        1300,
+        661,
+        1380
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "display-density-300-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        952,
+        1418,
+        1477,
+        1508
+      ],
+      "density": 1.875
+    },
+    {
+      "name": "display-density-300-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        98,
+        1141,
+        685,
+        1241
+      ],
+      "density": 1.875
+    },
+    {
+      "name": "display-density-300-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        68,
+        1525,
+        580,
+        1625
+      ],
+      "density": 1.875
+    },
+    {
+      "name": "display-density-300-close",
+      "text": "",
+      "description": "",
+      "bounds": [
+        650,
+        1625,
+        817,
+        1725
+      ],
+      "density": 1.875
+    }
+  ],
+  "hierarchyRetries": []
+}

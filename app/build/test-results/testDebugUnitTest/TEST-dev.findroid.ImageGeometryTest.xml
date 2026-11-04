@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.ImageGeometryTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:11.865Z" hostname="MacBook-Pro-2.local" time="0.008">
+<testsuite name="dev.findroid.ImageGeometryTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:10.030Z" hostname="MacBook-Pro-2.local" time="0.008">
   <properties/>
   <testcase name="fitDoesNotEnlargeSmallFilesAndInvalidStateIsClamped" classname="dev.findroid.ImageGeometryTest" time="0.001"/>
   <testcase name="zoomRetainsCursorAnchorAndPanCannotLoseTheImage" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
-  <testcase name="panoramaZoomLabelsDoNotRoundToZero" classname="dev.findroid.ImageGeometryTest" time="0.002"/>
-  <testcase name="sampleBudgetsHandlePanoramasOddDimensionsAndLargeSources" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
+  <testcase name="panoramaZoomLabelsDoNotRoundToZero" classname="dev.findroid.ImageGeometryTest" time="0.001"/>
+  <testcase name="sampleBudgetsHandlePanoramasOddDimensionsAndLargeSources" classname="dev.findroid.ImageGeometryTest" time="0.001"/>
   <testcase name="allEightExifTransformsAndTheirInversesMatchPixelEdges" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
   <testcase name="temporaryRotationComposesAfterExifAndFourTurnsRestore" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
   <testcase name="visibleRegionUsesFullDetailWithoutInflatingTheWholeSource" classname="dev.findroid.ImageGeometryTest" time="0.0"/>

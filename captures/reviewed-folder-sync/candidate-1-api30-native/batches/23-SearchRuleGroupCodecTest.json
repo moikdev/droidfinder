@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "passed": 9,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "boundedDecodingRejectsExcessiveDepthTotalNodesAndUtf8Text",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "recentHistoryRejectsRepeatedKeysAndExcessiveRawJsonDepthBeforeAndroidParsing",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "everyDecoderRejectsPresentButDamagedGroupsInsteadOfTreatingThemAsAbsent",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "allNodeTypesRoundTripThroughRulesTabsAndScanBudgets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "setupCarriesGroupsThroughEveryContainerAndReviewedTagRemapping",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "unreadableSmartFoldersCannotBeOverwrittenBySavingAnotherSearch",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "strictRecentHistoryRoundTripsGroupsAndPreservesUnknownTreesUntilExplicitClear",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "legacyRulesOmitGroupsAndKeepTheirExactBehavior",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SearchRuleGroupCodecTest",
+      "test": "strictGroupCodecRejectsUnknownFieldsTypesAndInvalidLeaves",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 2.5,
+  "timedOut": false
+}

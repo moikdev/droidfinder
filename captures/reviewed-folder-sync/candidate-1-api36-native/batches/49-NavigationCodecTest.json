@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "passed": 5,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "scopeRoundTripsInTabsAndBudgetsAndLegacyDefaultsToRecursive",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "legacyAndCurrentTabsRoundTripWithoutLosingFocusOrPositions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "multiTagRulesRoundTripWithEveryModeAndLegacySingleTag",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "malformedTabDoesNotDiscardOtherTabsAndOffsetsAreBounded",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.NavigationCodecTest",
+      "test": "savedLayoutsUseAtomicStorageAndPreserveAnUnrecognizedFile",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 1.4,
+  "timedOut": false
+}

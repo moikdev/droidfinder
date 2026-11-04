@@ -1,0 +1,275 @@
+{
+  "serial": "emulator-5582",
+  "section": "core",
+  "checkerSha256": "5521f1fb4dd872816bd0bd831f4e11d7bc486484617c121ff9a43fe37e9784e9",
+  "apkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "previousApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+  "sourceCommit": "e09fb0282ce348d373da7f96fe5a7eb12df005aa",
+  "fromVersionCode": 47,
+  "toVersionCode": 48,
+  "operationsUseExactOptimizedApk": true,
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "checks": [
+    {
+      "name": "direct-public-47-to-48-upgrade",
+      "exactOptimizedApk": true
+    },
+    {
+      "name": "default-additions-keep-originals",
+      "sourceAndDestinationBytesVerified": true
+    },
+    {
+      "name": "confirmed-replacement-and-trash",
+      "originalsPreservedInTrash": true,
+      "immutableRunRecords": 2
+    },
+    {
+      "name": "cold-record-review-does-not-replay",
+      "recordsAndJournalsUnchanged": true
+    },
+    {
+      "name": "occupied-name-after-review",
+      "bothOriginalsKept": true
+    }
+  ],
+  "layouts": [],
+  "immutableOriginalBytesVerifiedBeforeTests": true,
+  "originalManagedFileCount": 443,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  },
+  "controlProofs": [
+    {
+      "name": "default-addition-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        966,
+        1902,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "default-addition-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        799,
+        710,
+        871
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "default-addition-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1024,
+        524,
+        1096
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "default-addition-apply",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        844,
+        511,
+        916
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "confirmed-originals-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        966,
+        1902,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "confirmed-originals-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        799,
+        710,
+        871
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "choose-update",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        592,
+        1650,
+        682
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "choose-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        754,
+        1650,
+        844
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "confirmed-originals-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1024,
+        524,
+        1096
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "confirm-replacement",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        729,
+        1650,
+        801
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "confirm-trash",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        819,
+        1650,
+        891
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "confirmed-originals-apply",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        1032,
+        511,
+        1104
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "cold-records-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        678,
+        1902,
+        750
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "close-cold-records",
+      "text": "",
+      "description": "",
+      "bounds": [
+        709,
+        1032,
+        798,
+        1104
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "stale-menu",
+      "text": "",
+      "description": "",
+      "bounds": [
+        1482,
+        966,
+        1902,
+        1038
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "stale-open-review",
+      "text": "",
+      "description": "",
+      "bounds": [
+        438,
+        733,
+        710,
+        805
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "stale-choices",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        862,
+        524,
+        934
+      ],
+      "density": 1.5
+    },
+    {
+      "name": "stale-apply",
+      "text": "",
+      "description": "",
+      "bounds": [
+        270,
+        844,
+        511,
+        916
+      ],
+      "density": 1.5
+    }
+  ],
+  "hierarchyRetries": []
+}

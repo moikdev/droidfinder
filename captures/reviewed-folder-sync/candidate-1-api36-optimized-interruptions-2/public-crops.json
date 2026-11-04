@@ -1,0 +1,60 @@
+{
+  "explicitSyntheticImages": 4,
+  "surfaceHierarchyVerified": true,
+  "actualImageInspectionRequired": true,
+  "checkerSha256": "2301c6dc1dbb914a7a2fb172e361560d62de570bf471b95efd9b0081254f0511",
+  "images": [
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-interruptions-2/preparation-cold-records-surface.png",
+      "sha256": "a1682c9ab1f600903978e7a6441d338051c1bed3503495457fab14190c209ae5",
+      "surfaceBoundsPx": [
+        285,
+        219,
+        1635,
+        968
+      ],
+      "privateRawCaptureSha256": "9602f0a2a6f135d24c82e5bbd3eac01adf4b6207363e885372bc32d18fc89cd5",
+      "privateRawHierarchySha256": "8da01dee7f7b07c9c6a926aeed36824d4d901a8ae48b3b234432149320ca99e8",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-interruptions-2/publication-cold-records-surface.png",
+      "sha256": "b3fd4ab2ebd383ac9d59606a3f96effb285d758acf9dcd4cb67564cd1395f619",
+      "surfaceBoundsPx": [
+        285,
+        219,
+        1635,
+        968
+      ],
+      "privateRawCaptureSha256": "eee1b3568998525a4475d64120ebbb4cd44f8dc80c281349772fc62ab13d6e71",
+      "privateRawHierarchySha256": "37c9c828b76b219038619762ddd8302c717945ca746f3d1acfea50bff5350461",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-interruptions-2/cancellation-cold-records-surface.png",
+      "sha256": "5c41e589c5c1f2ddb2cc2c4f759abb6efcb82cbd031a986df121975677eb9fb2",
+      "surfaceBoundsPx": [
+        285,
+        219,
+        1635,
+        968
+      ],
+      "privateRawCaptureSha256": "5e6ab663872b9c197028cde58a1c36d538f9a80645b219ead3509cc38fd8bbf8",
+      "privateRawHierarchySha256": "7391649d25cd8ad44cccbaafdb57c755511ec1f1ffbf02f897791596d9aea7ea",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-interruptions-2/access-loss-cold-records-surface.png",
+      "sha256": "83bfd0f2a7e7e26268536fec64f8c197cc0b639523b0dfccd4f7146fa1844ba7",
+      "surfaceBoundsPx": [
+        285,
+        219,
+        1635,
+        968
+      ],
+      "privateRawCaptureSha256": "577254ba8ed28fc4d6156315b43c8835b4b4f56ad73c090d81b8f6188fd2960f",
+      "privateRawHierarchySha256": "6d271352a5142dba65982293830f3ba7c72a0d2f86da967be2deb4dcdc058eab",
+      "browserBackdropExcluded": true
+    }
+  ]
+}

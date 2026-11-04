@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "passed": 9,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "typeToSelectAndAppShortcutsResolveTargets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "shiftSelectionCanGrowAndShrink",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "customTagRenameCanBeUndoneAndRedone",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "pdfQuickLookNavigatesAllPages",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "iconViewSupportsMouseContextActions",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "expandedListCanRenameAChildAndUndo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "audioQuickLookPreparesAndPlays",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "mouseRectangleSelectsFilesFromEmptySpace",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.AdvancedWorkflowTest",
+      "test": "sharingAFolderCreatesReadableZipWithoutChangingOriginal",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 33.6,
+  "timedOut": false
+}

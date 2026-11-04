@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "passed": 8,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "finishingRecoveryHasCleanupControlsAndKeepsThePublishedCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "uncheckedTailIsDisclosedAndNeverCountedAsReusedBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "changedSourceBlocksResumeAndOffersOwnedDiscard",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "namedReviewResumesExactBytesAndKeepsDurableSeparateHistory",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "cancellingAReviewedDialogStartsNoCopyAndKeepsCheckpointBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "aDestinationCreatedAfterReviewCannotBeReplacedByResume",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "clearFinishedKeepsSavedCopiesAvailableForReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PartialCopyWorkflowTest",
+      "test": "manualDiscardKeepsSourceAndOtherDestinationItems",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 42.5,
+  "timedOut": false
+}

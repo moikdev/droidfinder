@@ -1,0 +1,126 @@
+{
+  "actualScreenshotsInspected": true,
+  "scope": "All 18 selected dialog Surfaces and all 12 actual system-font Close glyph crops inspected. Tablet landscape, portrait, narrow tablet, light and dark, Android font 1.0 and 2.0, plus real density 240 and 300. Complete named action controls remain visible; scrolled surrounding content can be partial. Synthetic dialog pixels only.",
+  "images": [
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-light-apply-surface.png",
+      "sha256": "fca6b39dac6edd36bed7863aa233444f78a01bdfc7976f2142017f51ce9b255a"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-apply-surface.png",
+      "sha256": "55211b24a75a31cc9a5b7fccb190d27764ab50f43d1d54047c076ab1df96cf50"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-light-apply-surface.png",
+      "sha256": "1fad45d26b9b91afb42fc617e054d1b43e526ad34165d6b1275fbf661efdeb64"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-apply-surface.png",
+      "sha256": "89107b6d5912d2c312e05457bcf5a1ad1eb3c603dcc6b06e77188035c00ec980"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-apply-surface.png",
+      "sha256": "6903a7470e8f35a34b6b80a0dff4556940906aaa19fc2eee4332249cb285949b"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-apply-surface.png",
+      "sha256": "44e3a861d1f54f5324d919da701cbc5f5532201c4770dde7bf73b711a4f130f4"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-apply-surface.png",
+      "sha256": "70a8ec27fa29573c15ac6473904e8431557709f09cc6c58ae9d7f8f1f280ccd8"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-apply-surface.png",
+      "sha256": "521fe960b56ba0b0f4ac19ee42a08ce7b76f631744be2cd98a6d13d543863521"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-apply-surface.png",
+      "sha256": "148a5f166c24008d4e8628162c4c2e42a9510ccfec10b4e576426ce959bb4b21"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-apply-surface.png",
+      "sha256": "9bd6adece5981bf7ea21cb7203a2bc6c44ff6c0065a75c3d5919f1246c8309d0"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-apply-surface.png",
+      "sha256": "4bdeb6ad4495c706ed16afd752ae65e47dd14adf2e0dcf88e47aaa98fdb7fb69"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-apply-surface.png",
+      "sha256": "6837822613946b382987ad9db2064568fa641bde6915c1975185e8419db3cc03"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/display-density-240-apply-surface.png",
+      "sha256": "8c26d2aadf485cd298bb694d087e3af3a0a08a761f1b8ca9900ae23f91c31bb3"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/display-density-300-apply-surface.png",
+      "sha256": "797ab8da2cc388a028c02d0623d1aadcb9c4fa51c1347eddf4b8f82120ed2667"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-replace-surface.png",
+      "sha256": "d6f2445eabf22e47655fd69b6f20db9de7c268b1d66ecbf1ee87ab2506e1d0bb"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-trash-surface.png",
+      "sha256": "b5765ee9c6bcc1e20730d3eb3f860ac245ebf3531202028ac4f7c9f803c5117d"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-replace-surface.png",
+      "sha256": "53278880cc5db2a3e5a38e512f398cd79d935584e641216bb2cfbc8ebf6c22cb"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-trash-surface.png",
+      "sha256": "521fe960b56ba0b0f4ac19ee42a08ce7b76f631744be2cd98a6d13d543863521"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-light-empty-records-close-glyph.png",
+      "sha256": "a4c4af8a326d47909f196fc813dd91b0d192402be428e8da68e45d3e965733f5"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-light-empty-records-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font1.0-dark-empty-records-close-glyph.png",
+      "sha256": "332d62b81c62486fdd1306057eb0d13ac5155ff8ff3dc77fcf0457341fa4e952"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-1280x800-font2.0-dark-empty-records-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-light-empty-records-close-glyph.png",
+      "sha256": "29c65dc52f601eb4b18b46475d1e5047c83fa370f2799d50a69f479066079d90"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-light-empty-records-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font1.0-dark-empty-records-close-glyph.png",
+      "sha256": "908ef90eb3eee80163bf2dbc8d4640e2a145bba5417a114ea5624509090f3503"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-800x1280-font2.0-dark-empty-records-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-light-empty-records-close-glyph.png",
+      "sha256": "a4c4af8a326d47909f196fc813dd91b0d192402be428e8da68e45d3e965733f5"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-light-empty-records-close-glyph.png",
+      "sha256": "e04aa919ea7b110f8fc6845bbef10598b4bfc2328da96ac4feb912ee622f7b25"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font1.0-dark-empty-records-close-glyph.png",
+      "sha256": "332d62b81c62486fdd1306057eb0d13ac5155ff8ff3dc77fcf0457341fa4e952"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-layouts-1/layout-600x800-font2.0-dark-empty-records-close-glyph.png",
+      "sha256": "b28afe051234b650f2da925a6e8198cdcfb51b776b254b5423b017e4997dc3a3"
+    }
+  ]
+}

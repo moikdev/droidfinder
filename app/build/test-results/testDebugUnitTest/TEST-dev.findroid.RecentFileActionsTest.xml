@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.RecentFileActionsTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:18.450Z" hostname="MacBook-Pro-2.local" time="0.011">
+<testsuite name="dev.findroid.RecentFileActionsTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:17.441Z" hostname="MacBook-Pro-2.local" time="0.011">
   <properties/>
-  <testcase name="partialRedoCanResumeWithoutApplyingAnEarlierStepTwice" classname="dev.findroid.RecentFileActionsTest" time="0.002"/>
-  <testcase name="descriptionsAreBoundedWhileRetainingActualNamesAndPaths" classname="dev.findroid.RecentFileActionsTest" time="0.0"/>
+  <testcase name="partialRedoCanResumeWithoutApplyingAnEarlierStepTwice" classname="dev.findroid.RecentFileActionsTest" time="0.001"/>
+  <testcase name="descriptionsAreBoundedWhileRetainingActualNamesAndPaths" classname="dev.findroid.RecentFileActionsTest" time="0.001"/>
   <testcase name="changedFileGuardsRemainVisibleAndNeverOverwriteLaterEdits" classname="dev.findroid.RecentFileActionsTest" time="0.004"/>
   <testcase name="snapshotsKeepTheirStateAndRecordOrderWhenTheClockMovesBackwards" classname="dev.findroid.RecentFileActionsTest" time="0.001"/>
-  <testcase name="theTimelineIsBoundedAndNewActionsDiscardTheRedoBranch" classname="dev.findroid.RecentFileActionsTest" time="0.0"/>
-  <testcase name="anEmptyRecordDoesNotDestroyAnExistingRedoOrFailure" classname="dev.findroid.RecentFileActionsTest" time="0.001"/>
+  <testcase name="theTimelineIsBoundedAndNewActionsDiscardTheRedoBranch" classname="dev.findroid.RecentFileActionsTest" time="0.001"/>
+  <testcase name="anEmptyRecordDoesNotDestroyAnExistingRedoOrFailure" classname="dev.findroid.RecentFileActionsTest" time="0.0"/>
   <testcase name="clearingSessionHistoryDropsFailuresAndDoesNotReuseVisibleIds" classname="dev.findroid.RecentFileActionsTest" time="0.001"/>
   <testcase name="everyGuardRunsBeforeAnyStepChangesAFile" classname="dev.findroid.RecentFileActionsTest" time="0.001"/>
   <testcase name="partialUndoShowsItsStateAndRetryDoesNotRepeatCompletedSteps" classname="dev.findroid.RecentFileActionsTest" time="0.001"/>

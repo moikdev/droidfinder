@@ -1,0 +1,33 @@
+{
+  "serial": "emulator-5582",
+  "expectedVersionCode": 48,
+  "fromVersionCode": 47,
+  "apkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "sourceCommit": "e09fb0282ce348d373da7f96fe5a7eb12df005aa",
+  "controllerSha256": "5e29156f0240405bb7ac373cf6b6dd10c701c40724167c4c944c9e7903972e76",
+  "publicAnonymousApkBytesMatch": true,
+  "acceptanceComplete": true,
+  "restorationComplete": true,
+  "originalDataRestored": true,
+  "originalUriGrantsKept": true,
+  "publicFeedUpdateVerified": true,
+  "installedApkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "actualInstallerCompletionConfirmed": true,
+  "originalWorkspaceTreeKept": true,
+  "restoration": {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true,
+    "installedPublicApkSha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+    "fontScale": "1.0",
+    "originalEnvironmentMatchesPersistedBaseline": true,
+    "originalUriGrantsKept": true,
+    "originalStorageModeRestored": true,
+    "originalScreenSizeRestored": true,
+    "originalSizeOverrideRestored": true,
+    "restorationCheckerSha256": "e84ac7201e8a0e2018379ba0ed4330b7c9340aa707640086cb59d74f75cab79c"
+  }
+}

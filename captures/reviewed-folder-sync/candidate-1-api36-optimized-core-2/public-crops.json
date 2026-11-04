@@ -1,0 +1,86 @@
+{
+  "explicitSyntheticImages": 6,
+  "surfaceHierarchyVerified": true,
+  "actualImageInspectionRequired": true,
+  "checkerSha256": "2301c6dc1dbb914a7a2fb172e361560d62de570bf471b95efd9b0081254f0511",
+  "images": [
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/default-addition-review-surface.png",
+      "sha256": "de0a0d2f07b282b706d6de224a485f4b6de236085fbba2404d0bbc60faae9b31",
+      "surfaceBoundsPx": [
+        240,
+        67,
+        1680,
+        1120
+      ],
+      "privateRawCaptureSha256": "db67f9b9e5fad1e2b93ef8f1b5547bdd21c836691fa57ccd9f669e4c37792ffc",
+      "privateRawHierarchySha256": "28d67e00adf7102d630860197a18fbba86bd43251f295a081700ad1116c2b7ea",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/addition-finished-surface.png",
+      "sha256": "15b9bc4b452224c4ed737f10f4a856c0270b5db941374f528ef18808570658ac",
+      "surfaceBoundsPx": [
+        240,
+        355,
+        1680,
+        832
+      ],
+      "privateRawCaptureSha256": "0f519f6f4f67e5e9e9505bdbbfe40f500719e4a2709d25ad12f1393b51cc0872",
+      "privateRawHierarchySha256": "711535c909dc953a659d3b8bdb687fbaee706b6ae031d6bfaf3be6fd8893cc4d",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/independent-confirmations-surface.png",
+      "sha256": "64a3a5bb509804d84b928d7fe320027b1acc35fc7d70889f666e27492b87a438",
+      "surfaceBoundsPx": [
+        240,
+        60,
+        1680,
+        1128
+      ],
+      "privateRawCaptureSha256": "f50be26022f18e060d8f9b04585f28f235d3bbf9b7efe13a2ea28441a4b834c5",
+      "privateRawHierarchySha256": "4378196d18b80f5245619080bccf2463f15d02b86e4a4c63361fa36127bdaadf",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/confirmed-finished-surface.png",
+      "sha256": "3b8a4572aeab3fd94b82c3e026154f966f1f0b1c3506572e9846b335a29daa99",
+      "surfaceBoundsPx": [
+        240,
+        355,
+        1680,
+        832
+      ],
+      "privateRawCaptureSha256": "218ca26e9fc1b90302212bf5af7e7a9d9176e36b0e21313fbe650fafc70b9558",
+      "privateRawHierarchySha256": "0f47c6207e9daf4a474d80ff64b29a3e60acbe9c56a11bca3b158dd9caf938ac",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/cold-manual-records-surface.png",
+      "sha256": "3813c601175aa6a99ec39f74f00a8dbdc4f9bb500ade9a4ddbab2a53e851c3c9",
+      "surfaceBoundsPx": [
+        285,
+        60,
+        1635,
+        1128
+      ],
+      "privateRawCaptureSha256": "118f5fc61ae2eefefd6a63a943d1f65c5983a67410979f2cfa5463f948226aed",
+      "privateRawHierarchySha256": "4381f8c150769a5fc604086547c91b2c9ff8b062455a375fef1414dd3eb9ae5c",
+      "browserBackdropExcluded": true
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/stale-review-stopped-surface.png",
+      "sha256": "2493488055e001654e316ce0819a87179ba4bc795551a5ffef8a15067eff3274",
+      "surfaceBoundsPx": [
+        240,
+        259,
+        1680,
+        928
+      ],
+      "privateRawCaptureSha256": "e085109f2ac3bfb03b6c748e0cd15ef7cb1fe1e18bcdcac154e7cb1295b65f69",
+      "privateRawHierarchySha256": "b53edd9be42fbde31d2a3ffc2e01fb8a84b0e47eb3721e35a644ba68b751c9ea",
+      "browserBackdropExcluded": true
+    }
+  ]
+}

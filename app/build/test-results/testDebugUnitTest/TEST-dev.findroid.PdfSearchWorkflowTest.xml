@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.PdfSearchWorkflowTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:12.983Z" hostname="MacBook-Pro-2.local" time="0.01">
+<testsuite name="dev.findroid.PdfSearchWorkflowTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:11.199Z" hostname="MacBook-Pro-2.local" time="0.013">
   <properties/>
-  <testcase name="searchPublishesReadablePagesAndMakesFailuresExplicit" classname="dev.findroid.PdfSearchWorkflowTest" time="0.003"/>
-  <testcase name="cappedResultsAndIssueExamplesHaveExplicitBounds" classname="dev.findroid.PdfSearchWorkflowTest" time="0.001"/>
+  <testcase name="searchPublishesReadablePagesAndMakesFailuresExplicit" classname="dev.findroid.PdfSearchWorkflowTest" time="0.004"/>
+  <testcase name="cappedResultsAndIssueExamplesHaveExplicitBounds" classname="dev.findroid.PdfSearchWorkflowTest" time="0.003"/>
   <testcase name="stopRetainsPublishedMatchesAndRejectsALateUncancellableRead" classname="dev.findroid.PdfSearchWorkflowTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

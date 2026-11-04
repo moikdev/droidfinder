@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.PartialCopyPersistenceTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-03T23:11:12.926Z" hostname="MacBook-Pro-2.local" time="0.013">
+<testsuite name="dev.findroid.PartialCopyPersistenceTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:11.136Z" hostname="MacBook-Pro-2.local" time="0.013">
   <properties/>
   <testcase name="savedCopyMustBelongToThisSourceDestinationAndVerificationRequest" classname="dev.findroid.PartialCopyPersistenceTest" time="0.001"/>
   <testcase name="rejectsUnsupportedSavedCopySchema" classname="dev.findroid.PartialCopyPersistenceTest" time="0.001"/>
   <testcase name="rejectsPathTraversalAndForgedStageOwnership" classname="dev.findroid.PartialCopyPersistenceTest" time="0.0"/>
   <testcase name="durableOffsetAndVerificationChoiceSurviveLegacyJournalRoundTrip" classname="dev.findroid.PartialCopyPersistenceTest" time="0.002"/>
-  <testcase name="rejectsAnOffsetPastTheSourceAndNanosecondsOutOfRange" classname="dev.findroid.PartialCopyPersistenceTest" time="0.0"/>
+  <testcase name="rejectsAnOffsetPastTheSourceAndNanosecondsOutOfRange" classname="dev.findroid.PartialCopyPersistenceTest" time="0.001"/>
   <testcase name="oldJournalDefaultsToNoSavedCopyAndNoReusedBytes" classname="dev.findroid.PartialCopyPersistenceTest" time="0.001"/>
-  <testcase name="changedAndFinishingCheckpointsCannotBeTransferredByAnOldApproval" classname="dev.findroid.PartialCopyPersistenceTest" time="0.0"/>
+  <testcase name="changedAndFinishingCheckpointsCannotBeTransferredByAnOldApproval" classname="dev.findroid.PartialCopyPersistenceTest" time="0.001"/>
   <testcase name="duplicateStageOwnersCannotBeSavedByTwoJobs" classname="dev.findroid.PartialCopyPersistenceTest" time="0.0"/>
   <testcase name="manualResumeTransfersStageOwnershipInOneJournalSnapshot" classname="dev.findroid.PartialCopyPersistenceTest" time="0.002"/>
   <testcase name="malformedPayloadCannotBecomeAnEmptyAcceptedCheckpoint" classname="dev.findroid.PartialCopyPersistenceTest" time="0.001"/>

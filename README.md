@@ -6,7 +6,7 @@ Browse folders, preview documents, organize a project, and move files between lo
 
 Native Android. Kotlin and Jetpack Compose. No account required.
 
-**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.45.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
+**[Download the Android APK](https://github.com/moikdev/findroid/releases/tag/v0.46.0-preview)** · [What’s supported](PARITY.md) · [Test results](VALIDATION.md)
 
 ![Findroid on an Android tablet, with Favorites, a file list, and named Search, New folder and More controls](docs/screenshots/commands-tablet.png)
 
@@ -14,7 +14,7 @@ Native Android. Kotlin and Jetpack Compose. No account required.
 
 ## Start here
 
-1. Open the [0.45.0 release](https://github.com/moikdev/findroid/releases/tag/v0.45.0-preview) and download **`Findroid-0.45.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
+1. Open the [0.46.0 release](https://github.com/moikdev/findroid/releases/tag/v0.46.0-preview) and download **`Findroid-0.46.0-preview.apk`**. Choose the preview APK; the unsigned APK is for developers.
 2. Open it on your Android device. If Android asks, allow the app you used to download it to install apps, then confirm installation.
 3. Launch Findroid and choose where to work:
    - **Workspace** is Findroid’s private folder. Use it to try the app immediately.
@@ -171,6 +171,18 @@ Opening the window uses cached information. **Refresh access info** explicitly r
 Two panes make a simple job feel simple: keep Downloads on one side and your project folder on the other, then copy or move selected files across. Each pane keeps its own tabs, location, search, and selection.
 
 Save a named layout for a recurring task. Compare two folders when you need to see what differs, with optional file-content verification. [More about panes and layouts](docs/WORKSPACES.md).
+
+### Review folder synchronization before it runs
+
+Keep a source folder in one pane and its destination in the other. Open **More → Compare folders… → Review synchronization…** to choose a direction and see additions, changed files, conflicts and destination-only items separately.
+
+New items are selected first. Replacements and moves to Trash each need their own confirmation, and the original destination copies are preserved before replacements are published. Changed files or an occupied name stop the run for review. **Synchronization records…** keeps the recorded locations available after an interruption; opening it never retries the work.
+
+This works with separate local folders on supported storage. Workspace is the tested option on Android 11; some shared-storage filesystems reject the safe rename and leave working copies for manual review. [Supported storage, Undo and recovery](docs/REVIEWED-FOLDER-SYNC.md).
+
+![Review selected additions and independently confirm replacements or moves to Trash](docs/screenshots/reviewed-folder-sync-tablet.png)
+
+*Actual optimized Android tablet dialog, scrolled to the confirmations, with synthetic files. The browser backdrop is excluded.*
 
 ### See what will happen before changing lots of files
 

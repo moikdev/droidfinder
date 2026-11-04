@@ -1,0 +1,46 @@
+{
+  "actualScreenshotsInspected": true,
+  "scope": "Ten cropped synthetic synchronization dialogs from frozen candidate 1. Normal and enlarged composition text, complete Apply row, default choices, successful additions and stale-review stop. Actual Android system-font acceptance is recorded separately by optimized checks.",
+  "images": [
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-native/images/after-batch-003/folder-sync-qa/completed-addition.png",
+      "sha256": "bd2651ee7f71d5c60fec95f4f93b00da39965fb5966a743b0f3784ac252e61ef"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-native/images/after-batch-003/folder-sync-qa/confirmed-replacement-and-trash.png",
+      "sha256": "ba888ce7b6d2ee7314cf8f2140186ca6d6ba0304ca6345e7c37b88e56c6e0c52"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-native/images/after-batch-003/folder-sync-qa/default-choices.png",
+      "sha256": "3027d2dc157e23d03ba4ca0654b3f722649e657555104830b549f9d938108220"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-native/images/after-batch-003/folder-sync-qa/large-text-confirmation.png",
+      "sha256": "f121325bcc37976b0d0882dc2cf5a46b96e7ed032c91cdb8463a8801a2696074"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-native/images/after-batch-003/folder-sync-qa/stale-review-stopped.png",
+      "sha256": "563f02ec236b6fbe3171c05700628885d5e83f6ec28d95f3954d19e7005f5e89"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-native/images/after-batch-003/folder-sync-qa/completed-addition.png",
+      "sha256": "add46835dd77bbdb887beb30bf51bae11bead93f30b61191cee0d23c9e1ebbaf"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-native/images/after-batch-003/folder-sync-qa/confirmed-replacement-and-trash.png",
+      "sha256": "6ee978c5c69c60f9f09c5571f5eb9e3a44da98e6045e9e8f33e0df8183e3d7a7"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-native/images/after-batch-003/folder-sync-qa/default-choices.png",
+      "sha256": "0a702ef911113bf03e31fba1beb3466a12d44a964963118f0b9195f41be95051"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-native/images/after-batch-003/folder-sync-qa/large-text-confirmation.png",
+      "sha256": "8fbaf15b5763fc5ab4e294105d26dc4609c084d28c8a58a7331a2c8400434dde"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-native/images/after-batch-003/folder-sync-qa/stale-review-stopped.png",
+      "sha256": "2ab77ae133f30524588d19a6c6a67a6958d43d66a3235c175dc6aca96035dab4"
+    }
+  ]
+}

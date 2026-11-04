@@ -1,0 +1,326 @@
+{
+  "serial": "emulator-5582",
+  "checkerSha256": "c017aafc0145790a94128833db5107b01ceea6bc1c6e53a8c195f25e379b8ee7",
+  "actualRasterGlyphsLarger": true,
+  "evidence": "The native Close TextView and thresholded actual glyph pixels grow at real Android font settings 1.0 and 2.0 in all six tablet size/theme groups.",
+  "groups": [
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "theme": "light",
+      "samples": [
+        {
+          "systemFontScale": 1.0,
+          "image": "layout-1280x800-font1.0-light-empty-records-close-glyph.png",
+          "sha256": "5374d028da524bfe90d81010e8ffacb2b301c64ffb7a2de0d50e60b1c8729a2a",
+          "textBoundsPx": [
+            727,
+            672,
+            780,
+            702
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17,
+          "privateRawCaptureSha256": "5feefe9afe4259c2c36f92359110b068c43f5ef5aabc1f992c3242a70f0769bf",
+          "privateRawHierarchySha256": "fae805d3c89efed010c4b8ddbd4be8bd075420968f5555962616b5bc66fa96ff"
+        },
+        {
+          "systemFontScale": 2.0,
+          "image": "layout-1280x800-font2.0-light-empty-records-close-glyph.png",
+          "sha256": "2f78469cc18c8624251f1717727f70f4c588f1c9c41e8fcd54b1c2c37a7857d8",
+          "textBoundsPx": [
+            987,
+            754,
+            1085,
+            810
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31,
+          "privateRawCaptureSha256": "497a816fc4e3f0736944b844aa93c3e61d9d9975983f06d67ec8984d8828987b",
+          "privateRawHierarchySha256": "4fe7af70b39d2d888445a2b14a0c6ae5133988a1fffebb33074abced5751bb1d"
+        }
+      ]
+    },
+    {
+      "widthDp": 1280,
+      "heightDp": 800,
+      "theme": "dark",
+      "samples": [
+        {
+          "systemFontScale": 1.0,
+          "image": "layout-1280x800-font1.0-dark-empty-records-close-glyph.png",
+          "sha256": "c3ffc7e3e25e8ad3ab90a1b9023feca25471217dc8a78383bc8b425a7a35ab72",
+          "textBoundsPx": [
+            727,
+            672,
+            780,
+            702
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17,
+          "privateRawCaptureSha256": "5581e6b37a07f124c28aae469199745181ae6f5faffbf0a412510941275d175b",
+          "privateRawHierarchySha256": "63219101c8a2ea2a27cfd6467467b35240a7daa67a7f3eab5d0a2e3f89c8c5da"
+        },
+        {
+          "systemFontScale": 2.0,
+          "image": "layout-1280x800-font2.0-dark-empty-records-close-glyph.png",
+          "sha256": "82b853d7685f5611daac7fc8dcb80e00b825f35bd619145e7653a3cc09ec9138",
+          "textBoundsPx": [
+            987,
+            754,
+            1085,
+            810
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31,
+          "privateRawCaptureSha256": "deaf05feedd8c914fc74b46d463b323e7da9433da7db9368c654d44cf7c275bb",
+          "privateRawHierarchySha256": "c379bb35629330c4ac53141fc15465904b741dd13913197cf1518e6a19d7d242"
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "theme": "light",
+      "samples": [
+        {
+          "systemFontScale": 1.0,
+          "image": "layout-800x1280-font1.0-light-empty-records-close-glyph.png",
+          "sha256": "5374d028da524bfe90d81010e8ffacb2b301c64ffb7a2de0d50e60b1c8729a2a",
+          "textBoundsPx": [
+            466,
+            1032,
+            519,
+            1062
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17,
+          "privateRawCaptureSha256": "95956d33c3275ff1fb64945763361c65e92c86e9f860e683e7f91f8078edef89",
+          "privateRawHierarchySha256": "64f6482950d11cfab3797a2fec35a4f4aca02bcd868a6914dc8526d56b9bc415"
+        },
+        {
+          "systemFontScale": 2.0,
+          "image": "layout-800x1280-font2.0-light-empty-records-close-glyph.png",
+          "sha256": "2f78469cc18c8624251f1717727f70f4c588f1c9c41e8fcd54b1c2c37a7857d8",
+          "textBoundsPx": [
+            726,
+            1149,
+            824,
+            1205
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31,
+          "privateRawCaptureSha256": "e9363a4d60f39ee0974f3ca385a38c8c23829549372552a0eb9a89383b998063",
+          "privateRawHierarchySha256": "e4df717d09901e64bc266e1910176d176d8a2a8e47edad88b3cd3d449474ab8c"
+        }
+      ]
+    },
+    {
+      "widthDp": 800,
+      "heightDp": 1280,
+      "theme": "dark",
+      "samples": [
+        {
+          "systemFontScale": 1.0,
+          "image": "layout-800x1280-font1.0-dark-empty-records-close-glyph.png",
+          "sha256": "c3ffc7e3e25e8ad3ab90a1b9023feca25471217dc8a78383bc8b425a7a35ab72",
+          "textBoundsPx": [
+            466,
+            1032,
+            519,
+            1062
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17,
+          "privateRawCaptureSha256": "1330257bc5e46e6d046be5428d02f4922c8ab8ff7885f54b587e7a23370c9275",
+          "privateRawHierarchySha256": "69f4fd1da88b48a7076d52a7f5f893ddcb9e98627764e916427552f9340c83b9"
+        },
+        {
+          "systemFontScale": 2.0,
+          "image": "layout-800x1280-font2.0-dark-empty-records-close-glyph.png",
+          "sha256": "82b853d7685f5611daac7fc8dcb80e00b825f35bd619145e7653a3cc09ec9138",
+          "textBoundsPx": [
+            726,
+            1149,
+            824,
+            1205
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31,
+          "privateRawCaptureSha256": "6d6093e4524d7ff8c2c29d86663765c93a5557d1e95e939af01b2b6cfd28433c",
+          "privateRawHierarchySha256": "1b1a9f192cf8eeb0c77f5b8c39215eb62c19f0ad2deaec75ec466801e7ad7f6e"
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "theme": "light",
+      "samples": [
+        {
+          "systemFontScale": 1.0,
+          "image": "layout-600x800-font1.0-light-empty-records-close-glyph.png",
+          "sha256": "5374d028da524bfe90d81010e8ffacb2b301c64ffb7a2de0d50e60b1c8729a2a",
+          "textBoundsPx": [
+            466,
+            690,
+            519,
+            720
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17,
+          "privateRawCaptureSha256": "58c1e2669fa98da8e65b50a2f3c46fa48bf872f15f289906c235f54483fdf28b",
+          "privateRawHierarchySha256": "d736479e5cc835f8d62c9c80a50d2c3709df0fb6aa77bf203a6a4b2d942d6e64"
+        },
+        {
+          "systemFontScale": 2.0,
+          "image": "layout-600x800-font2.0-light-empty-records-close-glyph.png",
+          "sha256": "2f78469cc18c8624251f1717727f70f4c588f1c9c41e8fcd54b1c2c37a7857d8",
+          "textBoundsPx": [
+            726,
+            856,
+            824,
+            912
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31,
+          "privateRawCaptureSha256": "0db8e2c21f3813b785595da0191380190588651ef3f984c0d90f1117ea0f0f9a",
+          "privateRawHierarchySha256": "091048f895f28c32531c7575a5eff79ba180c12a501c0805fac423553048a50d"
+        }
+      ]
+    },
+    {
+      "widthDp": 600,
+      "heightDp": 800,
+      "theme": "dark",
+      "samples": [
+        {
+          "systemFontScale": 1.0,
+          "image": "layout-600x800-font1.0-dark-empty-records-close-glyph.png",
+          "sha256": "c3ffc7e3e25e8ad3ab90a1b9023feca25471217dc8a78383bc8b425a7a35ab72",
+          "textBoundsPx": [
+            466,
+            690,
+            519,
+            720
+          ],
+          "textWidth": 53,
+          "textHeight": 30,
+          "rasterGlyphBounds": [
+            1,
+            6,
+            53,
+            23
+          ],
+          "rasterGlyphWidth": 52,
+          "rasterGlyphHeight": 17,
+          "privateRawCaptureSha256": "360ef903e07a17e1c997d341e2b5309eac4d65901846e7eecf9fbea1da2a2217",
+          "privateRawHierarchySha256": "ccf0e2c0056449fc762495d062c0991dab471bf6a292e64cbf417a79b110297c"
+        },
+        {
+          "systemFontScale": 2.0,
+          "image": "layout-600x800-font2.0-dark-empty-records-close-glyph.png",
+          "sha256": "82b853d7685f5611daac7fc8dcb80e00b825f35bd619145e7653a3cc09ec9138",
+          "textBoundsPx": [
+            726,
+            856,
+            824,
+            912
+          ],
+          "textWidth": 98,
+          "textHeight": 56,
+          "rasterGlyphBounds": [
+            2,
+            11,
+            97,
+            42
+          ],
+          "rasterGlyphWidth": 95,
+          "rasterGlyphHeight": 31,
+          "privateRawCaptureSha256": "f2b36a7fc68feeb8bb3c82fcffc288b3a6a77f9adddcb927979f7b4daf8db62c",
+          "privateRawHierarchySha256": "6eb4267f5bd6b210cb3d5d538a4f2ceab320bd633fcaed0d6ebba56b90853788"
+        }
+      ]
+    }
+  ]
+}

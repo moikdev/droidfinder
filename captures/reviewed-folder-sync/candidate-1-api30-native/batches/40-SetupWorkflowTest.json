@@ -1,0 +1,99 @@
+{
+  "success": true,
+  "passed": 17,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "providerLoadingResultsAreNeverTreatedAsCompleteMappings",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "anOpaqueReferenceWithoutRelativeNamesIsKeptForRepair",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "malformedAndFutureBackupsLeaveTheWholeSetupIntact",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "reviewedMergeRemapsAllSectionsAndKeepsOriginalFilesAndCurrentPreferences",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "overviewExplainsSetupScopeAndExportsAReadablePortableBackup",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "aStaleSetupReviewRefusesToOverwriteAChangedPreference",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "replacePreferencesHasAReviewAndSurvivesARereadFromDisk",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "reviewedSetupRemapsExactSearchExclusionsInSmartFoldersAndWorkspaceBudgets",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "closingAnUnappliedReviewDoesNotPersistAnyImportedMetadata",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "grantLossAfterReviewRequiresAFreshAvailabilityReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "previousSetupCanBeReviewedAndRestoredWithoutGuessingRoots",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "missingReferencesRequireAnExplicitKeepChoiceBeforeRestore",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "replacementFolderPickerAcceptsTheActualTouchChoice",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "ambiguousProviderNamesStayUnmappedForIndividualRepair",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "readOnlyProviderMappingUsesExistingDocumentIdsAndNeedsNoWriteGrant",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "restoredTabsOpenOnlyWhenRequestedAfterTheRestore",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.SetupWorkflowTest",
+      "test": "choosingOnlySidebarDoesNotChangeTagsWorkspacesPresetsOrTheme",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 54.2,
+  "timedOut": false
+}

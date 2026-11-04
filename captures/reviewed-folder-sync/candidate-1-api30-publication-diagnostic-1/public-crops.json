@@ -1,0 +1,21 @@
+{
+  "explicitSyntheticImages": 1,
+  "surfaceHierarchyVerified": true,
+  "actualImageInspectionRequired": true,
+  "checkerSha256": "2301c6dc1dbb914a7a2fb172e361560d62de570bf471b95efd9b0081254f0511",
+  "images": [
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-publication-diagnostic-1/unsupported-shared-storage-stopped-surface.png",
+      "sha256": "0362db172b8256b79fc2885fd370f4ad6112b66d1807eaef1ce125e1d298ba1b",
+      "surfaceBoundsPx": [
+        240,
+        151,
+        1680,
+        1012
+      ],
+      "privateRawCaptureSha256": "fa49297c1ce89013a84baaf2e9ffae65b15f9c9c4c8933a30e64f2f02686822d",
+      "privateRawHierarchySha256": "8e7c9e43794ff83e559be2bc5bb53fb39d6027df70e106c66aa8a314c3cb3a0e",
+      "browserBackdropExcluded": true
+    }
+  ]
+}

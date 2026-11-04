@@ -1,0 +1,54 @@
+{
+  "actualScreenshotsInspected": true,
+  "scope": "Twelve exact optimized-candidate synthetic dialog Surfaces. Complete named confirmation/result controls, defaults, source/destination paths, manual records and stopped stale review. The dimmed original browser backdrop is excluded.",
+  "images": [
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-core-2/addition-finished-surface.png",
+      "sha256": "46efae32e04569555af978f05b9e38198b5e1545cec22bb8b18bd80312fd7ba3"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-core-2/cold-manual-records-surface.png",
+      "sha256": "55759573dedf5f96cae74a4ae79e9e1b68676d479d85ff3b9c0c8a1be8a333d1"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-core-2/confirmed-finished-surface.png",
+      "sha256": "0a2bfc0f645e363f41691aa83823a47f8ae300300701f904b601745f6ffe255f"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-core-2/default-addition-review-surface.png",
+      "sha256": "bd5a677bbf285847c87f82736b2ec81816cb470937b127acffa8a5c7c788512a"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-core-2/independent-confirmations-surface.png",
+      "sha256": "ac7b76ca1a678e76253abe4e7061e7ed6ca2086f96e32cca5d39f7175e7fbc15"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api30-optimized-core-2/stale-review-stopped-surface.png",
+      "sha256": "34c194110efc2770864bf023606562101bd182be6b35100083214113f07cd43f"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/addition-finished-surface.png",
+      "sha256": "15b9bc4b452224c4ed737f10f4a856c0270b5db941374f528ef18808570658ac"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/cold-manual-records-surface.png",
+      "sha256": "3813c601175aa6a99ec39f74f00a8dbdc4f9bb500ade9a4ddbab2a53e851c3c9"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/confirmed-finished-surface.png",
+      "sha256": "3b8a4572aeab3fd94b82c3e026154f966f1f0b1c3506572e9846b335a29daa99"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/default-addition-review-surface.png",
+      "sha256": "de0a0d2f07b282b706d6de224a485f4b6de236085fbba2404d0bbc60faae9b31"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/independent-confirmations-surface.png",
+      "sha256": "64a3a5bb509804d84b928d7fe320027b1acc35fc7d70889f666e27492b87a438"
+    },
+    {
+      "path": "captures/reviewed-folder-sync/candidate-1-api36-optimized-core-2/stale-review-stopped-surface.png",
+      "sha256": "2493488055e001654e316ce0819a87179ba4bc795551a5ffef8a15067eff3274"
+    }
+  ]
+}

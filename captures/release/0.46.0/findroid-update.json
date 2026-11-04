@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 48,
+  "versionName": "0.46.0-preview",
+  "apkName": "Findroid-0.46.0-preview.apk",
+  "bytes": 8843048,
+  "sha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.46.0-preview/Findroid-0.46.0-preview.apk",
+  "notes": "Reviewed folder synchronization: compare complete local folders, choose one direction, review additions, replacements, conflicts and destination-only items separately, then apply only your choices. Hidden files and complete new subtrees are disclosed. Replacements and destination-only Trash moves require separate confirmations and preserve originals before publishing.\n\nTags, folder appearance and original references follow verified changes. Completed additions support eligible saved Undo; runs with replacements or metadata-aware Trash moves keep Undo for this app session. Originals and manual synchronization records remain available after restart. Replacements and Trash moves require the same filesystem as Findroid\u2019s Trash. Changed reviews, collisions and interrupted work stop for manual review; no automatic replay or cleanup runs.\n"
+}

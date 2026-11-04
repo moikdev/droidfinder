@@ -1,6 +1,21 @@
 # Android preview verification
 
 
+## Findroid 0.46.0 — review before synchronizing
+
+Local and actual public OTA acceptance completed on November 4, 2026. Independent immutable-archive verification is still pending, so proposal 43 is not yet counted as complete.
+
+- **851 JVM cases pass**, with zero failures, errors or skips. Lint: **0 errors / 147 warnings / 12 hints**. The candidate pins **377 source inputs and 99 build/report outputs**. `BUILDINFO.json` honestly records generated tracked reports as a dirty tree; complete source bindings prove every application input matches the public source commit, including the declared Windows batch-file CRLF checkout transformation.
+- Both tablets pass the same **505 distinct native cases in 55 fresh-process batches**, with zero failures or skips in the accepted cases. The 20 focused synchronization cases are a subset. Three API30 batches passed unchanged whole-batch retries after UI waits failed; their earlier receipts remain excluded and retained.
+- Both exact optimized previews pass five core checks: direct **0.45/code47 → 0.46/code48** upgrade, additions with existing destination originals kept, independently confirmed replacement/Trash preservation, cold read-only record review and stale-name refusal.
+- Each tablet passes preparation death, partial-publication death, cancellation and all-files access revocation followed by an explicit force-stop. The access-loss check does not measure an automatic permission-gate stop. Source bytes, completed publication bytes, cold manual review and unchanged trees/records/journals pass. Each accepted publication interruption retains **one of 160** published files. API30 uses Workspace; an emulator root command observes only that synthetic fixture while the app remains unprivileged. API36 uses shared storage.
+- Each tablet passes **12 layouts** across 1280×800, 800×1280 and 600×800 dp, system fonts 1.0/2.0 and light/dark, plus real **240/300 dpi** changes. Interacted named controls have complete 48 dp targets. Both confirmation labels enlarge; actual native Close TextView and raster glyph dimensions grow in every size/theme group. All **91 selected local image paths**, the separately inspected README duplicate and **12 public OTA images** were viewed: **104 image paths**, not 104 distinct visual states.
+- API30 shared storage rejects atomic no-replace publication with EINVAL. The actual optimized stop keeps all **160 source files, 160 prepared copies and the manual run/move records**, with **zero destination publications**. This is an unsupported-filesystem diagnostic, separate from successful Workspace publication acceptance. No broader filesystem/OEM support is inferred.
+- All five initial public assets match anonymous download bytes and GitHub digests. Both tablets pass the real public download and Android installer **47→48** upgrade, retained synthetic file bytes/Favorite/sentinel, and no repeat offer. The first API36 OTA attempt timed out before opening More; the unchanged whole retry passed. Final restoration checks all **495 API30 / 443 API36** managed files/absences, original Workspace trees, URI grants, storage/font/display settings and size overrides; both finish with the exact public 0.46 APK.
+- Preview and unsigned native-library sets each cover four ABIs with at least **16 KiB** load-segment and ZIP alignment. Signing matches public 0.45. Preview: **8,843,048 bytes**, SHA-256 `d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2`. Frozen application/native source: `e09fb0282ce348d373da7f96fe5a7eb12df005aa`.
+
+Rejected core, popup-boundary, passive-notice and unsupported-storage attempts are retained and excluded. The API36 popup checker permits one physical pixel of accessibility-window rounding at fractional density while keeping exact 48 dp targets and scroll containment. No application source or frozen output changed for those retries. The [guide](docs/REVIEWED-FOLDER-SYNC.md) explains local-storage, Undo and manual recovery limits. The immutable archive is the remaining publication step.
+
 ## Findroid 0.45.0 — Undo after reopening
 
 Local, actual public OTA and independent immutable archive acceptance completed on November 4, 2026. Proposal 42 is implemented.

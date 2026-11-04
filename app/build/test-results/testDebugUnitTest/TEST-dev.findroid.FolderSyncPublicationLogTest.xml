@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.FolderSyncPublicationLogTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-04T02:01:09.179Z" hostname="MacBook-Pro-2.local" time="0.279">
+  <properties/>
+  <testcase name="anUnfinishedIntentBlocksAnotherMutationOrCompletionOfTheRun" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.037"/>
+  <testcase name="redirectedJournalParentsAndLinkedRecordsAreRefused" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.023"/>
+  <testcase name="reopeningNeverReusesOrTruncatesAnExistingJournal" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.016"/>
+  <testcase name="invalidOwnersAndRelativeMutationPathsAreRefusedWithoutInventingRecords" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.009"/>
+  <testcase name="aPartialIntentWriteIsRetainedAndBlocksLaterWrites" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.012"/>
+  <testcase name="originalPreservationRecordsTheExactOriginalAndRecoveryPathsWithoutMovingAnything" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.033"/>
+  <testcase name="aJournalCannotBeCreatedInsideTheReviewedOrWorkingTree" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.001"/>
+  <testcase name="aPreservationCannotBeCompletedAsAPublicationOrInterleavedWithAnotherMove" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.057"/>
+  <testcase name="anIntentReadbackMismatchBlocksPublicationAndPreservesTheBadRecord" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.033"/>
+  <testcase name="changedAndUnexpectedRecordsStopWithoutDeletingThem" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.019"/>
+  <testcase name="creationAndCompletedPublicationsKeepEveryImmutableRecord" classname="dev.findroid.FolderSyncPublicationLogTest" time="0.038"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

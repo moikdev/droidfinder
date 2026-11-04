@@ -1,0 +1,44 @@
+{
+  "release": "v0.46.0-preview",
+  "sourceCommit": "e09fb0282ce348d373da7f96fe5a7eb12df005aa",
+  "allSelectedPublicBytesAndDigestsMatch": true,
+  "publicTagMatchesBuildInfo": true,
+  "artifacts": [
+    {
+      "name": "Findroid-0.46.0-preview.apk",
+      "bytes": 8843048,
+      "sha256": "d394b2b078da375335057baa349a01c2db58388a6463f3b15f8e0475f848a0d2",
+      "anonymousBytesIdentical": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "Findroid-0.46.0-unsigned.apk",
+      "bytes": 8834840,
+      "sha256": "588de8208e5ec714d8ff6e63bf165c6e938df4e1952fe22da6083c6ee3a878d5",
+      "anonymousBytesIdentical": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "findroid-update.json",
+      "bytes": 1221,
+      "sha256": "859c0633c34cd04d75f1fd76e4b3f23aeecf0aaf2d49e5acf37c18f456c01283",
+      "anonymousBytesIdentical": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 189,
+      "sha256": "72710d543537d955306665ef173361a785e06cd7672a6c4b458bf1a440395894",
+      "anonymousBytesIdentical": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "BUILDINFO.json",
+      "bytes": 600,
+      "sha256": "69c7703ecdde14859125b2f4996d0ac10f0e2d87f13e0091d66dc1b997a31e7e",
+      "anonymousBytesIdentical": true,
+      "githubDigestMatches": true
+    }
+  ],
+  "checkerSha256": "c02a901618fba171bf83760a884353fcdb67c5fc28d7c327172ae16eb7789226"
+}
