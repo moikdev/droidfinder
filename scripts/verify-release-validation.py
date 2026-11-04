@@ -68,6 +68,7 @@ def main():
         assert set(names)=={'EVIDENCE.json',*rows}
         application_tree = source_tree(manifest['applicationSourceCommit'])
         native_tree = source_tree(manifest['nativeTestSourceCommit'])
+        evidence_tree = source_tree(manifest['evidenceCommit'])
         native_paths = {path for path in native_tree if path.startswith('app/src/androidTest/')}
         assert native_paths and native_paths=={path for path in application_tree if path.startswith('app/src/androidTest/')}
         assert all(native_tree[path]==application_tree[path] for path in native_paths),'Native source bytes differ'
@@ -77,6 +78,7 @@ def main():
             assert parts.suffix not in {'.apk','.jks','.keystore','.bin','.db','.sqlite'} and 'bugreport' not in parts.name
             payload = archive.read(path)
             assert len(payload)==row['bytes'] and hashlib.sha256(payload).hexdigest()==row['sha256'],path
+            assert evidence_tree.get(path)==git_blob(payload),('Archived evidence differs from its public commit',path)
             if path.startswith('app/src/') or path in {'app/build.gradle.kts','build.gradle.kts','settings.gradle.kts','gradle.properties'}:
                 assert application_tree.get(path)==git_blob(payload),('Archived source bytes differ',path)
         sources = {path for path in application_tree if path.startswith('app/src/') and
@@ -128,7 +130,7 @@ def main():
         assert re.fullmatch(r'[0-9a-f]{40}',manifest['evidenceCommit'])
     report = dict(release=args.tag,archive=name,bytes=len(data),sha256=digest,entries=len(names),
         anonymousDownloadMatchesLocal=bool(args.archive),githubDigestMatches=True,allManifestEntriesVerified=True,
-        archivedSourcesMatchPublicCommit=True,nativeSourcesIdenticalAcrossRecordedCommits=True,
+        archivedSourcesMatchPublicCommit=True,evidenceSnapshotMatchesPublicCommit=True,nativeSourcesIdenticalAcrossRecordedCommits=True,
         recordedJvmAndNativeTotalsVerified=True,
         **{key:manifest[key] for key in ('applicationSourceCommit','nativeTestSourceCommit','evidenceCommit')},
         verificationScript='scripts/verify-release-validation.py',

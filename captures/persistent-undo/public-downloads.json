@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-04",
+  "release": "v0.45.0-preview",
+  "public": true,
+  "sourceCommit": "bbdf2b8ca4463a42d01f24c1000853dd36aa8f66",
+  "assets": [
+    {
+      "name": "Findroid-0.45.0-preview.apk",
+      "bytes": 8728364,
+      "sha256": "5e78fe383a3bff1cec6f2ad1cd94fa25ea980a649156543aa6234d12fcf84f06",
+      "publicDownloadMatchesLocal": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "Findroid-0.45.0-unsigned.apk",
+      "bytes": 8720152,
+      "sha256": "c8be64221c10b5713d58a66ef01c1bf7d5e2f81a4e9d5230442e000bfa5a90bc",
+      "publicDownloadMatchesLocal": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "BUILDINFO.json",
+      "bytes": 601,
+      "sha256": "d54dd7c32b5872c26756edc0d6fdb1f3796bbe4996a326d331bf3a8a47cf435e",
+      "publicDownloadMatchesLocal": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 189,
+      "sha256": "7ba94e51c5cfd2c79ed6ec095287323dc7f0203543f3ea424d0868a565718c77",
+      "publicDownloadMatchesLocal": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "findroid-update.json",
+      "bytes": 707,
+      "sha256": "9f6dd73c501ca3de78b354f6b12c679de91a373989734be3c48ecccf553fc949",
+      "publicDownloadMatchesLocal": true,
+      "githubDigestMatches": true
+    }
+  ]
+}

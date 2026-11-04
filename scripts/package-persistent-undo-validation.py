@@ -23,6 +23,7 @@ SCRIPTS=('scripts/check-persistent-undo.py','scripts/package-persistent-undo-val
          'captures/persistent-undo/private-native-state.py','captures/persistent-undo/native-reset.py','captures/persistent-undo/after-native.py',
          'captures/persistent-undo/check-public-privacy.py','captures/persistent-undo/check-snackbar-save-gate.py',
          'captures/persistent-undo/verify-public.py','captures/persistent-undo/restore-public-tablets.py',
+         'captures/persistent-undo/run-public-acceptance.py','captures/persistent-undo/check-system-font.py',
          'captures/persistent-undo/check-live-feed.py','captures/persistent-undo/run-final-acceptance.py','captures/persistent-undo/check-build-artifacts.py','captures/persistent-undo/derive-focused.py')
 OPT_REQUIRED=('success','operationsUseExactOptimizedApk','freshAndroidHierarchies','originalEnvironmentPersistedBeforeMutation',
     'directPreviousPublicUpgrade','actualOptimizedProcessDeath','restartStartsNoAction','copyRenameTrashSaved',
@@ -142,6 +143,17 @@ def local():
         assert {(r['widthDp'],r['heightDp'],r['fontScale'],r['dark']) for r in layouts}=={(w,h,s,d) for w,h in ((1280,800),(800,1280),(600,800)) for s in (1.0,1.5,2.0) for d in (False,True)}
         assert all(r['allNamedControlsReachable'] for r in layouts)
         check_layout_captures(opt_dir,layouts)
+        font_path=PROOF/(api+'-system-font.json');font=read(font_path)
+        assert font['serial']==serial and font['actualRasterGlyphsLarger'] and len(font['groups'])==6
+        assert {(g['widthDp'],g['heightDp'],g['theme']) for g in font['groups']}=={(w,h,t) for w,h in ((1280,800),(800,1280),(600,800)) for t in ('light','dark')}
+        assert font['checkerSha256']==sha(PROOF/'check-system-font.py')
+        for group in font['groups']:
+            samples=group['samples'];assert [r['fontScale'] for r in samples]==[1.0,1.5,2.0]
+            for row in samples:
+                assert sha(PROOF/row['image'])==row['sha256'] and sha(PROOF/row['captureXml'])==row['captureXmlSha256']
+            for metric in ('textWidth','textHeight','rasterGlyphWidth','rasterGlyphHeight'):
+                assert samples[0][metric]<samples[1][metric]<samples[2][metric] and samples[2][metric]/samples[0][metric]>=1.2
+        files.append(font_path)
         captures=list(opt_dir.glob('*.png'));assert captures;screens+=captures
         files += [path for path in opt_dir.iterdir() if path.is_file() and path.suffix in ('.png','.xml','.json')]
         for name in ('completed','reopened-no-action','undo-after-0','undo-after-1','undo-after-2',
@@ -167,6 +179,15 @@ def local():
     for label,row in zip(('previous','preview'),signing['artifacts']):
         log=PROOF/(label+'-apksigner.txt');assert sha(log)==row['signatureLogSha256'];files.append(log)
     files.append(PROOF/'signing-continuity.json')
+    attempts=read(PROOF/'acceptance-attempts.json');assert attempts['canonicalCountsExcludeRejectedAttempts']
+    for row in [attempts['archiveFirstAttempt'],attempts['unchangedAcceptedArchiveRetry'],*attempts['api36DeviceRecovery']['records'],*attempts['canonical']]:
+        assert sha(ROOT/row['path'])==row['sha256']
+    assert attempts['api36DeviceRecovery']['noDataWipeOrSnapshotLoad'] and not attempts['api36DeviceRecovery']['forcedHostStopRequired']
+    for name in ('native-visual-review.json','acceptance-attempts.json','api36-force-stop-stall-readonly.json',
+                 'api36-controller-recovery-2.json','api36-controller-recovery-3.json','local-restored-public-tablets.json',
+                 'after-local-display-restoration.txt','api36-native-batches/06-ArchiveWorkflowTest-before-retry-1.json',
+                 'api36-native-batches/06-ArchiveWorkflowTest-before-retry-1.txt'):
+        files.append(PROOF/name)
     return files,expected
 
 
@@ -200,19 +221,25 @@ def main():
     assert all(r['publicDownloadMatchesLocal'] and r['githubDigestMatches'] for r in public['assets'])
     live=read(PROOF/'api36-live-feed.json');successful(live);assert live['passed']==1 and live['downloadedVersionCode']==47 and live['downloadedApkSha256']==expected
     restored=read(PROOF/'restored-public-tablets.json');assert len(restored)==2
-    assert all(r['originalManagedMetadataDatabasesAndCacheRestored'] and r['originalFileAbsencesRestored'] and r['installedPublicApkSha256']==expected and r['originalEnvironmentMatchesPersistedBaseline'] for r in restored)
+    assert all(r['originalManagedMetadataDatabasesAndCacheRestored'] and r['originalFileAbsencesRestored'] and r['installedPublicApkSha256']==expected and r['originalEnvironmentMatchesPersistedBaseline'] and r['originalScreenSizeRestored'] and r['originalSizeOverrideRestored'] and r['restorationCheckerSha256']==sha(PROOF/'restore-public-tablets.py') for r in restored)
     provenance=read(PROOF/'docs-screenshot-provenance.json');assert provenance['actualOptimizedScreenshots']
     for row in provenance['images']:
         capture=ROOT/row['capturePath'];document=ROOT/row['documentPath']
         assert capture.is_relative_to(PROOF) and sha(capture)==sha(document)==row['sha256'];files.append(document)
     assert read(PROOF/'signing-continuity.json')['sameSigningCertificate']
-    for name in ('public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','docs-screenshot-provenance.json','signing-continuity.json','public-privacy-review.json','local-acceptance.json'):
+    for name in ('public-downloads.json','api36-live-feed.json','api36-live-feed.txt','restored-public-tablets.json','docs-screenshot-provenance.json','signing-continuity.json','public-privacy-review.json','publication-allowlist.json','local-acceptance.json'):
         files.append(PROOF/name)
     files=sorted(set(files));relative=[str(path.relative_to(ROOT)) for path in files]
     for path in files:
         assert path.is_file() and not any('PRIVATE' in part or 'private-native-screenshots' in part or part in ('private-native-state','candidate-build','candidate-build-2','candidate-build-3','candidate-build-4','candidate-build-5','candidate-build-6','accepted-build','private-native-screenshots') for part in path.parts)
         assert path.suffix not in ('.apk','.tar','.db','.sqlite','.keystore','.jks','.bin')
     if a.list_files:print(json.dumps(relative,indent=2));return
+    allowlist=PROOF/'publication-allowlist.json';privacy=read(PROOF/'public-privacy-review.json')
+    assert read(allowlist)==relative
+    assert privacy['explicitAllowlistChecked'] and privacy['privateRecoveryFilesExcluded'] and privacy['literalIdentifierMatches']==0
+    assert privacy['publicationAllowlistSha256']==sha(allowlist) and privacy['publishedFilesChecked']==len(relative)
+    assert privacy['privacyCheckerSha256']==sha(PROOF/'check-public-privacy.py')
+    assert privacy['publishedTextFilesChecked']==sum(path.suffix.lower() not in ('.png','.jpg','.jpeg','.webp','.gif') for path in files)
     assert a.output is not None and not a.output.exists(), 'Never overwrite an immutable archive'
     assert not git('status','--porcelain').strip(), 'Commit the exact source and evidence snapshot first'
     commit=git('rev-parse','HEAD').decode().strip()

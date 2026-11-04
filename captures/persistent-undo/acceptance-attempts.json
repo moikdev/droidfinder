@@ -1,0 +1,66 @@
+{
+  "canonicalCountsExcludeRejectedAttempts": true,
+  "archiveFirstAttempt": {
+    "path": "captures/persistent-undo/api36-native-batches/06-ArchiveWorkflowTest-before-retry-1.json",
+    "sha256": "a9e9483ae27d033c0de8bc1dd309515541fd1e5c0d0ffb802eb12114a2b95ea9",
+    "log": {
+      "path": "captures/persistent-undo/api36-native-batches/06-ArchiveWorkflowTest-before-retry-1.txt",
+      "sha256": "b39fe05cecd05631386d3beca3b5c86facf9587ae682d13c82397f3e70a85071"
+    },
+    "passed": 5,
+    "failed": 1,
+    "explanation": "One archive UI condition exceeded its existing 10000 ms wait; cause undetermined."
+  },
+  "unchangedAcceptedArchiveRetry": {
+    "path": "captures/persistent-undo/api36-native-batches/06-ArchiveWorkflowTest.json",
+    "sha256": "7d8c1f87d94a62697a12e6ae455766ebcdb3c864a4673569613d02d66be5de45",
+    "passed": 6
+  },
+  "api36DeviceRecovery": {
+    "gracefulHostShutdown": true,
+    "forcedHostStopRequired": false,
+    "officialSdkLauncherSucceeded": true,
+    "sameExistingAvdAndOptions": true,
+    "noDataWipeOrSnapshotLoad": true,
+    "resumedOnlyOutstandingBatch": true,
+    "originalControllerReservationReleased": true,
+    "cause": "Undetermined; no app, renderer or hardware attribution.",
+    "records": [
+      {
+        "path": "captures/persistent-undo/api36-force-stop-stall-readonly.json",
+        "sha256": "0e3bed0eca1bfe7b229f35acf3144948168196bb6f40d13801df3f2a176aab12"
+      },
+      {
+        "path": "captures/persistent-undo/api36-controller-recovery-2.json",
+        "sha256": "da980dd76aafe26e7c5de9bd54fe334a37b52fb25b1f59b4f1b50a443f47b5be"
+      },
+      {
+        "path": "captures/persistent-undo/api36-controller-recovery-3.json",
+        "sha256": "134e6a60726f9d16f422b6fd165a08f9171f5c2e3fc6fafa055c3405ac241eae"
+      }
+    ]
+  },
+  "displacedWrappers": "The original archive-failing driver and the stopped native worker returned nonzero. Their finalizers/restoration were collected. These are not successful acceptance receipts.",
+  "canonical": [
+    {
+      "path": "captures/persistent-undo/api30-regression.json",
+      "sha256": "d65f38a3d773d54422edd221d79658d6ef2b0b19581d039afc2be9ea3bd5d671",
+      "nativeCases": 485,
+      "isolatedBatches": 52,
+      "optimized": {
+        "path": "captures/persistent-undo/api30-optimized/verification.json",
+        "sha256": "555d8e4e761b9a92a541caa2c707893bc859813374c5051e922571880861caf0"
+      }
+    },
+    {
+      "path": "captures/persistent-undo/api36-regression.json",
+      "sha256": "4be56a158a5b6cddff1c06fc0c3b26248546baa6557301edc05b1bcba864d4e5",
+      "nativeCases": 485,
+      "isolatedBatches": 52,
+      "optimized": {
+        "path": "captures/persistent-undo/api36-optimized/verification.json",
+        "sha256": "0cb5246e2243d8604b2bf9d8603ebfa694a4a6b268cd563f56c5383f2ca18206"
+      }
+    }
+  ]
+}

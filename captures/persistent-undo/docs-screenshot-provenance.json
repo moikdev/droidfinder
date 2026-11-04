@@ -1,0 +1,30 @@
+{
+  "actualOptimizedScreenshots": true,
+  "images": [
+    {
+      "capturePath": "captures/persistent-undo/api36-optimized/reopened-saved.png",
+      "documentPath": "docs/screenshots/persistent-undo-tablet.png",
+      "sha256": "74611c1ce935edecd85bb4183d337b35968cabe63543978ecaa182c6dc66609e"
+    },
+    {
+      "capturePath": "captures/persistent-undo/api36-optimized/occupied-destination.png",
+      "documentPath": "docs/screenshots/persistent-undo-guarded.png",
+      "sha256": "15a99e47761b2e143320070696e48953675faa4aa622a882fba128903dc09d0d"
+    },
+    {
+      "capturePath": "captures/persistent-undo/api36-optimized/damaged-review.png",
+      "documentPath": "docs/screenshots/persistent-undo-review.png",
+      "sha256": "7a5622c3e813f1fa835255cbb4d4bfd85eee88c13f0e775360e71fabc7442175"
+    },
+    {
+      "capturePath": "captures/persistent-undo/api36-optimized/review-600x800-font2.0-dark-Confirm.png",
+      "documentPath": "docs/screenshots/persistent-undo-reset-large-text.png",
+      "sha256": "21eaa76efa63a14fcbbd810b68e82429b9aef056674b92d256bba34d68b4e798"
+    },
+    {
+      "capturePath": "captures/persistent-undo/api36-ota/up-to-date.png",
+      "documentPath": "docs/screenshots/app-updates-045.png",
+      "sha256": "63831b547898f61336937ec69ad0eaeb52fbda687482188252ad1db985a1e357"
+    }
+  ]
+}

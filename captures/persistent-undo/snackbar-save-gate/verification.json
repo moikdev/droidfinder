@@ -1,0 +1,37 @@
+{
+  "oldAppSha256": "d86f68bfb3012a129e54d0fb921e52d2c1fe0452e4f7722d9ecd9f4c46c16ee3",
+  "newAppSha256": "0ff23029143741e7cf0f2570674af526bcf31737281e8bc79a409bf8aaa0ba3f",
+  "testApkSha256": "d53071c341082062798fa058845868fbec909c83feb51c0efeb511e6472cc20e",
+  "regressionReproducedAndCorrected": true,
+  "tablets": [
+    {
+      "serial": "emulator-5602",
+      "oldAppPrematureActionReproduced": true,
+      "newAppHoldsActionUntilSaveCompletes": true,
+      "results": [
+        {
+          "stage": "old",
+          "report": "captures/persistent-undo/snackbar-save-gate/api30-old.json",
+          "appSha256": "d86f68bfb3012a129e54d0fb921e52d2c1fe0452e4f7722d9ecd9f4c46c16ee3"
+        },
+        {
+          "stage": "new",
+          "report": "captures/persistent-undo/snackbar-save-gate/api30-new.json",
+          "appSha256": "0ff23029143741e7cf0f2570674af526bcf31737281e8bc79a409bf8aaa0ba3f"
+        }
+      ]
+    },
+    {
+      "serial": "emulator-5582",
+      "oldAppPrematureActionReproduced": false,
+      "newAppHoldsActionUntilSaveCompletes": true,
+      "results": [
+        {
+          "stage": "new",
+          "report": "captures/persistent-undo/snackbar-save-gate/api36-new.json",
+          "appSha256": "0ff23029143741e7cf0f2570674af526bcf31737281e8bc79a409bf8aaa0ba3f"
+        }
+      ]
+    }
+  ]
+}

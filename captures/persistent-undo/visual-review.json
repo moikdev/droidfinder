@@ -1,0 +1,849 @@
+{
+  "actualScreenshotsInspected": true,
+  "imageFiles": 210,
+  "claimOf210UniqueVisualStates": false,
+  "inspection": "All 18 optimized layout sheets and workflow sheets per API were inspected, with full-resolution occupied-destination, damaged-review and narrow system-font2.0 confirmation images. Native crops were inspected separately. API30 checkpoint hashes were checked before combining.",
+  "largeTextEvidence": "Actual optimized Android system font settings, TextView bounds and raster glyph measurements. Native large-text-reset is pixel-identical to reset-review and is not enlarged-text evidence.",
+  "images": [
+    {
+      "path": "api30-native-images/changed-file.png",
+      "sha256": "9ff3acc5ca88c3a2133af5f54bad7b427ea3af0d7b9a119082d1f87da51d625e"
+    },
+    {
+      "path": "api30-native-images/interrupted-review.png",
+      "sha256": "8a9de82e03ea1e838e00d0c0216232e8404806b5354d0c4685dc8465025d805d"
+    },
+    {
+      "path": "api30-native-images/large-text-reset.png",
+      "sha256": "e1c19535e0002bfcf17b1d87d07876452301838e74255034180333c67b389fad"
+    },
+    {
+      "path": "api30-native-images/reset-review.png",
+      "sha256": "e1c19535e0002bfcf17b1d87d07876452301838e74255034180333c67b389fad"
+    },
+    {
+      "path": "api30-native-images/saved.png",
+      "sha256": "2be42e7367aef762c5a959f4efd2d181525e0b3de39b84a6f680c545207587e6"
+    },
+    {
+      "path": "api30-native-images/session-boundary.png",
+      "sha256": "d46a95489a70499325d6b137370b2d1781759113c0b8ab8ee4c991dceb41be18"
+    },
+    {
+      "path": "api30-optimized/copy-saved.png",
+      "sha256": "1513d989f8ae8ce36c7c0cb7be7a5728970d6394b6bff0c6df3565630badfe9f"
+    },
+    {
+      "path": "api30-optimized/damaged-review.png",
+      "sha256": "681d332e67fb792298bb04349b53eac971fca786a48aef83d200652f52e35ed6"
+    },
+    {
+      "path": "api30-optimized/occupied-destination.png",
+      "sha256": "27336eb077b5c6292dc2fdadf1c0b013a824aa35981154356628575073dc26ab"
+    },
+    {
+      "path": "api30-optimized/previous-public-sidebar.png",
+      "sha256": "96d98604421a758de425881726f667c285738f5a287cd1349ee99779a0c0f116"
+    },
+    {
+      "path": "api30-optimized/rename-saved.png",
+      "sha256": "33af1d5fc2b1e952555565b505727988fb8704289389a5f9e6cfb1734d66dddc"
+    },
+    {
+      "path": "api30-optimized/reopened-saved.png",
+      "sha256": "abec1b29649a143dab924da7a062810f5ef1eca535905aa573b0f875f8dd3abc"
+    },
+    {
+      "path": "api30-optimized/reset-completed.png",
+      "sha256": "1afa0a4a83d06b4fe806d6a723748213aae1a1d090d581df6fb836c624837621"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Close.png",
+      "sha256": "f6783df0a8197e02908d1ec2bdedcd85f61643f3f87906785a751a0958a04ad8"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Confirm.png",
+      "sha256": "04a26fee4664a899043f93f85f011271c8c77bd14b59a34e421428eb4a1c1106"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Keep.png",
+      "sha256": "04a26fee4664a899043f93f85f011271c8c77bd14b59a34e421428eb4a1c1106"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Reset.png",
+      "sha256": "3c3d73d991a12c853e98225ffa0e6781ac4a841c1de0b1bbad15df13624ccfcd"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-dark-Undo.png",
+      "sha256": "3c3d73d991a12c853e98225ffa0e6781ac4a841c1de0b1bbad15df13624ccfcd"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Close.png",
+      "sha256": "35f4f61803590f77e393a66ac4b96b2d502d7a667aa920d7855e5e5d80a20016"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Confirm.png",
+      "sha256": "6327d79f43b2018a675689883e711dcc55457e7b5d31efa97cda409ca07a8859"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Keep.png",
+      "sha256": "6327d79f43b2018a675689883e711dcc55457e7b5d31efa97cda409ca07a8859"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Reset.png",
+      "sha256": "60dcbc3659324b77c240bf41ab2293d661c27e2f178c7e45fc563c4f852a03ac"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.0-light-Undo.png",
+      "sha256": "60dcbc3659324b77c240bf41ab2293d661c27e2f178c7e45fc563c4f852a03ac"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Close.png",
+      "sha256": "b6b84eed856322d28642a6abacbdf5933d18c2d66d6086334deac1175ae99587"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Confirm.png",
+      "sha256": "b785ae0fdad2c6adc186c9489693a066ff619e47b800a80c62a99f377199f54c"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Keep.png",
+      "sha256": "b785ae0fdad2c6adc186c9489693a066ff619e47b800a80c62a99f377199f54c"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Reset.png",
+      "sha256": "47bdb327677d28fa9cb5dd0d74298f744141328f09cb6ff1852d6f7bc6e00094"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-dark-Undo.png",
+      "sha256": "47bdb327677d28fa9cb5dd0d74298f744141328f09cb6ff1852d6f7bc6e00094"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Close.png",
+      "sha256": "49102f26187231fa730ba4d3b3ad07d54898226c6eb962f831b001d02e4c55f8"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Confirm.png",
+      "sha256": "7cc27c6342a4f9319d33520192824359ffeb0aa3564892b7dd766e78f023b0c7"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Keep.png",
+      "sha256": "7cc27c6342a4f9319d33520192824359ffeb0aa3564892b7dd766e78f023b0c7"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Reset.png",
+      "sha256": "49102f26187231fa730ba4d3b3ad07d54898226c6eb962f831b001d02e4c55f8"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font1.5-light-Undo.png",
+      "sha256": "32d47f196436ec00d65c9fb27eba6aa53d5af3ae66e8ee96895acc29168e0c49"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Close.png",
+      "sha256": "6944b9f4e536a723475d3a67262f34b9ba317f4db5e1701fd386e69f23939bab"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Confirm.png",
+      "sha256": "bc3b1b83f95f569cfc625f26b72d9fc4b188903b2120f51ab6fe60bd981c90c0"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Keep.png",
+      "sha256": "bc3b1b83f95f569cfc625f26b72d9fc4b188903b2120f51ab6fe60bd981c90c0"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Reset.png",
+      "sha256": "6944b9f4e536a723475d3a67262f34b9ba317f4db5e1701fd386e69f23939bab"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-dark-Undo.png",
+      "sha256": "5a204fb1797560fa92495b4c5c06e20573ccc8ea7351865d29272b9aa25823c1"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Close.png",
+      "sha256": "309d738d555d987109ee9c886638f5ecd230b5f04cbc5c360ade09f889a63d9c"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Confirm.png",
+      "sha256": "b46d2bc17e5599d199ed0524739116519cde558169cdcbd9f887c243ad5607dd"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Keep.png",
+      "sha256": "b46d2bc17e5599d199ed0524739116519cde558169cdcbd9f887c243ad5607dd"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Reset.png",
+      "sha256": "e470c2592bcb2c84b10a0a390b2482bf73964da646e942164d6cb1428fc8ab2a"
+    },
+    {
+      "path": "api30-optimized/review-1280x800-font2.0-light-Undo.png",
+      "sha256": "e78877b042dcca99c5ad4347004899806f5de3cc815392c278e66b108bd2feea"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Close.png",
+      "sha256": "ef68acac3c80e8044e890ecd49faf916e555e9ca74b5e700d3310bc3e8ad7a3e"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Confirm.png",
+      "sha256": "9a4f5423aa7605499306bf23a44404e8f79c1569b00232e41d37ede6569c68e6"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Keep.png",
+      "sha256": "9a4f5423aa7605499306bf23a44404e8f79c1569b00232e41d37ede6569c68e6"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Reset.png",
+      "sha256": "ef68acac3c80e8044e890ecd49faf916e555e9ca74b5e700d3310bc3e8ad7a3e"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-dark-Undo.png",
+      "sha256": "ef68acac3c80e8044e890ecd49faf916e555e9ca74b5e700d3310bc3e8ad7a3e"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Close.png",
+      "sha256": "4d93084002927d6a9bcc6a625eb9aca0bef6c0f8fc6f91d57611a85bf3535d6a"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Confirm.png",
+      "sha256": "277768fbf3a33b7c0bde20228ffc12c4a4e15eebd125bb8ac52305ad2f669d81"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Keep.png",
+      "sha256": "277768fbf3a33b7c0bde20228ffc12c4a4e15eebd125bb8ac52305ad2f669d81"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Reset.png",
+      "sha256": "4d93084002927d6a9bcc6a625eb9aca0bef6c0f8fc6f91d57611a85bf3535d6a"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.0-light-Undo.png",
+      "sha256": "4d93084002927d6a9bcc6a625eb9aca0bef6c0f8fc6f91d57611a85bf3535d6a"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Close.png",
+      "sha256": "ae8c7d2801a2101e625c19ab74fab815e0d095fde65afdbd48afd756b846baa6"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Confirm.png",
+      "sha256": "bb16fd990590125e6471acda344e2e4514674895384e4ccc68316ed96dea13da"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Keep.png",
+      "sha256": "bb16fd990590125e6471acda344e2e4514674895384e4ccc68316ed96dea13da"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Reset.png",
+      "sha256": "e4c082317afc7d1da319e2680cc4724f2b033f5e99dc70d8a3149e126176ca02"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-dark-Undo.png",
+      "sha256": "e4c082317afc7d1da319e2680cc4724f2b033f5e99dc70d8a3149e126176ca02"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Close.png",
+      "sha256": "934d5cca1b3803bdf214fdf734b15147e69001805a9a6d882f281cc8738c9b7f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Confirm.png",
+      "sha256": "eeb27969e679f59df599b47a7c0f45c2994b6c328132f8882238571400fe5aa7"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Keep.png",
+      "sha256": "eeb27969e679f59df599b47a7c0f45c2994b6c328132f8882238571400fe5aa7"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Reset.png",
+      "sha256": "934d5cca1b3803bdf214fdf734b15147e69001805a9a6d882f281cc8738c9b7f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font1.5-light-Undo.png",
+      "sha256": "934d5cca1b3803bdf214fdf734b15147e69001805a9a6d882f281cc8738c9b7f"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Close.png",
+      "sha256": "f377b8f0ca8a9c44971d7837327e7cdaf766df3a01545eb2ad522ba987f9baa4"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Confirm.png",
+      "sha256": "c460dae82d89360b7886c61a5904676a272f09a45aaa6fc326ea50845e52dd17"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Keep.png",
+      "sha256": "c460dae82d89360b7886c61a5904676a272f09a45aaa6fc326ea50845e52dd17"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Reset.png",
+      "sha256": "3825807a405ddf582520d8f4422e2686f939543bd4610fee1ffbbda55917318c"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-dark-Undo.png",
+      "sha256": "ddae95b118bde0ab150198ddfeffe2755a32761c8cd952b2e1150dec6479a549"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Close.png",
+      "sha256": "95933e12572a637de5be9bd65319b14284da43ecd3a5296c5363c86a67961b38"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Confirm.png",
+      "sha256": "cc12db6b1effc04c8697236e5d0bea485933a1e881760591e5ab94cca9ccddca"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Keep.png",
+      "sha256": "cc12db6b1effc04c8697236e5d0bea485933a1e881760591e5ab94cca9ccddca"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Reset.png",
+      "sha256": "95933e12572a637de5be9bd65319b14284da43ecd3a5296c5363c86a67961b38"
+    },
+    {
+      "path": "api30-optimized/review-600x800-font2.0-light-Undo.png",
+      "sha256": "95933e12572a637de5be9bd65319b14284da43ecd3a5296c5363c86a67961b38"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Close.png",
+      "sha256": "2cb71cce5417f048b0e2459962ab1ab6fb81f4e3f35fe847809c59b3908e9ec6"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Confirm.png",
+      "sha256": "a86c51a84f74a24779deb7a45f2cf4d9b0a2c61313091bada642c92b52d98300"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Keep.png",
+      "sha256": "a86c51a84f74a24779deb7a45f2cf4d9b0a2c61313091bada642c92b52d98300"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Reset.png",
+      "sha256": "3ee33cf84ca33423e864d7d586146d0ebcc723be03b6c7d31044dd04d064317d"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-dark-Undo.png",
+      "sha256": "3ee33cf84ca33423e864d7d586146d0ebcc723be03b6c7d31044dd04d064317d"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Close.png",
+      "sha256": "ad81e0097a26e2fd111d916be0d71f83ca2e6770e1e91c326abdb74e29e97a6f"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Confirm.png",
+      "sha256": "6dda9eca4aad0968100b8899b19b452c6da4ac4a6e539973e33d152c0a33b9ce"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Keep.png",
+      "sha256": "6dda9eca4aad0968100b8899b19b452c6da4ac4a6e539973e33d152c0a33b9ce"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Reset.png",
+      "sha256": "ad81e0097a26e2fd111d916be0d71f83ca2e6770e1e91c326abdb74e29e97a6f"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.0-light-Undo.png",
+      "sha256": "ad81e0097a26e2fd111d916be0d71f83ca2e6770e1e91c326abdb74e29e97a6f"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Close.png",
+      "sha256": "4be93bc6b6865e5d982f26b6126f9b257c7e3183012c606cf2c79f53011f3bab"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Confirm.png",
+      "sha256": "94df5f7f1792dc90d9450c095ae9e8369169efbf87c580e6fb6839ee2c49c54a"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Keep.png",
+      "sha256": "94df5f7f1792dc90d9450c095ae9e8369169efbf87c580e6fb6839ee2c49c54a"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Reset.png",
+      "sha256": "4be93bc6b6865e5d982f26b6126f9b257c7e3183012c606cf2c79f53011f3bab"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-dark-Undo.png",
+      "sha256": "4be93bc6b6865e5d982f26b6126f9b257c7e3183012c606cf2c79f53011f3bab"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Close.png",
+      "sha256": "e119912adc9ecdadb2d22f425327728dfc651b8ff0c45b71c607c44a0bc4bc79"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Confirm.png",
+      "sha256": "784afab15305c96ee5a55d8472f1184b629aaabdd46a35bfa72d11b42ea5f162"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Keep.png",
+      "sha256": "784afab15305c96ee5a55d8472f1184b629aaabdd46a35bfa72d11b42ea5f162"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Reset.png",
+      "sha256": "e119912adc9ecdadb2d22f425327728dfc651b8ff0c45b71c607c44a0bc4bc79"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font1.5-light-Undo.png",
+      "sha256": "e119912adc9ecdadb2d22f425327728dfc651b8ff0c45b71c607c44a0bc4bc79"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Close.png",
+      "sha256": "003d7e05080ddc6de2cd0dc6cd295066fed676f4b5505beae7000a343fb6ac0b"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Confirm.png",
+      "sha256": "b0ff9cf945689424b7350870dfbdcf5abe8fa5457b4f68b9e69cc85fe213db0e"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Keep.png",
+      "sha256": "b0ff9cf945689424b7350870dfbdcf5abe8fa5457b4f68b9e69cc85fe213db0e"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Reset.png",
+      "sha256": "003d7e05080ddc6de2cd0dc6cd295066fed676f4b5505beae7000a343fb6ac0b"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-dark-Undo.png",
+      "sha256": "003d7e05080ddc6de2cd0dc6cd295066fed676f4b5505beae7000a343fb6ac0b"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Close.png",
+      "sha256": "6ccb565f45992a267ab67ec4ef100ecb5d3c3327783ab954db851e922410fdfa"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Confirm.png",
+      "sha256": "390d52710e074affed85711c96aa7eefe938e61f8a225c05fd4655dc6282e9b3"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Keep.png",
+      "sha256": "b5b8732731cf7deae7f838d27465ae7fdb8fe9f78ff7184bd68f720ca5d2f067"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Reset.png",
+      "sha256": "6ccb565f45992a267ab67ec4ef100ecb5d3c3327783ab954db851e922410fdfa"
+    },
+    {
+      "path": "api30-optimized/review-800x1280-font2.0-light-Undo.png",
+      "sha256": "6ccb565f45992a267ab67ec4ef100ecb5d3c3327783ab954db851e922410fdfa"
+    },
+    {
+      "path": "api30-optimized/trash-saved.png",
+      "sha256": "08c18f130ebdac4cd758421d6a53e994cc553d4013b3ee9fc81a7cb0add71b02"
+    },
+    {
+      "path": "api30-optimized/upgraded-sidebar.png",
+      "sha256": "8a06bf402ce77c786dc14d92a5daa7d5a158ec0dc3553ac31bbdf66a42599ad1"
+    },
+    {
+      "path": "api36-native-images/changed-file.png",
+      "sha256": "7350be297e2e35031b6a3cef3bea45a6d87120b92a5a96c750879de130b9b9b8"
+    },
+    {
+      "path": "api36-native-images/interrupted-review.png",
+      "sha256": "068e7ae6c3871f986eb5496a65577caaef9a1f010e1be7d5ddc35af499033f82"
+    },
+    {
+      "path": "api36-native-images/large-text-reset.png",
+      "sha256": "fd714bb6f1b5761a712791a54a0a8ac1ade0f9a2cb710d18e9220d1ad776f2f4"
+    },
+    {
+      "path": "api36-native-images/reset-review.png",
+      "sha256": "fd714bb6f1b5761a712791a54a0a8ac1ade0f9a2cb710d18e9220d1ad776f2f4"
+    },
+    {
+      "path": "api36-native-images/saved.png",
+      "sha256": "51446a5adeefb3d26c1b271ef6cacfbfb92ce86cf550ec810716104661fc5d19"
+    },
+    {
+      "path": "api36-native-images/session-boundary.png",
+      "sha256": "c868e93a0eb8f36493fc7b1e7b834f9835b0412559b207c4c52dbdf9f884aaae"
+    },
+    {
+      "path": "api36-optimized/copy-saved.png",
+      "sha256": "5202db365fe1bc2dd81a3c63fcb8f6f8528e8a4be98429a0f48cb6765811f113"
+    },
+    {
+      "path": "api36-optimized/damaged-review.png",
+      "sha256": "7a5622c3e813f1fa835255cbb4d4bfd85eee88c13f0e775360e71fabc7442175"
+    },
+    {
+      "path": "api36-optimized/occupied-destination.png",
+      "sha256": "15a99e47761b2e143320070696e48953675faa4aa622a882fba128903dc09d0d"
+    },
+    {
+      "path": "api36-optimized/previous-public-sidebar.png",
+      "sha256": "ae0e8eb8638e8e27903def556f557996b63a7cc55f1df5a62e4040c2b101e1b4"
+    },
+    {
+      "path": "api36-optimized/rename-saved.png",
+      "sha256": "24911c85827b037d2b0ede2ebd081b08fc25d114fc9dc5a7d4a78bede8bfc736"
+    },
+    {
+      "path": "api36-optimized/reopened-saved.png",
+      "sha256": "74611c1ce935edecd85bb4183d337b35968cabe63543978ecaa182c6dc66609e"
+    },
+    {
+      "path": "api36-optimized/reset-completed.png",
+      "sha256": "dda1a6f24b56bcce3bc4005d08d4d42ce5bdbe77e188fdf3fe8b71db2665ed19"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Close.png",
+      "sha256": "8293c86f1167541bcc5e2253a6c48749f6b840681c107e6ecc1a1ddb9dfccf9d"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Confirm.png",
+      "sha256": "2edf24890988739c747b82fd14f78546bcb9ddcc200907ea86f8a49e29068bfd"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Keep.png",
+      "sha256": "93ad94b9bf45788036112746aafa45306df6e4613a7d8aa9f67b2f590945931d"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Reset.png",
+      "sha256": "c9fc1a5d0788210eb919209a0f81176c945877f50bf2e77a8ee8a1442607077a"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-dark-Undo.png",
+      "sha256": "c9fc1a5d0788210eb919209a0f81176c945877f50bf2e77a8ee8a1442607077a"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Close.png",
+      "sha256": "3e0aa1484580cfc44ae61c060029b1de6560ecbc11889b8fcc4543ef51bc4d19"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Confirm.png",
+      "sha256": "d0b417b57c739dafaf7836f25705d89621ecef50ee14479e9effd5c83bf46aa3"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Keep.png",
+      "sha256": "d0b417b57c739dafaf7836f25705d89621ecef50ee14479e9effd5c83bf46aa3"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Reset.png",
+      "sha256": "3e0aa1484580cfc44ae61c060029b1de6560ecbc11889b8fcc4543ef51bc4d19"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.0-light-Undo.png",
+      "sha256": "3e0aa1484580cfc44ae61c060029b1de6560ecbc11889b8fcc4543ef51bc4d19"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Close.png",
+      "sha256": "cc8e4fe753bfe70bef1907836f90047404095bdf486403d2c5dbff8138de487b"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Confirm.png",
+      "sha256": "bb25cdd808f187e6d0f1d530545ae9ff38ca1be1776ee98bd52f1d99bc666ce9"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Keep.png",
+      "sha256": "bb25cdd808f187e6d0f1d530545ae9ff38ca1be1776ee98bd52f1d99bc666ce9"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Reset.png",
+      "sha256": "d69854a50a45fb2ed132612b60c50036d97960133de677bac13d41bab3141ac7"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-dark-Undo.png",
+      "sha256": "d69854a50a45fb2ed132612b60c50036d97960133de677bac13d41bab3141ac7"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Close.png",
+      "sha256": "e0d3f0f3a6b23c0bcbba54429026916769a9f06f5e0dcec3c629f716cd62638c"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Confirm.png",
+      "sha256": "36902466327f120fad9e481690d311e12c8e9b41c272948b54d70838bb66449f"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Keep.png",
+      "sha256": "d3df0c92e65d618d60bf0e9bbd0daf7dc00a307dcad66c025ac0742825e06ff4"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Reset.png",
+      "sha256": "e0d3f0f3a6b23c0bcbba54429026916769a9f06f5e0dcec3c629f716cd62638c"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font1.5-light-Undo.png",
+      "sha256": "e0d3f0f3a6b23c0bcbba54429026916769a9f06f5e0dcec3c629f716cd62638c"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Close.png",
+      "sha256": "e54904c6cb4ad5b574a989a47fdbb2547146885e59bc466b145255a2c4a34cd3"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Confirm.png",
+      "sha256": "716d14c27f3403316a9af007dac281f2d94832fb708969c2c6d785b489a8bebd"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Keep.png",
+      "sha256": "716d14c27f3403316a9af007dac281f2d94832fb708969c2c6d785b489a8bebd"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Reset.png",
+      "sha256": "22f19b2d336c4b6375b67605a5c9829a54f3dbfe705d31162b05fce9e3fb8abe"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-dark-Undo.png",
+      "sha256": "22f19b2d336c4b6375b67605a5c9829a54f3dbfe705d31162b05fce9e3fb8abe"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Close.png",
+      "sha256": "f622031ef304a6e70a7781e4cc7780bec7f6956e84136eaa0301588fe30e6a1e"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Confirm.png",
+      "sha256": "5e4a1c621330475de8d48e0e52cfac3b3baa04b5aa64b93e14d18d1635b0fc39"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Keep.png",
+      "sha256": "bf8351d5f35cb774b5989e7704f37f5b8bde39a32c9d942ca3433467da9c30a4"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Reset.png",
+      "sha256": "f622031ef304a6e70a7781e4cc7780bec7f6956e84136eaa0301588fe30e6a1e"
+    },
+    {
+      "path": "api36-optimized/review-1280x800-font2.0-light-Undo.png",
+      "sha256": "f622031ef304a6e70a7781e4cc7780bec7f6956e84136eaa0301588fe30e6a1e"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Close.png",
+      "sha256": "b24dc32886d94002476184f5300e11b62c186a29f34d09f5e263110a2cee4b7b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Confirm.png",
+      "sha256": "c89073fa24069f9f2904df08ef60f639d741708165648fe7959d1f5039883245"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Keep.png",
+      "sha256": "c89073fa24069f9f2904df08ef60f639d741708165648fe7959d1f5039883245"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Reset.png",
+      "sha256": "b24dc32886d94002476184f5300e11b62c186a29f34d09f5e263110a2cee4b7b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-dark-Undo.png",
+      "sha256": "f02b7474c3215e380396bc1f488343fd33212ff0057bfaba66338821d5c17859"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Close.png",
+      "sha256": "bc9a39f97451fbfccd6b8db8495ea9ebb39ea5abaad54d2863361cf477812f46"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Confirm.png",
+      "sha256": "fd444c85a3cb7281d531077d9a7ed0495f74f1c9cbfab4516ae45bd06d38596c"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Keep.png",
+      "sha256": "fd444c85a3cb7281d531077d9a7ed0495f74f1c9cbfab4516ae45bd06d38596c"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Reset.png",
+      "sha256": "19ce74298ebd519a4ed99e68e7c4536458cb3a9231ce55d038c98a75064458ca"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.0-light-Undo.png",
+      "sha256": "19ce74298ebd519a4ed99e68e7c4536458cb3a9231ce55d038c98a75064458ca"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Close.png",
+      "sha256": "6b76d8b2239cbde783b625932632f00f685a7af494aba62a95bac1873263b05b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Confirm.png",
+      "sha256": "13d9797e910bd652c6187d0517f27ad1d16c50cb42741057902ace7e9e43d6c1"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Keep.png",
+      "sha256": "13d9797e910bd652c6187d0517f27ad1d16c50cb42741057902ace7e9e43d6c1"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Reset.png",
+      "sha256": "aaecd46f1b89aa720ea17424ed71976f1d4f62463a425bf89d75de3c7ed76311"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-dark-Undo.png",
+      "sha256": "aaecd46f1b89aa720ea17424ed71976f1d4f62463a425bf89d75de3c7ed76311"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Close.png",
+      "sha256": "9953a985e248d7b96f3aeb805d144760d1fc95f6c2e276834d2197bdf1178bd4"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Confirm.png",
+      "sha256": "3b7f2c2f38745f28fa3dce1980dff8559c7294d535452260f18888b261d0970b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Keep.png",
+      "sha256": "3b7f2c2f38745f28fa3dce1980dff8559c7294d535452260f18888b261d0970b"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Reset.png",
+      "sha256": "d11edbc522d5ebd38fe93e01193765bafab280adcec4f06e243122621b58504c"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font1.5-light-Undo.png",
+      "sha256": "d11edbc522d5ebd38fe93e01193765bafab280adcec4f06e243122621b58504c"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Close.png",
+      "sha256": "429df9055c964c83a6a274d48297fd664eb6ff321f48c522e2c01b31185e811c"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Confirm.png",
+      "sha256": "21eaa76efa63a14fcbbd810b68e82429b9aef056674b92d256bba34d68b4e798"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Keep.png",
+      "sha256": "21eaa76efa63a14fcbbd810b68e82429b9aef056674b92d256bba34d68b4e798"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Reset.png",
+      "sha256": "429df9055c964c83a6a274d48297fd664eb6ff321f48c522e2c01b31185e811c"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-dark-Undo.png",
+      "sha256": "3a51e15f4da0009f3f10f9282df9b8c521559bdf7e17697ff3dbfa7aa9689c77"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Close.png",
+      "sha256": "6919238b379332f4d702d516211fbe1bfd19d605da41544945783c25693dbc0e"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Confirm.png",
+      "sha256": "074666f196f73868e1eb5be5806eb2743e30bbbcc9f6034f82ad7750cb9df269"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Keep.png",
+      "sha256": "074666f196f73868e1eb5be5806eb2743e30bbbcc9f6034f82ad7750cb9df269"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Reset.png",
+      "sha256": "6919238b379332f4d702d516211fbe1bfd19d605da41544945783c25693dbc0e"
+    },
+    {
+      "path": "api36-optimized/review-600x800-font2.0-light-Undo.png",
+      "sha256": "6919238b379332f4d702d516211fbe1bfd19d605da41544945783c25693dbc0e"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Close.png",
+      "sha256": "71e8f71b256c012158d397efaf04c28e65e47580c414635f3932382fa168a952"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Confirm.png",
+      "sha256": "5868b61a4b009e6f36558ba8bcda6b0c81162dbd40e1d05ec35061dcbed2e0e4"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Keep.png",
+      "sha256": "5868b61a4b009e6f36558ba8bcda6b0c81162dbd40e1d05ec35061dcbed2e0e4"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Reset.png",
+      "sha256": "71e8f71b256c012158d397efaf04c28e65e47580c414635f3932382fa168a952"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-dark-Undo.png",
+      "sha256": "71e8f71b256c012158d397efaf04c28e65e47580c414635f3932382fa168a952"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Close.png",
+      "sha256": "95c7a8877cd59da2ee0849a564390c4c66930da72f6b6c8c66269bda12775730"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Confirm.png",
+      "sha256": "b09b07e329da5e91c2508ca611f78c0d79e3d2d4b8979cbffd3a3ef8f30519bf"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Keep.png",
+      "sha256": "1192dd85094eaa833eeb60f336cfff1bbedba05836476e7fd96aeee1879d0028"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Reset.png",
+      "sha256": "95c7a8877cd59da2ee0849a564390c4c66930da72f6b6c8c66269bda12775730"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.0-light-Undo.png",
+      "sha256": "95c7a8877cd59da2ee0849a564390c4c66930da72f6b6c8c66269bda12775730"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Close.png",
+      "sha256": "d5889a2370a3fcd97df54071fc48a6d42874251ce8a027328d3905ab373da09d"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Confirm.png",
+      "sha256": "87914b55dbde09b3dcff744928b4d425a73cfd11213966494dce35d8f21c327f"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Keep.png",
+      "sha256": "87914b55dbde09b3dcff744928b4d425a73cfd11213966494dce35d8f21c327f"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Reset.png",
+      "sha256": "d5889a2370a3fcd97df54071fc48a6d42874251ce8a027328d3905ab373da09d"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-dark-Undo.png",
+      "sha256": "3f4911616eb13d6965d84bcaa06146742fe4b03f8329fc99030208a572fdb806"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Close.png",
+      "sha256": "d5b066e4dd37d95c711454db22c0b6b522bea8ee714b8c61bd8bb95c7ff3e0f0"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Confirm.png",
+      "sha256": "e57d9cfb744c87226e5f07222618f96ff552beab508904762fd66ff2ddefabd2"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Keep.png",
+      "sha256": "e57d9cfb744c87226e5f07222618f96ff552beab508904762fd66ff2ddefabd2"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Reset.png",
+      "sha256": "d5b066e4dd37d95c711454db22c0b6b522bea8ee714b8c61bd8bb95c7ff3e0f0"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font1.5-light-Undo.png",
+      "sha256": "d5b066e4dd37d95c711454db22c0b6b522bea8ee714b8c61bd8bb95c7ff3e0f0"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Close.png",
+      "sha256": "a57073e299962dea625fd360ac34ab761b21d05c9bc2f4be5871251f59b216ed"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Confirm.png",
+      "sha256": "7c96fcc5cecbaffe7a4dd02f15e3dc3b43d4a2cf403f22bf64afe20a102f4b64"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Keep.png",
+      "sha256": "7c96fcc5cecbaffe7a4dd02f15e3dc3b43d4a2cf403f22bf64afe20a102f4b64"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Reset.png",
+      "sha256": "a57073e299962dea625fd360ac34ab761b21d05c9bc2f4be5871251f59b216ed"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-dark-Undo.png",
+      "sha256": "fb258458c86ae9832c0e62db31c327826730c3b55f2e275c00fc4cbdb52338cf"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Close.png",
+      "sha256": "e66153db6229d55bc4abd53cbdadda4b577929b24120442354117824d12ea125"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Confirm.png",
+      "sha256": "2484ae4f4bbef7eb0cbf060f983c280d037f8f58f8f91e6ce389e7c224b2f80b"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Keep.png",
+      "sha256": "2484ae4f4bbef7eb0cbf060f983c280d037f8f58f8f91e6ce389e7c224b2f80b"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Reset.png",
+      "sha256": "ab5912b7e78a988f55ad1eb273ead22c4c739ef7c9426110e8d987e4586baf69"
+    },
+    {
+      "path": "api36-optimized/review-800x1280-font2.0-light-Undo.png",
+      "sha256": "ab5912b7e78a988f55ad1eb273ead22c4c739ef7c9426110e8d987e4586baf69"
+    },
+    {
+      "path": "api36-optimized/trash-saved.png",
+      "sha256": "66683645bafcacfe43caee2b612b736910ef8dbfcbec9de610fa6d595810986f"
+    },
+    {
+      "path": "api36-optimized/upgraded-sidebar.png",
+      "sha256": "0c40d7913d514ee0944079c95360970b25968d6f28c0a1e1978cefbc6ac83026"
+    }
+  ]
+}

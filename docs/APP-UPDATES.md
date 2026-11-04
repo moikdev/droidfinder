@@ -23,6 +23,8 @@ Keep the signing key stable and backed up privately. These development previews 
 
 ## Validation
 
+The **0.45.0** preview passes actual **0.44 → 0.45** public download and Android installer confirmation on both assigned API30/API36 tablets. Both retain the original synthetic files, Favorites and sentinel preference, then report [“You’re up to date”](screenshots/app-updates-045.png). A separate API36 production-source download/package/version/signer check passes. Original private metadata, URI grants, storage access, font and display settings are restored and verified.
+
 JVM tests cover manifest bounds, source restrictions, credential/cleartext rejection, path traversal and tampered/truncated/oversized downloads. Native tests use APK fixtures generated with the current checkout's debug key; the fixture private key and APKs stay in ignored build outputs and never enter a shipping build. Native checks cover package/version/certificate/Android compatibility, cancellation/retry, cached-download verification and recovery, update controls, feed errors and Android's installer handoff.
 
 Build and native results are recorded in [VALIDATION.md](../VALIDATION.md). Public manifest/APK downloads through the production source passed on both API 30 and API 36. The exact optimized preview shows [“You’re up to date”](screenshots/app-updates-030.png) against the published feed. The release also includes a validation archive with the artifact manifest, final test logs, installation-preservation evidence and live feed checks. No physical-device or third-party provider success is implied by emulator checks.

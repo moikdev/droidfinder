@@ -1,0 +1,280 @@
+{
+  "success": true,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "serial": "emulator-5602",
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "0ff23029143741e7cf0f2570674af526bcf31737281e8bc79a409bf8aaa0ba3f",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "d53071c341082062798fa058845868fbec909c83feb51c0efeb511e6472cc20e"
+  },
+  "installedApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "0ff23029143741e7cf0f2570674af526bcf31737281e8bc79a409bf8aaa0ba3f",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "d53071c341082062798fa058845868fbec909c83feb51c0efeb511e6472cc20e"
+  },
+  "timedOut": false,
+  "passed": 46,
+  "skipped": 0,
+  "failed": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "occupiedDestinationIsNeverOverwritten",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "trashAndRestoreKeepTheirOwnedRecoveryMappings",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "failedInitialMarkerWritePreventsMutation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "exactRestoreRejectsAnOriginalPathRemappedInTheTrashIndex",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "sameInodeRewriteAndRestoredMtimeIsRejectedByCtime",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "finalSymlinkNeverReadsOrMovesTheOutsideTarget",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "redirectedParentIsRejectedEvenWhenItContainsTheOriginalInode",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "sameByteReplacementWithPreservedMtimeIsRejected",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "stableAndroidDataAliasCanBeReopened",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "localCopyUndoAndRedoRemainExactAcrossFreshControllers",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "anInterruptedDeferredUndoRemainsManualAndDoesNotRecreateTheDocument",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "resettingReferencesNeverDeletesTrashDocuments",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "failedReadySnapshotLeavesTheDurableMarker",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "unsupportedSpecialFilesRemainSessionOnly",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "failedMetadataCompletionLeavesTheDurableMarker",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "kernelDirectoryCollisionAlsoPreservesTheExistingFolder",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "fifoReplacementIsRejectedBeforeFingerprintCanBlock",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "unicodePublicationDoesNotChangeNonBmpNames",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "kernelCollisionAfterPreflightKeepsBothFiles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "corruptJournalIsPreservedForManualReset",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "localRenameChainRetainsNativeIdentityThroughControlledRenames",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoNativeTest",
+      "test": "savedPrivatePathsAreNotCreatedOrHashedDuringDecode",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoWorkflowTest",
+      "test": "laterEditsStopUndoAndTheirReasonStaysAvailable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoWorkflowTest",
+      "test": "confirmedResetPreservesTheOldRecordAndLeavesEveryDocument",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoWorkflowTest",
+      "test": "cancellingTheResetKeepsTheExactJournalAndDocuments",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoWorkflowTest",
+      "test": "realOrganizationCallbackExplainsTheSessionBoundary",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoWorkflowTest",
+      "test": "largeTextKeepsReviewConfirmationAndAllNamedControlsReachable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoWorkflowTest",
+      "test": "activityRecreationKeepsTheSharedTimelineAndExactSavedSnapshot",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoWorkflowTest",
+      "test": "savedLocalFolderCanBeUndoneAndRedoneWithNamedControls",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PersistentUndoWorkflowTest",
+      "test": "incompleteMetadataSaveRequiresManualReviewAndReset",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "editedFileStopsUndoAndShowsThePersistentReasonWithoutOverwritingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "disconnectedFolderCreationExplainsStorageRecoveryAndPreservesItsScope",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "selectionActionsActivateTheirPaneAndLeaveOnlyOneNamedDragHandle",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyProviderRenameExplainsAndOffersACopyDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsUndoAndRedoShowTheAffectedFolderWithoutLosingOriginals",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyCreationAndKeyboardRenameUseTheSameRecoveryPolicy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsExplainsAnEmptySessionThroughTheNamedMenu",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "anActiveProviderTransferExplainsRenameButStillAllowsQueuedCopyChoices",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "readOnlyProviderMoveOffersCopyWithoutChangingTheOriginal",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "recentActionsAreSharedAcrossPanesWindowsAndActivityRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "providerHistoryShowsTheActualNameAndGuardsLaterEdits",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "launcherKeepsTheReasonAndOffersTheSameCopyRecovery",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "primaryNamesOrderAndBoundsStayFixedAcrossSelectionViewsSearchAndAddress",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "virtualFolderCreationExplainsScopeAndCanChooseARealDestination",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "narrowLargeTextKeepsPrimaryActionsAndRecoveryControlsReachable",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.CommandClarityWorkflowTest",
+      "test": "emptyClipboardExplanationDoesNotChangeFilesOrSelection",
+      "code": 0
+    }
+  ],
+  "isolatedBatches": [
+    {
+      "selector": "dev.findroid.PersistentUndoNativeTest",
+      "report": "captures/persistent-undo/api30-native-batches/02-PersistentUndoNativeTest.json",
+      "log": "captures/persistent-undo/api30-native-batches/02-PersistentUndoNativeTest.txt",
+      "reportSha256": "05707f7387dcf41005b8af31fe25225f1d022963a45250c8ad1d6735fa0546b2",
+      "logSha256": "0f78a3e6933728488cb3a110b6d049d6fe8abc086fb628bad392c4a984911a01",
+      "passed": 22
+    },
+    {
+      "selector": "dev.findroid.PersistentUndoWorkflowTest",
+      "report": "captures/persistent-undo/api30-native-batches/03-PersistentUndoWorkflowTest.json",
+      "log": "captures/persistent-undo/api30-native-batches/03-PersistentUndoWorkflowTest.txt",
+      "reportSha256": "8efcb32510825f490d1dc620d1a962722e75a2a4cd5d4734f8381f928e8ef253",
+      "logSha256": "cb4d3eabf8e5d1b30d83c3b43fb5cc102e6a5d04e9148d34a12acfd7cbf78837",
+      "passed": 8
+    },
+    {
+      "selector": "dev.findroid.CommandClarityWorkflowTest",
+      "report": "captures/persistent-undo/api30-native-batches/29-CommandClarityWorkflowTest.json",
+      "log": "captures/persistent-undo/api30-native-batches/29-CommandClarityWorkflowTest.txt",
+      "reportSha256": "9b568f860488459082f94b6de80c00d219c2516353f15a86b259501e3e5d3d20",
+      "logSha256": "cac0b0bebd30b211b3aacfa16045221870968e0a2949dcf32feac735bc25083e",
+      "passed": 16
+    }
+  ],
+  "derivedFromFullNativeAcceptance": true,
+  "fullAcceptanceSha256": "d65f38a3d773d54422edd221d79658d6ef2b0b19581d039afc2be9ea3bd5d671",
+  "selectionDescription": "22 persistent-Undo native checks, 8 workflow checks and 16 existing command-clarity checks; no separate test execution counted."
+}
