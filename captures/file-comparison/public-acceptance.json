@@ -1,0 +1,59 @@
+{
+  "version": "0.52.0-preview",
+  "versionCode": 54,
+  "applicationSourceCommit": "fe7e3f1ba532d23c92dbc4d7c8e225410270eddc",
+  "evidenceCommit": "0747018f4dfb891abf1dd29b331e70ddcab86ffb",
+  "localAcceptanceComplete": true,
+  "publicOtaComplete": true,
+  "independentPublicArchiveVerificationComplete": true,
+  "allSixPublicArtifactsVerified": true,
+  "proposal": 49,
+  "proposalImplemented": true,
+  "implementedProposals": 40,
+  "totalProposals": 72,
+  "jvmCases": 1000,
+  "nativeCasesPerApi": 29,
+  "optimizedCoreWorkflowsPerApi": 2,
+  "balancedLayoutsPerApi": 12,
+  "named48DpTargetsPerApi": 84,
+  "reviewedCapturePaths": 66,
+  "originalStateRestoredOnBothApis": true,
+  "originalWorkspaceTreesKept": true,
+  "archive": {
+    "path": "captures/release/0.52.0/Findroid-0.52.0-validation.zip",
+    "sha256": "a2716961953c1d22c8654dc604836d253655f302ddfc4ad092e26e4e2e766797",
+    "bytes": 11853107,
+    "entries": 701
+  },
+  "scope": "Emulated Android 11 and Android 16 tablets. Physical tablet, third-party provider and screen-reader acceptance remain open.",
+  "evidence": [
+    {
+      "path": "captures/file-comparison/local-acceptance.json",
+      "sha256": "6568000c1dbebd638663f62fd74f5826f69bd0e5bb4dda5dd8d282e1f451303a"
+    },
+    {
+      "path": "captures/file-comparison/independent-public-verification.json",
+      "sha256": "88bf750135a9635f9e713aaf9db822bbbdb55cd1a8f171069238c2220acd30fc"
+    },
+    {
+      "path": "captures/file-comparison/public-final-artifacts.json",
+      "sha256": "014c2b556ecf7c27f9dac6b12bff6769ae3c75c2321ab88a983b1d5f64642808"
+    },
+    {
+      "path": "captures/file-comparison/public-image-review.json",
+      "sha256": "11a52f9cff87313acbeef9f11b7f799934d42725af9f7ca76caf60ecdf48ac34"
+    },
+    {
+      "path": "captures/file-comparison/public-privacy-review.json",
+      "sha256": "badd4dc8b1ee214561a28c1e04d7966a6c5303f969ba434db2405053670d847a"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api30-public-ota/verification.json",
+      "sha256": "78c8a9964d839c2e58cfa7f458e8ee7c2f4aa6447f7d0ed45c8abd33c9506b68"
+    },
+    {
+      "path": "captures/file-comparison/candidate-2-api36-public-ota/verification.json",
+      "sha256": "b65870ea8ddbef6ab1789f5f081f7455db5fee2e54e50aef436d8e5968a3fa28"
+    }
+  ]
+}

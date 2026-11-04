@@ -1,0 +1,13 @@
+[
+  "PARITY.md",
+  "README.md",
+  "VALIDATION.md",
+  "captures/file-comparison/independent-public-verification.json",
+  "captures/file-comparison/public-acceptance.json",
+  "captures/file-comparison/public-final-artifacts.json",
+  "captures/file-comparison/release-notes-final.md",
+  "captures/release/0.52.0/Findroid-0.52.0-validation.json",
+  "docs/FILE-COMPARISON.md",
+  "docs/IMPROVEMENT-TRACKER.md",
+  "docs/releases/0.52.0.md"
+]
