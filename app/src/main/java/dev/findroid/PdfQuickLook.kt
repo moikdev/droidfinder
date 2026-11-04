@@ -82,6 +82,7 @@ private fun PdfQuickLookContent(
     var selectionMap by remember(session, page) { mutableStateOf<PdfSelectionMap?>(null) }
     var pendingSelection by remember(session, page) { mutableStateOf<PdfSelectionTouch?>(null) }
     var selectionNote by remember(session, page) { mutableStateOf<String?>(null) }
+    val selectionActive = selectionMode || pageSelection != null
     val opening by
         produceState<Result<Int>?>(null, session) {
             value = null
@@ -156,18 +157,18 @@ private fun PdfQuickLookContent(
             { event ->
                 when {
                     event.action != KeyEvent.ACTION_DOWN -> false
-                    selectionMode && !readText && event.keyCode == KeyEvent.KEYCODE_ESCAPE -> {
+                    selectionActive && !readText && event.keyCode == KeyEvent.KEYCODE_ESCAPE -> {
                         selectionMode = false
                         pageSelection = null
                         pendingSelection = null
                         true
                     }
-                    selectionMode && !readText && keys?.editing != true &&
+                    selectionActive && !readText && keys?.editing != true &&
                         (event.isCtrlPressed || event.isMetaPressed) && event.keyCode == KeyEvent.KEYCODE_C -> {
                         copyPageSelection()
                         true
                     }
-                    selectionMode && !readText && keys?.editing != true &&
+                    selectionActive && !readText && keys?.editing != true &&
                         (event.isCtrlPressed || event.isMetaPressed) && event.keyCode == KeyEvent.KEYCODE_A -> {
                         pageSelection = selectionMap?.all()
                         true
@@ -272,16 +273,16 @@ private fun PdfQuickLookContent(
                 if (pages > 0) pdfResult { session.render(page.coerceIn(0, pages - 1)) } else null
         }
     val text by
-        produceState<Result<PdfPageText>?>(null, session, page, readText, query, pages, selectionMode) {
+        produceState<Result<PdfPageText>?>(null, session, page, readText, query, pages, selectionActive) {
             value = null
             value =
-                if (pages > 0 && (readText || query.isNotBlank() || selectionMode))
+                if (pages > 0 && (readText || query.isNotBlank() || selectionActive))
                     pdfResult { session.text(page.coerceIn(0, pages - 1)) }
                 else null
         }
-    LaunchedEffect(text, selectionMode, selectionPageKey) {
+    LaunchedEffect(text, selectionActive, selectionPageKey) {
         selectionMap = null
-        if (selectionMode) text?.getOrNull()?.let { content ->
+        if (selectionActive) text?.getOrNull()?.let { content ->
             selectionMap = pdfSelectionMap(content)
         }
     }
@@ -681,11 +682,11 @@ private fun PdfQuickLookContent(
                 verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 TextButton(onClick = {
                     selectionMode = !selectionMode
-                    pageSelection = null; pendingSelection = null; selectionNote = null
+                    pendingSelection = null; selectionNote = null
                 }, modifier = Modifier.heightIn(min = 48.dp)) {
                     Text(if (selectionMode) "Pan and zoom" else "Select page text")
                 }
-                if (selectionMode) {
+                if (selectionActive) {
                     TextButton(onClick = ::copyPageSelection, enabled = pageSelection != null && selectionMap != null,
                         modifier = Modifier.heightIn(min = 48.dp)) { Text("Copy selection") }
                     TextButton(onClick = { pageSelection = selectionMap?.all(); selectionNote = null },
@@ -695,13 +696,14 @@ private fun PdfQuickLookContent(
                         enabled = pageSelection != null, modifier = Modifier.heightIn(min = 48.dp)) { Text("Clear selection") }
                 }
             }
-            if (selectionMode) Text(
+            if (selectionActive) Text(
                 when {
                     text?.isFailure == true -> text!!.exceptionOrNull()?.message ?: "Couldn't read this page's text"
                     selectionMap == null -> "Reading this page's text…"
                     selectionMap!!.glyphs.isEmpty() -> "This page has no text layer to select."
                     selectionMap!!.textLimited || selectionMap!!.geometryLimited -> "Only part of this page is available for selection."
                     selectionNote != null -> selectionNote!!
+                    !selectionMode -> "Selection kept. Drag to move the page; choose Select page text to adjust it."
                     pageSelection != null -> selectionMap!!.selectedText(pageSelection!!).take(160).replace(Regex("\\s+"), " ")
                     else -> "Drag across text or use the selection handles. Choose Pan and zoom to move the page."
                 }, Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp).testTag("pdf-page-selection-status"),

@@ -99,7 +99,7 @@ internal fun PdfPageSelectionLayer(
             for (box in boxes) drawRect(color.copy(alpha = .3f), Offset(box.left * this.size.width, box.top * this.size.height),
                 Size((box.right - box.left) * this.size.width, (box.bottom - box.top) * this.size.height))
         }
-        if (map != null && selection != null) for (start in listOf(true, false)) {
+        if (selecting && map != null && selection != null) for (start in listOf(true, false)) {
             val edge = map.edge(selection, start) ?: continue
             val pointOnGlyph = Offset((if (start) edge.left else edge.right) * size.width, edge.bottom * size.height)
             val center = Offset(pointOnGlyph.x + (if (start) -target / 2 else target / 2), pointOnGlyph.y + target / 2)

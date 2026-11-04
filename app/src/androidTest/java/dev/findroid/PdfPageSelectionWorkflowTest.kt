@@ -197,7 +197,35 @@ class PdfPageSelectionWorkflowTest {
         compose.waitForIdle()
         val after = compose.onNodeWithContentDescription("End of PDF text selection").fetchSemanticsNode().boundsInRoot
         assertTrue("The page and its handle share the zoom transform",after.width > before.width)
+        compose.onNodeWithText("Pan and zoom",substring=false).performClick()
+        compose.onNodeWithText("Select page text",substring=false).assertExists()
+        compose.onNodeWithContentDescription("End of PDF text selection").assertDoesNotExist()
+        assertEquals("Ocean",selected())
+        val beforePan = compose.onNodeWithTag("pdf-page-selection-layer").fetchSemanticsNode().positionInRoot
+        compose.onNodeWithTag("bitmap-viewport").performTouchInput {
+            swipe(Offset(center.x,height * .5f),Offset(center.x,height * .85f),durationMillis=350)
+        }
+        val afterPan = compose.onNodeWithTag("pdf-page-selection-layer").fetchSemanticsNode().positionInRoot
+        assertTrue("Dragging the zoomed page must move it while keeping the selection",afterPan.y > beforePan.y)
+        assertEquals("Ocean",copy())
+        compose.onNodeWithText("Select page text",substring=false).performClick()
+        compose.onNodeWithContentDescription("End of PDF text selection").assertIsDisplayed()
+        val viewport = compose.onNodeWithTag("bitmap-viewport").fetchSemanticsNode().boundsInRoot
+        val handle = compose.onNodeWithContentDescription("End of PDF text selection").fetchSemanticsNode().boundsInRoot
+        assertTrue("The selected word's handle is fully inside the viewport after panning",handle.top >= viewport.top && handle.bottom <= viewport.bottom)
         assertEquals("Ocean",copy());capture("zoomed-selection")
+    }
+
+    @Test fun switchingToReadingTextClearsTheRetainedRenderedPageSelection() {
+        open();ready();tapOcean()
+        compose.onNodeWithText("Pan and zoom",substring=false).performClick()
+        assertEquals("Ocean",selected())
+        compose.onNodeWithContentDescription("Read PDF text").performClick()
+        compose.onNodeWithText("Copy selection",substring=false).assertDoesNotExist()
+        compose.onNodeWithContentDescription("Show PDF page").performClick()
+        compose.onNodeWithText("Select page text",substring=false).assertExists()
+        assertEquals("No page text selected",selected())
+        compose.onNodeWithContentDescription("End of PDF text selection").assertDoesNotExist()
     }
 
     @Test fun changingPagesAndReopeningThePreviewDoNotReuseThePriorSelection() {

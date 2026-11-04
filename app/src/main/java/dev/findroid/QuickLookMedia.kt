@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -90,6 +91,7 @@ internal fun ZoomableBitmap(
                 .fillMaxWidth()
                 .clipToBounds()
                 .transformable(transform)
+                .testTag("bitmap-viewport")
                 .onSizeChanged { viewport = it },
             contentAlignment = Alignment.Center,
         ) {

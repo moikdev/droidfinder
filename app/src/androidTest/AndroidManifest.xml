@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity
+            android:name="dev.findroid.PdfClipboardProbeActivity"
+            android:exported="true"
+            android:label="PDF clipboard validation" />
+    </application>
+</manifest>
