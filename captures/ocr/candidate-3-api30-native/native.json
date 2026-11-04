@@ -1,0 +1,314 @@
+{
+  "success": true,
+  "passed": 45,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "realOfflineEngineReadsRasterAndKeepsSourceBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "workerRefusesUninstalledLanguageAndOverBudgetRaster",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "pdfOcrKeepsExistingExtractionRestriction",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "reviewedJapaneseModelRecognizesLocalPrintedText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "cancellationAfterNativeImageIsReadyStopsOnlyPrivateWorker",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "scannedPdfWithoutTextLayerCanBeRecognizedReadOnly",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "failedStorageReviewCanBeRetriedWithoutChangingTheModel",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "removingLanguageRequiresConfirmationAndDisablesRecognition",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "incompleteLanguageBytesAreReviewedBeforeDiscard",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "repeatedOpeningAndLanguageSwitchingUsesOnlyTheSelectedModel",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrWorkflowTest",
+      "test": "openingOcrOffersExplicitModelChoiceAndStartsNoRecognition",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "cancellationEndsAnIdlePipeReadBeforeTheWriterCloses",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "declaredAssetOffsetAndLengthDoNotExposeSurroundingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "cancelingACacheWaitReleasesOnlyThatReader",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.DocumentPreviewInputTest",
+      "test": "unknownLengthPipeReadsChunksAndFinishesAtEof",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "metadataLocationIsExplicitAndRotationDoesNotModifySource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "malformedOversizedAndChangedSourcesHaveRecoverableErrors",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "mimeOnlyProviderImageAndBlockedPreparationCanStop",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "zoomWheelPanKeyboardAndRecreationKeepTheView",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "largeSourceUsesBoundedRegionsAndNavigatorPansAtActualPixels",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "nativeCanvasHonorsAllExifOrientationsAndSpaceCloses",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfGeometryTest",
+      "test": "extractedTextBoundsCoverRenderedGlyphsAtEveryPageRotationAndCrop",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "aPageWithoutATextLayerCannotCreateAnInventedSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionRespectsTheDocumentsExistingTextExtractionPermission",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionNativeTest",
+      "test": "selectionBoxesFollowActualRenderedGlyphsAcrossPageAndTextRotationsAndCropBoxes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "theFirstLongPressCanContinueIntoADragAfterLoadingTheTextLayer",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "switchingToReadingTextClearsTheRetainedRenderedPageSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "draggingTheEndHandleExtendsTheActualCopiedRange",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "changingPagesAndReopeningThePreviewDoNotReuseThePriorSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "holdingTheRenderedWordOpensSelectionWithoutASeparateModeTap",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "zoomKeepsTheSelectionAnchoredToThePageAndUsesTheSameCopyText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "accessibilityActionsCanExtendAHandleAndClearTheSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "draggingAcrossTwoRenderedLinesKeepsTheirActualLineBreak",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "anEmptyTextLayerExplainsWhyThereIsNothingToCopy",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "touchingAWordOnTheRenderedPageCopiesExactlyItsTextAndShowsNamedHandles",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "test": "keyboardSelectAllCopyAndEscapeOperateOnTheCurrentPdfPage",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "bookmarksAndReadingPositionSurviveReopeningWithoutEditingThePdf",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "imageOnlyPageRemainsViewableAndClearlyHasNoSelectableText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "selectableTextCopiesAndEmbeddedContentsNavigate",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "pageJumpAndDocumentKeyboardNavigationPreserveZoom",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "searchUsesSpacesAndFindsMatchesAcrossTheDocument",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "closingAProviderPeekClosesItsBlockedDownloadBeforeTheProviderReturns",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "providerPdfWithoutAnExtensionUsesItsDeclaredMimeType",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "malformedPdfReportsFailureAndPreviousFileStillOpens",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 286.7,
+  "wallSecondsThisInvocation": 59.0,
+  "timedOut": false,
+  "isolatedBatches": [
+    {
+      "selector": "dev.findroid.OcrNativeTest",
+      "report": "captures/ocr/candidate-3-api30-native/batches/01-OcrNativeTest.json",
+      "log": "captures/ocr/candidate-3-api30-native/batches/01-OcrNativeTest.txt",
+      "reportSha256": "765e1a048020333e534e9beea2e0aed387fac8a78d91a9dba2509b7a90348027",
+      "logSha256": "1ff750560b7c7df0212431a79f2a5f14588f05ad4360655166b22bea87674184",
+      "passed": 5
+    },
+    {
+      "selector": "dev.findroid.OcrWorkflowTest",
+      "report": "captures/ocr/candidate-3-api30-native/batches/02-OcrWorkflowTest.json",
+      "log": "captures/ocr/candidate-3-api30-native/batches/02-OcrWorkflowTest.txt",
+      "reportSha256": "be7d8ae40b12fc798122c0ec16477caa411462d8e15b772deef167175bab6900",
+      "logSha256": "759cec8f3d2e19a6ffa5af1b85bcee0fab7b6d6581693b24771b27297df54609",
+      "passed": 7
+    },
+    {
+      "selector": "dev.findroid.DocumentPreviewInputTest",
+      "report": "captures/ocr/candidate-3-api30-native/batches/03-DocumentPreviewInputTest.json",
+      "log": "captures/ocr/candidate-3-api30-native/batches/03-DocumentPreviewInputTest.txt",
+      "reportSha256": "08d541d592ed307f3a6db23518df0b69d6e8da4adffcf2eeb316c86a4a447ecb",
+      "logSha256": "a15692688f84c8e8659b7593a06202d6bc021761f7de0e6a57a7cead88bc8552",
+      "passed": 4
+    },
+    {
+      "selector": "dev.findroid.ImagePeekWorkflowTest",
+      "report": "captures/ocr/candidate-3-api30-native/batches/04-ImagePeekWorkflowTest.json",
+      "log": "captures/ocr/candidate-3-api30-native/batches/04-ImagePeekWorkflowTest.txt",
+      "reportSha256": "b841ea60a5f41d9a3299eadbb9983806c819851d42cb0f2b4e7a960ff33af7a8",
+      "logSha256": "eb91eaa92f5460e3c4a235c3fd33b6a259c9fa3fe2472186663cf97a3b48dcfc",
+      "passed": 6
+    },
+    {
+      "selector": "dev.findroid.PdfGeometryTest",
+      "report": "captures/ocr/candidate-3-api30-native/batches/05-PdfGeometryTest.json",
+      "log": "captures/ocr/candidate-3-api30-native/batches/05-PdfGeometryTest.txt",
+      "reportSha256": "faf6279fad75406adc2643b398f3e97fa61cd056a6176d739f355e0da0867c95",
+      "logSha256": "5242e5d8a7cee093695a67cd2d1cc855ae5052894af211b98e521cf68947ab2d",
+      "passed": 1
+    },
+    {
+      "selector": "dev.findroid.PdfPageSelectionNativeTest",
+      "report": "captures/ocr/candidate-3-api30-native/batches/06-PdfPageSelectionNativeTest.json",
+      "log": "captures/ocr/candidate-3-api30-native/batches/06-PdfPageSelectionNativeTest.txt",
+      "reportSha256": "e4a8b72973855450bf264639f0bada427cd8d4c9f249566600541d9e3bfb68a1",
+      "logSha256": "882753187ef3dfa028b4a5b697ffb669402621fe1f187e8c7c0b99b0648f3689",
+      "passed": 3
+    },
+    {
+      "selector": "dev.findroid.PdfPageSelectionWorkflowTest",
+      "report": "captures/ocr/candidate-3-api30-native/batches/07-PdfPageSelectionWorkflowTest.json",
+      "log": "captures/ocr/candidate-3-api30-native/batches/07-PdfPageSelectionWorkflowTest.txt",
+      "reportSha256": "237fb44dbe9c885eb2781a03f870dd94600b84f228b02218bac55b4c416afa7f",
+      "logSha256": "bf8da40fb923fdb9e657a801578c26f38deb377fbfed5c619e69bbfc593db271",
+      "passed": 11
+    },
+    {
+      "selector": "dev.findroid.PdfReadingWorkflowTest#searchUsesSpacesAndFindsMatchesAcrossTheDocument,dev.findroid.PdfReadingWorkflowTest#bookmarksAndReadingPositionSurviveReopeningWithoutEditingThePdf,dev.findroid.PdfReadingWorkflowTest#selectableTextCopiesAndEmbeddedContentsNavigate,dev.findroid.PdfReadingWorkflowTest#pageJumpAndDocumentKeyboardNavigationPreserveZoom,dev.findroid.PdfReadingWorkflowTest#closingAProviderPeekClosesItsBlockedDownloadBeforeTheProviderReturns,dev.findroid.PdfReadingWorkflowTest#malformedPdfReportsFailureAndPreviousFileStillOpens,dev.findroid.PdfReadingWorkflowTest#imageOnlyPageRemainsViewableAndClearlyHasNoSelectableText,dev.findroid.PdfReadingWorkflowTest#providerPdfWithoutAnExtensionUsesItsDeclaredMimeType",
+      "report": "captures/ocr/candidate-3-api30-native/batches/08-PdfReadingWorkflowTest.json",
+      "log": "captures/ocr/candidate-3-api30-native/batches/08-PdfReadingWorkflowTest.txt",
+      "reportSha256": "2b658790163e7fa5bc07e2fc00ed30b0035d35a302591cd4e33175f07e1fdd7e",
+      "logSha256": "daca0f893ce60bf2c623be8364c0252923a05cd086ef9250a5191cfc1a0cca72",
+      "passed": 8
+    }
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "325afd3269336e9d07727d53366ed23cf5ab95ec278fdaadec19d234753505eb",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "05ba12ed10f21b6db5d27e090700cfa062dab8aa8f01b20264ed4daf1239f10e"
+  },
+  "installedApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "325afd3269336e9d07727d53366ed23cf5ab95ec278fdaadec19d234753505eb",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "05ba12ed10f21b6db5d27e090700cfa062dab8aa8f01b20264ed4daf1239f10e"
+  }
+}

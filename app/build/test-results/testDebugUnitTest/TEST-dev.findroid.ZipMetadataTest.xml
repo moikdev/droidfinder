@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.ZipMetadataTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:50.177Z" hostname="MacBook-Pro-2.local" time="0.473">
+<testsuite name="dev.findroid.ZipMetadataTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:23:12.530Z" hostname="MacBook-Pro-2.local" time="0.436">
   <properties/>
   <testcase name="malformedExtraFieldsAreRejectedWithoutIndexing" classname="dev.findroid.ZipMetadataTest" time="0.002"/>
-  <testcase name="configuredEntryLimitRejectsBeforeReaderIndexingOrOutputCreation" classname="dev.findroid.ZipMetadataTest" time="0.038"/>
-  <testcase name="oversizedNamesAreRejectedBeforeDecoding" classname="dev.findroid.ZipMetadataTest" time="0.002"/>
+  <testcase name="configuredEntryLimitRejectsBeforeReaderIndexingOrOutputCreation" classname="dev.findroid.ZipMetadataTest" time="0.051"/>
+  <testcase name="oversizedNamesAreRejectedBeforeDecoding" classname="dev.findroid.ZipMetadataTest" time="0.003"/>
   <testcase name="cancelledMetadataReadNeverOpensTheReader" classname="dev.findroid.ZipMetadataTest" time="0.001"/>
-  <testcase name="cancellationDuringMetadataCaptureClosesTheSource" classname="dev.findroid.ZipMetadataTest" time="0.008"/>
+  <testcase name="cancellationDuringMetadataCaptureClosesTheSource" classname="dev.findroid.ZipMetadataTest" time="0.007"/>
   <testcase name="longArchiveCommentRemainsReadable" classname="dev.findroid.ZipMetadataTest" time="0.021"/>
   <testcase name="inconsistentCountIsRejectedEvenWhenBelowResourceLimits" classname="dev.findroid.ZipMetadataTest" time="0.002"/>
-  <testcase name="excessiveLocalExtraFieldsAreRejectedWhenCentralFieldsAreSmall" classname="dev.findroid.ZipMetadataTest" time="0.008"/>
+  <testcase name="excessiveLocalExtraFieldsAreRejectedWhenCentralFieldsAreSmall" classname="dev.findroid.ZipMetadataTest" time="0.005"/>
   <testcase name="excessiveCentralExtraFieldsAreRejected" classname="dev.findroid.ZipMetadataTest" time="0.003"/>
   <testcase name="emptyZip64SelfExtractorCanHaveALargePrefix" classname="dev.findroid.ZipMetadataTest" time="0.001"/>
-  <testcase name="aggregateExtraFieldsAreBoundedAcrossBothHeaderCopies" classname="dev.findroid.ZipMetadataTest" time="0.297"/>
-  <testcase name="selfExtractingPrefixAndArchiveCommentsRemainReadable" classname="dev.findroid.ZipMetadataTest" time="0.006"/>
-  <testcase name="truncatedDirectoryAndImpossibleZip64LocatorsFailCleanly" classname="dev.findroid.ZipMetadataTest" time="0.003"/>
-  <testcase name="largeAggregateCommentsAreRejectedBeforeReaderAllocations" classname="dev.findroid.ZipMetadataTest" time="0.046"/>
-  <testcase name="readerIndexesSnapshotsWhenTheSourceIsRewrittenAfterValidation" classname="dev.findroid.ZipMetadataTest" time="0.003"/>
-  <testcase name="actualDirectoryCountCannotBypassLimitWithAForgedEndRecord" classname="dev.findroid.ZipMetadataTest" time="0.031"/>
+  <testcase name="aggregateExtraFieldsAreBoundedAcrossBothHeaderCopies" classname="dev.findroid.ZipMetadataTest" time="0.247"/>
+  <testcase name="selfExtractingPrefixAndArchiveCommentsRemainReadable" classname="dev.findroid.ZipMetadataTest" time="0.005"/>
+  <testcase name="truncatedDirectoryAndImpossibleZip64LocatorsFailCleanly" classname="dev.findroid.ZipMetadataTest" time="0.002"/>
+  <testcase name="largeAggregateCommentsAreRejectedBeforeReaderAllocations" classname="dev.findroid.ZipMetadataTest" time="0.043"/>
+  <testcase name="readerIndexesSnapshotsWhenTheSourceIsRewrittenAfterValidation" classname="dev.findroid.ZipMetadataTest" time="0.006"/>
+  <testcase name="actualDirectoryCountCannotBypassLimitWithAForgedEndRecord" classname="dev.findroid.ZipMetadataTest" time="0.035"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

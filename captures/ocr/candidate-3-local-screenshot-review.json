@@ -1,0 +1,538 @@
+{
+  "images": [
+    {
+      "path": "captures/ocr/candidate-3-api30-native/images/after-batch-002/ocr-qa/explicit-language-choice.png",
+      "sha256": "8c4a6c88bbad84f0c0272b1bf9e7b57e0c9862231ac09cc57848d44576bd37d6",
+      "inspected": true,
+      "method": "Exact PNG bytes match an actually inspected native capture."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-native/images/after-batch-002/ocr-qa/image-recognized-text.png",
+      "sha256": "a32cd2a0dfb8c4c4834de13187409e1adebd911932f0d395cfe251996bc53936",
+      "inspected": true,
+      "method": "Exact PNG bytes match an actually inspected native capture."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-native/images/after-batch-002/ocr-qa/scanned-pdf-recognized-text.png",
+      "sha256": "b9527a817f8aae3f81509c0df3fd7b8a87e01729779fd622fa7a08411cad2bec",
+      "inspected": true,
+      "method": "Exact PNG bytes match an actually inspected native capture."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/explicit-model-choice-dialog.png",
+      "sha256": "90b3b89d373581a632d72a52f7892eee3ca38e780dee616935791ee119e9b6d8",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/image-result-dialog.png",
+      "sha256": "ce531c588a21e57cddb8edbb79e0d6918b5ef9ffa11cbe4ff128af91728238fc",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/image-search-result-dialog.png",
+      "sha256": "cc7c1cc679fdd9b37fa4875b029c68930550477ae19c5251eddfc34eca30abac",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/imported-model-ready-dialog.png",
+      "sha256": "03a11b831421725fd81f86d6f4f9082ac7853cdfd8b9abaf92fb33f86fffb6bb",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api30-optimized-core-1/scanned-pdf-result-dialog.png",
+      "sha256": "3bb70646cf7486a87a937a43bf217bd9c7b9d2dd2d4fb028275f3627814328af",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font1.0-light-result-dialog.png",
+      "sha256": "ce531c588a21e57cddb8edbb79e0d6918b5ef9ffa11cbe4ff128af91728238fc",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font1.0-light-recognized-glyph.png",
+      "sha256": "336d3aa1794e340fd2a839dacf59be07ff020333aed4fbba9f1157d451e6c1a8",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font1.0-light-options-dialog.png",
+      "sha256": "dd0d696dc51dd75e629bb88fc5b57ca6c95f8c583b475fde8e4974f7bc53b2ec",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font1.0-dark-result-dialog.png",
+      "sha256": "dacb13a1dd7fcc326f156271d4dfce756fc3bcb7d7f42cbf92b71062bee8d812",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font1.0-dark-recognized-glyph.png",
+      "sha256": "15d57953303e607699b6cdb64d2b4209eb6195b52f4279fde2158fd1bab0b9a9",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font1.0-dark-options-dialog.png",
+      "sha256": "f5062f96540ed14fce7f3d218176194e7ed89d3d8e6827af2344c55930566f6d",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font2.0-light-result-dialog.png",
+      "sha256": "b509543445caebf334a40a87be19f2a139b9132bef2a7747d7ca3bc7db4319c7",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font2.0-light-recognized-glyph.png",
+      "sha256": "248a71b52899ece478c839f57e3d660b6c36e70729f3e11e4649e653366b8c05",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font2.0-light-options-dialog.png",
+      "sha256": "fc771d95ec8881929f656b458d1d76e7d1af1e52e18165a882c6a17a68ccdd81",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font2.0-dark-result-dialog.png",
+      "sha256": "9947fca582960af962f2c2450569432d0aeb6b34ad3e5636db34babf611c738a",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font2.0-dark-recognized-glyph.png",
+      "sha256": "f4f700656ddd65e4c0f1cc071996f59e9353513d0b041e4673e9c429fedc96c8",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-1280x800-font2.0-dark-options-dialog.png",
+      "sha256": "56a062fc7e10c2d84b0e241818dfbb2b3a6b7259732181986bb8e3ebc33da39c",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font1.0-light-result-dialog.png",
+      "sha256": "a278a9dd2c9e66c53bbe29d6581a999f2f2bc7f2e8e0ecb597ae648ab2855de0",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font1.0-light-recognized-glyph.png",
+      "sha256": "7781a328f827118e6ec1041d8f755697fac27794de2c1711cba25cc9bba70bb9",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font1.0-light-options-dialog.png",
+      "sha256": "c05a04ba1fa86e7cc5715439113213f65722e551ee403b8c66dd8cbb75179e88",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font1.0-dark-result-dialog.png",
+      "sha256": "bd286b47ec3410e4e52b2a1170e02159c336075dc8e30ce7c2b2987fbd584571",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font1.0-dark-recognized-glyph.png",
+      "sha256": "63cbb9ee6ae0c3acd1f7872137b36dc4f6682c4d43fb5298fbdda5df560433cd",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font1.0-dark-options-dialog.png",
+      "sha256": "933f5217cc5738bf2c3d970e7e2d0c2a17cc601371ddbb95ee627c7dc02efd45",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font2.0-light-result-dialog.png",
+      "sha256": "b40fbcaa7508537fd112a40f8406c4b0779bcee64a5391ffba948304eaa8898d",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font2.0-light-recognized-glyph.png",
+      "sha256": "d077f9908a46165760f80b713526002666e690d6791d83daffb2278a156934ea",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font2.0-light-options-dialog.png",
+      "sha256": "d64d440dc37e2d00580a8c3ceb16248bacedcf50991a5641d488cf61e7217679",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font2.0-dark-result-dialog.png",
+      "sha256": "46347722f535ffe892ca4f67328478a6da6013741d171107770ed9e753cc7159",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font2.0-dark-recognized-glyph.png",
+      "sha256": "e9081d7118a6b5be190ac7b9ba40a861e82726b6fa4280ff32d363672638f2ae",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-800x1280-font2.0-dark-options-dialog.png",
+      "sha256": "3e1b803f209ca45b7d9c4729563f17d6f16ae84815e73596c0a1b8d5b564a72a",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font1.0-light-result-dialog.png",
+      "sha256": "48186c45183cbb56dd73f92e472c3ec77d5ce415b1dfaa4696ba77b3e652f86c",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font1.0-light-recognized-glyph.png",
+      "sha256": "336d3aa1794e340fd2a839dacf59be07ff020333aed4fbba9f1157d451e6c1a8",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font1.0-light-options-dialog.png",
+      "sha256": "d25164465c5baf3902709fa53e30df9a8b16dd4b5aa0ec589cce9238e185746e",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font1.0-dark-result-dialog.png",
+      "sha256": "fa28454d31e0349c52cd50b93882b3409520b0a6b2fcd70406f6487073067e94",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font1.0-dark-recognized-glyph.png",
+      "sha256": "15d57953303e607699b6cdb64d2b4209eb6195b52f4279fde2158fd1bab0b9a9",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font1.0-dark-options-dialog.png",
+      "sha256": "6b1f8b7c55b54521262b6e5ea2f9ff25ad516f1d05c7b97041a3104c8f91c483",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font2.0-light-result-dialog.png",
+      "sha256": "32d1c4b5c020fd3f6e1fcc646eeb005617c7237018d8b1594a3bf6e61ceb9699",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font2.0-light-recognized-glyph.png",
+      "sha256": "248a71b52899ece478c839f57e3d660b6c36e70729f3e11e4649e653366b8c05",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font2.0-light-options-dialog.png",
+      "sha256": "99647377bbe8a58bc2f49aebff9d9f9bc41008fc83322d8d58835f38a713fe6e",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font2.0-dark-result-dialog.png",
+      "sha256": "b2ee5d0e7bd4e2dc356a35e7af207190c73e0905fd023e9fcd713c52ecdf1d0a",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font2.0-dark-recognized-glyph.png",
+      "sha256": "f4f700656ddd65e4c0f1cc071996f59e9353513d0b041e4673e9c429fedc96c8",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api30-optimized-layouts-3/layout-600x800-font2.0-dark-options-dialog.png",
+      "sha256": "c1b0b3610c6a9f7b266495ab019ad72fb63459825c9882d55e986f1f351c7a5a",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-native/images/after-batch-002/ocr-qa/explicit-language-choice.png",
+      "sha256": "7e89e4211b7556e7c3a0b060c4d4d9eb3ac09db35b1632026ba831038be6bf92",
+      "inspected": true,
+      "method": "Exact PNG bytes match an actually inspected native capture."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-native/images/after-batch-002/ocr-qa/image-recognized-text.png",
+      "sha256": "898448d720cf870c343e3d14b56481651f0ce25859dc8bd826a4f6bee08f5647",
+      "inspected": true,
+      "method": "Exact PNG bytes match an actually inspected native capture."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-native/images/after-batch-002/ocr-qa/scanned-pdf-recognized-text.png",
+      "sha256": "9c1a217744fb1e60bc6ec66bab5fd36c36d773b931c9ffde6ca699bae2b08950",
+      "inspected": true,
+      "method": "Exact PNG bytes match an actually inspected native capture."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/explicit-model-choice-dialog.png",
+      "sha256": "f7b62602c6e4866bc1cab2b250a0f0eabef6222ba29116240a492ebd04ba9c8a",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/image-result-dialog.png",
+      "sha256": "24306673a4e5f7a39c8c6e0dcb5c1590608b4e9e1184090617f7ab7ec200177e",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/image-search-result-dialog.png",
+      "sha256": "10262477fe892500abb31e634de29ff2c7e00841f8a14af50e9697f3c346978d",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/imported-model-ready-dialog.png",
+      "sha256": "acdd3bc205a7060768917ecf25e64252783865136ea12e7c1ead4d632323d4ea",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-2-api36-optimized-core-1/scanned-pdf-result-dialog.png",
+      "sha256": "239657e43948a7e4f7f83e44bc3fc6c9e390d8229eea7ab6df1124f7b323026d",
+      "inspected": true,
+      "method": "Actual individual image inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font1.0-light-result-dialog.png",
+      "sha256": "24306673a4e5f7a39c8c6e0dcb5c1590608b4e9e1184090617f7ab7ec200177e",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font1.0-light-options-dialog.png",
+      "sha256": "9a692908f7977985abea21f2e70d7cb2f1ed04ea13f9e3cf3d42892a348548c1",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font1.0-dark-result-dialog.png",
+      "sha256": "1fcbfa0ff8948f1888701c31d5a1f7b45c6b60277e994a624d9ed451f9a0b8a1",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font1.0-dark-options-dialog.png",
+      "sha256": "abe33b52890e1723725b28353f2121cb81741a0fc22e28e84282203acad66d56",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font2.0-light-result-dialog.png",
+      "sha256": "bec3fcb4ba715f52d73674d5e596ffbe0c1bd4ffeb6414ec21c8882896a804f8",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font2.0-light-options-dialog.png",
+      "sha256": "8b91f23650a035b5f5165aac0ac3313149287c79227199231dadb4e2018deaf4",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font2.0-dark-result-dialog.png",
+      "sha256": "f64f2ba82ae998f55863a152267971aec9d073d8bbdc70e524bf9f9efd2e170d",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-1280x800-font2.0-dark-options-dialog.png",
+      "sha256": "e458a753b4cd2a9445e8a72e5441e426eeea376d6ec92bafa6c4a4e483f50884",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font1.0-light-result-dialog.png",
+      "sha256": "11c82a3382ec2bcb7aa3d78a7d95a4c36ef23c11e9f89ed91e0b7eefc703e7e1",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font1.0-light-options-dialog.png",
+      "sha256": "5af3bb481080fdc3f6e5b4477bdb296a55c273ae1452d800fd8787e69bcc3d67",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font1.0-dark-result-dialog.png",
+      "sha256": "f768c3ab16a1bc5392f938d096e70708f996d4b47f4b09440d4ca36f6484fac7",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font1.0-dark-options-dialog.png",
+      "sha256": "1dea56e0a538a38f793392a7a45e6269ed47cd675793ce78c4151154460ab438",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font2.0-light-result-dialog.png",
+      "sha256": "db188bb9b746f81136f1d2cdbe3c062b029fb21de13d057cdbfd66d8bbcaa581",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font2.0-light-options-dialog.png",
+      "sha256": "4ac1b356485c1178cb45a3f4b08d38db3128032b95225e506fed8f483da39bae",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font2.0-dark-result-dialog.png",
+      "sha256": "a36e79b0f44ab054f9362ee6d806e46ff2e9d6fb4b7d0a0229d5e3fdc8613a93",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-800x1280-font2.0-dark-options-dialog.png",
+      "sha256": "1686f28ee9ede82844dcbdb42dd36408fd977f0041dfac094dcdf82fd88ff342",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font1.0-light-result-dialog.png",
+      "sha256": "4f1c892d2384271bfb82d84a5bf7ce2c2dd72274f3a447b72b57be96bd3e75eb",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font1.0-light-recognized-glyph.png",
+      "sha256": "73390ca01b146eddfc2534fc329de392085c3b796f18313f43433fb4a5fac91b",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font1.0-light-options-dialog.png",
+      "sha256": "c67e3fa1f2bb6bc0f89de3cad93177477ec892689e1d1fa7ce2888e55a08cde2",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font1.0-dark-result-dialog.png",
+      "sha256": "d1dba690269ff097c9b8d8eef7930e6261451179b044210391d81ad7314a808f",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font1.0-dark-recognized-glyph.png",
+      "sha256": "aba088f2905a3ab14895e79bb3e00c87e131d3f605f5f9da8ce1409c9e2916fe",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font1.0-dark-options-dialog.png",
+      "sha256": "5b2190f5add5d860ec91ca16e5860eb48f85492964f7e3fa90bada86ccd1f2d8",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font2.0-light-result-dialog.png",
+      "sha256": "8cb8caf9c1c45c9c03f0598cb370574ad962392b4c8d77f6088de69255599018",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font2.0-light-recognized-glyph.png",
+      "sha256": "767db6c8ecadbaf0554f5c039b7bbf629d40d161375a6e491c9dd6c71f5f68ea",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font2.0-light-options-dialog.png",
+      "sha256": "8fb8cae90b4e501c81f5df5b14490e7e450f2b814cd2b85056c8ccdd36bfb84f",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font2.0-dark-result-dialog.png",
+      "sha256": "24e25b29b646e95c8d2f03e52d9d29732a3c2998afe186530aae4a7afeae9060",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font2.0-dark-recognized-glyph.png",
+      "sha256": "34bfe5d5ea6eb4a00e75dbcdc5641b6640bbf52701c912f0971328188fe85302",
+      "inspected": true,
+      "method": "Exact glyph subset of an inspected result surface."
+    },
+    {
+      "path": "captures/ocr/candidate-3-api36-optimized-layouts-3/layout-600x800-font2.0-dark-options-dialog.png",
+      "sha256": "b9b9b7605021377d8641f8e89d134a10926fd23c6563a58f774a79151c95a749",
+      "inspected": true,
+      "method": "Actual size/font/theme review sheet inspection."
+    }
+  ],
+  "selectedImagePaths": 88,
+  "allSelectedImagesInspected": true,
+  "glyphSubsetsVerified": 24,
+  "nativePixelIdenticalGroupsVerified": 6,
+  "findings": "Both actual recognized lines are readable in every accepted result capture. Scrolling options can clip the result context below their viewport; the model controls and sticky Close action stay readable. All surfaces show synthetic data only.",
+  "initialClippedTextCapturesExcludedFromReadableTextAcceptance": true
+}

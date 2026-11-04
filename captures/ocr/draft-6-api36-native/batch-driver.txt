@@ -1,0 +1,39 @@
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 5 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-local-ocr/captures/ocr/draft-6-api36-native/batches/01-OcrNativeTest.txt
+Accepted batch 1/2: dev.findroid.OcrNativeTest (5 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 7 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-local-ocr/captures/ocr/draft-6-api36-native/batches/02-OcrWorkflowTest.txt
+Accepted batch 2/2: dev.findroid.OcrWorkflowTest (7 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+emulator-5582: 12 passed in 2 isolated batches; zero failures/skips.

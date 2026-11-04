@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncTrashTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:40.420Z" hostname="MacBook-Pro-2.local" time="0.05">
+<testsuite name="dev.findroid.FolderSyncTrashTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:22:59.205Z" hostname="MacBook-Pro-2.local" time="0.04">
   <properties/>
-  <testcase name="aFailedPreservationIntentLeavesTheOriginalAndItsRecordedRecoveryLocationForReview" classname="dev.findroid.FolderSyncTrashTest" time="0.004"/>
-  <testcase name="cancellationBeforeTheMoveLeavesTheReviewedOriginalInPlace" classname="dev.findroid.FolderSyncTrashTest" time="0.002"/>
-  <testcase name="anOriginalEditedWhileItsIntentIsSavedIsRecheckedBeforeTheNativeMove" classname="dev.findroid.FolderSyncTrashTest" time="0.006"/>
-  <testcase name="crossFilesystemTrashIsRefusedBeforeCreatingABucketOrReadingNewData" classname="dev.findroid.FolderSyncTrashTest" time="0.003"/>
-  <testcase name="aDisclosedFolderMovesAsOneOriginalWithoutRecursivelyCopyingIt" classname="dev.findroid.FolderSyncTrashTest" time="0.008"/>
-  <testcase name="aRecoveryNameCollisionPreservesBothTheLiveOriginalAndTheOccupant" classname="dev.findroid.FolderSyncTrashTest" time="0.005"/>
-  <testcase name="sameFilesystemOriginalGetsAnExactDurableTrashMapping" classname="dev.findroid.FolderSyncTrashTest" time="0.004"/>
-  <testcase name="theExactRecoveryIntentIsRecordedAfterTheDurableMappingAndBeforeTheOriginalMoves" classname="dev.findroid.FolderSyncTrashTest" time="0.005"/>
+  <testcase name="aFailedPreservationIntentLeavesTheOriginalAndItsRecordedRecoveryLocationForReview" classname="dev.findroid.FolderSyncTrashTest" time="0.003"/>
+  <testcase name="cancellationBeforeTheMoveLeavesTheReviewedOriginalInPlace" classname="dev.findroid.FolderSyncTrashTest" time="0.001"/>
+  <testcase name="anOriginalEditedWhileItsIntentIsSavedIsRecheckedBeforeTheNativeMove" classname="dev.findroid.FolderSyncTrashTest" time="0.004"/>
+  <testcase name="crossFilesystemTrashIsRefusedBeforeCreatingABucketOrReadingNewData" classname="dev.findroid.FolderSyncTrashTest" time="0.002"/>
+  <testcase name="aDisclosedFolderMovesAsOneOriginalWithoutRecursivelyCopyingIt" classname="dev.findroid.FolderSyncTrashTest" time="0.006"/>
+  <testcase name="aRecoveryNameCollisionPreservesBothTheLiveOriginalAndTheOccupant" classname="dev.findroid.FolderSyncTrashTest" time="0.006"/>
+  <testcase name="sameFilesystemOriginalGetsAnExactDurableTrashMapping" classname="dev.findroid.FolderSyncTrashTest" time="0.003"/>
+  <testcase name="theExactRecoveryIntentIsRecordedAfterTheDurableMappingAndBeforeTheOriginalMoves" classname="dev.findroid.FolderSyncTrashTest" time="0.003"/>
   <testcase name="staleReviewedBytesAreNeverMovedToTrash" classname="dev.findroid.FolderSyncTrashTest" time="0.002"/>
-  <testcase name="aFaultAfterTheRenameReportsThePreservedOriginalAndKeepsItsMapping" classname="dev.findroid.FolderSyncTrashTest" time="0.004"/>
+  <testcase name="aFaultAfterTheRenameReportsThePreservedOriginalAndKeepsItsMapping" classname="dev.findroid.FolderSyncTrashTest" time="0.003"/>
   <testcase name="recoveryCannotMoveTrashIntoItselfOrAnAncestorEvenWithoutAPreflightToken" classname="dev.findroid.FolderSyncTrashTest" time="0.003"/>
-  <testcase name="aLastMomentRewriteIsPreservedInTrashAndRefusesFurtherSynchronization" classname="dev.findroid.FolderSyncTrashTest" time="0.004"/>
+  <testcase name="aLastMomentRewriteIsPreservedInTrashAndRefusesFurtherSynchronization" classname="dev.findroid.FolderSyncTrashTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

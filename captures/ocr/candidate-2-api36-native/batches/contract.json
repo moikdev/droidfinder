@@ -1,0 +1,17 @@
+{
+  "serial": "emulator-5582",
+  "selectors": [
+    "dev.findroid.OcrNativeTest",
+    "dev.findroid.OcrWorkflowTest",
+    "dev.findroid.DocumentPreviewInputTest",
+    "dev.findroid.ImagePeekWorkflowTest",
+    "dev.findroid.PdfGeometryTest",
+    "dev.findroid.PdfPageSelectionNativeTest",
+    "dev.findroid.PdfPageSelectionWorkflowTest",
+    "dev.findroid.PdfReadingWorkflowTest"
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "325afd3269336e9d07727d53366ed23cf5ab95ec278fdaadec19d234753505eb",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "05ba12ed10f21b6db5d27e090700cfa062dab8aa8f01b20264ed4daf1239f10e"
+  }
+}

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SetupJsonTreeTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:49.601Z" hostname="MacBook-Pro-2.local" time="0.03">
+<testsuite name="dev.findroid.SetupJsonTreeTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:23:11.844Z" hostname="MacBook-Pro-2.local" time="0.05">
   <properties/>
-  <testcase name="strictJsonRejectsDuplicateFieldsTrailingInputAndLenientSyntax" classname="dev.findroid.SetupJsonTreeTest" time="0.001"/>
+  <testcase name="strictJsonRejectsDuplicateFieldsTrailingInputAndLenientSyntax" classname="dev.findroid.SetupJsonTreeTest" time="0.002"/>
   <testcase name="unicodeAndIntegerPrecisionSurviveStrictParsing" classname="dev.findroid.SetupJsonTreeTest" time="0.0"/>
   <testcase name="nestedPayloadIsRejectedBeforeARecursiveAndroidParserReadsIt" classname="dev.findroid.SetupJsonTreeTest" time="0.0"/>
-  <testcase name="readRejectsInvalidUtf8AndOverBudgetStreams" classname="dev.findroid.SetupJsonTreeTest" time="0.029"/>
+  <testcase name="readRejectsInvalidUtf8AndOverBudgetStreams" classname="dev.findroid.SetupJsonTreeTest" time="0.048"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

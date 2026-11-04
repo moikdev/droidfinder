@@ -1,0 +1,296 @@
+{
+  "initialMatricesRetained": true,
+  "applicationUnchanged": true,
+  "problem": "Non-clickable accessibility nodes can expose only one pixel of a clipped passage. These initial result captures are not accepted as proof of complete recognized text. Clipboard and action-target checks are separate.",
+  "replacement": "Named scrolling followed by two complete raster glyph bands and actual font-growth measurements.",
+  "cases": [
+    {
+      "serial": "api30",
+      "case": "layout-1280x800-font1.0-dark",
+      "recognizedTextBoundsPx": [
+        398,
+        738,
+        519,
+        846
+      ],
+      "recognizedTextHeightPx": 108,
+      "hierarchySha256": "cc298e3664a840f16147540a95025afc212e810d2ca93a8e71199fb6633f2292"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-1280x800-font1.0-light",
+      "recognizedTextBoundsPx": [
+        398,
+        738,
+        519,
+        810
+      ],
+      "recognizedTextHeightPx": 72,
+      "hierarchySha256": "ce9f67bd1b53125fee199327247f59d798cc8b3d367030fe145e6960a4c04241"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-1280x800-font2.0-dark",
+      "recognizedTextBoundsPx": [
+        398,
+        973,
+        608,
+        974
+      ],
+      "recognizedTextHeightPx": 1,
+      "hierarchySha256": "9680ff58d6047cd2faf04ca243dced0204fc8e914a35fc34a1ade60d32206319"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-1280x800-font2.0-light",
+      "recognizedTextBoundsPx": [
+        398,
+        973,
+        608,
+        974
+      ],
+      "recognizedTextHeightPx": 1,
+      "hierarchySha256": "ef794c4c511914f97b0de56e0bac65f5c6b4e31b3aac4490429bd588ab198054"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-600x800-font1.0-dark",
+      "recognizedTextBoundsPx": [
+        57,
+        774,
+        178,
+        882
+      ],
+      "recognizedTextHeightPx": 108,
+      "hierarchySha256": "a5ecc41a20ea2a6d331ca613513d6e983303f4476bd210848764a97906b4ae3a"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-600x800-font1.0-light",
+      "recognizedTextBoundsPx": [
+        57,
+        774,
+        178,
+        846
+      ],
+      "recognizedTextHeightPx": 72,
+      "hierarchySha256": "ad1329e4aa571d670e7a60a70f0f293b2fd0e2ae622d5fb5b3fe4ef7353adf0e"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-600x800-font2.0-dark",
+      "recognizedTextBoundsPx": [
+        57,
+        973,
+        267,
+        974
+      ],
+      "recognizedTextHeightPx": 1,
+      "hierarchySha256": "789665f830b27ddc730157d32dcacc9e74c7aa786938f8c632cd1adb0b566c33"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-600x800-font2.0-light",
+      "recognizedTextBoundsPx": [
+        57,
+        973,
+        267,
+        974
+      ],
+      "recognizedTextHeightPx": 1,
+      "hierarchySha256": "cc170c689dfbc4eb38fe1d3b711d0b3248c24f79b11b1782704d33fe93026b1b"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-800x1280-font1.0-dark",
+      "recognizedTextBoundsPx": [
+        66,
+        767,
+        187,
+        875
+      ],
+      "recognizedTextHeightPx": 108,
+      "hierarchySha256": "3127e6158d42a591700dec80d4205ec4e5ced186fc10cab49faa8b592abf32a8"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-800x1280-font1.0-light",
+      "recognizedTextBoundsPx": [
+        66,
+        767,
+        187,
+        839
+      ],
+      "recognizedTextHeightPx": 72,
+      "hierarchySha256": "295a08841a48118396a8e1948ce55a6c676e39a1625bb2178ab38c65289b39a1"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-800x1280-font2.0-dark",
+      "recognizedTextBoundsPx": [
+        66,
+        1115,
+        276,
+        1304
+      ],
+      "recognizedTextHeightPx": 189,
+      "hierarchySha256": "f2b5c173ee0c1e6c42f26dbdbb2f95724ca12265b5cce1cfec089e44d62dcce2"
+    },
+    {
+      "serial": "api30",
+      "case": "layout-800x1280-font2.0-light",
+      "recognizedTextBoundsPx": [
+        66,
+        1115,
+        276,
+        1241
+      ],
+      "recognizedTextHeightPx": 126,
+      "hierarchySha256": "6613082aa0d1a1d460df4f904f7c1893a22bf027aaf82ce0bb37854160213261"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-1280x800-font1.0-dark",
+      "recognizedTextBoundsPx": [
+        398,
+        739,
+        519,
+        847
+      ],
+      "recognizedTextHeightPx": 108,
+      "hierarchySha256": "52360b13e4127b11e27e79ce81cc181b908dd94fa5e473bb19f937ef7b2956d3"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-1280x800-font1.0-light",
+      "recognizedTextBoundsPx": [
+        398,
+        739,
+        519,
+        811
+      ],
+      "recognizedTextHeightPx": 72,
+      "hierarchySha256": "ed00efe3024dfa89f3298daf39c6d082994919c5e1749c1308d68d4dde791344"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-1280x800-font2.0-dark",
+      "recognizedTextBoundsPx": [
+        398,
+        996,
+        608,
+        997
+      ],
+      "recognizedTextHeightPx": 1,
+      "hierarchySha256": "aa9ee6355a8dc99f6f191f7bed3bf44d79539c1684da608cefe7756d315920a8"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-1280x800-font2.0-light",
+      "recognizedTextBoundsPx": [
+        398,
+        996,
+        608,
+        997
+      ],
+      "recognizedTextHeightPx": 1,
+      "hierarchySha256": "bd6821e6868ba17081a59ae4735879e66f91bff6f178a4865f83a1dec6417f3b"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-600x800-font1.0-dark",
+      "recognizedTextBoundsPx": [
+        57,
+        775,
+        178,
+        883
+      ],
+      "recognizedTextHeightPx": 108,
+      "hierarchySha256": "5857d75cecb7f9126ad29fb2b306eec439276b83951b965b663d0817d500d803"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-600x800-font1.0-light",
+      "recognizedTextBoundsPx": [
+        57,
+        775,
+        178,
+        847
+      ],
+      "recognizedTextHeightPx": 72,
+      "hierarchySha256": "2d054c8a1467c085a32bd72aa18e70852e7346beeb8fe2d5d05040b06507b6d7"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-600x800-font2.0-dark",
+      "recognizedTextBoundsPx": [
+        57,
+        996,
+        267,
+        997
+      ],
+      "recognizedTextHeightPx": 1,
+      "hierarchySha256": "8083c91ee9228943d32784b659c20b0b28bc624abbfd2c83a42b89a0ab197cae"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-600x800-font2.0-light",
+      "recognizedTextBoundsPx": [
+        57,
+        996,
+        267,
+        997
+      ],
+      "recognizedTextHeightPx": 1,
+      "hierarchySha256": "a6996c7630752fdcc83941185281b902c3f4f16b402b5b9cbd1cfb13bf4dfb24"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-800x1280-font1.0-dark",
+      "recognizedTextBoundsPx": [
+        66,
+        768,
+        187,
+        876
+      ],
+      "recognizedTextHeightPx": 108,
+      "hierarchySha256": "a99fc2b1bfc2a79302718f4c4fd81ecb39aa55b16f18dff127c655cb101ff4f7"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-800x1280-font1.0-light",
+      "recognizedTextBoundsPx": [
+        66,
+        768,
+        187,
+        840
+      ],
+      "recognizedTextHeightPx": 72,
+      "hierarchySha256": "9d3a9470aa294cc80910cfee29dc3c5906d300d70f88cd090278781acf37d336"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-800x1280-font2.0-dark",
+      "recognizedTextBoundsPx": [
+        66,
+        1116,
+        276,
+        1305
+      ],
+      "recognizedTextHeightPx": 189,
+      "hierarchySha256": "0188b9796af956b5359adfce67e826d15f9f27ead937cfa34bfb8635e2656b0a"
+    },
+    {
+      "serial": "api36",
+      "case": "layout-800x1280-font2.0-light",
+      "recognizedTextBoundsPx": [
+        66,
+        1116,
+        276,
+        1242
+      ],
+      "recognizedTextHeightPx": 126,
+      "hierarchySha256": "a34b4d39f8aeacf559c2fba60608724f69240f792a1c126fec88b33bd355c1aa"
+    }
+  ]
+}

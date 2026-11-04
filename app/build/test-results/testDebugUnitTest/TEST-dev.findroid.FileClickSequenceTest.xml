@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FileClickSequenceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:35.894Z" hostname="MacBook-Pro-2.local" time="0.001">
+<testsuite name="dev.findroid.FileClickSequenceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:22:53.638Z" hostname="MacBook-Pro-2.local" time="0.001">
   <properties/>
   <testcase name="touchOrModifierSelectionResetsTheSequence" classname="dev.findroid.FileClickSequenceTest" time="0.001"/>
   <testcase name="InterveningBackgroundPressOrCancelledDragCannotOpenAnItem" classname="dev.findroid.FileClickSequenceTest" time="0.0"/>

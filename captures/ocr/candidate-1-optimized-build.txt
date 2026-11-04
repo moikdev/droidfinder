@@ -1,0 +1,157 @@
+> Task :app:verifyOcrEngine
+> Task :app:preBuild
+> Task :app:prePreviewBuild
+> Task :app:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :app:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :app:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :app:buildCMakeRelWithDebInfo[armeabi-v7a]
+> Task :app:configureCMakeRelWithDebInfo[x86]
+> Task :app:buildCMakeRelWithDebInfo[x86]
+> Task :app:configureCMakeRelWithDebInfo[x86_64]
+> Task :app:buildCMakeRelWithDebInfo[x86_64]
+> Task :app:mergePreviewJniLibFolders
+> Task :app:generatePreviewBuildConfig
+> Task :app:generatePreviewResources
+> Task :app:packagePreviewResources
+> Task :app:processPreviewNavigationResources
+> Task :app:javaPreCompilePreview
+> Task :app:parsePreviewLocalResources
+> Task :app:generatePreviewRFile
+> Task :app:mergePreviewArtProfile
+> Task :app:checkPreviewDuplicateClasses
+> Task :app:checkPreviewAarMetadata
+> Task :app:mapPreviewSourceSetPaths
+> Task :app:compilePreviewNavigationResources
+> Task :app:mergePreviewNativeLibs
+> Task :app:createPreviewCompatibleScreenManifests
+> Task :app:extractDeepLinksPreview
+> Task :app:processPreviewMainManifest
+> Task :app:processPreviewManifest
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:mergePreviewStartupProfile
+> Task :app:generatePreviewAssets UP-TO-DATE
+> Task :app:stripPreviewDebugSymbols
+> Task :app:mergePreviewAssets
+> Task :app:mergePreviewResources
+> Task :app:extractPreviewVersionControlInfo
+> Task :app:extractPreviewNativeSymbolTables
+> Task :app:compressPreviewAssets
+> Task :app:collectPreviewDependencies
+> Task :app:mergePreviewNativeDebugMetadata
+> Task :app:sdkPreviewDependencyData
+> Task :app:validateSigningPreview
+> Task :app:writePreviewAppMetadata
+> Task :app:writePreviewSigningConfigVersions
+> Task :app:preReleaseBuild
+> Task :app:mergeReleaseJniLibFolders
+> Task :app:generateReleaseBuildConfig
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:generateReleaseResources
+> Task :app:packageReleaseResources
+> Task :app:processReleaseNavigationResources
+> Task :app:javaPreCompileRelease
+> Task :app:parseReleaseLocalResources
+> Task :app:mergeReleaseArtProfile
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:checkReleaseAarMetadata
+> Task :app:compileReleaseNavigationResources
+> Task :app:generateReleaseRFile
+> Task :app:mergeReleaseNativeLibs
+> Task :app:processPreviewManifestForPackage
+> Task :app:stripReleaseDebugSymbols
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :app:mergeReleaseResources
+> Task :app:extractReleaseNativeSymbolTables
+> Task :app:processReleaseMainManifest
+> Task :app:mergeReleaseNativeDebugMetadata
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :app:mergeReleaseStartupProfile
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:compressReleaseAssets
+> Task :app:processPreviewResources
+> Task :app:processReleaseResources
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :app:compilePreviewKotlin
+> Task :app:compileReleaseKotlin
+
+> Task :app:compilePreviewKotlin
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/AnalysisDialogs.kt:798:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/BatchRename.kt:120:62 Java type mismatch: inferred type is 'File?', but 'File' was expected.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderApp.kt:213:29 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderApp.kt:779:101 'val Icons.Outlined.NoteAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Outlined.NoteAdd.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderDragDrop.kt:105:5 'fun Modifier.dragAndDropSource(block: suspend DragAndDropSourceScope.() -> Unit): Modifier' is deprecated. Replaced by overload with a callback for obtain a transfer data,start detection is performed by Compose itself.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderDragDrop.kt:179:14 'fun Modifier.dragAndDropSource(block: suspend DragAndDropSourceScope.() -> Unit): Modifier' is deprecated. Replaced by overload with a callback for obtain a transfer data,start detection is performed by Compose itself.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderDragDrop.kt:228:5 'fun Modifier.dragAndDropSource(block: suspend DragAndDropSourceScope.() -> Unit): Modifier' is deprecated. Replaced by overload with a callback for obtain a transfer data,start detection is performed by Compose itself.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:111:53 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:112:47 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:113:47 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:114:50 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:115:53 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:257:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:410:44 'val Icons.Outlined.RotateRight: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Outlined.RotateRight.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/OrganizationDialog.kt:1077:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ReferenceRepairDialog.kt:350:33 'val Icons.Outlined.ArrowForward: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Outlined.ArrowForward.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/RenameDialog.kt:45:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+
+> Task :app:compileReleaseKotlin
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/AnalysisDialogs.kt:798:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/BatchRename.kt:120:62 Java type mismatch: inferred type is 'File?', but 'File' was expected.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderApp.kt:213:29 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderApp.kt:779:101 'val Icons.Outlined.NoteAdd: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Outlined.NoteAdd.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderDragDrop.kt:105:5 'fun Modifier.dragAndDropSource(block: suspend DragAndDropSourceScope.() -> Unit): Modifier' is deprecated. Replaced by overload with a callback for obtain a transfer data,start detection is performed by Compose itself.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderDragDrop.kt:179:14 'fun Modifier.dragAndDropSource(block: suspend DragAndDropSourceScope.() -> Unit): Modifier' is deprecated. Replaced by overload with a callback for obtain a transfer data,start detection is performed by Compose itself.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/FinderDragDrop.kt:228:5 'fun Modifier.dragAndDropSource(block: suspend DragAndDropSourceScope.() -> Unit): Modifier' is deprecated. Replaced by overload with a callback for obtain a transfer data,start detection is performed by Compose itself.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:111:53 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:112:47 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:113:47 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:114:50 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:115:53 Type argument for reified type parameter 'T' was inferred to the intersection of ['Comparable<*>' & 'Serializable']. Reification of an intersection type results in the common supertype being used. This may lead to subtle issues and an explicit type argument is encouraged. This will become an error in a future release.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:257:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ImageQuickLook.kt:410:44 'val Icons.Outlined.RotateRight: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Outlined.RotateRight.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/OrganizationDialog.kt:1077:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/ReferenceRepairDialog.kt:350:33 'val Icons.Outlined.ArrowForward: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Outlined.ArrowForward.
+w: file:///private/tmp/findroid-local-ocr/app/src/main/java/dev/findroid/RenameDialog.kt:45:21 'val LocalClipboardManager: ProvidableCompositionLocal<ClipboardManager>' is deprecated. Use LocalClipboard instead which supports suspend functions.
+
+> Task :app:compilePreviewJavaWithJavac
+> Task :app:mergePreviewGeneratedProguardFiles
+> Task :app:processPreviewJavaRes
+> Task :app:generatePreviewLintVitalReportModel
+> Task :app:compileReleaseJavaWithJavac
+> Task :app:mergeReleaseGeneratedProguardFiles
+> Task :app:processReleaseJavaRes
+> Task :app:generateReleaseLintVitalReportModel
+> Task :app:expandPreviewArtProfileWildcards
+> Task :app:mergePreviewJavaResource
+> Task :app:mergeReleaseJavaResource
+> Task :app:expandReleaseArtProfileWildcards
+> Task :app:lintVitalAnalyzePreview
+> Task :app:lintVitalAnalyzeRelease
+> Task :app:minifyPreviewWithR8
+> Task :app:lintVitalReportPreview
+> Task :app:lintVitalPreview
+> Task :app:lintVitalReportRelease
+> Task :app:lintVitalRelease
+> Task :app:convertShrunkResourcesToBinaryPreview
+> Task :app:optimizePreviewResources
+> Task :app:compilePreviewArtProfile
+> Task :app:packagePreview
+> Task :app:createPreviewApkListingFileRedirect
+> Task :app:assemblePreview
+> Task :app:minifyReleaseWithR8
+> Task :app:convertShrunkResourcesToBinaryRelease
+> Task :app:optimizeReleaseResources
+> Task :app:compileReleaseArtProfile
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect
+> Task :app:assembleRelease
+
+BUILD SUCCESSFUL in 5m 7s
+107 actionable tasks: 106 executed, 1 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html

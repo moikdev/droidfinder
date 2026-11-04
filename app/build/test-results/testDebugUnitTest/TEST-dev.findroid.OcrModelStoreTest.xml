@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.OcrModelStoreTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:22:59.652Z" hostname="MacBook-Pro-2.local" time="0.515">
+  <properties/>
+  <testcase name="publicationFailureRetainsCompleteStageWithoutAdoptingIt" classname="dev.findroid.OcrModelStoreTest" time="0.051"/>
+  <testcase name="verifiedFixtureMatchesPinnedModelAndInstallsWithoutSourceChanges" classname="dev.findroid.OcrModelStoreTest" time="0.08"/>
+  <testcase name="changedExistingModelCannotBeReplacedAndRemovalRequiresCurrentReview" classname="dev.findroid.OcrModelStoreTest" time="0.06"/>
+  <testcase name="existingValidModelIsKeptWithoutReadingNewInput" classname="dev.findroid.OcrModelStoreTest" time="0.067"/>
+  <testcase name="cancellationRetainsOnlyOwnedPartialAndPreservesOtherFiles" classname="dev.findroid.OcrModelStoreTest" time="0.005"/>
+  <testcase name="incompleteRemovalRequiresMatchingFullReview" classname="dev.findroid.OcrModelStoreTest" time="0.003"/>
+  <testcase name="linkedStorageAndModelNamesAreRefusedWithoutTouchingTargets" classname="dev.findroid.OcrModelStoreTest" time="0.002"/>
+  <testcase name="checksumFailureKeepsPartialAndNoActiveModel" classname="dev.findroid.OcrModelStoreTest" time="0.067"/>
+  <testcase name="truncatedAndOversizedImportsNeverActivate" classname="dev.findroid.OcrModelStoreTest" time="0.179"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

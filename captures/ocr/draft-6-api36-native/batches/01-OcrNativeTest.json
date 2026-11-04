@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "passed": 5,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "realOfflineEngineReadsRasterAndKeepsSourceBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "workerRefusesUninstalledLanguageAndOverBudgetRaster",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "pdfOcrKeepsExistingExtractionRestriction",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "reviewedJapaneseModelRecognizesLocalPrintedText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.OcrNativeTest",
+      "test": "cancellationAfterNativeImageIsReadyStopsOnlyPrivateWorker",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 7.3,
+  "timedOut": false
+}

@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 52,
+  "versionName": "0.50.0-preview",
+  "apkName": "Findroid-0.50.0-preview.apk",
+  "bytes": 37967844,
+  "sha256": "14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.50.0-preview/Findroid-0.50.0-preview.apk",
+  "notes": "Recognize printed text locally from an image or the current PDF page. Choose English or Japanese and explicitly download or import its verified language model. Installed languages work offline. Copy recognized text, find matches, stop recognition, and review language removal or incomplete downloads. Your source document stays unchanged. See the release notes for validation and current limits."
+}

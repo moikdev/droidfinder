@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.RecoveryNoticeStoreTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:49.101Z" hostname="MacBook-Pro-2.local" time="0.39">
+<testsuite name="dev.findroid.RecoveryNoticeStoreTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:23:11.222Z" hostname="MacBook-Pro-2.local" time="0.484">
   <properties/>
-  <testcase name="redirectedMarkerIsNeverReadOrChanged" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.001"/>
-  <testcase name="boundedListingReportsItsLimitAndKeepsEveryUnlistedRecord" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.303"/>
+  <testcase name="redirectedMarkerIsNeverReadOrChanged" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.003"/>
+  <testcase name="boundedListingReportsItsLimitAndKeepsEveryUnlistedRecord" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.398"/>
   <testcase name="malformedRecordsDoNotHideASeparateValidNotice" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.016"/>
-  <testcase name="aLaterMarkerCannotRemoveTheEarlierNotice" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.021"/>
+  <testcase name="aLaterMarkerCannotRemoveTheEarlierNotice" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.013"/>
   <testcase name="oversizedMarkerIsKeptWithoutCreatingAnArchive" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.002"/>
   <testcase name="cancellingAReadOnlyScanDoesNotChangeItsRecords" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.011"/>
-  <testcase name="failedArchiveWriteKeepsTheCurrentMarkerAndPartialArchive" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.003"/>
-  <testcase name="preservingKeepsExactMarkerAndSurvivesAReopenedStore" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.011"/>
-  <testcase name="missingRecordsAreReadOnlyAndCreateNothing" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.0"/>
-  <testcase name="corruptArchiveStopsAcknowledgmentAndKeepsBothCopies" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.012"/>
-  <testcase name="repeatedAcknowledgmentDoesNotRewriteArchiveBytes" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.007"/>
+  <testcase name="failedArchiveWriteKeepsTheCurrentMarkerAndPartialArchive" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.002"/>
+  <testcase name="preservingKeepsExactMarkerAndSurvivesAReopenedStore" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.01"/>
+  <testcase name="missingRecordsAreReadOnlyAndCreateNothing" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.001"/>
+  <testcase name="corruptArchiveStopsAcknowledgmentAndKeepsBothCopies" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.009"/>
+  <testcase name="repeatedAcknowledgmentDoesNotRewriteArchiveBytes" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.015"/>
   <testcase name="redirectedArchiveFolderIsNeverWritten" classname="dev.findroid.RecoveryNoticeStoreTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

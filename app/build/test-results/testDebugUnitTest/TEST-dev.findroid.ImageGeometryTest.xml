@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.ImageGeometryTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:40.573Z" hostname="MacBook-Pro-2.local" time="0.01">
+<testsuite name="dev.findroid.ImageGeometryTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:22:59.356Z" hostname="MacBook-Pro-2.local" time="0.011">
   <properties/>
-  <testcase name="fitDoesNotEnlargeSmallFilesAndInvalidStateIsClamped" classname="dev.findroid.ImageGeometryTest" time="0.001"/>
+  <testcase name="fitDoesNotEnlargeSmallFilesAndInvalidStateIsClamped" classname="dev.findroid.ImageGeometryTest" time="0.002"/>
   <testcase name="zoomRetainsCursorAnchorAndPanCannotLoseTheImage" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
-  <testcase name="panoramaZoomLabelsDoNotRoundToZero" classname="dev.findroid.ImageGeometryTest" time="0.002"/>
+  <testcase name="panoramaZoomLabelsDoNotRoundToZero" classname="dev.findroid.ImageGeometryTest" time="0.001"/>
   <testcase name="sampleBudgetsHandlePanoramasOddDimensionsAndLargeSources" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
   <testcase name="allEightExifTransformsAndTheirInversesMatchPixelEdges" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
-  <testcase name="temporaryRotationComposesAfterExifAndFourTurnsRestore" classname="dev.findroid.ImageGeometryTest" time="0.001"/>
+  <testcase name="temporaryRotationComposesAfterExifAndFourTurnsRestore" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
   <testcase name="visibleRegionUsesFullDetailWithoutInflatingTheWholeSource" classname="dev.findroid.ImageGeometryTest" time="0.0"/>
-  <testcase name="variedViewportTransformsKeepRegionsWithinRawBounds" classname="dev.findroid.ImageGeometryTest" time="0.005"/>
-  <testcase name="copiedMetadataIncludesCoordinatesOnlyWhenRevealed" classname="dev.findroid.ImageGeometryTest" time="0.001"/>
+  <testcase name="variedViewportTransformsKeepRegionsWithinRawBounds" classname="dev.findroid.ImageGeometryTest" time="0.006"/>
+  <testcase name="copiedMetadataIncludesCoordinatesOnlyWhenRevealed" classname="dev.findroid.ImageGeometryTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,5 +1,17 @@
 # Android preview verification
 
+## Findroid 0.50.0 — optional local OCR, public acceptance pending
+
+Local acceptance passes for application/native-test source `688bf25972fa93cd40d29403088ce8c6b38a61f8`. Candidate 3 binds 425 source inputs and 94 outputs; its updater-description-only amendment preserves all candidate-2 APK bytes. Proposal 47 remains open and the implemented count remains **37/72** until actual public OTA and independent immutable-archive acceptance pass.
+
+**964 JVM cases pass**, with zero failures/errors/skips. App lint is 0 errors / 149 warnings / 12 hints; interop lint is 0 errors / 18 warnings. Both tablets pass **45 matching native cases in eight batches**, covering OCR and existing image/PDF integration. Seven successful batches are reused only with identical source/APK hashes; the final eight tablet reading cases are rerun explicitly after excluding a phone-only case that intentionally skips on tablet widths.
+
+Both exact optimized previews pass public 51→52 direct installation, real pinned-model HTTPS download, actual Android document-picker import, reviewed removal/cancel, image/scanned-PDF recognition, actual foreground clipboard reads, Find, unchanged source bytes and offline recognition after cold reopen. Each API passes **12 layouts / 12 clipboard reads / 48 complete named 48 dp targets**, spanning 1280×800, 800×1280 and 600×800 dp at system fonts 1.0/2.0 in light/dark. Two full glyph lines are verified in every accepted result capture; all six size/theme groups per API show actual text/raster growth. All **88 selected local image paths** were inspected, grouping only exact native PNG matches and exact glyph subsets.
+
+The retained readiness stops, off-screen image-fixture lookup, phone-only selector stop, one-pixel accessibility clipping and later hidden-options checker stop remain disclosed in [the OCR guide](docs/LOCAL-OCR.md). Initial clipped-text captures are excluded from readable-text acceptance. The final layout resumes reuse only two complete matching layouts per API, with capture hashes checked and incomplete work repeated. Original private bytes/absences, Workspace, grants and environment are restored with public 0.49 installed.
+
+Preview: **37,967,844 bytes**, SHA-256 `14d3419e3032eab962ddecdb4fef354cd66409497a402ddb8851c363740697e8`. Preview signature continuity and four-ABI packaging pass; 64-bit native libraries meet 16 KiB load alignment and APK ZIP alignment passes. OCR's 32-bit libraries use 4 KiB alignment. No 16 KiB device runtime acceptance is claimed. The 115-coordinate Maven OSV query records zero known matches. [OCR guide](docs/LOCAL-OCR.md) · [Release notes](docs/releases/0.50.0.md).
+
 ## Findroid 0.49.0 — PDF page selection, acceptance complete
 
 Proposal 46 is implemented; **37/72 proposals are complete**. Local, actual public OTA and independent immutable-archive acceptance completed on November 4, 2026. Frozen candidate 2 binds 403 source inputs / 105 outputs to application/native-test source `93d36afd3d3caf1c972a3dcd42256978fac468cb`; 948 JVM cases pass, lint reports 0 errors / 148 existing warnings / 12 hints. The preview SHA-256 is `c3e201f9129dfeef3d9e755c13a52eee684de7521834a0655b400a59cc5facf3`.

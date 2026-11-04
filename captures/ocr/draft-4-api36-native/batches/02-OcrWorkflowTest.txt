@@ -1,0 +1,75 @@
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+dev.findroid.OcrWorkflowTest:
+INSTRUMENTATION_STATUS: test=imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stack=androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.waitForModel(OcrWorkflowTest.kt:65)
+	at dev.findroid.OcrWorkflowTest.recognize(OcrWorkflowTest.kt:75)
+	at dev.findroid.OcrWorkflowTest.imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose(OcrWorkflowTest.kt:97)
+
+INSTRUMENTATION_STATUS: stream=
+Error in imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose(dev.findroid.OcrWorkflowTest):
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.waitForModel(OcrWorkflowTest.kt:65)
+	at dev.findroid.OcrWorkflowTest.recognize(OcrWorkflowTest.kt:75)
+	at dev.findroid.OcrWorkflowTest.imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose(OcrWorkflowTest.kt:97)
+
+INSTRUMENTATION_STATUS: test=imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=scannedPdfWithoutTextLayerCanBeRecognizedReadOnly
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=scannedPdfWithoutTextLayerCanBeRecognizedReadOnly
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=openingOcrOffersExplicitModelChoiceAndStartsNoRecognition
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.findroid.OcrWorkflowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=openingOcrOffersExplicitModelChoiceAndStartsNoRecognition
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 25.503
+There was 1 failure:
+1) imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose(dev.findroid.OcrWorkflowTest)
+androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 10000 ms
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:504)
+	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:339)
+	at dev.findroid.OcrWorkflowTest.waitForModel(OcrWorkflowTest.kt:65)
+	at dev.findroid.OcrWorkflowTest.recognize(OcrWorkflowTest.kt:75)
+	at dev.findroid.OcrWorkflowTest.imageRecognitionCopiesActualTextFindsMatchesAndClearsOnClose(OcrWorkflowTest.kt:97)
+
+FAILURES!!!
+Tests run: 3,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

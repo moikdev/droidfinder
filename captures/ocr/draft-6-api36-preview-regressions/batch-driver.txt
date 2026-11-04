@@ -1,0 +1,46 @@
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 4 passed, 0 skipped, 0 failed; runner complete: True
+Log: /private/tmp/findroid-local-ocr/captures/ocr/draft-6-api36-preview-regressions/batches/01-DocumentPreviewInputTest.txt
+Accepted batch 1/6: dev.findroid.DocumentPreviewInputTest (4 cases)
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Starting: Intent { cmp=dev.findroid/.MainActivity }
+emulator-5582: 5 passed, 0 skipped, 1 failed; runner complete: True
+dev.findroid.ImagePeekWorkflowTest#malformedOversizedAndChangedSourcesHaveRecoverableErrors: java.lang.AssertionError: Failed to inject mouse input.
+Log: /private/tmp/findroid-local-ocr/captures/ocr/draft-6-api36-preview-regressions/batches/02-ImagePeekWorkflowTest.txt
+[
+  {
+    "serial": "emulator-5582",
+    "originalManagedMetadataDatabasesAndCacheRestored": true,
+    "originalFileAbsencesRestored": true,
+    "originalDirectoryAbsencesRestored": true,
+    "managedFileCount": 443,
+    "privateOriginalSnapshotUnchanged": true
+  }
+]
+Traceback (most recent call last):
+  File "/private/tmp/findroid-local-ocr/scripts/check-device-batches.py", line 105, in <module>
+    if __name__=='__main__': main()
+                             ~~~~^^
+  File "/private/tmp/findroid-local-ocr/scripts/check-device-batches.py", line 80, in main
+    assert result.returncode==0, f'Batch failed; inspect {report_path}. It is not accepted.'
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: Batch failed; inspect /private/tmp/findroid-local-ocr/captures/ocr/draft-6-api36-preview-regressions/batches/02-ImagePeekWorkflowTest.json. It is not accepted.

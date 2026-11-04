@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.MergePlannerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:40.768Z" hostname="MacBook-Pro-2.local" time="0.002">
+<testsuite name="dev.findroid.MergePlannerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:22:59.606Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
   <testcase name="symbolicSourceAndPairedDestinationLinksAreRejected" classname="dev.findroid.MergePlannerTest" time="0.001"/>
   <testcase name="rejectsCyclesDuplicateDestinationsAndOversizedPlans" classname="dev.findroid.MergePlannerTest" time="0.001"/>

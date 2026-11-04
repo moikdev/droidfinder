@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "passed": 8,
+  "skipped": 1,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "bookmarksAndReadingPositionSurviveReopeningWithoutEditingThePdf",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "imageOnlyPageRemainsViewableAndClearlyHasNoSelectableText",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "selectableTextCopiesAndEmbeddedContentsNavigate",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "pageJumpAndDocumentKeyboardNavigationPreserveZoom",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "searchUsesSpacesAndFindsMatchesAcrossTheDocument",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "closingAProviderPeekClosesItsBlockedDownloadBeforeTheProviderReturns",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "providerPdfWithoutAnExtensionUsesItsDeclaredMimeType",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "compactNavigationExposesThumbnailsBookmarksAndContents",
+      "code": -4,
+      "error": "org.junit.AssumptionViolatedException: got: <false>, expected: is <true>"
+    },
+    {
+      "class": "dev.findroid.PdfReadingWorkflowTest",
+      "test": "malformedPdfReportsFailureAndPreviousFileStillOpens",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 150.9,
+  "timedOut": false
+}

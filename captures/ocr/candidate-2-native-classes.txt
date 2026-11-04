@@ -1,0 +1,1 @@
+dev.findroid.OcrNativeTest,dev.findroid.OcrWorkflowTest,dev.findroid.DocumentPreviewInputTest,dev.findroid.ImagePeekWorkflowTest,dev.findroid.PdfGeometryTest,dev.findroid.PdfPageSelectionNativeTest,dev.findroid.PdfPageSelectionWorkflowTest,dev.findroid.PdfReadingWorkflowTest

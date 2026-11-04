@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.RecoveryMarkerLifecycleTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:48.855Z" hostname="MacBook-Pro-2.local" time="0.245">
+<testsuite name="dev.findroid.RecoveryMarkerLifecycleTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:23:10.971Z" hostname="MacBook-Pro-2.local" time="0.249">
   <properties/>
-  <testcase name="twoOperationsWithTheSameTimeAndDestinationHaveDifferentAcknowledgmentIds" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.055"/>
-  <testcase name="versionedMarkersRetainNewlinesAndUnicodeInRecordedPaths" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.009"/>
-  <testcase name="completionRefusesARedirectedMarkerAndKeepsTheTarget" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.011"/>
-  <testcase name="completionCannotDeleteAChangedMarker" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.012"/>
-  <testcase name="malformedVersionedTextDoesNotInventADestination" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.001"/>
-  <testcase name="completionCannotDeleteAnIdenticalReplacementObject" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.007"/>
-  <testcase name="laterWorkPreservesTheExactEarlierMarkerBeforeReplacingIt" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.02"/>
-  <testcase name="acknowledgmentKeepsTheCurrentMarkerAndIsBoundToItsDigest" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.014"/>
-  <testcase name="liveMarkerIsExcludedUntilTheProcessIsReopened" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.007"/>
-  <testcase name="hardLinkedPriorMarkerCannotBeRetired" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.003"/>
+  <testcase name="twoOperationsWithTheSameTimeAndDestinationHaveDifferentAcknowledgmentIds" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.044"/>
+  <testcase name="versionedMarkersRetainNewlinesAndUnicodeInRecordedPaths" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.01"/>
+  <testcase name="completionRefusesARedirectedMarkerAndKeepsTheTarget" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.008"/>
+  <testcase name="completionCannotDeleteAChangedMarker" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.013"/>
+  <testcase name="malformedVersionedTextDoesNotInventADestination" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.0"/>
+  <testcase name="completionCannotDeleteAnIdenticalReplacementObject" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.009"/>
+  <testcase name="laterWorkPreservesTheExactEarlierMarkerBeforeReplacingIt" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.024"/>
+  <testcase name="acknowledgmentKeepsTheCurrentMarkerAndIsBoundToItsDigest" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.017"/>
+  <testcase name="liveMarkerIsExcludedUntilTheProcessIsReopened" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.008"/>
+  <testcase name="hardLinkedPriorMarkerCannotBeRetired" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.002"/>
   <testcase name="anOversizedNewNoticeLeavesThePriorMarkerUntouched" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.002"/>
-  <testcase name="aLaterSuccessfulOperationKeepsAllPriorFailedNotices" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.048"/>
+  <testcase name="aLaterSuccessfulOperationKeepsAllPriorFailedNotices" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.043"/>
   <testcase name="failedNewMarkerReadbackLeavesTheDamagedMarkerForManualReview" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.002"/>
-  <testcase name="archiveSyncFailureRetainsTheOriginalAndAnUnchangedRetrySyncsTheCopy" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.022"/>
-  <testcase name="failureToArchiveAnUnsuccessfulOperationKeepsItsMarkerReviewable" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.01"/>
-  <testcase name="failedWorkKeepsItsMarkerAndADurableReopenableNotice" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.019"/>
-  <testcase name="anUnwritableArchiveStopsNewWorkWithoutDeletingTheOldMarker" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.003"/>
+  <testcase name="archiveSyncFailureRetainsTheOriginalAndAnUnchangedRetrySyncsTheCopy" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.016"/>
+  <testcase name="failureToArchiveAnUnsuccessfulOperationKeepsItsMarkerReviewable" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.017"/>
+  <testcase name="failedWorkKeepsItsMarkerAndADurableReopenableNotice" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.023"/>
+  <testcase name="anUnwritableArchiveStopsNewWorkWithoutDeletingTheOldMarker" classname="dev.findroid.RecoveryMarkerLifecycleTest" time="0.01"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

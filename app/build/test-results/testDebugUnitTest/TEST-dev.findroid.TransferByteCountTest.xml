@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.TransferByteCountTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:42:50.044Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.TransferByteCountTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T13:23:12.395Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
-  <testcase name="exactAndUnknownLengthStreamsReturnTheirActualCount" classname="dev.findroid.TransferByteCountTest" time="0.002"/>
+  <testcase name="exactAndUnknownLengthStreamsReturnTheirActualCount" classname="dev.findroid.TransferByteCountTest" time="0.001"/>
   <testcase name="emptyStreamWithZeroAdvertisedSizeSucceeds" classname="dev.findroid.TransferByteCountTest" time="0.0"/>
-  <testcase name="prematureEofIsAnErrorIncludingEmptyFilesWithPositiveAdvertisedSize" classname="dev.findroid.TransferByteCountTest" time="0.0"/>
-  <testcase name="unendingStreamCannotFillTheDestinationBeyondItsAdvertisedSize" classname="dev.findroid.TransferByteCountTest" time="0.001"/>
+  <testcase name="prematureEofIsAnErrorIncludingEmptyFilesWithPositiveAdvertisedSize" classname="dev.findroid.TransferByteCountTest" time="0.001"/>
+  <testcase name="unendingStreamCannotFillTheDestinationBeyondItsAdvertisedSize" classname="dev.findroid.TransferByteCountTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

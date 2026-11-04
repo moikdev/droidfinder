@@ -1,0 +1,45 @@
+{
+  "success": false,
+  "passed": 5,
+  "skipped": 0,
+  "failed": 1,
+  "runnerCompleted": true,
+  "runnerSucceeded": false,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "metadataLocationIsExplicitAndRotationDoesNotModifySource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "malformedOversizedAndChangedSourcesHaveRecoverableErrors",
+      "code": -2,
+      "error": "java.lang.AssertionError: Failed to inject mouse input."
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "mimeOnlyProviderImageAndBlockedPreparationCanStop",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "zoomWheelPanKeyboardAndRecreationKeepTheView",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "largeSourceUsesBoundedRegionsAndNavigatorPansAtActualPixels",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "nativeCanvasHonorsAllExifOrientationsAndSpaceCloses",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5582",
+  "durationSeconds": 217.4,
+  "timedOut": false
+}
