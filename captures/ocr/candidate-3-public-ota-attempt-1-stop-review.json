@@ -1,0 +1,30 @@
+{
+  "attempts": [
+    {
+      "api": "api30",
+      "stage": "offer lookup",
+      "acceptanceComplete": false,
+      "restorationComplete": true,
+      "originalDataRestored": true,
+      "originalUriGrantsKept": true,
+      "report": "captures/ocr/candidate-3-api30-public-ota-1/verification.json",
+      "lastWindowReportedBusy": true
+    },
+    {
+      "api": "api36",
+      "stage": "post-install no-repeat check",
+      "acceptanceComplete": false,
+      "restorationComplete": true,
+      "originalDataRestored": true,
+      "originalUriGrantsKept": true,
+      "report": "captures/ocr/candidate-3-api36-public-ota-1/verification.json",
+      "lastWindowReportedBusy": true
+    }
+  ],
+  "anonymousPublicApiStatus": 403,
+  "anonymousRemainingQuota": 0,
+  "quotaResetUtc": "2026-11-04T15:05:59Z",
+  "applicationBytesUnchanged": true,
+  "attemptsRetainedAndExcluded": true,
+  "retryReason": "The public anonymous API reported exhausted quota; both app windows displayed service busy. Retry after the published quota reset."
+}

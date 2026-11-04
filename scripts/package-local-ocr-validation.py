@@ -130,7 +130,7 @@ def main():
         assert (raw.replace(b'\r\n',b'\n') if name.endswith('.bat') else raw)==stored,('Uncommitted evidence',name)
     manifest=dict(version='0.50.0-preview',versionCode=52,applicationSourceCommit=frozen['sourceCommit'],nativeTestSourceCommit=frozen['sourceCommit'],
         evidenceCommit=evidence_commit,previewApkSha256=expected,jvmCases=964,nativeCasesPerApi=45,isolatedBatchesPerApi=8,
-        nativeScope='OCR plus existing image/PDF integration regressions; unrelated native suites are outside this increment.',
+        nativeScope='45 focused OCR and existing image/PDF integration cases.',
         frozenCandidateManifest=str(frozen_path.relative_to(ROOT)),frozenSourceBindingsComplete=True,publicOtaIncluded=a.include_ota,
         files=[dict(path=str(path.relative_to(ROOT)),sha256=sha(path),bytes=path.stat().st_size) for path in sorted(files)])
     with zipfile.ZipFile(a.output,'x',compression=zipfile.ZIP_DEFLATED) as archive:

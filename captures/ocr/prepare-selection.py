@@ -24,9 +24,11 @@ proof_names=[
  'run-focused-native.py','run-public-ota.py','license-review.json','license-review-2.json',
  'checker-optimized-core-1.py','checker-optimized-layouts-1.py','checker-optimized-layouts-2.py','checker-optimized-layouts-3.py','checker-optimized-layouts-4.py',
  'draft-build-4.json','draft-build-5.json','draft-build-5-gradle.txt','draft-build-6.json','draft-build-6-gradle.txt','draft-build-7.json','draft-build-7-gradle.txt',
- 'text-visibility-attempt-1-review.json',
+ 'text-visibility-attempt-1-review.json','candidate-3-public-ota-attempt-1-stop-review.json','candidate-3-public-artifacts-initial.json',
 ]
 support|={'captures/ocr/'+name for name in proof_names}
+if a.phase=='ota':
+ support|={'captures/ocr/'+name for name in ('candidate-3-local-selection.json','candidate-3-local-publication-files.json','candidate-3-local-privacy-review.json','candidate-3-local-screenshot-review.json')}
 support|={str(f.relative_to(ROOT)) for f in (PROOF/'candidate-2-artifact-checks').iterdir() if f.is_file() and f.suffix in ('.json','.txt')}
 # Retain the stopped readiness, off-screen fixture and phone-only selector receipts.
 for folder in ('draft-3-api36-native','draft-4-api36-native','draft-5-api36-native','draft-6-api30-native','draft-6-api36-native',
@@ -38,13 +40,16 @@ for folder in ('draft-3-api36-native','draft-4-api36-native','draft-5-api36-nati
 for api in ('api30','api36'):
  for attempt in (1,2):
   support.add(f'captures/ocr/candidate-3-{api}-optimized-layouts-{attempt}/result.json')
+for api in ('api30','api36'):
+ for name in ('verification.json','ota-driver.txt'):
+  support.add(f'captures/ocr/candidate-3-{api}-public-ota-1/{name}')
 tables={}
 for api in ('api30','api36'):
  folder=PROOF/f'candidate-3-{api}-native'
  tables[api]=dict(nativeFolder=str(folder.relative_to(ROOT)),
   nativeImages=[str(f.relative_to(ROOT)) for f in sorted((folder/'images').rglob('*.png')) if 'PRIVATE' not in str(f.relative_to(folder))],
   optimized=dict(core=f'captures/ocr/candidate-2-{api}-optimized-core-1/result.json',layouts=f'captures/ocr/candidate-3-{api}-optimized-layouts-3/result.json'),
-  ota=f'captures/ocr/candidate-3-{api}-public-ota-1/verification.json')
+  ota=f'captures/ocr/candidate-3-{api}-public-ota-2/verification.json')
 selection=dict(frozenCandidateManifest='captures/ocr/candidate-build-3.json',supportingFiles=sorted(support),tablets=tables,
  optimizedCheckers=['captures/ocr/checker-optimized-core-1.py','captures/ocr/checker-optimized-layouts-3.py','captures/ocr/checker-optimized-layouts-4.py'],
  screenshotReview=f'captures/ocr/candidate-3-{a.phase}-screenshot-review.json',privacyReview=f'captures/ocr/candidate-3-{a.phase}-privacy-review.json',
