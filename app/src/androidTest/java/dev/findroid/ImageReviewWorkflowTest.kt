@@ -125,8 +125,12 @@ class ImageReviewWorkflowTest {
         compose.activityRule.scenario.recreate(); organizeReady()
         compose.onNodeWithTag("image-review").assertDoesNotExist()
         compose.waitUntil(10_000) {
-            InstrumentationRegistry.getInstrumentation().uiAutomation.rootInActiveWindow
-                ?.findAccessibilityNodeInfosByText("Organize")?.isNotEmpty() == true
+            fun containsTitle(node: android.view.accessibility.AccessibilityNodeInfo?): Boolean {
+                if (node == null) return false
+                if (node.text?.toString() == "Organize") return true
+                return (0 until node.childCount).any { containsTitle(node.getChild(it)) }
+            }
+            containsTitle(InstrumentationRegistry.getInstrumentation().uiAutomation.rootInActiveWindow)
         }
         assertEquals(review, state.selection)
         compose.onNodeWithContentDescription("Close organization library").performClick(); ready()
