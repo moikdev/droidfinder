@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.provider.DocumentsContract
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import dev.findroid.testing.FixtureDocumentsProvider
@@ -90,6 +91,38 @@ class FileComparisonWorkflowTest {
         compose.onNodeWithContentDescription("Pan both images right").performScrollTo().performClick()
         compose.onNodeWithText("Linked zoom · 2× · Drag either image to pan both",substring=false).performScrollTo().assertIsDisplayed()
         capture("linked-images")
+        click("Fit both images")
+        repeat(3) { compose.onNodeWithContentDescription("Zoom both images in").performScrollTo().performClick() }
+        val pane=compose.onNodeWithTag("image-comparison")
+        val before=pane.captureToImage().asAndroidBitmap().copy(Bitmap.Config.ARGB_8888,false)
+        pane.performTouchInput {
+            val start=Offset(width*.25f-32f,height*.60f)
+            swipe(start,start+Offset(64f,0f),300)
+        }
+        val after=pane.captureToImage().asAndroidBitmap().copy(Bitmap.Config.ARGB_8888,false)
+        try {
+            fun shift(side: Int): Int {
+                assertEquals(before.width,after.width);assertEquals(before.height,after.height)
+                val half=before.width/2;var best=0;var bestScore=Double.MAX_VALUE
+                for(delta in -180..180) {
+                    var error=0L;var count=0
+                    for(fraction in listOf(.65,.80,.95)) {
+                        val y=(before.height*fraction).toInt().coerceAtMost(before.height-1)
+                        for(x in 16 until half-16 step 3)if(x+delta in 16 until half-16) {
+                            val a=before.getPixel(side*half+x,y);val b=after.getPixel(side*half+x+delta,y)
+                            error+=kotlin.math.abs(Color.red(a)-Color.red(b))+kotlin.math.abs(Color.green(a)-Color.green(b))+kotlin.math.abs(Color.blue(a)-Color.blue(b));count++
+                        }
+                    }
+                    val score=error.toDouble()/count
+                    if(score<bestScore) { bestScore=score;best=delta }
+                }
+                return best
+            }
+            val left=shift(0);val right=shift(1)
+            assertTrue("64 px drag must track the finger at 4×; measured $left px",left in 20..80)
+            assertTrue("Both previews must follow the same drag; measured $left / $right px",right in 20..80&&kotlin.math.abs(left-right)<=3)
+            File(compose.activity.cacheDir,"file-comparison-qa/gesture-proof.json").writeText("{\"zoom\":4,\"dragPixels\":64,\"leftRasterShiftPixels\":$left,\"rightRasterShiftPixels\":$right,\"bothTrackFinger\":true}\n")
+        } finally { before.recycle();after.recycle() }
         click("Fit both images");click("Swap sides");ready("image-comparison")
         compose.onNodeWithText("Linked zoom · 1× · Drag either image to pan both",substring=false).performScrollTo().assertIsDisplayed()
     }

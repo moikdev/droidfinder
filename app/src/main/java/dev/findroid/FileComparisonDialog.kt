@@ -123,7 +123,8 @@ internal fun FileComparisonDialog(
                             if (copied) Text("Copied comparison report", Modifier.padding(horizontal = 16.dp), color = Muted)
                         }
                         if (result?.images?.size == 2) {
-                            Text("Linked zoom · ${zoom.zoom.toInt()}× · Drag either image to pan both", Modifier.padding(horizontal = 16.dp), color = Ink)
+                            val scaleLabel = java.lang.String.format(java.util.Locale.ROOT, "%.1f", zoom.zoom).removeSuffix(".0")
+                            Text("Linked zoom · ${scaleLabel}× · Drag either image to pan both", Modifier.padding(horizontal = 16.dp), color = Ink)
                             Text("Sampled previews; visual review does not prove file equality.", Modifier.padding(horizontal = 16.dp), style = MaterialTheme.typography.bodySmall, color = Muted)
                             FlowRow(Modifier.padding(horizontal = 8.dp)) {
                                 ToolButton(Icons.Outlined.Remove, "Zoom both images out", { zoom.zoom = (zoom.zoom - 1).coerceAtLeast(1f) }, enabled = zoom.zoom > 1)
@@ -200,7 +201,14 @@ private fun ComparisonImagePane(image: ComparisonImage, label: String, zoom: Com
     val transform = rememberTransformableState { scale, offset, _ ->
         zoom.zoom = (zoom.zoom * scale).coerceIn(1f, 4f)
         if (zoom.zoom == 1f) zoom.pan = Offset.Zero
-        else zoom.move(offset.x / (size.width / 2f).coerceAtLeast(1f), offset.y / (size.height / 2f).coerceAtLeast(1f))
+        else {
+            val fit = minOf(size.width.toFloat() / image.bitmap.width, size.height.toFloat() / image.bitmap.height)
+            val overflowX = ((image.bitmap.width * fit * zoom.zoom - size.width) / 2).coerceAtLeast(0f)
+            val overflowY = ((image.bitmap.height * fit * zoom.zoom - size.height) / 2).coerceAtLeast(0f)
+            // The image under the finger moves by the finger's distance at every zoom level.
+            // The other pane follows the same normalized position within its own overflow.
+            zoom.move(if (overflowX > 0) offset.x / overflowX else 0f, if (overflowY > 0) offset.y / overflowY else 0f)
+        }
     }
     val fit = minOf(size.width.toFloat() / image.bitmap.width, size.height.toFloat() / image.bitmap.height)
     val overflowX = ((image.bitmap.width * fit * zoom.zoom - size.width) / 2).coerceAtLeast(0f)
