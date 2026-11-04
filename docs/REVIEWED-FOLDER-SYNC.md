@@ -39,3 +39,5 @@ The draft Trash preflight checks all originals in a selected plan before any rec
 - Inspect the optimized tablet interface and complete public release and OTA acceptance.
 
 JVM coverage currently includes planning, inspection, digest reads, working-file staging, complete subtree preparation, the final read-only gate, original-preserving Trash rename and guarded publication. Device and release acceptance have not been claimed for this draft.
+
+Four Android foundation cases now compile against actual descriptor and native rename implementations. They cover disclosed subtree publication, preserving an updated original in Trash, a kernel destination collision and an original edited during intent recording. Their device execution remains pending; they are separate from the 0.45 release totals.
