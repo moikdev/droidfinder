@@ -95,9 +95,10 @@ internal fun OfficeQuickLook(entry: Entry, modifier: Modifier = Modifier) {
     val controlsScroll=rememberScrollState()
     LaunchedEffect(identity) { controlsScroll.scrollTo(0) }
     BoxWithConstraints(modifier.testTag("office-preview")) {
-        val controlsMaxHeight=maxHeight*0.6f
+        val availableHeight=maxHeight
+        val controlsMaxHeight=availableHeight*0.6f
         Column(Modifier.fillMaxSize()) {
-            Column(Modifier.fillMaxWidth().heightIn(max=if(section!=null)controlsMaxHeight else maxHeight)
+            Column(Modifier.fillMaxWidth().heightIn(max=if(section!=null)controlsMaxHeight else availableHeight)
                 .verticalScroll(controlsScroll).testTag("office-preview-controls")) {
                 FlowRow(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(8.dp)) {
                     Text(format.label,Modifier.padding(12.dp),style=MaterialTheme.typography.titleMedium)

@@ -66,7 +66,7 @@ class OfficeWorkflowTest {
         return value
     }
     private fun copy() {
-        compose.onNodeWithText("Copy loaded section",substring=false).performClick()
+        compose.onNodeWithText("Copy loaded section",substring=false).performScrollTo().performClick()
         compose.waitUntil(5000) { compose.onAllNodesWithTag("office-status").fetchSemanticsNodes().isNotEmpty() }
     }
     private fun capture(name: String) {
@@ -82,37 +82,37 @@ class OfficeWorkflowTest {
         open("Notes.docx")
         compose.onNodeWithText("Ocean light",substring=false).assertIsDisplayed()
         copy();assertEquals("Ocean light\nFar shore 日本語 🌊\n",clipboard())
-        compose.onNodeWithTag("office-search").performTextInput("shore");hideKeyboard()
-        compose.onNodeWithText("1 of 1 matching rows",substring=false).assertIsDisplayed()
+        compose.onNodeWithTag("office-search").performScrollTo().performTextInput("shore");hideKeyboard()
+        compose.onNodeWithText("1 of 1 matching rows",substring=false).performScrollTo().assertIsDisplayed()
         capture("word-find-and-copy")
-        compose.onNodeWithText("Preview limits…",substring=false).performClick()
+        compose.onNodeWithText("Preview limits…",substring=false).performScrollTo().performClick()
         compose.onNodeWithText("Office preview limits",substring=false).assertIsDisplayed()
         compose.onNodeWithText("Close preview limits",substring=false).performClick()
     }
     @Test fun workbookUsesStoredValuesAndCopiesOnlyTheSelectedWorksheet() {
         open("Budget.xlsx")
-        compose.onNodeWithText("1 of 2 · Field notes",substring=false).assertIsDisplayed()
-        compose.onNodeWithText("Stored values; formulas aren't recalculated.",substring=false).assertIsDisplayed()
+        compose.onNodeWithText("1 of 2 · Field notes",substring=false).performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Stored values; formulas aren't recalculated.",substring=false).performScrollTo().assertIsDisplayed()
         copy();assertEquals("Row\tA\tB\n1\tOcean light\tFar shore\n2\t2\t3",clipboard())
         capture("workbook-stored-values")
-        compose.onNodeWithText("Next section",substring=false).performClick()
-        compose.onNodeWithText("2 of 2 · Morning",substring=false).assertIsDisplayed()
+        compose.onNodeWithText("Next section",substring=false).performScrollTo().performClick()
+        compose.onNodeWithText("2 of 2 · Morning",substring=false).performScrollTo().assertIsDisplayed()
         copy();assertEquals("Row\tA\n1\tMorning sea",clipboard())
         compose.onNodeWithText("Next section",substring=false).assertIsNotEnabled()
-        compose.onNodeWithText("Previous section",substring=false).performClick()
-        compose.onNodeWithText("1 of 2 · Field notes",substring=false).assertIsDisplayed()
+        compose.onNodeWithText("Previous section",substring=false).performScrollTo().performClick()
+        compose.onNodeWithText("1 of 2 · Field notes",substring=false).performScrollTo().assertIsDisplayed()
     }
     @Test fun slideNavigationUpdatesFindAndReopeningClearsTheQuery() {
         open("Journey.pptx")
-        compose.onNodeWithTag("office-search").performTextInput("shore");hideKeyboard()
-        compose.onNodeWithText("No matching rows in loaded section",substring=false).assertIsDisplayed()
-        compose.onNodeWithText("Next section",substring=false).performClick()
-        compose.onNodeWithText("2 of 2 · Slide 2",substring=false).assertIsDisplayed()
-        compose.onNodeWithText("1 of 1 matching rows",substring=false).assertIsDisplayed()
+        compose.onNodeWithTag("office-search").performScrollTo().performTextInput("shore");hideKeyboard()
+        compose.onNodeWithText("No matching rows in loaded section",substring=false).performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Next section",substring=false).performScrollTo().performClick()
+        compose.onNodeWithText("2 of 2 · Slide 2",substring=false).performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("1 of 1 matching rows",substring=false).performScrollTo().assertIsDisplayed()
         copy();assertEquals("Far shore\n",clipboard());capture("slide-section-and-find")
         close();open("Journey.pptx")
         assertEquals("",compose.onNodeWithTag("office-search").fetchSemanticsNode().config[androidx.compose.ui.semantics.SemanticsProperties.EditableText].text)
-        compose.onNodeWithText("1 of 2 · Slide 1",substring=false).assertIsDisplayed()
+        compose.onNodeWithText("1 of 2 · Slide 1",substring=false).performScrollTo().assertIsDisplayed()
     }
     @Test fun providerMimeOnlyDocumentAndBlockedPreparationCanStopAndRetry() {
         val provider=File(compose.activity.filesDir,"ProviderFixtures/Office-${System.nanoTime()}").apply { check(mkdirs()) }
@@ -132,11 +132,11 @@ class OfficeWorkflowTest {
             open("Gate.docx",false);assertTrue(opened.await(5,TimeUnit.SECONDS))
             val partial=File(model.focused!!.file.parentFile,"preview.tmp")
             compose.waitUntil(5000) { partial.exists() }
-            compose.onNodeWithText("Stop Office preview",substring=false).performClick()
-            compose.onNodeWithText("Office preview stopped.",substring=false).assertIsDisplayed()
+            compose.onNodeWithText("Stop Office preview",substring=false).performScrollTo().performClick()
+            compose.onNodeWithText("Office preview stopped.",substring=false).performScrollTo().assertIsDisplayed()
             compose.waitUntil(5000) { !partial.exists() };capture("provider-stopped")
             gate.countDown()
-            compose.onNodeWithText("Retry Office preview",substring=false).performClick()
+            compose.onNodeWithText("Retry Office preview",substring=false).performScrollTo().performClick()
             compose.waitUntil(15_000) { compose.onAllNodes(hasText("Copy loaded section") and isEnabled()).fetchSemanticsNodes().isNotEmpty() }
             copy();assertTrue(clipboard().contains("Ocean light"));assertArrayEquals(before,file.readBytes())
         } finally {
