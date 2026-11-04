@@ -151,6 +151,16 @@ See [the current verification record](VALIDATION.md) for local test coverage, op
 - [x] Cancellable size/CRC verification, explicit failure/incomplete results and persisted resource limits.
 - [ ] Encrypted ZIP, additional formats and actual multi-GiB ZIP64 performance verification.
 
+## Image review pass
+
+- [x] Frozen review of 1–200 selected images using the existing zoom/pan/temporary-rotation viewer and thumbnail strip.
+- [x] Session flags, flagged-only navigation, a pinned reference and linked read-only pair comparison.
+- [x] Exactly flagged images passed to the reviewed tag editor, with explicit Apply, existing stale-file checks, app-local metadata and session Undo/Redo.
+- [x] Flags, current item and reference retained through activity recreation; reviewed tagging keeps its own window in front. Closing/process loss discards session decisions.
+- [x] Wrapped, independently scrolling review/viewer controls keep room for the photo at enlarged system text sizes.
+
+Proposal 50 local acceptance is complete for 0.53; actual public OTA and archive acceptance remain pending. See the [photo review guide](docs/IMAGE-REVIEW.md).
+
 ## Image Peek pass
 
 - [x] Visible-region decoding, source-pixel zoom, bounded overview/detail output and navigator.

@@ -1,0 +1,10 @@
+{
+  "source": "captures/image-review/candidate-3-api30-optimized/core-review-flagged-preview.png",
+  "destination": "docs/screenshots/image-review-tablet.png",
+  "sha256": "e591ab82390aca0c9821b13e43498d03e8009837cf43d26a4e22f9c55b483657",
+  "actualOptimizedAndroidUi": true,
+  "syntheticPhotosOnly": true,
+  "exactBytesKept": true,
+  "applicationSourceCommit": "2b9c157dff077eadf66583c2a61b36b925a891e9",
+  "supersedesEarlierUnpublishedCandidate": true
+}

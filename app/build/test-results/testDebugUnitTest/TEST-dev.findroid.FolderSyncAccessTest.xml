@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncAccessTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:46.418Z" hostname="MacBook-Pro-2.local" time="0.002">
+<testsuite name="dev.findroid.FolderSyncAccessTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:01:57.643Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
   <testcase name="scopedWorkingAccessRejectsTraversalAndRedirectedWorkingChildren" classname="dev.findroid.FolderSyncAccessTest" time="0.002"/>
   <testcase name="laterWorkspacePermissionLossRevokesItsSpecialSiblingGrant" classname="dev.findroid.FolderSyncAccessTest" time="0.0"/>

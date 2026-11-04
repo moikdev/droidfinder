@@ -1,0 +1,11 @@
+{
+  "serial": "emulator-5582",
+  "launcherAnrDialogHeldSystemFocus": true,
+  "launcherPackage": "com.google.android.apps.nexuslauncher",
+  "launcherRestartedWithoutClearingItsData": true,
+  "noAnrDialogHoldsFocusAfterRecovery": true,
+  "applicationOriginalStateRestoredBeforeRecovery": true,
+  "applicationApkAndSourceUnchanged": true,
+  "diagnosticRun": "captures/image-review/diagnostic-api36-lifecycle/build-provenance.json",
+  "scope": "Reserved Android 16 emulator system-launcher recovery only; private screenshots/window dumps are excluded from publication."
+}

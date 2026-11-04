@@ -1,0 +1,13 @@
+{
+  "serial": "emulator-5602",
+  "selectors": [
+    "dev.findroid.ImageReviewWorkflowTest",
+    "dev.findroid.ImagePeekWorkflowTest",
+    "dev.findroid.FileComparisonNativeTest",
+    "dev.findroid.FileComparisonWorkflowTest"
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "35bb2cdf452b8bf5f0f4f0f4332c27b870f1a68ed0d82beb6429b57371c32d29",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "ea693730002a1ba92ec02bad1fb9934e65a8e6f243101fa8ce53f5daec41850e"
+  }
+}

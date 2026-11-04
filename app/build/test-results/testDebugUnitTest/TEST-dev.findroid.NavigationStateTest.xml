@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.NavigationStateTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:50.924Z" hostname="MacBook-Pro-2.local" time="0.001">
+<testsuite name="dev.findroid.NavigationStateTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:02.172Z" hostname="MacBook-Pro-2.local" time="0.001">
   <properties/>
   <testcase name="renamedTagsUpdateClosedTabHistoryAndItsSearchRules" classname="dev.findroid.NavigationStateTest" time="0.0"/>
   <testcase name="workspaceRelocationKeepsLayoutAndBothPanes" classname="dev.findroid.NavigationStateTest" time="0.0"/>
-  <testcase name="browseLimitsFollowFolderMovesAndAreNormalizedWhenRestored" classname="dev.findroid.NavigationStateTest" time="0.001"/>
-  <testcase name="relocationIncludesInactiveFocusExpansionAndViewportPaths" classname="dev.findroid.NavigationStateTest" time="0.0"/>
+  <testcase name="browseLimitsFollowFolderMovesAndAreNormalizedWhenRestored" classname="dev.findroid.NavigationStateTest" time="0.0"/>
+  <testcase name="relocationIncludesInactiveFocusExpansionAndViewportPaths" classname="dev.findroid.NavigationStateTest" time="0.001"/>
   <testcase name="multiTagRulesFollowRenamesInTabsAndScanBudgets" classname="dev.findroid.NavigationStateTest" time="0.0"/>
   <testcase name="movedPrefixDoesNotAlterSiblingNames" classname="dev.findroid.NavigationStateTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>

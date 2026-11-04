@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SearchExclusionsTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:23:02.278Z" hostname="MacBook-Pro-2.local" time="0.004">
+<testsuite name="dev.findroid.SearchExclusionsTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:11.655Z" hostname="MacBook-Pro-2.local" time="0.004">
   <properties/>
   <testcase name="knownParentChecksAreSharedAcrossFilesAndFileExclusionsNeverNeedAncestry" classname="dev.findroid.SearchExclusionsTest" time="0.0"/>
   <testcase name="remappingUsesExactProviderReferencesAndPreservesUnrelatedRules" classname="dev.findroid.SearchExclusionsTest" time="0.001"/>

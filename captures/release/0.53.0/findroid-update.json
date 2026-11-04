@@ -1,0 +1,10 @@
+{
+  "packageName": "dev.findroid",
+  "versionCode": 55,
+  "versionName": "0.53.0-preview",
+  "apkName": "Findroid-0.53.0-preview.apk",
+  "bytes": 38066148,
+  "sha256": "81cc0b75ac6f038aec555e5c930c5cbaed5cb2debdf79d63db1f006f81402f0e",
+  "downloadUrl": "https://github.com/moikdev/findroid/releases/download/v0.53.0-preview/Findroid-0.53.0-preview.apk",
+  "notes": "Findroid 0.53.0 preview adds a dedicated photo review for Android tablets.\n\n- Select 1\u2013200 images and choose More \u2192 Review images\u2026 to browse the existing image viewer and thumbnail strip.\n- Flag candidates, filter to the shortlist, and compare another photo with a pinned reference using linked zoom and pan.\n- Tag flagged\u2026 opens the existing reviewed tag editor for exactly those candidates, with file-change checks and session Undo/Redo.\n- Flags, order and reference survive activity recreation. Closing the review or losing the app process discards flags; applied tags remain saved.\n- Image-viewer controls wrap and scroll at enlarged text sizes while keeping the photo visible.\n\nPhoto bytes and EXIF remain unchanged. Tags live in Findroid's library. Existing viewer and comparison limits apply. This is a development-signed preview; physical tablets, third-party providers and screen-reader acceptance remain open.\n"
+}

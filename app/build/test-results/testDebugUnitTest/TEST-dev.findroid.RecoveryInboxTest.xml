@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.RecoveryInboxTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:23:01.350Z" hostname="MacBook-Pro-2.local" time="0.004">
+<testsuite name="dev.findroid.RecoveryInboxTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:10.776Z" hostname="MacBook-Pro-2.local" time="0.004">
   <properties/>
   <testcase name="acknowledgedAndCurrentCopiesOfTheSameNoticeAppearOnce" classname="dev.findroid.RecoveryInboxTest" time="0.002"/>
   <testcase name="emptyRecordsDoNotInventRecoveryWork" classname="dev.findroid.RecoveryInboxTest" time="0.0"/>
-  <testcase name="synchronizationIntentDoesNotClaimCompletion" classname="dev.findroid.RecoveryInboxTest" time="0.0"/>
+  <testcase name="synchronizationIntentDoesNotClaimCompletion" classname="dev.findroid.RecoveryInboxTest" time="0.001"/>
   <testcase name="interruptedInFlightSourceIsExplainedWithoutRetryingIt" classname="dev.findroid.RecoveryInboxTest" time="0.001"/>
   <testcase name="newestTransferIsFirstAndProjectionKeepsItsInputs" classname="dev.findroid.RecoveryInboxTest" time="0.0"/>
   <testcase name="blankMarkerDoesNotCreateAnEmptyCard" classname="dev.findroid.RecoveryInboxTest" time="0.0"/>
-  <testcase name="legacyMarkerHasAnExplicitDestinationAndNoMutationRoute" classname="dev.findroid.RecoveryInboxTest" time="0.001"/>
+  <testcase name="legacyMarkerHasAnExplicitDestinationAndNoMutationRoute" classname="dev.findroid.RecoveryInboxTest" time="0.0"/>
   <testcase name="aNewNoticeDoesNotHideAnEarlierAcknowledgedOperation" classname="dev.findroid.RecoveryInboxTest" time="0.0"/>
   <testcase name="cancellationRemainsVisibleEvenWithACompletedPrefix" classname="dev.findroid.RecoveryInboxTest" time="0.0"/>
   <testcase name="corruptHistoriesHaveIndependentReviewRoutes" classname="dev.findroid.RecoveryInboxTest" time="0.0"/>

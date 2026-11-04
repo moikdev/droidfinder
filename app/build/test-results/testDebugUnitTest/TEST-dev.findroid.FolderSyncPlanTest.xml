@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncPlanTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:49.461Z" hostname="MacBook-Pro-2.local" time="0.012">
+<testsuite name="dev.findroid.FolderSyncPlanTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:00.495Z" hostname="MacBook-Pro-2.local" time="0.067">
   <properties/>
   <testcase name="anIncompleteComparisonCannotInferAnyDeletionOrStartWork" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
   <testcase name="reversingDirectionSwapsRootsAndAdditionDeletionMeaning" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="unknownAndCoveredSelectionsCannotSlipIntoAReviewedPlan" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
+  <testcase name="unknownAndCoveredSelectionsCannotSlipIntoAReviewedPlan" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
   <testcase name="zeroByteFilesAreCountedWithoutBeingCalledUnknown" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="oversizedReviewIsBoundedBeforeBuildingPerItemChoices" classname="dev.findroid.FolderSyncPlanTest" time="0.007"/>
-  <testcase name="replacementAndTrashHaveIndependentConfirmations" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="linksNeverAcquireAnAutomaticSubtreeCopy" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="unreadableItemsBlockEvenOtherApparentlySafeAdditions" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
+  <testcase name="oversizedReviewIsBoundedBeforeBuildingPerItemChoices" classname="dev.findroid.FolderSyncPlanTest" time="0.028"/>
+  <testcase name="replacementAndTrashHaveIndependentConfirmations" classname="dev.findroid.FolderSyncPlanTest" time="0.005"/>
+  <testcase name="linksNeverAcquireAnAutomaticSubtreeCopy" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
+  <testcase name="unreadableItemsBlockEvenOtherApparentlySafeAdditions" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
   <testcase name="connectedOrRelativeRootsRequireTheirOwnChecks" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
   <testcase name="anOrphanedNestedFileCannotInventItsMissingParents" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
-  <testcase name="everyDifferenceHasItsOwnVisibleCategory" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
+  <testcase name="everyDifferenceHasItsOwnVisibleCategory" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
   <testcase name="unverifiedContentsRemainAConflictEvenWithMatchingMetadata" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
   <testcase name="aReviewCannotRewriteDotSegmentsInItsRootOrNodePaths" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
   <testcase name="aComparedNodeCannotPointOutsideItsDeclaredRoot" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="aNewSubtreeIsDisclosedAndCopiedOnlyOnce" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="unicodeAndCaseDistinctNamesKeepTheirExactDestinationPaths" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
-  <testcase name="destinationOnlyItemsRequireExplicitTrashChoice" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="verifiedIdenticalFilesCanNeverBeSelectedForMutation" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
-  <testcase name="emptyFoldersProduceACompletePlanWithNoChanges" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
+  <testcase name="aNewSubtreeIsDisclosedAndCopiedOnlyOnce" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
+  <testcase name="unicodeAndCaseDistinctNamesKeepTheirExactDestinationPaths" classname="dev.findroid.FolderSyncPlanTest" time="0.004"/>
+  <testcase name="destinationOnlyItemsRequireExplicitTrashChoice" classname="dev.findroid.FolderSyncPlanTest" time="0.002"/>
+  <testcase name="verifiedIdenticalFilesCanNeverBeSelectedForMutation" classname="dev.findroid.FolderSyncPlanTest" time="0.006"/>
+  <testcase name="emptyFoldersProduceACompletePlanWithNoChanges" classname="dev.findroid.FolderSyncPlanTest" time="0.001"/>
   <testcase name="newerTimesNeverChooseAReplacementAutomatically" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
   <testcase name="unknownOrOverflowingBytesAreReportedAsUnknown" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
   <testcase name="pairedParentsLeaveNestedChangesIndividuallySelectable" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="additionsAloneAreSelectedAndDestinationOnlyFilesStayUntouched" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="traversalAbsoluteAndAmbiguousRelativeNamesCannotBeApplied" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="aDestinationOnlySubtreeNeedsOneExplicitTrashChoice" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
-  <testcase name="duplicateOrInconsistentComparisonRowsAreRejected" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
+  <testcase name="additionsAloneAreSelectedAndDestinationOnlyFilesStayUntouched" classname="dev.findroid.FolderSyncPlanTest" time="0.003"/>
+  <testcase name="traversalAbsoluteAndAmbiguousRelativeNamesCannotBeApplied" classname="dev.findroid.FolderSyncPlanTest" time="0.005"/>
+  <testcase name="aDestinationOnlySubtreeNeedsOneExplicitTrashChoice" classname="dev.findroid.FolderSyncPlanTest" time="0.002"/>
+  <testcase name="duplicateOrInconsistentComparisonRowsAreRejected" classname="dev.findroid.FolderSyncPlanTest" time="0.003"/>
   <testcase name="overlappingAndEqualRootsAreRejectedInEitherDirection" classname="dev.findroid.FolderSyncPlanTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

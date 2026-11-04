@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.SidebarLayoutTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:23:02.633Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.SidebarLayoutTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:11.848Z" hostname="MacBook-Pro-2.local" time="0.002">
   <properties/>
-  <testcase name="orderingLabelsGroupsAndBuiltinsRoundTrip" classname="dev.findroid.SidebarLayoutTest" time="0.001"/>
+  <testcase name="orderingLabelsGroupsAndBuiltinsRoundTrip" classname="dev.findroid.SidebarLayoutTest" time="0.0"/>
   <testcase name="remappingKeepsIdentityLabelAndOrder" classname="dev.findroid.SidebarLayoutTest" time="0.0"/>
-  <testcase name="stableInsertionCanMoveInBothDirectionsAndAppend" classname="dev.findroid.SidebarLayoutTest" time="0.0"/>
+  <testcase name="stableInsertionCanMoveInBothDirectionsAndAppend" classname="dev.findroid.SidebarLayoutTest" time="0.001"/>
   <testcase name="movingBetweenGroupsPreservesLabelAndOtherOrder" classname="dev.findroid.SidebarLayoutTest" time="0.0"/>
-  <testcase name="corruptAndFutureDataFailInsteadOfSilentlyResetting" classname="dev.findroid.SidebarLayoutTest" time="0.001"/>
+  <testcase name="corruptAndFutureDataFailInsteadOfSilentlyResetting" classname="dev.findroid.SidebarLayoutTest" time="0.0"/>
   <testcase name="staleInsertionAndDeletedGroupAreRejected" classname="dev.findroid.SidebarLayoutTest" time="0.0"/>
   <testcase name="legacySetMigratesDeterministicallyWithoutLosingPaths" classname="dev.findroid.SidebarLayoutTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>

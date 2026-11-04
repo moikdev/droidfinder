@@ -1,0 +1,67 @@
+{
+  "attempts": [
+    {
+      "api": "api30",
+      "reason": "Dialog focus request ran before the BoxWithConstraints content was placed. Source was corrected while the rejected draft was running, so its final source-stability assertion also stopped. Immutable originals and Workspace were restored.",
+      "receipt": "captures/image-review/draft-1-api30-native/build-provenance.json"
+    },
+    {
+      "api": "api36",
+      "reason": "Dialog focus request ran before the BoxWithConstraints content was placed. Source was corrected while the rejected draft was running, so its final source-stability assertion also stopped. Immutable originals and Workspace were restored.",
+      "receipt": "captures/image-review/draft-1-api36-native/build-provenance.json"
+    },
+    {
+      "api": "api30",
+      "reason": "Five review cases passed; three tag cases stopped because the test helper tried to scroll the fixed Apply tags footer. The helper now clicks already-visible controls directly. Original private state and Workspace were restored.",
+      "receipt": "captures/image-review/draft-3-api30-native/build-provenance.json"
+    },
+    {
+      "api": "api36",
+      "reason": "Five review cases passed; three tag cases stopped because the test helper tried to scroll the fixed Apply tags footer. The helper now clicks already-visible controls directly. Original private state and Workspace were restored.",
+      "receipt": "captures/image-review/draft-3-api36-native/build-provenance.json"
+    },
+    {
+      "api": "api30",
+      "reason": "Optimized core workflow passed. Layout acceptance stopped on a strict filename selector matching both the current-image header and thumbnail. The revised selector uses the control-region ancestry. No APK or native code changed. No layout was counted; exact original state was restored.",
+      "receipt": "captures/image-review/candidate-1-api30-optimized/result.json",
+      "checker": "captures/image-review/checker-optimized-attempt-1.py",
+      "checkerSha256": "8dcd96fa8e4c0bbfcc5c2678c127dfaa1f5c6e3b1c597f3dbe2f1f4a026990d1"
+    },
+    {
+      "api": "api36",
+      "reason": "Optimized core workflow passed. Layout acceptance stopped on a strict filename selector matching both the current-image header and thumbnail. The revised selector uses the control-region ancestry. No APK or native code changed. No layout was counted; exact original state was restored.",
+      "receipt": "captures/image-review/candidate-1-api36-optimized/result.json",
+      "checker": "captures/image-review/checker-optimized-attempt-1.py",
+      "checkerSha256": "8dcd96fa8e4c0bbfcc5c2678c127dfaa1f5c6e3b1c597f3dbe2f1f4a026990d1"
+    },
+    {
+      "candidate": 1,
+      "reason": "Superseded before publication by a modal-lifecycle fix: omit the image-review window while the reviewed tag editor is visible, so activity recreation leaves Organize in front. Native regression now checks the active Android accessibility window during tag-editor recreation and actual thumbnail activation. Accepted earlier APK results are not reused for the new APK; fresh native and optimized acceptance will run.",
+      "originalStateRestoredOnBothApis": true
+    },
+    {
+      "candidate": 2,
+      "api": "api30",
+      "reason": "Eight review cases passed, including thumbnail activation. The lifecycle case verified that the review window was absent while Organize was retained, then stopped at the active-window text query. The test now traverses actual child accessibility nodes; no application behavior changed.",
+      "receipt": "captures/image-review/candidate-2-api30-native/build-provenance.json",
+      "originalStateRestored": true
+    },
+    {
+      "candidate": 2,
+      "api": "api36",
+      "reason": "Eight review cases passed, including thumbnail activation. The lifecycle case verified that the review window was absent while Organize was retained, then stopped at the active-window text query. The test now traverses actual child accessibility nodes; no application behavior changed.",
+      "receipt": "captures/image-review/candidate-2-api36-native/build-provenance.json",
+      "originalStateRestored": true
+    },
+    {
+      "candidate": 3,
+      "api": "api36",
+      "reason": "The original native run stopped on activity teardown and active-window checks. A single-case diagnostic also stopped. Private screen/window inspection identified a system-launcher ANR dialog holding focus. The reserved launcher was restarted without clearing data; the same application/test APKs are being rerun. No failed case is counted.",
+      "runs": [
+        "captures/image-review/candidate-3-api36-native/build-provenance.json",
+        "captures/image-review/diagnostic-api36-lifecycle/build-provenance.json"
+      ],
+      "recovery": "captures/image-review/api36-launcher-recovery.json"
+    }
+  ]
+}

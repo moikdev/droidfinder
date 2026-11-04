@@ -1,0 +1,182 @@
+{
+  "success": true,
+  "passed": 25,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "readOnlyProviderImagesCanBeReviewedAndTaggedWithoutWritingPhotoBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "menuFlagsCandidatesFiltersAndComparesReferenceWithoutChangingBrowserSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "keyboardNavigationFlagsAndViewerZoomAreScopedToReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "mixedSelectionGetsAnExplanationAndNoReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "removedCandidateCannotAcquireTagsFromAStaleReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "frozenOrderFlagsAndReferenceSurviveActivityRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "closeDiscardsOnlySessionDecisionsAndNewReviewStartsClean",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "taggingOnlyFlaggedCandidatesNeedsApplyAndSupportsUndoRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "unreadableImageCanBeSkippedWithoutLosingTheReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "metadataLocationIsExplicitAndRotationDoesNotModifySource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "malformedOversizedAndChangedSourcesHaveRecoverableErrors",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "mimeOnlyProviderImageAndBlockedPreparationCanStop",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "zoomWheelPanKeyboardAndRecreationKeepTheView",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "largeSourceUsesBoundedRegionsAndNavigatorPansAtActualPixels",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImagePeekWorkflowTest",
+      "test": "nativeCanvasHonorsAllExifOrientationsAndSpaceCloses",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "mimeOnlyUnknownSizeProviderImagesBypassStaleCacheAndRemoveTemporaryCopies",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "corruptAndOversizedImagesRefuseWithoutChangingBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "localLoadReopensTextAndRefusesMixedFormats",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "imageDecoderSamplesAndAppliesExifOrientationWithoutWritingSource",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonNativeTest",
+      "test": "missingUnauthorizedAndRepeatedFilesAreRefused",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonWorkflowTest",
+      "test": "folderComparisonOpensNestedFilePairReadOnly",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonWorkflowTest",
+      "test": "selectionMenuNavigatesDifferencesCopiesActualReportAndSwaps",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonWorkflowTest",
+      "test": "imageReviewLinksZoomPanFitAndSwapWithBothImagesVisible",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonWorkflowTest",
+      "test": "providerReadCanStopRetryAndReopenFreshBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.FileComparisonWorkflowTest",
+      "test": "unsupportedPairExplainsAndDoesNotShowFalseResults",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 91.0,
+  "wallSecondsThisInvocation": 100.7,
+  "timedOut": false,
+  "isolatedBatches": [
+    {
+      "selector": "dev.findroid.ImageReviewWorkflowTest",
+      "report": "captures/image-review/candidate-3-api30-native/batches/01-ImageReviewWorkflowTest.json",
+      "log": "captures/image-review/candidate-3-api30-native/batches/01-ImageReviewWorkflowTest.txt",
+      "reportSha256": "7a89046d80d97dba0b5b468610928f0e9b4e21638b119cbe0035fe89521cd7ff",
+      "logSha256": "ac7dea041a354ecacc5832607006cf7a55e3361e829fdc9de408046c5be40a4f",
+      "passed": 9
+    },
+    {
+      "selector": "dev.findroid.ImagePeekWorkflowTest",
+      "report": "captures/image-review/candidate-3-api30-native/batches/02-ImagePeekWorkflowTest.json",
+      "log": "captures/image-review/candidate-3-api30-native/batches/02-ImagePeekWorkflowTest.txt",
+      "reportSha256": "8dc1a4df986d83246a8cfef25d06985477f788781121ff97c6b0d36175a7a9ff",
+      "logSha256": "041de50fddd57bf5706cd12a97e192aaa73530668ded50ada11590cca7993814",
+      "passed": 6
+    },
+    {
+      "selector": "dev.findroid.FileComparisonNativeTest",
+      "report": "captures/image-review/candidate-3-api30-native/batches/03-FileComparisonNativeTest.json",
+      "log": "captures/image-review/candidate-3-api30-native/batches/03-FileComparisonNativeTest.txt",
+      "reportSha256": "96cc18b8acddcb05338bad442b919175589141f449c4123d47aa39f312a370c7",
+      "logSha256": "85225a77e139f822572b2c66901ad7d2ec2edd4bce42e6d8054acec383c0bd12",
+      "passed": 5
+    },
+    {
+      "selector": "dev.findroid.FileComparisonWorkflowTest",
+      "report": "captures/image-review/candidate-3-api30-native/batches/04-FileComparisonWorkflowTest.json",
+      "log": "captures/image-review/candidate-3-api30-native/batches/04-FileComparisonWorkflowTest.txt",
+      "reportSha256": "71719394c671bf9594901439a13e59a134070069b4f423a557267fd0d78ff077",
+      "logSha256": "bb12a0721abe1c312f988227e5e05397c38eb89039bc8a75b34b98c100b88495",
+      "passed": 5
+    }
+  ],
+  "apkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "35bb2cdf452b8bf5f0f4f0f4332c27b870f1a68ed0d82beb6429b57371c32d29",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "ea693730002a1ba92ec02bad1fb9934e65a8e6f243101fa8ce53f5daec41850e"
+  },
+  "installedApkSha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "35bb2cdf452b8bf5f0f4f0f4332c27b870f1a68ed0d82beb6429b57371c32d29",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "ea693730002a1ba92ec02bad1fb9934e65a8e6f243101fa8ce53f5daec41850e"
+  }
+}

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.PdfPageSelectionTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:53.124Z" hostname="MacBook-Pro-2.local" time="0.089">
+<testsuite name="dev.findroid.PdfPageSelectionTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:04.362Z" hostname="MacBook-Pro-2.local" time="0.067">
   <properties/>
-  <testcase name="selectAllKeepsNewlinesAndTheLimitedExtractionStatus" classname="dev.findroid.PdfPageSelectionTest" time="0.003"/>
-  <testcase name="draggingBackwardsKeepsLogicalReadingOrder" classname="dev.findroid.PdfPageSelectionTest" time="0.001"/>
+  <testcase name="selectAllKeepsNewlinesAndTheLimitedExtractionStatus" classname="dev.findroid.PdfPageSelectionTest" time="0.004"/>
+  <testcase name="draggingBackwardsKeepsLogicalReadingOrder" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="partlyCroppedGlyphsUseOnlyTheirVisibleBox" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="aGroupedExtractionSpanRemainsIndivisible" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="aCombiningCharacterCannotBeCopiedWithoutItsBase" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="aLongCombiningRunUsesOnePrecomputedCharacterBoundaryIndex" classname="dev.findroid.PdfPageSelectionTest" time="0.006"/>
-  <testcase name="theHitToleranceFollowsTheRenderedScale" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
-  <testcase name="movingEitherHandlePreservesTheOppositeEdge" classname="dev.findroid.PdfPageSelectionTest" time="0.001"/>
+  <testcase name="theHitToleranceFollowsTheRenderedScale" classname="dev.findroid.PdfPageSelectionTest" time="0.001"/>
+  <testcase name="movingEitherHandlePreservesTheOppositeEdge" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="blankPageSpaceDoesNotPickADistantWord" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="movingAHandleAcrossTheOtherEdgeReversesItsRangeSafely" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
-  <testcase name="geometryInputsAreBoundedEvenWhenTheSourceSequenceNeverEnds" classname="dev.findroid.PdfPageSelectionTest" time="0.076"/>
+  <testcase name="geometryInputsAreBoundedEvenWhenTheSourceSequenceNeverEnds" classname="dev.findroid.PdfPageSelectionTest" time="0.054"/>
   <testcase name="indexConstructionHonorsCancellationBeforeDoingPageWork" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="rectanglesBelongToTheSelectedGlyphsAcrossRotatedLayouts" classname="dev.findroid.PdfPageSelectionTest" time="0.001"/>
   <testcase name="invalidAndOffPageGeometryCannotCreateASelection" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="aDragAcrossLinesIncludesRealWhitespaceOnlyOnce" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
-  <testcase name="extendingIntoAnOverlappingGroupedRunKeepsThatWholeMapping" classname="dev.findroid.PdfPageSelectionTest" time="0.001"/>
+  <testcase name="extendingIntoAnOverlappingGroupedRunKeepsThatWholeMapping" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
   <testcase name="aSurrogatePairCannotBeSplitByAProviderSpan" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
-  <testcase name="startsAtTheRenderedWordAndKeepsItsOriginalOffsets" classname="dev.findroid.PdfPageSelectionTest" time="0.0"/>
+  <testcase name="startsAtTheRenderedWordAndKeepsItsOriginalOffsets" classname="dev.findroid.PdfPageSelectionTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

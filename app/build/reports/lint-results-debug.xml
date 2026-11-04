@@ -575,7 +575,7 @@
         errorLine2="                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="713"
+            line="715"
             column="59"/>
     </issue>
 
@@ -591,7 +591,7 @@
         errorLine2="                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="759"
+            line="761"
             column="48"/>
     </issue>
 
@@ -607,7 +607,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1136"
+            line="1139"
             column="17"/>
     </issue>
 
@@ -1007,7 +1007,7 @@
         errorLine2="    ~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1361"
+            line="1364"
             column="5"/>
     </issue>
 
@@ -1325,7 +1325,7 @@
         errorLine2="                             ~~~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderApp.kt"
-            line="1277"
+            line="1280"
             column="30"/>
     </issue>
 
@@ -2125,7 +2125,7 @@
         errorLine2="                                                   ~~~~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/FinderModel.kt"
-            line="3719"
+            line="3721"
             column="52"/>
     </issue>
 
@@ -2221,7 +2221,7 @@
         errorLine2="        ~~~~~~">
         <location
             file="/Users/LENOVO/.t3/projects/droidfinder/app/src/main/java/dev/findroid/ImageQuickLook.kt"
-            line="509"
+            line="508"
             column="9"/>
     </issue>
 

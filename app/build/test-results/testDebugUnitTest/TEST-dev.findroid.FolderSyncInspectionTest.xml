@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncInspectionTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:49.457Z" hostname="MacBook-Pro-2.local" time="0.003">
+<testsuite name="dev.findroid.FolderSyncInspectionTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:00.489Z" hostname="MacBook-Pro-2.local" time="0.003">
   <properties/>
   <testcase name="theInspectionRetainsIndependentDigestsForBothReviewedFiles" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>
   <testcase name="reviewedFileSizesComeFromThePinnedNativeSnapshot" classname="dev.findroid.FolderSyncInspectionTest" time="0.001"/>
@@ -8,8 +8,8 @@
   <testcase name="changesAfterReviewCannotAcquireFreshProofsForAnOlderPlan" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>
   <testcase name="cancellationNeverStartsAContentReadOrMutation" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>
   <testcase name="aReadOnlyInspectionVerifiesContentsAndBothNativeSnapshots" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>
-  <testcase name="aResolvedAliasMustStillHavePermission" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>
-  <testcase name="aMalformedChecksumCannotReachAReviewedPlan" classname="dev.findroid.FolderSyncInspectionTest" time="0.001"/>
+  <testcase name="aResolvedAliasMustStillHavePermission" classname="dev.findroid.FolderSyncInspectionTest" time="0.001"/>
+  <testcase name="aMalformedChecksumCannotReachAReviewedPlan" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>
   <testcase name="changedContentsBecomeAnExplicitUpdateWithoutAnAutomaticSelection" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>
   <testcase name="aliasesOfTheSameDirectoryAreRejectedBeforeReadingContents" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>
   <testcase name="aNativeChangeDuringHashingInvalidatesTheWholeReview" classname="dev.findroid.FolderSyncInspectionTest" time="0.0"/>

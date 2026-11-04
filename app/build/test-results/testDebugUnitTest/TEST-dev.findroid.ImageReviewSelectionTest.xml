@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.findroid.ImageReviewSelectionTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:01.974Z" hostname="MacBook-Pro-2.local" time="0.003">
+  <properties/>
+  <testcase name="readOnlyImagesCanBeReviewedDuringAnUnrelatedTransfer" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="removingLastCandidateReturnsToAllImages" classname="dev.findroid.ImageReviewSelectionTest" time="0.001"/>
+  <testcase name="enforcesUniqueImageLimit" classname="dev.findroid.ImageReviewSelectionTest" time="0.001"/>
+  <testcase name="commandRejectsMixedEmptyOversizedAndTrashSelections" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="flagsToggleWithoutChangingOrderOrOtherFlags" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="newSessionHasNoFlagsReferenceOrFilter" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="unflagInFilteredListChoosesNextThenPrevious" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="flaggedFilterUsesOriginalOrderAndRetainsCurrentWhenPossible" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="refusesEmptyReview" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="invalidSelectionDoesNotLeaveTheReview" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="refusesBlankId" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="emptyFilterKeepsAllImagesReachable" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="keepsFrozenOrderAndDeduplicatesIds" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="filteringAnUnflaggedCurrentChoosesFirstCandidate" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="referenceNeverComparesWithItselfAndPersistsOutsideFilteredList" classname="dev.findroid.ImageReviewSelectionTest" time="0.001"/>
+  <testcase name="clearFlagsKeepsCurrentAndReference" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <testcase name="navigationClampsAtEndsEvenForLargeDeltas" classname="dev.findroid.ImageReviewSelectionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

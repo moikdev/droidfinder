@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.PdfSearchTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:53.213Z" hostname="MacBook-Pro-2.local" time="0.015">
+<testsuite name="dev.findroid.PdfSearchTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:04.429Z" hostname="MacBook-Pro-2.local" time="0.018">
   <properties/>
   <testcase name="unicodeLiteralAndRepeatedMatchesDoNotUseRegexSyntax" classname="dev.findroid.PdfSearchTest" time="0.001"/>
   <testcase name="providerPdfMimeDoesNotRequireAFilenameExtension" classname="dev.findroid.PdfSearchTest" time="0.0"/>
   <testcase name="whitespaceAndCaseMatchesKeepOffsetsIntoTheOriginalText" classname="dev.findroid.PdfSearchTest" time="0.0"/>
-  <testcase name="largeResultsAreBoundedAndSnippetsKeepContext" classname="dev.findroid.PdfSearchTest" time="0.014"/>
+  <testcase name="largeResultsAreBoundedAndSnippetsKeepContext" classname="dev.findroid.PdfSearchTest" time="0.017"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

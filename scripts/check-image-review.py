@@ -35,7 +35,26 @@ sync = load('comparison_inspection_and_restoration', ROOT / 'scripts/check-revie
 sha = lambda raw: hashlib.sha256(raw).hexdigest()
 
 
+class CurrentImageName:
+    def __init__(self, name, font_scale=1.0): self.name = name; self.minimum_height = 14 * font_scale
+    def __call__(self, text, desc): return text == self.name
+    def __str__(self): return 'Current image name: ' + self.name
+
+
 class ReviewControls(sync.NativeControls):
+    def matching(self, scope, label):
+        found = super().matching(scope, label)
+        if not isinstance(label, CurrentImageName): return found
+        parents = {child: parent for parent in scope.iter() for child in parent}
+        def in_controls(node):
+            while node in parents:
+                node = parents[node]
+                children = list(node.iter('node'))
+                if any(n.get('text') == 'Next image' for n in children) and not any(n.get('content-desc', '').startswith('Preview of ') for n in children):
+                    return True
+            return False
+        return [node for node in found if in_controls(node)]
+
     def reach(self, name, label, *, clickable=True, enabled=True):
         for direction in (1, -1):
             previous = None
@@ -43,7 +62,8 @@ class ReviewControls(sync.NativeControls):
                 tree = self.d.dump(name)
                 scope = self.scope(tree)
                 node = self.node(scope, label, clickable)
-                if node is not None and (not enabled or node.get('enabled') == 'true') and self.full(scope, node, clickable):
+                enough_text = not isinstance(label, CurrentImageName) or node is not None and self.d.bounds(node)[3]-self.d.bounds(node)[1] >= label.minimum_height*self.density
+                if node is not None and enough_text and (not enabled or node.get('enabled') == 'true') and self.full(scope, node, clickable):
                     return tree, node
                 panes = [n for n in scope.iter('node') if n.get('scrollable') == 'true'
                          and len(self.d.bounds(n)) == 4 and self.d.bounds(n)[3] > self.d.bounds(n)[1]]
@@ -101,6 +121,41 @@ def run(a):
         checkerSha256=sha(Path(__file__).read_bytes()), buildReceiptSha256=sha(a.build_receipt.read_bytes()),
         apkSha256=expected, previousApkSha256=sha(public.read_bytes()), checks=[], layouts=[], captures=[], clipboardProofs=[],
         acceptanceComplete=False, restorationComplete=False, operationsUseExactOptimizedApk=True, textVisibilityProofs=[])
+    if a.resume_from:
+        import ast
+        import shutil
+        previous_path = a.resume_from.resolve()
+        assert previous_path.is_relative_to(MAIN/'captures/image-review') and previous_path.name == 'result.json'
+        previous = json.loads(previous_path.read_text())
+        old_checker = MAIN/'captures/image-review/checker-optimized-attempt-2.py'
+        assert previous['checkerSha256'] == sha(old_checker.read_bytes())
+        def fixture_source(raw):
+            tree = ast.parse(raw)
+            return ast.get_source_segment(raw, next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'fixture_documents'))
+        assert fixture_source(old_checker.read_text()) == fixture_source(Path(__file__).read_text())
+        assert a.section == previous['section'] == 'all' and previous['serial'] == a.serial
+        assert previous['sourceCommit'] == build['sourceCommit'] and previous['apkSha256'] == expected
+        assert previous['restorationComplete'] and previous['originalWorkspaceTreeKept'] and previous['immutableOriginalBytesVerifiedBeforeTests']
+        count = len(previous['layouts'])
+        assert not previous['acceptanceComplete'] and 1 <= count < 12
+        assert all(row['sourceBytesKept'] and row['allNamedControlsHaveComplete48DpBounds'] for row in previous['layouts'])
+        names = {row['name'] for row in previous['checks']}
+        assert len(names) == count + 1 and 'core-review' in names
+        assert {row['name'] for row in previous['textVisibilityProofs']} == names - {'core-review'}
+        report['checks'] = previous['checks'][:]
+        report['layouts'] = previous['layouts'][:]
+        report['textVisibilityProofs'] = previous['textVisibilityProofs'][:]
+        report['controlProofs'] = [row for row in previous['controlProofs'] if row.get('name') in names]
+        report['captures'] = [row for row in previous['captures'] if any(row['path'].startswith(name+'-') for name in names)]
+        assert len(report['captures']) == 4 + 2 * count
+        for row in report['captures']:
+            source = previous_path.parent/row['path']; target = a.output/row['path']
+            assert source.name == row['path'] and sha(source.read_bytes()) == row['sha256'] and not target.exists()
+            shutil.copy2(source, target); assert sha(target.read_bytes()) == row['sha256']
+        report['explicitLayoutResume'] = dict(previousResult=str(previous_path.relative_to(MAIN)),previousResultSha256=sha(previous_path.read_bytes()),
+            previousCheckerSha256=previous['checkerSha256'],reusedChecks=sorted(names),completedLayoutsReused=count,completedCoreWorkflowsReused=1,
+            previousOriginalStateRestored=True,unchangedFixtureGeneratorVerified=True,sourceAndOptimizedApkIdentical=True,
+            incompleteLayoutCaptureExcluded=True)
     def installed(package='dev.findroid'):
         path=d.shell('pm','path',package).decode().strip().splitlines()[0].removeprefix('package:')
         return sha(d.call('exec-out','cat',path))
@@ -176,7 +231,7 @@ def run(a):
         report['captures'].append(dict(path=target.name,sha256=sha(target.read_bytes()),surfaceBoundsPx=bounds,syntheticSetupOnly=True))
         return tree,image
     def glyph(name,tree,image,font_scale):
-        scope=ui.scope(tree);node=ui.node(scope,'02 Noon.png',False)
+        scope=ui.scope(tree);node=ui.node(scope,CurrentImageName('02 Noon.png'),False)
         assert node is not None and ui.full(scope,node,False),'Complete current image name required'
         bounds=d.bounds(node);crop=image.crop(tuple(bounds))
         background=crop.getpixel((crop.width-1,crop.height-1))
@@ -201,7 +256,7 @@ def run(a):
         workspace=d.shell('run-as','dev.findroid','tar','-cf','-','files/Workspace');(private/'PRIVATE-workspace-before.tar').write_bytes(workspace)
         verified=True;report['immutableOriginalBytesVerifiedBeforeTests']=True
         d.call('install','-r',ROOT/PAIR[1]);assert installed('dev.findroid.test')==build['files'][PAIR[1]]['sha256']
-        if a.section in ('core','all'):
+        if a.section in ('core','all') and not any(row['name'] == 'core-review' for row in report['checks']):
             name='core-review';case=seed(name)
             install(public);install(a.apk);launch(name);open_review(name)
             click(name+'-reference','Use as reference');click(name+'-flag-first','Flag image')
@@ -216,7 +271,7 @@ def run(a):
             click(name+'-cancel-tags','Close organization library');wait(name+'-cancelled','Preview of 03 Evening.png')
             click(name+'-tag-again','Tag flagged…');wait(name+'-organize-again','Change Green for selection')
             click(name+'-green-again','Change Green for selection');click(name+'-apply','Apply tags')
-            wait(name+'-applied',lambda text,desc:'Tags updated for 2 items.' in text)
+            d.wait(name+'-applied',lambda tree:len([node for node in ui.scope(tree).iter('node') if node.get('text')=='Green → Green'])==2)
             capture(name+'-tags-applied');click(name+'-close-tags','Close organization library')
             wait(name+'-review-returned','Preview of 03 Evening.png');click(name+'-close','Close image review')
             # Reopen after closing: decisions are deliberately session-only.
@@ -234,6 +289,7 @@ def run(a):
                 for dark in (False,True):
                     for font_scale in (1.0,2.0):
                         name=f'layout-{width}x{height}-font{font_scale}-'+('dark' if dark else 'light')
+                        if any(row['name'] == name for row in report['checks']): continue
                         case=seed(name,dark);requested=(round(width*ui.density),round(height*ui.density))
                         d.shell('wm','size',f'{requested[0]}x{requested[1]}');d.screen=requested
                         actual=tuple(map(int,re.findall(r'(?:Physical|Override) size: (\d+)x(\d+)',d.shell('wm','size').decode())[-1]));assert actual==requested
@@ -242,12 +298,15 @@ def run(a):
                         click(name+'-reference','Use as reference');click(name+'-flag','Flag image');click(name+'-next','Next image')
                         labels=('Previous image','Next image','Flag image','Show flagged only','Tag flagged…','Clear flags',
                                 'Use as reference','Compare with reference…','Clear reference','Close image review','Zoom in','Fit image','Image information')
+                        tree=d.dump(name+'-controls-start');scope=ui.scope(tree)
                         for label in labels:
-                            tree,node=ui.reach(name+'-control',label,enabled=False)
+                            node=ui.node(scope,label,True)
+                            if node is None or not ui.full(scope,node,True):
+                                tree,node=ui.reach(name+'-control',label,enabled=False);scope=ui.scope(tree)
                             ui.proofs.append(dict(name=name,label=label,bounds=d.bounds(node),density=ui.density))
                         click(name+'-zoom','Zoom in');click(name+'-fit','Fit image')
                         ui.text(name+'-image','Preview of 02 Noon.png')
-                        ui.text(name+'-name','02 Noon.png')
+                        ui.text(name+'-name',CurrentImageName('02 Noon.png',font_scale))
                         # Capture the overview and current-image label together.
                         tree,image=capture(name+'-result');scope=ui.scope(tree)
                         viewport=ui.node(scope,'Preview of 02 Noon.png',False);assert viewport is not None
@@ -256,7 +315,8 @@ def run(a):
                         font_proof=glyph(name,tree,image,font_scale)
                         click(name+'-close','Close image review');unchanged(case)
                         report['layouts'].append(dict(widthDp=width,heightDp=height,fontScale=font_scale,dark=dark,actualSizePx=list(actual),
-                            activeImageActuallyVisible=True,viewportBoundsPx=bounds,allNamedControlsHaveComplete48DpBounds=True,sourceBytesKept=True,systemFont=font_proof))
+                            activeImageActuallyVisible=True,viewportBoundsPx=bounds,allNamedControlsHaveComplete48DpBounds=True,
+                            unchangedControlChecksShareActualHierarchy=True,sourceBytesKept=True,systemFont=font_proof))
                         checked(name)
             groups={}
             for row in report['layouts']:groups.setdefault((row['widthDp'],row['heightDp'],row['dark']),{})[row['fontScale']]=row['systemFont']
@@ -292,6 +352,7 @@ def main():
     p.add_argument('--serial',required=True,choices=('emulator-5602','emulator-5582'))
     p.add_argument('--apk',required=True,type=Path);p.add_argument('--build-receipt',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path);p.add_argument('--section',choices=('core','layouts','all'),default='all')
+    p.add_argument('--resume-from',type=Path,help='Reuse only complete restored identical-source/APK cases with exact retained captures')
     a=p.parse_args()
     with (ORIGINAL/('.'+a.serial+'-acceptance.lock')).open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);run(a)

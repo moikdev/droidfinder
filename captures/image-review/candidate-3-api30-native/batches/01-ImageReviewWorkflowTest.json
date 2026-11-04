@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "passed": 9,
+  "skipped": 0,
+  "failed": 0,
+  "runnerCompleted": true,
+  "runnerSucceeded": true,
+  "adbExitCode": 0,
+  "cases": [
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "readOnlyProviderImagesCanBeReviewedAndTaggedWithoutWritingPhotoBytes",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "menuFlagsCandidatesFiltersAndComparesReferenceWithoutChangingBrowserSelection",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "keyboardNavigationFlagsAndViewerZoomAreScopedToReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "mixedSelectionGetsAnExplanationAndNoReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "removedCandidateCannotAcquireTagsFromAStaleReview",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "frozenOrderFlagsAndReferenceSurviveActivityRecreation",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "closeDiscardsOnlySessionDecisionsAndNewReviewStartsClean",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "taggingOnlyFlaggedCandidatesNeedsApplyAndSupportsUndoRedo",
+      "code": 0
+    },
+    {
+      "class": "dev.findroid.ImageReviewWorkflowTest",
+      "test": "unreadableImageCanBeSkippedWithoutLosingTheReview",
+      "code": 0
+    }
+  ],
+  "serial": "emulator-5602",
+  "durationSeconds": 45.9,
+  "timedOut": false
+}

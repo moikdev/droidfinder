@@ -1,0 +1,62 @@
+{
+  "version": "0.53.0-preview",
+  "versionCode": 55,
+  "applicationSourceCommit": "2b9c157dff077eadf66583c2a61b36b925a891e9",
+  "nativeTestSourceCommit": "2b9c157dff077eadf66583c2a61b36b925a891e9",
+  "localAcceptanceComplete": true,
+  "publicAcceptancePending": true,
+  "proposal": 50,
+  "proposalImplemented": false,
+  "jvmCases": 1017,
+  "nativeCasesPerApi": 25,
+  "isolatedNativeBatchesPerApi": 4,
+  "optimizedCoreWorkflowsPerApi": 1,
+  "balancedLayoutsPerApi": 12,
+  "named48DpTargetsPerApi": 156,
+  "actualSystemFontGrowthGroupsPerApi": 6,
+  "reviewedNativeAndOptimizedCapturePaths": 62,
+  "originalStateRestoredOnBothApis": true,
+  "originalWorkspaceTreesKept": true,
+  "previewApkSha256": "81cc0b75ac6f038aec555e5c930c5cbaed5cb2debdf79d63db1f006f81402f0e",
+  "previewApkBytes": 38066148,
+  "noSupersededApkAcceptanceReused": true,
+  "evidence": [
+    {
+      "path": "captures/image-review/candidate-build-3.json",
+      "sha256": "67a08bdfd7a3f1fae1025686e30b9549de019a1a8cc1876e2a0aad0f3b1f8729"
+    },
+    {
+      "path": "captures/image-review/local-image-review.json",
+      "sha256": "272360fb32c70161299c3f49085f2513ebfaaa223ee1c44d171ed86c2c74e360"
+    },
+    {
+      "path": "captures/image-review/api36-launcher-recovery.json",
+      "sha256": "46b955a7909921dd09ae45d881a2a3ddbce446a923557263d3212ddd200229be"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-native/native.json",
+      "sha256": "5e7bc2d2f1f45fd541538a0c6031ba21d5fa27395404a73f5cad4881638c8d77"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-native/build-provenance.json",
+      "sha256": "a99d5cca4b67f0381c4d8480ce1734b31011fe03f936ecb6c47db5f9fc5ee290"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api30-optimized/result.json",
+      "sha256": "0ead269083c501fd55b423e30a98c88c2d87f25d7b9de9e3af5db0d99f149488"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-native-2/native.json",
+      "sha256": "fa359c1839f7bc4ca3657c4cabab392853a1780d5a0c5b2192e4257290d46de0"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-native-2/build-provenance.json",
+      "sha256": "8830aec0372048a3cdd065b8faadaccdfde4ca17058bfb8a19d1b8a6b5d96777"
+    },
+    {
+      "path": "captures/image-review/candidate-3-api36-optimized/result.json",
+      "sha256": "b93b165fd4ccafae4cebafdf4646296fdf207b56d953fc97a3da9614e156724c"
+    }
+  ],
+  "scope": "Emulated Android 11 and Android 16 tablets. Physical hardware, third-party provider and screen-reader acceptance remain open."
+}

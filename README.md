@@ -52,6 +52,16 @@ You can also open a paired nested file from **Compare folders… → Compare sel
 
 *Actual optimized Android tablet capture with synthetic text files.*
 
+### Review a set of photos
+
+Select up to 200 images and open **More → Review images…**. Browse the thumbnails in the zoomable image viewer, flag candidates, and use **Show flagged only** to review the shortlist. Keep one photo as a reference and compare another beside it with linked zoom and pan.
+
+Choose **Tag flagged…** to review tag changes for exactly those candidates before saving. Tags stay in Findroid's library; the photos and EXIF are kept intact. Session Undo and Redo are available after applying. Flags survive activity recreation and last until this review closes or the app process ends. [Photo review guide](docs/IMAGE-REVIEW.md).
+
+![Flagged candidates in Findroid's photo review](docs/screenshots/image-review-tablet.png)
+
+*Actual optimized Android 11 tablet capture with synthetic photos.*
+
 ### Drop files into another app
 
 Open Findroid beside another app in Android’s split screen. **Hold a file icon**, drag it across, and release it over the other app’s file-drop area. With a mouse, drag the icon directly.

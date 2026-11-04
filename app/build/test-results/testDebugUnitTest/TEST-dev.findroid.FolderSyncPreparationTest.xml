@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.FolderSyncPreparationTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:22:49.474Z" hostname="MacBook-Pro-2.local" time="0.427">
+<testsuite name="dev.findroid.FolderSyncPreparationTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:00.572Z" hostname="MacBook-Pro-2.local" time="0.472">
   <properties/>
-  <testcase name="lostPermissionsCannotPassTheFinalGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.042"/>
-  <testcase name="defaultPreparationCopiesOnlyDisclosedAdditionsAndLeavesBothOriginalTreesExact" classname="dev.findroid.FolderSyncPreparationTest" time="0.037"/>
-  <testcase name="deniedWorkingLocationCannotCreateAnyRecoveryOrWorkingFile" classname="dev.findroid.FolderSyncPreparationTest" time="0.006"/>
-  <testcase name="newlyArrivedDestinationItemsCannotPassTheFinalGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.05"/>
-  <testcase name="aTrashOnlyReviewPreparesItsRecordWithoutMovingAnyDestinationItem" classname="dev.findroid.FolderSyncPreparationTest" time="0.021"/>
-  <testcase name="unchangedPreparationPassesTheFinalReadOnlyGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.039"/>
-  <testcase name="aStaleDestinationReviewIsRejectedBeforeCreatingAWorkingDirectory" classname="dev.findroid.FolderSyncPreparationTest" time="0.006"/>
+  <testcase name="lostPermissionsCannotPassTheFinalGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.053"/>
+  <testcase name="defaultPreparationCopiesOnlyDisclosedAdditionsAndLeavesBothOriginalTreesExact" classname="dev.findroid.FolderSyncPreparationTest" time="0.044"/>
+  <testcase name="deniedWorkingLocationCannotCreateAnyRecoveryOrWorkingFile" classname="dev.findroid.FolderSyncPreparationTest" time="0.008"/>
+  <testcase name="newlyArrivedDestinationItemsCannotPassTheFinalGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.046"/>
+  <testcase name="aTrashOnlyReviewPreparesItsRecordWithoutMovingAnyDestinationItem" classname="dev.findroid.FolderSyncPreparationTest" time="0.042"/>
+  <testcase name="unchangedPreparationPassesTheFinalReadOnlyGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.038"/>
+  <testcase name="aStaleDestinationReviewIsRejectedBeforeCreatingAWorkingDirectory" classname="dev.findroid.FolderSyncPreparationTest" time="0.007"/>
   <testcase name="cancellingBeforePreparationCreatesNoWorkingFolder" classname="dev.findroid.FolderSyncPreparationTest" time="0.007"/>
-  <testcase name="cancellingDuringPreparationKeepsAnOwnedReviewAndBothOriginalTrees" classname="dev.findroid.FolderSyncPreparationTest" time="0.02"/>
-  <testcase name="aLateUndisclosedSourceFileInvalidatesTheWholePreparedTree" classname="dev.findroid.FolderSyncPreparationTest" time="0.026"/>
-  <testcase name="alteredWorkingBytesCannotPassTheFinalGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.035"/>
-  <testcase name="forgedReplacementConsentIsRejectedBeforeCreatingWorkingStorage" classname="dev.findroid.FolderSyncPreparationTest" time="0.006"/>
-  <testcase name="laterDestinationEditsCannotPassTheFinalGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.042"/>
-  <testcase name="changingTheDestinationDuringPreparationDoesNotReplaceOrTrashIt" classname="dev.findroid.FolderSyncPreparationTest" time="0.052"/>
-  <testcase name="aPreviouslyCreatedWorkingFolderIsNeverReusedOrDeleted" classname="dev.findroid.FolderSyncPreparationTest" time="0.007"/>
-  <testcase name="replacementPreparationKeepsTheExistingDestinationUntilASeparateApply" classname="dev.findroid.FolderSyncPreparationTest" time="0.03"/>
+  <testcase name="cancellingDuringPreparationKeepsAnOwnedReviewAndBothOriginalTrees" classname="dev.findroid.FolderSyncPreparationTest" time="0.036"/>
+  <testcase name="aLateUndisclosedSourceFileInvalidatesTheWholePreparedTree" classname="dev.findroid.FolderSyncPreparationTest" time="0.035"/>
+  <testcase name="alteredWorkingBytesCannotPassTheFinalGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.033"/>
+  <testcase name="forgedReplacementConsentIsRejectedBeforeCreatingWorkingStorage" classname="dev.findroid.FolderSyncPreparationTest" time="0.013"/>
+  <testcase name="laterDestinationEditsCannotPassTheFinalGate" classname="dev.findroid.FolderSyncPreparationTest" time="0.034"/>
+  <testcase name="changingTheDestinationDuringPreparationDoesNotReplaceOrTrashIt" classname="dev.findroid.FolderSyncPreparationTest" time="0.031"/>
+  <testcase name="aPreviouslyCreatedWorkingFolderIsNeverReusedOrDeleted" classname="dev.findroid.FolderSyncPreparationTest" time="0.006"/>
+  <testcase name="replacementPreparationKeepsTheExistingDestinationUntilASeparateApply" classname="dev.findroid.FolderSyncPreparationTest" time="0.036"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

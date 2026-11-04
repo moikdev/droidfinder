@@ -1,5 +1,17 @@
 # Android preview verification
 
+## Findroid 0.53.0 — dedicated photo review, local acceptance complete
+
+Application/native source: `2b9c157dff077eadf66583c2a61b36b925a891e9`. **1,017 JVM cases pass**, with zero failures/errors/skips; app lint has zero errors / 149 warnings / 12 hints, and interop lint zero errors / 18 warnings. The same **25 focused native cases in four isolated batches per API** pass on Android 11 and Android 16 tablets. They cover thumbnail activation, flags/filter/reference, real reviewed tag Apply/cancel/Undo/Redo, exact candidate scope, read-only provider bytes, stale/missing files, malformed-image navigation, keyboard control, and retained flags with the actual foreground tag-editor window after activity recreation.
+
+The exact optimized preview passes the complete reference/review/tagging workflow and **12 layouts per API**, covering 1280×800, 800×1280 and 600×800 dp at actual system fonts 1.0/2.0 in light/dark. Each API verifies **156 complete named 48 dp targets**, visible photo pixels, readable current-name raster glyphs and six measured font-growth groups. All **62 native/optimized capture paths** are reviewed; 24 are exact glyph subsets. Original private bytes/absences, Workspace, grants and display settings are restored with public 0.52 installed. The docs screenshot is an exact copy of an inspected current optimized capture.
+
+Earlier focus, filename-selector and clipped-glyph stops are retained separately. A superseded candidate's review window could reopen above Organize; the final caller omits that window while reviewed tagging is visible, with native recreation regression coverage. An Android 16 system-launcher ANR held focus during failed native/diagnostic runs. Restarting that launcher without clearing its data allows the unchanged final app/test APKs to pass. No earlier APK acceptance is reused. [Excluded attempts](captures/image-review/excluded-attempts.json).
+
+The development-signed preview is **38,066,148 bytes**, SHA-256 `81cc0b75ac6f038aec555e5c930c5cbaed5cb2debdf79d63db1f006f81402f0e`. APK manifest/privacy/signature/upgrade-certificate checks, ZIP alignment, four native bridge ABIs and packaged 64-bit 16 KiB load alignment pass. Public OTA, anonymous downloads and independent immutable-archive acceptance are pending; proposal 50 remains in progress and 40/72 proposals are implemented. Physical hardware, third-party providers and screen-reader workflows remain open.
+
+[Photo review guide](docs/IMAGE-REVIEW.md) · [Release notes](docs/releases/0.53.0.md).
+
 ## Findroid 0.52.0 — read-only file comparison, acceptance complete
 
 Local, actual public OTA and independent immutable-archive acceptance pass. Proposal 49 is implemented and **40/72** proposals are complete. Application/native-test source: `fe7e3f1ba532d23c92dbc4d7c8e225410270eddc`. All 447 recorded build inputs match that commit; 94 outputs are frozen.

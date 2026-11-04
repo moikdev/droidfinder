@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.findroid.TransferQueueTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:23:02.937Z" hostname="MacBook-Pro-2.local" time="0.099">
+<testsuite name="dev.findroid.TransferQueueTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T23:02:12.177Z" hostname="MacBook-Pro-2.local" time="0.105">
   <properties/>
-  <testcase name="pauseStopsAtBoundaryResumeContinuesAndCancelWakesPausedWorker" classname="dev.findroid.TransferQueueTest" time="0.088"/>
+  <testcase name="pauseStopsAtBoundaryResumeContinuesAndCancelWakesPausedWorker" classname="dev.findroid.TransferQueueTest" time="0.089"/>
   <testcase name="mergeRetriesKeepDestinationParentsAndExcludePublishedSkippedAndAmbiguousUnits" classname="dev.findroid.TransferQueueTest" time="0.0"/>
   <testcase name="journalRoundTripsUnicodePathsResultsAndOrdering" classname="dev.findroid.TransferQueueTest" time="0.002"/>
   <testcase name="damagedJournalResetPreservesEvidenceAndBackupRecoveryDoesNotOverwriteValidBackup" classname="dev.findroid.TransferQueueTest" time="0.004"/>
-  <testcase name="cancelClosesAGuardedVerificationStreamToUnblockReads" classname="dev.findroid.TransferQueueTest" time="0.0"/>
-  <testcase name="explicitCopyNamesPreserveExistingFilesAndKeepMovesWithinFolderSafe" classname="dev.findroid.TransferQueueTest" time="0.002"/>
+  <testcase name="cancelClosesAGuardedVerificationStreamToUnblockReads" classname="dev.findroid.TransferQueueTest" time="0.001"/>
+  <testcase name="explicitCopyNamesPreserveExistingFilesAndKeepMovesWithinFolderSafe" classname="dev.findroid.TransferQueueTest" time="0.007"/>
   <testcase name="publishedButIncompleteMoveIsNotBlindlyRetried" classname="dev.findroid.TransferQueueTest" time="0.0"/>
   <testcase name="corruptPrimaryFallsBackToLastValidJournalWithoutReplayingWork" classname="dev.findroid.TransferQueueTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
