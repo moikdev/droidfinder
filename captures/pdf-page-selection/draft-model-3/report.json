@@ -1,0 +1,10 @@
+{
+  "draftOnly": true,
+  "applicationAndroidAcceptancePending": true,
+  "compilerExit": 0,
+  "sourceSha256": {
+    "app/src/main/java/dev/findroid/PdfPageSelection.kt": "18c4fa2043cbec8f6346f4b022c3a62bed4fe6d01d926f4d993ed548771d7ef6",
+    "app/src/test/java/dev/findroid/PdfPageSelectionTest.kt": "289ef470100954458c5913134a19afa1c3a39078ec1e1d181d93ee3cc84b5efc"
+  },
+  "junitExit": 0
+}

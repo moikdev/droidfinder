@@ -65,6 +65,7 @@ internal fun ZoomableBitmap(
     stateKey: Any = bitmap,
     zoomState: BitmapZoomState = remember(stateKey) { BitmapZoomState() },
     paper: Boolean = false,
+    pageOverlay: @Composable BoxScope.() -> Unit = {},
 ) {
     var viewport by remember { mutableStateOf(androidx.compose.ui.unit.IntSize.Zero) }
     fun clampPan() {
@@ -128,6 +129,7 @@ internal fun ZoomableBitmap(
                     highlights.forEach { mark(it, Color(0x55FFD54F)) }
                     activeHighlights.forEach { mark(it, Color(0x66FF9800)) }
                 }
+                pageOverlay()
             }
         }
         if (controls)

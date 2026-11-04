@@ -1,0 +1,18 @@
+[
+  "app/build.gradle.kts",
+  "app/src/androidTest/java/dev/findroid/PdfPageSelectionNativeTest.kt",
+  "app/src/androidTest/java/dev/findroid/PdfPageSelectionWorkflowTest.kt",
+  "app/src/main/java/dev/findroid/PdfPageSelection.kt",
+  "app/src/main/java/dev/findroid/PdfPageSelectionGeometry.kt",
+  "app/src/main/java/dev/findroid/PdfPageSelectionLayer.kt",
+  "app/src/main/java/dev/findroid/PdfQuickLook.kt",
+  "app/src/main/java/dev/findroid/QuickLookMedia.kt",
+  "app/src/test/java/dev/findroid/PdfPageSelectionTest.kt",
+  "captures/pdf-page-selection/draft-compile-3.txt",
+  "captures/pdf-page-selection/draft-model-3/compile.txt",
+  "captures/pdf-page-selection/draft-model-3/junit.txt",
+  "captures/pdf-page-selection/draft-model-3/report.json",
+  "captures/pdf-page-selection/draft-progress-publication-files.json",
+  "captures/pdf-page-selection/draft-source-progress.json",
+  "docs/PDF-PAGE-SELECTION.md"
+]

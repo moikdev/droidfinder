@@ -55,6 +55,7 @@ fun PdfQuickLook(entry: Entry, modifier: Modifier = Modifier, sourcePath: String
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun PdfQuickLookContent(
     entry: Entry,
@@ -74,6 +75,13 @@ private fun PdfQuickLookContent(
     val saved = remember(session) { store.read(sourcePath, entry.modified, entry.size) }
     var page by remember(session) { mutableIntStateOf(saved.page) }
     var bookmarks by remember(session) { mutableStateOf(saved.bookmarks) }
+    val selectionScope = rememberCoroutineScope()
+    val selectionPageKey = remember(session, page) { Any() }
+    var selectionMode by remember(session, page) { mutableStateOf(false) }
+    var pageSelection by remember(session, page) { mutableStateOf<PdfPageSelection?>(null) }
+    var selectionMap by remember(session, page) { mutableStateOf<PdfSelectionMap?>(null) }
+    var pendingSelection by remember(session, page) { mutableStateOf<PdfSelectionTouch?>(null) }
+    var selectionNote by remember(session, page) { mutableStateOf<String?>(null) }
     val opening by
         produceState<Result<Int>?>(null, session) {
             value = null
@@ -131,11 +139,39 @@ private fun PdfQuickLookContent(
         sidebar = true
         focusRequest++
     }
+    fun copyPageSelection() {
+        val index = selectionMap ?: return
+        val chosen = pageSelection ?: return
+        val copied = index.selectedText(chosen)
+        if (copied.isEmpty()) return
+        selectionScope.launch {
+            val result = pdfResult { copyPreviewText(context, entry.name, copied) }
+            if (selectionMap === index && pageSelection == chosen)
+                selectionNote = if (result.isSuccess) "Copied selected text"
+                    else result.exceptionOrNull()?.message?.take(160) ?: "Couldn't copy this selection"
+        }
+    }
     val handleKey by
         rememberUpdatedState<(KeyEvent) -> Boolean>(
             { event ->
                 when {
                     event.action != KeyEvent.ACTION_DOWN -> false
+                    selectionMode && !readText && event.keyCode == KeyEvent.KEYCODE_ESCAPE -> {
+                        selectionMode = false
+                        pageSelection = null
+                        pendingSelection = null
+                        true
+                    }
+                    selectionMode && !readText && keys?.editing != true &&
+                        (event.isCtrlPressed || event.isMetaPressed) && event.keyCode == KeyEvent.KEYCODE_C -> {
+                        copyPageSelection()
+                        true
+                    }
+                    selectionMode && !readText && keys?.editing != true &&
+                        (event.isCtrlPressed || event.isMetaPressed) && event.keyCode == KeyEvent.KEYCODE_A -> {
+                        pageSelection = selectionMap?.all()
+                        true
+                    }
                     (event.isCtrlPressed || event.isMetaPressed) &&
                         event.keyCode == KeyEvent.KEYCODE_F -> {
                         find()
@@ -236,13 +272,27 @@ private fun PdfQuickLookContent(
                 if (pages > 0) pdfResult { session.render(page.coerceIn(0, pages - 1)) } else null
         }
     val text by
-        produceState<Result<PdfPageText>?>(null, session, page, readText, query, pages) {
+        produceState<Result<PdfPageText>?>(null, session, page, readText, query, pages, selectionMode) {
             value = null
             value =
-                if (pages > 0 && (readText || query.isNotBlank()))
+                if (pages > 0 && (readText || query.isNotBlank() || selectionMode))
                     pdfResult { session.text(page.coerceIn(0, pages - 1)) }
                 else null
         }
+    LaunchedEffect(text, selectionMode, selectionPageKey) {
+        selectionMap = null
+        if (selectionMode) text?.getOrNull()?.let { content ->
+            selectionMap = pdfSelectionMap(content)
+        }
+    }
+    LaunchedEffect(selectionMap, pendingSelection) {
+        val index = selectionMap
+        val point = pendingSelection
+        if (index != null && point != null) {
+            pageSelection = index.wordAt(point.x, point.y, point.toleranceX, point.toleranceY)
+            pendingSelection = null
+        }
+    }
     val contents by
         produceState<Result<PdfContents>?>(null, session, rail) {
             if (rail == "contents") value = pdfResult { session.outline() }
@@ -292,7 +342,7 @@ private fun PdfQuickLookContent(
             ToolButton(
                 Icons.AutoMirrored.Outlined.TextSnippet,
                 if (readText) "Show PDF page" else "Read PDF text",
-                { readText = !readText },
+                { readText = !readText; selectionMode = false; pageSelection = null; pendingSelection = null },
                 enabled = pages > 0,
                 active = readText,
             )
@@ -607,6 +657,12 @@ private fun PdfQuickLookContent(
                                 stateKey = sourcePath,
                                 zoomState = zoomState,
                                 paper = true,
+                                pageOverlay = {
+                                    PdfPageSelectionLayer(selectionPageKey, selectionMap, pageSelection,
+                                        selecting = selectionMode, zoom = zoomState.zoom,
+                                        requestSelection = { point -> selectionMode = true; pendingSelection = point; selectionNote = null },
+                                        changeSelection = { chosen -> pageSelection = chosen; pendingSelection = null; selectionNote = null })
+                                },
                             )
                         image?.isFailure == true ->
                             Text(
@@ -618,6 +674,38 @@ private fun PdfQuickLookContent(
                     }
                 }
             }
+        }
+        if (!readText && pages > 0) {
+            FlowRow(Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                TextButton(onClick = {
+                    selectionMode = !selectionMode
+                    pageSelection = null; pendingSelection = null; selectionNote = null
+                }, modifier = Modifier.heightIn(min = 48.dp)) {
+                    Text(if (selectionMode) "Pan and zoom" else "Select page text")
+                }
+                if (selectionMode) {
+                    TextButton(onClick = ::copyPageSelection, enabled = pageSelection != null && selectionMap != null,
+                        modifier = Modifier.heightIn(min = 48.dp)) { Text("Copy selection") }
+                    TextButton(onClick = { pageSelection = selectionMap?.all(); selectionNote = null },
+                        enabled = selectionMap?.glyphs?.isNotEmpty() == true,
+                        modifier = Modifier.heightIn(min = 48.dp)) { Text("Select all page text") }
+                    TextButton(onClick = { pageSelection = null; selectionNote = null },
+                        enabled = pageSelection != null, modifier = Modifier.heightIn(min = 48.dp)) { Text("Clear selection") }
+                }
+            }
+            if (selectionMode) Text(
+                when {
+                    text?.isFailure == true -> text!!.exceptionOrNull()?.message ?: "Couldn't read this page's text"
+                    selectionMap == null -> "Reading this page's text…"
+                    selectionMap!!.glyphs.isEmpty() -> "This page has no text layer to select."
+                    selectionMap!!.textLimited || selectionMap!!.geometryLimited -> "Only part of this page is available for selection."
+                    selectionNote != null -> selectionNote!!
+                    pageSelection != null -> selectionMap!!.selectedText(pageSelection!!).take(160).replace(Regex("\\s+"), " ")
+                    else -> "Drag across text or use the selection handles. Choose Pan and zoom to move the page."
+                }, Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp).testTag("pdf-page-selection-status"),
+                color = Muted, fontSize = 12.sp, minLines = 3, maxLines = 3, overflow = TextOverflow.Ellipsis)
         }
         HorizontalDivider(color = Border, thickness = .5.dp)
         Row(
