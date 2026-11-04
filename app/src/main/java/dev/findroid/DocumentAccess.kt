@@ -693,8 +693,45 @@ class DocumentAccess(
         )
     }
 
+    internal fun inspectTransferSpace(request: TransferSpaceRequest, control: TransferControl): TransferSpaceInspection {
+        val listing = ListingControl()
+        return control.guard(java.io.Closeable { listing.cancel() }) {
+            fun metadata(path: String) = control.documentCall(path) { read(path, listing) }
+            fun children(path: String): List<Entry> = control.documentCall(path) {
+                val items = mutableListOf<Entry>()
+                val reply = kotlinx.coroutines.runBlocking {
+                    visitChildren(path, listing) { entry ->
+                        control.check()
+                        check(items.size < 100_000) { "This folder exceeds the space review inventory limit." }
+                        items.add(entry)
+                        true
+                    }
+                }
+                check(!reply.loading && reply.error == null) { reply.error ?: "This provider is still loading its folder." }
+                items
+            }
+            fun node(entry: Entry) = EstimateNode(entry.path, entry.folder, entry.size.takeIf { entry.sizeKnown },
+                entry.documentUri == null && Files.isSymbolicLink(entry.file.toPath()))
+            inspectTransferSpace(request, read = ::metadata, list = ::children,
+                estimate = { paths -> estimateTransfer(paths, { node(metadata(it)) }, { children(it).map(::node) }, control) },
+                location = { path ->
+                    val available = control.documentCall(path) { availableSpace(path, listing) }
+                    // Emulated shared storage can have a different st_dev while consuming the
+                    // same allocation pool as app-private data. Only a storage-volume UUID is proof.
+                    val volume = if (isDocumentPath(path)) null else runCatching {
+                        context.getSystemService(android.os.storage.StorageManager::class.java)
+                            .getUuidForPath(File(path)).toString()
+                    }.getOrNull()
+                    TransferSpaceLocation(path, available, volume)
+                }, recoveryPath = context.filesDir.absolutePath, control = control)
+        }
+    }
+
     /** Match an actual provider root; never apply one volume's capacity to another volume. */
-    fun availableSpace(path: String): Long? {
+    fun availableSpace(path: String): Long? = availableSpace(path, null)
+
+    private fun availableSpace(path: String, control: ListingControl?): Long? {
+        control?.check()
         if (spaceProbe != null) return spaceProbe.invoke(path)?.takeIf { it >= 0 }
         if (!isDocumentPath(path)) return runCatching { File(path).usableSpace }.getOrNull()
         return runCatching {
@@ -705,10 +742,12 @@ class DocumentAccess(
                     DocumentsContract.Root.COLUMN_DOCUMENT_ID,
                     DocumentsContract.Root.COLUMN_AVAILABLE_BYTES,
                 )
-            resolver
-                .query(DocumentsContract.buildRootsUri(authority), columns, null, null, null)
-                ?.use { cursor ->
+            val roots = DocumentsContract.buildRootsUri(authority)
+            val cursor = if (control == null) resolver.query(roots, columns, null, null, null)
+                else control.withSignal { signal -> resolver.query(roots, columns, null, null, null, signal) }
+            cursor?.use { cursor ->
                     while (cursor.moveToNext()) {
+                        control?.check()
                         val id = cursor.getString(0) ?: continue
                         val root = DocumentsContract.buildDocumentUriUsingTree(uri, id)
                         val matches =

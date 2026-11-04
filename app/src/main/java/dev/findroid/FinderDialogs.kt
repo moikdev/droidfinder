@@ -50,11 +50,13 @@ fun DestinationDialog(
     confirmLabel: String? = null,
     onDestination: ((String) -> Unit)? = null,
     requireWritable: Boolean = true,
+    initialFolder: String? = null,
+    onReviewSpace: ((List<String>, String) -> Unit)? = null,
     dismiss: () -> Unit,
 ) {
     val paths = remember { model.selectedEntries.map { it.path } }
     var folder by rememberSaveable {
-        mutableStateOf(model.folderPath ?: model.workspace.absolutePath)
+        mutableStateOf(initialFolder ?: model.folderPath ?: model.workspace.absolutePath)
     }
     val requested = folder
     val control = remember(requested) { ListingControl() }
@@ -178,6 +180,12 @@ fun DestinationDialog(
                     Text(problem, color = MaterialTheme.colorScheme.error, fontSize = 12.sp)
                 else if (choices.path != requested || choices.loading)
                     Text("Reading folders…", color = Muted, fontSize = 12.sp)
+                if (onReviewSpace != null) {
+                    TextButton(onClick = { onReviewSpace(paths, folder); dismiss() },
+                        enabled = writable && paths.isNotEmpty(), modifier = Modifier.heightIn(min = 48.dp)) {
+                        Text("Review space and alternatives…")
+                    }
+                }
                 LazyColumn(Modifier.heightIn(min = 160.dp, max = 280.dp)) {
                     items(children, key = { it.path }) { entry ->
                         Row(

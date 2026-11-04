@@ -4439,6 +4439,34 @@ constructor(
         }
     }
 
+    internal var transferSpaceReview by mutableStateOf<TransferSpaceRequest?>(null)
+        private set
+
+    internal fun reviewTransferSpace(paths: List<String>, destination: String, move: Boolean) {
+        val distinct = paths.distinct()
+        if (distinct.isEmpty()) return
+        if (distinct.size > 10_000) { message = "Review up to 10,000 selected items at a time."; return }
+        transferSpaceReview = TransferSpaceRequest(distinct, destination, move, conflictPolicy)
+    }
+
+    internal fun changeTransferSpaceDestination(request: TransferSpaceRequest, destination: String) {
+        if (transferSpaceReview == request) transferSpaceReview = request.copy(destination = destination)
+    }
+
+    internal fun dismissTransferSpace() { transferSpaceReview = null }
+
+    internal fun confirmTransferSpace(request: TransferSpaceRequest) {
+        if (transferSpaceReview != request) return
+        if (busy != null) { message = "Wait for the current operation before starting this transfer."; return }
+        if (!allowedPath(request.destination) || request.paths.any { !allowedPath(it) }) {
+            message = "Storage access changed. Reconnect and review this transfer again."
+            return
+        }
+        transferSpaceReview = null
+        transferPaths(request.paths, request.destination, request.move, policy = request.policy,
+            clearSelectionOnCompletion = selected == request.paths.toSet())
+    }
+
     internal var verifiedCopyReview by mutableStateOf<VerifiedCopyRequest?>(null)
         private set
 
@@ -4530,6 +4558,7 @@ constructor(
         clearClipboard: Boolean = false,
         policy: ConflictPolicy = conflictPolicy,
         verifyCopies: Boolean = false,
+        clearSelectionOnCompletion: Boolean = true,
     ) {
         if (paths.isEmpty()) return
         if (move && verifyCopies) {
@@ -4556,6 +4585,7 @@ constructor(
                 tabs[activeTab].id,
                 location,
                 selected,
+                clearSelectionOnCompletion,
             )
         transferJobs = transferJobs + job
         TransferRuntime.scope.launch {
@@ -4622,7 +4652,8 @@ constructor(
                                 .takeIf { it.isNotEmpty() }
                                 ?.let { ClipboardFiles(it, true) }
                     if (
-                        tabs[activeTab].id == submitted.tab &&
+                        submitted.clearSelectionOnCompletion &&
+                            tabs[activeTab].id == submitted.tab &&
                             location == submitted.location &&
                             selected == submitted.selection
                     )

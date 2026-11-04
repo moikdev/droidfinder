@@ -1,0 +1,1 @@
+Review space before copying or moving. Copy to and Move to now offer a metadata-only space review with destination contents, possible replacement recovery copies, reported free space, known shortfall and unknown-provider explanations. Choose another destination or refresh before starting. Opening or closing the review starts no transfer.

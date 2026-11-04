@@ -213,6 +213,7 @@ data class TransferSubmission(
     val tab: String,
     val location: String,
     val selection: Set<String>,
+    val clearSelectionOnCompletion: Boolean = true,
 )
 
 /** Navigation belongs to a window; storage, mutations and recovery belong to FinderSession. */

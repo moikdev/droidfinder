@@ -103,6 +103,7 @@ fun FinderApp(
     val dragController = remember { FinderDragController(dragScope) }
     val workspaceModel = model
     val model = workspaceModel.activePaneModel
+
     val configuration = LocalConfiguration.current
     val phone = configuration.screenWidthDp < 600 || configuration.screenHeightDp < 480
     CompositionLocalProvider(
@@ -137,7 +138,7 @@ fun FinderApp(
             var phoneLocations by remember { mutableStateOf(false) }
             LaunchedEffect(model.location, phone) { phoneLocations = false }
             var cursorMenu by remember { mutableStateOf<FinderContextRequest?>(null) }
-            LaunchedEffect(dialog, cursorMenu, menu, phoneLocations, quickLook) {
+            LaunchedEffect(dialog, cursorMenu, menu, phoneLocations, quickLook, model.transferSpaceReview) {
                 workspaceModel.windowState.fileClicks.reset()
             }
             if (model.analysis.visible) FileAnalysisDialog(model)
@@ -147,6 +148,7 @@ fun FinderApp(
             if (model.organization.visible) OrganizationDialog(model)
             if (model.setup.visible) SetupDialog(model)
             model.verifiedCopyReview?.let { VerifiedCopyReviewDialog(model, it) }
+            model.transferSpaceReview?.let { TransferSpacePlanDialog(model, it) }
             if (workspaceModel.workspaceRecovery.visible) WorkspaceRecoveryDialog(workspaceModel, onConnectFolder)
             LaunchedEffect(model.storageRequested) {
                 if (model.storageRequested) {
@@ -239,12 +241,13 @@ fun FinderApp(
             LaunchedEffect(quickLook) {
                 if (quickLook == null && !searchActive && !addressActive) rootFocus.requestFocus()
             }
-            LaunchedEffect(dialog, cursorMenu, model.organization.visible, model.verifiedCopyReview) {
+            LaunchedEffect(dialog, cursorMenu, model.organization.visible, model.verifiedCopyReview, model.transferSpaceReview) {
                 if (
                     dialog == null &&
                         cursorMenu == null &&
                         !model.organization.visible &&
                         model.verifiedCopyReview == null &&
+                        model.transferSpaceReview == null &&
                         quickLook == null &&
                         !searchActive &&
                         !addressActive
@@ -447,7 +450,7 @@ fun FinderApp(
                     .windowInsetsPadding(WindowInsets.safeDrawing)
                     .focusRequester(rootFocus)
                     .onPreviewKeyEvent { event ->
-                        if (event.type != KeyEventType.KeyDown || dialog != null || model.verifiedCopyReview != null) false
+                        if (event.type != KeyEventType.KeyDown || dialog != null || model.verifiedCopyReview != null || model.transferSpaceReview != null) false
                         else {
                             val editing = searchFocused || addressFocused
                             val shortcut =
@@ -837,7 +840,8 @@ fun FinderApp(
                         },
                     )
                 "copyTo",
-                "moveTo" -> DestinationDialog(model, dialog == "moveTo") { dialog = null }
+                "moveTo" -> DestinationDialog(model, dialog == "moveTo",
+                    onReviewSpace = { paths, destination -> model.reviewTransferSpace(paths, destination, dialog == "moveTo") }) { dialog = null }
                 "compress" ->
                     CompressDialog(model, { dialog = null }) { name, level, choose ->
                         archiveName = name

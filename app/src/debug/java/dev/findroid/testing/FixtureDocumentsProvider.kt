@@ -21,6 +21,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
         @Volatile var readDelayMillis: Map<String, Long> = emptyMap()
         @Volatile var mimeOverrides: Map<String, String> = emptyMap()
         @Volatile var unknownSizePaths: Set<String> = emptySet()
+        @Volatile var unreportedCapacity: Boolean = false
         @Volatile var capabilityFlags: Map<String, Any?> = emptyMap()
         @Volatile var omittedCapabilityColumns: Set<String> = emptySet()
         val metadataQueries = java.util.concurrent.ConcurrentHashMap<String, java.util.concurrent.atomic.AtomicInteger>()
@@ -110,7 +111,7 @@ class FixtureDocumentsProvider : DocumentsProvider() {
                             Root.COLUMN_TITLE -> "Findroid test storage"
                             Root.COLUMN_FLAGS ->
                                 Root.FLAG_SUPPORTS_CREATE or Root.FLAG_SUPPORTS_IS_CHILD
-                            Root.COLUMN_AVAILABLE_BYTES -> root.usableSpace
+                            Root.COLUMN_AVAILABLE_BYTES -> if (unreportedCapacity) null else root.usableSpace
                             else -> null
                         },
                     )
